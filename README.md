@@ -23,6 +23,7 @@ You will need the following things properly installed on your computer.
 ## Running / Development
 
 * `ember server`
+* `ember server --proxy http://54.172.130.22/`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
 ### Code Generators
