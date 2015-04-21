@@ -14,6 +14,7 @@ module.exports = function(environment) {
     },
 
     APP: {
+      defaultLocale: 'en'
       // Here you can pass flags/options to your application instance
       // when it is created
     }
@@ -21,7 +22,7 @@ module.exports = function(environment) {
 
   if (environment === 'development') {
     ENV.contentSecurityPolicy = {
-      'connect-src': "'self' 'localhost:4200'",
+      'connect-src': "'self' http://54.172.130.22",
       'style-src': "'self' 'unsafe-inline' *",
     }
   }
@@ -39,7 +40,9 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.contentSecurityPolicy = {
+      'connect-src': "'self' http://54.172.130.22",
+    }
   }
 
   return ENV;
