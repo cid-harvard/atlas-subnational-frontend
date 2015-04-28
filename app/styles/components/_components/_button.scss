@@ -6,21 +6,15 @@
 
 .button {
   display: inline-block;
-  padding: (($lineHeight / 2) - 1) 32px;
-  margin-bottom: $lineHeight / 2;
-  margin-top: $lineHeight / 2;
-  min-height: $lineHeight;
-
+  padding: (($baseSpace / 2) - 1) 3.2rem;
+  margin-bottom: $baseSpace / 2;
+  margin-top: $baseSpace / 2;
+  min-height: $baseSpace;
   text-align: center;
-
-  font-family: $fontHighlight;
   font-weight: 600;
   text-decoration: none;
-
   outline: 0;
-
   transition: none;
-
   &:hover {
     background: #4d4d4d;
     color: #ffffff;
@@ -47,10 +41,5 @@
 
 .button--secondary {
   @extend .button;
-  @include style-button(#ffffff, $colorBlue);
-}
-
-.button--secondary-variation {
-  @extend .button;
-  @include style-button(#ffffff, $colorBlue, true);
+  @include style-button(#ffffff, blue);
 }

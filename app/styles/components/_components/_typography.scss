@@ -8,43 +8,7 @@
 // Recommend using padding instead of margin
 h1, h2, h3, h4, h5, p {
   margin: 0;
-}
-
-// Definitions
-.small,
-small {
-  @include rule--small;
-}
-
-.base,
-p,
-ul,
-ol {
-  @include rule--base;
-}
-
-.medium,
-h4 {
-  @include rule--medium;
-}
-
-.large,
-h3 {
-  @include rule--large;
-}
-
-.xlarge,
-h2 {
-  @include rule--xlarge;
-}
-
-.xxlarge,
-h1 {
-  @include rule--xxlarge;
-}
-
-.huge {
-  @include rule--huge;
+  padding: 0;
 }
 
 

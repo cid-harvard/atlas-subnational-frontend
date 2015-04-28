@@ -5,17 +5,9 @@
 **/
 
 a {
-  color: $colorBlue;
+  color: blue;
 }
 
 a:hover {
   text-decoration: none;
-}
-
-.cta--primary {
-  @include style-cta($colorBlue);
-}
-
-.cta--secondary {
-  @include style-cta($colorBlue);
 }
