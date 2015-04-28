@@ -1,0 +1,137 @@
+/**
+*
+* List
+*
+**/
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+
+  @include small-only {
+    padding-left: 0;
+  }
+}
+
+ul li {
+  position: relative;
+  padding-left: 16px;
+  @include bullet-type("", icon-bullet);
+
+  &::before {
+    font-size: 4px;
+  }
+}
+
+ol {
+  counter-reset: list;
+  > li {
+    @include numbered-list;
+    position: relative;
+    padding-left: 32px;
+
+    // This selected every adjacent <li>
+    // from the 10th and overrides the
+    // content property of each
+    &:nth-child(10n) ~ li::before,
+    &:nth-child(10n)::before {
+      content: counter(list);
+    }
+
+  }
+}
+
+ul ol,
+ol ul {
+  padding-top: 0;
+}
+
+
+/*==========  LIST LINKS  ==========*/
+
+ul.list-links {
+  li::before {
+    display: none;
+  }
+  a {
+    @include bullet-type("", icon-bullet);
+
+    &::before {
+      font-size: 4px;
+    }
+
+    font-weight: 400;
+  }
+
+  &.list-links--primary {
+    a {
+      @include bullet-type("", icon-chevron-right);
+      font-weight: 400;
+      line-height: 1; // fixes baseline grid alignment
+      text-decoration: none;
+    }
+  }
+}
+
+ol.list-links {
+  li {
+    &::before {
+      display: none;
+    }
+
+    a {
+      display: inline-block;
+      @include numbered-list;
+      font-weight: 300;
+    }
+
+    &:nth-child(10n) ~ li a::before,
+    &:nth-child(10n) a::before {
+      content: counter(list);
+    }
+  }
+
+  &.list-links--secondary {
+    a::before {
+      display: none;
+    }
+  }
+}
+
+.list-links--secondary {
+  font-size: $fontBase;
+  padding-left: 0;
+
+  li {
+    padding-left: 0;
+  }
+}
+
+/*==========  ANCHOR LIST  ==========*/
+
+.list-anchor {
+  padding-left: 0;
+
+  li {
+    font-size: $fontBase;
+    padding-top: 0;
+    padding-left: 0;
+
+    &::before {
+      display: none
+    }
+
+  }
+
+  a {
+    @include bullet-type("", icon-bullet);
+    line-height: 1; // fixes baseline grid alignment
+    display: inline-block;
+    padding-left: 16px;
+
+    &::before {
+      font-size: 4px;
+    }
+  }
+}

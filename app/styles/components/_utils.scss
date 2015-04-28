@@ -1,0 +1,144 @@
+/**
+*
+* Utils
+*
+**/
+
+/*==========  VARIABLES  ==========*/
+
+  // Defining breakpoints
+  $small: 38rem !default;
+  $medium: 62rem !default;
+  $large: 80rem !default;
+  $huge: 160rem !default;
+
+  // Defining font family
+  $fontIcon: 'icons' !default;
+
+  // Defining font sizes
+  $fontSmall: 1.3rem !default;
+  $fontBase: 1.6rem  !default;
+  $fontMedium: 2rem !default;
+  $fontLarge: 2.6rem !default;
+  $fontXLarge: 4.2rem !default;
+  $fontXXLarge: 6.8rem !default;
+  $fontHuge: 11rem !default;
+
+  // Defining baseline spacing
+  $baseSpace: 2.6rem !default;
+
+  // Defining animation easings
+  $animationEasing: cubic-bezier(0.455, 0.030, 0.515, 0.955) !default;
+
+
+// Z-Index Scale (private vars)
+// --------------------------------------------------
+$zIndex-1:   100;
+$zIndex-2:   200;
+$zIndex-3:   300;
+$zIndex-4:   400;
+$zIndex-5:   500;
+$zIndex-6:   600;
+$zIndex-7:   700;
+$zIndex-8:   800;
+$zIndex-9:   900;
+$zIndex-10: 1000;
+
+
+
+/*==========  FUNCTIONS  ==========*/
+
+
+/*==========  MIXINS  ==========*/
+
+  @mixin media-query($media-query) {
+    @if $media-query == small {
+      @media only screen and (max-width: $medium - 1) { @content; }
+    }
+
+    @if $media-query == medium {
+      @media only screen and (min-width: $medium) { @content; }
+    }
+
+    @if $media-query == medium-only {
+      @media only screen and (min-width: $medium) and (max-width: $wide - 1) { @content; }
+    }
+
+    @if $media-query == wide {
+      @media only screen and (min-width: $wide) { @content; }
+    }
+
+    @if $media-query == huge {
+      @media only screen and (min-width: $huge) { @content; }
+    }
+  }
+
+  // Just some helpers...
+  @mixin small-only { @include media-query(small) { @content }; }
+  @mixin medium { @include media-query(medium) { @content }; }
+  @mixin medium-only { @include media-query(medium-only) { @content }; }
+  @mixin wide { @include media-query(wide) { @content }; }
+  @mixin huge { @include media-query(huge) { @content }; }
+
+
+  // Mixin to show a baseline grid
+  // only visible when body has 'debug' class
+  @mixin baseline-grid() {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      z-index: 9;
+
+      display: none;
+      background-image: linear-gradient(to bottom, rgba(0,0,0,0.15) 95%,rgba(0,0,0,0.15) 100%);
+
+      background-size: 100% 2.6rem;
+    }
+
+    &.debug::after {
+      display: block;
+      pointer-events: none;
+    }
+  }
+
+  // LISTS
+  @mixin bullet-type($bullet, $icon: false) {
+    &::before {
+      @if $icon {
+        font-family: $fontIcon;
+        @extend .#{$icon}::before;
+        font-size: $fontSmall;
+      }
+      @else {
+        content: $bullet;
+        font-family: $fontHighlight;
+      }
+
+      display: block;
+      font-weight: 400;
+      position: absolute;
+      top: 0;
+      left: 0;
+      line-height: $baseSpace;
+
+    }
+  }
+
+  @mixin numbered-list() {
+    &::before {
+      counter-increment: list;
+      content: '0' counter(list);
+      color: inherit;
+      font-weight: 400;
+      display: inline-block;
+      position: absolute;
+      left: 0;
+    }
+  }

@@ -1,0 +1,36 @@
+/**
+*
+* Color palette
+*
+**/
+
+/* ==========  Color Palettes  ========== */
+
+$paletteGray: #fde0dc #f9bdbb #f69988 #f36c60 #e84e40 #e51c23 #dd191d
+           #d01716 #c41411 #b0120a #ff7997 #ff5177 #ff2d6f #e00032;
+
+$paletteRed: #fde0dc #f9bdbb #f69988 #f36c60 #e84e40 #e51c23 #dd191d
+           #d01716 #c41411 #b0120a #ff7997 #ff5177 #ff2d6f #e00032;
+
+/* ==========  Color definitions  ========== */
+
+$colorBlack: nth($paletteGray, 1);
+$colorGrayDark: nth($paletteGray, 2);
+$colorGray: nth($paletteGray, 3);
+$colorGrayLight: nth($paletteGray, 4);
+$colorGrayLighter: nth($paletteGray, 5);
+
+$colorRed50:   nth($paletteRed, 1);
+$colorRed100:  nth($paletteRed, 2);
+$colorRed200:  nth($paletteRed, 3);
+$colorRed300:  nth($paletteRed, 4);
+$colorRed400:  nth($paletteRed, 5);
+$colorRed500:  nth($paletteRed, 6);
+$colorRed600:  nth($paletteRed, 7);
+$colorRed700:  nth($paletteRed, 8);
+$colorRed800:  nth($paletteRed, 9);
+$colorRed900:  nth($paletteRed, 10);
+$colorRedA100: nth($paletteRed, 11);
+$colorRedA200: nth($paletteRed, 12);
+$colorRedA400: nth($paletteRed, 13);
+$colorRedA700: nth($paletteRed, 14);
