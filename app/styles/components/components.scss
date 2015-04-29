@@ -9,11 +9,14 @@
 @import '_sanitize';
 @import '_palette';
 
-// Icons - Need to add Font Awesome
+// Icons - Need to sadd Font Awesome
 // @import '_components/_icons';
 
 // Modules
 @import '_modules/_layout';
+@import '_modules/_page-header';
+@import '_modules/_profile';
+@import '_modules/_section';
 @import '_modules/_footer';
 
 // Components

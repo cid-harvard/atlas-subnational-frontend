@@ -1,9 +1,15 @@
 <article class="profile">
-  <img src="profile__header--img" class="">
-  <header class="profile__header">
-    <h2 class="profile__head">{{model.name}}</h2>
+  <img src="assets/img/department_profile/baranquilla-hero.jpg" class="profile__header--img">
+  <header class="page__header profile__header">
+    <h2 class="page__head profile__head">{{model.name}}</h2>
+    <ol class="breadcrumbs">
+      <li class="breadcrumb">Location</li>
+      <li class="breadcrumb">Colombia</li>
+      <li class="breadcrumb">{{model.name}}</li>
+      <li class="breadcrumb">Exports and imports</li>
+    </ol>
   </header>
-  <section class="profile__section">
+  <section class="page-section profile__section">
     <header class="section__header">
       <h3 class="section__head">Overview</h3>
     </header>
@@ -26,14 +32,14 @@
       </tr>
     </table>
   </section>
-  <section class="profile__section">
+  <section class="page-section profile__section">
     <header class="section__header">
       <h3 class="section__head">Exports and imports</h3>
     </header>
     <ul class="section__ul section__ul--takeaways">
-      <li class="section__li section__li--takeaway">Atlántico exported USD $1.1B in 2013, 3% of Colombia's total exports</li>
-      <li class="section__li section__li--takeaway">Atlántico's main export partners in 2013 were the United States, China, and Venezuela</li>
-      <li class="section__li section__li--takeaway">Atlántico's main exports are metals, chemical products, and textiles</li>
+      <li class="section__li section__li--takeaway">{{model.name}} exported USD $1.1B in 2013, 3% of Colombia's total exports</li>
+      <li class="section__li section__li--takeaway">{{model.name}}'s main export partners in 2013 were the United States, China, and Venezuela</li>
+      <li class="section__li section__li--takeaway">{{model.name}}'s main exports are metals, chemical products, and textiles</li>
     </ul>
     <table class="section__table--takeaways">
       <tr class="section__table__row section__table__row--header">
@@ -87,7 +93,7 @@
     <div class="section__tabmod__card" id="tab-3"></div>
     <div class="section__tabmod__card" id="tab-4"></div>
   </section>
-  <section class="profile__section">
+  <section class="page-section profile__section">
     <header class="section__header">
       <h3 class="section__head">Export complexity</h3>
     </header>
@@ -108,8 +114,8 @@
       <ol class="section__stepper__list">
         <li class="section__stepper__item">This circle represents bananas. Think of it as a container for all the capabilities needed to extract and transport bananas.</li>
         <li class="section__stepper__item">Bananas are lucrative, but the capabilities needed to extract it can't be used to make many other products. That's why bananas are a low opportunity product.</li>
-        <li class="section__stepper__item">Here we arrange products by the similarity of the capabilities required in their production, given international patterns. Atlantico's current exports are circled in blue. Follow the links from those exports to see more products that Atlantico could start exporting.</li>
-        <li class="section__stepper__item">But Atlantico doesn't just want more products, it wants complex products that require sophisticated capabilities that are not common to many countries. This is not the case of bananas, which is produced by almost every country that has banana trees. We shade products green by their complexity—that is, how many countries export them.</li>
+        <li class="section__stepper__item">Here we arrange products by the similarity of the capabilities required in their production, given international patterns. {{model.name}}'s current exports are circled in blue. Follow the links from those exports to see more products that {{model.name}} could start exporting.</li>
+        <li class="section__stepper__item">But {{model.name}} doesn't just want more products, it wants complex products that require sophisticated capabilities that are not common to many countries. This is not the case of bananas, which is produced by almost every country that has banana trees. We shade products green by their complexity—that is, how many countries export them.</li>
       </ol>
       <div class="section__stepper__vizmod">
         <div class="section__stepper__vizmod__vizwrap"></div>
@@ -121,7 +127,7 @@
       </div>
       <table class="section__table--complexity">
         <tr class="section__table__row section__table__row--header">
-          <th class="section__table__header">Current exports of Atlántico, ranked by complexity</th>
+          <th class="section__table__header">Current exports of {{model.name}}, ranked by complexity</th>
           <th class="section__table__header">Export value (2013)</th>
           <th class="section__table__header">Growth, annual (2009-2013)</th>
         </tr>
@@ -143,11 +149,11 @@
       </table>
     </div>
   </section>
-  <section class="profile__section">
+  <section class="page-section profile__section">
     <header class="section__header">
       <h3 class="section__head">Export possiblities</h3>
     </header>
-    <p class="section__intro">We've found that countries which export complex products grow faster than those which export simple products. Using the similarity map we built in the section above, we've highlighted  high potential products for Atlántico, ranked by which have the highest combination of opportunity and complexity.</p>
+    <p class="section__intro">We've found that countries which export complex products grow faster than those which export simple products. Using the similarity map we built in the section above, we've highlighted  high potential products for {{model.name}}, ranked by which have the highest combination of opportunity and complexity.</p>
     <div class="section__spacemod">
       <div class="section__spacemod__vizmod">
         <div class="section__spacemod__legend">
@@ -160,7 +166,7 @@
         <div class="section__spacemod__vizwrap"></div>
       </div>
       <div class="section__spacemod__listmod">
-        <h4 class="section__spacemod__listmod__head">High potential exports for Atlantico</h4>
+        <h4 class="section__spacemod__listmod__head">High potential exports for {{model.name}}</h4>
         <ol class="section__spacemod__listmod__ol">
           <li class="section__spacemod__listmod__item">Slag wool, rock wool, and similar mineral wools</li>
           <li class="section__spacemod__listmod__item">Lifting, handling, (un)loading machinery (ex. elevators, escalators, conveyors)</li>
@@ -187,38 +193,8 @@
     <h3 class="interstitial__head">CSV (13MB)</h3>
     <button class="interstitial__btn">Excel (41MB)</button>
   </div>
-  <section class="profile__section">
-    <header class="section__header">
-      <h3 class="section__head">Cities and municipalities in Atlantico</h3>
-    </header>
-    <ul class="section__list__links">
-      <li class="section__list__link">Baranoa</li>
-      <li class="section__list__link">Barranquilla (city)</li>
-      <li class="section__list__link">Barranquilla</li>
-      <li class="section__list__link">Campo de la Cruz</li>
-      <li class="section__list__link">Candelaria</li>
-      <li class="section__list__link">Galapa</li>
-      <li class="section__list__link">Juan de Acosta</li>
-      <li class="section__list__link">Luruaco</li>
-      <li class="section__list__link">Malambo (city)</li>
-      <li class="section__list__link">Malambo</li>
-      <li class="section__list__link">Manatí</li>
-      <li class="section__list__link">Palmar de Varela</li>
-      <li class="section__list__link">Piojó</li>
-      <li class="section__list__link">Polonuevo</li>
-      <li class="section__list__link">Ponedera</li>
-      <li class="section__list__link">Puerto Colombia</li>
-      <li class="section__list__link">Repelon</li>
-      <li class="section__list__link">Sabanagrande</li>
-      <li class="section__list__link">Sabanalarga</li>
-      <li class="section__list__link">Santa Lucía</li>
-      <li class="section__list__link">Santo Tomás</li>
-      <li class="section__list__link">Soledad (city)</li>
-      <li class="section__list__link">Soledad</li>
-      <li class="section__list__link">Suan</li>
-      <li class="section__list__link">Tubará</li>
-      <li class="section__list__link">Usiacurí</li>
-    </ul>
+  <section class="page-section profile__section">
+    {{partial "partials/profile-navigator"}}
   </section>
 </article>
 <footer class="footer">Footer TK</footer>

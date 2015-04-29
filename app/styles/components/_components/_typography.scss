@@ -1,11 +1,14 @@
 /**
 *
 * Typography
+* Includes any type styles applied across all pages that don't deserve a component
 *
 **/
 
-// Just normalizing text
-// Recommend using padding instead of margin
+body {
+  font-size: $fontBase;
+}
+
 h1, h2, h3, h4, h5, p {
   margin: 0;
   padding: 0;
