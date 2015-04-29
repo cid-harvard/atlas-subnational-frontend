@@ -7,3 +7,56 @@
 .page__section {
   margin: $baseSpace * 2;
 }
+
+.section__head {
+  font-size: $fontLarge;
+  padding-bottom: $baseSpace / 2;
+  margin-bottom: $baseSpace;
+  border-bottom: 1px solid rgb( 25, 25, 20 );
+}
+
+.section__ul {
+  margin-bottom: $baseSpace;
+}
+
+.section__li--takeaway {
+  list-style-type: disc;
+  color: rgb( 83, 83, 79 );
+}
+
+.section__table--summaries {
+  margin-bottom: $baseSpace;
+}
+
+.section__tabmod__tabs {
+  margin-left: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.section__tabmod__tab {
+  display: inline-block;
+  padding: $baseSpace/2 $baseSpace;
+  background: rgb( 240, 236, 234 );
+  transform: skew( -11deg );
+}
+
+.section__tabmod__card {
+  padding: $baseSpace * 2;
+  background: white;
+}
+
+.section__tabmod__tab--is--active {
+  background: white;
+}
+
+.tab__link {
+  display: inline-block;
+  transform: skew( 11deg );
+  color: rgb( 198, 198, 196 );
+}
+
+.tab__link--is--active {
+  display: inline-block;
+  transform: skew( 11deg );
+  color: rgb( 83, 83, 79 );
+}
