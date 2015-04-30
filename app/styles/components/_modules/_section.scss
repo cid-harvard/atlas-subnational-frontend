@@ -128,7 +128,7 @@
 
 .section__stepper__list {
   width: 50%;
-  padding-right: $baseSpace;
+  padding-right: $baseSpace * 2;
 }
 
 .section__stepper__item {
@@ -145,28 +145,96 @@
   background: rgb( 240, 236, 234 );
 }
 
-.section__table--complexity {
-  width: 100%;
-  margin-top: $baseSpace;
-}
 
 
-// Section table
-.section__table__header--scroller {
-  padding: 1.3rem 2.6rem;
-  background: rgb( 219, 212, 206 );
-  border-color: rgb( 230, 224, 220 );
-  border-bottom-width: 0px;
-}
-
-.section__table__body--scroller {
-  background: rgb( 240, 236, 234 );
-  height: 300px;
-  overflow: auto;
-  .section__table__datum {
-    padding: 1.3rem 2.6rem;
-    border-color: rgb( 230, 224, 220 );
-    color: rgb( 140, 140, 138 );
+// Universal table styles
+.table__cell,
+.table__header {
+  padding: $baseSpace/2 $baseSpace;
+  text-align: left;
+  font-weight: 300;
+  border-width: 1px;
+  &:last-of-type {
+    border-right-width: 0;
   }
 }
 
+// Base table styles
+.table--base {
+  flex-direction: column;
+  width: 100%;
+}
+
+// Scroller styles
+.table__thead--scroller,
+.table__tbody--scroller {
+  display: flex;
+  flex-direction: column;
+  flex-grow:0;
+  flex-shrink:0;
+  box-sizing:border-box;
+  overflow-y: scroll;
+}
+
+.table__thead--scroller::-webkit-scrollbar{
+  background: transparent;
+}
+
+.table__tbody--scroller {
+  overflow-y: scroll;
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 200px;
+}
+
+.table__row--scroller {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.table__cell--scroller,
+.table__header--scroller {
+  display: block;
+  flex-direction: column;
+  flex-shrink: 1;
+  flex-grow: 1;
+  box-sizing:border-box;
+  flex-basis:50px;
+}
+
+// Base styles
+.table__thead--base {
+  background: rgb( 219, 212, 206 );
+}
+
+.table__tbody--base {
+  background: rgb( 240, 236, 234 );
+}
+
+.table__header--base {
+  border-color: rgb( 230, 224, 220 );
+  border-bottom-width: 0;
+  border-top-width: 0;
+}
+
+.table__cell--base {
+  border-color: rgb( 230, 224, 220 );
+  color: rgb( 140, 140, 138 );
+}
+
+// Complexity table styles
+.table--complexity {
+  margin-top: $baseSpace;
+}
+
+.table__cell--complexity,
+.table__header--complexity {
+  &:nth-of-type(1) {
+    flex-grow: 2.5;
+  }
+  &:nth-of-type(3) {
+    flex-grow: 1.5;
+  }
+}
