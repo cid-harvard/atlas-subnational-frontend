@@ -24,10 +24,29 @@
   color: rgb( 83, 83, 79 );
 }
 
+// Table
 .section__table--summaries {
   margin-bottom: $baseSpace;
+  width: 100%;
 }
 
+.section__table__header,
+.section__table__datum {
+  padding: $baseSpace/2;
+  border-right: 1px solid rgb( 179, 162, 150 );
+  border-bottom: 1px solid rgb( 179, 162, 150 );
+  text-align: left;
+  font-weight: 300;
+  &:last-of-type {
+    border-right-width: 0px;
+  }
+}
+
+.section__table__row--body:last-of-type .section__table__datum {
+  border-bottom-width: 0px;
+}
+
+// Tabmod
 .section__tabmod__tabs {
   margin-left: 0.6rem;
   margin-bottom: 0.6rem;
@@ -59,6 +78,8 @@
   }
 }
 
+// rgb( 179, 162, 150 )
+
 .tab__link {
   display: inline-block;
   transform: skew( 11deg );
@@ -82,6 +103,7 @@
 .section__treemod__listmod__head {
   padding: $baseSpace/2 $baseSpace;
   background: rgb( 230, 224, 220 );
+  font-weight: 300;
 }
 
 .section__treemod__listmod__ol {
@@ -94,5 +116,57 @@
   border-bottom: 1px solid white;
   padding: $baseSpace/2 $baseSpace;
   color: rgb( 140, 140, 138 );
+}
+
+
+// Stepper
+.section__stepper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.section__stepper__list {
+  width: 50%;
+  padding-right: $baseSpace;
+}
+
+.section__stepper__item {
+  margin-bottom: $baseSpace;
+  color: rgb( 240, 236, 234 );
+}
+
+.section__stepper__item--is--active {
+  color: rgb( 25, 25, 20 );
+}
+
+.section__stepper__vizmod {
+  width: 50%;
+  background: rgb( 240, 236, 234 );
+}
+
+.section__table--complexity {
+  width: 100%;
+  margin-top: $baseSpace;
+}
+
+
+// Section table
+.section__table__header--scroller {
+  padding: 1.3rem 2.6rem;
+  background: rgb( 219, 212, 206 );
+  border-color: rgb( 230, 224, 220 );
+  border-bottom-width: 0px;
+}
+
+.section__table__body--scroller {
+  background: rgb( 240, 236, 234 );
+  height: 300px;
+  overflow: auto;
+  .section__table__datum {
+    padding: 1.3rem 2.6rem;
+    border-color: rgb( 230, 224, 220 );
+    color: rgb( 140, 140, 138 );
+  }
 }
 

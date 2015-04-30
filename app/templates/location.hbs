@@ -21,6 +21,7 @@
     <table class="section__table--summaries">
       <thead>
         <tr class="section__table__row section__table__row--header">
+          <th class="section__table__header"></th>
           <th class="section__table__header">All 32 departments</th>
           <th class="section__table__header">Value</th>
           <th class="section__table__header">Growth, annual (2009-2013)</th>
@@ -58,6 +59,7 @@
         <table class="section__table--summaries">
           <thead>
             <tr class="section__table__row section__table__row--header">
+              <th class="section__table__header"></th>
               <th class="section__table__header">All 32 departments</th>
               <th class="section__table__header">Value</th>
               <th class="section__table__header">Growth, annual (2009-2013)</th>
@@ -99,6 +101,7 @@
     <table class="section__table--summaries">
       <thead>
         <tr class="section__table__row section__table__row--header">
+          <th class="section__table__header"></th>
           <th class="section__table__header">All 32 departments</th>
           <th class="section__table__header">Value</th>
           <th class="section__table__header">Growth, annual (2009-2013)</th>
@@ -115,7 +118,7 @@
     </table>
     <div class="section__stepper">
       <ol class="section__stepper__list">
-        <li class="section__stepper__item">This circle represents bananas. Think of it as a container for all the capabilities needed to extract and transport bananas.</li>
+        <li class="section__stepper__item section__stepper__item--is--active">This circle represents bananas. Think of it as a container for all the capabilities needed to extract and transport bananas.</li>
         <li class="section__stepper__item">Bananas are lucrative, but the capabilities needed to extract it can't be used to make many other products. That's why bananas are a low opportunity product.</li>
         <li class="section__stepper__item">Here we arrange products by the similarity of the capabilities required in their production, given international patterns. {{model.name}}'s current exports are circled in blue. Follow the links from those exports to see more products that {{model.name}} could start exporting.</li>
         <li class="section__stepper__item">But {{model.name}} doesn't just want more products, it wants complex products that require sophisticated capabilities that are not common to many countries. This is not the case of bananas, which is produced by almost every country that has banana trees. We shade products green by their complexity—that is, how many countries export them.</li>
@@ -129,26 +132,40 @@
         </div>
       </div>
       <table class="section__table--complexity">
-        <tr class="section__table__row section__table__row--header">
-          <th class="section__table__header">Current exports of {{model.name}}, ranked by complexity</th>
-          <th class="section__table__header">Export value (2013)</th>
-          <th class="section__table__header">Growth, annual (2009-2013)</th>
-        </tr>
-        <tr class="section__table__row section__table__row--body">
-          <td class="section__table__datum">Slag wool, rock wool, and similar mineral wools</td>
-          <td class="section__table__datum">$2.4M</td>
-          <td class="section__table__datum">Up 4%</td>
-        </tr>
-        <tr class="section__table__row section__table__row--body">
-          <td class="section__table__datum">Slag wool, rock wool, and similar mineral wools</td>
-          <td class="section__table__datum">$2.4M</td>
-          <td class="section__table__datum">Up 4%</td>
-        </tr>
-        <tr class="section__table__row section__table__row--body">
-          <td class="section__table__datum">Slag wool, rock wool, and similar mineral wools</td>
-          <td class="section__table__datum">$2.4M</td>
-          <td class="section__table__datum">Up 4%</td>
-        </tr>
+        <thead>
+          <tr class="section__table__row section__table__row--header">
+            <th class="section__table__header section__table__header--scroller">Current exports of {{model.name}}, ranked by complexity</th>
+            <th class="section__table__header section__table__header--scroller">Export value (2013)</th>
+            <th class="section__table__header section__table__header--scroller">Growth, annual (2009-2013)</th>
+          </tr>
+        </thead>
+        <tbody class="section__table__body--scroller">
+          <tr class="section__table__row section__table__row--body">
+            <td class="section__table__datum">Slag wool, rock wool, and similar mineral wools</td>
+            <td class="section__table__datum">$2.4M</td>
+            <td class="section__table__datum">Up 4%</td>
+          </tr>
+          <tr class="section__table__row section__table__row--body">
+            <td class="section__table__datum">Slag wool, rock wool, and similar mineral wools</td>
+            <td class="section__table__datum">$2.4M</td>
+            <td class="section__table__datum">Up 4%</td>
+          </tr>
+          <tr class="section__table__row section__table__row--body">
+            <td class="section__table__datum">Slag wool, rock wool, and similar mineral wools</td>
+            <td class="section__table__datum">$2.4M</td>
+            <td class="section__table__datum">Up 4%</td>
+          </tr>
+          <tr class="section__table__row section__table__row--body">
+            <td class="section__table__datum">Slag wool, rock wool, and similar mineral wools</td>
+            <td class="section__table__datum">$2.4M</td>
+            <td class="section__table__datum">Up 4%</td>
+          </tr>
+          <tr class="section__table__row section__table__row--body">
+            <td class="section__table__datum">Slag wool, rock wool, and similar mineral wools</td>
+            <td class="section__table__datum">$2.4M</td>
+            <td class="section__table__datum">Up 4%</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </section>
