@@ -43,10 +43,20 @@
 .section__tabmod__card {
   padding: $baseSpace * 2;
   background: white;
+  display: none;
+}
+
+.section__tabmod__card--is--active {
+  padding: $baseSpace * 2;
+  background: white;
+  display: block;
 }
 
 .section__tabmod__tab--is--active {
   background: white;
+  .tab__link {
+    color: rgb( 83, 83, 79 );
+  }
 }
 
 .tab__link {
@@ -55,8 +65,34 @@
   color: rgb( 198, 198, 196 );
 }
 
-.tab__link--is--active {
-  display: inline-block;
-  transform: skew( 11deg );
-  color: rgb( 83, 83, 79 );
+.section__tabmod__treemod {
+  display: flex;
 }
+
+.section__treemod__treemap {
+  background: rgb( 240, 236, 234 );
+  width: 66%;
+  margin-right: $baseSpace;
+}
+
+.section__treemod__listmod {
+  width: 33%;
+}
+
+.section__treemod__listmod__head {
+  padding: $baseSpace/2 $baseSpace;
+  background: rgb( 230, 224, 220 );
+}
+
+.section__treemod__listmod__ol {
+  background: rgb( 240, 236, 234 );
+  overflow-y: scroll;
+  max-height: 400px;
+}
+
+.section__treemod__listmod__item {
+  border-bottom: 1px solid white;
+  padding: $baseSpace/2 $baseSpace;
+  color: rgb( 140, 140, 138 );
+}
+

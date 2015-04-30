@@ -19,17 +19,21 @@
       <li class="section__li section__li--takeaway">The population is {{model.population}}, making {{model.name}} the 5th largest department</li>
     </ul>
     <table class="section__table--summaries">
-      <tr class="section__table__row section__table__row--header">
-        <th class="section__table__header">All 32 departments</th>
-        <th class="section__table__header">Value</th>
-        <th class="section__table__header">Growth, annual (2009-2013)</th>
-      </tr>
-      <tr class="section__table__row section__table__row--body">
-        <td class="section__table__datum">GDP</td>
-        <td class="section__table__datum">dot plot</td>
-        <td class="section__table__datum">$8.2M</td>
-        <td class="section__table__datum">line chart + 2.4%</td>
-      </tr>
+      <thead>
+        <tr class="section__table__row section__table__row--header">
+          <th class="section__table__header">All 32 departments</th>
+          <th class="section__table__header">Value</th>
+          <th class="section__table__header">Growth, annual (2009-2013)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="section__table__row section__table__row--body">
+          <td class="section__table__datum">GDP</td>
+          <td class="section__table__datum">dot plot</td>
+          <td class="section__table__datum">$8.2M</td>
+          <td class="section__table__datum">line chart + 2.4%</td>
+        </tr>
+      </tbody>
     </table>
   </section>
   <section class="page__section profile__section">
@@ -41,39 +45,32 @@
       <li class="section__li section__li--takeaway">{{model.name}}'s main export partners in 2013 were the United States, China, and Venezuela</li>
       <li class="section__li section__li--takeaway">{{model.name}}'s main exports are metals, chemical products, and textiles</li>
     </ul>
-    <table class="section__table--summaries">
-      <tr class="section__table__row section__table__row--header">
-        <th class="section__table__header">All 32 departments</th>
-        <th class="section__table__header">Value</th>
-        <th class="section__table__header">Growth, annual (2009-2013)</th>
-      </tr>
-      <tr class="section__table__row section__table__row--body">
-        <td class="section__table__datum">GDP</td>
-        <td class="section__table__datum">dot plot</td>
-        <td class="section__table__datum">$8.2M</td>
-        <td class="section__table__datum">line chart + 2.4%</td>
-      </tr>
-    </table>
     <div class="section__tabmod">
       <ul class="section__tabmod__tabs">
-        <li class="section__tabmod__tab" data-tab="tab-1"><a href="#" class="tab__link tab__link--is--active">Exports, 2013</a></li>
+        <li class="section__tabmod__tab section__tabmod__tab--is--active" data-tab="tab-1">
+          <a href="#" class="tab__link">Exports, 2013</a>
+        </li>
         <li class="section__tabmod__tab" data-tab="tab-2"><a href="#" class="tab__link">Export partners</a></li>
         <li class="section__tabmod__tab" data-tab="tab-3"><a href="#" class="tab__link">Imports</a></li>
         <li class="section__tabmod__tab" data-tab="tab-4"><a href="#" class="tab__link">Import partners</a></li>
       </ul>
-      <div class="section__tabmod__card" id="tab-1">
+      <div class="section__tabmod__card section__tabmod__card--is--active" id="tab-1">
         <table class="section__table--summaries">
-          <tr class="section__table__row section__table__row--header">
-            <th class="section__table__header">All 32 departments</th>
-            <th class="section__table__header">Value</th>
-            <th class="section__table__header">Growth, annual (2009-2013)</th>
-          </tr>
-          <tr class="section__table__row section__table__row--body">
-            <td class="section__table__datum">Total exports</td>
-            <td class="section__table__datum">dot plot</td>
-            <td class="section__table__datum">$8.2M</td>
-            <td class="section__table__datum">line chart + 1.2%</td>
-          </tr>
+          <thead>
+            <tr class="section__table__row section__table__row--header">
+              <th class="section__table__header">All 32 departments</th>
+              <th class="section__table__header">Value</th>
+              <th class="section__table__header">Growth, annual (2009-2013)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="section__table__row section__table__row--body">
+              <td class="section__table__datum">Total exports</td>
+              <td class="section__table__datum">dot plot</td>
+              <td class="section__table__datum">$8.2M</td>
+              <td class="section__table__datum">line chart + 1.2%</td>
+            </tr>
+          </tbody>
         </table>
         <div class="section__tabmod__treemod">
           <div class="section__treemod__treemap"></div>
@@ -100,17 +97,21 @@
       <h3 class="section__head">Export complexity</h3>
     </header>
     <table class="section__table--summaries">
-      <tr class="section__table__row section__table__row--header">
-        <th class="section__table__header">All 32 departments</th>
-        <th class="section__table__header">Value</th>
-        <th class="section__table__header">Growth, annual (2009-2013)</th>
-      </tr>
-      <tr class="section__table__row section__table__row--body">
-        <td class="section__table__datum">Overall export complexity</td>
-        <td class="section__table__datum">dot plot</td>
-        <td class="section__table__datum">0.3</td>
-        <td class="section__table__datum">line chart + TK%</td>
-      </tr>
+      <thead>
+        <tr class="section__table__row section__table__row--header">
+          <th class="section__table__header">All 32 departments</th>
+          <th class="section__table__header">Value</th>
+          <th class="section__table__header">Growth, annual (2009-2013)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="section__table__row section__table__row--body">
+          <td class="section__table__datum">Overall export complexity</td>
+          <td class="section__table__datum">dot plot</td>
+          <td class="section__table__datum">0.3</td>
+          <td class="section__table__datum">line chart + TK%</td>
+        </tr>
+      </tbody>
     </table>
     <div class="section__stepper">
       <ol class="section__stepper__list">
