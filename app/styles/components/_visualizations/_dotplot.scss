@@ -1,0 +1,22 @@
+.scatter-plot{
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .dot {
+    stroke: #000;
+  }
+
+  .dotsLabels {
+    display: none;
+  }
+
+  .dotsLabels:hover {
+    display: visible;
+    color: red;
+  }
+
+}
