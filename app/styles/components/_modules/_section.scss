@@ -5,7 +5,7 @@
 **/
 
 .page__section {
-  margin: $baseSpace * 2;
+  margin: $baseSpace*3;
 }
 
 .section__head {
@@ -113,9 +113,12 @@
 }
 
 .section__treemod__listmod__item {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid rgb( 230, 224, 220 );
   padding: $baseSpace/2 $baseSpace;
   color: rgb( 140, 140, 138 );
+  &:last-of-type {
+    border-bottom-width: 0px;
+  }
 }
 
 
@@ -148,6 +151,10 @@
 
 
 // Universal table styles
+.table__row:last-of-type .table__cell {
+  border-bottom-width: 0px;
+}
+
 .table__cell,
 .table__header {
   padding: $baseSpace/2 $baseSpace;
