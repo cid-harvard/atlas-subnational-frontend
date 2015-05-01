@@ -12,6 +12,7 @@ var templateTree = new HtmlbarsCompiler('app/templates', {
 var app = new EmberApp();
 
 app.import('bower_components/d3/d3.min.js');
+app.import('bower_components/lodash/lodash.js');
 app.import('vendor/vistk.js');
 
 // Use `app.import` to add additional libraries to the generated
