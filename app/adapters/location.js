@@ -8,11 +8,12 @@ export default ApplicationAdapter.extend({
   },
   find(store, type, id, snapshot) {
     let env = this.container.lookup('application:main').env;
+    return fixture;
 
-    if(env === 'development'){
-      return fixture;
-    }else{
-      return super.find(store,type,id,snapshot);
-    }
+    //if(env === 'development'){
+      //return fixture;
+    //}else{
+      //return super.find(store,type,id,snapshot);
+    //}
   }
 });
