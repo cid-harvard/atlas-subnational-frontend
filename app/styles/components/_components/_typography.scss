@@ -8,13 +8,13 @@
 body {
   font-size: $fontBase;
   font-weight: 300;
-  color: rgb( 83, 83, 79 );
+  color: $colorGrayDark;
 }
 
 h1, h2, h3, h4, h5, p {
   margin: 0;
   padding: 0;
-  color: rgb( 25, 25, 20 );
+  color: $colorBlack;
 }
 
 

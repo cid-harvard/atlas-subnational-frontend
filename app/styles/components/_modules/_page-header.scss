@@ -20,7 +20,7 @@
   &:after {
     content: '>';
     margin-left: $baseSpace / 2;
-    color: rgb( 140, 140, 138 );
+    color: $colorGray;
   }
   &:last-of-type {
     margin-right: 0;
@@ -31,5 +31,5 @@
 }
 
 .breadcrumb__link {
-  color: rgb( 140, 140, 138 );
+  color: $colorGray;
 }

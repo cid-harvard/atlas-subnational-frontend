@@ -13,9 +13,9 @@
 }
 
 .section__head {
-  font-size: $fontLarge;
+  font-size: $fontXLarge;
   padding-bottom: $baseSpace / 2;
-  border-bottom: 1px solid rgb( 25, 25, 20 );
+  border-bottom: 1px solid $colorBlack;
 }
 
 .section__ul {
@@ -37,8 +37,8 @@
 .section__table__header,
 .section__table__datum {
   padding: $baseSpace/2;
-  border-right: 1px solid rgb( 179, 162, 150 );
-  border-bottom: 1px solid rgb( 179, 162, 150 );
+  border-right: 1px solid $colorBrown600;
+  border-bottom: 1px solid $colorBrown600;
   text-align: left;
   font-weight: 300;
   &:last-of-type {
@@ -59,7 +59,7 @@
 .section__tabmod__tab {
   display: inline-block;
   padding: $baseSpace/2 $baseSpace;
-  background: rgb( 240, 236, 234 );
+  background: $colorBrown100;
   transform: skew( -11deg );
 }
 
@@ -78,16 +78,16 @@
 .section__tabmod__tab--is--active {
   background: white;
   .tab__link {
-    color: rgb( 83, 83, 79 );
+    color: $colorGrayDark;
   }
 }
 
-// rgb( 179, 162, 150 )
+// $colorBrown900
 
 .tab__link {
   display: inline-block;
   transform: skew( 11deg );
-  color: rgb( 198, 198, 196 );
+  color: $colorGrayLight;
 }
 
 .section__vizmod {
@@ -97,31 +97,31 @@
 }
 
 .section__vizmod--treemod {
-  background: rgb( 240, 236, 234 );
+  background: $colorBrown100;
   width: 66%;
-  padding-right: $baseSpace;
 }
 
 .section__vizmod__listmod {
   width: 33%;
+  padding-left: $baseSpace * 1.5;
 }
 
 .section__vizmod__listmod__head {
   padding: $baseSpace/2 $baseSpace;
-  background: rgb( 219, 212, 206 );
+  background: $colorBrown400;
   font-weight: 300;
 }
 
 .section__vizmod__listmod__ol {
-  background: rgb( 240, 236, 234 );
+  background: $colorBrown100;
   overflow-y: scroll;
   max-height: 350px;
 }
 
 .section__vizmod__listmod__item {
-  border-bottom: 1px solid rgb( 230, 224, 220 );
+  border-bottom: 1px solid $colorBrown200;
   padding: $baseSpace/2 $baseSpace;
-  color: rgb( 140, 140, 138 );
+  color: $colorGray;
   &:last-of-type {
     border-bottom-width: 0px;
   }
@@ -141,13 +141,13 @@
 }
 
 .section__stepper__item {
-  color: rgb( 219, 212, 206 );
+  color: $colorBrown400;
   list-style: decimal-leading-zero;
   margin-left: $baseSpace * 1.5;
 }
 
 .section__stepper__item--is--active {
-  color: rgb( 25, 25, 20 );
+  color: $colorBlack;
 }
 
 // Vizmod
@@ -160,14 +160,14 @@
   width: 100%;
   text-align: center;
   padding-bottom: $baseSpace * 3;
-  border-top: 1px solid rgb( 179, 162, 150 );
+  border-top: 1px solid $colorBrown600;
   @include absolute(bottom 0);
 }
 
 .section__stepper__control {
   padding: $baseSpace/2 $baseSpace;
-  background: rgb( 179, 162, 150 );
-  color: rgb( 240, 236, 234 );
+  background: $colorBrown900;
+  color: $colorBrown100;
   cursor: pointer;
 }
 
@@ -250,22 +250,22 @@
 }
 
 .table__thead--base {
-  background: rgb( 219, 212, 206 );
+  background: $colorBrown400;
 }
 
 .table__tbody--base {
-  background: rgb( 240, 236, 234 );
+  background: $colorBrown100;
 }
 
 .table__header--base {
-  border-color: rgb( 230, 224, 220 );
+  border-color: $colorBrown200;
   border-bottom-width: 0;
   border-top-width: 0;
 }
 
 .table__cell--base {
-  border-color: rgb( 230, 224, 220 );
-  color: rgb( 140, 140, 138 );
+  border-color: $colorBrown200;
+  color: $colorGray;
 }
 
 // Complexity table styles
@@ -283,27 +283,39 @@
   }
 }
 
+
+// Export possibilities
 .section__intro {
   width: 66.66%;
   margin-bottom: $baseSpace;
 }
 
-
-
 .section__vizmod--spacemod {
-  background: rgb( 240, 236, 234 );
   width: 66%;
   padding-right: $baseSpace;
+}
+
+.section__vizmod__legend__list {
+  text-align: center;
+  margin-bottom: $baseSpace;
+}
+
+.section__vizmod__legend__item {
+  display: inline;
+  margin-right: $baseSpace;
+  &:last-of-type {
+    margin-right: 0;
+  }
 }
 
 .section__vizmod__footer {
   padding-top: $baseSpace;
   margin-top: $baseSpace;
-  border-top: 1px solid rgb( 179, 162, 150 );
+  border-top: 1px solid $colorBrown600;
 }
 
 .section__vizmod__footer__p {
-  color: rgb( 140, 140, 138 );
+  color: $colorGray;
 }
 
 
@@ -314,13 +326,13 @@
   justify-content: space-between;
   align-items: center;
   &:nth-of-type(1) {
-    background: rgb( 219, 212, 206 );
+    background: $colorBrown400;
   }
   &:nth-of-type(2) {
-    background: rgb( 204, 193, 185 );
+    background: $colorBrown500;
   }
   &:nth-of-type(3) {
-    background: rgb( 179, 162, 150 );
+    background: $colorBrown600;
   }
 }
 
@@ -342,5 +354,5 @@
 }
 
 .list__link {
-    color: #8c8c8a;
+    color: $colorGray;
 }

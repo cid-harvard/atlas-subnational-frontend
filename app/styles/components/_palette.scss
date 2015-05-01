@@ -6,31 +6,32 @@
 
 /* ==========  Color Palettes  ========== */
 
-$paletteGray: #fde0dc #f9bdbb #f69988 #f36c60 #e84e40 #e51c23 #dd191d
-           #d01716 #c41411 #b0120a #ff7997 #ff5177 #ff2d6f #e00032;
+$colorBlack: rgb( 25, 25, 20 );
+$colorGrayDark: rgb( 83, 83, 79 );
+$colorGray: rgb( 140, 140, 138 );
+$colorGrayLight: rgb( 198, 198, 196 );
+$colorGrayLighter: rgb( 221, 221, 220 );
+$colorGrayLightest: rgb( 232, 232, 232 );
+$colorWhite: rgb( 240, 240, 240 );
 
-$paletteRed: #fde0dc #f9bdbb #f69988 #f36c60 #e84e40 #e51c23 #dd191d
-           #d01716 #c41411 #b0120a #ff7997 #ff5177 #ff2d6f #e00032;
+$colorBrown100: rgb( 245, 243, 241 );
+$colorBrown200: rgb( 235, 230, 227 );
+$colorBrown300: rgb( 224, 218, 213 );
+$colorBrown400: rgb( 214, 205, 199 );
+$colorBrown500: rgb( 204, 193, 185 );
+$colorBrown600: rgb( 194, 181, 171 );
+$colorBrown700: rgb( 184, 168, 157 );
+$colorBrown800: rgb( 173, 156, 143 );
+$colorBrown900: rgb( 163, 143, 129 );
+$colorBrown: rgb( 153, 131, 115 );
 
-/* ==========  Color definitions  ========== */
-
-$colorBlack: nth($paletteGray, 1);
-$colorGrayDark: nth($paletteGray, 2);
-$colorGray: nth($paletteGray, 3);
-$colorGrayLight: nth($paletteGray, 4);
-$colorGrayLighter: nth($paletteGray, 5);
-
-$colorRed50:   nth($paletteRed, 1);
-$colorRed100:  nth($paletteRed, 2);
-$colorRed200:  nth($paletteRed, 3);
-$colorRed300:  nth($paletteRed, 4);
-$colorRed400:  nth($paletteRed, 5);
-$colorRed500:  nth($paletteRed, 6);
-$colorRed600:  nth($paletteRed, 7);
-$colorRed700:  nth($paletteRed, 8);
-$colorRed800:  nth($paletteRed, 9);
-$colorRed900:  nth($paletteRed, 10);
-$colorRedA100: nth($paletteRed, 11);
-$colorRedA200: nth($paletteRed, 12);
-$colorRedA400: nth($paletteRed, 13);
-$colorRedA700: nth($paletteRed, 14);
+// $colorNavy100: rgb( 245, 243, 241 );
+$colorNavy200: rgb( 204, 204, 214 );
+// $colorNavy300: rgb( 224, 218, 213 );
+$colorNavy400: rgb( 154, 153, 172 );
+// $colorNavy500: rgb( 204, 193, 185 );
+$colorNavy600: rgb( 103, 102, 131 );
+// $colorNavy700: rgb( 184, 168, 157 );
+$colorNavy800: rgb( 53, 51, 89 );
+// $colorNavy900: rgb( 163, 143, 129 );
+$colorNavy: rgb( 2, 0, 48 );
