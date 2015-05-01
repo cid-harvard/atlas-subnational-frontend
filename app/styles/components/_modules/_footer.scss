@@ -5,9 +5,12 @@
 **/
 
 .footer {
-	padding: 20px;
+	padding: $baseSpace * 2 $baseSpace * 3;
+  background: rgb( 65, 64, 100 );
+  text-align: center;
 }
 
 .footer__text {
 	padding-top: 0;
+  color: white;
 }
