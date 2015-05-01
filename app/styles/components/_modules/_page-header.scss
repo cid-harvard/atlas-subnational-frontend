@@ -22,14 +22,14 @@
     margin-left: $baseSpace / 2;
     color: rgb( 140, 140, 138 );
   }
-}
-
-.breadcrumb__link {
-  color: rgb( 140, 140, 138 );
-  &:last-of-type .breadcrumb {
+  &:last-of-type {
     margin-right: 0;
     &:after {
       content: '';
     }
   }
+}
+
+.breadcrumb__link {
+  color: rgb( 140, 140, 138 );
 }

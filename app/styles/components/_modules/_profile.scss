@@ -6,4 +6,9 @@
 
 .profile {
   background: rgb( 230, 224, 220 );
+  padding-bottom: $baseSpace * 2;
+}
+
+img {
+  max-width: 100%;
 }

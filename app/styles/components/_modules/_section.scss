@@ -306,8 +306,10 @@
   color: rgb( 140, 140, 138 );
 }
 
+
+// Interstitial
 .interstitial {
-  padding: $baseSpace * 2;
+  padding: $baseSpace * 2 $baseSpace * 3;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -324,10 +326,17 @@
 
 .interstitial__head {
   font-size: $fontLarge;
+  color: white;
 }
 
 .interstitial__btn {
   padding: $baseSpace/2 $baseSpace;
   background: white;
   margin-left: $baseSpace/2;
+}
+
+
+// List of links
+.section__list__links {
+  -webkit-columns: $baseSpace*2 3;
 }
