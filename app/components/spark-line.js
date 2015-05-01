@@ -9,9 +9,6 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  w: computed('width', function () {
-    return this.get('width') - 60;
-  }),
   cleanData: function(data) {
    return data.map((d) => {
       var object = { year: Date.parse(d.year)};
@@ -24,8 +21,8 @@ export default Ember.Component.extend({
    return vistk.viz()
     .type("sparkline")
     .container(this.get('id'))
-    .height(100)
-    .width(this.get('w'))
+    .height(this.get('height'))
+    .width(this.get('width'))
     .data(data)
     .id("id")
     .y_var(this.get('yVar'))
@@ -42,6 +39,8 @@ export default Ember.Component.extend({
       .call(this.get('sparkLine'));
   },
   didInsertElement: function() {
+    this.set('width', this.$().parent().width());
+    this.set('height', this.$().parent().height());
     this.draw();
   }
 });

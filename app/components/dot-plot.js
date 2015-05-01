@@ -8,15 +8,12 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  w: computed('width', function () {
-    return this.get('width') - 60;
-  }),
   dotPlot: computed('id','data','w', 'xVar', 'yVar', function() {
     return vistk.viz()
       .type('dotplot')
       .container(this.get('id'))
-      .height(100)
-      .width(this.get('w'))
+      .height(this.get('height'))
+      .width(this.get('width'))
       .data(this.get('data'))
       .x_var(this.get('xVar'))
       .x_scale('linear')
@@ -34,6 +31,8 @@ export default Ember.Component.extend({
       .call(this.get('dotPlot'));
   },
   didInsertElement: function() {
+    this.set('width', this.$().parent().width());
+    this.set('height', this.$().parent().height());
     this.draw();
   }
 });
