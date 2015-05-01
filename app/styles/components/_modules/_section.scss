@@ -8,20 +8,24 @@
   margin: $baseSpace*3;
 }
 
+.section__header {
+  margin-bottom: $baseSpace;
+}
+
 .section__head {
   font-size: $fontLarge;
   padding-bottom: $baseSpace / 2;
-  margin-bottom: $baseSpace;
   border-bottom: 1px solid rgb( 25, 25, 20 );
 }
 
 .section__ul {
   margin-bottom: $baseSpace;
+  width: 66.66%;
+  margin-left: 1em;
 }
 
 .section__li--takeaway {
   list-style-type: disc;
-  color: rgb( 83, 83, 79 );
 }
 
 // Table
@@ -86,33 +90,35 @@
   color: rgb( 198, 198, 196 );
 }
 
-.section__tabmod__treemod {
+.section__vizmod {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
-.section__treemod__treemap {
+.section__vizmod--treemod {
   background: rgb( 240, 236, 234 );
   width: 66%;
-  margin-right: $baseSpace;
+  padding-right: $baseSpace;
 }
 
-.section__treemod__listmod {
+.section__vizmod__listmod {
   width: 33%;
 }
 
-.section__treemod__listmod__head {
+.section__vizmod__listmod__head {
   padding: $baseSpace/2 $baseSpace;
-  background: rgb( 230, 224, 220 );
+  background: rgb( 219, 212, 206 );
   font-weight: 300;
 }
 
-.section__treemod__listmod__ol {
+.section__vizmod__listmod__ol {
   background: rgb( 240, 236, 234 );
   overflow-y: scroll;
-  max-height: 400px;
+  max-height: 350px;
 }
 
-.section__treemod__listmod__item {
+.section__vizmod__listmod__item {
   border-bottom: 1px solid rgb( 230, 224, 220 );
   padding: $baseSpace/2 $baseSpace;
   color: rgb( 140, 140, 138 );
@@ -135,8 +141,9 @@
 }
 
 .section__stepper__item {
-  margin-bottom: $baseSpace;
-  color: rgb( 240, 236, 234 );
+  color: rgb( 219, 212, 206 );
+  list-style: decimal-leading-zero;
+  margin-left: $baseSpace * 1.5;
 }
 
 .section__stepper__item--is--active {
@@ -159,7 +166,7 @@
 
 .section__stepper__control {
   padding: $baseSpace/2 $baseSpace;
-  background: rgb( 219, 212, 206 );
+  background: rgb( 179, 162, 150 );
   color: rgb( 240, 236, 234 );
   cursor: pointer;
 }
@@ -195,12 +202,6 @@
   &:last-of-type {
     border-right-width: 0;
   }
-}
-
-// Base table styles
-.table--base {
-  flex-direction: column;
-  width: 100%;
 }
 
 // Scroller styles
@@ -243,6 +244,11 @@
 }
 
 // Base styles
+.table--base {
+  flex-direction: column;
+  width: 100%;
+}
+
 .table__thead--base {
   background: rgb( 219, 212, 206 );
 }
@@ -264,7 +270,7 @@
 
 // Complexity table styles
 .table--complexity {
-  margin-top: $baseSpace;
+  margin-top: $baseSpace * 2;
 }
 
 .table__cell--complexity,
@@ -275,4 +281,27 @@
   &:nth-of-type(3) {
     flex-grow: 1.5;
   }
+}
+
+.section__intro {
+  width: 66.66%;
+  margin-bottom: $baseSpace;
+}
+
+
+
+.section__vizmod--spacemod {
+  background: rgb( 240, 236, 234 );
+  width: 66%;
+  padding-right: $baseSpace;
+}
+
+.section__vizmod__footer {
+  padding-top: $baseSpace;
+  margin-top: $baseSpace;
+  border-top: 1px solid rgb( 179, 162, 150 );
+}
+
+.section__vizmod__footer__p {
+  color: rgb( 140, 140, 138 );
 }
