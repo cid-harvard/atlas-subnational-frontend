@@ -81,6 +81,53 @@ $zIndex-10: 1000;
   @mixin huge { @include media-query(huge) { @content }; }
 
 
+  // Positioning
+  @mixin position($position, $args: ()) {
+    $offsets: top right bottom left;
+    position: $position;                                               // 1
+
+    @each $offset in $offsets {                                        // 3
+      $index: index($args, $offset);                                   // 4
+
+      @if $index {                                                     // 5
+        @if $index == length($args) {                                  // 6
+          #{$offset}: 0;                                               // 7
+        }
+        @else {                                                        // 8
+          $next: nth($args, $index + 1);                               // 9
+          @if is-valid-length($next) {                                 // 10
+            #{$offset}: $next;                                         // 11
+          }
+          @else if index($offsets, $next) {                            // 12
+            #{$offset}: 0;                                             // 13
+          }
+          @else {                                                      // 14
+            @warn "Invalid value `#{$next}` for offset `#{$offset}`."; // 15
+          }
+        }
+      }
+    }
+  }
+
+  // Function checking if $value is a valid length
+  // ---
+  // @param [literal] $value: value to test
+  // ---
+  // @return [bool]
+
+  @function is-valid-length($value) {
+    @return (type-of($value) == "number" and not unitless($value))
+         or (index(auto initial inherit 0, $value) != false);
+  }
+
+  // Shorthands
+  // ---
+
+  @mixin absolute($args: ()) {
+    @include position(absolute, $args);
+  }
+
+
   // Mixin to show a baseline grid
   // only visible when body has 'debug' class
   @mixin baseline-grid() {

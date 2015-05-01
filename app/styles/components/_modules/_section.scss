@@ -143,10 +143,41 @@
   color: rgb( 25, 25, 20 );
 }
 
+// Vizmod
 .section__stepper__vizmod {
   width: 50%;
-  background: rgb( 240, 236, 234 );
+  position: relative;
 }
+
+.section__stepper__controls {
+  width: 100%;
+  text-align: center;
+  padding-bottom: $baseSpace * 3;
+  border-top: 1px solid rgb( 179, 162, 150 );
+  @include absolute(bottom 0);
+}
+
+.section__stepper__control {
+  padding: $baseSpace/2 $baseSpace;
+  background: rgb( 219, 212, 206 );
+  color: rgb( 240, 236, 234 );
+  cursor: pointer;
+}
+
+.section__stepper__control__progress {
+  padding: $baseSpace/2 $baseSpace;
+  @include absolute(bottom 0 left 0 right 0);
+}
+
+.section__stepper__control--left {
+  @include absolute(bottom 0 left 0);
+}
+
+.section__stepper__control--right {
+  @include absolute(bottom 0 right 0);
+}
+
+
 
 
 
