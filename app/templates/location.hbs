@@ -14,9 +14,9 @@
       <h3 class="section__head">Overview</h3>
     </header>
     <ul class="section__ul section__ul--takeaways">
-      <li class="section__li section__li--takeaway">GDP grew {{model.gdpGrowth}}% per year from 2009–2013</li>
-      <li class="section__li section__li--takeaway">{{model.name}} has the 9th highest GDP per capita at {{model.gdp}}</li>
-      <li class="section__li section__li--takeaway">The population is {{model.population}}, making {{model.name}} the 5th largest department</li>
+      <li class="section__li section__li--takeaway">GDP grew {{model.gdpGrowth}} per year from {{model.yearRange}}</li>
+      <li class="section__li section__li--takeaway">{{model.name}} has the 9th highest GDP per capita at {{model.latestGdp}}</li>
+      <li class="section__li section__li--takeaway">The population is {{model.latestPop}}, making {{model.name}} the 5th largest department</li>
     </ul>
     <table class="section__table--summaries">
       <thead>
@@ -24,15 +24,17 @@
           <th class="section__table__header"></th>
           <th class="section__table__header">All 32 departments</th>
           <th class="section__table__header">Value</th>
-          <th class="section__table__header">Growth, annual (2009-2013)</th>
+          <th class="section__table__header">Growth, annual ({{model.yearRange}})</th>
         </tr>
       </thead>
       <tbody>
         <tr class="section__table__row section__table__row--body">
           <td class="section__table__datum">GDP</td>
-          <td class="section__table__datum">dot plot</td>
+          <td class="section__table__datum">
+            {{dot-plot xVar='realgdp' yVar=["dept_pop", "realgdp"] data=model.profileDot elementId='gdp-dotplot' }}
+          </td>
           <td class="section__table__datum">$8.2M</td>
-          <td class="section__table__datum">line chart + 2.4%</td>
+          <td class="section__table__datum"> {{spark-line yVar='realgdp' data=model.profileSpark elementId='gdp-sparkline' }}</td>
         </tr>
       </tbody>
     </table>
@@ -225,24 +227,7 @@
 <footer class="footer">
   <p class="footer__text">Footer TK</p>
 </footer>
-
-{{dot-plot
-  xVar='realgdp'
-  yVar=["dept_pop", "realgdp"]
-  data=model.profileDot
-  elementId='gdp-dotplot'
-  height=100
-  width=400
-}}
-
-{{spark-line
-  yVar='realgdp'
-  data=model.profileSpark
-  elementId='gdp-sparkline'
-  height=100
-  width=400
-}}
-
+<!--
 {{dot-plot
   xVar='realgdp_percap'
   data=model.profileDot
@@ -289,3 +274,4 @@
   height=300
   width=400
 }}
+--!>
