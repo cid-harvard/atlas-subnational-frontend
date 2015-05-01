@@ -9,7 +9,14 @@ var templateTree = new HtmlbarsCompiler('app/templates', {
   templateCompiler: require('./bower_components/ember/ember-template-compiler')
 });
 
-var app = new EmberApp();
+var app = new EmberApp({
+  minifyCSS: {
+    enabled: false
+  },
+  minifyJS: {
+    enabled: false
+  }
+});
 
 app.import('bower_components/d3/d3.min.js');
 app.import('bower_components/lodash/lodash.js');
