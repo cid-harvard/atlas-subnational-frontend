@@ -1,0 +1,25 @@
+/**
+*
+* Stream section
+*
+**/
+
+.stream__section {
+  margin: $baseSpace*3;
+}
+
+.section__header {
+  margin-bottom: $baseSpace;
+}
+
+.section__head {
+  font-size: $fontXLarge;
+  padding-bottom: $baseSpace / 2;
+  border-bottom: 1px solid $colorBlack;
+}
+
+.section__intro {
+  width: 66.66%;
+  margin-bottom: $baseSpace;
+}
+

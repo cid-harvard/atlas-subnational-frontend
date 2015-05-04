@@ -1,15 +1,19 @@
 /**
 *
-* Page header
+* Stream header
 *
 **/
 
-.page__header {
+.stream__img--hero {
+  max-width: 100%;
+}
+
+.stream__header {
   text-align: center;
   margin: $baseSpace * 2;
 }
 
-.page__head {
+.stream__head {
   font-size: $fontHuge;
   margin: 0 auto;
 }

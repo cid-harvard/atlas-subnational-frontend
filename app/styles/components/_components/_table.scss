@@ -1,0 +1,104 @@
+/**
+*
+* Table
+*
+**/
+
+.table {
+  width: 100%;
+}
+
+.table__header,
+.table__cell {
+  padding: $baseSpace/2 $baseSpace/2;
+  border-right: 1px solid $colorBrown600;
+  border-bottom: 1px solid $colorBrown600;
+  text-align: left;
+  font-weight: 300;
+  &:last-of-type {
+    border-right-width: 0px;
+  }
+}
+
+.table__row--body:last-of-type .table__cell {
+  border-bottom-width: 0px;
+}
+
+
+// Summary table
+.table--summaries {
+  margin-bottom: $baseSpace;
+  width: 100%;
+}
+
+
+// Scroller styles
+
+.table__thead--scroller,
+.table__tbody--scroller {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0;
+  box-sizing:border-box;
+}
+
+.table__thead--scroller::-webkit-scrollbar{
+  background: transparent;
+}
+
+.table__tbody--scroller {
+  overflow-y: scroll;
+  height: 200px;
+}
+
+.table__row--scroller {
+  display: flex;
+  flex-direction: row;
+  flex: 1 0 auto;
+}
+
+.table__cell--scroller,
+.table__header--scroller {
+  display: block;
+  flex-direction: column;
+  box-sizing:border-box;
+  flex: 1 1 50px;
+}
+
+
+// Complexity table styles
+
+.table--complexity {
+  margin-top: $baseSpace * 2;
+}
+
+.table__cell--complexity,
+.table__header--complexity {
+  border-color: $colorBrown200;
+  &:nth-of-type(1) {
+    flex-grow: 2.5;
+  }
+  &:nth-of-type(3) {
+    flex-grow: 1.5;
+  }
+}
+
+.table__thead--complexity {
+  background: $colorBrown400;
+}
+
+.table__tbody--complexity {
+  background: $colorBrown100;
+}
+
+.table__header--complexity {
+  border-width: 0 2px 0 0;
+}
+
+.table__cell--complexity {
+  color: $colorGray;
+  border-width: 0 2px 2px 0;
+}
+
+
+

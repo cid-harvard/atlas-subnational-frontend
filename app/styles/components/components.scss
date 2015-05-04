@@ -12,21 +12,30 @@
 // Icons - Need to sadd Font Awesome
 // @import '_components/_icons';
 
-// Modules
-@import '_modules/_layout';
-@import '_modules/_page-header';
-@import '_modules/_profile';
-@import '_modules/_section';
-@import '_modules/_footer';
 
 // Components
 @import '_components/_typography';
 @import '_components/_button';
 @import '_components/_list';
 @import '_components/_link';
+@import '_components/_table';
 @import '_components/_form';
+@import '_components/_interstitial';
 
 // Visualizations
 @import '_visualizations/_dotplot';
 @import '_visualizations/_sparkline';
 @import '_visualizations/_productspace';
+
+// Modules
+@import '_modules/_layout';
+@import '_modules/_profile';
+@import '_modules/_stream-header';
+@import '_modules/_stream-section';
+@import '_modules/_tabmod';
+@import '_modules/_vizmod';
+@import '_modules/_treemod';
+@import '_modules/_stepper';
+@import '_modules/_spacemod';
+@import '_modules/_navigator';
+@import '_modules/_footer';

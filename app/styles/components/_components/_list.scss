@@ -18,3 +18,19 @@ ul ol,
 ol ul {
   padding-top: 0;
 }
+
+
+.list--section {
+  margin-bottom: $baseSpace;
+  width: 66.66%;
+  margin-left: 1em;
+}
+
+.list--section--bullets {
+  margin-left: 1em;
+}
+
+.list__item--section--bullets {
+  list-style-type: disc;
+}
+
