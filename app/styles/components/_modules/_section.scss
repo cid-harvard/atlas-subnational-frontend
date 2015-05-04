@@ -259,13 +259,13 @@
 
 .table__header--base {
   border-color: $colorBrown200;
-  border-bottom-width: 0;
-  border-top-width: 0;
+  border-width: 0 2px 0 0;
 }
 
 .table__cell--base {
   border-color: $colorBrown200;
   color: $colorGray;
+  border-width: 0 2px 2px 0;
 }
 
 // Complexity table styles
