@@ -4,8 +4,8 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'atlas-colombia',
     environment: environment,
-    baseURL: '/atlas-colombia',
-    locationType: 'hash',
+    baseURL: '/',
+    locationType: 'auto',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -41,7 +41,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.baseURL = '/atlas-columbia';
+    ENV.baseURL = '/atlas-colombia',
+    ENV.locationType = 'hash',
     ENV.contentSecurityPolicy = {
       'connect-src': "'self' http://54.172.130.22",
     }
