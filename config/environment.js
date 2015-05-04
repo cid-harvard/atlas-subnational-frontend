@@ -14,7 +14,8 @@ module.exports = function(environment) {
     },
 
     APP: {
-      defaultLocale: 'en'
+      defaultLocale: 'en',
+      env: environment
       // Here you can pass flags/options to your application instance
       // when it is created
     }
@@ -40,6 +41,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.baseURL = '/atlas-colombia',
+    ENV.locationType = 'hash',
     ENV.contentSecurityPolicy = {
       'connect-src': "'self' http://54.172.130.22",
     }
