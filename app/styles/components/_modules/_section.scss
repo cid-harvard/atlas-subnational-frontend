@@ -1,0 +1,358 @@
+/**
+*
+* Section
+*
+**/
+
+.page__section {
+  margin: $baseSpace*3;
+}
+
+.section__header {
+  margin-bottom: $baseSpace;
+}
+
+.section__head {
+  font-size: $fontXLarge;
+  padding-bottom: $baseSpace / 2;
+  border-bottom: 1px solid $colorBlack;
+}
+
+.section__ul {
+  margin-bottom: $baseSpace;
+  width: 66.66%;
+  margin-left: 1em;
+}
+
+.section__li--takeaway {
+  list-style-type: disc;
+}
+
+// Table
+.section__table--summaries {
+  margin-bottom: $baseSpace;
+  width: 100%;
+}
+
+.section__table__header,
+.section__table__datum {
+  padding: $baseSpace/2;
+  border-right: 1px solid $colorBrown600;
+  border-bottom: 1px solid $colorBrown600;
+  text-align: left;
+  font-weight: 300;
+  &:last-of-type {
+    border-right-width: 0px;
+  }
+}
+
+.section__table__row--body:last-of-type .section__table__datum {
+  border-bottom-width: 0px;
+}
+
+// Tabmod
+.section__tabmod__tabs {
+  margin-left: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.section__tabmod__tab {
+  display: inline-block;
+  padding: $baseSpace/2 $baseSpace;
+  background: $colorBrown100;
+  transform: skew( -11deg );
+}
+
+.section__tabmod__card {
+  padding: $baseSpace * 2;
+  background: white;
+  display: none;
+}
+
+.section__tabmod__card--is--active {
+  padding: $baseSpace * 2;
+  background: white;
+  display: block;
+}
+
+.section__tabmod__tab--is--active {
+  background: white;
+  .tab__link {
+    color: $colorGrayDark;
+  }
+}
+
+// $colorBrown900
+
+.tab__link {
+  display: inline-block;
+  transform: skew( 11deg );
+  color: $colorGrayLight;
+}
+
+.section__vizmod {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.section__vizmod--treemod {
+  background: $colorBrown100;
+  width: 66%;
+}
+
+.section__vizmod__listmod {
+  width: 33%;
+  padding-left: $baseSpace * 1.5;
+}
+
+.section__vizmod__listmod__head {
+  padding: $baseSpace/2 $baseSpace;
+  background: $colorBrown400;
+  font-weight: 300;
+}
+
+.section__vizmod__listmod__ol {
+  background: $colorBrown100;
+  overflow-y: scroll;
+  max-height: 350px;
+}
+
+.section__vizmod__listmod__item {
+  border-bottom: 1px solid $colorBrown200;
+  padding: $baseSpace/2 $baseSpace;
+  color: $colorGray;
+  &:last-of-type {
+    border-bottom-width: 0px;
+  }
+}
+
+
+// Stepper
+.section__stepper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.section__stepper__list {
+  width: 50%;
+  padding-right: $baseSpace * 2;
+}
+
+.section__stepper__item {
+  color: $colorBrown400;
+  list-style: decimal-leading-zero;
+  margin-left: $baseSpace * 1.5;
+}
+
+.section__stepper__item--is--active {
+  color: $colorBlack;
+}
+
+// Vizmod
+.section__stepper__vizmod {
+  width: 50%;
+  position: relative;
+}
+
+.section__stepper__controls {
+  width: 100%;
+  text-align: center;
+  padding-bottom: $baseSpace * 3;
+  border-top: 1px solid $colorBrown600;
+  @include absolute(bottom 0);
+}
+
+.section__stepper__control {
+  padding: $baseSpace/2 $baseSpace;
+  background: $colorBrown900;
+  color: $colorBrown100;
+  cursor: pointer;
+}
+
+.section__stepper__control__progress {
+  padding: $baseSpace/2 $baseSpace;
+  @include absolute(bottom 0 left 0 right 0);
+}
+
+.section__stepper__control--left {
+  @include absolute(bottom 0 left 0);
+}
+
+.section__stepper__control--right {
+  @include absolute(bottom 0 right 0);
+}
+
+
+
+
+
+// Universal table styles
+.table__row:last-of-type .table__cell {
+  border-bottom-width: 0px;
+}
+
+.table__cell,
+.table__header {
+  padding: $baseSpace/2 $baseSpace;
+  text-align: left;
+  font-weight: 300;
+  border-width: 1px;
+  &:last-of-type {
+    border-right-width: 0;
+  }
+}
+
+// Scroller styles
+.table__thead--scroller,
+.table__tbody--scroller {
+  display: flex;
+  flex-direction: column;
+  flex-grow:0;
+  flex-shrink:0;
+  box-sizing:border-box;
+  overflow-y: scroll;
+}
+
+.table__thead--scroller::-webkit-scrollbar{
+  background: transparent;
+}
+
+.table__tbody--scroller {
+  overflow-y: scroll;
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 200px;
+}
+
+.table__row--scroller {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.table__cell--scroller,
+.table__header--scroller {
+  display: block;
+  flex-direction: column;
+  flex-shrink: 1;
+  flex-grow: 1;
+  box-sizing:border-box;
+  flex-basis:50px;
+}
+
+// Base styles
+.table--base {
+  flex-direction: column;
+  width: 100%;
+}
+
+.table__thead--base {
+  background: $colorBrown400;
+}
+
+.table__tbody--base {
+  background: $colorBrown100;
+}
+
+.table__header--base {
+  border-color: $colorBrown200;
+  border-bottom-width: 0;
+  border-top-width: 0;
+}
+
+.table__cell--base {
+  border-color: $colorBrown200;
+  color: $colorGray;
+}
+
+// Complexity table styles
+.table--complexity {
+  margin-top: $baseSpace * 2;
+}
+
+.table__cell--complexity,
+.table__header--complexity {
+  &:nth-of-type(1) {
+    flex-grow: 2.5;
+  }
+  &:nth-of-type(3) {
+    flex-grow: 1.5;
+  }
+}
+
+
+// Export possibilities
+.section__intro {
+  width: 66.66%;
+  margin-bottom: $baseSpace;
+}
+
+.section__vizmod--spacemod {
+  width: 66%;
+  padding-right: $baseSpace;
+}
+
+.section__vizmod__legend__list {
+  text-align: center;
+  margin-bottom: $baseSpace;
+}
+
+.section__vizmod__legend__item {
+  display: inline;
+  margin-right: $baseSpace;
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.section__vizmod__footer {
+  padding-top: $baseSpace;
+  margin-top: $baseSpace;
+  border-top: 1px solid $colorBrown600;
+}
+
+.section__vizmod__footer__p {
+  color: $colorGray;
+}
+
+
+// Interstitial
+.interstitial {
+  padding: $baseSpace * 2 $baseSpace * 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &:nth-of-type(1) {
+    background: $colorBrown400;
+  }
+  &:nth-of-type(2) {
+    background: $colorBrown500;
+  }
+  &:nth-of-type(3) {
+    background: $colorBrown600;
+  }
+}
+
+.interstitial__head {
+  font-size: $fontLarge;
+  color: white;
+}
+
+.interstitial__btn {
+  padding: $baseSpace/2 $baseSpace;
+  background: white;
+  margin-left: $baseSpace/2;
+}
+
+
+// List of links
+.section__list__links {
+  -webkit-columns: $baseSpace*2 3;
+}
+
+.list__link {
+    color: $colorGray;
+}

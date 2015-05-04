@@ -1,6 +1,227 @@
-<h2 id="title">Location Show #template/location</h2>
-{{t 'location.overview'}}
-<p>Name: {{model.name}}</p>
-<p>gdp: {{model.gdp}}</p>
-<p>code: {{model.code}}</p>
-<p>random: {{model.randomAttr}}</p>
+<article class="profile">
+  <img src="assets/img/department_profile/baranquilla-hero.jpg" class="profile__header--img">
+  <header class="page__header profile__header">
+    <h2 class="page__head profile__head">{{model.name}}</h2>
+    <ol class="breadcrumbs">
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Location</a></li>
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Colombia</a></li>
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">{{model.name}}</a></li>
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Exports and imports</a></li>
+    </ol>
+  </header>
+  <section class="page__section profile__section">
+    <header class="section__header">
+      <h3 class="section__head">Overview</h3>
+    </header>
+    <ul class="section__ul section__ul--takeaways">
+      <li class="section__li section__li--takeaway">GDP grew {{model.gdpGrowth}}% per year from 2009–2013</li>
+      <li class="section__li section__li--takeaway">{{model.name}} has the 9th highest GDP per capita at {{model.gdp}}</li>
+      <li class="section__li section__li--takeaway">The population is {{model.population}}, making {{model.name}} the 5th largest department</li>
+    </ul>
+    <table class="section__table--summaries">
+      <thead>
+        <tr class="section__table__row section__table__row--header">
+          <th class="section__table__header"></th>
+          <th class="section__table__header">All 32 departments</th>
+          <th class="section__table__header">Value</th>
+          <th class="section__table__header">Growth, annual (2009-2013)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="section__table__row section__table__row--body">
+          <td class="section__table__datum">GDP</td>
+          <td class="section__table__datum">dot plot</td>
+          <td class="section__table__datum">$8.2M</td>
+          <td class="section__table__datum">line chart + 2.4%</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="page__section profile__section">
+    <header class="section__header">
+      <h3 class="section__head">Exports and imports</h3>
+    </header>
+    <ul class="section__ul section__ul--takeaways">
+      <li class="section__li section__li--takeaway">{{model.name}} exported USD $1.1B in 2013, 3% of Colombia's total exports</li>
+      <li class="section__li section__li--takeaway">{{model.name}}'s main export partners in 2013 were the United States, China, and Venezuela</li>
+      <li class="section__li section__li--takeaway">{{model.name}}'s main exports are metals, chemical products, and textiles</li>
+    </ul>
+    <div class="section__tabmod">
+      <ul class="section__tabmod__tabs">
+        <li class="section__tabmod__tab section__tabmod__tab--is--active" data-tab="tab-1">
+          <a href="#" class="tab__link">Exports, 2013</a>
+        </li>
+        <li class="section__tabmod__tab" data-tab="tab-2"><a href="#" class="tab__link">Export partners</a></li>
+        <li class="section__tabmod__tab" data-tab="tab-3"><a href="#" class="tab__link">Imports</a></li>
+        <li class="section__tabmod__tab" data-tab="tab-4"><a href="#" class="tab__link">Import partners</a></li>
+      </ul>
+      <div class="section__tabmod__card section__tabmod__card--is--active" id="tab-1">
+        <table class="section__table--summaries">
+          <thead>
+            <tr class="section__table__row section__table__row--header">
+              <th class="section__table__header"></th>
+              <th class="section__table__header">All 32 departments</th>
+              <th class="section__table__header">Value</th>
+              <th class="section__table__header">Growth, annual (2009-2013)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="section__table__row section__table__row--body">
+              <td class="section__table__datum">Total exports</td>
+              <td class="section__table__datum">dot plot</td>
+              <td class="section__table__datum">$8.2M</td>
+              <td class="section__table__datum">line chart + 1.2%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="section__vizmod">
+          <div class="section__vizmod--treemod"></div>
+          <div class="section__vizmod__listmod">
+            <h4 class="section__vizmod__listmod__head">Top exports, all</h4>
+            <ol class="section__vizmod__listmod__ol">
+              <li class="section__vizmod__listmod__item">Aleaciones madre de cobre</li>
+              <li class="section__vizmod__listmod__item">Productos de acabado para el teñido</li>
+              <li class="section__vizmod__listmod__item">Guatas, gasas y vendas</li>
+              <li class="section__vizmod__listmod__item">Extractos curtientes de origen vegetal</li>
+              <li class="section__vizmod__listmod__item">Cortinas persianas, cortinas cenefas, algodón, tejido de punto</li>
+              <li class="section__vizmod__listmod__item">Depósitos, cubas, tanques, etc.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="section__tabmod__card" id="tab-2"></div>
+      <div class="section__tabmod__card" id="tab-3"></div>
+      <div class="section__tabmod__card" id="tab-4"></div>
+    </div>
+  </section>
+  <section class="page__section profile__section">
+    <header class="section__header">
+      <h3 class="section__head">Export complexity</h3>
+    </header>
+    <table class="section__table--summaries">
+      <thead>
+        <tr class="section__table__row section__table__row--header">
+          <th class="section__table__header"></th>
+          <th class="section__table__header">All 32 departments</th>
+          <th class="section__table__header">Value</th>
+          <th class="section__table__header">Growth, annual (2009-2013)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="section__table__row section__table__row--body">
+          <td class="section__table__datum">Overall export complexity</td>
+          <td class="section__table__datum">dot plot</td>
+          <td class="section__table__datum">0.3</td>
+          <td class="section__table__datum">line chart + TK%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="section__stepper">
+      <ol class="section__stepper__list">
+        <li class="section__stepper__item section__stepper__item--is--active">This circle represents bananas. Think of it as a container for all the capabilities needed to extract and transport bananas.</li>
+        <li class="section__stepper__item">Bananas are lucrative, but the capabilities needed to extract it can't be used to make many other products. That's why bananas are a low opportunity product.</li>
+        <li class="section__stepper__item">Here we arrange products by the similarity of the capabilities required in their production, given international patterns. {{model.name}}'s current exports are circled in blue. Follow the links from those exports to see more products that {{model.name}} could start exporting.</li>
+        <li class="section__stepper__item">But {{model.name}} doesn't just want more products, it wants complex products that require sophisticated capabilities that are not common to many countries. This is not the case of bananas, which is produced by almost every country that has banana trees. We shade products green by their complexity—that is, how many countries export them.</li>
+      </ol>
+      <div class="section__stepper__vizmod">
+        <div class="section__stepper__vizmod__vizwrap"></div>
+        <div class="section__stepper__controls">
+          <button class="section__stepper__control section__stepper__control--left">Back</button>
+          <p class="section__stepper__control__progress">1 of 4</p>
+          <button class="section__stepper__control section__stepper__control--right">Forward</button>
+        </div>
+      </div>
+      <table class="table table--base table--scroller table--complexity">
+        <thead class="table__thead table__thead--base table__thead--scroller">
+          <tr class="table__row table__row--base table__row--scroller">
+            <th class="table__header table__header--base table__header--scroller table__header--complexity">Current exports of {{model.name}}, ranked by complexity</th>
+            <th class="table__header table__header--base table__header--scroller table__header--complexity">Export value (2013)</th>
+            <th class="table__header table__header--base table__header--scroller table__header--complexity">Growth, annual (2009-2013)</th>
+          </tr>
+        </thead>
+        <tbody class="table__tbody table__tbody--base table__tbody--scroller">
+          <tr class="table__row table__row--base table__row--scroller">
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">Slag wool, rock wool, and similar mineral wools</td>
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">$2.4M</td>
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">Up 4%</td>
+          </tr>
+          <tr class="table__row table__row--base table__row--scroller">
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">Slag wool, rock wool, and similar mineral wools</td>
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">$2.4M</td>
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">Up 4%</td>
+          </tr>
+          <tr class="table__row table__row--base table__row--scroller">
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">Slag wool, rock wool, and similar mineral wools</td>
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">$2.4M</td>
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">Up 4%</td>
+          </tr>
+          <tr class="table__row table__row--base table__row--scroller">
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">Slag wool, rock wool, and similar mineral wools</td>
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">$2.4M</td>
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">Up 4%</td>
+          </tr>
+          <tr class="table__row table__row--base table__row--scroller">
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">Slag wool, rock wool, and similar mineral wools</td>
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">$2.4M</td>
+            <td class="table__cell table__cell--base table__cell--scroller table__cell--complexity">Up 4%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="page__section profile__section">
+    <header class="section__header">
+      <h3 class="section__head">Export possiblities</h3>
+    </header>
+    <p class="section__intro">We've found that countries which export complex products grow faster than those which export simple products. Using the similarity map we built in the section above, we've highlighted  high potential products for {{model.name}}, ranked by which have the highest combination of opportunity and complexity.</p>
+    <div class="section__vizmod">
+      <div class="section__vizmod--spacemod">
+        <div class="section__vizmod__legend">
+          <ul class="section__vizmod__legend__list">
+            <li class="section__vizmod__legend__item">Non-export</li>
+            <li class="section__vizmod__legend__item">Export</li>
+            <li class="section__vizmod__legend__item">Similarity link</li>
+          </ul>
+        </div>
+        <div class="section__vizmod__vizwrap"></div>
+      </div>
+      <div class="section__vizmod__listmod">
+        <h4 class="section__vizmod__listmod__head">High potential exports for {{model.name}}</h4>
+        <ol class="section__vizmod__listmod__ol">
+          <li class="section__vizmod__listmod__item">Slag wool, rock wool, and similar mineral wools</li>
+          <li class="section__vizmod__listmod__item">Lifting, handling, (un)loading machinery (ex. elevators, escalators, conveyors)</li>
+          <li class="section__vizmod__listmod__item">Other plastic plates, sheets, film, foil and strip</li>
+          <li class="section__vizmod__listmod__item">Printed pictures and photographs</li>
+          <li class="section__vizmod__listmod__item">Other fermented beverages (ex. cider) and mixtures</li>
+        </ol>
+      </div>
+      <footer class="section__vizmod__footer">
+        <p class="section__vizmod__footer__p">Note that the list is dynamically generated. Not all exports may make sense given local conditions not captured in our measure of product similarity.</p>
+      </footer>
+    </div>
+  </section>
+  <div class="interstitial">
+    <h3 class="interstitial__head">Continue reading</h3>
+    <button class="interstitial__btn">Industries and manufacturing</button>
+  </div>
+  <div class="interstitial">
+    <h3 class="interstitial__head">Share</h3>
+    <div class="interstitial__btnmod">
+      <button class="interstitial__btn">Facebook</button>
+      <button class="interstitial__btn">Twitter</button>
+    </div>
+  </div>
+  <div class="interstitial">
+    <h3 class="interstitial__head">Download data for this profile</h3>
+    <div class="interstitial__btnmod">
+      <button class="interstitial__btn">CSV (13MB)</button>
+      <button class="interstitial__btn">Excel (41MB)</button>
+    </div>
+  </div>
+  <section class="page__section profile__section">
+    {{partial "partials/profile-navigator"}}
+  </section>
+</article>
+<footer class="footer">
+  <p class="footer__text">Footer TK</p>
+</footer>

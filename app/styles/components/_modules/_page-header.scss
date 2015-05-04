@@ -1,0 +1,35 @@
+/**
+*
+* Page header
+*
+**/
+
+.page__header {
+  text-align: center;
+  margin: $baseSpace * 2;
+}
+
+.page__head {
+  font-size: $fontHuge;
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  display: inline-block;
+  margin-right: $baseSpace / 2;
+  &:after {
+    content: '>';
+    margin-left: $baseSpace / 2;
+    color: $colorGray;
+  }
+  &:last-of-type {
+    margin-right: 0;
+    &:after {
+      content: '';
+    }
+  }
+}
+
+.breadcrumb__link {
+  color: $colorGray;
+}
