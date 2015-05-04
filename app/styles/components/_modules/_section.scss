@@ -209,10 +209,8 @@
 .table__tbody--scroller {
   display: flex;
   flex-direction: column;
-  flex-grow:0;
-  flex-shrink:0;
+  flex: 0 0;
   box-sizing:border-box;
-  overflow-y: scroll;
 }
 
 .table__thead--scroller::-webkit-scrollbar{
@@ -221,31 +219,25 @@
 
 .table__tbody--scroller {
   overflow-y: scroll;
-  flex-grow: 1;
-  flex-shrink: 1;
   height: 200px;
 }
 
 .table__row--scroller {
   display: flex;
   flex-direction: row;
-  flex-grow: 1;
-  flex-shrink: 0;
+  flex: 1 0 auto;
 }
 
 .table__cell--scroller,
 .table__header--scroller {
   display: block;
   flex-direction: column;
-  flex-shrink: 1;
-  flex-grow: 1;
   box-sizing:border-box;
-  flex-basis:50px;
+  flex: 1 1 50px;
 }
 
 // Base styles
 .table--base {
-  flex-direction: column;
   width: 100%;
 }
 
