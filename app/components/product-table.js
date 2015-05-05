@@ -14,14 +14,14 @@ export default Ember.Component.extend({
   }),
   productTable: computed('data', function() {
     return vistk.viz()
-      .type("table")
+      .type('table')
       .container(this.get('id'))
       .height(this.get('h'))
       .width(this.get('w'))
       .data(this.get('data'))
       .columns(['product_id', 'export_value', 'export_rca'])
-      .id("product_id")
-      .title("Top Exports (2013), all")
+      .id('product_id')
+      .title('Top Exports (2013), all')
       .ui(false);
   }),
   draw: function() {

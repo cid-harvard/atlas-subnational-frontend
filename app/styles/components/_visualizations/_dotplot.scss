@@ -1,19 +1,24 @@
-.scatter-plot{
+/**
+*
+* Dot plot
+*
+**/
+
+// Nested here instead of giving ever el a class in the js
+.dotplot {
+
   .axis path,
   .axis line {
     fill: none;
     stroke: #000;
     shape-rendering: crispEdges;
   }
-
   .dot {
-    stroke: #000;
+    // stroke: #000;
   }
-
-  .dotsLabels {
+  .tick .text{
     display: none;
   }
-
   .dotsLabels:hover {
     display: visible;
     color: red;
