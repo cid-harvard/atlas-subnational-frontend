@@ -13,12 +13,29 @@
     stroke: #000;
     shape-rendering: crispEdges;
   }
+
+  .label {
+    display: none;
+  }
+
+  .tick {
+    display: none;
+    &:first-of-type, &:last-of-type {
+      display: block;
+    }
+  }
+
   .tick .text {
     display: none;
   }
-  .dotsLabels:hover {
-    display: visible;
-    color: red;
+
+  // TODO: Rename .dotLabels in vistk
+  .dotsLabels {
+    display: none;
+  }
+
+  .points:hover .dotsLabels {
+    display: block;
   }
 
 }
