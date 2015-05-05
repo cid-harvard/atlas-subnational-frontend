@@ -29,13 +29,13 @@
     display: none;
   }
 
-  // TODO: Rename .dotLabels in vistk
-  .dotsLabels {
+  .dot__label {
     display: none;
   }
 
-  .points:hover .dotsLabels {
-    display: block;
+  .dot__label:hover {
+    display: visible;
+    color: red;
   }
 
 }
