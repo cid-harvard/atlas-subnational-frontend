@@ -16,8 +16,8 @@
     </header>
     <ul class="list--section list--section--bullets">
       <li class="list__item--section--bullets">GDP grew {{format-percent model.gdpGrowth}} per year from {{model.yearRange}}</li>
-      <li class="list__item--section--bullets">{{model.name}} has the 9th highest GDP per capita at {{model.latestGdp}}</li>
-      <li class="list__item--section--bullets">The population is {{model.latestPop}}, making {{model.name}} the 5th largest department</li>
+      <li class="list__item--section--bullets">{{model.name}} has the 9th highest GDP per capita at ${{format-largenumber model.latestGdp}}</li>
+      <li class="list__item--section--bullets">The population is {{format-largenumber model.latestPop}}, making {{model.name}} the 5th largest department</li>
     </ul>
     <table class="table--summaries">
       <thead>
