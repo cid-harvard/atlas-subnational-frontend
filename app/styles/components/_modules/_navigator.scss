@@ -1,0 +1,13 @@
+/**
+*
+* Navigator
+*
+**/
+
+.navigator__list {
+  -webkit-columns: $baseSpace*2 3;
+}
+
+.list__link {
+    color: $colorGray;
+}

@@ -1,0 +1,61 @@
+/**
+*
+* Vizmod
+*
+**/
+
+.vizmod {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+// Scrollable list with header
+.vizmod__list__wrap {
+  width: 33%;
+  padding-left: $baseSpace * 1.5;
+}
+
+.vizmod__list__head {
+  padding: $baseSpace/2 $baseSpace;
+  background: $colorBrown400;
+  font-weight: 300;
+}
+
+.vizmod__list {
+  background: $colorBrown100;
+  overflow-y: scroll;
+  max-height: 350px;
+}
+
+.vizmod__list__item {
+  border-bottom: 1px solid $colorBrown200;
+  padding: $baseSpace/2 $baseSpace;
+  color: $colorGray;
+  &:last-of-type {
+    border-bottom-width: 0px;
+  }
+}
+
+.vizmod__legend__list {
+  text-align: center;
+  margin-bottom: $baseSpace;
+}
+
+.vizmod__legend__item {
+  display: inline;
+  margin-right: $baseSpace;
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.vizmod__footer {
+  padding-top: $baseSpace;
+  margin-top: $baseSpace;
+  border-top: 1px solid $colorBrown600;
+}
+
+.vizmod__footer__p {
+  color: $colorGray;
+}
