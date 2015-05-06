@@ -15,9 +15,9 @@
       <h3 class="section__head">Overview</h3>
     </header>
     <ul class="list--section list--section--bullets">
-      <li class="list__item--section--bullets">GDP grew {{model.gdpGrowth}} per year from {{model.yearRange}}</li>
-      <li class="list__item--section--bullets">{{model.name}} has the 9th highest GDP per capita at {{model.latestGdp}}</li>
-      <li class="list__item--section--bullets">The population is {{model.latestPop}}, making {{model.name}} the 5th largest department</li>
+      <li class="list__item--section--bullets">GDP grew {{format-percent model.gdpGrowth}} per year from {{model.yearRange}}</li>
+      <li class="list__item--section--bullets">{{model.name}} has the 9th highest GDP per capita at ${{format-largenumber model.latestGdp}}</li>
+      <li class="list__item--section--bullets">The population is {{format-largenumber model.latestPop}}, making {{model.name}} the 5th largest department</li>
     </ul>
     <table class="table--summaries">
       <thead>
@@ -32,10 +32,10 @@
         <tr class="table__row table__row--body">
           <td class="table__cell">GDP</td>
           <td class="table__cell">
-            {{dot-plot xVar='realgdp' yVar=["dept_pop", "realgdp"] data=model.profileDot elementId='gdp-dotplot' }}
+            {{dot-plot xVar='realgdp' yVar=['dept_pop', 'realgdp'] data=model.profileDot elementId='dotplot--gdp' }}
           </td>
           <td class="table__cell">$8.2M</td>
-          <td class="table__cell">{{spark-line yVar='realgdp' data=model.profileSpark elementId='gdp-sparkline' }} + 2.4%</td>
+          <td class="table__cell">{{spark-line yVar='realgdp' data=model.profileSpark elementId='spark--gdp' }} + 2.4%</td>
         </tr>
       </tbody>
     </table>

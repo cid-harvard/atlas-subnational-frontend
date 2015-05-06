@@ -41,6 +41,6 @@ export default DS.Model.extend({
     return this.get('lastTimeSeries').year;
   }),
   yearRange: computed(function() {
-    return `${this.get('firstYear')} - ${this.get('lastYear')}`;
+    return `${this.get('firstYear')}–${this.get('lastYear')}`;
   })
 });

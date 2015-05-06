@@ -19,20 +19,20 @@ export default Ember.Component.extend({
   sparkLine: computed('data','yVar', function() {
    let data = this.cleanData(this.get('data'));
    return vistk.viz()
-    .type("sparkline")
+    .type('sparkline')
     .container(this.get('id'))
     .height(this.get('height'))
     .width(this.get('width'))
     .data(data)
-    .id("id")
+    .id('id')
     .y_var(this.get('yVar'))
-    .group("category")
-    .color("name")
-    .title("Products")
-    .group("category")
+    .group('category')
+    .color('name')
+    .title('Products')
+    .group('category')
     .ui(false)
-    .time({var_time: "year"})
-    .text("name");
+    .time({var_time: 'year'})
+    .text('name');
   }),
   draw: function() {
     d3.select(this.get('id'))

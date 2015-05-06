@@ -22,11 +22,6 @@
 @import '_components/_form';
 @import '_components/_interstitial';
 
-// Visualizations
-@import '_visualizations/_dotplot';
-@import '_visualizations/_sparkline';
-@import '_visualizations/_productspace';
-
 // Modules
 @import '_modules/_layout';
 @import '_modules/_profile';
@@ -39,3 +34,8 @@
 @import '_modules/_spacemod';
 @import '_modules/_navigator';
 @import '_modules/_footer';
+
+// Visualizations
+@import '_visualizations/_dotplot';
+@import '_visualizations/_sparkline';
+@import '_visualizations/_product-space';

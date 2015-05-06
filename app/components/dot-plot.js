@@ -3,7 +3,7 @@ const { computed } = Ember;
 
 export default Ember.Component.extend({
   tagName: 'svg',
-  classNames: ['scatter-plot'],
+  classNames: ['dotplot'],
   attributeBindings: ['width','height'],
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
