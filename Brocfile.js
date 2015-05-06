@@ -20,7 +20,7 @@ var app = new EmberApp({
 
 app.import('bower_components/d3/d3.min.js');
 app.import('bower_components/lodash/lodash.js');
-app.import('vendor/vistk.js');
+app.import('bower_components/vis-toolkit/js/vistk.js');
 
 // Use `app.import` to add additional libraries to the generated
 // output files.

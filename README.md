@@ -19,11 +19,12 @@ You will need the following things properly installed on your computer.
 * change into the new directory
 * `npm install`
 * `bower install`
+* clone the Vis-toolkit repository.  `CD` into to the vis-toolkit directory and, run `bower link`
+* In application directory, run `bower link vis-toolkit`
 
 ## Running / Development
 
 * `ember server`
-* `ember server --proxy http://54.172.130.22/`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
 ### Code Generators
