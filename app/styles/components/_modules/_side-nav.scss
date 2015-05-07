@@ -51,17 +51,64 @@
 
 
 // Toggle
-.toggle {
+.toggle--languages {
   position: absolute;
   margin-left: -9999px;
   visibility: hidden;
+  &:checked ~ .toggle__label:after {
+    margin-left: 20px;
+  }
 }
 
 .toggle__label {
-  display: block;
+  display: inline-block;
   position: relative;
   cursor: pointer;
   outline: none;
   user-select: none;
+  padding: $baseSpace / 10;
+  width: 50px;
+  height: 30px;
+  background-color: $colorWhite;
+  border-radius: 30px;
+  transition: background $animationTime $animationEasing;
+  margin: 0 auto;
+  &:before,
+  &:after {
+    display: block;
+    position: absolute;
+    content: '';
+  }
+  &:before {
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    background-color: $colorNavy;
+    border-radius: $baseSpace / 2;
+    transition: background $animationEasing;
+  }
+  &:after {
+    top: 6px;
+    left: 6px;
+    bottom: 6px;
+    right: 6px;
+    width: 18px;
+    height: 18px;
+    background-color: $colorWhite;
+    border-radius: 18px;
+    transition: margin $animationTime $animationEasing, background $animationTime $animationEasing;
+  }
+}
+
+.toggle__label__text {
+  color: $colorNavy600;
+  font-size: $fontTiny;
+  display: inline;
+  vertical-align: 10px;
+}
+
+.toggle__label--is--active {
+  color: $colorWhite;
 }
 
