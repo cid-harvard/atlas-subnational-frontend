@@ -121,17 +121,16 @@
     </table>
     <div class="stepper">
       <ol class="stepper__list">
-        <li class="stepper__item stepper__item--is--active">This circle represents bananas. Think of it as a container for all the capabilities needed to extract and transport bananas.</li>
-        <li class="stepper__item">Bananas are lucrative, but the capabilities needed to extract it can't be used to make many other products. That's why bananas are a low opportunity product.</li>
-        <li class="stepper__item">Here we arrange products by the similarity of the capabilities required in their production, given international patterns. {{model.name}}'s current exports are circled in blue. Follow the links from those exports to see more products that {{model.name}} could start exporting.</li>
-        <li class="stepper__item">But {{model.name}} doesn't just want more products, it wants complex products that require sophisticated capabilities that are not common to many countries. This is not the case of bananas, which is produced by almost every country that has banana trees. We shade products green by their complexity—that is, how many countries export them.</li>
+        {{#each story in stepStories}}
+          {{component 'department-stepper' story=story parentController=controller}}
+        {{/each}}
       </ol>
       <div class="stepper__vizmod">
         <div class="stepper__vizmod__vizwrap"></div>
         <div class="stepper__controls">
-          <button class="stepper__control stepper__control--left">Back</button>
-          <p class="stepper__control__progress">1 of 4</p>
-          <button class="stepper__control stepper__control--right">Forward</button>
+          <button class="stepper__control stepper__control--left" {{action 'back'}}>Back</button>
+          <p class="stepper__control__progress">{{activeStep}} of {{stepStories.length}}</p>
+          <button class="stepper__control stepper__control--right" {{action 'forward'}}>Forward</button>
         </div>
       </div>
       <table class="table table--scroller table--complexity">
