@@ -35,3 +35,55 @@ $colorNavy600: rgb( 103, 102, 131 );
 $colorNavy800: rgb( 53, 51, 89 );
 // $colorNavy900: rgb( 163, 143, 129 );
 $colorNavy: rgb( 2, 0, 48 );
+
+
+/* ==========  Breakpoints  ========== */
+
+$small: 38rem !default;
+$medium: 62rem !default;
+$large: 80rem !default;
+$huge: 160rem !default;
+
+
+/* ==========  Fonts  ========== */
+
+// Icon font family
+$fontIcon: 'icons' !default;
+
+// Defining font sizes
+$fontTiny: 1.3rem !default;
+$fontSmall: 1.6rem  !default;
+$fontBase: 2rem !default;
+$fontLarge: 2.6rem !default;
+$fontXLarge: 4.2rem !default;
+$fontXXLarge: 6.8rem !default;
+$fontHuge: 11rem !default;
+
+
+/* ==========  Spacing  ========== */
+
+$baseSpace: 2.6rem !default;
+
+
+/* ==========  Animation  ========== */
+
+$animationEasing: cubic-bezier(0.455, 0.030, 0.515, 0.955) !default;
+
+
+/* ==========  Layout  ========== */
+
+$sidebarWidth: $baseSpace * 6;
+
+
+/* ==========  Z-index  ========== */
+
+$zIndex-1:   100;
+$zIndex-2:   200;
+$zIndex-3:   300;
+$zIndex-4:   400;
+$zIndex-5:   500;
+$zIndex-6:   600;
+$zIndex-7:   700;
+$zIndex-8:   800;
+$zIndex-9:   900;
+$zIndex-10: 1000;
