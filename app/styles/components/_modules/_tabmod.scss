@@ -7,6 +7,8 @@
 .tabmod__tab {
   display: inline-block;
   padding: $baseSpace/2 $baseSpace;
+  cursor: pointer;
+  outline: 0;
 }
 
 .tabmod__card {
