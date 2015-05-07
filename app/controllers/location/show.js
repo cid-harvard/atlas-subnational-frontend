@@ -2,7 +2,7 @@ import Ember from 'ember';
 const {computed} = Ember;
 
 export default Ember.Controller.extend({
-  activeStep: 3,
+  activeStep: 1,
   stepStories: computed(function() {
     return [
       { index: 1 , text: this.t('stepper.0')},
