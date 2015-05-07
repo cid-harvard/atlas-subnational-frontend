@@ -39,4 +39,29 @@
   border-top: 1px solid $colorNavy800;
 }
 
+// Buttons
+.sidebar__btn {
+  font-size: $fontTiny;
+  color: $colorNavy600;
+}
+
+.sidebar__btn--is--active {
+  color: $colorWhite;
+}
+
+
+// Toggle
+.toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+
+.toggle__label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
 
