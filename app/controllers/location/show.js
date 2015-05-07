@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
       { index: 2 , text: this.t('stepper.1')},
       { index: 3 , text: this.t('stepper.2', this.get('model.name'), this.get('model.name'))},
       { index: 4 , text: this.t('stepper.0', this.get('model.name'))}
-    ]
+    ];
   }),
   actions: {
     back: function() {
