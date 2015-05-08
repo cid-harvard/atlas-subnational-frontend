@@ -4,12 +4,10 @@
 *
 **/
 
-.sidebar {
-	position: fixed;
-	height: 100%;
-	width: 250px;
+.stream {
+	margin-left: $sidebarWidth;
 }
 
-.stream {
-	margin-left:: 250px;
+.footer {
+  margin-left: $sidebarWidth;
 }

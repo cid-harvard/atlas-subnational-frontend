@@ -5,9 +5,9 @@
 *
 **/
 
+@import '_variables';
 @import '_utils';
 @import '_sanitize';
-@import '_palette';
 
 // Icons - Need to sadd Font Awesome
 // @import '_components/_icons';
@@ -24,6 +24,7 @@
 
 // Modules
 @import '_modules/_layout';
+@import '_modules/_side-nav';
 @import '_modules/_profile';
 @import '_modules/_stream-header';
 @import '_modules/_stream-section';
