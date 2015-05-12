@@ -1,0 +1,30 @@
+<header class="header--sidebar">
+  <div class="branding">
+    <img src="assets/img/branding/logo.png" alt="" class="branding__logo">
+    <p class="branding__slogan">Using data to keep Colombia competitive</p>
+  </div>
+  <div class="sidebar__search sidebar__section">
+    <a href="" class="sidebar__btn sidebar__btn--search">Search</a>
+  </div>
+  <nav class="sidebar__section sidebar__nav">
+    <ul class="nav__list">
+      <li class="nav__item">
+        <a href="" class="sidebar__btn sidebar__btn--is--active nav__item__link">Profiles</a>
+      </li>
+      <li class="nav__item">
+        <a href="" class="sidebar__btn nav__item__link">Graph Builder</a>
+      </li>
+      <li class="nav__item">
+        <a href="" class="sidebar__btn nav__item__link">Rankings</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="sidebar__section sidebar__languages">
+    <div class="togglemod togglemod--languages">
+      <p {{bind-attr class=":toggle__label__text isEnglish:toggle__label--is--active"}}>EN</p>
+       {{input type='checkbox' id='toggle--languages' class='toggle toggle--languages' checked=language}}
+      <label class="toggle__label" for="toggle--languages"></label>
+      <p {{bind-attr class=":toggle__label__text isEnglish::toggle__label--is--active"}}>ES</p>
+    </div>
+  </div>
+</header>
