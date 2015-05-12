@@ -53,6 +53,7 @@
 
 .stepper__control__progress {
   padding: $baseSpace/2 $baseSpace;
+  pointer-events: none;
   @include absolute(bottom 0 left 0 right 0);
 }
 

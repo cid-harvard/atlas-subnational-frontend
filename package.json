@@ -35,6 +35,7 @@
     "ember-cli-sass": "4.0.0-beta.6",
     "ember-cli-uglify": "1.0.1",
     "ember-data": "1.0.0-beta.16.1",
-    "ember-export-application-global": "1.0.2"
+    "ember-export-application-global": "1.0.2",
+    "ivy-tabs": "git://github.com/ivyapp/ivy-tabs.git"
   }
 }

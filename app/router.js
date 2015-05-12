@@ -11,7 +11,6 @@ export default Router.map(function() {
 
   this.route('location', { path: 'location'}, function() {
     this.route('colombia', { path:'colombia'});
-    this.route('industries', { path: ':location_id/industries'});
-    this.route('products', { path: ':location_id/products'});
+    this.route('show', { path: ':location_id'});
   });
 });
