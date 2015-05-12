@@ -12,7 +12,7 @@
   </header>
   <section class="stream__section">
     <header class="section__header">
-      <h3 class="section__head">Overview</h3>
+    <h3 class="section__head">{{t 'location.overview'}}</h3>
     </header>
     <ul class="list--section list--section--bullets">
       <li class="list__item--section--bullets">GDP grew {{format-percent model.gdpGrowth}} per year from {{model.yearRange}}</li>
@@ -141,7 +141,7 @@
     <div class="stepper">
       <ol class="stepper__list">
         {{#each story in stepStories}}
-          {{component 'department-stepper' story=story parentController=controller}}
+          {{component 'department-stepper' model=model story=story parentController=controller}}
         {{/each}}
       </ol>
       <div class="stepper__vizmod">
