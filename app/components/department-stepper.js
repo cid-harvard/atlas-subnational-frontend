@@ -8,7 +8,10 @@ export default Ember.Component.extend({
   activeStepIndex: computed('parentController.activeStep', function() {
     return this.get('parentController.activeStep');
   }),
-  isActive: computed('story', 'activeStepIndex', function() {
+  isActive: computed('story.index', 'activeStepIndex', function() {
     return this.get('story.index') === this.get('activeStepIndex');
+  }),
+  i18nString: computed('story.index', function() {
+    return `stepper.${this.get('story.index')}`;
   })
 });
