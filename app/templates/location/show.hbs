@@ -91,12 +91,9 @@
             <div class="vizmod__list__wrap">
               <h4 class="vizmod__list__head">Top exports, all</h4>
               <ol class="vizmod__list">
-                <li class="vizmod__list__item">Aleaciones madre de cobre</li>
-                <li class="vizmod__list__item">Productos de acabado para el teñido</li>
-                <li class="vizmod__list__item">Guatas, gasas y vendas</li>
-                <li class="vizmod__list__item">Extractos curtientes de origen vegetal</li>
-                <li class="vizmod__list__item">Cortinas persianas, cortinas cenefas, algodón, tejido de punto</li>
-                <li class="vizmod__list__item">Depósitos, cubas, tanques, etc.</li>
+                {{#each export in model.topExports}}
+                  <li class="vizmod__list__item">{{export.name}}</li>
+                {{/each}}
               </ol>
             </div>
           </div>
@@ -161,31 +158,13 @@
           </tr>
         </thead>
         <tbody class="table__tbody table__tbody--complexity table__tbody--scroller">
-          <tr class="table__row table__row--complexity table__row--scroller">
-            <td class="table__cell table__cell--scroller table__cell--complexity">Slag wool, rock wool, and similar mineral wools</td>
-            <td class="table__cell table__cell--scroller table__cell--complexity">$2.4M</td>
-            <td class="table__cell table__cell--scroller table__cell--complexity">Up 4%</td>
-          </tr>
-          <tr class="table__row table__row--complexity table__row--scroller">
-            <td class="table__cell table__cell--scroller table__cell--complexity">Slag wool, rock wool, and similar mineral wools</td>
-            <td class="table__cell table__cell--scroller table__cell--complexity">$2.4M</td>
-            <td class="table__cell table__cell--scroller table__cell--complexity">Up 4%</td>
-          </tr>
-          <tr class="table__row table__row--complexity table__row--scroller">
-            <td class="table__cell table__cell--scroller table__cell--complexity">Slag wool, rock wool, and similar mineral wools</td>
-            <td class="table__cell table__cell--scroller table__cell--complexity">$2.4M</td>
-            <td class="table__cell table__cell--scroller table__cell--complexity">Up 4%</td>
-          </tr>
-          <tr class="table__row table__row--complexity table__row--scroller">
-            <td class="table__cell table__cell--scroller table__cell--complexity">Slag wool, rock wool, and similar mineral wools</td>
-            <td class="table__cell table__cell--scroller table__cell--complexity">$2.4M</td>
-            <td class="table__cell table__cell--scroller table__cell--complexity">Up 4%</td>
-          </tr>
-          <tr class="table__row table__row--complexity table__row--scroller">
-            <td class="table__cell table__cell--scroller table__cell--complexity">Slag wool, rock wool, and similar mineral wools</td>
-            <td class="table__cell table__cell--scroller table__cell--complexity">$2.4M</td>
-            <td class="table__cell table__cell--scroller table__cell--complexity">Up 4%</td>
-          </tr>
+          {{#each export in model.currentExports }}
+            <tr class="table__row table__row--complexity table__row--scroller">
+              <td class="table__cell table__cell--scroller table__cell--complexity">{{export.name}}</td>
+              <td class="table__cell table__cell--scroller table__cell--complexity">{{export.value}}</td>
+              <td class="table__cell table__cell--scroller table__cell--complexity">{{export.growth}}</td>
+            </tr>
+          {{/each}}
         </tbody>
       </table>
     </div>
@@ -209,12 +188,9 @@
       <div class="vizmod__list__wrap">
         <h4 class="vizmod__list__head">High potential exports for {{model.name}}</h4>
         <ol class="vizmod__list">
-          <li class="vizmod__list__item">Aleaciones madre de cobre</li>
-          <li class="vizmod__list__item">Productos de acabado para el teñido</li>
-          <li class="vizmod__list__item">Guatas, gasas y vendas</li>
-          <li class="vizmod__list__item">Extractos curtientes de origen vegetal</li>
-          <li class="vizmod__list__item">Cortinas persianas, cortinas cenefas, algodón, tejido de punto</li>
-          <li class="vizmod__list__item">Depósitos, cubas, tanques, etc.</li>
+          {{#each export in model.topExports}}
+            <li class="vizmod__list__item">{{export.name}}</li>
+          {{/each}}
         </ol>
       </div>
       <footer class="vizmod__footer">
