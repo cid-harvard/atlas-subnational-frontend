@@ -23,6 +23,21 @@ export default {
     { "year": 2012, "pop": 2373550, "gdp": 18761000000000, "export_value": 0, "value_added": 0 },
     { "year": 2013, "pop": 2402910, "gdp": 19680000000000, "export_value": 1183541344, "value_added": 3529084685 }
   ],
+  topExports: [
+    { name: 'Aleaciones madre de cobre'},
+    { name: 'Productos de acabado para el teñido'},
+    { name: 'Guatas, gasas y vendas'},
+    { name:'Extractos curtientes de origen vegetal'},
+    { name: 'Cortinas persianas, cortinas cenefas, algodón, tejido de punto'},
+    { name:'Depósitos, cubas, tanques, etc.'}
+  ],
+  currentExports: [
+    { name: "Slag wool, rock wool, and similar mineral wools", value: "$2.4M", growth: "Up 4%" },
+    { name: "Slag wool, rock wool, and similar mineral wools", value: "$2.4M", growth: "Up 4%" },
+    { name: "Slag wool, rock wool, and similar mineral wools", value: "$2.4M", growth: "Up 4%" },
+    { name: "Slag wool, rock wool, and similar mineral wools", value: "$2.4M", growth: "Up 4%" },
+    { name: "Slag wool, rock wool, and similar mineral wools", value: "$2.4M", growth: "Up 4%" },
+  ],
   totalExports: [],
   totalImports: [],
   profileSpark: sparkData.data,

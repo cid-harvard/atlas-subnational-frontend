@@ -12,7 +12,8 @@ export default DS.Model.extend({
   profileSpark: attr(),
   profileExport: attr(),
   timeSeries: attr(),
-
+  topExports: attr(),
+  currentExports: attr(),
   sortedTimeSeries: computed('timeSeries', function() {
     return _.sortBy(this.get('timeSeries'), 'year');
   }),
