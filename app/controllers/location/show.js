@@ -2,23 +2,18 @@ import Ember from 'ember';
 const {computed} = Ember;
 
 export default Ember.Controller.extend({
-  activeStep: 1,
+  activeStep: 0,
   stepStories: computed(function() {
-    return [
-      { index: 1 , text: this.t('stepper.0')},
-      { index: 2 , text: this.t('stepper.1')},
-      { index: 3 , text: this.t('stepper.2', this.get('model.name'), this.get('model.name'))},
-      { index: 4 , text: this.t('stepper.0', this.get('model.name'))}
-    ];
+    return [ { index: 0 }, { index: 1 }, { index: 2 }, { index: 3 } ];
   }),
   actions: {
     back: function() {
-      if(this.get('activeStep') > 1) {
+      if(this.get('activeStep') > 0) {
         this.decrementProperty('activeStep');
       }
     },
     forward: function() {
-      if(this.get('activeStep') < this.get('stepStories').length) {
+      if(this.get('activeStep') < this.get('stepStories').length - 1) {
         this.incrementProperty('activeStep');
       }
     }
