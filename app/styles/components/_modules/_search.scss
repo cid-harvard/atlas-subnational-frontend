@@ -78,6 +78,12 @@
 
 .search__results {
   margin-top: $baseSpace;
+  &--none {
+    margin-top:$baseSpace;
+    color: $colorWhite;
+    font-size: $fontSmall;
+    text-align: center;
+  }
 }
 
 .search__result {
@@ -88,7 +94,6 @@
   margin-top: $baseSpace;
   padding-bottom: $baseSpace;
 }
-
 .search__result-text {
   margin-right:auto;
 }
