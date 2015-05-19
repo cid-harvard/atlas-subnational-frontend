@@ -4,17 +4,6 @@
 *
 **/
 
-@mixin search-page__button($color) {
-  font-size: $fontSmall;
-  cursor: pointer;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: $color;
-  border: solid 1px $color;
-  padding: 1rem;
-}
-
 .search {
   background: $colorNavy600;
   padding-bottom: $baseSpace * 2;
@@ -26,7 +15,7 @@
   padding: $baseSpace;
 }
 
-.search__head {
+.search__header__head {
   font-size: $fontXXLarge;
   margin: 0 auto;
   color: $colorWhite;
@@ -49,7 +38,7 @@
   border-bottom: solid 1px $colorWhite;
 }
 
-.search__box {
+.search__wrap {
   display: flex;
 }
 
@@ -66,14 +55,30 @@
 }
 
 .search__button {
-  @include search-page__button($colorWhite);
+  margin-bottom: 0;
+  margin-top: 0;
+  font-size: $fontSmall;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 1rem;
 }
-.profile__button {
-  @include search-page__button($colorGray);
-  margin-right: 1rem;
+
+.search__button--query {
+  color: $colorWhite;
+  border: solid 1px $colorWhite;
 }
-.graph-builder__button {
-  @include search-page__button($colorGray);
+
+.search__button--result {
+  color: $colorGray;
+  border: solid 1px $colorGray;
+  &:first-of-type{
+    margin-right: 1rem;
+  }
+}
+
+.results__section {
+  margin: $baseSpace $baseSpace*3;
 }
 
 .search__results {
@@ -94,16 +99,17 @@
   margin-top: $baseSpace;
   padding-bottom: $baseSpace;
 }
-.search__result-text {
+
+.search__result__text {
   margin-right:auto;
 }
 
-.search__result-breadcrumb {
+.search__result__breadcrumb {
   color: $colorGray;
   font-size: $fontSmall;
 }
 
-.search__result-name {
+.search__result__name {
   color: $colorGrayLightest;
 }
 
