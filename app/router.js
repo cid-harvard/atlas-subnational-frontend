@@ -6,6 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 export default Router.map(function() {
+  this.route('search');
   this.route('graph_builder');
   this.route('ranking');
 

@@ -1,0 +1,28 @@
+<article class="stream search">
+  <header class="search__header">
+    <h2 class="search__header__head">Search</h2>
+  </header>
+  <section class="search__section">
+    <div class="search__wrap">
+      {{input
+        class="search__field"
+        placeholder="Type here to search for a location, product, industry or occupation"
+        value=search
+        enter='search'
+      }}
+      <button class="button search__button search__button--query"{{action 'search'}}>Search</button>
+    </div>
+  </section>
+  <section class="results__section">
+    <h3 class="results__header">Results</h3>
+    {{#if model.length}}
+      <ul class="search__results">
+        {{#each result in model}}
+          {{partial 'partials/result'}}
+        {{/each}}
+      </ul>
+    {{else}}
+      <p class='search__results--none'>No results found.</p>
+    {{/if}}
+  </section>
+</article>
