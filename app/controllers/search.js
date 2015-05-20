@@ -5,11 +5,11 @@ export default Ember.Controller.extend({
   queryParams: ['query'],
   query: null,
   setSearch: on('init', function() {
-    this.set('search', this.get('query'))
+    this.set('search', this.get('query'));
   }),
   actions: {
     search: function() {
-      this.transitionToRoute('search', { queryParams: { query: this.get('search')}})
+      this.transitionToRoute('search', { queryParams: { query: this.get('search')}});
     }
   }
 });
