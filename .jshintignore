@@ -1,2 +1,2 @@
 #ignore fixtures
-/app/fixture
+app/fixtures/*
