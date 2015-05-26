@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {on,computed,observer} = Ember;
+const {on,observer} = Ember;
 
 export default Ember.Controller.extend({
   queryParams: ['query'],
