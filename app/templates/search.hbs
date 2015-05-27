@@ -14,15 +14,10 @@
     </div>
   </section>
   <section class="results__section">
-    <h3 class="results__header">Results</h3>
-    {{#if model.length}}
-      <ul class="search__results">
-        {{#each result in model}}
-          {{partial 'partials/result'}}
-        {{/each}}
-      </ul>
+    {{#if query }}
+      {{partial 'partials/results'}}
     {{else}}
-      <p class='search__results--none'>No results found.</p>
     {{/if}}
+
   </section>
 </article>
