@@ -5,7 +5,9 @@ const { computed } = Ember;
 
 export default DS.Model.extend({
   code: attr(),
-  name: attr(),
+  name_en: attr(),
+  name_es: attr(),
+
   population: attr(),
   randomAttr: attr(),
   profileDot: attr(),
@@ -14,6 +16,7 @@ export default DS.Model.extend({
   timeSeries: attr(),
   topExports: attr(),
   currentExports: attr(),
+
   sortedTimeSeries: computed('timeSeries', function() {
     return _.sortBy(this.get('timeSeries'), 'year');
   }),
