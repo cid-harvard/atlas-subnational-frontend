@@ -2,7 +2,8 @@ import dotPlot from "../fixtures/dot";
 import sparkLine from "../fixtures/spark";
 export default [
   {
-    name: 'Atlántico',
+    name_en: 'Atlántico in English',
+    name_es: 'Atlántico in Spanish',
     id: '1',
     code: '42',
     gdpGrowth: 'TK',
@@ -42,9 +43,5 @@ export default [
     profileDot: dotPlot.data,
     profileSpark: sparkLine.data,
     profileExport: []
-  },
-  {
-    id: 2,
-    name: 'Link'
-  },
+  }
 ];
