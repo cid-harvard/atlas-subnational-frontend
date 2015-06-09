@@ -41,6 +41,6 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     this.set('width', this.$().parent().width());
     this.set('height', this.$().parent().height());
-    this.draw();
+    //this.draw();
   }
 });
