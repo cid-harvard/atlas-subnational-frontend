@@ -13,8 +13,9 @@ export default Ember.Route.extend({
       let model = array[0].value;
       let exports = array[1].value;
       let departments = array[2].value;
-      model.set('productsData', exports.data);
-      model.set('departments', departments.data);
+
+      if(exports) { model.set('productsData', exports.data);}
+      if(departments) { model.set('departments', departments.data);}
       return model;
     });
   }
