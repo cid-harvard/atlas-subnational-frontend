@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
     return products;
   }),
   productsSortedByExports: computed('productsData', function() {
-    return _.sortBy(this.get('productsData'),  'export_value');
+    return _.slice(_.sortBy(this.get('productsData'), function(d) { return -d.export_value;}), 0, 50);
   }),
   name: computed('isEnglish',function() {
     if(this.get('isEnglish')) {
