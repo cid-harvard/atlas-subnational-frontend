@@ -16,7 +16,8 @@ export default Ember.Component.extend({
         container: this.get('id'),
         height: this.get('height'),
         width: this.get('width'),
-        id: this.get('varId'),
+        margin: {top: 0, right: 10, bottom: 0, left: 10},
+        var_id: this.get('varId'),
         var_text: this.get('varText'),
         var_x: this.get('varX'),
         x_type: 'linear',
@@ -25,7 +26,11 @@ export default Ember.Component.extend({
         x_format: function(d) { return '$' + d3.format(".1s")(d); },
         mark: { type: 'diamond', width: 10, height: 10, translate: 30 },
         tickSize: 0,
-        tickPadding: 10
+        tickPadding: 10,
+        var_id: "dept_name",
+        var_text: "dept_name", 
+        selection: ["Antioquia"],
+        highlight: ["Antioquia"],
       });
  }),
   draw: function() {
