@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { on,computed } = Ember;
+const { computed } = Ember;
 
 export default Ember.Component.extend({
   tagName: 'div',

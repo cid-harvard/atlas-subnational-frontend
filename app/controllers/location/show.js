@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
 
     _.each(departments, function(d) {
       d.name = _.find(locationsMetaData, {id: d.department_id}).name_en;
-    })
+    });
 
     return departments;
   }),
@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
     return _.slice(_.sortBy(this.get('productsData'), function(d) { return -d.export_value;}), 0, 50);
   }),
   name: computed('isEnglish',function() {
-    if(!this.model.get('name_es')) { return this.model.get('name_en');};
+    if(!this.model.get('name_es')) { return this.model.get('name_en');}
 
     if(this.get('isEnglish')) {
       return this.model.get('name_en');

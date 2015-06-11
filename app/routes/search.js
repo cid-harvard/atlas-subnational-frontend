@@ -17,6 +17,6 @@ export default Ember.Route.extend({
   model: function(transition) {
     if(transition.query) {
       return Ember.$.getJSON('metadata/locations/?level=department')
-        .then(function(model) { return model.data });
+        .then(function(model) { return model.data; });
     }
   }});

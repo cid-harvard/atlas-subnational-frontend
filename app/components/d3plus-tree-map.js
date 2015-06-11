@@ -22,7 +22,7 @@ export default Ember.Component.extend({
     .ui({padding: 20})
     .height(this.get('height'))
     .width(this.get('width'))
-    .size("export_value")
+    .size("export_value");
   }),
   draw: function() {
     this.set('width', this.$().parent().width());
