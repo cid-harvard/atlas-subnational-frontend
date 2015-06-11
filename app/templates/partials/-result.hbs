@@ -4,5 +4,5 @@
     <p class="search__result__name">{{result.name_en}}</p>
   </div>
     {{!-- {{link-to 'Profile' 'location.show' result.id  class="button search__button search__button--result"}} --}}
-    <a class="button search__button search__button--result">Graph Builder</a>
+    {{link-to 'Graph Builder' 'graph_builder' (query-params entity='location' entity_id=result.id)  class="button search__button search__button--result"}}
 </li>
