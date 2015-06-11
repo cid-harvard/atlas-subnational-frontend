@@ -1,6 +1,8 @@
 <header class="header--sidebar">
   <div class="branding">
-    <img src="assets/img/branding/logo.png" alt="" class="branding__logo">
+    {{#link-to "search" (query-params query="null") class="" }}
+      <img src="assets/img/branding/logo.png" alt="" class="branding__logo">
+    {{/link-to}}
     <p class="branding__slogan">Using data to keep Colombia competitive</p>
   </div>
   {{#link-to "search" (query-params query="null") class="sidebar__search sidebar__section" tagName="div" }}
@@ -10,11 +12,11 @@
   {{/link-to}}
   <nav class="sidebar__section sidebar__nav">
     <ul class="nav__list">
-      {{#link-to "location.show"  1 class="nav__item" tagName="li"}}
+{{!--       {{#link-to "location.show"  1 class="nav__item" tagName="li"}}
         {{#link-to "location.show" 1 class="sidebar__btn nav__item__link" activeClass="sidebar__btn--is--active"}}
           Profiles
         {{/link-to}}
-      {{/link-to}}
+      {{/link-to}} --}}
 
       {{#link-to "graph_builder" class="nav__item" tagName="li"}}
         {{#link-to "graph_builder" class="sidebar__btn nav__item__link" activeClass="sidebar__btn--is--active"}}
@@ -22,17 +24,17 @@
         {{/link-to}}
       {{/link-to}}
 
-      <li class="nav__item">
+{{!--       <li class="nav__item">
         <a href="" class="sidebar__btn nav__item__link">Rankings</a>
-      </li>
+      </li> --}}
     </ul>
   </nav>
-  <div class="sidebar__section sidebar__languages">
+{{!--   <div class="sidebar__section sidebar__languages">
     <div class="togglemod togglemod--languages">
       <p {{bind-attr class=":toggle__label__text isEnglish:toggle__label--is--active"}}>EN</p>
        {{input type='checkbox' id='toggle--languages' class='toggle toggle--languages' checked=language}}
       <label class="toggle__label" for="toggle--languages"></label>
       <p {{bind-attr class=":toggle__label__text isEnglish::toggle__label--is--active"}}>ES</p>
     </div>
-  </div>
+  </div> --}}
 </header>
