@@ -27,8 +27,6 @@ export default Ember.Component.extend({
         mark: { type: 'diamond', width: 10, height: 10, translate: 30 },
         tickSize: 0,
         tickPadding: 10,
-        var_id: "dept_name",
-        var_text: "dept_name", 
         selection: ["Antioquia"],
         highlight: ["Antioquia"],
       });
@@ -36,7 +34,7 @@ export default Ember.Component.extend({
   draw: function() {
     this.set('width', this.$().parent().width());
     this.set('height', this.$().parent().height());
-    d3.select(this.get('id')) .call(this.get('dotPlot'));
+    d3.select(this.get('id')).call(this.get('dotPlot'));
   },
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
