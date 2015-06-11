@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {computed} = Ember;
+const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
   tagName: 'div',
@@ -8,7 +8,7 @@ export default Ember.Component.extend({
     return `#${this.get('elementId')}`;
   }),
   filteredData: computed('data', function() {
-                  return this.get('data');
+    return this.get('data');
   }),
   treemap: computed('id','data',function() {
      return  vistk.viz()
@@ -39,6 +39,9 @@ export default Ember.Component.extend({
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.draw();
     });
-  }
+  },
+  didDataChange: observer('data', function() {
+    this.rerender();
+  })
 });
 
