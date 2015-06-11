@@ -1,5 +1,18 @@
-<article class="stream">
-  <header>
-    <h2>Graph Builder</h2>
+<article class="stream search">
+  <header class="search__header">
+    <h2 class="search__header__head">Graph Builder</h2>
   </header>
+  <section class="search__section">
+    {{view "select"
+      content=departmentLocations
+      optionValuePath="content.id"
+      optionLabelPath="content.name_en"
+      value=queryParams.entity_id
+    }}
+  </section>
+  <section class="results__section">
+    {{d3plus-tree-map elementID="d3plus" data=productsData }}
+  </section>
 </article>
+
+
