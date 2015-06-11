@@ -3,8 +3,8 @@ const {RSVP} = Ember;
 
 export default Ember.Route.extend({
   model: function() {
-    var productsMetadata = Ember.$.getJSON('metadata/products');
-    var locationsMetadata = Ember.$.getJSON('metadata/locations');
+    var productsMetadata = Ember.$.getJSON('metadata/products/');
+    var locationsMetadata = Ember.$.getJSON('metadata/locations/');
     var locationsHierarchy = Ember.$.getJSON('metadata/products/hierarchy?from_level=4digit&to_level=section');
 
     return RSVP.allSettled([productsMetadata, locationsMetadata, locationsHierarchy]).then(function(array) {
