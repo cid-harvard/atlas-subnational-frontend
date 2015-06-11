@@ -15,9 +15,8 @@ export default Ember.Route.extend({
     }
   },
   model: function(transition) {
-    // hardcoded so search result is going to be Atlantico
     if(transition.query) {
-      return [this.store.find('location', 930), this.store.find('location', 930)];
+      return Ember.$.getJSON('metadata/locations/?level=department')
+        .then(function(model) { return model.data });
     }
-  }
-});
+  }});
