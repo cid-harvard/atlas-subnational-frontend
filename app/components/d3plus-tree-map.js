@@ -18,8 +18,6 @@ export default Ember.Component.extend({
     .id(['parent_name','name'])         // key for which our data is unique on
     .depth(1)
     .color('grey')
-    .time({"value": "year", "solo": 2013})
-    .ui({padding: 20})
     .height(this.get('height'))
     .width(this.get('width'))
     .size("export_value");

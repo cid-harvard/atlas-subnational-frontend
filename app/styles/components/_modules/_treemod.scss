@@ -8,3 +8,16 @@
   background: $colorBrown100;
   width: 66%;
 }
+
+
+
+// Fuggin d3plus id styling let's get this shit outta here ASAP
+#bg {
+  display: none;
+}
+
+.d3plus_data {
+    stroke: $colorBrown200  !important;
+    stroke-width: 1.5px !important;
+    fill: $colorBrown100 !important;
+}

@@ -1,0 +1,18 @@
+/**
+*
+* Graph Builder
+*
+**/
+
+.builder {
+  background: $colorBrown200;
+  padding-bottom: $baseSpace * 2;
+}
+
+.builder__header {
+  text-align: center;
+}
+
+.builder__graph__wrap {
+  height: 800px;
+}

@@ -11,12 +11,13 @@
 
 .stream__header {
   text-align: center;
-  padding: $baseSpace * 2;
+  padding: $baseSpace*2 $baseSpace*2 0 $baseSpace*2;
 }
 
 .stream__head {
   font-size: $fontHuge;
   margin: 0 auto;
+  letter-spacing: -5px;
 }
 
 .breadcrumb {
