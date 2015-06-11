@@ -18,6 +18,8 @@ export default DS.Model.extend({
   productsData: attr(),
   departments: attr(),
 
+  level: attr(),
+
   timeSeries: attr(),
   topExports: attr(),
   currentExports: attr(),
