@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {observer, on, set:set} = Ember;
+const {observer, computed, on, set:set} = Ember;
 
 export default Ember.Controller.extend({
   language: Ember.$.cookie('lang') === 'es',
@@ -24,6 +24,11 @@ export default Ember.Controller.extend({
       Ember.$.cookie('lang', 'en');
       set(this, 'isEnglish', true);
     }
-    this.send('rerender');
+  }),
+  productsMetadata: computed('model.products', function() {
+    return this.get('model.products');
+  }),
+  locationsMetadata: computed('model.locations', function(){
+    return this.get('model.locations');
   })
 });

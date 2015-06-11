@@ -22,8 +22,9 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
+    // need to fix for production mode
     ENV.contentSecurityPolicy = {
-      'connect-src': "'self' http://54.172.130.22",
+      'connect-src': "'self' http://54.172.130.22 *",
       'style-src': "'self' 'unsafe-inline' *",
     }
   }

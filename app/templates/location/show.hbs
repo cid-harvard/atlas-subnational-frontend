@@ -5,9 +5,8 @@
     <ol class="breadcrumbs">
       <li class="breadcrumb"><a href="#" class="breadcrumb__link">Location</a></li>
       <li class="breadcrumb"><a href="#" class="breadcrumb__link">Colombia</a></li>
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">{{model.name}}</a></li>
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Profiles</a></li>
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Exports and imports</a></li>
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">{{name}}</a></li>
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Profile</a></li>
     </ol>
   </header>
   <section class="stream__section">
@@ -16,8 +15,8 @@
     </header>
     <ul class="list--section list--section--bullets">
       <li class="list__item--section--bullets">GDP grew {{format-percent model.gdpGrowth}} per year from {{model.yearRange}}</li>
-      <li class="list__item--section--bullets">{{model.name}} has the 9th highest GDP per capita at ${{format-largenumber model.latestGdp}}</li>
-      <li class="list__item--section--bullets">The population is {{format-largenumber model.latestPop}}, making {{model.name}} the 5th largest department</li>
+      <li class="list__item--section--bullets">{{name}} has the 9th highest GDP per capita at ${{format-largenumber model.latestGdp}}</li>
+      <li class="list__item--section--bullets">The population is {{format-largenumber model.latestPop}}, making {{name}} the 5th largest department</li>
     </ul>
     <table class="table--summaries">
       <thead>
@@ -32,7 +31,6 @@
         <tr class="table__row table__row--body">
           <td class="table__cell">GDP</td>
           <td class="table__cell">
-            {{dot-plot xVar='realgdp' yVar=['dept_pop', 'realgdp'] data=model.profileDot elementId='dotplot--gdp' }}
           </td>
           <td class="table__cell">$8.2M</td>
           <td class="table__cell">{{spark-line yVar='realgdp' data=model.profileSpark elementId='spark--gdp' }} + 2.4%</td>
@@ -45,9 +43,9 @@
       <h3 class="section__head">Exports and imports</h3>
     </header>
     <ul class="list--section list--section--bullets">
-      <li class="list__item--section--bullets">{{model.name}} exported USD $1.1B in 2013, 3% of Colombia's total exports</li>
-      <li class="list__item--section--bullets">{{model.name}}'s main export partners in 2013 were the United States, China, and Venezuela</li>
-      <li class="list__item--section--bullets">{{model.name}}'s main exports are metals, chemical products, and textiles</li>
+      <li class="list__item--section--bullets">{{name}} exported USD $1.1B in 2013, 3% of Colombia's total exports</li>
+      <li class="list__item--section--bullets">{{name}}'s main export partners in 2013 were the United States, China, and Venezuela</li>
+      <li class="list__item--section--bullets">{{name}}'s main exports are metals, chemical products, and textiles</li>
     </ul>
 
     <div class="tabmod">
@@ -80,18 +78,36 @@
             <tbody>
               <tr class="table__row table__row--body">
                 <td class="table__cell">Total exports</td>
-                <td class="table__cell">dot plot</td>
+                <td class="table__cell">
+                  {{dot-plot
+                    elementId='dotplot--gdp'
+                    data=departmentsData
+                    varX='export_value'
+                    varText='name'
+                    varId='department_name'
+                    }}
+                </td>
                 <td class="table__cell">$8.2M</td>
                 <td class="table__cell">line chart + 1.2%</td>
               </tr>
             </tbody>
           </table>
           <div class="vizmod">
-            <div class="vizmod--treemod"></div>
+            <div class="vizmod--treemod">
+              {{tree-map
+                data=productsData
+                elementId='tree-map'
+                varId='parent_name'
+                varGroup='parent_id'
+                varColor='parent_id'
+                varText='parent_name'
+                varSize='export_value'
+              }}
+            </div>
             <div class="vizmod__list__wrap">
               <h4 class="vizmod__list__head">Top exports, all</h4>
               <ol class="vizmod__list">
-                {{#each export in model.topExports}}
+                {{#each export in productsSortedByExports}}
                   <li class="vizmod__list__item">{{export.name}}</li>
                 {{/each}}
               </ol>
@@ -152,7 +168,7 @@
       <table class="table table--scroller table--complexity">
         <thead class="table__thead table__thead--complexity table__thead--scroller">
           <tr class="table__row table__row--complexity table__row--scroller">
-            <th class="table__header table__header--scroller table__header--complexity">Current exports of {{model.name}}, ranked by complexity</th>
+            <th class="table__header table__header--scroller table__header--complexity">Current exports of {{name}}, ranked by complexity</th>
             <th class="table__header table__header--scroller table__header--complexity">Export value (2013)</th>
             <th class="table__header table__header--scroller table__header--complexity">Growth, annual (2009-2013)</th>
           </tr>
@@ -173,7 +189,7 @@
     <header class="section__header">
       <h3 class="section__head">Export possiblities</h3>
     </header>
-    <p class="section__intro">We've found that countries which export complex products grow faster than those which export simple products. Using the similarity map we built in the section above, we've highlighted  high potential products for {{model.name}}, ranked by which have the highest combination of opportunity and complexity.</p>
+    <p class="section__intro">We've found that countries which export complex products grow faster than those which export simple products. Using the similarity map we built in the section above, we've highlighted  high potential products for {{name}}, ranked by which have the highest combination of opportunity and complexity.</p>
     <div class="vizmod">
       <div class="vizmod--treemod">
         <div class="vizmod__legend">
@@ -186,7 +202,7 @@
         <div class="vizmod__vizwrap"></div>
       </div>
       <div class="vizmod__list__wrap">
-        <h4 class="vizmod__list__head">High potential exports for {{model.name}}</h4>
+        <h4 class="vizmod__list__head">High potential exports for {{name}}</h4>
         <ol class="vizmod__list">
           {{#each export in model.topExports}}
             <li class="vizmod__list__item">{{export.name}}</li>

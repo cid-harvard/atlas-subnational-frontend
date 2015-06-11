@@ -27,6 +27,16 @@ You will need the following things properly installed on your computer.
 * `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
+## Running on API
+
+* clone `https://github.com/cid-harvard/colombia`
+* get correct db file from Mali
+* `cd` into the the repo
+* put db file in `colombia/database.db`
+* run `make dummy && make dev`
+
+*  In a seperate terminal window `cd` into the ember app
+*  Run `ember s --proxy http://127.0.0.1:8001/`
 ### Code Generators
 
 Make use of the many generators for code, try `ember help generate` for more details

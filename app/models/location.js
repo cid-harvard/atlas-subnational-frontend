@@ -4,18 +4,26 @@ const { attr } = DS;
 const { computed } = Ember;
 
 export default DS.Model.extend({
-  code: attr(),
-  name_en: attr(),
-  name_es: attr(),
+  code: attr('number', { defaultValue: 111}),
 
-  population: attr(),
-  randomAttr: attr(),
-  profileDot: attr(),
-  profileSpark: attr(),
-  profileExport: attr(),
+  name_en: attr('string', { defaultValue: 'atlantico in english'}),
+  name_es: attr('string', { defaultValue: 'atlantico in spanish'}),
+
+  name_short_en: attr('string', { defaultValue: 'english'}),
+  name_short_es: attr('string', { defaultValue: 'spanish'}),
+
+  population: attr('number', { defaultValue: 100000000}),
+  randomAttr: attr('number', { defaultValue: 100000000}),
+
+  productsData: attr(),
+  departments: attr(),
+
+  level: attr(),
+
   timeSeries: attr(),
   topExports: attr(),
   currentExports: attr(),
+  products: attr(),
 
   sortedTimeSeries: computed('timeSeries', function() {
     return _.sortBy(this.get('timeSeries'), 'year');
@@ -27,22 +35,22 @@ export default DS.Model.extend({
     return _.last(this.get('sortedTimeSeries'));
   }),
   firstGdp: computed(function() {
-    return this.get('firstTimeSeries').gdp;
+    return this.get('firstTimeSeries.gdp');
   }),
   latestGdp: computed(function() {
-    return this.get('lastTimeSeries').gdp;
+    return this.get('lastTimeSeries.gdp');
   }),
   gdpGrowth: computed(function(){
     return (this.get('latestGdp') - this.get('firstGdp')) / this.get('latestGdp');
   }),
   latestPop: computed(function() {
-    return this.get('lastTimeSeries').pop;
+    return this.get('lastTimeSeries.pop');
   }),
   firstYear: computed(function() {
-    return this.get('firstTimeSeries').year;
+    return this.get('firstTimeSeries.year');
   }),
   lastYear: computed(function() {
-    return this.get('lastTimeSeries').year;
+    return this.get('lastTimeSeries.year');
   }),
   yearRange: computed(function() {
     return `${this.get('firstYear')}–${this.get('lastYear')}`;

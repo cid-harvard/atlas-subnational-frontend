@@ -7,35 +7,26 @@
 // Nested here instead of giving ever el a class in the js
 .dotplot {
 
-  .axis path,
-  .axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
+  .items__mark__diamond {
+      fill: gray;
+      opacity: .1;
   }
 
-  .label {
+  .items__mark__diamond.highlighted {
+    fill: red;
+    opacity: 1;
+   }
+
+  .items__mark__text {
     display: none;
   }
 
-  .tick {
-    display: none;
-    &:first-of-type, &:last-of-type {
-      display: block;
-    }
+  .axis > .label {
+      display: none;
   }
 
-  .tick .text {
-    display: none;
-  }
-
-  .dot__label {
-    display: none;
-  }
-
-  .dot__label:hover {
-    display: visible;
-    color: red;
+  .axis > .domain {
+    stroke-dasharray: 1,1
   }
 
 }
