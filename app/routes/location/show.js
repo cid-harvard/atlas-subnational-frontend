@@ -7,24 +7,18 @@ export default Ember.Route.extend({
   model: function(params) {
     return this.store.find('location', params.location_id);
   },
-  afterModel: function(model) {
-    if(model.get('level') === 'department') {
-      var exports = Ember.$.getJSON(`data/products?location=${model.id}&year=2012`);
-      var departments = Ember.$.getJSON('data/departments?year=2012');
+  afterModel: function(model, transition) {
+    var year = Ember.get(transition,'queryParams.year') || 2012;
 
-      RSVP.allSettled([exports, departments]).then(function(array) {
-        let exports = array[0].value;
-        let departments = array[1].value;
+    var products = Ember.$.getJSON(`data/products?location=${model.id}&year=${year}`);
+    var departments = Ember.$.getJSON(`data/departments?year=${year}`);
 
-        var exportData = exports.data || [];
-        var departmentData = departments.data || [];
-
-        if(exports) { model.set('productsData', exportData);}
-        if(departments) { model.set('departments', departmentData);}
-      });
-    } else {
-       model.set('productsData', []);
-       model.set('departments', []);
-    }
+    return RSVP.allSettled([products, departments]).then(function(array) {
+      var productsData = Ember.get(array[0], 'value.data') || [];
+      var departmentData = Ember.get(array[1], 'value.data') || [];
+      model.set('productsData', productsData);
+      model.set('departments', departmentData);
+      return model;
+    });
   }
 });
