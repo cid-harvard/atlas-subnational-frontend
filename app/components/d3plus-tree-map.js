@@ -3,6 +3,7 @@ const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
   tagName: 'div',
+  colorScale: ['#bdbdbd', '#969696', '#737373', '#525252', '#252525'],
   attributeBindings: ['width','height'],
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
@@ -10,17 +11,25 @@ export default Ember.Component.extend({
   filteredData: computed('data', function() {
     return this.get('data');
   }),
+  varId: computed('dataType', function() {
+    if(this.get('dataType') === 'products') {
+      return ['parent_name','name'];
+    }
+  }),
   treemap: computed('id','data',function() {
     return d3plus.viz()
-    .container(this.get('id'))  // container DIV to hold the visualization
-    .data({value: this.get('data'), padding: 5})  // data to use with the visualization
-    .type("tree_map")   // visualization type
-    .id(['parent_name','name'])         // key for which our data is unique on
+    .container(this.get('id'))
+    .data({value: this.get('data'), padding: 5})
+    .type("tree_map")
+    .id(this.get('varId'))
     .depth(1)
     .color('grey')
+    .time({"value": "year", "solo": 2013})
+    .ui({padding: 20})
     .height(this.get('height'))
     .width(this.get('width'))
-    .size("export_value");
+    .timing({transitions: 300})
+    .size(this.get('varSize'));
   }),
   draw: function() {
     this.set('width', this.$().parent().width());
