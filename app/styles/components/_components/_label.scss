@@ -5,20 +5,8 @@
 *
 **/
 
-body {
-  font-size: $fontBase;
+.label {
+  font-size: $fontSmall;
   font-weight: 300;
   color: $colorGrayDark;
 }
-
-h1, h2, h3, h4, h5, p {
-  margin: 0;
-  padding: 0;
-  color: $colorBlack;
-}
-
-
-li > p {
-  padding-top: 0;
-}
-

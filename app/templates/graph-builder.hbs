@@ -8,14 +8,29 @@
       <li class="breadcrumb"><a href="#" class="breadcrumb__link">Graph Builder</a></li>
     </ol>
   </header>
+
   <section class="stream__section">
     <header class="section__header builder__header">
       <h3 class="section__head">What products does {{model.name_en}} export?</h3>
     </header>
-    <div class="builder__graph__wrap">
+    <div class="section__vizmod builder__graph__wrap">
       {{d3plus-tree-map elementID="d3plus" data=productsData }}
     </div>
   </section>
+  <section class="stream__section">
+    <header class="section__header">
+      <h3 class="section__head">More graphs for this location</h3>
+    </header>
+    <p class="section__intro">Select a question to see the corresponding graph. If the question has missing parameters (  ) , you'll fill those in when you click.</p>
+    {{partial "partials/builder-nav"}}
+  </section>
+
+  <section class="stream__section stream__section--recirc">
+    <h3 class="section__head section__head--recirc">Read the executive profile and complexity analysis for this location</h3>
+    <a href="#" class="btn btn--recirc">View now</a>
+  </section>
+
+
 </article>
 
 

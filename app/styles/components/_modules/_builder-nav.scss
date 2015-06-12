@@ -1,0 +1,29 @@
+/**
+*
+* Graph Builder nav/question list
+*
+**/
+
+.builder__nav__item {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: $baseSpace;
+}
+
+.builder__nav__item__icon, .builder__nav__item__textwrap {
+
+}
+
+.builder__nav__item__icon {
+  margin-right: $baseSpace / 2;
+}
+
+.builder__nav__label {
+  color: $colorGray;
+}
+
+.builder__nav__question {
+  font-weight: 300;
+  color: $colorGray;
+}
