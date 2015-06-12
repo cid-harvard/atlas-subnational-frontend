@@ -1,11 +1,20 @@
-<article class="stream search">
-  <header class="search__header">
-  <h2 class="search__header__head">{{model.name_en}}</h2>
+<article class="stream builder">
+  <header class="stream__header">
+    <h2 class="stream__head">{{model.name_en}}</h2>
+    <ol class="breadcrumbs">
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Location</a></li>
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Colombia</a></li>
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">{{model.name_en}}</a></li>
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Graph Builder</a></li>
+    </ol>
   </header>
-  <section class="search__section">
-  </section>
-  <section class="results__section">
-    {{d3plus-tree-map elementID="d3plus" data=productsData }}
+  <section class="stream__section">
+    <header class="section__header builder__header">
+      <h3 class="section__head">What products does {{model.name_en}} export?</h3>
+    </header>
+    <div class="builder__graph__wrap">
+      {{d3plus-tree-map elementID="d3plus" data=productsData }}
+    </div>
   </section>
 </article>
 
