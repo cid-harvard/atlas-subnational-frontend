@@ -16,6 +16,15 @@
     <div class="section__vizmod builder__graph__wrap">
       {{d3plus-tree-map elementID="d3plus" data=productsData }}
     </div>
+    <div class="section__vizmod builder__graph__wrap">
+      {{d3plus-stack-area
+        elementID="d3plus-area"
+        data=productsData
+        dataType='products'
+        varY='export_value'
+        varX='year'
+      }}
+    </div>
   </section>
   <section class="stream__section">
     <header class="section__header">
@@ -29,8 +38,5 @@
     <h3 class="section__head section__head--recirc">Read the executive profile and complexity analysis for this location</h3>
     <a href="#" class="btn btn--recirc">View now</a>
   </section>
-
-
 </article>
-
 
