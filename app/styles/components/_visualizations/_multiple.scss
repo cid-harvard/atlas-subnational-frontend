@@ -1,0 +1,57 @@
+.multiple {
+  display: inline-block;
+  margin: 0 20px 20px 0;
+}
+
+.chart__title {
+  font-family: Helvetica, sans;
+  font-weight: 700;
+  font-size: 10px;
+}
+
+.chart__wrap {
+  font-family: Helvetica, sans;
+  font-weight: 300;
+  font-size: 10px;
+}
+
+.background {
+  fill: #eae6e3;
+  pointer-events: all;
+}
+
+.area {
+  fill: #ccc1b9;
+  pointer-events: none;
+}
+
+.line {
+  stroke: #b7a89d;
+  stroke-width: 1px;
+  fill: none;
+  pointer-events: none;
+}
+
+.axis path {
+  fill: none;
+  pointer-events: none;
+}
+
+.axis--y line {
+  stroke: #e0d9d4;
+  fill: none;
+  shape-rendering: crispEdges;
+  pointer-events: none;
+}
+
+.marker {
+  fill: #ee4036;
+}
+
+.caption, .year, .marker {
+  pointer-events: none;
+}
+
+.hidden {
+  opacity: 0;
+}

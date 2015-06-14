@@ -1,0 +1,195 @@
+import Ember from 'ember';
+const {computed, observer} = Ember;
+//keys are products Ids
+
+export default Ember.Component.extend({
+  classNames: ['multiples'],
+  height: 140,
+  width:  180,
+  id: computed('elementId', function() {
+    return `#${this.get('elementId')}`;
+  }),
+  nestedData: computed('data', function() {
+    var nest = d3.nest()
+      .key(function(d) { return d.product_id; })
+      .entries(this.get('data'));
+    nest = _.toArray(nest);
+    return _.sortBy(nest, function(d) { return -d.values[5].export_value; }).slice(0, 12);
+  }),
+  formatNumber: function(num) {
+    var prefix = d3.formatPrefix(num);
+    return prefix.scale(num).toFixed(0) + prefix.symbol.replace(/G/,'B');
+  },
+  truncateYear: function(year) {
+    return '’' + year.toString().slice(-2);
+  },
+  maxValue: computed(function () {
+    let nestedData = this.get('nestedData');
+    nestedData.forEach(function(year) {
+      year.maxValue = d3.max(year.values, function(d) { return d.export_value; });
+    });
+    return d3.max(nestedData, function(d) { return d.maxValue; });
+  }),
+  xScale: computed('width', function() {
+    return d3.scale.linear()
+      .domain([2008, 2013])
+      .range([ 0, this.get('width') ]);
+  }),
+  yScale: computed('height', function() {
+    return d3.scale.linear()
+      .range([ this.get('height'), 0 ])
+      .domain([ 0, this.get('maxValue')]);
+  }),
+  xAxis: computed(function(){
+    return d3.svg.axis()
+      .scale(this.get('xScale'))
+      .orient('bottom');
+  }),
+  yAxis: computed(function() {
+    return d3.svg.axis()
+    .scale(this.get('yScale'))
+    .ticks(3)
+    .tickFormat((d) => { return'$'+this.formatNumber(d); })
+    .outerTickSize(0)
+    .tickSize(-this.get('width'))
+    .orient('left');
+  }),
+  area: computed(function() {
+    return d3.svg.area()
+      .x((d) => { return this.get('xScale')(d.year); })
+      .y((d) => { return this.get('yScale')(d.export_value); })
+      .y0(this.get('height'));
+  }),
+  line: computed(function() {
+    let xScale = this.get('xScale');
+    let yScale = this.get('yScale');
+    return d3.svg.line()
+      .x((d) => { return this.get('xScale')(d.year); })
+      .y((d) => { return this.get('yScale')(d.export_value); });
+  }),
+  initCharts: function() {
+    let x = this.get('xScale');
+    let y = this.get('yScale');
+    let xAxis = this.get('xAxis');
+    let yAxis = this.get('yAxis');
+    let data = this.get('nestedData');
+    let w = this.get('width');
+    let h = this.get('height');
+    let line = this.get('line');
+    let area = this.get('area');
+    var margin = { top: 20, right: 15, bottom: 30, left: 25 };
+
+    var div = d3.select(this.get('id')).selectAll('div')
+      .data(data)
+    .enter().append('div')
+      .attr('class', 'multiple');
+
+    var title = div.append('h3')
+      .attr('class', 'chart__title')
+      .text(function(d) { return d.key; });
+
+    var svg = div.append('svg')
+      .attr('class', 'chart__wrap')
+      .attr('width', w + margin.left + margin.right)
+      .attr('height', h + margin.top + margin.bottom)
+    .append('g')
+      .attr('class', 'chart')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+    svg.append('rect')
+      .attr('class', 'background')
+      .attr('width', w)
+      .attr('height', h)
+      .on('mouseover', mouseover)
+      .on('mousemove', mousemove)
+      .on('mouseout', mouseout)
+
+    svg.append('text')
+      .attr('class', 'static_year')
+      .attr('text-anchor', 'start')
+      .attr('dy', 13)
+      .attr('y', h)
+      .attr('x', 0)
+      .text('’08')
+
+    svg.append('text')
+      .attr('class', 'static_year')
+      .attr('text-anchor', 'end')
+      .attr('dy', 13)
+      .attr('y', h)
+      .attr('x', w)
+      .text('’13')
+
+    svg.append('g')
+      .attr('class', 'axis axis--y')
+      .call(yAxis);
+
+    svg.append('path')
+      .attr('class', 'area')
+      .attr('d', function(d) { return area(d.values); });
+
+    svg.append('path')
+      .attr('class', 'line')
+      .attr('d', function(d) {
+        return line(d.values);
+      });
+
+    var hoverMarker = svg.append('rect')
+      .classed('marker', true)
+      .attr('width', 5)
+      .attr('height', 5)
+      .attr('opacity', 0);
+
+    var caption = svg.append('text')
+      .attr('class', 'caption')
+      .attr('text-anchor', 'middle')
+      .attr('dy', -8);
+
+    var curYear = svg.append('text')
+      .attr('class', 'year')
+      .attr('text-anchor', 'middle')
+      .attr('dy', 13)
+      .attr('y', h);
+
+    function mouseover() {
+      hoverMarker.attr('opacity', 1);
+      d3.selectAll('.static_year').classed( 'hidden', true)
+      mousemove.call(this);
+    }
+
+    function mousemove() {
+      var year = x.invert(d3.mouse( this)[ 0 ]);
+      var date = Math.round(year);
+      var bisect = d3.bisector(function(d) { return d.year; }).left;
+      var index = 0;
+
+      hoverMarker.attr('x', x(date))
+        .attr('y', function(d) {
+          index = bisect(d.values, date, 0, d.values.length - 1);
+          return y(d.values[index].export_value);
+        })
+        .attr('transform', function(d) {
+          return 'translate(0, -3.54) rotate( 45 ' + x(date) + ' ' + y(d.values[index].export_value) + ')';
+        });
+
+      caption.attr('x', x(date))
+        .attr('y', function(d) { return y(d.values[index].export_value); })
+        .text(function(d) { return '$' + formatLargenumber(d.values[index].export_value); });
+
+      curYear.attr('x', x(date))
+        .text(truncateYear(date));
+    }
+
+    function mouseout() {
+      hoverMarker.attr('opacity', 0);
+      d3.selectAll('.static_year').classed('hidden', false)
+      caption.text('');
+      curYear.text('');
+    }
+  },
+  didInsertElement: function() {
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      this.initCharts();
+    });
+  }
+});
