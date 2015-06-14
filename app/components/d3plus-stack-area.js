@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {computed, observer} = Ember;
+const {computed, observer, on} = Ember;
 
 export default Ember.Component.extend({
   tagName: 'div',
@@ -36,16 +36,13 @@ export default Ember.Component.extend({
       'scale': this.get('colorScale')
     });
   }),
-  draw: function() {
-    this.set('width', this.$().parent().width());
-    this.set('height', this.$().parent().height());
-    this.get('stackedArea').draw();
-  },
-  didInsertElement: function() {
+  draw: on('didInsertElement', function() {
     Ember.run.later(this , function() {
-      this.draw();
+      this.set('width', this.$().parent().width());
+      this.set('height', this.$().parent().height());
+      this.get('stackedArea').draw();
     }, 300);
-  },
+  }),
   didDataChange: observer('data', function() {
     this.rerender();
   })

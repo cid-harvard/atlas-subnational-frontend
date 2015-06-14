@@ -31,14 +31,11 @@ export default Ember.Component.extend({
     .timing({transitions: 300})
     .size(this.get('varSize'));
   }),
-  draw: function() {
-    this.set('width', this.$().parent().width());
-    this.set('height', this.$().parent().height());
-    this.get('treemap').draw();
-  },
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
-      this.draw();
+      this.set('width', this.$().parent().width());
+      this.set('height', this.$().parent().height());
+      this.get('treemap').draw();
     });
   },
   didDataChange: observer('data', function() {

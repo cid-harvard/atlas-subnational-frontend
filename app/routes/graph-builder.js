@@ -9,19 +9,14 @@ export default Ember.Route.extend({
     data: { refreshModel: true }
   },
   model: function(queryParams, transition) {
-    return this.store.find(queryParams.entity, queryParams.entity_id);
+    return this.store.find(queryParams.entity, queryParams.entity_id)
   },
   afterModel: function(model, transition) {
     var data = Ember.getWithDefault(transition, 'queryParams.data', 'product');
     if(data  === 'product'){
-      this.productsData(model);
+      return Ember.$.getJSON(`data/products?location=${model.id}`)
+        .then(function(data) { model.set('productsData', Ember.getWithDefault(data, 'data', [])); });
     }
-  },
-  productsData: function(model) {
-    Ember.$.getJSON(`data/products?location=${model.id}`)
-      .then(function(data) {
-        model.set('productsData', Ember.getWithDefault(data, 'data', []));
-      });
   }
 });
 
