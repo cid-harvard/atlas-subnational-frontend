@@ -4,8 +4,11 @@ const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
   classNames: ['multiples'],
+  margin: { top: 20, right: 15, bottom: 30, left: 25 },
   height: 140,
-  width:  180,
+  width: computed(function() {
+    return this.$('.multiple:first').width() - this.get('margin.left') - this.get('margin.right');
+  }),
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
@@ -65,24 +68,25 @@ export default Ember.Component.extend({
       .y((d) => { return this.get('yScale')(Ember.get(d, varY)); });
   }),
   initCharts: function() {
-    let x = this.get('xScale');
-    let y = this.get('yScale');
-    let yAxis = this.get('yAxis');
-    let data = this.get('nestedData');
-    let w = this.get('width');
-    let h = this.get('height');
-    let line = this.get('line');
-    let area = this.get('area');
-    let formatNumber = this.get('formatNumber');
-    let truncateYear = this.get('truncateYear');
-    let varY = this.get('varY');
 
-    var margin = { top: 20, right: 15, bottom: 30, left: 25 };
+    let data = this.get('nestedData');
 
     var div = d3.select(this.get('id')).selectAll('div')
       .data(data)
     .enter().append('div')
       .attr('class', 'multiple');
+
+    let margin = this.get('margin');
+    let x = this.get('xScale');
+    let y = this.get('yScale');
+    let w = this.get('width');
+    let h = this.get('height');
+    let yAxis = this.get('yAxis');
+    let line = this.get('line');
+    let area = this.get('area');
+    let formatNumber = this.get('formatNumber');
+    let truncateYear = this.get('truncateYear');
+    let varY = this.get('varY');
 
     div.append('h3')
       .attr('class', 'chart__title')
