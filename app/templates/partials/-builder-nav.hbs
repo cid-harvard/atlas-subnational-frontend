@@ -16,82 +16,99 @@
     {{/ivy-tab-list}}
 
     {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-    <ul class="builder__nav__list">
-      <li class="builder__nav__item">
-        <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-        <div class="builder__nav__item__textwrap">
-          <h4 class="label builder__nav__label">Treemap</h4>
-          <h3 class="builder__nav__question">What countries does Atlántico export to?</h3>
-        </div>
-      </li>
-      <li class="builder__nav__item">
-        <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-        <div class="builder__nav__item__textwrap">
-          <h4 class="label builder__nav__label">Treemap</h4>
-          <h3 class="builder__nav__question">What countries does Atlántico export BLANK to?</h3>
-        </div>
-      </li>
-      <li class="builder__nav__item">
-        <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-        <div class="builder__nav__item__textwrap">
-          <h4 class="label builder__nav__label">Treemap</h4>
-          <h3 class="builder__nav__question">What countries does Atlántico import from?</h3>
-        </div>
-      </li>
-      <li class="builder__nav__item">
-        <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-        <div class="builder__nav__item__textwrap">
-          <h4 class="label builder__nav__label">Treemap</h4>
-          <h3 class="builder__nav__question">What countries does Atlántico import BLANK from?</h3>
-        </div>
-      </li>
-
-      <li class="builder__nav__item">
-        <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-        <div class="builder__nav__item__textwrap">
-          <h4 class="label builder__nav__label">Treemap</h4>
-          <h3 class="builder__nav__question">What subregions contribute to the exports from Atlántico?</h3>
-        </div>
-      </li>
-      <li class="builder__nav__item">
-        <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-        <div class="builder__nav__item__textwrap">
-          <h4 class="label builder__nav__label">Treemap</h4>
-          <h3 class="builder__nav__question">What subregions contribute to the exports from Atlántico to    of   ?</h3>
-        </div>
-      </li>
-      <li class="builder__nav__item">
-        <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-        <div class="builder__nav__item__textwrap">
-          <h4 class="label builder__nav__label">Treemap</h4>
-          <h3 class="builder__nav__question">What subregions contribute to the imports of Atlántico?</h3>
-        </div>
-      </li>
-      <li class="builder__nav__item">
-        <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-        <div class="builder__nav__item__textwrap">
-          <h4 class="label builder__nav__label">Treemap</h4>
-          <h3 class="builder__nav__question">What subregions contribute to the imports of Atlántico from   ?</h3>
-        </div>
-      </li>
-      <li class="builder__nav__item">
-        <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-        <div class="builder__nav__item__textwrap">
-          <h4 class="label builder__nav__label">Treemap</h4>
-          <h3 class="builder__nav__question">What subregions contribute to the imports of Atlántico from    of   ?</h3>
-        </div>
-      </li>
-
-    </ul>
-
+      <ul class="builder__nav__list">
+        <li class="builder__nav__item">
+          <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+          <div class="builder__nav__item__textwrap">
+            <h4 class="label builder__nav__label">Treemap</h4>
+            <h3 class="builder__nav__question">What countries does {{model.name_en}} export to?</h3>
+          </div>
+        </li>
+        <li class="builder__nav__item">
+          <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+          <div class="builder__nav__item__textwrap">
+            <h4 class="label builder__nav__label">Treemap</h4>
+            <h3 class="builder__nav__question">What countries does {{model.name_en}} export BLANK to?</h3>
+          </div>
+        </li>
+        <li class="builder__nav__item">
+          <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+          <div class="builder__nav__item__textwrap">
+            <h4 class="label builder__nav__label">Treemap</h4>
+            <h3 class="builder__nav__question">What countries does {{model.name_en}} import from?</h3>
+          </div>
+        </li>
+        <li class="builder__nav__item">
+          <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+          <div class="builder__nav__item__textwrap">
+            <h4 class="label builder__nav__label">Treemap</h4>
+            <h3 class="builder__nav__question">What countries does {{model.name_en}} import BLANK from?</h3>
+          </div>
+        </li>
+        <li class="builder__nav__item">
+          <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+          <div class="builder__nav__item__textwrap">
+            <h4 class="label builder__nav__label">Treemap</h4>
+            <h3 class="builder__nav__question">What subregions contribute to the exports from {{model.name_en}}?</h3>
+          </div>
+        </li>
+        <li class="builder__nav__item">
+          <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+          <div class="builder__nav__item__textwrap">
+            <h4 class="label builder__nav__label">Treemap</h4>
+            <h3 class="builder__nav__question">What subregions contribute to the exports from {{model.name_en}} to    of   ?</h3>
+          </div>
+        </li>
+        <li class="builder__nav__item">
+          <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+          <div class="builder__nav__item__textwrap">
+            <h4 class="label builder__nav__label">Treemap</h4>
+            <h3 class="builder__nav__question">What subregions contribute to the imports of {{model.name_en}}?</h3>
+          </div>
+        </li>
+        <li class="builder__nav__item">
+          <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+          <div class="builder__nav__item__textwrap">
+            <h4 class="label builder__nav__label">Treemap</h4>
+            <h3 class="builder__nav__question">What subregions contribute to the imports of {{model.name_en}} from   ?</h3>
+          </div>
+        </li>
+        <li class="builder__nav__item">
+          <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+          <div class="builder__nav__item__textwrap">
+            <h4 class="label builder__nav__label">Treemap</h4>
+            <h3 class="builder__nav__question">What subregions contribute to the imports of {{model.name_en}} from    of   ?</h3>
+          </div>
+        </li>
+      </ul>
     {{/ivy-tab-panel}}
 
     {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-      <h2>Exports and imports</h2>
+      <ul class="builder__nav__list">
+        <li class="builder__nav__item">
+          <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+          <div class="builder__nav__item__textwrap">
+            <h4 class="label builder__nav__label">Treemap</h4>
+            {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") }}
+              <h3 class="builder__nav__question">What products does {{model.name_en}} export?</h3>
+            {{/link-to}}
+          </div>
+        </li>
+      </ul>
     {{/ivy-tab-panel}}
 
     {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-      <h2>Industries</h2>
+      <ul class="builder__nav__list">
+        <li class="builder__nav__item">
+          <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+          <div class="builder__nav__item__textwrap">
+            <h4 class="label builder__nav__label">Treemap</h4>
+            {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="industries") }}
+              <h3 class="builder__nav__question">What industries are in {{model.name_en}}?</h3>
+            {{/link-to}}
+          </div>
+        </li>
+      </ul>
     {{/ivy-tab-panel}}
 
     {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}

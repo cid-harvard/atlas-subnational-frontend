@@ -10,36 +10,50 @@
   </header>
 
   <section class="stream__section">
-    <header class="section__header builder__header">
-      <h3 class="section__head">What products does {{model.name_en}} export?</h3>
-    </header>
-    <div class="section__vizmod builder__graph__wrap">
-      {{d3plus-tree-map
-        elementID="d3plus-tree"
-        data=productsData
-        dataType='products'
-        varSize='export_value'
-      }}
-    </div>
-  </section>
-  <section class="stream__section">
-{{!--     <div class="section__vizmod builder__graph__wrap">
-      {{d3plus-stack-area
-        elementID="d3plus-area"
-        data=productsData
-        dataType='products'
-        varY='export_value'
-        varX='year'
-      }}
-    </div> --}}
-    <div class="section__vizmod">
-      {{multiples-graph
-        elementId="d3area"
-        data=productsData
-        varId='name'
-        varY='export_value'
-      }}
-    </div>
+    {{#if isProducts }}
+      <header class="section__header builder__header">
+        <h3 class="section__head">What products does {{model.name_en}} export?</h3>
+      </header>
+      <header class="section__header builder__header">
+      </header>
+      <div class="section__vizmod builder__graph__wrap">
+        {{d3plus-tree-map
+          elementID="d3plus-tree"
+          data=productsData
+          dataType='products'
+          varSize='export_value'
+        }}
+      </div>
+      <div class="section__vizmod builder__graph__wrap">
+        {{multiples-graph
+          elementId="d3area"
+          data=productsData
+          varId='name'
+          varY='export_value'
+          yUnits='$'
+        }}
+      </div>
+    {{else if isIndustries }}
+      <header class="section__header builder__header">
+        <h3 class="section__head">What industries are in {{model.name_en}}?</h3>
+      </header>
+      <div class="section__vizmod builder__graph__wrap">
+        {{d3plus-tree-map
+          elementID="d3plus-tree"
+          data=industriesData
+          dataType='industries'
+          varSize='wages'
+        }}
+      </div>
+      <div class="section__vizmod builder__graph__wrap">
+        {{multiples-graph
+          elementId="d3area"
+          data=industriesData
+          varY='wages'
+          varId='name'
+        }}
+      </div>
+    {{/if}}
   </section>
   <section class="stream__section">
     <header class="section__header">
