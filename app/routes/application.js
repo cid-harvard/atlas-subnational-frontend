@@ -3,10 +3,13 @@ const {RSVP} = Ember;
 
 export default Ember.Route.extend({
   model: function() {
-    var productsMetadata = Ember.$.getJSON('metadata/products/');
-    var locationsMetadata = Ember.$.getJSON('metadata/locations/');
-    var industiesMetadata = Ember.$.getJSON('metadata/industries');
-    var productsHierarchy = Ember.$.getJSON('metadata/products/hierarchy?from_level=4digit&to_level=section');
+    var url = 'http://52.6.95.239/api/';
+
+    var productsMetadata = Ember.$.getJSON(url+'metadata/products/');
+    var locationsMetadata = Ember.$.getJSON(url+'metadata/locations/');
+    var productsHierarchy = Ember.$.getJSON(url+'metadata/products/hierarchy?from_level=4digit&to_level=section');
+    var industiesMetadata = Ember.$.getJSON(url+'metadata/industries');
+
     var promises = [productsMetadata, locationsMetadata, productsHierarchy, industiesMetadata];
 
     return RSVP.allSettled(promises).then(function(array) {

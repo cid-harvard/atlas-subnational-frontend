@@ -12,13 +12,14 @@ export default Ember.Route.extend({
     return this.store.find(queryParams.entity, queryParams.entity_id)
   },
   afterModel: function(model, transition) {
+    var url = 'http://52.6.95.239/api/';
     var data = Ember.getWithDefault(transition, 'queryParams.data_source', 'products');
     if(data  === 'products'){
-      return Ember.$.getJSON(`data/products?location=${model.id}`)
+      return Ember.$.getJSON(`${url}data/products?location=${model.id}`)
         .then(function(data) { model.set('productsData', Ember.getWithDefault(data, 'data', [])); })
         .then(function() { window.scrollTo(0,0);})
     } else if (data == 'industries') {
-      return Ember.$.getJSON(`data/industries?location=${model.id}`)
+      return Ember.$.getJSON(`${url}data/industries?location=${model.id}`)
         .then(function(data) { model.set('industriesData', Ember.getWithDefault(data, 'data', [])); })
         .then(function() { window.scrollTo(0,0);})
     }
