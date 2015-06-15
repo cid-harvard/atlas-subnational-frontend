@@ -16,6 +16,7 @@
 // Components
 @import '_components/_typography';
 @import '_components/_button';
+@import '_components/_label';
 @import '_components/_list';
 @import '_components/_link';
 @import '_components/_table';
@@ -27,6 +28,7 @@
 @import '_modules/_side-nav';
 @import '_modules/_profile';
 @import '_modules/_graph-builder';
+@import '_modules/_builder-nav';
 @import '_modules/_stream-header';
 @import '_modules/_stream-section';
 @import '_modules/_tabmod';
@@ -41,4 +43,5 @@
 // Visualizations
 @import '_visualizations/_dotplot';
 @import '_visualizations/_sparkline';
+@import '_visualizations/_multiple';
 @import '_visualizations/_product-space';

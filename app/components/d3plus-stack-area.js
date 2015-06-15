@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {computed, observer} = Ember;
+const {computed, observer, on} = Ember;
 
 export default Ember.Component.extend({
   tagName: 'div',
@@ -16,28 +16,33 @@ export default Ember.Component.extend({
       return ['parent_name','name'];
     }
   }),
-  treemap: computed('id','data',function() {
+  stackedArea: computed('id','data',function() {
     return d3plus.viz()
     .container(this.get('id'))
     .data({value: this.get('data'), padding: 5})
-    .type("tree_map")
+    .type("stacked")
     .id(this.get('varId'))
-    .depth(1)
-    .color('grey')
-    .time({"value": "year", "solo": 2013})
-    .timeline(false)
+    .x(this.get('varX'))
+    .y(this.get('varY'))
+    .ui({padding: 20})
     .height(this.get('height'))
     .width(this.get('width'))
+    .time({"value": "year"})
+    .ui({padding: 20})
     .timing({transitions: 300})
-    .size(this.get('varSize'));
+    .margin(10)
+    .labels({"padding": 30})
+    .color({
+      'scale': this.get('colorScale')
+    });
   }),
-  didInsertElement: function() {
-    Ember.run.scheduleOnce('afterRender', this , function() {
+  draw: on('didInsertElement', function() {
+    Ember.run.later(this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
-      this.get('treemap').draw();
-    });
-  },
+      this.get('stackedArea').draw();
+    }, 300);
+  }),
   didDataChange: observer('data', function() {
     this.rerender();
   })
