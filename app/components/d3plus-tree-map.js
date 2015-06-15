@@ -25,7 +25,7 @@ export default Ember.Component.extend({
     .depth(1)
     .color('grey')
     .time({"value": "year", "solo": 2013})
-    .ui({padding: 20})
+    .timeline(false)
     .height(this.get('height'))
     .width(this.get('width'))
     .timing({transitions: 300})
