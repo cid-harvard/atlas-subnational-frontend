@@ -1,6 +1,5 @@
 import Ember from 'ember';
 const {computed, observer} = Ember;
-//keys are products Ids
 
 export default Ember.Component.extend({
   classNames: ['multiples'],
@@ -12,13 +11,18 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
+  years: computed('data', function() {
+    return d3.extent(this.get('data'), function(d) { return d.year;} );
+  }),
   nestedData: computed('data', function() {
-    let key = this.get('varId');
+    let key = this.get('varId')
+    let years = this.get('years');
+    let varY = this.get('varY');
     var nest = d3.nest()
       .key(function(d) { return Ember.get(d, key); })
       .entries(this.get('data'));
     nest = _.toArray(nest);
-    return _.sortBy(nest, function(d) { return -d.values[5].export_value; }).slice(0, 12);
+    return _.sortBy(nest, function(d) { return -Ember.get(d.values[years.length -1], varY); }).slice(0, 12); //last year data
   }),
   formatNumber: function(num) {
     var prefix = d3.formatPrefix(num);
@@ -37,7 +41,7 @@ export default Ember.Component.extend({
   }),
   xScale: computed('width', function() {
     return d3.scale.linear()
-      .domain([2008, 2013])
+      .domain(this.get('years'))
       .range([ 0, this.get('width') ]);
   }),
   yScale: computed('height', function() {
