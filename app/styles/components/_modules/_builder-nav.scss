@@ -4,11 +4,35 @@
 *
 **/
 
+.builder__nav__list {
+  display: flex;
+}
+
+.builder__list--nested {
+  padding-right: $baseSpace * 2;
+}
+
 .builder__nav__item {
   display: flex;
   align-items: center;
   flex-direction: row;
   margin-bottom: $baseSpace;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.builder__nav__item--unavailable {
+  pointer-events: none;
+  .builder__nav__item__icon {
+    opacity: 0.5;
+  }
+  .builder__nav__label {
+    color: $colorGrayLight;
+  }
+  .builder__nav__question {
+    color: $colorGrayLight;
+  }
 }
 
 .builder__nav__item__icon, .builder__nav__item__textwrap {
@@ -16,7 +40,8 @@
 }
 
 .builder__nav__item__icon {
-  margin-right: $baseSpace / 2;
+  margin-right: $baseSpace;
+  min-width: 40px;
 }
 
 .builder__nav__label {
