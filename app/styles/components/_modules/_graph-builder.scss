@@ -13,5 +13,8 @@
 }
 
 .builder__graph__wrap {
-  height: 800px;
+  height: 600px;
+  padding: $baseSpace;
+  border: 1px solid $colorBrown500;
+  overflow: scroll;
 }

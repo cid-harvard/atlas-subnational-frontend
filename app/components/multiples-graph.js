@@ -28,7 +28,7 @@ export default Ember.Component.extend({
       .key(function(d) { return Ember.get(d, key); })
       .entries(this.get('data'));
     nest = _.toArray(nest);
-    return _.sortBy(nest, function(d) { return -Ember.get(d.values[xRange.length -1], varY); }).slice(0, 12); //last year data
+    return _.sortBy(nest, function(d) { return -Ember.get(d.values[xRange.length -1], varY); }).slice(0, 40); //last year data
   }),
   formatNumber: function(num) {
     var prefix = d3.formatPrefix(num);
