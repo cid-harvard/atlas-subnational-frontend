@@ -6,7 +6,8 @@
     "-Promise",
     "d3",
     "vistk",
-    "_"
+    "_",
+    "d3plus"
   ],
   "browser": true,
   "boss": true,
