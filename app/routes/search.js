@@ -15,8 +15,9 @@ export default Ember.Route.extend({
     }
   },
   model: function(transition) {
+    var url = 'http://52.6.95.239/api/';
     if(transition.query) {
-      return Ember.$.getJSON('metadata/locations/?level=department')
+      return Ember.$.getJSON(url+'metadata/locations/?level=department')
         .then(function(model) { return model.data; });
     }
   }});

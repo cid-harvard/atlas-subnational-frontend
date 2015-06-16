@@ -12,11 +12,15 @@ export default Ember.Component.extend({
     return this.get('data');
   }),
   varId: computed('dataType', function() {
-    if(this.get('dataType') === 'products') {
+    let dataType = this.get('dataType');
+    if( dataType === 'products') {
+      return ['parent_name','name'];
+    } else if (dataType === 'industries') {
       return ['parent_name','name'];
     }
   }),
   treemap: computed('id','data',function() {
+    var maxYear = d3.max(this.get('data'), function(d) {return d.year;} );
     return d3plus.viz()
     .container(this.get('id'))
     .data({value: this.get('data'), padding: 5})
@@ -24,7 +28,7 @@ export default Ember.Component.extend({
     .id(this.get('varId'))
     .depth(1)
     .color('grey')
-    .time({"value": "year", "solo": 2013})
+    .time({"value": "year", "solo": maxYear })
     .timeline(false)
     .height(this.get('height'))
     .width(this.get('width'))

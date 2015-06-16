@@ -30,5 +30,8 @@ export default Ember.Controller.extend({
   }),
   locationsMetadata: computed('model.locations', function(){
     return this.get('model.locations');
+  }),
+  industriesMetadata: computed('model.industries', function() {
+    return this.get('model.industries');
   })
 });
