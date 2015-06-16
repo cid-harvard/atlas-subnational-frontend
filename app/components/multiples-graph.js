@@ -15,10 +15,10 @@ export default Ember.Component.extend({
     return d3.extent(this.get('data'), function(d) { return d.year;} );
   }),
   xRange: computed('data', function() {
-    return _.chain( this.get('data') )
-        .pluck( 'year' )
-        .uniq( true )
-        .value();
+    return  _.chain( this.get('data') )
+      .pluck('year')
+      .uniq()
+      .value();
   }),
   nestedData: computed('data', function() {
     let key = this.get('varId');
