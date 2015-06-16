@@ -16,6 +16,9 @@ export default DS.Model.extend({
   randomAttr: attr('number', { defaultValue: 100000000}),
 
   productsData: attr(),
+  industriesData: attr(),
+  scatterPlot: attr(),
+
   departments: attr(),
 
   level: attr(),

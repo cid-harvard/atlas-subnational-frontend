@@ -12,7 +12,10 @@ export default Ember.Component.extend({
     return this.get('data');
   }),
   varId: computed('dataType', function() {
-    if(this.get('dataType') === 'products') {
+    let dataType = this.get('dataType');
+    if( dataType === 'products') {
+      return ['parent_name','name'];
+    } else if (dataType === 'industries') {
       return ['parent_name','name'];
     }
   }),
