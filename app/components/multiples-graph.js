@@ -3,7 +3,7 @@ const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
   classNames: ['multiples'],
-  margin: { top: 20, right: 15, bottom: 30, left: 25 },
+  margin: { top: 20, right: 15, bottom: 30, left: 35 },
   height: 140,
   width: computed(function() {
     return this.$('.multiple:first').width() - this.get('margin.left') - this.get('margin.right');
@@ -11,18 +11,24 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  years: computed('data', function() {
+  xExtent: computed('data', function() {
     return d3.extent(this.get('data'), function(d) { return d.year;} );
   }),
+  xRange: computed('data', function() {
+    return _.chain( this.get('data') )
+        .pluck( 'year' )
+        .uniq( true )
+        .value();
+  }),
   nestedData: computed('data', function() {
-    let key = this.get('varId')
-    let years = this.get('years');
+    let key = this.get('varId');
+    let xRange = this.get('xRange');
     let varY = this.get('varY');
     var nest = d3.nest()
       .key(function(d) { return Ember.get(d, key); })
       .entries(this.get('data'));
     nest = _.toArray(nest);
-    return _.sortBy(nest, function(d) { return -Ember.get(d.values[years.length -1], varY); }).slice(0, 12); //last year data
+    return _.sortBy(nest, function(d) { return -Ember.get(d.values[xRange.length -1], varY); }).slice(0, 12); //last year data
   }),
   formatNumber: function(num) {
     var prefix = d3.formatPrefix(num);
@@ -41,7 +47,7 @@ export default Ember.Component.extend({
   }),
   xScale: computed('width', function() {
     return d3.scale.linear()
-      .domain(this.get('years'))
+      .domain(this.get('xExtent'))
       .range([ 0, this.get('width') ]);
   }),
   yScale: computed('height', function() {

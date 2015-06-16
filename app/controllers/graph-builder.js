@@ -35,7 +35,6 @@ export default Ember.Controller.extend({
   industriesData: computed('model.industriesData', function() {
     let industries = _.unique(this.get('model.industriesData'), function(n) { return `${n.industry_id}-${n.year}`;});
     let industriesMetadata = this.get('industriesMetadata');
-    debugger
     _.each(industries, function(d) {
       let industry = _.find(industriesMetadata, { id: d.industry_id });
       let parentIndustry =  _.find(industriesMetadata, { id: industry.parent_id});
