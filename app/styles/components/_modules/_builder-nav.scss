@@ -20,18 +20,27 @@
   &:last-of-type {
     margin-bottom: 0;
   }
+  &:hover {
+    .builder__nav__label {
+      transition: color 0.2s ease-in-out;
+      color: $colorGrayDark;
+    }
+    .builder__nav__question {
+      color: $colorGrayDark;
+    }
+  }
 }
 
 .builder__nav__item--unavailable {
   pointer-events: none;
   .builder__nav__item__icon {
-    opacity: 0.5;
+    opacity: 0.25;
   }
   .builder__nav__label {
-    color: $colorGrayLight;
+    color: $colorGrayLighter;
   }
   .builder__nav__question {
-    color: $colorGrayLight;
+    color: $colorGrayLighter;
   }
 }
 

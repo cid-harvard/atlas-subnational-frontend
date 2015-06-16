@@ -120,9 +120,7 @@
               <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") }}
-                  <h3 class="builder__nav__question">What products does {{model.name_en}} export?</h3>
-                {{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What products does {{model.name_en}} export?{{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
@@ -171,20 +169,62 @@
 
     {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
       <ul class="builder__nav__list">
-        <li class="builder__nav__item">
-          <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-          <div class="builder__nav__item__textwrap">
-            <h4 class="label builder__nav__label">Treemap</h4>
-            {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="industries") }}
-              <h3 class="builder__nav__question">What industries are in {{model.name_en}}?</h3>
-            {{/link-to}}
-          </div>
+        <li class="builder__list--nested">
+          <ul>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                <h3 class="builder__nav__question">What industries in {{model.name_en}} employ the most people?</h3>
+              </div>
+            </li>
+            <li class="builder__nav__item">
+              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="industries") class="builder__nav__question"}} What industries in {{model.name_en}} pay the most wages?
+                {{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                <h3 class="builder__nav__question">What industries in {{model.name_en}} have the highest wages per worker?</h3>
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                <h3 class="builder__nav__question">What industries offer the highest wages for BLANK?</h3>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li class="builder__list--nested">
+          <ul>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Scatterplot</h4>
+                <h3 class="builder__nav__question">What industries have the best combination of complexity and opportunity for {{model.name_en}}?</h3>
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Similarity map</h4>
+                <h3 class="builder__nav__question">What does the industry map look like for {{model.name_en}}?</h3>
+              </div>
+            </li>
+          </ul>
         </li>
       </ul>
     {{/ivy-tab-panel}}
 
     {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-      <h2>Occupations</h2>
+      <p>Occupation data is only available at the national level. <a class="link--inactive" href="#">View the Graph Builder for Colombia.</a></p>
     {{/ivy-tab-panel}}
   {{/ivy-tabs}}
 </div>

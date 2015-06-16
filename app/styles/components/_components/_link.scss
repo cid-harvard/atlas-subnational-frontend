@@ -5,9 +5,14 @@
 **/
 
 a {
-  color: blue;
+  transition: color 0.2s ease-in-out;
+  color: $colorGrayLight;
+  &:hover {
+    color: $colorGray;
+  }
 }
 
-a:hover {
-  text-decoration: none;
+.link--inactive {
+  color: $colorGrayLighter;
+  pointer-events: none;
 }
