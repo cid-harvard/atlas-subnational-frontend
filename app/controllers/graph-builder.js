@@ -47,6 +47,16 @@ export default Ember.Controller.extend({
     });
     return industries;
   }),
+  scatterPlot: computed('model.scatterPlot', function() {
+    let industries = _.filter(this.get('industriesData'), {year: 2012});
+    let scatterPlot = this.get('model.scatterPlot');
+    _.each(scatterPlot, function(d) {
+      let industry = _.find(industries, { industry_id: d.industry_id });
+      d.name = industry.name;
+      d.rca = industry.rca;
+    });
+    return scatterPlot;
+  }),
   departmentLocations: computed('locationsMetadata', function(){
     return _.filter(this.get('locationsMetadata'), 'level', 'department');
   }),

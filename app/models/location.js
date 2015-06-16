@@ -17,6 +17,7 @@ export default DS.Model.extend({
 
   productsData: attr(),
   industriesData: attr(),
+  scatterPlot: attr(),
 
   departments: attr(),
 
