@@ -14,6 +14,7 @@
         <header class="section__header builder__header">
           <h3 class="section__head">What products does {{model.name_en}} export?</h3>
         </header>
+        Total Exports (${{format-largenumber totalExports}})
         <div class="section__vizmod builder__graph__wrap">
           {{d3plus-tree-map
             elementID="d3plus-tree"
@@ -24,7 +25,7 @@
         </div>
       </section>
       <section class="stream__section">
-        <div class="section__vizmod">
+        <div class="section__vizmod builder__graph__wrap">
           {{multiples-graph
             elementId="d3area"
             data=productsData
@@ -32,6 +33,7 @@
             varY='export_value'
             yUnits='$'
           }}
+          <p>Note: Only showing top 40 for demo.</p>
         </div>
       </section>
     {{else if isIndustries }}
@@ -39,6 +41,7 @@
         <header class="section__header builder__header">
           <h3 class="section__head">What industries are in {{model.name_en}}?</h3>
         </header>
+        Total Wages (${{format-largenumber totalWages}})
         <div class="section__vizmod builder__graph__wrap">
           {{d3plus-tree-map
             elementID="d3plus-tree"
@@ -49,13 +52,14 @@
         </div>
       </section>
       <section class="stream__section">
-        <div class="section__vizmod">
+        <div class="section__vizmod builder__graph__wrap">
           {{multiples-graph
             elementId="d3area"
             data=industriesData
             varY='wages'
             varId='name'
           }}
+          <p>Note: Only showing top 40 for demo.</p>
         </div>
       </section>
       <section class="stream__section">

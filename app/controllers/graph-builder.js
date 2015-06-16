@@ -10,7 +10,14 @@ export default Ember.Controller.extend({
   productsMetadata: computed.alias('controllers.application.productsMetadata'),
   locationsMetadata: computed.alias('controllers.application.locationsMetadata'),
   industriesMetadata: computed.alias('controllers.application.industriesMetadata'),
-
+  totalWages: computed('industriesData', function() {
+    let data = _.filter(this.get('industriesData'), {year: 2012});
+    return _.sum(data, 'wages');
+  }),
+  totalExports: computed('productsData', function() {
+    let data = _.filter(this.get('productsData'), {year: 2012});
+    return _.sum(data, 'export_value');
+  }),
   isProducts: computed('data_source', function() {
     return this.get('data_source') === 'products';
   }),

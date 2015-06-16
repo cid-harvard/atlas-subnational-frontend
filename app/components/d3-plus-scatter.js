@@ -12,7 +12,7 @@ export default Ember.Component.extend({
     .container(this.get('id'))
     .data({value: this.get('data')})
     .type("scatter")
-    .color('grey')
+    .color('#ccc1b9')
     .id(this.get('varId'))
     .x(this.get('varX'))
     .y(this.get('varY'))
