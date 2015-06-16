@@ -58,6 +58,18 @@
           }}
         </div>
       </section>
+      <section class="stream__section">
+        <div class="section__vizmod builder__graph__wrap">
+          {{d3-plus-scatter
+            elementId="d3-scatter"
+            data=scatterPlot
+            varId='name'
+            varY='complexity'
+            varX='distance'
+            varSize='rca'
+          }}
+        </div>
+      </section>
     {{/if}}
 
   <section class="stream__section">
