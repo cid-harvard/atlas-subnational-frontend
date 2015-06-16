@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {computed, observer} = Ember;
+const {computed} = Ember;
 
 export default Ember.Component.extend({
   classNames: ['multiples'],
