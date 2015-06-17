@@ -5,11 +5,20 @@
 **/
 
 .btn {
-  background: $colorBrown500;
+  transition: color 0.2s ease-in-out;
   padding: $baseSpace / 2;
+  font-size: $fontBase;
+  cursor: pointer;
+}
+
+.btn--standalone {
+  background: $colorBrown500;
   text-transform: uppercase;
   color: $colorWhite;
-  font-size: $fontBase;
+}
+
+.btn--inline {
+
 }
 
 .btn--recirc {
