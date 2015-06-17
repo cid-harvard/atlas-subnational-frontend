@@ -22,11 +22,22 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    // need to fix for production mode
+    ENV.apiURL = "http://52.6.95.239/api/";
     ENV.contentSecurityPolicy = {
-      'connect-src': "'self' http://54.6.95.239 *",
+      'connect-src': "'self' 'localhost:4200' *",
       'style-src': "'self' 'unsafe-inline' *",
       'img-src': "'self' http://placehold.it/40x40 *"
+    }
+  }
+
+  if (environment === 'edge') {
+    ENV.apiURL = "http://ec2-54-174-138-240.compute-1.amazonaws.com/api/";
+    // need to fix for production mode
+    ENV.contentSecurityPolicy = {
+      'connect-src': "'self' 'localhost:4200' *",
+      'style-src': "'self' 'unsafe-inline' *",
+      'img-src': "'self' http://placehold.it/40x40 *",
+      'script-src': "'self' 'localhost:4200' 'localhost:35729' 'unsafe-eval'",
     }
   }
 
@@ -34,7 +45,6 @@ module.exports = function(environment) {
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'none';
-
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
@@ -43,7 +53,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.baseURL = '/atlas-colombia',
+    ENV.apiURL = "http://52.6.95.239/api/";
+    ENV.baseURL = '/atlas-colombia';
     ENV.locationType = 'hash',
     ENV.contentSecurityPolicy = {
       'connect-src': "'self' http://54.6.95.239 *",

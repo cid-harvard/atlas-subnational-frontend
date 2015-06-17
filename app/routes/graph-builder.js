@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import ENV from '../config/environment';
+const {apiURL} = ENV;
 
 export default Ember.Route.extend({
   queryParams: {
@@ -10,16 +12,14 @@ export default Ember.Route.extend({
     return this.store.find(queryParams.entity, queryParams.entity_id);
   },
   afterModel: function(model, transition) {
-    var url = 'http://52.6.95.239/api/';
     var data = Ember.getWithDefault(transition, 'queryParams.data_source', 'products');
     if(data  === 'products'){
-      return Ember.$.getJSON(`${url}data/products?location=${model.id}`)
+      return Ember.$.getJSON(`${apiURL}data/products?location=${model.id}`)
         .then(function(data) { model.set('productsData', Ember.getWithDefault(data, 'data', [])); })
         .then(function() { window.scrollTo(0,0);});
     } else if (data === 'industries') {
-      var industryData = Ember.$.getJSON(`${url}data/industries?location=${model.id}`);
-      var scatterPlot = Ember.$.getJSON(`${url}data/industries/scatterplot?location=${model.id}&year=2012`);
-
+      var industryData = Ember.$.getJSON(`${apiURL}data/industries?location=${model.id}`)
+      var scatterPlot = Ember.$.getJSON(`${apiURL}data/industries/scatterplot?location=${model.id}&year=2012`)
       return Ember.RSVP.allSettled([industryData, scatterPlot]).then(function(array) {
         var data = array[0];
         var scatter = array[1];

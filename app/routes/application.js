@@ -1,14 +1,15 @@
 import Ember from 'ember';
+import ENV from '../config/environment';
 const {RSVP} = Ember;
+const {apiURL} = ENV;
 
 export default Ember.Route.extend({
   model: function() {
-    var url = 'http://52.6.95.239/api/';
 
-    var productsMetadata = Ember.$.getJSON(url+'metadata/products/');
-    var locationsMetadata = Ember.$.getJSON(url+'metadata/locations/');
-    var productsHierarchy = Ember.$.getJSON(url+'metadata/products/hierarchy?from_level=4digit&to_level=section');
-    var industiesMetadata = Ember.$.getJSON(url+'metadata/industries');
+    var productsMetadata = Ember.$.getJSON(apiURL+'metadata/products/');
+    var locationsMetadata = Ember.$.getJSON(apiURL+'metadata/locations/');
+    var productsHierarchy = Ember.$.getJSON(apiURL+'metadata/products/hierarchy?from_level=4digit&to_level=section');
+    var industiesMetadata = Ember.$.getJSON(apiURL+'metadata/industries');
 
     var promises = [productsMetadata, locationsMetadata, productsHierarchy, industiesMetadata];
 

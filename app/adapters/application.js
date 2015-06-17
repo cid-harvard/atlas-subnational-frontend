@@ -1,5 +1,6 @@
 import DS from 'ember-data';
+import ENV from '../config/environment';
 
 export default DS.RESTAdapter.extend({
-  host: 'http://52.6.95.239/api/'
+  host: ENV.apiURL
 });
