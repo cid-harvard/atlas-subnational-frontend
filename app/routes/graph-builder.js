@@ -18,8 +18,8 @@ export default Ember.Route.extend({
         .then(function(data) { model.set('productsData', Ember.getWithDefault(data, 'data', [])); })
         .then(function() { window.scrollTo(0,0);});
     } else if (data === 'industries') {
-      var industryData = Ember.$.getJSON(`${apiURL}data/industries?location=${model.id}`)
-      var scatterPlot = Ember.$.getJSON(`${apiURL}data/industries/scatterplot?location=${model.id}&year=2012`)
+      var industryData = Ember.$.getJSON(`${apiURL}data/industries?location=${model.id}`);
+      var scatterPlot = Ember.$.getJSON(`${apiURL}data/industries/scatterplot?location=${model.id}&year=2012`);
       return Ember.RSVP.allSettled([industryData, scatterPlot]).then(function(array) {
         var data = array[0];
         var scatter = array[1];

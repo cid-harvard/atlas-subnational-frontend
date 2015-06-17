@@ -30,7 +30,7 @@ export default Ember.Component.extend({
 
     nest = _.chain(nest)
       .toArray()
-      .filter(function(d) { return d.values.length === xRange.length })
+      .filter(function(d) { return d.values.length === xRange.length });
       .value();
 
     return _.sortBy(nest, function(d) {
