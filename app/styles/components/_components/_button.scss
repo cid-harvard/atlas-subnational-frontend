@@ -9,6 +9,9 @@
   padding: $baseSpace / 2;
   font-size: $fontBase;
   cursor: pointer;
+  &:active, &:focus {
+    outline: 0;
+  }
 }
 
 .btn--standalone {
