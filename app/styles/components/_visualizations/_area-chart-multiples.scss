@@ -11,12 +11,12 @@
 }
 
 .chart__title {
-  font-family: Helvetica, sans;
-  font-weight: 700;
-  font-size: 10px;
-  white-space: nowrap;
+  font-weight: 300;
+  font-size: $fontSmall;
   overflow: hidden;
-  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .chart__wrap {
