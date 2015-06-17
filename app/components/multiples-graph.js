@@ -27,8 +27,15 @@ export default Ember.Component.extend({
     var nest = d3.nest()
       .key(function(d) { return Ember.get(d, key); })
       .entries(this.get('data'));
-    nest = _.toArray(nest);
-    return _.sortBy(nest, function(d) { return -Ember.get(d.values[xRange.length -1], varY); }).slice(0, 40); //last year data
+
+    nest = _.chain(nest)
+      .toArray()
+      .filter(function(d) { return d.values.length === xRange.length })
+      .value();
+
+    return _.sortBy(nest, function(d) {
+       return -Ember.get(_.last(d.values), varY);
+    }).slice(0, 40); //last year data
   }),
   formatNumber: function(num) {
     var prefix = d3.formatPrefix(num);
