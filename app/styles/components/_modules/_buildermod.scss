@@ -1,0 +1,49 @@
+/**
+*
+* Buildermod
+*
+**/
+
+.section__buildermod {
+
+}
+
+.buildermod__header {
+  background: $colorBrown500;
+  padding: $baseSpace/2;
+  position: relative;
+}
+
+.buildermod__head {
+  display: inline-block;
+  font-weight: 300;
+}
+
+.buildermod__tools {
+  @include absolute( right $baseSpace/2 top 0 );
+  height: 100%;
+  font-size: 0;
+}
+
+.buildermod__tool {
+  border-left: 1px solid $colorBrown200;
+  display: inline-block;
+  height: 100%;
+  &:last-of-type {
+    padding-right: 0;
+  }
+}
+
+.buildermod__tool__btn  {
+  color: $colorGray;
+  &:hover, &:active, &:focus {
+    color: $colorGrayDark;
+  }
+}
+
+.buildermod__vizwrap {
+  height: 600px;
+  padding: $baseSpace;
+  border: 1px solid $colorBrown500;
+  overflow-y: scroll;
+}

@@ -65,6 +65,10 @@
     }
   }
 
+  @mixin absolute($args: ()) {
+    @include position(absolute, $args);
+  }
+
   // Function checking if $value is a valid length
   // ---
   // @param [literal] $value: value to test
@@ -74,41 +78,6 @@
   @function is-valid-length($value) {
     @return (type-of($value) == "number" and not unitless($value))
          or (index(auto initial inherit 0, $value) != false);
-  }
-
-  // Shorthands
-  // ---
-
-  @mixin absolute($args: ()) {
-    @include position(absolute, $args);
-  }
-
-
-  // Mixin to show a baseline grid
-  // only visible when body has 'debug' class
-  @mixin baseline-grid() {
-    position: relative;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      width: 100%;
-      z-index: 9;
-
-      display: none;
-      background-image: linear-gradient(to bottom, rgba(0,0,0,0.15) 95%,rgba(0,0,0,0.15) 100%);
-
-      background-size: 100% 2.6rem;
-    }
-
-    &.debug::after {
-      display: block;
-      pointer-events: none;
-    }
   }
 
   // LISTS
