@@ -10,6 +10,13 @@ var templateTree = new HtmlbarsCompiler('app/templates', {
 });
 
 var app = new EmberApp({
+  dotEnv: {
+    clientAllowedKeys: ['GA'],
+    path: {
+      colombia_june_2015: '.env.colombia_june_2015',
+      atlas_colombia_master: '.env.atlas_colombia_master'
+    }
+  },
   minifyCSS: {
     enabled: false
   },

@@ -53,8 +53,39 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.apiURL = "/api/";
-    ENV.baseURL = '/atlas-colombia';
+    ENV.apiURL = "api/";
+    ENV.baseURL = '/';
+    ENV.locationType = 'hash',
+    ENV.contentSecurityPolicy = {
+      'style-src': "'self' 'unsafe-inline' *",
+      'connect-src': "'self' http://54.6.95.239 *",
+      'img-src': "'self' http://placehold.it/40x40 *",
+      'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
+    };
+    ENV.googleAnalytics = {
+      webPropertyId: process.env.GA
+    };
+  }
+
+  if (environment === 'colombia_june_2015') {
+    ENV.apiURL = "api/";
+    ENV.baseURL = '/';
+    ENV.locationType = 'hash',
+    ENV.contentSecurityPolicy = {
+      'style-src': "'self' 'unsafe-inline' *",
+      'connect-src': "'self' http://54.6.95.239 *",
+      'img-src': "'self' http://placehold.it/40x40 *",
+      'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
+    };
+    ENV.googleAnalytics = {
+      webPropertyId: process.env.GA
+    };
+  }
+
+  if (environment === 'atlas_colombia_master') {
+    ENV.apiURL = "api/";
+    ENV.baseURL = '/';
+>>>>>>> da749e2... stash wip
     ENV.locationType = 'hash',
     ENV.contentSecurityPolicy = {
       'connect-src': "'self' http://54.6.95.239 *",
