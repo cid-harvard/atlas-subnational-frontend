@@ -37,7 +37,7 @@ module.exports = function(environment) {
       'connect-src': "'self' 'localhost:4200' *",
       'style-src': "'self' 'unsafe-inline' *",
       'img-src': "'self' http://placehold.it/40x40 *",
-      'script-src': "'self' 'localhost:4200' 'localhost:35729' 'unsafe-eval'",
+      'script-src': "'self' 'localhost:4200' 'unsafe-eval'",
     }
   }
 
@@ -48,7 +48,6 @@ module.exports = function(environment) {
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
-
     ENV.APP.rootElement = '#ember-testing';
   }
 
@@ -85,12 +84,43 @@ module.exports = function(environment) {
   if (environment === 'atlas_colombia_master') {
     ENV.apiURL = "api/";
     ENV.baseURL = '/';
->>>>>>> da749e2... stash wip
     ENV.locationType = 'hash',
     ENV.contentSecurityPolicy = {
+      'style-src': "'self' 'unsafe-inline' *",
       'connect-src': "'self' http://54.6.95.239 *",
-      'img-src': "'self' http://placehold.it/40x40 *"
-    }
+      'img-src': "'self' http://placehold.it/40x40 *",
+      'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
+    };
+  }
+
+  if (environment === 'colombia_june_2015') {
+    ENV.apiURL = "api/";
+    ENV.baseURL = '/';
+    ENV.locationType = 'hash',
+    ENV.contentSecurityPolicy = {
+      'style-src': "'self' 'unsafe-inline' *",
+      'connect-src': "'self' http://54.6.95.239 *",
+      'img-src': "'self' http://placehold.it/40x40 *",
+      'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
+    };
+    ENV.googleAnalytics = {
+      webPropertyId: process.env.GA
+    };
+  }
+
+  if (environment === 'atlas_colombia_master') {
+    ENV.apiURL = "api/";
+    ENV.baseURL = '/';
+    ENV.locationType = 'hash',
+    ENV.contentSecurityPolicy = {
+      'style-src': "'self' 'unsafe-inline' *",
+      'connect-src': "'self' http://54.6.95.239 *",
+      'img-src': "'self' http://placehold.it/40x40 *",
+      'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
+    };
+    ENV.googleAnalytics = {
+      webPropertyId: process.env.GA
+    };
   }
 
   return ENV;
