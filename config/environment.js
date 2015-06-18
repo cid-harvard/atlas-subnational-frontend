@@ -53,7 +53,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.apiURL = "http://52.6.95.239/api/";
+    ENV.apiURL = "/api/";
     ENV.baseURL = '/atlas-colombia';
     ENV.locationType = 'hash',
     ENV.contentSecurityPolicy = {

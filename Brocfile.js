@@ -15,6 +15,9 @@ var app = new EmberApp({
   },
   minifyJS: {
     enabled: false
+  },
+  emberCliFontAwesome: {
+    includeFontAwesomeAssets: false
   }
 });
 
@@ -22,6 +25,17 @@ app.import('bower_components/d3/d3.min.js');
 app.import('bower_components/lodash/lodash.js');
 app.import('bower_components/vis-toolkit/build/vistk.js');
 app.import('bower_components/d3plus/d3plus.js');
+
+// Font Awesome
+// The npm package readme mentions refactoring this as a Broccoli tree, so consider that a TODO
+app.import("bower_components/font-awesome/css/font-awesome.css");
+app.import("bower_components/font-awesome/fonts/fontawesome-webfont.eot", { destDir: "fonts" });
+app.import("bower_components/font-awesome/fonts/fontawesome-webfont.svg", { destDir: "fonts" });
+app.import("bower_components/font-awesome/fonts/fontawesome-webfont.ttf", { destDir: "fonts" });
+app.import("bower_components/font-awesome/fonts/fontawesome-webfont.woff", { destDir: "fonts" });
+app.import("bower_components/font-awesome/fonts/fontawesome-webfont.woff2", { destDir: "fonts" });
+app.import("bower_components/font-awesome/fonts/FontAwesome.otf", { destDir: "fonts" });
+
 
 // Use `app.import` to add additional libraries to the generated
 // output files.

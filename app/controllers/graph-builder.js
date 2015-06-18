@@ -12,11 +12,11 @@ export default Ember.Controller.extend({
   industriesMetadata: computed.alias('controllers.application.industriesMetadata'),
   totalWages: computed('industriesData', function() {
     let data = _.filter(this.get('industriesData'), {year: 2012});
-    return _.sum(data, 'wages');
+    return _.sum(data, 'wages').toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   }),
   totalExports: computed('productsData', function() {
     let data = _.filter(this.get('productsData'), {year: 2012});
-    return _.sum(data, 'export_value');
+    return  _.sum(data, 'export_value').toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   }),
   isProducts: computed('data_source', function() {
     return this.get('data_source') === 'products';
@@ -24,6 +24,10 @@ export default Ember.Controller.extend({
   isIndustries: computed('data_source', function() {
     return this.get('data_source') === 'industries';
   }),
+  filterRca: function( data ) {
+      // TODO: Eventually move this into builder tools for scatter and similarity map
+      return _.filter( data, function(d) { return d.rca >= 1; });
+  },
   productsData: computed('model.productsData', function() {
     let products = this.get('model.productsData');
     let productsMetadata = this.get('productsMetadata');
@@ -62,6 +66,7 @@ export default Ember.Controller.extend({
       d.name = industry.name;
       d.rca = industry.rca;
     });
+    scatterPlot = this.filterRca(scatterPlot);
     return scatterPlot;
   }),
   departmentLocations: computed('locationsMetadata', function(){

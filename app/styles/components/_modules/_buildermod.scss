@@ -10,27 +10,34 @@
 
 .buildermod__header {
   background: $colorBrown500;
-  padding: $baseSpace/2;
+  // padding: $baseSpace/2;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .buildermod__head {
   display: inline-block;
   font-weight: 300;
+  padding-left: $baseSpace/2;
 }
 
 .buildermod__tools {
-  @include absolute( right $baseSpace/2 top 0 );
-  height: 100%;
-  font-size: 0;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .buildermod__tool {
   border-left: 1px solid $colorBrown200;
   display: inline-block;
   height: 100%;
+}
+
+.buildermod__tool__btn--zoom {
+  margin-right: -$baseSpace/2;
   &:last-of-type {
-    padding-right: 0;
+    margin-right: 0;
   }
 }
 
