@@ -28,6 +28,7 @@
     "ember-cli-cookie": "^0.1.0",
     "ember-cli-dependency-checker": "0.0.8",
     "ember-cli-font-awesome": "0.0.9",
+    "ember-cli-dotenv": "^1.0.0",
     "ember-cli-github-pages": "0.0.4",
     "ember-cli-htmlbars": "0.7.4",
     "ember-cli-i18n": "0.0.6",
