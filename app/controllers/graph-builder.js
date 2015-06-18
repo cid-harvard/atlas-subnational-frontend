@@ -12,11 +12,11 @@ export default Ember.Controller.extend({
   industriesMetadata: computed.alias('controllers.application.industriesMetadata'),
   totalWages: computed('industriesData', function() {
     let data = _.filter(this.get('industriesData'), {year: 2012});
-    return _.sum(data, 'wages');
+    return _.sum(data, 'wages').toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   }),
   totalExports: computed('productsData', function() {
     let data = _.filter(this.get('productsData'), {year: 2012});
-    return _.sum(data, 'export_value');
+    return  _.sum(data, 'export_value').toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   }),
   isProducts: computed('data_source', function() {
     return this.get('data_source') === 'products';
