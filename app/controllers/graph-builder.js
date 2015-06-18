@@ -24,6 +24,10 @@ export default Ember.Controller.extend({
   isIndustries: computed('data_source', function() {
     return this.get('data_source') === 'industries';
   }),
+  filterRca: function( data ) {
+      // TODO: Eventually move this into builder tools for scatter and similarity map
+      return _.filter( data, function(d) { return d.rca >= 1; });
+  },
   productsData: computed('model.productsData', function() {
     let products = this.get('model.productsData');
     let productsMetadata = this.get('productsMetadata');
@@ -62,6 +66,7 @@ export default Ember.Controller.extend({
       d.name = industry.name;
       d.rca = industry.rca;
     });
+    scatterPlot = this.filterRca(scatterPlot);
     return scatterPlot;
   }),
   departmentLocations: computed('locationsMetadata', function(){
