@@ -37,6 +37,8 @@ export default Ember.Controller.extend({
       d.name = product.name_en;
       d.level = product.level;
       d.code = product.code;
+      d.group = product.group;
+      d.group_name_en = product.group_name_en;
       d.parent_id = parentProduct.id;
       d.parent_name = parentProduct.name_en;
       d.parent_code = parentProduct.code;
@@ -52,6 +54,8 @@ export default Ember.Controller.extend({
       d.name = industry.name_en;
       d.code = industry.code;
       d.level = industry.level;
+      d.group = industry.group;
+      d.group_name_en = industry.group_name_en;
       d.parent_id = parentIndustry.id;
       d.parent_name = parentIndustry.name_en;
       d.parent_code = parentIndustry.code;
