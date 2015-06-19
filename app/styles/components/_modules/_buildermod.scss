@@ -10,7 +10,6 @@
 
 .buildermod__header {
   background: $colorBrown500;
-  // padding: $baseSpace/2;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -53,4 +52,5 @@
   padding: $baseSpace;
   border: 1px solid $colorBrown500;
   overflow-y: scroll;
+  background: $colorBrown200;
 }
