@@ -19,13 +19,12 @@
 .stream__header--builder:before {
   content: '';
   background-color: $colorGreen;
-  height: 80vw;
-  width: 80vw;
+  height: 120vw;
+  width: 120vw;
   z-index: -1;
   position: absolute;
-  top: -60vw;
-  transform-origin: 0% 50%;
-  transform: rotate(45deg) translate(0%, 50%);
+  transform: translate(-50%, -30vw);
+  clip-path: polygon(50% 0%, 100% 50%, 75% 75%, 25% 75%, 0 50%);
 }
 
 .stream__head {
