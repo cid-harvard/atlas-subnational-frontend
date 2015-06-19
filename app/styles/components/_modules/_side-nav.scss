@@ -44,9 +44,25 @@
 .sidebar__btn {
   font-size: $fontTiny;
   color: $colorNavy600;
+  &:hover {
+    color: $colorWhite;
+    .sidebar__btn__icon:before {
+      color: $colorWhite;
+    }
+  }
+}
+
+.sidebar__btn__icon:before {
+  display: block;
+  color: $colorNavy600;
+  font-size: 40px;
+  margin: 0 auto;
 }
 
 .sidebar__btn--is--active {
+  .sidebar__btn__icon:before {
+    color: $colorWhite;
+  }
   color: $colorWhite;
 }
 
