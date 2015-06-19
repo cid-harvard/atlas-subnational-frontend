@@ -6,6 +6,8 @@
 
 .stream__section {
   margin: $baseSpace*3;
+  z-index: $zIndex-2;
+  position: relative;
 }
 
 .section__header {
