@@ -7,7 +7,7 @@
 .btn {
   transition: color 0.2s ease-in-out;
   padding: $baseSpace / 2;
-  font-size: $fontBase;
+  font-size: $fontSmall;
   cursor: pointer;
   &:active, &:focus {
     outline: 0;
@@ -18,7 +18,6 @@
   background: $colorBrown500;
   text-transform: uppercase;
   color: $colorWhite;
-  font-size: $fontSmall;
 }
 
 .btn--inline {

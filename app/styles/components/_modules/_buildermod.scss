@@ -16,6 +16,7 @@
   display: inline-block;
   font-weight: 300;
   padding-left: $baseSpace/2;
+  font-size: $fontSmall;
 }
 
 .buildermod__tools {
@@ -52,4 +53,5 @@
   border: 1px solid $colorBrown500;
   overflow-y: scroll;
   background: $colorBrown200;
+  margin-bottom: $baseSpace;
 }
