@@ -4,10 +4,6 @@
 *
 **/
 
-.section__buildermod {
-
-}
-
 .buildermod__header {
   background: $colorBrown500;
   position: relative;
@@ -44,6 +40,9 @@
   color: $colorGray;
   &:hover, &:active, &:focus {
     color: $colorGrayDark;
+    .tool__btn__icon:before {
+      color: $colorGrayDark;
+    }
   }
 }
 
