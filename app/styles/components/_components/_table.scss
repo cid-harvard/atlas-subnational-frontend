@@ -41,9 +41,11 @@
   flex-direction: column;
   flex: 0 0;
   box-sizing:border-box;
+    overflow-y: scroll;
 }
 
 .table__thead--scroller::-webkit-scrollbar{
+
   background: transparent;
 }
 
