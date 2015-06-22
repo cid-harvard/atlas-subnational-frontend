@@ -43,7 +43,7 @@
 // Buttons
 .sidebar__btn {
   font-size: $fontTiny;
-  color: $colorNavy600;
+  color: $colorNavy400;
   &:hover {
     color: $colorWhite;
     .sidebar__btn__icon:before {
@@ -54,7 +54,7 @@
 
 .sidebar__btn__icon:before {
   display: block;
-  color: $colorNavy600;
+  color: $colorNavy400;
   font-size: 40px;
   margin: 0 auto;
 }
@@ -119,7 +119,7 @@
 }
 
 .toggle__label__text {
-  color: $colorNavy600;
+  color: $colorNavy400;
   font-size: $fontTiny;
   display: inline;
   vertical-align: 10px;
