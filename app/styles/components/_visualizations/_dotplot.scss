@@ -8,25 +8,35 @@
 .dotplot {
 
   .items__mark__diamond {
-      fill: gray;
-      opacity: .1;
+    fill: gray;
+    opacity: .1;
   }
 
   .items__mark__diamond.highlighted {
-    fill: red;
+    stroke: black;
     opacity: 1;
    }
+
+  .items__mark__diamond.selected {
+    fill: red;
+    opacity: 1;
+  }
 
   .items__mark__text {
     display: none;
   }
 
   .axis > .label {
-      display: none;
+    display: none;
   }
 
   .axis > .domain {
+    stroke: #000;
     stroke-dasharray: 1,1
+  }
+
+  .tick > text {
+    font-size: 1.5rem;;
   }
 
 }
