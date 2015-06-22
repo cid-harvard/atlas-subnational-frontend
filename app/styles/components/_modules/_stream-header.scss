@@ -16,6 +16,13 @@
   z-index: $zIndex-1;
 }
 
+.builder__pentagon {
+  position: absolute;
+  width: 120vw;
+  z-index: -1;
+  transform: translate(-50%, -30vw);
+}
+
 .stream__header--builder:before {
   content: '';
   background-color: $colorGreen;
