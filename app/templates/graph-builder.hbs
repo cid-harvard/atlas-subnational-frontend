@@ -20,15 +20,16 @@
             <h4 class="buildermod__head">Total exports, 2013: ${{totalExports}}</h4>
             <div class="buildermod__tools">
               <div class="buildermod__tool">
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
               </div>
               <button class="btn buildermod__tool__btn buildermod__settings buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Settings</button>
               <button class="btn buildermod__tool__btn buildermod__changegraph buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Change graph</button>
             </div>
           </header>
           <div class="buildermod__vizwrap">
+            {{partial "partials/buildermod-search"}}
             {{d3plus-tree-map
               elementID="d3plus-tree"
               data=productsData
@@ -46,15 +47,16 @@
           <header class="buildermod__header">
             <div class="buildermod__tools">
               <div class="buildermod__tool">
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
               </div>
               <button class="btn buildermod__tool__btn buildermod__settings buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Settings</button>
               <button class="btn buildermod__tool__btn buildermod__changegraph buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Change graph</button>
             </div>
           </header>
           <div class="buildermod__vizwrap">
+            {{partial "partials/buildermod-search"}}
             {{multiples-graph
               elementId="d3area"
               data=productsData
@@ -77,15 +79,16 @@
             <h4 class="buildermod__head">Total wages, 2013: ${{totalWages}}</h4>
             <div class="buildermod__tools">
               <div class="buildermod__tool">
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
               </div>
               <button class="btn buildermod__tool__btn buildermod__settings buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Settings</button>
               <button class="btn buildermod__tool__btn buildermod__changegraph buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Change graph</button>
             </div>
           </header>
           <div class="buildermod__vizwrap">
+            {{partial "partials/buildermod-search"}}
             {{d3plus-tree-map
               elementID="d3plus-tree"
               data=industriesData
@@ -103,15 +106,16 @@
           <header class="buildermod__header">
             <div class="buildermod__tools">
               <div class="buildermod__tool">
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
               </div>
               <button class="btn buildermod__tool__btn buildermod__settings buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Settings</button>
               <button class="btn buildermod__tool__btn buildermod__changegraph buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Change graph</button>
             </div>
           </header>
           <div class="buildermod__vizwrap">
+            {{partial "partials/buildermod-search"}}
             {{multiples-graph
               elementId="d3area"
               data=industriesData
@@ -127,15 +131,16 @@
           <header class="buildermod__header">
             <div class="buildermod__tools">
               <div class="buildermod__tool">
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--zoom">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
+                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
               </div>
-              <button class="btn buildermod__tool__btn buildermod__settings buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Settings</button>
-              <button class="btn buildermod__tool__btn buildermod__changegraph buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Change graph</button>
+              <button class="btn buildermod__tool buildermod__tool__btn buildermod__settings buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Settings</button>
+              <button class="btn buildermod__tool buildermod__tool__btn buildermod__changegraph buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Change graph</button>
             </div>
           </header>
           <div class="buildermod__vizwrap">
+            {{partial "partials/buildermod-search"}}
             {{d3-plus-scatter
               elementId="d3-scatter"
               data=scatterPlot
