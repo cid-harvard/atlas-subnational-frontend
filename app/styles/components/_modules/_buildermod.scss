@@ -15,7 +15,7 @@
 .buildermod__head {
   display: inline-block;
   font-weight: 300;
-  padding-left: $baseSpace/2;
+  padding-left: $baseSpace;
 }
 
 .buildermod__tools {
@@ -27,13 +27,7 @@
   border-left: 1px solid $colorBrown200;
   display: inline-block;
   height: 100%;
-}
-
-.buildermod__tool__btn--zoom {
-  margin-right: -$baseSpace/2;
-  &:last-of-type {
-    margin-right: 0;
-  }
+  padding: $baseSpace/2 $baseSpace;
 }
 
 .buildermod__tool__btn  {
@@ -46,10 +40,59 @@
   }
 }
 
+.buildermod__tool__btn--sub {
+  padding: 0;
+  margin-right: $baseSpace / 2;
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
 .buildermod__vizwrap {
   height: 600px;
   padding: $baseSpace;
   border: 1px solid $colorBrown500;
   overflow-y: scroll;
   background: $colorBrown200;
+}
+
+.buildermod__searchwrap {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: $baseSpace / 1.5;
+  box-shadow: 2px 2px 2px $colorGrayLighter;
+}
+
+.buildermod__search {
+  transition: background 0.2s ease-in-out;
+  background: $colorWhite;
+  font-size: $fontSmall;
+  font-weight: 500;
+  padding: $baseSpace/2 $baseSpace;
+  flex: 1 1 auto;
+  &:active, &:focus {
+    outline: 0;
+    &::-webkit-input-placeholder {
+      color: $colorGray;
+    }
+  }
+  &::-webkit-input-placeholder {
+    transition: color 0.2s ease-in-out;
+    color: $colorGrayLight;
+    weight: 500;
+    font-size: $fontSmall;
+  }
+}
+
+.buildermod__search__submit {
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+  padding: $baseSpace/2 $baseSpace;
+  background: $colorNavy800;
+  color: $colorGrayLighter;
+  cursor: pointer;
+  &:hover, &:active, &:focus {
+    background: $colorNavy;
+    outline: 0;
+    color: $colorWhite;
+  }
 }
