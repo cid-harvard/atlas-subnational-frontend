@@ -31,7 +31,7 @@
   transform: rotate(45deg);
   padding: $baseSpace;
   display: flex;
-  border: $baseSpace solid $colorBrown200;
+  border: 2vw solid $colorBrown200;
   background-clip: padding-box;
   position:  absolute;
   top: 0;
@@ -43,7 +43,7 @@
 .cta__header {
   width: 100%;
   text-align: right;
-  padding-left: $baseSpace * 2;
+  padding-left: 33.3333%;
   transform: rotate(-90deg);
   line-height: 100%;
 }
