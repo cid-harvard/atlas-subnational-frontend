@@ -3,8 +3,10 @@ const {computed, observer} = Ember;
 
 export default Ember.Controller.extend({
   needs: 'application',
-  queryParams: ['entity', 'entity_id', 'data_source'],
-  data_source: 'products',
+  queryParams: ['entity', 'entity_id', 'source', 'variable', 'vis'],
+  source: 'products',
+  vis: 'treemap',
+  variable: 'export_value',
 
   isEnglish: computed.alias('controllers.application.isEnglish'),
   productsMetadata: computed.alias('controllers.application.productsMetadata'),

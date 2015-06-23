@@ -4,9 +4,11 @@ const {apiURL} = ENV;
 
 export default Ember.Route.extend({
   queryParams: {
-    entity: { refreshModel: true },
-    entity_id: { refreshModel: true },
-    data_source: { refreshModel: true }
+    entity: { refreshModel: true }, // location, product, industry
+    entity_id: { refreshModel: true }, // Id of the entities
+    source: { refreshModel: true }, // products, industries,
+    variable: { refreshModel: true }, //export_value, import_value, wages, employment
+    vis: { refreshModel: true } // treemap, multiples, scatter
   },
   model: function(queryParams) {
     return this.store.find(queryParams.entity, queryParams.entity_id);
