@@ -10,6 +10,7 @@
 
 .builder__list--nested {
   padding-right: $baseSpace * 2;
+  width: 50%;
 }
 
 .builder__nav__item {
@@ -70,4 +71,5 @@
   font-weight: 300;
   color: $colorGray;
   font-size: $fontSmall;
+  display: inline-block;
 }

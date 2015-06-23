@@ -44,9 +44,8 @@
     overflow-y: scroll;
 }
 
-.table__thead--scroller::-webkit-scrollbar{
-
-  background: transparent;
+.table__thead--scroller::-webkit-scrollbar {
+  // background: transparent;
 }
 
 .table__tbody--scroller {
