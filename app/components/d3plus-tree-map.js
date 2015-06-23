@@ -3,29 +3,21 @@ const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
   tagName: 'div',
-  colorScale: ['#bdbdbd', '#969696', '#737373', '#525252', '#252525'],
   attributeBindings: ['width','height'],
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  filteredData: computed('data', function() {
-    return this.get('data');
+  varIndependent: computed('dataType', function() {
+    // this should be based on i18n
+    return ['group_name_en','name'];
   }),
-  varId: computed('dataType', function() {
-    let dataType = this.get('dataType');
-    if( dataType === 'products') {
-      return ['parent_name','name'];
-    } else if (dataType === 'industries') {
-      return ['parent_name','name'];
-    }
-  }),
-  treemap: computed('id','data',function() {
+  treemap: computed('data.[]', 'varDependent', 'dataType', 'vis', function() {
     var maxYear = d3.max(this.get('data'), function(d) {return d.year;} );
     return d3plus.viz()
     .container(this.get('id'))
     .data({value: this.get('data'), padding: 5})
     .type("tree_map")
-    .id(this.get('varId'))
+    .id(this.get('varIndependent'))
     .depth(1)
     .color('grey')
     .time({"value": "year", "solo": maxYear })
@@ -33,7 +25,7 @@ export default Ember.Component.extend({
     .height(this.get('height'))
     .width(this.get('width'))
     .timing({transitions: 300})
-    .size(this.get('varSize'));
+    .size(this.get('varDependent'));
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
@@ -42,8 +34,12 @@ export default Ember.Component.extend({
       this.get('treemap').draw();
     });
   },
-  didDataChange: observer('data', function() {
-    this.rerender();
+  update: observer('data.[]', 'varDependent', 'dataType', 'vis', function() {
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      this.set('width', this.$().parent().width());
+      this.set('height', this.$().parent().height());
+      this.get('treemap').draw();
+    });
   })
 });
 

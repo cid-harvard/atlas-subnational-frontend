@@ -20,10 +20,13 @@ export default Ember.Component.extend({
       .uniq()
       .value();
   }),
+  varId: computed(function() {
+    return 'name';
+  }),
   nestedData: computed('data', function() {
     let key = this.get('varId');
     let xRange = this.get('xRange');
-    let varY = this.get('varY');
+    let varDependent = this.get('varDependent');
     var nest = d3.nest()
       .key(function(d) { return Ember.get(d, key); })
       .entries(this.get('data'));
@@ -34,7 +37,7 @@ export default Ember.Component.extend({
       .value();
 
     return _.sortBy(nest, function(d) {
-       return -Ember.get(_.last(d.values), varY);
+       return -Ember.get(_.last(d.values), varDependent);
     }).slice(0, 40); //last year data
   }),
   formatNumber: function(num) {
@@ -46,9 +49,9 @@ export default Ember.Component.extend({
   },
   maxValue: computed(function () {
     let nestedData = this.get('nestedData');
-    let varY = this.get('varY');
+    let varDependent = this.get('varDependent');
     nestedData.forEach(function(year) {
-      year.maxValue = d3.max(year.values, function(d) { return Ember.get(d, varY); });
+      year.maxValue = d3.max(year.values, function(d) { return Ember.get(d, varDependent); });
     });
     return d3.max(nestedData, function(d) { return d.maxValue; });
   }),
@@ -72,17 +75,17 @@ export default Ember.Component.extend({
     .orient('left');
   }),
   area: computed(function() {
-    let varY = this.get('varY');
+    let varDependent = this.get('varDependent');
     return d3.svg.area()
       .x((d) => { return this.get('xScale')(d.year); })
-      .y((d) => { return this.get('yScale')(Ember.get(d, varY)); })
+      .y((d) => { return this.get('yScale')(Ember.get(d, varDependent)); })
       .y0(this.get('height'));
   }),
   line: computed(function() {
-    let varY = this.get('varY');
+    let varDependent = this.get('varDependent');
     return d3.svg.line()
       .x((d) => { return this.get('xScale')(d.year); })
-      .y((d) => { return this.get('yScale')(Ember.get(d, varY)); });
+      .y((d) => { return this.get('yScale')(Ember.get(d, varDependent)); });
   }),
   initCharts: function() {
 
@@ -103,7 +106,7 @@ export default Ember.Component.extend({
     let area = this.get('area');
     let formatNumber = this.get('formatNumber');
     let truncateYear = this.get('truncateYear');
-    let varY = this.get('varY');
+    let varDependent = this.get('varDependent');
 
     div.append('h3')
       .attr('class', 'chart__title')
@@ -188,21 +191,21 @@ export default Ember.Component.extend({
         .attr('y', function(d) {
           index = bisect(d.values, date, 0, d.values.length - 1);
 
-          let yValue = Ember.get(d.values[index], varY);
+          let yValue = Ember.get(d.values[index], varDependent);
           return y(yValue);
         })
         .attr('transform', function(d) {
-          let yValue = Ember.get(d.values[index], varY);
+          let yValue = Ember.get(d.values[index], varDependent);
           return 'translate(0, -3.54) rotate( 45 ' + x(date) + ' ' + y(yValue) + ')';
         });
 
       caption.attr('x', x(date))
         .attr('y', function(d) {
-          let yValue = Ember.get(d.values[index], varY);
+          let yValue = Ember.get(d.values[index], varDependent);
           return y(yValue);
         })
         .text(function(d) {
-          let yValue = Ember.get(d.values[index], varY);
+          let yValue = Ember.get(d.values[index], varDependent);
           return '$' + formatNumber(yValue);
         });
 
