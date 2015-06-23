@@ -51,9 +51,12 @@ Make use of the many generators for code, try `ember help generate` for more det
 * `ember build` (development)
 * `ember build --environment production` (production)
 
-### Deploying
+* To build the app, have the correct `.env` file in the root dir see '.env.example'
+* run `ember build -e <enviroment>` e.g. `ember build -e atlas_colombia_master`
+* By default the built app is in the `dist/` folder
 
-Specify what it takes to deploy your app.
+* Required `ENV` vars
+  * GA (for Google Analytics)
 
 ## Further Reading / Useful Links
 
