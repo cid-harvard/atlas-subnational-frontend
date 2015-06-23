@@ -14,7 +14,6 @@ export default Ember.Component.extend({
   }),
   scatter: computed('data.[]', 'dataType',function() {
     var maxYear = d3.max(this.get('data'), function(d) {return d.year;} );
-    console.log(this.get('data'));
     return d3plus.viz()
       .container(this.get('id'))
       .data({value: this.get('data')})
@@ -41,6 +40,7 @@ export default Ember.Component.extend({
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
       this.get('scatter').draw();
+      window.scrollTo(0,0);
     });
   })
 });
