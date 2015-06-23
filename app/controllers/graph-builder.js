@@ -10,19 +10,24 @@ export default Ember.Controller.extend({
 
   isEnglish: computed.alias('controllers.application.isEnglish'),
 
-  scatterPlot: computed('model.industriesData', function() {
-    return _.filter(this.get('model.industriesData'), function(d) { return d.rca <= 1; });
-  }),
+  scatterPlot: function(data) {
+    return _.filter(data, (d) => {
+      return Ember.get(d, this.get('rca')) <= 1;
+    });
+  },
   departmentLocations: computed('locationsMetadata', function(){
     return _.filter(this.get('locationsMetadata'), 'level', 'department');
   }),
   data: computed('source','vis', function() {
     let source = this.get('source');
+    let data;
     if(source  === 'products') {
-      return this.get('model.productsData');
+      data = this.get('model.productsData');
     } else if(source === 'industries') {
-      return  this.get('vis') === 'scatter' ? this.get('scatterPlot') : this.get('model.industriesData');
+      data =  this.get('model.industriesData');
     }
+    if(this.get('vis') === 'scatter') { return this.scatterPlot(data); }
+    return data
   }),
   visualizationComponent: computed('vis', function(){
     let visualization = this.get('vis');
@@ -38,6 +43,11 @@ export default Ember.Controller.extend({
     let visualization = this.get('vis');
     if (visualization === 'scatter') { return false; }
     return true;
+  }),
+  rca: computed('source', function() {
+    let source = this.get('source');
+    if(source === 'industries') { return 'rca'; }
+    return 'export_rca';
   }),
   actions: {
     toggleVisualization: function() {
