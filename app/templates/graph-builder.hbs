@@ -25,7 +25,11 @@
             <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
           </div>
           <button class="btn buildermod__tool__btn buildermod__settings buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Settings</button>
-          <button class="btn buildermod__tool__btn buildermod__changegraph buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Change graph</button>
+          {{#if canChangeVisualization}}
+            <button class="btn buildermod__tool__btn buildermod__changegraph buildermod__tool" {{action 'toggleVisualization'}}>
+              {{fa-icon "plus" classNames="tool__btn__icon"}} Change graph
+            </button>
+          {{/if}}
         </div>
       </header>
       <div class="buildermod__vizwrap">

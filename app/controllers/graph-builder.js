@@ -34,7 +34,19 @@ export default Ember.Controller.extend({
       return 'd3plus-scatter';
     }
   }),
+  canChangeVisualization: computed('vis', function() {
+    let visualization = this.get('vis');
+    if (visualization === 'scatter') { return false; }
+    return true;
+  }),
   actions: {
+    toggleVisualization: function() {
+      if(this.get('vis') === 'treemap') {
+        this.set('vis', 'multiples');
+      } else {
+        this.set('vis', 'treemap');
+      }
+    },
     toTreemap: function() {
       this.set('vis', 'treemap');
     },
