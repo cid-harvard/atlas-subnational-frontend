@@ -8,9 +8,7 @@ export default Ember.Component.extend({
   }),
   varIndependent: computed('dataType', function() {
     // this should be based on i18n
-    if(this.get('dataType') === 'industries') {
-      return 'name';
-    }
+    return 'name';
   }),
   scatter: computed('data.[]', 'dataType',function() {
     var maxYear = d3.max(this.get('data'), function(d) {return d.year;} );
@@ -22,7 +20,7 @@ export default Ember.Component.extend({
       .id(this.get('varIndependent'))
       .x(this.get('varX'))
       .y(this.get('varY'))
-      .size(this.get('varSize'))
+      .size(this.get('varRca'))
       .time({'value': 'year', 'solo': maxYear })
       .timeline(false)
       .height(this.get('height'))
