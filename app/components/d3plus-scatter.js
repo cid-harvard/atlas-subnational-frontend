@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   varIndependent: computed('dataType', function() {
     // this should be based on i18n
     if(this.get('dataType') === 'industries') {
-      return 'name'
+      return 'name';
     }
   }),
   scatter: computed('data.[]', 'dataType',function() {

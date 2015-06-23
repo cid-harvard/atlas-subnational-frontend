@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {computed, observer} = Ember;
+const {computed} = Ember;
 
 export default Ember.Controller.extend({
   needs: 'application',
@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
     return _.filter(this.get('locationsMetadata'), 'level', 'department');
   }),
   data: computed('source','vis', function() {
-    let source = this.get('source')
+    let source = this.get('source');
     if(source  === 'products') {
       return this.get('model.productsData');
     } else if(source === 'industries') {

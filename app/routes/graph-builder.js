@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import ENV from '../config/environment';
-const {computed} = Ember;
 const {apiURL} = ENV;
 
 export default Ember.Route.extend({
@@ -32,7 +31,7 @@ export default Ember.Route.extend({
           d.name = product.name_en;
           _.extend(d, product);
           d.group = product.group;
-          d.group_name_en = product.group_name_en
+          d.group_name_en = product.group_name_en;
         });
         model.set('productsData', data);
       })
@@ -44,8 +43,8 @@ export default Ember.Route.extend({
     var industriesData = Ember.$.getJSON(`${apiURL}data/industries/scatterplot?location=${model.id}&year=2012`);
     return Ember.RSVP.allSettled([industries, industriesData])
       .then((array) => {
-      let industries = Ember.getWithDefault(array[0], 'value.data', [])
-      let industriesData = Ember.getWithDefault(array[1], 'value.data', [])
+      let industries = Ember.getWithDefault(array[0], 'value.data', []);
+      let industriesData = Ember.getWithDefault(array[1], 'value.data', []);
       let industriesMetadata = this.modelFor('application').industries;
 
       _.each(industries, function(d) {
