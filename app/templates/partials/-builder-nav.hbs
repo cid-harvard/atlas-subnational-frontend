@@ -120,7 +120,9 @@
               <i class="cidcon-treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What products does {{model.name_en}} export?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source="products" variable='export_value' vis='treemap') class="builder__nav__question"}}
+                  What products does {{model.name_en}} export?
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
@@ -130,11 +132,13 @@
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What products does {{model.name_en}} export to BLANK?{{/link-to}}
               </div>
             </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
+            <li class="builder__nav__item">
               <i class="cidcon-treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What products does {{model.name_en}} import?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='products' variable='import_value' vis='treemap') class="builder__nav__question"}}
+                  What products does {{model.name_en}} import?
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
@@ -148,11 +152,13 @@
         </li>
         <li class="builder__list--nested">
           <ul>
-            <li class="builder__nav__item builder__nav__item--unavailable">
+            <li class="builder__nav__item">
               <i class="cidcon-scatter builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Scatterplot</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What products have the best combination of complexity and opportunity for {{model.name_en}}?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id variable='null' source='products' vis='scatter') class="builder__nav__question"}}
+                  What products have the best combination of complexity and opportunity for {{model.name_en}}?
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
@@ -171,18 +177,21 @@
       <ul class="builder__nav__list">
         <li class="builder__list--nested">
           <ul>
-            <li class="builder__nav__item builder__nav__item--unavailable">
+            <li class="builder__nav__item">
               <i class="cidcon-treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What industries in {{model.name_en}} employ the most people?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source="industries" variable='employment' vis='treemap') class="builder__nav__question"}}
+                  What industries in {{model.name_en}} employ the most people?
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item">
               <i class="cidcon-treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="industries") class="builder__nav__question"}} What industries are in {{model.name_en}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source="industries" variable='wages' vis='treemap') class="builder__nav__question"}}
+                  What industries are in {{model.name_en}}
                 {{/link-to}}
               </div>
             </li>
@@ -190,25 +199,31 @@
               <i class="cidcon-treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What industries in {{model.name_en}} have the highest wages per worker?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  What industries in {{model.name_en}} have the highest wages per worker?
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
               <i class="cidcon-treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What industries offer the highest wages for BLANK?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  What industries offer the highest wages for BLANK?
+                {{/link-to}}
               </div>
             </li>
           </ul>
         </li>
         <li class="builder__list--nested">
           <ul>
-            <li class="builder__nav__item builder__nav__item--unavailable">
+            <li class="builder__nav__item">
               <i class="cidcon-scatter builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Scatterplot</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What industries have the best combination of complexity and opportunity for {{model.name_en}}?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='industries' vis='scatter') class="builder__nav__question"}}
+                  What industries have the best combination of complexity and opportunity for {{model.name_en}}?
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
