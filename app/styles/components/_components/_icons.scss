@@ -1,8 +1,12 @@
 /**
 *
-* Form
+* Icons
 *
 **/
+
+i:before {
+  transition: color 0.2s ease-in-out;
+}
 
 .fa {
   font-size: $fontSmall;

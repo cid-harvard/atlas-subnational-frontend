@@ -15,6 +15,7 @@
   border-bottom: 1px solid $colorBrown600;
   text-align: left;
   font-weight: 300;
+  font-size: $fontSmall;
   &:last-of-type {
     border-right-width: 0px;
   }
@@ -40,9 +41,11 @@
   flex-direction: column;
   flex: 0 0;
   box-sizing:border-box;
+    overflow-y: scroll;
 }
 
 .table__thead--scroller::-webkit-scrollbar{
+
   background: transparent;
 }
 
@@ -66,15 +69,15 @@
 }
 
 
-// Complexity table styles
+// Text table styles
 
-.table--complexity {
+.table--text {
   margin-top: $baseSpace * 2;
 }
 
-.table__cell--complexity,
-.table__header--complexity {
-  border-color: $colorBrown200;
+.table__cell--text,
+.table__header--text {
+  border-color: $colorBrown400;
   &:nth-of-type(1) {
     flex-grow: 2.5;
   }
@@ -83,20 +86,21 @@
   }
 }
 
-.table__thead--complexity {
-  background: $colorBrown400;
+.table__thead--text {
+  background: $colorBrown500;
 }
 
-.table__tbody--complexity {
-  background: $colorBrown100;
+.table__tbody--text {
+  background: $colorBrown300;
 }
 
-.table__header--complexity {
+.table__header--text {
   border-width: 0 2px 0 0;
 }
 
-.table__cell--complexity {
+.table__cell--text {
   color: $colorGray;
+  border-color: $colorBrown200;
   border-width: 0 2px 2px 0;
 }
 
