@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {computed} = Ember;
+const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
   classNames: ['multiples'],
@@ -91,9 +91,10 @@ export default Ember.Component.extend({
 
     let data = this.get('nestedData');
 
-    var div = d3.select(this.get('id')).selectAll('div')
-      .data(data)
-    .enter().append('div')
+    var container = d3.select(this.get('id')).selectAll('div')
+      .data(data, function(d,i) { return [d.key, i]; });
+
+    var div = container.enter().append('div')
       .attr('class', 'multiple');
 
     let margin = this.get('margin');
@@ -219,10 +220,17 @@ export default Ember.Component.extend({
       caption.text('');
       curYear.text('');
     }
+    container.exit().remove();
   },
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.initCharts();
     });
-  }
+  },
+  update: observer('data.[]', 'varDependent', 'dataType', 'vis', function() {
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      this.initCharts();
+    });
+  })
 });
+
