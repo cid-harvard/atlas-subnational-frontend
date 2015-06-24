@@ -14,9 +14,9 @@ export default Ember.Component.extend({
   varId: computed('dataType', function() {
     let dataType = this.get('dataType');
     if( dataType === 'products') {
-      return ['parent_name','name'];
+      return ['group_name_en','name'];
     } else if (dataType === 'industries') {
-      return ['parent_name','name'];
+      return ['group_name_en', 'name'];
     }
   }),
   treemap: computed('id','data',function() {
