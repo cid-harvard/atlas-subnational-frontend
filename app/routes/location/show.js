@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import ENV from '../../config/environment';
+const {apiURL} = ENV;
 const {RSVP} = Ember;
 
 export default Ember.Route.extend({
@@ -8,10 +10,10 @@ export default Ember.Route.extend({
     return this.store.find('location', params.location_id);
   },
   afterModel: function(model, transition) {
-    var year = Ember.get(transition,'queryParams.year') || 2012;
+    var year = Ember.getWithDefault(transition, 'queryParams.year', 2012);
 
-    var products = Ember.$.getJSON(`data/products?location=${model.id}&year=${year}`);
-    var departments = Ember.$.getJSON(`data/departments?year=${year}`);
+    var products = Ember.$.getJSON(`${apiURL}data/products?location=${model.id}&year=${year}`);
+    var departments = Ember.$.getJSON(`${apiURL}data/departments?year=${year}`);
 
     return RSVP.allSettled([products, departments]).then(function(array) {
       var productsData = Ember.get(array[0], 'value.data') || [];
