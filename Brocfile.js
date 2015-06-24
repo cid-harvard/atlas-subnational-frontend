@@ -50,6 +50,21 @@ app.import('vendor/fonts/cidcons/cidcons.svg', { destDir: 'fonts' });
 app.import('vendor/fonts/cidcons/cidcons.ttf', { destDir: 'fonts' });
 app.import('vendor/fonts/cidcons/cidcons.woff', { destDir: 'fonts' });
 
+// Platform
+app.import('vendor/fonts/platform/Platform-Bold-Web.eot', { destDir: 'fonts' });
+app.import('vendor/fonts/platform/Platform-Bold-Web.ttf', { destDir: 'fonts' });
+app.import('vendor/fonts/platform/Platform-Bold-Web.woff', { destDir: 'fonts' });
+
+// Circular
+app.import('vendor/fonts/circular/circular-light.woff2', { destDir: 'fonts' });
+app.import('vendor/fonts/circular/circular-light.woff', { destDir: 'fonts' });
+app.import('vendor/fonts/circular/circular-book.woff2', { destDir: 'fonts' });
+app.import('vendor/fonts/circular/circular-book.woff', { destDir: 'fonts' });
+app.import('vendor/fonts/circular/circular-medium.woff2', { destDir: 'fonts' });
+app.import('vendor/fonts/circular/circular-medium.woff', { destDir: 'fonts' });
+app.import('vendor/fonts/circular/circular-bold.woff2', { destDir: 'fonts' });
+app.import('vendor/fonts/circular/circular-bold.woff', { destDir: 'fonts' });
+
 // Use `app.import` to add additional libraries to the generated
 // output files.
 //

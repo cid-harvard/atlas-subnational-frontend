@@ -15,8 +15,11 @@
 .buildermod__head {
   display: inline-block;
   font-weight: 300;
-  padding-left: $baseSpace/2;
+  padding-left: $baseSpace;
   font-size: $fontSmall;
+  &~.buildermod__tools .buildermod__tool:first-child {
+    border-left: 2px solid $colorBrown400;
+  }
 }
 
 .buildermod__tools {
@@ -27,8 +30,11 @@
 .buildermod__tool {
   border-left: 2px solid $colorBrown400;
   display: inline-block;
-  height: 100%;
   padding: $baseSpace/2 $baseSpace;
+  line-height: 100%;
+  &:first-child {
+    border-left: none;
+  }
 }
 
 .buildermod__tool__btn  {
@@ -41,6 +47,10 @@
   }
 }
 
+.tool__btn__icon:before {
+  margin-right: $baseSpace/5;
+}
+
 .buildermod__tool__btn--sub {
   padding: 0;
   margin-right: $baseSpace / 2;
@@ -51,7 +61,7 @@
 
 .buildermod__vizwrap {
   height: 600px;
-  padding: $baseSpace;
+  padding: $baseSpace * 1.5;
   border: 1px solid $colorBrown500;
   overflow-y: scroll;
   background: $colorBrown200;
@@ -61,7 +71,7 @@
 .buildermod__searchwrap {
   display: flex;
   align-items: stretch;
-  margin-bottom: $baseSpace / 1.5;
+  margin-bottom: $baseSpace;
   box-shadow: 2px 2px 2px $colorGrayLighter;
 }
 
@@ -69,7 +79,7 @@
   transition: background 0.2s ease-in-out;
   background: $colorWhite;
   font-size: $fontSmall;
-  font-weight: 500;
+  font-weight: 300;
   padding: $baseSpace/2 $baseSpace;
   flex: 1 1 auto;
   &:active, &:focus {
