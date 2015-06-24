@@ -1,0 +1,51 @@
+/**
+*
+* Font-face
+* Include any font-face declarations here. Note that fontawesome is declared in vendor/css.
+* Only use woff2 and woff, re: http://davidensinger.com/2014/10/update-your-font-face-file-formats-to-just-use-woff-and-woff2/
+**/
+
+/* ==========  Platform  ========== */
+
+@font-face {
+  font-family: 'Platform Web';
+  src: url('../fonts/Platform-Bold-Web.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* ==========  Circular  ========== */
+
+@font-face {
+  font-family: 'Circular';
+  src: url('../fonts/circular-light.woff2') format('woff2'),
+       url('../fonts/circular-light.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url('../fonts/circular-book.woff2') format('woff2'),
+       url('../fonts/circular-book.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url('../fonts/circular-medium.woff2') format('woff2'),
+       url('../fonts/circular-medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url('../fonts/circular-bold.woff2') format('woff2'),
+       url('../fonts/circular-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
