@@ -1,4 +1,9 @@
 <form class="buildermod__searchwrap">
-  <input class="buildermod__search" type="search" name="s" placeholder="Search for a product name or code">
-  <input class="buildermod__search__submit fa fa-search" type="submit" value="&#xf002;">
+  {{input
+    class="buildermod__search"
+    placeholder="Search for a product name or code"
+    value=searchText
+    enter='search'
+  }}
+  <input class="buildermod__search__submit fa fa-search" type="submit" value="&#xf002;" {{action 'search'}}>
 </form>

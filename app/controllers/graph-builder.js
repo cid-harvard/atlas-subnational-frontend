@@ -1,24 +1,34 @@
 import Ember from 'ember';
-const {computed} = Ember;
+const {computed, get:get } = Ember;
 
 export default Ember.Controller.extend({
   needs: 'application',
-  queryParams: ['entity', 'entity_id', 'source', 'variable', 'vis'],
+  queryParams: ['entity', 'entity_id', 'source', 'variable', 'vis', 'search'],
   source: 'products',
   vis: 'treemap',
   variable: 'export_value',
+  search: null,
 
   isEnglish: computed.alias('controllers.application.isEnglish'),
 
-  scatterPlot: function(data) {
+  rcaFilter: function(data) {
     return _.filter(data, (d) => {
-      return Ember.get(d, this.get('rca')) <= 1;
+      return get(d, this.get('rca')) <= 1;
+    });
+  },
+  searchFilter: function(data) {
+    let search = this.get('search');
+    var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
+      .replace(/\s+/g, ''), "gi");
+
+    return _.filter(data, function(d) {
+      return get(d,'name').match(regexp) || get(d, 'code').match(regexp);
     });
   },
   departmentLocations: computed('locationsMetadata', function(){
     return _.filter(this.get('locationsMetadata'), 'level', 'department');
   }),
-  data: computed('source','vis', function() {
+  data: computed('source','vis', 'search', function() {
     let source = this.get('source');
     let data;
     if(source  === 'products') {
@@ -26,8 +36,13 @@ export default Ember.Controller.extend({
     } else if(source === 'industries') {
       data =  this.get('model.industriesData');
     }
-    if(this.get('vis') === 'scatter') { return this.scatterPlot(data); }
-    return data
+    if(this.get('vis') === 'scatter') {
+      data = this.rcaFilter(data);
+    }
+    if(this.get('search')){
+      data = this.searchFilter(data);
+    }
+    return data;
   }),
   visualizationComponent: computed('vis', function(){
     let visualization = this.get('vis');
@@ -50,6 +65,9 @@ export default Ember.Controller.extend({
     return 'export_rca';
   }),
   actions: {
+    search: function() {
+      this.set('search', this.get('searchText'));
+    },
     toggleVisualization: function() {
       if(this.get('vis') === 'treemap') {
         this.set('vis', 'multiples');
