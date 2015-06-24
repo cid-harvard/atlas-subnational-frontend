@@ -47,6 +47,10 @@
   }
 }
 
+.tool__btn__icon:before {
+  margin-right: $baseSpace/5;
+}
+
 .buildermod__tool__btn--sub {
   padding: 0;
   margin-right: $baseSpace / 2;
@@ -75,7 +79,7 @@
   transition: background 0.2s ease-in-out;
   background: $colorWhite;
   font-size: $fontSmall;
-  font-weight: 500;
+  font-weight: 300;
   padding: $baseSpace/2 $baseSpace;
   flex: 1 1 auto;
   &:active, &:focus {

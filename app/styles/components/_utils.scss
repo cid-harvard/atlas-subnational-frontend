@@ -69,6 +69,11 @@
     @include position(absolute, $args);
   }
 
+  @mixin offset-text {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   // Function checking if $value is a valid length
   // ---
   // @param [literal] $value: value to test

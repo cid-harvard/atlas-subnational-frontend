@@ -36,8 +36,10 @@
 
 .stream__head {
   font-size: $fontHuge;
-  margin: 0 auto;
-  letter-spacing: -5px;
+  margin: 0 auto $baseSpace/2;
+  letter-spacing: -2px;
+  font-family: $sansAlt;
+  line-height: 100%;
 }
 
 .breadcrumb {
