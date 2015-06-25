@@ -38,8 +38,11 @@ export default Ember.Component.extend({
 
     return _.sortBy(nest, function(d) {
        return -Ember.get(_.last(d.values), varDependent);
-    }).slice(0, this.limit); //last year data
+    }); //last year data
   }),
+  sliceData: function(nested) {
+    return nested.slice(0, this.limit);
+  },
   formatNumber: function(num) {
     var prefix = d3.formatPrefix(num);
     return prefix.scale(num).toFixed(0) + prefix.symbol.replace(/G/,'B');
@@ -89,7 +92,7 @@ export default Ember.Component.extend({
   }),
   initCharts: function() {
 
-    let data = this.get('nestedData');
+    let data = this.sliceData(this.get('nestedData'));
 
     var container = d3.select(this.get('id')).selectAll('div')
       .data(data, function(d,i) { return [d.key, i]; });
@@ -222,6 +225,9 @@ export default Ember.Component.extend({
     }
     container.exit().remove();
   },
+  showMoreIsRelevant: computed('nestedData.[]', function() {
+    return this.get('nestedData').length > this.limit;
+  }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.initCharts();
@@ -234,10 +240,9 @@ export default Ember.Component.extend({
   }),
   actions: {
     showAll: function() {
-      this.set('limit', 100);
+      this.set('limit', this.get('nestedData').length);
       this.initCharts();
-
-             }
-}
+    }
+  }
 });
 

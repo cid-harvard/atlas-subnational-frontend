@@ -27,6 +27,15 @@
   font-size: 10px;
 }
 
+.multiples__btn--showall {
+  margin: 0 auto;
+  display: none;
+}
+
+.multiples__btn--showall--is--relevant {
+  display: block;
+}
+
 .background {
   fill: #eae6e3;
   pointer-events: all;
