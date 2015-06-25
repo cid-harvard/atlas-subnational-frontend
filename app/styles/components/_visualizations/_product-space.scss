@@ -4,14 +4,32 @@
 *
 **/
 
-.node {
-  stroke: black;
-  stroke-width: 1.5px;
-  fill: white;
-}
-
-.link {
+.connect__line {
   stroke: #999;
   stroke-opacity: .6;
 }
 
+.items__mark__star {
+  fill: yellow;
+  stroke-width: .5px;
+  stroke: black;
+}
+
+.items__mark__star.selected {
+  stroke-width: 1px;
+}
+
+.items__mark__star.highlighted {
+  fill: yellow;
+  stroke-width: 1.5px;
+}
+
+.items__mark__circle.highlighted {
+  stroke: black;
+  stroke-width: 2.5px;
+}
+
+.items__mark__circle.selected {
+  stroke: black;
+  stroke-width: 1.5px;
+}

@@ -84,7 +84,8 @@
                     data=departmentsData
                     varX='export_value'
                     varText='name'
-                    varId='department_name'
+                    varId='department_id'
+                    currentLocation=model.id
                     }}
                 </td>
                 <td class="table__cell">$8.2M</td>
@@ -97,9 +98,8 @@
               {{tree-map
                 data=productsData
                 elementId='tree-map'
-                varId='parent_name'
+                varId='product_id'
                 varGroup='parent_id'
-                varColor='parent_id'
                 varText='parent_name'
                 varSize='export_value'
               }}
@@ -199,7 +199,17 @@
             <li class="vizmod__legend__item">Similarity link</li>
           </ul>
         </div>
-        <div class="vizmod__vizwrap"></div>
+        <div class="vizmod__vizwrap">
+              {{product-space
+                data=productsData
+                elementId='product-space'
+                varId='product_id'
+                varGroup='parent_id'
+                varColor='parent_code'
+                varText='parent_name'
+                varSize='export_value'
+              }}
+        </div>
       </div>
       <div class="vizmod__list__wrap">
         <h4 class="vizmod__list__head">High potential exports for {{name}}</h4>
