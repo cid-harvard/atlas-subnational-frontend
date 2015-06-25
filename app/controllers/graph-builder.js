@@ -9,7 +9,6 @@ export default Ember.Controller.extend({
   variable: 'export_value',
   search: null,
   searchText: computed.oneWay('search'),
-  zoom: 0, // for treemap zoom
 
   isEnglish: computed.alias('controllers.application.isEnglish'),
 
