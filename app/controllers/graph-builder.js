@@ -64,6 +64,8 @@ export default Ember.Controller.extend({
     if(source === 'industries') { return 'rca'; }
     return 'export_rca';
   }),
+  drawerSettingsIsOpen: false,
+  drawerChangeGraphIsOpen: false,
   actions: {
     search: function() {
       this.set('search', this.get('searchText'));
@@ -74,6 +76,12 @@ export default Ember.Controller.extend({
       } else {
         this.set('vis', 'treemap');
       }
+    },
+    toggleDrawerSettings: function() {
+      this.get('drawerSettingsIsOpen') ? this.set('drawerSettingsIsOpen', false) : this.set('drawerSettingsIsOpen', true);
+    },
+    toggleDrawerChangeGraph: function() {
+      this.get('drawerChangeGraphIsOpen') ? this.set('drawerChangeGraphIsOpen', false) : this.set('drawerChangeGraphIsOpen', true);
     },
     zoomOut: function() {
       if(this.get('zoom') === 1) { this.decrementProperty('zoom'); }

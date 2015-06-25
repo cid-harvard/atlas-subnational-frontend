@@ -6,6 +6,7 @@
 **/
 
 @import '_font-face';
+@import 'bower_components/font-awesome/scss/font-awesome.scss';
 @import '_variables';
 @import '_utils';
 @import '_sanitize';
@@ -35,6 +36,7 @@
 @import '_modules/_vizmod';
 @import '_modules/_treemod';
 @import '_modules/_buildermod';
+@import '_modules/_buildermod-drawer';
 @import '_modules/_stepper';
 @import '_modules/_ctas';
 @import '_modules/_spacemod';

@@ -15,7 +15,7 @@
       <h3 class="section__head">What products does {{model.name_en}} export?</h3>
       <p>Note: Values below are in Colombian pesos, but the symbols (M, B) are according to U.S. customs. 1M = 1,000,000 and 1B = 1,000,000,000.</p>
     </header>
-    <div class="section__buildermod">
+    <div {{bind-attr class=":section__buildermod drawerSettingsIsOpen:buildermod--is--open--settings drawerChangeGraphIsOpen:buildermod--is--open--changegraph"}}>
       <header class="buildermod__header">
         <h4 class="buildermod__head">Total exports, 2013: ${{totalExports}}</h4>
         <div class="buildermod__tools">
@@ -30,19 +30,22 @@
               {{fa-icon "refresh" classNames="tool__btn__icon"}}
             </button>
           </div>
-          <button class="btn buildermod__tool__btn buildermod__settings buildermod__tool">
+          <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--settings" {{action 'toggleDrawerSettings'}}>
             {{fa-icon "plus" classNames="tool__btn__icon"}} Settings
           </button>
           {{#if canChangeVisualization}}
-            <button class="btn buildermod__tool__btn buildermod__changegraph buildermod__tool" {{action 'toggleVisualization'}}>
+            <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--changegraph" {{action 'toggleDrawerChangeGraph'}}>
+            {{!-- <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--changegraph" {{action 'toggleVisualization'}}> --}}
               {{fa-icon "plus" classNames="tool__btn__icon"}} Change graph
             </button>
           {{/if}}
         </div>
       </header>
       <div class="buildermod__vizwrap">
+        {{partial "partials/buildermod-drawer-settings"}}
         {{partial "partials/buildermod-search"}}
         {{component visualizationComponent
+          classNames= 'buildermod__viz'
           elementId='visualization'
           data=filteredData
           dataType=source

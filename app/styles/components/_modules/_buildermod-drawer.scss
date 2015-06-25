@@ -1,0 +1,58 @@
+/**
+*
+* Buildermod Drawer
+*
+**/
+
+.buildermod--is--open--settings {
+  .buildermod__drawer--settings {
+    display: block;
+  }
+  .buildermod__tool--settings {
+    background: $colorBrown300;
+    border-left-color: $colorBrown300;
+    .tool__btn__icon:before {
+      content: '\f00d';
+    }
+  }
+  .buildermod__tool--changegraph {
+    border-left-color: $colorBrown300;
+  }
+  .buildermod__vizwrap {
+    border-width: 0;
+  }
+  .buildermod__viz {
+    display: none;
+  }
+}
+
+.buildermod--is--open--changegraph {
+  .buildermod__drawer--changegraph {
+    display: block;
+  }
+  .buildermod__tool--changegraph {
+    background: $colorBrown300;
+    border-left-color: $colorBrown300;
+    .tool__btn__icon:before {
+      content: '\f00d';
+    }
+  }
+  .buildermod__vizwrap {
+    border-width: 0;
+  }
+  .buildermod__viz {
+    display: none;
+  }
+}
+
+.buildermod__drawer {
+  background: $colorBrown300;
+  position: absolute;
+  z-index: $zIndex-2;
+  left: 0;
+  right: 0;
+  top: 0;
+  min-height: 100%;
+  padding: $baseSpace * 1.5;
+  display: none;
+}
