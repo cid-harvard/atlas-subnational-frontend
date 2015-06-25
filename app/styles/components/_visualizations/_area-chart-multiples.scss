@@ -16,15 +16,58 @@
   font-weight: 300;
   font-size: $fontSmall;
   overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  overflow: hidden;
+  position: relative;
+  line-height: 2.4rem;
+  max-height: 4.8rem;
+  &:before {
+    transition: color 0.2s ease-in-out;
+    font-size: $fontTiny;
+    font-family: $icon;
+    background: $colorBrown200;
+    background: linear-gradient(to right, rgba(235, 230, 227, .5) 0%, $colorBrown200 50%);
+    width: 5rem;
+    text-align: right;
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    content: '\f067';
+    color: $colorGrayLight;
+    cursor: pointer;
+  }
+  &:after{
+    content: '';
+    background: $colorBrown200;
+    position: absolute;
+    height: 2.4rem;
+    width: 100%;
+    z-index: $zIndex-1;
+  }
+  &:hover:before {
+    color: $colorGray;
+  }
+}
+
+.chart__title--is--expanded {
+  max-height: none;
+  &:before, &:after {
+    display: none;
+  }
 }
 
 .chart__wrap {
   font-family: Helvetica, sans;
   font-weight: 300;
   font-size: 10px;
+}
+
+.multiples__btn--showall {
+  margin: 0 auto;
+  display: none;
+}
+
+.multiples__btn--showall--is--relevant {
+  display: block;
 }
 
 .background {
