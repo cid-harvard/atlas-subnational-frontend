@@ -20,184 +20,33 @@
         <li class="builder__list--nested">
           <ul>
             <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What countries does {{model.name_en}} export to?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What countries does {{model.name_en}} export BLANK to?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What countries does {{model.name_en}} import from?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What countries does {{model.name_en}} import BLANK from?</h3>
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li class="builder__list--nested">
-          <ul>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What subregions contribute to the exports from {{model.name_en}}?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What subregions contribute to the exports of BLANK from {{model.name_en}}?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What subregions contribute to the exports from {{model.name_en}} to BLANK?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What subregions contribute to the exports of BLANK from {{model.name_en}} to BLANK?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What subregions contribute to the imports for {{model.name_en}}?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What subregions contribute to the imports of BLANK for {{model.name_en}}?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What subregions contribute to the imports for {{model.name_en}} from BLANK?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What subregions contribute to the imports of BLANK for {{model.name_en}} from BLANK?</h3>
-              </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    {{/ivy-tab-panel}}
-
-    {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-      <ul class="builder__nav__list">
-        <li class="builder__list--nested">
-          <ul>
-            <li class="builder__nav__item">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What products does {{model.name_en}} export?{{/link-to}}
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What products does {{model.name_en}} export to BLANK?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What products does {{model.name_en}} import?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What products does {{model.name_en}} import from BLANK?</h3>
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li class="builder__list--nested">
-          <ul>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Scatterplot</h4>
-                <h3 class="builder__nav__question">What products have the best combination of complexity and opportunity for {{model.name_en}}?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Similarity map</h4>
-                <h3 class="builder__nav__question">What does the product map look like for {{model.name_en}}?</h3>
-              </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    {{/ivy-tab-panel}}
-
-    {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-      <ul class="builder__nav__list">
-        <li class="builder__list--nested">
-          <ul>
-            <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What industries in {{model.name_en}} employ the most people?</h3>
-              </div>
-            </li>
-            <li class="builder__nav__item">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
-              <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="industries") class="builder__nav__question"}} What industries are in {{model.name_en}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  What countries does {{model.name_en}} export to?
                 {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What industries in {{model.name_en}} have the highest wages per worker?</h3>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What countries does {{model.name_en}} export BLANK to?{{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                <h3 class="builder__nav__question">What industries offer the highest wages for BLANK?</h3>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What countries does {{model.name_en}} import from?{{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What countries does {{model.name_en}} import BLANK from?{{/link-to}}
               </div>
             </li>
           </ul>
@@ -205,17 +54,185 @@
         <li class="builder__list--nested">
           <ul>
             <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Scatterplot</h4>
-                <h3 class="builder__nav__question">What industries have the best combination of complexity and opportunity for {{model.name_en}}?</h3>
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the exports from {{model.name_en}}?{{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
-              <img src="http://placehold.it/40x40" class="icon builder__nav__item__icon">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the exports of BLANK from {{model.name_en}}?{{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the exports from {{model.name_en}} to BLANK?{{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the exports of BLANK from {{model.name_en}} to BLANK?{{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the imports for {{model.name_en}}?{{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the imports of BLANK for {{model.name_en}}?{{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the imports for {{model.name_en}} from BLANK?{{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the imports of BLANK for {{model.name_en}} from BLANK?{{/link-to}}
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    {{/ivy-tab-panel}}
+
+    {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+      <ul class="builder__nav__list">
+        <li class="builder__list--nested">
+          <ul>
+            <li class="builder__nav__item">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source="products" variable='export_value' vis='treemap') class="builder__nav__question"}}
+                  What products does {{model.name_en}} export?
+                {{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What products does {{model.name_en}} export to BLANK?{{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='products' variable='import_value' vis='treemap') class="builder__nav__question"}}
+                  What products does {{model.name_en}} import?
+                {{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What products does {{model.name_en}} import from BLANK?{{/link-to}}
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li class="builder__list--nested">
+          <ul>
+            <li class="builder__nav__item">
+              <i class="cidcon-scatter builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Scatterplot</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='products' vis='scatter') class="builder__nav__question"}}
+                  What products have the best combination of complexity and opportunity for {{model.name_en}}?
+                {{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <i class="cidcon-similarity builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Similarity map</h4>
-                <h3 class="builder__nav__question">What does the industry map look like for {{model.name_en}}?</h3>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What does the product map look like for {{model.name_en}}?{{/link-to}}
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    {{/ivy-tab-panel}}
+
+    {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+      <ul class="builder__nav__list">
+        <li class="builder__list--nested">
+          <ul>
+            <li class="builder__nav__item">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source="industries" variable='employment' vis='treemap') class="builder__nav__question"}}
+                  What industries in {{model.name_en}} employ the most people?
+                {{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source="industries" variable='wages' vis='treemap') class="builder__nav__question"}}
+                  What industries are in {{model.name_en}}
+                {{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  What industries in {{model.name_en}} have the highest wages per worker?
+                {{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <i class="cidcon-treemap builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Treemap</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  What industries offer the highest wages for BLANK?
+                {{/link-to}}
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li class="builder__list--nested">
+          <ul>
+            <li class="builder__nav__item">
+              <i class="cidcon-scatter builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Scatterplot</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='industries' vis='scatter') class="builder__nav__question"}}
+                  What industries have the best combination of complexity and opportunity for {{model.name_en}}?
+                {{/link-to}}
+              </div>
+            </li>
+            <li class="builder__nav__item builder__nav__item--unavailable">
+              <i class="cidcon-similarity builder__nav__item__icon"></i>
+              <div class="builder__nav__item__textwrap">
+                <h4 class="label builder__nav__label">Similarity map</h4>
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What does the industry map look like for {{model.name_en}}?{{/link-to}}
               </div>
             </li>
           </ul>

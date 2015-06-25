@@ -6,6 +6,9 @@
 
 a {
   transition: color 0.2s ease-in-out;
+}
+
+.link--stream {
   color: $colorGrayLight;
   &:hover {
     color: $colorGray;

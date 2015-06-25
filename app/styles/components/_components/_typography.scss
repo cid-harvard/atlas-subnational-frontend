@@ -1,7 +1,7 @@
 /**
 *
 * Typography
-* Includes any type styles applied across all pages that don't deserve a component
+* Include any type styles applied across all pages that don't deserve a component
 *
 **/
 
@@ -9,6 +9,8 @@ body {
   font-size: $fontBase;
   font-weight: 300;
   color: $colorGrayDark;
+  font-family: $sans;
+  font-weight: 300;
 }
 
 h1, h2, h3, h4, h5, p {
