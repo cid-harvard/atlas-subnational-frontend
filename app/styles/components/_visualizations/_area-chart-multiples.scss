@@ -22,7 +22,7 @@
   max-height: 4.8rem;
   &:before {
     transition: color 0.2s ease-in-out;
-    font-size: $fontSmall;
+    font-size: $fontTiny;
     font-family: $icon;
     background: $colorBrown200;
     background: linear-gradient(to right, rgba(235, 230, 227, .5) 0%, $colorBrown200 50%);
