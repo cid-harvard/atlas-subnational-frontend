@@ -4,7 +4,7 @@ const {computed, observer} = Ember;
 export default Ember.Component.extend({
   margin: { top: 20, right: 15, bottom: 30, left: 35 },
   height: 140,
-  limit: 40,
+  firstSlice: 40,
   width: computed(function() {
     return this.$('.multiple:first').width() - this.get('margin.left') - this.get('margin.right');
   }),
@@ -23,7 +23,7 @@ export default Ember.Component.extend({
   varId: computed(function() {
     return 'name';
   }),
-  nestedData: computed('data','limit', function() {
+  nestedData: computed('data','firstSlice', function() {
     let key = this.get('varId');
     let xRange = this.get('xRange');
     let varDependent = this.get('varDependent');
@@ -40,8 +40,8 @@ export default Ember.Component.extend({
        return -Ember.get(_.last(d.values), varDependent);
     }); //last year data
   }),
-  sliceData: function(nested) {
-    return nested.slice(0, this.limit);
+  firstSliceData: function(nested) {
+    return nested.slice(0, this.firstSlice);
   },
   formatNumber: function(num) {
     var prefix = d3.formatPrefix(num);
@@ -92,7 +92,7 @@ export default Ember.Component.extend({
   }),
   initCharts: function() {
 
-    let data = this.sliceData(this.get('nestedData'));
+    let data = this.firstSliceData(this.get('nestedData'));
 
     var container = d3.select(this.get('id')).selectAll('div')
       .data(data, function(d,i) { return [d.key, i]; });
@@ -230,8 +230,8 @@ export default Ember.Component.extend({
     }
     container.exit().remove();
   },
-  showMoreIsRelevant: computed('nestedData.[]', function() {
-    return this.get('nestedData').length > this.limit;
+  hasMore: computed('nestedData.[]', function() {
+    return this.get('nestedData').length > this.firstSlice;
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
@@ -245,7 +245,7 @@ export default Ember.Component.extend({
   }),
   actions: {
     showAll: function() {
-      this.set('limit', this.get('nestedData').length);
+      this.set('firstSlice', this.get('nestedData').length);
       this.initCharts();
     }
   }
