@@ -114,6 +114,7 @@ export default Ember.Component.extend({
 
     div.append('h3')
       .attr('class', 'chart__title')
+      .on('click', expandTitle)
       .text(function(d) { return d.key; });
 
     var svg = div.append('svg')
@@ -178,6 +179,10 @@ export default Ember.Component.extend({
       .attr('text-anchor', 'middle')
       .attr('dy', 13)
       .attr('y', h);
+
+    function expandTitle() {
+      this.classList.add('chart__title--is--expanded');
+    }
 
     function mouseover() {
       hoverMarker.attr('opacity', 1);

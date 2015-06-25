@@ -48,6 +48,13 @@
   }
 }
 
+.chart__title--is--expanded {
+  max-height: none;
+  &:before, &:after {
+    display: none;
+  }
+}
+
 .chart__wrap {
   font-family: Helvetica, sans;
   font-weight: 300;
