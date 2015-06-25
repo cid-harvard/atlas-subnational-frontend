@@ -4,13 +4,12 @@ const {computed, observer} = Ember;
 export default Ember.Component.extend({
   margin: { top: 20, right: 15, bottom: 30, left: 35 },
   height: 140,
-  limit: 10,
+  limit: 40,
   width: computed(function() {
     return this.$('.multiple:first').width() - this.get('margin.left') - this.get('margin.right');
   }),
   id: computed('elementId', function() {
-    return '#foo';
-    return `#${this.get('elementId')}`;
+    return '#multiples';
   }),
   xExtent: computed('data', function() {
     return d3.extent(this.get('data'), function(d) { return d.year;} );
