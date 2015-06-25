@@ -8,6 +8,8 @@ export default Ember.Controller.extend({
   vis: 'treemap',
   variable: 'export_value',
   search: null,
+  searchText: computed.oneWay('search'),
+  zoom: 0, // for treemap zoom
 
   isEnglish: computed.alias('controllers.application.isEnglish'),
 
@@ -25,24 +27,22 @@ export default Ember.Controller.extend({
       return get(d,'name').match(regexp) || get(d, 'code').match(regexp);
     });
   },
+  immutableData: computed('source', function() {
+    let source = this.get('source');
+    if(source  === 'products') {
+      return this.get('model.productsData');
+    } else if(source === 'industries') {
+      return this.get('model.industriesData');
+    }
+  }),
+  filteredData: computed('immutableData', 'vis', 'search', function() {
+    let data = this.get('immutableData');
+    if(this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
+    if(this.get('search')){ data = this.searchFilter(data); }
+    return data;
+  }),
   departmentLocations: computed('locationsMetadata', function(){
     return _.filter(this.get('locationsMetadata'), 'level', 'department');
-  }),
-  data: computed('source','vis', 'search', function() {
-    let source = this.get('source');
-    let data;
-    if(source  === 'products') {
-      data = this.get('model.productsData');
-    } else if(source === 'industries') {
-      data =  this.get('model.industriesData');
-    }
-    if(this.get('vis') === 'scatter') {
-      data = this.rcaFilter(data);
-    }
-    if(this.get('search')){
-      data = this.searchFilter(data);
-    }
-    return data;
   }),
   visualizationComponent: computed('vis', function(){
     let visualization = this.get('vis');
@@ -74,6 +74,12 @@ export default Ember.Controller.extend({
       } else {
         this.set('vis', 'treemap');
       }
+    },
+    zoomOut: function() {
+      if(this.get('zoom') === 1) { this.decrementProperty('zoom'); }
+    },
+    zoomIn: function() {
+      if(this.get('zoom') === 0) { this.incrementProperty('zoom'); }
     },
     toTreemap: function() {
       this.set('vis', 'treemap');
