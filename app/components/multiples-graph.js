@@ -2,13 +2,14 @@ import Ember from 'ember';
 const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
-  classNames: ['multiples'],
   margin: { top: 20, right: 15, bottom: 30, left: 35 },
   height: 140,
+  limit: 10,
   width: computed(function() {
     return this.$('.multiple:first').width() - this.get('margin.left') - this.get('margin.right');
   }),
   id: computed('elementId', function() {
+    return '#foo';
     return `#${this.get('elementId')}`;
   }),
   xExtent: computed('data', function() {
@@ -23,7 +24,7 @@ export default Ember.Component.extend({
   varId: computed(function() {
     return 'name';
   }),
-  nestedData: computed('data', function() {
+  nestedData: computed('data','limit', function() {
     let key = this.get('varId');
     let xRange = this.get('xRange');
     let varDependent = this.get('varDependent');
@@ -38,7 +39,7 @@ export default Ember.Component.extend({
 
     return _.sortBy(nest, function(d) {
        return -Ember.get(_.last(d.values), varDependent);
-    }).slice(0, 40); //last year data
+    }).slice(0, this.limit); //last year data
   }),
   formatNumber: function(num) {
     var prefix = d3.formatPrefix(num);
@@ -231,6 +232,13 @@ export default Ember.Component.extend({
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.initCharts();
     });
-  })
+  }),
+  actions: {
+    showAll: function() {
+      this.set('limit', 100);
+      this.initCharts();
+
+             }
+}
 });
 
