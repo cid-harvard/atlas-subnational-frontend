@@ -10,154 +10,55 @@
       <li class="breadcrumb"><a href="#" class="breadcrumb__link">Graph Builder</a></li>
     </ol>
   </header>
-
-    {{#if isProducts }}
-      <section class="stream__section">
-        <header class="section__header builder__header">
-          <h3 class="section__head">What products does {{model.name_en}} export?</h3>
-          <p>Note: Values below are in Colombian pesos, but the symbols (M, B) are according to U.S. customs. 1M = 1,000,000 and 1B = 1,000,000,000.</p>
-        </header>
-        <div class="section__buildermod">
-          <header class="buildermod__header">
-            <h4 class="buildermod__head">Total exports, 2013: ${{totalExports}}</h4>
-            <div class="buildermod__tools">
-              <div class="buildermod__tool">
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
-              </div>
-              <button class="btn buildermod__tool__btn buildermod__settings buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Settings</button>
-              <button class="btn buildermod__tool__btn buildermod__changegraph buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Change graph</button>
-            </div>
-          </header>
-          <div class="buildermod__vizwrap">
-            {{partial "partials/buildermod-search"}}
-            {{d3plus-tree-map
-              elementID="d3plus-tree"
-              data=productsData
-              dataType='products'
-              varSize='export_value'
-            }}
+  <section class="stream__section">
+    <header class="section__header builder__header">
+      <h3 class="section__head">What products does {{model.name_en}} export?</h3>
+      <p>Note: Values below are in Colombian pesos, but the symbols (M, B) are according to U.S. customs. 1M = 1,000,000 and 1B = 1,000,000,000.</p>
+    </header>
+    <div class="section__buildermod">
+      <header class="buildermod__header">
+        <h4 class="buildermod__head">Total exports, 2013: ${{totalExports}}</h4>
+        <div class="buildermod__tools">
+          <div class="buildermod__tool">
+            <button class="btn buildermod__tool__btn buildermod__tool__btn--sub"{{action 'zoomIn' }}>
+              {{fa-icon "search-plus" classNames="tool__btn__icon"}}
+            </button>
+            <button class="btn buildermod__tool__btn buildermod__tool__btn--sub"{{action 'zoomOut' }}>
+              {{fa-icon "search-minus" classNames="tool__btn__icon"}}
+            </button>
+            <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">
+              {{fa-icon "refresh" classNames="tool__btn__icon"}}
+            </button>
           </div>
-          {{partial "partials/buildermod-table"}}
+          <button class="btn buildermod__tool__btn buildermod__settings buildermod__tool">
+            {{fa-icon "plus" classNames="tool__btn__icon"}} Settings
+          </button>
+          {{#if canChangeVisualization}}
+            <button class="btn buildermod__tool__btn buildermod__changegraph buildermod__tool" {{action 'toggleVisualization'}}>
+              {{fa-icon "plus" classNames="tool__btn__icon"}} Change graph
+            </button>
+          {{/if}}
         </div>
-      </section>
-      <section class="stream__section">
-        {{partial "partials/ctas"}}
-      </section>
-      <section class="stream__section">
-        <div class="section__buildermod">
-          <header class="buildermod__header">
-            <div class="buildermod__tools">
-              <div class="buildermod__tool">
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
-              </div>
-              <button class="btn buildermod__tool__btn buildermod__settings buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Settings</button>
-              <button class="btn buildermod__tool__btn buildermod__changegraph buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Change graph</button>
-            </div>
-          </header>
-          <div class="buildermod__vizwrap">
-            {{partial "partials/buildermod-search"}}
-            {{multiples-graph
-              elementId="d3area"
-              data=productsData
-              varId='name'
-              varY='export_value'
-              yUnits='$'
-            }}
-            <p>Note: Only showing top 40 for demo.</p>
-          </div>
-        </div>
-      </section>
-    {{else if isIndustries }}
-      <section class="stream__section">
-        <header class="section__header builder__header">
-          <h3 class="section__head">What industries are in {{model.name_en}}?</h3>
-          <p>Note: Values below are in Colombian pesos, but the symbols (M, B) are according to U.S. customs. 1M = 1,000,000 and 1B = 1,000,000,000.</p>
-        </header>
-        <div class="section__buildermod">
-          <header class="buildermod__header">
-            <h4 class="buildermod__head">Total wages, 2013: ${{totalWages}}</h4>
-            <div class="buildermod__tools">
-              <div class="buildermod__tool">
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
-              </div>
-              <button class="btn buildermod__tool__btn buildermod__settings buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Settings</button>
-              <button class="btn buildermod__tool__btn buildermod__changegraph buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Change graph</button>
-            </div>
-          </header>
-          <div class="buildermod__vizwrap">
-            {{partial "partials/buildermod-search"}}
-            {{d3plus-tree-map
-              elementID="d3plus-tree"
-              data=industriesData
-              dataType='industries'
-              varSize='wages'
-            }}
-          </div>
-          {{partial "partials/buildermod-table"}}
-        </div>
-      </section>
-      <section class="stream__section">
-        {{partial "partials/ctas"}}
-      </section>
-      <section class="stream__section">
-        <div class="section__buildermod">
-          <header class="buildermod__header">
-            <div class="buildermod__tools">
-              <div class="buildermod__tool">
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
-              </div>
-              <button class="btn buildermod__tool__btn buildermod__settings buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Settings</button>
-              <button class="btn buildermod__tool__btn buildermod__changegraph buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Change graph</button>
-            </div>
-          </header>
-          <div class="buildermod__vizwrap">
-            {{partial "partials/buildermod-search"}}
-            {{multiples-graph
-              elementId="d3area"
-              data=industriesData
-              varY='wages'
-              varId='name'
-            }}
-            <p>Note: Only showing top 40 for demo.</p>
-          </div>
-        </div>
-      </section>
-      <section class="stream__section">
-        <div class="section__buildermod">
-          <header class="buildermod__header">
-            <div class="buildermod__tools">
-              <div class="buildermod__tool">
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-plus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "search-minus" classNames="tool__btn__icon"}}</button>
-                <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">{{fa-icon "refresh" classNames="tool__btn__icon"}}</button>
-              </div>
-              <button class="btn buildermod__tool buildermod__tool__btn buildermod__settings buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Settings</button>
-              <button class="btn buildermod__tool buildermod__tool__btn buildermod__changegraph buildermod__tool">{{fa-icon "plus" classNames="tool__btn__icon"}} Change graph</button>
-            </div>
-          </header>
-          <div class="buildermod__vizwrap">
-            {{partial "partials/buildermod-search"}}
-            {{d3-plus-scatter
-              elementId="d3-scatter"
-              data=scatterPlot
-              varId='name'
-              varY='complexity'
-              varX='distance'
-              varSize='rca'
-            }}
-          </div>
-        </div>
-      </section>
-    {{/if}}
-
+      </header>
+      <div class="buildermod__vizwrap">
+        {{partial "partials/buildermod-search"}}
+        {{component visualizationComponent
+          elementId='visualization'
+          data=filteredData
+          dataType=source
+          varDependent=variable
+          varY='complexity'
+          varX='distance'
+          varRca=rca
+          varZoom=zoom
+        }}
+      </div>
+      {{partial "partials/buildermod-table"}}
+    </div>
+  </section>
+  <section class="stream__section">
+    {{partial "partials/ctas"}}
+  </section>
   <section class="stream__section">
     <header class="section__header">
       <h3 class="section__head">More graphs for this location</h3>
