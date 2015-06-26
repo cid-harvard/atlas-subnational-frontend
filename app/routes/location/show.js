@@ -42,7 +42,7 @@ export default Ember.Route.extend({
       });
 
       //all time series data for the department with id = model.id
-      var departmentTimeseries = _.filter(departmentsDataAll, {department_id: model.id});
+      var departmentTimeseries = _.filter(departmentsDataAll, {department_id: parseInt(model.id)});
 
       model.set('productsData', productsData);
       model.set('departments', departmentsData);
