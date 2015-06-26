@@ -2,9 +2,12 @@
 {{#if model.length}}
   <ul class="search__results">
     {{#each result in model}}
-      {{partial 'partials/result'}}
+      {{search-result
+        result=result
+      }}
     {{/each}}
   </ul>
 {{else}}
   <p class='search__results--none'>No results found.</p>
 {{/if}}
+
