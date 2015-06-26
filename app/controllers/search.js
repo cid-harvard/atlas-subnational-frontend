@@ -1,12 +1,10 @@
 import Ember from 'ember';
-const {on,observer} = Ember;
+const {on, computed, observer} = Ember;
 
 export default Ember.Controller.extend({
   queryParams: ['query'],
   query: null,
-  setSearch: on('init', function() {
-    this.set('search', this.get('query'));
-  }),
+  search: computed.oneWay('query'),
   clearSearch: observer('query', function() {
     // if query is empty, set the search to null
     // this is for route transitions that don't trigger `init`
