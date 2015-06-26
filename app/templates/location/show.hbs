@@ -41,7 +41,12 @@
             }}
           </td>
           <td class="table__cell">$8.2M</td>
-          <td class="table__cell">{{spark-line yVar='realgdp' data=model.profileSpark elementId='spark--gdp' }} + 2.4%</td>
+          <td class="table__cell">
+          {{spark-line 
+            yVar='gdp_real' 
+            data=model.timeseries
+            elementId='spark--gdp' 
+          }} + 2.4%</td>
         </tr>
       </tbody>
     </table>
@@ -97,7 +102,9 @@
                     }}
                 </td>
                 <td class="table__cell">$8.2M</td>
-                <td class="table__cell">line chart + 1.2%</td>
+                <td class="table__cell">
+
+                + 1.2%</td>
               </tr>
             </tbody>
           </table>
