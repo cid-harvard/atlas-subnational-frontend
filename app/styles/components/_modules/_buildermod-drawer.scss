@@ -22,7 +22,7 @@
     border-width: 0;
   }
   .buildermod__viz {
-    visibility: hidden;
+    display: none;
   }
 }
 
@@ -39,6 +39,7 @@
   }
   .buildermod__vizwrap {
     border-width: 0;
+    overflow-y: hidden;
   }
   .buildermod__viz {
     visibility: hidden;
