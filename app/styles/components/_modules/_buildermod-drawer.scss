@@ -22,7 +22,7 @@
     border-width: 0;
   }
   .buildermod__viz {
-    display: none;
+    visibility: hidden;
   }
 }
 
@@ -41,7 +41,7 @@
     border-width: 0;
   }
   .buildermod__viz {
-    display: none;
+    visibility: hidden;
   }
 }
 
@@ -55,4 +55,45 @@
   min-height: 100%;
   padding: $baseSpace * 1.5;
   display: none;
+}
+
+.changegraph__btnswrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.changegraph__btnwrap {
+  width: 25%;
+  &:nth-of-type(4n+1) {
+    padding: 0 $baseSpace*0.75 $baseSpace 0;
+  }
+  &:nth-of-type(4n+2) {
+    padding: 0 $baseSpace*0.5 $baseSpace $baseSpace*0.25;
+  }
+  &:nth-of-type(4n+3) {
+    padding: 0 $baseSpace*0.25 $baseSpace $baseSpace*0.5;
+  }
+  &:nth-of-type(4n) {
+    padding: 0 0 $baseSpace $baseSpace*0.75;
+  }
+}
+
+.buildermod__changegraph__btn {
+  transition: color 0.2 ease-in-out, background-color 0.2 ease-in-out;
+  background: $colorBrown200;
+  color: $colorGray;
+  padding: $baseSpace;
+  height: $baseSpace*9;
+  width: 100%;
+  &:hover {
+    background: $colorBrown100;
+    color: $colorGrayDark;
+  }
+}
+
+.buildermod__changegraph__icon {
+  display: block;
+  font-size: $fontXLarge;
+  margin: 0 auto;
 }

@@ -82,14 +82,14 @@ export default Ember.Controller.extend({
       this.set('drawerChangeGraphIsOpen', false);
 
       // Turn on settings drawer
-      this.get('drawerSettingsIsOpen') ? this.set('drawerSettingsIsOpen', false) : this.set('drawerSettingsIsOpen', true);
+      this.toggleProperty('drawerSettingsIsOpen');
     },
     toggleDrawerChangeGraph: function() {
       // Turn off other drawers
       this.set('drawerSettingsIsOpen', false);
 
       // Turn on settings drawer
-      this.get('drawerChangeGraphIsOpen') ? this.set('drawerChangeGraphIsOpen', false) : this.set('drawerChangeGraphIsOpen', true);
+      this.toggleProperty('drawerChangeGraphIsOpen');
     },
     zoomOut: function() {
       if(this.get('zoom') === 1) { this.decrementProperty('zoom'); }

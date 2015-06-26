@@ -35,7 +35,6 @@
           </button>
           {{#if canChangeVisualization}}
             <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--changegraph" {{action 'toggleDrawerChangeGraph'}}>
-            {{!-- <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--changegraph" {{action 'toggleVisualization'}}> --}}
               {{fa-icon "plus" classNames="tool__btn__icon"}} Change graph
             </button>
           {{/if}}
@@ -43,6 +42,7 @@
       </header>
       <div class="buildermod__vizwrap">
         {{partial "partials/buildermod-drawer-settings"}}
+        {{partial "partials/buildermod-drawer-change-graph"}}
         {{partial "partials/buildermod-search"}}
         {{component visualizationComponent
           classNames= 'buildermod__viz'
