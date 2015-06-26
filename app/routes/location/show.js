@@ -36,8 +36,9 @@ export default Ember.Route.extend({
 
       //all department data for 2012
       _.each(departmentsData, function(d) {
-        let department = _.find(departmentsDataAll);
+        let department = _.find(departmentsDataAll, {id: d.department_id, year: 2012});
         d.name = _.find(locationsMetadata, {id: d.department_id}).name_en;
+        _.extend(d, department);
       });
 
       //all time series data for the department with id = model.id
