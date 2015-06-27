@@ -1,8 +1,8 @@
 import Ember from 'ember';
-const {computed, get:get } = Ember;
+const {computed, observer, get:get } = Ember;
 
 export default Ember.Controller.extend({
-  needs: 'application',
+  needs: 'application', // inject the application controller
   queryParams: ['entity', 'entity_id', 'source', 'variable', 'vis', 'search'],
   source: 'products',
   vis: 'treemap',
@@ -12,6 +12,13 @@ export default Ember.Controller.extend({
   zoom: 0, // for treemap zoom
 
   isEnglish: computed.alias('controllers.application.isEnglish'),
+
+  // observer the Query Params and set the links on the side nav
+  setSideNav: observer('entity', 'entity_id', function() {
+    var applicationController = this.get('controllers.application');
+    applicationController.set('entity', this.get('entity'));
+    applicationController.set('entity_id', this.get('entity_id'));
+  }),
 
   rcaFilter: function(data) {
     return _.filter(data, (d) => {
