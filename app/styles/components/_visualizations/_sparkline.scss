@@ -4,14 +4,23 @@
 *
 **/
 
-.sparkline {
-  fill: none;
-  stroke: #000;
-  stroke-width: 0.5px;
-}
+  .connect__path {
+    fill: none;
+    stroke: #000;
+    stroke-width: 1.5px;
+  }
 
-.sparkcircle {
-  fill: #f00;
-  stroke: none;
-}
+  .items__mark__diamond {
+    fill: gray;
+    opacity: .1;
+  }
 
+  .items__mark__diamond.highlighted {
+    stroke: black;
+    opacity: 1;
+   }
+
+  .items__mark__diamond.selected {
+    fill: red;
+    opacity: 1;
+  }
