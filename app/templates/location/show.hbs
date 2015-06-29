@@ -103,7 +103,11 @@
                 </td>
                 <td class="table__cell">$8.2M</td>
                 <td class="table__cell">
-
+                {{spark-line 
+                  yVar='gdp_real' 
+                  data=model.timeseries
+                  elementId='spark--exports' 
+                }}
                 + 1.2%</td>
               </tr>
             </tbody>
@@ -171,7 +175,13 @@
             }}
           </td>
           <td class="table__cell">0.3</td>
-          <td class="table__cell">line chart + TK%</td>
+          <td class="table__cell">
+          {{spark-line 
+            yVar='gdp_real' 
+            data=model.timeseries
+            elementId='spark--complexity' 
+          }}
+          + TK%</td>
         </tr>
       </tbody>
     </table>
@@ -224,15 +234,15 @@
           </ul>
         </div>
         <div class="vizmod__vizwrap">
-              {{product-space
-                data=productsData
-                elementId='product-space'
-                varId='product_id'
-                varGroup='parent_id'
-                varColor='parent_code'
-                varText='parent_name'
-                varSize='export_value'
-              }}
+        {{product-space
+          data=productsData
+          elementId='product-space'
+          varId='product_id'
+          varGroup='parent_id'
+          varColor='parent_code'
+          varText='parent_name'
+          varSize='export_value'
+        }}
         </div>
       </div>
       <div class="vizmod__list__wrap">
