@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
       return get(d,'name').match(regexp) || get(d, 'code').match(regexp);
     });
   },
-  immutableData: computed('source', function() {
+  immutableData: computed('source','entity', 'entity_id',function() {
     let source = this.get('source');
     if(source  === 'products') {
       return this.get('model.productsData');
@@ -42,7 +42,7 @@ export default Ember.Controller.extend({
       return this.get('model.industriesData');
     }
   }),
-  filteredData: computed('immutableData', 'vis', 'search', function() {
+  filteredData: computed('immutableData.[]', 'vis', 'search', function() {
     let data = this.get('immutableData');
     if(this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
     if(this.get('search')){ data = this.searchFilter(data); }
