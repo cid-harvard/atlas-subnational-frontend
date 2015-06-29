@@ -29,16 +29,16 @@ export default Ember.Controller.extend({
   },
   immutableData: computed('source', function() {
     let source = this.get('source');
-    if(source  === 'products') {
+    if (source  === 'products') {
       return this.get('model.productsData');
-    } else if(source === 'industries') {
+    } else if (source === 'industries') {
       return this.get('model.industriesData');
     }
   }),
   filteredData: computed('immutableData', 'vis', 'search', function() {
     let data = this.get('immutableData');
-    if(this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
-    if(this.get('search')){ data = this.searchFilter(data); }
+    if (this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
+    if (this.get('search')){ data = this.searchFilter(data); }
     return data;
   }),
   departmentLocations: computed('locationsMetadata', function(){
@@ -61,21 +61,35 @@ export default Ember.Controller.extend({
   }),
   rca: computed('source', function() {
     let source = this.get('source');
-    if(source === 'industries') { return 'rca'; }
+    if (source === 'industries') { return 'rca'; }
     return 'export_rca';
   }),
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
+  hasMore: computed('nestedData.[]', function() {
+    return this.get('nestedData').length > this.firstSlice;
+  }),
   actions: {
     search: function() {
       this.set('search', this.get('searchText'));
     },
     toggleVisualization: function() {
-      if(this.get('vis') === 'treemap') {
-        this.set('vis', 'multiples');
-      } else {
+      let id = $(event.target).attr('id');
+
+      if (id === 'changegraph__radio--treemap') {
         this.set('vis', 'treemap');
+      } else if (id === 'changegraph__radio--multiples') {
+        console.log('test');
+        this.set('vis', 'multiples');
+      } else if (id === 'changegraph__radio--geo') {
+        this.set('vis', 'geo');
+      } else if (id === 'changegraph__radio--scatter') {
+        this.set('vis', 'scatter');
+      } else if (id === 'changegraph__radio--similarity') {
+        this.set('vis', 'similarity');
       }
+
+      this.send('toggleDrawerChangeGraph');
     },
     toggleDrawerSettings: function() {
       // Turn off other drawers
@@ -92,16 +106,10 @@ export default Ember.Controller.extend({
       this.toggleProperty('drawerChangeGraphIsOpen');
     },
     zoomOut: function() {
-      if(this.get('zoom') === 1) { this.decrementProperty('zoom'); }
+      if (this.get('zoom') === 1) { this.decrementProperty('zoom'); }
     },
     zoomIn: function() {
-      if(this.get('zoom') === 0) { this.incrementProperty('zoom'); }
-    },
-    toTreemap: function() {
-      this.set('vis', 'treemap');
-    },
-    toMultiples: function() {
-      this.set('vis', 'multiples');
+      if (this.get('zoom') === 0) { this.incrementProperty('zoom'); }
     }
   }
 });

@@ -1,36 +1,36 @@
 <form class="buildermod__drawer buildermod__drawer--changegraph">
   <div class="changegraph__radioswrap">
     <div class="changegraph__radiowrap">
-      <input {{bind-attr class=":changegraph__radio :canChangeVisualization:changegraph__radio--is--possible"}} id="changegraph__radio--treemap" value="treemap" value="treemap" {{action 'toggleVisualization'}} type="radio" checked="checked">
-      <label class="changegraph__radio__target" for="changegraph__radio--treemap">
+      <input {{bind-attr class=":changegraph__radio"}} id="changegraph__radio--treemap" value="treemap" value="treemap" {{action 'toggleVisualization'}} type="radio" checked="checked">
+      <label class="changegraph__radio__target changegraph__radio--is--possible" for="changegraph__radio--treemap">
         <i class="cidcon-treemap changegraph__icon"></i>
         Treemap
       </label>
     </div>
     <div class="changegraph__radiowrap">
-      <input {{bind-attr class=":changegraph__radio canChangeVisualization:changegraph__radio--is--possible"}} id="changegraph__radio--multiples" value="multiples" {{action 'toggleVisualization'}} type="radio">
-      <label class="changegraph__radio__target" for="changegraph__radio--multiples">
+      <input {{bind-attr class=":changegraph__radio"}} id="changegraph__radio--multiples" value="multiples" {{action 'toggleVisualization'}} type="radio">
+      <label class="changegraph__radio__target changegraph__radio--is--possible" for="changegraph__radio--multiples">
         <i class="cidcon-multiples changegraph__icon"></i>
         Area multiples
       </label>
     </div>
     <div class="changegraph__radiowrap">
-      <input {{bind-attr class=":changegraph__radio canChangeVisualization:changegraph__radio--is--possible"}} id="changegraph__radio--geo" value="geo" {{action 'toggleVisualization'}} type="radio">
-      <label class="changegraph__radio__target" for="changegraph__radio--geo">
+      <input {{bind-attr class=":changegraph__radio"}} id="changegraph__radio--geo" value="geo" {{action 'toggleVisualization'}} type="radio">
+      <label class="changegraph__radio__target changegraph__radio--is--possible" for="changegraph__radio--geo">
         <i class="cidcon-geo changegraph__icon"></i>
         Geographic map
       </label>
     </div>
     <div class="changegraph__radiowrap">
-      <input {{bind-attr class=":changegraph__radio canChangeVisualization:changegraph__radio--is--possible"}} id="changegraph__radio--scatter" value="scatter" {{action 'toggleVisualization'}} type="radio">
-      <label class="changegraph__radio__target" for="changegraph__radio--scatter">
+      <input {{bind-attr class=":changegraph__radio"}} id="changegraph__radio--scatter" value="scatter" {{action 'toggleVisualization'}} type="radio">
+      <label class="changegraph__radio__target changegraph__radio--is--possible" for="changegraph__radio--scatter">
         <i class="cidcon-scatter changegraph__icon"></i>
         Scatterplot
       </label>
     </div>
     <div class="changegraph__radiowrap">
-      <input {{bind-attr class=":changegraph__radio canChangeVisualization:changegraph__radio--is--possible"}} id="changegraph__radio--similarity" value="similarity" {{action 'toggleVisualization'}} type="radio">
-      <label class="changegraph__radio__target" for="changegraph__radio--similarity">
+      <input {{bind-attr class=":changegraph__radio"}} id="changegraph__radio--similarity" value="similarity" {{action 'toggleVisualization'}} type="radio">
+      <label class="changegraph__radio__target changegraph__radio--is--possible" for="changegraph__radio--similarity">
         <i class="cidcon-similarity changegraph__icon"></i>
         Similarity map
       </label>

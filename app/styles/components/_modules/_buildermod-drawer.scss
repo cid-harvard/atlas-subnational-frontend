@@ -92,14 +92,15 @@
 }
 
 .changegraph__radio__target {
-  transition: color 0.2 ease-in-out, background-color 0.2 ease-in-out;
+  transition: color 0.2s ease-in-out, background 0.2s ease-in-out;
   background: $colorBrown200;
   color: $colorGray;
   padding: 6.2rem $baseSpace $baseSpace; // revisit for better horizontal centering mebbe
   height: $baseSpace*9;
   width: 100%;
-  // pointer-events: none;
+  pointer-events: none;
   text-align: center;
+  line-height: 120%;
   &:hover {
     background: $colorBrown100;
     color: $colorGrayDark;
@@ -114,5 +115,5 @@
 .changegraph__icon {
   display: block;
   font-size: $fontXLarge;
-  margin: 0 auto;
+  margin: 0 auto $baseSpace/2;
 }
