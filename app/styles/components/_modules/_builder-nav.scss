@@ -73,3 +73,7 @@
   font-size: $fontSmall;
   display: inline-block;
 }
+
+.builder__icon--placeholder:before {
+  width: auto;
+}
