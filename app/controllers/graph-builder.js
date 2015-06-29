@@ -19,6 +19,40 @@ export default Ember.Controller.extend({
     applicationController.set('entity_id', this.get('entity_id'));
   }),
 
+  // push to i18n later sorry :(
+  pageTitle: computed('variable','vis', function() {
+    let variable = this.get('variable');
+    let vis = this.get('vis');
+    let name = this.get('model.name_en');
+    if(variable === 'export_value' && vis === 'scatter') {
+      return `What products have the best combination of complexity and opportunity for ${name}`;
+    } else if(variable === 'export_value') {
+      return `What products does ${name} export?`;
+    } else if(variable === 'import_value') {
+      return `What products does ${name} import?`;
+    } else if(variable === 'employment') {
+      return `What industries in ${name} employ the most people?`;
+    } else if(variable === 'wages' && vis === 'scatter') {
+      return `What industries have the best combination of complexity and opportunity for ${name}?`;
+    } else if(variable === 'wages') {
+      return `What industries are in ${name}?`;
+    }
+  }),
+  // push to i18n later sorry :(
+  builderModHeader: computed('variable','vis', function() {
+    let variable = this.get('variable');
+    if(this.get('vis') === 'scatter') { return 'Complexity and Opportunity'; }
+    if(variable === 'export_value') {
+      return 'Total Exports';
+    } else if(variable === 'import_value') {
+      return 'Total Imports';
+    } else if(variable === 'employment') {
+      return 'Total Employment';
+    } else if(variable === 'wages') {
+      return 'Total Wages';
+    }
+  }),
+
   rcaFilter: function(data) {
     return _.filter(data, (d) => {
       return get(d, this.get('rca')) <= 1;
