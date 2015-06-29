@@ -1,8 +1,0 @@
-<li class="search__result">
-  <div class="search__result__text">
-    <p class="search__result__breadcrumb">{{result.breadcrumb}}</p>
-    <p class="search__result__name">{{result.name_en}}</p>
-  </div>
-    {{!-- {{link-to 'Profile' 'location.show' result.id  class="button search__button search__button--result"}} --}}
-    {{link-to 'Graph Builder' 'graph_builder' (query-params entity='location' entity_id=result.id)  class="button search__button search__button--result"}}
-</li>

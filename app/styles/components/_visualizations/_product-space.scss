@@ -5,8 +5,8 @@
 **/
 
 .connect__line {
-  stroke: #999;
-  stroke-opacity: .6;
+  stroke: #E1DCD6;
+  stroke-opacity: .4;
 }
 
 .items__mark__star {
@@ -24,12 +24,16 @@
   stroke-width: 1.5px;
 }
 
+.items__mark__circle {
+  fill: #CDC5BC;
+}
+
 .items__mark__circle.highlighted {
+  fill: #CDC5BC;  
   stroke: black;
-  stroke-width: 2.5px;
+  stroke-width: 1.5px;
 }
 
 .items__mark__circle.selected {
-  stroke: black;
-  stroke-width: 1.5px;
+  fill: #EA413D;
 }
