@@ -10,9 +10,9 @@ export default Router.map(function() {
   this.route('search');
   this.route('graph_builder');
   this.route('ranking');
+  this.route('colombia');
 
   this.route('location', { path: 'location'}, function() {
-    this.route('colombia', { path:'colombia'});
     this.route('show', { path: ':location_id'});
   });
 });
