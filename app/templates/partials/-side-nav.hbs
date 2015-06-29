@@ -11,17 +11,21 @@
   {{/link-to}}
   <nav class="sidebar__section sidebar__nav">
     <ul class="nav__list">
-      {{#link-to "location.show"  1 class="nav__item" tagName="li"}}
-        {{#link-to "location.show" 1 class="sidebar__btn nav__item__link" activeClass="sidebar__btn--is--active"}}
-          Profile
+      <li class="nav__item">
+        {{#link-to profileLink entity_id
+          class="sidebar__btn nav__item__link"
+          activeClass="sidebar__btn--is--active"}}
+          Profiles
         {{/link-to}}
-      {{/link-to}}
-
-      {{#link-to "graph_builder" class="nav__item" tagName="li"}}
-        {{#link-to "graph_builder" class="sidebar__btn nav__item__link" activeClass="sidebar__btn--is--active"}}
+      </li>
+      <li class="nav__item">
+        {{#link-to "graph_builder"
+          (query-params entity=entity entity_id=entity_id)
+          class="sidebar__btn nav__item__link"
+          activeClass="sidebar__btn--is--active"}}
           Graph Builder
         {{/link-to}}
-      {{/link-to}}
+      </li>
     </ul>
   </nav>
   <div class="sidebar__section sidebar__languages">
