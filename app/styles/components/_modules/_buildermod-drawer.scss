@@ -11,7 +11,7 @@
   .buildermod__tool--settings {
     background: $colorBrown300;
     border-left-color: $colorBrown300;
-    .tool__radio__icon:before {
+    .tool__btn__icon:before {
       content: '\f00d';
     }
   }
@@ -33,7 +33,7 @@
   .buildermod__tool--changegraph {
     background: $colorBrown300;
     border-left-color: $colorBrown300;
-    .tool__radio__icon:before {
+    .tool__btn__icon:before {
       content: '\f00d';
     }
   }
@@ -42,7 +42,8 @@
     overflow-y: hidden;
   }
   .buildermod__viz {
-    visibility: hidden;
+    // visibility: hidden;
+    display: none;
   }
 }
 

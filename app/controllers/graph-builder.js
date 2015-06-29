@@ -76,6 +76,8 @@ export default Ember.Controller.extend({
     toggleVisualization: function() {
       let id = $(event.target).attr('id');
 
+      this.send('toggleDrawerChangeGraph');
+
       if (id === 'changegraph__radio--treemap') {
         this.set('vis', 'treemap');
       } else if (id === 'changegraph__radio--multiples') {
@@ -88,8 +90,6 @@ export default Ember.Controller.extend({
       } else if (id === 'changegraph__radio--similarity') {
         this.set('vis', 'similarity');
       }
-
-      this.send('toggleDrawerChangeGraph');
     },
     toggleDrawerSettings: function() {
       // Turn off other drawers
