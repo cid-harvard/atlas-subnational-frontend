@@ -48,7 +48,11 @@ export default Ember.Route.extend({
         }
       });
 
-      return { products: productsMetadata, locations: locationsMetadata, industries: industriesMetadata };
+      // Index metadata by entity id's
+      // e.g. { 0: {id:0, name: 'Atlantico'.....}, ...}
+      return { products: _.indexBy(productsMetadata, 'id'),
+        locations: _.indexBy(locationsMetadata, 'id'),
+        industries: _.indexBy(industriesMetadata, 'id') };
     });
   },
   actions: {
