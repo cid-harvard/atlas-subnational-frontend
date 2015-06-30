@@ -3,7 +3,7 @@ const { computed } = Ember;
 
 
 export default Ember.Component.extend({
-  tagName: 'svg',
+  tagName: 'div',
   classNames: ['something-something'],
   attributeBindings: ['width','height'],
   id: computed('elementId', function() {
@@ -11,36 +11,52 @@ export default Ember.Component.extend({
   }),
   cleanData: function(data) {
    return data.map((d) => {
-      var object = { year: Date.parse(d.year)};
+      var object = { year: d.year};
       object[this.get('yVar')] = d[this.get('yVar')];
+      object['department_id'] = this.get('currentLocation');
       return object;
     });
   },
   sparkLine: computed('data','yVar', function() {
    let data = this.cleanData(this.get('data'));
    return vistk.viz()
-    .type('sparkline')
-    .container(this.get('id'))
-    .height(this.get('height'))
-    .width(this.get('width'))
-    .data(data)
-    .id('id')
-    .y_var(this.get('yVar'))
-    .group('category')
-    .color('name')
-    .title('Products')
-    .group('category')
-    .ui(false)
-    .time({var_time: 'year'})
-    .text('name');
+    .params({
+      type: 'sparkline',
+      container: this.get('id'),
+      width: this.get('width'),
+      height: this.get('height'),
+      margin: {top: 0, right: 0, bottom: 0, left: 0},
+      data: data,
+      var_y: this.get('yVar'),
+      var_x: 'year',
+      var_id: 'department_id',
+      time: {
+        var_time: 'year',
+        parse: d3.time.format("%Y").parse,
+        current_time: '2012'
+      },
+      items: [{
+        attr: 'name',
+        marks: [{
+          type: 'diamond',
+          width: 10,
+          height: 10
+        }]
+      }],
+      var_text: 'department_id',
+      selection: [this.get('currentLocation')],
+      highlight: [this.get('currentLocation')]
+    })
   }),
   draw: function() {
+    this.set('width', this.$().parent().width());
+    this.set('height', this.$().parent().height());
     d3.select(this.get('id'))
       .call(this.get('sparkLine'));
   },
   didInsertElement: function() {
-    this.set('width', this.$().parent().width());
-    this.set('height', this.$().parent().height());
-    //this.draw();
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      this.draw();
+    });
   }
 });

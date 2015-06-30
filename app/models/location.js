@@ -23,7 +23,7 @@ export default DS.Model.extend({
 
   level: attr(),
 
-  timeSeries: attr(),
+  timeseries: attr(),
   topExports: attr(),
   currentExports: attr(),
   products: attr(),
