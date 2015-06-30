@@ -74,6 +74,7 @@ export default Ember.Controller.extend({
       this.set('search', this.get('searchText'));
     },
     toggleVisualization: function(visualization) {
+      this.send('toggleDrawerChangeGraph');
       this.set('vis', visualization);
     },
     toggleDrawerSettings: function() {
