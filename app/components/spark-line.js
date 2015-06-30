@@ -13,7 +13,7 @@ export default Ember.Component.extend({
    return data.map((d) => {
       var object = { year: d.year};
       object[this.get('yVar')] = d[this.get('yVar')];
-      object['department_id'] = "930";
+      object['department_id'] = this.get('currentLocation');
       return object;
     });
   },
@@ -31,7 +31,7 @@ export default Ember.Component.extend({
       var_x: 'year',
       var_id: 'department_id',
       time: {
-        var_time: 'year', 
+        var_time: 'year',
         parse: d3.time.format("%Y").parse,
         current_time: '2012'
       },
@@ -44,8 +44,8 @@ export default Ember.Component.extend({
         }]
       }],
       var_text: 'department_id',
-      selection: ["930"],
-      highlight: ["930"]
+      selection: [this.get('currentLocation')],
+      highlight: [this.get('currentLocation')]
     })
   }),
   draw: function() {
