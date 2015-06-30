@@ -40,7 +40,7 @@ export default Ember.Route.extend({
 
       //all department data for 2012
       _.each(departmentsData, function(d) {
-        let department = _.find(departmentsDataAll, {department_id: d.department_id, year: 2012});
+        let department = _.find(departmentsDataAll, {department_id: d.department_id, year: year});
         d.name = locationsMetadata[d.department_id].name_en;
         _.extend(d, department);
       });

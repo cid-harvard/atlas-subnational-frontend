@@ -3,24 +3,24 @@ const {computed, observer} = Ember;
 
 export default Ember.Controller.extend({
   needs: 'application',
+  queryParams: ['year'],
   isEnglish: computed.alias("controllers.application.isEnglish"),
   departmentsData: computed.oneWay('model.departments'),
   productsData: computed.oneWay('model.productsData'),
   timeSeriesData: computed.oneWay('model.timeseries'),
   locationId: computed.readOnly('model.id'),
+  year: 2013,
 
   setSideNav: observer('model', function() {
     var applicationController = this.get('controllers.application');
     applicationController.set('entity', 'location' );
     applicationController.set('entity_id', this.get('model.id'));
   }),
-
   productsSortedByExports: computed('productsData', function() {
     return _.slice(_.sortBy(this.get('productsData'), function(d) { return -d.export_value;}), 0, 50);
   }),
   name: computed('model','isEnglish',function() {
     if(!this.model.get('name_es')) { return this.model.get('name_en');}
-
     if(this.get('isEnglish')) {
       return this.model.get('name_en');
     } else {
