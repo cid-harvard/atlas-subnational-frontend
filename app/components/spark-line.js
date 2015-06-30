@@ -49,12 +49,14 @@ export default Ember.Component.extend({
     })
   }),
   draw: function() {
+    this.set('width', this.$().parent().width());
+    this.set('height', this.$().parent().height());
     d3.select(this.get('id'))
       .call(this.get('sparkLine'));
   },
   didInsertElement: function() {
-    this.set('width', this.$().parent().width());
-    this.set('height', this.$().parent().height());
-    this.draw();
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      this.draw();
+    });
   }
 });
