@@ -7,6 +7,7 @@ export default Ember.Controller.extend({
   departmentsData: computed.oneWay('model.departments'),
   productsData: computed.oneWay('model.productsData'),
   timeSeriesData: computed.oneWay('model.timeseries'),
+  locationId: computed.readOnly('model.id'),
 
   productsSortedByExports: computed('productsData', function() {
     return _.slice(_.sortBy(this.get('productsData'), function(d) { return -d.export_value;}), 0, 50);

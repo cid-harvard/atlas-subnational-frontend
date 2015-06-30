@@ -37,16 +37,18 @@
             varX='export_value'
             varText='name'
             varId='department_id'
-            currentLocation=model.id
+            currentLocation=locationId
             }}
           </td>
           <td class="table__cell">$8.2M</td>
           <td class="table__cell">
-          {{spark-line 
-            yVar='gdp_real' 
-            data=model.timeseries
-            elementId='spark--gdp' 
-          }} + 2.4%</td>
+            {{spark-line
+              yVar='gdp_real'
+              data=timeSeriesData
+              elementId='spark--gdp'
+              currentLocation=locationId
+              }} + 2.4%
+          </td>
         </tr>
       </tbody>
     </table>
@@ -95,18 +97,19 @@
                   {{dot-plot
                     elementId='dotplot--exports'
                     data=departmentsData
-                    varX='export_value'
+                    varX='gdp_real'
                     varText='name'
                     varId='department_id'
-                    currentLocation=model.id
+                    currentLocation=locationId
                     }}
                 </td>
                 <td class="table__cell">$8.2M</td>
                 <td class="table__cell">
-                {{spark-line 
-                  yVar='gdp_real' 
-                  data=model.timeseries
-                  elementId='spark--exports' 
+                {{spark-line
+                  yVar='gdp_real'
+                  data=timeSeriesData
+                  elementId='spark--exports'
+                  currentLocation=locationId
                 }}
                 + 1.2%</td>
               </tr>
@@ -171,17 +174,19 @@
             varX='export_value'
             varText='name'
             varId='department_id'
-            currentLocation=model.id
+            currentLocation=locationId
             }}
           </td>
           <td class="table__cell">0.3</td>
           <td class="table__cell">
-          {{spark-line 
-            yVar='gdp_real' 
-            data=model.timeseries
-            elementId='spark--complexity' 
-          }}
-          + TK%</td>
+            {{spark-line
+              yVar='population'
+              data=timeSeriesData
+              elementId='spark--complexity'
+              currentLocation=locationId
+            }}
+            + TK%
+          </td>
         </tr>
       </tbody>
     </table>
