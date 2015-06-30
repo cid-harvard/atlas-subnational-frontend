@@ -18,8 +18,8 @@ export default Ember.Component.extend({
         'max': 2014
       },
       pips: { // Show a scale with the slider
-        mode: 'steps',
-        density: 9
+        mode: 'count',
+        values: 9
       }
     });
 
