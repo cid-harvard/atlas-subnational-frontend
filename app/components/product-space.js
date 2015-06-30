@@ -17,7 +17,7 @@ export default Ember.Component.extend({
   productSpace: computed('data', function() {
     return vistk.viz().params({
         type: 'productspace',
-        height: 300, 
+        height: 300,
         width: 500,
         container: this.get('id'),
         margin: {top: 0, right: 0, bottom: 30, left: 30},
@@ -39,7 +39,7 @@ export default Ember.Component.extend({
           }]
         }],
         time: {
-          var_time: 'year', 
+          var_time: 'year',
           current_time: '2012',
           parse: function(d) { return d; },
           filter: '2012'
@@ -53,7 +53,7 @@ export default Ember.Component.extend({
       .call(this.get('productSpace'));
   },
   didInsertElement: function() {
-    this.draw();
+    //this.draw();
   }
 });
 
