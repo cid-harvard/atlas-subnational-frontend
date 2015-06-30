@@ -6,7 +6,8 @@
 
 .buildermod--is--open--settings {
   .buildermod__drawer--settings {
-    display: block;
+    // display: block;
+    visibility: visible;
   }
   .buildermod__tool--settings {
     background: $colorBrown300;
@@ -28,7 +29,8 @@
 
 .buildermod--is--open--changegraph {
   .buildermod__drawer--changegraph {
-    display: block;
+    // display: block;
+    visibility: visible;
   }
   .buildermod__tool--changegraph {
     background: $colorBrown300;
@@ -55,7 +57,13 @@
   top: 0;
   min-height: 100%;
   padding: $baseSpace * 1.5;
-  display: none;
+  // display: none;
+  visibility: hidden;
+}
+
+.buildermod__drawer--settings {
+  // display: block;
+  visibility: visible;
 }
 
 .changegraph__radioswrap {
