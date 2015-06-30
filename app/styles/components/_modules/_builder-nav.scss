@@ -15,7 +15,7 @@
 
 .builder__nav__item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: row;
   margin-bottom: $baseSpace;
   &:last-of-type {
@@ -72,4 +72,8 @@
   color: $colorGray;
   font-size: $fontSmall;
   display: inline-block;
+}
+
+.builder__icon--placeholder:before {
+  width: auto;
 }

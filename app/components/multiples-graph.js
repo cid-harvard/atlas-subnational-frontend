@@ -230,7 +230,7 @@ export default Ember.Component.extend({
     }
     container.exit().remove();
   },
-  hasMore: computed('nestedData.[]', function() {
+  graphIsActive: computed(function() {
     return this.get('nestedData').length > this.firstSlice;
   }),
   didInsertElement: function() {

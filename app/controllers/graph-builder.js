@@ -46,17 +46,17 @@ export default Ember.Controller.extend({
   }),
   visualizationComponent: computed('vis', function(){
     let visualization = this.get('vis');
-    if ( visualization === 'treemap') {
+    if( visualization === 'treemap') {
       return 'd3plus-tree-map';
-    } else if (visualization === 'multiples') {
+    } else if(visualization === 'multiples') {
       return 'multiples-graph';
-    } else if (visualization === 'scatter') {
+    } else if(visualization === 'scatter') {
       return 'd3plus-scatter';
     }
   }),
   canChangeVisualization: computed('vis', function() {
     let visualization = this.get('vis');
-    if (visualization === 'scatter') { return false; }
+    if(visualization === 'scatter') { return false; }
     return true;
   }),
   rca: computed('source', function() {
@@ -64,28 +64,37 @@ export default Ember.Controller.extend({
     if(source === 'industries') { return 'rca'; }
     return 'export_rca';
   }),
+  drawerSettingsIsOpen: false,
+  drawerChangeGraphIsOpen: false,
+  hasMore: computed('nestedData.[]', function() {
+    return this.get('nestedData').length > this.firstSlice;
+  }),
   actions: {
     search: function() {
       this.set('search', this.get('searchText'));
     },
-    toggleVisualization: function() {
-      if(this.get('vis') === 'treemap') {
-        this.set('vis', 'multiples');
-      } else {
-        this.set('vis', 'treemap');
-      }
+    toggleVisualization: function(visualization) {
+      this.set('vis', visualization);
+    },
+    toggleDrawerSettings: function() {
+      // Turn off other drawers
+      this.set('drawerChangeGraphIsOpen', false);
+
+      // Turn on settings drawer
+      this.toggleProperty('drawerSettingsIsOpen');
+    },
+    toggleDrawerChangeGraph: function() {
+      // Turn off other drawers
+      this.set('drawerSettingsIsOpen', false);
+
+      // Turn on settings drawer
+      this.toggleProperty('drawerChangeGraphIsOpen');
     },
     zoomOut: function() {
       if(this.get('zoom') === 1) { this.decrementProperty('zoom'); }
     },
     zoomIn: function() {
       if(this.get('zoom') === 0) { this.incrementProperty('zoom'); }
-    },
-    toTreemap: function() {
-      this.set('vis', 'treemap');
-    },
-    toMultiples: function() {
-      this.set('vis', 'multiples');
     }
   }
 });
