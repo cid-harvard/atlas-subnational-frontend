@@ -11,14 +11,14 @@ export default Ember.Component.extend({
     // this should be based on i18n
     return ['group_name_en','name'];
   }),
-  treemap: computed('data.[]','varZoom', 'varDependent', 'dataType', 'vis', function() {
+  treemap: computed('data.[]', 'varDependent', 'dataType', 'vis', function() {
     var maxYear = d3.max(this.get('data'), function(d) { return d.year;} );
     return d3plus.viz()
       .container(this.get('id'))
       .data({value: this.get('data'), padding: 5})
       .type("tree_map")
       .id({value: this.get('varIndependent'), grouping: true })
-      .depth(this.get('varZoom'))
+      .depth(1)
       .tooltip({children: false})
       .color({value: 'grey'})
       .zoom(false)
@@ -36,7 +36,7 @@ export default Ember.Component.extend({
       this.get('treemap').draw();
     });
   },
-  update: observer('data.[]','varZoom', 'varDependent', 'dataType', 'vis', function() {
+  update: observer('data.[]', 'varDependent', 'dataType', 'vis', function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());

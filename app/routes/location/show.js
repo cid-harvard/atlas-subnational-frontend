@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import ENV from '../../config/environment';
 const {apiURL} = ENV;
-const {RSVP} = Ember;
+const {RSVP, getWithDefault} = Ember;
 
 export default Ember.Route.extend({
 // `this.store.find` makes an api call for `params.location_id` and returns a promise
@@ -19,17 +19,20 @@ export default Ember.Route.extend({
     var departmentsAll = Ember.$.getJSON(`${apiURL}data/departments/departmentyear/`);
 
     return RSVP.allSettled([products, departments, departmentsAll]).then((array) => {
-      var productsData = Ember.getWithDefault(array[0], 'value.data', []);
-      var departmentsData = Ember.getWithDefault(array[1], 'value.data', []);
-      var departmentsDataAll = Ember.getWithDefault(array[2], 'value.data', []);
+      var productsData = getWithDefault(array[0], 'value.data', []);
+      var departmentsData = getWithDefault(array[1], 'value.data', []);
+      var departmentsDataAll = getWithDefault(array[2], 'value.data', []);
+
+      var productsDataIndex = _.indexBy(productsData, 'product_id');
 
       let productsMetadata = this.modelFor('application').products;
       let locationsMetadata = this.modelFor('application').locations;
 
       //get products data for the department
-      _.each(productsData, function(d) {
-        let product = _.find(productsMetadata, { id: d.product_id });
-        let productData = _.find(productsData, { product_id: d.product_id });
+      _.each(productsData, (d) => {
+        let product = productsMetadata[d.product_id];
+        let productData = productsDataIndex[d.product_id];
+
         d.name = product.name_en;
         _.extend(d, product);
         _.extend(d, productData);
@@ -38,7 +41,7 @@ export default Ember.Route.extend({
       //all department data for 2012
       _.each(departmentsData, function(d) {
         let department = _.find(departmentsDataAll, {department_id: d.department_id, year: 2012});
-        d.name = _.find(locationsMetadata, {id: d.department_id}).name_en;
+        d.name = locationsMetadata[d.department_id].name_en;
         _.extend(d, department);
       });
 
