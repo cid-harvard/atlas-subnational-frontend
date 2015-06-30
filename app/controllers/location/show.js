@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {computed} = Ember;
+const {computed, observer} = Ember;
 
 export default Ember.Controller.extend({
   needs: 'application',
@@ -9,10 +9,16 @@ export default Ember.Controller.extend({
   timeSeriesData: computed.oneWay('model.timeseries'),
   locationId: computed.readOnly('model.id'),
 
+  setSideNav: observer('model', function() {
+    var applicationController = this.get('controllers.application');
+    applicationController.set('entity', 'location' );
+    applicationController.set('entity_id', this.get('model.id'));
+  }),
+
   productsSortedByExports: computed('productsData', function() {
     return _.slice(_.sortBy(this.get('productsData'), function(d) { return -d.export_value;}), 0, 50);
   }),
-  name: computed('isEnglish',function() {
+  name: computed('model','isEnglish',function() {
     if(!this.model.get('name_es')) { return this.model.get('name_en');}
 
     if(this.get('isEnglish')) {
