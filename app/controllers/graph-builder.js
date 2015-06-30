@@ -20,7 +20,7 @@ export default Ember.Controller.extend({
   }),
 
   // push to i18n later sorry :(
-  pageTitle: computed('variable','vis', function() {
+  pageTitle: computed('model', 'variable','vis', function() {
     let variable = this.get('variable');
     let vis = this.get('vis');
     let name = this.get('model.name_en');
