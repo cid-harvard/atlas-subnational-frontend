@@ -36,7 +36,7 @@ export default Ember.Component.extend({
       this.get('treemap').draw();
     });
   },
-  update: observer('data.[]', 'varDependent', 'dataType', 'vis', function() {
+  update: observer('data.[]', function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());

@@ -33,7 +33,7 @@ export default Ember.Component.extend({
       this.get('scatter').draw();
     });
   },
-  update: observer('data.[]', 'dataType',  function() {
+  update: observer('data.[]',  function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
