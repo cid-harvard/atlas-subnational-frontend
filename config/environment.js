@@ -22,7 +22,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    ENV.apiURL = "http://52.6.95.239/api/";
+    ENV.apiURL = "http://atlas-colombia-master.cid-labs.com/api/";
     ENV.contentSecurityPolicy = {
       'connect-src': "'self' 'localhost:4200' *",
       'style-src': "'self' 'unsafe-inline' *",

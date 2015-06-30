@@ -11,11 +11,11 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return '#multiples';
   }),
-  xExtent: computed('data', function() {
-    return d3.extent(this.get('data'), function(d) { return d.year;} );
+  xExtent: computed('immutableData.[]', function() {
+    return d3.extent(this.get('immutableData'), function(d) { return d.year;} );
   }),
-  xRange: computed('data', function() {
-    return  _.chain( this.get('data') )
+  xRange: computed('immutableData.[]', function() {
+    return  _.chain( this.get('immutableData') )
       .pluck('year')
       .uniq()
       .value();
@@ -50,13 +50,9 @@ export default Ember.Component.extend({
   truncateYear: function(year) {
     return '’' + year.toString().slice(-2);
   },
-  maxValue: computed(function () {
-    let nestedData = this.get('nestedData');
+  maxValue: computed('immutableData.[]', function () {
     let varDependent = this.get('varDependent');
-    nestedData.forEach(function(year) {
-      year.maxValue = d3.max(year.values, function(d) { return Ember.get(d, varDependent); });
-    });
-    return d3.max(nestedData, function(d) { return d.maxValue; });
+    return d3.max(this.get('immutableData'), function(d) { return Ember.get(d, varDependent); });
   }),
   xScale: computed('width', function() {
     return d3.scale.linear()

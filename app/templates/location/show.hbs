@@ -31,9 +31,24 @@
         <tr class="table__row table__row--body">
           <td class="table__cell">GDP</td>
           <td class="table__cell">
+          {{dot-plot
+            elementId='dotplot--gdp'
+            data=departmentsData
+            varX='export_value'
+            varText='name'
+            varId='department_id'
+            currentLocation=locationId
+            }}
           </td>
           <td class="table__cell">$8.2M</td>
-          <td class="table__cell">{{spark-line yVar='realgdp' data=model.profileSpark elementId='spark--gdp' }} + 2.4%</td>
+          <td class="table__cell">
+            {{spark-line
+              yVar='gdp_real'
+              data=timeSeriesData
+              elementId='spark--gdp'
+              currentLocation=locationId
+              }} + 2.4%
+          </td>
         </tr>
       </tbody>
     </table>
@@ -80,16 +95,23 @@
                 <td class="table__cell">Total exports</td>
                 <td class="table__cell">
                   {{dot-plot
-                    elementId='dotplot--gdp'
+                    elementId='dotplot--exports'
                     data=departmentsData
-                    varX='export_value'
+                    varX='gdp_real'
                     varText='name'
                     varId='department_id'
-                    currentLocation=model.id
+                    currentLocation=locationId
                     }}
                 </td>
                 <td class="table__cell">$8.2M</td>
-                <td class="table__cell">line chart + 1.2%</td>
+                <td class="table__cell">
+                {{spark-line
+                  yVar='gdp_real'
+                  data=timeSeriesData
+                  elementId='spark--exports'
+                  currentLocation=locationId
+                }}
+                + 1.2%</td>
               </tr>
             </tbody>
           </table>
@@ -99,8 +121,8 @@
                 data=productsData
                 elementId='tree-map'
                 varId='product_id'
-                varGroup='parent_id'
-                varText='parent_name'
+                varGroup='group'
+                varText='group_name_en'
                 varSize='export_value'
               }}
             </div>
@@ -145,9 +167,26 @@
       <tbody>
         <tr class="table__row table__row--body">
           <td class="table__cell">Overall export complexity</td>
-          <td class="table__cell">dot plot</td>
+          <td class="table__cell">
+          {{dot-plot
+            elementId='dotplot--complexity'
+            data=departmentsData
+            varX='export_value'
+            varText='name'
+            varId='department_id'
+            currentLocation=locationId
+            }}
+          </td>
           <td class="table__cell">0.3</td>
-          <td class="table__cell">line chart + TK%</td>
+          <td class="table__cell">
+            {{spark-line
+              yVar='population'
+              data=timeSeriesData
+              elementId='spark--complexity'
+              currentLocation=locationId
+            }}
+            + TK%
+          </td>
         </tr>
       </tbody>
     </table>
@@ -200,15 +239,15 @@
           </ul>
         </div>
         <div class="vizmod__vizwrap">
-              {{product-space
-                data=productsData
-                elementId='product-space'
-                varId='product_id'
-                varGroup='parent_id'
-                varColor='parent_code'
-                varText='parent_name'
-                varSize='export_value'
-              }}
+          {{product-space
+            data=productsData
+            elementId='product-space'
+            varId='product_id'
+            varGroup='parent_id'
+            varColor='parent_code'
+            varText='parent_name'
+            varSize='export_value'
+          }}
         </div>
       </div>
       <div class="vizmod__list__wrap">

@@ -1,17 +1,56 @@
 import Ember from 'ember';
-const {computed, get:get } = Ember;
+const {computed, observer, get:get } = Ember;
 
 export default Ember.Controller.extend({
-  needs: 'application',
+  needs: 'application', // inject the application controller
   queryParams: ['entity', 'entity_id', 'source', 'variable', 'vis', 'search'],
   source: 'products',
   vis: 'treemap',
   variable: 'export_value',
   search: null,
   searchText: computed.oneWay('search'),
-  zoom: 0, // for treemap zoom
-
   isEnglish: computed.alias('controllers.application.isEnglish'),
+
+  // observer the Query Params and set the links on the side nav
+  setSideNav: observer('entity', 'entity_id', function() {
+    var applicationController = this.get('controllers.application');
+    applicationController.set('entity', this.get('entity'));
+    applicationController.set('entity_id', this.get('entity_id'));
+  }),
+
+  // push to i18n later sorry :(
+  pageTitle: computed('variable','vis', function() {
+    let variable = this.get('variable');
+    let vis = this.get('vis');
+    let name = this.get('model.name_en');
+    if(variable === 'export_value' && vis === 'scatter') {
+      return `What products have the best combination of complexity and opportunity for ${name}`;
+    } else if(variable === 'export_value') {
+      return `What products does ${name} export?`;
+    } else if(variable === 'import_value') {
+      return `What products does ${name} import?`;
+    } else if(variable === 'employment') {
+      return `What industries in ${name} employ the most people?`;
+    } else if(variable === 'wages' && vis === 'scatter') {
+      return `What industries have the best combination of complexity and opportunity for ${name}?`;
+    } else if(variable === 'wages') {
+      return `What industries are in ${name}?`;
+    }
+  }),
+  // push to i18n later sorry :(
+  builderModHeader: computed('variable','vis', function() {
+    let variable = this.get('variable');
+    if(this.get('vis') === 'scatter') { return 'Complexity and Opportunity'; }
+    if(variable === 'export_value') {
+      return 'Total Exports';
+    } else if(variable === 'import_value') {
+      return 'Total Imports';
+    } else if(variable === 'employment') {
+      return 'Total Employment';
+    } else if(variable === 'wages') {
+      return 'Total Wages';
+    }
+  }),
 
   rcaFilter: function(data) {
     return _.filter(data, (d) => {
@@ -27,7 +66,7 @@ export default Ember.Controller.extend({
       return get(d,'name').match(regexp) || get(d, 'code').match(regexp);
     });
   },
-  immutableData: computed('source', function() {
+  immutableData: computed('source','entity', 'entity_id',function() {
     let source = this.get('source');
     if(source  === 'products') {
       return this.get('model.productsData');
@@ -35,7 +74,7 @@ export default Ember.Controller.extend({
       return this.get('model.industriesData');
     }
   }),
-  filteredData: computed('immutableData', 'vis', 'search', function() {
+  filteredData: computed('immutableData.[]', 'vis', 'search', function() {
     let data = this.get('immutableData');
     if(this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
     if(this.get('search')){ data = this.searchFilter(data); }
@@ -74,6 +113,7 @@ export default Ember.Controller.extend({
       this.set('search', this.get('searchText'));
     },
     toggleVisualization: function(visualization) {
+      this.toggleProperty('drawerChangeGraphIsOpen');
       this.set('vis', visualization);
     },
     toggleDrawerSettings: function() {

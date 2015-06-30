@@ -31,14 +31,16 @@ export default Ember.Route.extend({
         let productsData = Ember.getWithDefault(array[1], 'value.data', []);
         let productsMetadata = this.modelFor('application').products;
 
+        //index on 'product_id'
+        productsData = _.indexBy(productsData, 'product_id');
+
           _.each(products, function(d) {
-            let product = _.find(productsMetadata, { id: d.product_id });
-            let productData = _.find(productsData, { product_id: d.product_id });
+            let product = productsMetadata[d.product_id];
+            let productData = productsData[d.product_id];
             d.name = product.name_en;
             _.extend(d, product);
             _.extend(d, productData);
           });
-
           model.set('productsData', products);
         })
       .then(function() { window.scrollTo(0,0);});
@@ -53,9 +55,12 @@ export default Ember.Route.extend({
         let industriesData = Ember.getWithDefault(array[1], 'value.data', []);
         let industriesMetadata = this.modelFor('application').industries;
 
+        //index on 'industry_id'
+        industriesData = _.indexBy(industriesData, 'industry_id');
+
         _.each(industries, function(d) {
-          let industry = _.find(industriesMetadata, { id: d.industry_id });
-          let industryData = _.find(industriesData, { industry_id: d.industry_id });
+          let industry = industriesMetadata[d.industry_id];
+          let industryData = industriesData[d.industry_id];
           d.name = industry.name_en;
           _.extend(d, industry);
           _.extend(d, industryData);
