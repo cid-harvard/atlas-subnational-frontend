@@ -9,7 +9,6 @@ export default Ember.Controller.extend({
   variable: 'export_value',
   search: null,
   searchText: computed.oneWay('search'),
-
   isEnglish: computed.alias('controllers.application.isEnglish'),
 
   // observer the Query Params and set the links on the side nav
@@ -114,6 +113,7 @@ export default Ember.Controller.extend({
       this.set('search', this.get('searchText'));
     },
     toggleVisualization: function(visualization) {
+      this.toggleProperty('drawerChangeGraphIsOpen');
       this.set('vis', visualization);
     },
     toggleDrawerSettings: function() {
