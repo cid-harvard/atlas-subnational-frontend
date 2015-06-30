@@ -197,7 +197,18 @@
         {{/each}}
       </ol>
       <div class="stepper__vizmod">
-        <div class="stepper__vizmod__vizwrap"></div>
+        <div class="stepper__vizmod__vizwrap">
+        {{product-space
+          data=productsData
+          elementId='product-space-stepper'
+          varId='product_id'
+          varGroup='parent_id'
+          varColor='parent_code'
+          varText='parent_name'
+          varSize='export_value'
+          varActiveStep=activeStep
+        }}
+        </div>
         <div class="stepper__controls">
           <button class="stepper__control stepper__control--left" {{action 'back'}}>Back</button>
           <p class="stepper__control__progress">{{activeStep}} of {{stepStories.length}}</p>
@@ -239,15 +250,6 @@
           </ul>
         </div>
         <div class="vizmod__vizwrap">
-        {{product-space
-          data=productsData
-          elementId='product-space'
-          varId='product_id'
-          varGroup='parent_id'
-          varColor='parent_code'
-          varText='parent_name'
-          varSize='export_value'
-        }}
         </div>
       </div>
       <div class="vizmod__list__wrap">
