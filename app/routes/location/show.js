@@ -23,7 +23,7 @@ export default Ember.Route.extend({
       var departmentsData = getWithDefault(array[1], 'value.data', []);
       var departmentsDataAll = getWithDefault(array[2], 'value.data', []);
 
-      productsData = _.indexBy(productsData, 'product_id');
+      var productsDataIndex = _.indexBy(productsData, 'product_id');
 
       let productsMetadata = this.modelFor('application').products;
       let locationsMetadata = this.modelFor('application').locations;
@@ -31,7 +31,7 @@ export default Ember.Route.extend({
       //get products data for the department
       _.each(productsData, (d) => {
         let product = productsMetadata[d.product_id];
-        let productData = productsData[d.product_id];
+        let productData = productsDataIndex[d.product_id];
 
         d.name = product.name_en;
         _.extend(d, product);
