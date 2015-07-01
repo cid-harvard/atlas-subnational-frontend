@@ -4,12 +4,17 @@ export default Ember.Component.extend({
   classNames: ['settings__input'],
   slider: {},
   sliderOptions: {},
+  initSlider: function() {
+    this.setSliderConfig();
+    this.createSlider();
+    this.bindListeners();
+  },
   setSliderConfig: function() {
     let type = this.get('type');
 
     if(type === 'time') {
       this.set('sliderOptions', {
-        start: [ 2013, 2014 ],
+        start: [2013, 2014],
         step: 1,
         margin: 1,
         connect: true,
@@ -25,7 +30,7 @@ export default Ember.Component.extend({
       });
     } else if(type === 'rca' || type === 'similarity') {
       this.set('sliderOptions', {
-        start: 1,
+        start: [1],
         step: 1,
         behaviour: 'tap',
         range: {
@@ -38,13 +43,6 @@ export default Ember.Component.extend({
         }
       });
     }
-  },
-  setSliderRange: function() {
-    // Get array with range of all years
-  },
-  initSlider: function() {
-    this.setSliderConfig();
-    this.createSlider();
   },
   createSlider: function() {
     this.slider = document.getElementById(this.elementId);
@@ -65,7 +63,19 @@ export default Ember.Component.extend({
         values: opt.pips.values
       }
     });
-    // debugger;
+  },
+  setSliderRange: function() {
+    // Get array with range of all years
+  },
+  bindListeners: function() {
+    this.slider.noUiSlider.on('update', (values, handle)=> {
+      // this.set('time', values);
+      // if(this.get('type') ===) {
+
+      // } else if() {
+
+      // }
+    });
   },
   didInsertElement: function() {
     this.initSlider();
