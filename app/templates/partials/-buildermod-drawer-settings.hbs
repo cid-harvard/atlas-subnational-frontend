@@ -1,4 +1,14 @@
 <div class="buildermod__drawer buildermod__drawer--settings">
-  <label for="buildermod__settings__slider--time" class="buildermod__settings__slider">Change time period:</label>
-  {{input-slider}}
+  <div class="settings__input__wrap">
+    <label for="settings__slider--time" class="settings__slider">Change time period:</label>
+    {{input-slider id="settings__slider--time" type="time"}}
+  </div>
+  <div class="settings__input__wrap">
+    <label for="settings__slider--rca" class="settings__slider">RCA value needed to circle {{entityName}}:</label>
+    {{input-slider id="settings__slider--rca" type="rca"}}
+  </div>
+  <div class="settings__input__wrap">
+    <label for="settings__slider--similarity" class="settings__slider">Similarity value needed to connect {{entityName}}:</label>
+    {{input-slider id="settings__slider--similarity" type="similarity"}}
+  </div>
 </div>
