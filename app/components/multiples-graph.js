@@ -232,6 +232,9 @@ export default Ember.Component.extend({
   graphIsActive: computed(function() {
     return this.get('nestedData').length > this.firstSlice;
   }),
+  hasMore: computed('nestedData.[]', function() {
+    return this.get('nestedData').length > this.firstSlice;
+  }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.initCharts();

@@ -5,11 +5,13 @@ const {computed, observer, get:get } = Ember;
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   needs: 'application', // inject the application controller
-  queryParams: ['entity', 'entity_id', 'source', 'variable', 'vis', 'search'],
+  queryParams: ['entity', 'entity_id', 'source', 'variable', 'vis', 'search', 'rca', 'startDate', 'endDate'],
   source: 'products',
   vis: 'treemap',
   variable: 'export_value',
   search: null,
+  startDate: null,
+  endDate: null,
   searchText: computed.oneWay('search'),
   builderNavDropDown: Ember.String.htmlSafe("<i class='icon-cidcon_placeholder-1 builder__icon--placeholder'></i>"),
 
@@ -58,6 +60,7 @@ export default Ember.Controller.extend({
   }),
   filteredData: computed('immutableData.[]', 'vis', 'search', function() {
     let data = this.get('immutableData');
+    this.get('')
     if(this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
     if(this.get('search')){ data = this.searchFilter(data); }
     return data;
