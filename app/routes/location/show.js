@@ -11,6 +11,7 @@ export default Ember.Route.extend({
     return this.store.find('location', params.location_id);
   },
   afterModel: function(model, transition) {
+    // extract year out later
     var year = Ember.getWithDefault(transition, 'queryParams.year', 2012);
 
     var products = Ember.$.getJSON(`${apiURL}data/products?location=${model.id}&year=${year}`);
@@ -38,7 +39,7 @@ export default Ember.Route.extend({
         _.extend(d, productData);
       });
 
-      //all department data for 2012
+      //all department data for  ${year}
       _.each(departmentsData, function(d) {
         let department = _.find(departmentsDataAll, {department_id: d.department_id, year: year});
         d.name = locationsMetadata[d.department_id].name_en;
