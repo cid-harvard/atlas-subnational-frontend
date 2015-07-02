@@ -32,6 +32,10 @@ export default Ember.Component.extend({
           marks: [{
             type: 'circle',
             var_r: 'export_value'
+          },{
+            var_mark: '__highlighted',
+            type: d3.scale.ordinal().domain([true, false]).range(["text", "none"]),
+            rotate: "0"
           }]
         }],
         time: {
@@ -52,13 +56,13 @@ export default Ember.Component.extend({
       return [];
 
     if(step == 1)
-      return [];
+      return ['115'];
 
     if(step == 2)
-      return [];
+      return ['117'];
 
     if(step == 3)
-      return [];
+      return ['202'];
 
   }),
   draw: function() {
