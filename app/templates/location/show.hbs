@@ -29,8 +29,8 @@
       </thead>
       <tbody>
         <tr class="table__row table__row--body">
-          <td class="table__cell">GDP</td>
-          <td class="table__cell">
+          <td class="table__cell table__cell--summaries">GDP</td>
+          <td class="table__cell table__cell--summaries">
           {{dot-plot
             elementId='dotplot--gdp'
             data=departmentsData
@@ -40,8 +40,8 @@
             currentLocation=locationId
             }}
           </td>
-          <td class="table__cell">$8.2M</td>
-          <td class="table__cell">
+          <td class="table__cell table__cell--summaries">$8.2M</td>
+          <td class="table__cell table__cell--summaries">
             {{spark-line
               yVar='gdp_real'
               data=timeSeriesData
@@ -92,8 +92,8 @@
             </thead>
             <tbody>
               <tr class="table__row table__row--body">
-                <td class="table__cell">Total exports</td>
-                <td class="table__cell">
+                <td class="table__cell table__cell--summaries">Total exports</td>
+                <td class="table__cell table__cell--summaries">
                   {{dot-plot
                     elementId='dotplot--exports'
                     data=departmentsData
@@ -103,8 +103,8 @@
                     currentLocation=locationId
                     }}
                 </td>
-                <td class="table__cell">$8.2M</td>
-                <td class="table__cell">
+                <td class="table__cell table__cell--summaries">$8.2M</td>
+                <td class="table__cell table__cell--summaries">
                 {{spark-line
                   yVar='gdp_real'
                   data=timeSeriesData
@@ -167,8 +167,8 @@
       </thead>
       <tbody>
         <tr class="table__row table__row--body">
-          <td class="table__cell">Overall export complexity</td>
-          <td class="table__cell">
+          <td class="table__cell table__cell--summaries">Overall export complexity</td>
+          <td class="table__cell table__cell--summaries">
           {{dot-plot
             elementId='dotplot--complexity'
             data=departmentsData
@@ -178,8 +178,8 @@
             currentLocation=locationId
             }}
           </td>
-          <td class="table__cell">0.3</td>
-          <td class="table__cell">
+          <td class="table__cell table__cell--summaries">0.3</td>
+          <td class="table__cell table__cell--summaries">
             {{spark-line
               yVar='population'
               data=timeSeriesData
@@ -227,9 +227,9 @@
         <tbody class="table__tbody table__tbody--complexity table__tbody--scroller">
           {{#each export in model.currentExports }}
             <tr class="table__row table__row--complexity table__row--scroller">
-              <td class="table__cell table__cell--scroller table__cell--complexity">{{export.name}}</td>
-              <td class="table__cell table__cell--scroller table__cell--complexity">{{export.value}}</td>
-              <td class="table__cell table__cell--scroller table__cell--complexity">{{export.growth}}</td>
+              <td class="table__cell table__cell--summaries table__cell table__cell--summaries--scroller table__cell table__cell--summaries--complexity">{{export.name}}</td>
+              <td class="table__cell table__cell--summaries table__cell table__cell--summaries--scroller table__cell table__cell--summaries--complexity">{{export.value}}</td>
+              <td class="table__cell table__cell--summaries table__cell table__cell--summaries--scroller table__cell table__cell--summaries--complexity">{{export.growth}}</td>
             </tr>
           {{/each}}
         </tbody>
