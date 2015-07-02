@@ -23,7 +23,7 @@ export default Ember.Component.extend({
     .params({
       type: 'sparkline',
       container: this.get('id'),
-      width: this.get('width'),
+      width: this.get('width') - 60,
       height: this.get('height'),
       margin: {top: 10, right: 10, bottom: 10, left: 10},
       data: data,
@@ -34,7 +34,7 @@ export default Ember.Component.extend({
       time: {
         var_time: 'year',
         parse: d3.time.format("%Y").parse,
-        current_time: '2013'
+        current_time: '2012'
       },
       items: [{
         attr: 'name',
