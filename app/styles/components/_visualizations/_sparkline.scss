@@ -6,6 +6,9 @@
 
 // Nested here instead of giving every el a class in the js
 .sparkline {
+
+  display: inline-block;
+
   .connect__path {
     fill: none;
     stroke: #000;
