@@ -25,7 +25,7 @@ export default Ember.Component.extend({
       container: this.get('id'),
       width: this.get('width'),
       height: this.get('height'),
-      margin: {top: 0, right: 0, bottom: 0, left: 0},
+      margin: {top: 10, right: 10, bottom: 10, left: 10},
       data: data,
       var_y: this.get('yVar'),
       var_x: 'year',
@@ -34,7 +34,7 @@ export default Ember.Component.extend({
       time: {
         var_time: 'year',
         parse: d3.time.format("%Y").parse,
-        current_time: '2012'
+        current_time: '2013'
       },
       items: [{
         attr: 'name',
