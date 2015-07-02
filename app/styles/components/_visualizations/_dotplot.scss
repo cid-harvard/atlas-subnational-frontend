@@ -8,8 +8,8 @@
 .dotplot {
 
   .items__mark__diamond {
-    fill: gray;
-    opacity: .1;
+      fill: gray;
+      opacity: .1;
   }
 
   .items__mark__diamond.highlighted {
@@ -22,7 +22,7 @@
     opacity: 1;
   }
 
-  .items__mark__text {
+  .items__mark__text.selected {
     display: none;
   }
 
@@ -34,9 +34,4 @@
     stroke: #000;
     stroke-dasharray: 1,1
   }
-
-  .tick > text {
-    font-size: 1.5rem;;
-  }
-
 }
