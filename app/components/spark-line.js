@@ -30,6 +30,7 @@ export default Ember.Component.extend({
       var_y: this.get('yVar'),
       var_x: 'year',
       var_id: 'department_id',
+      var_group: this.get('varId'),
       time: {
         var_time: 'year',
         parse: d3.time.format("%Y").parse,
