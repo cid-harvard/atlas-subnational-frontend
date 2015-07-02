@@ -5,13 +5,13 @@ const {computed, observer, get:get } = Ember;
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   needs: 'application', // inject the application controller
-  queryParams: ['entity', 'entity_id', 'source', 'variable', 'vis', 'search', 'rca', 'startDate', 'endDate'],
+  queryParams: ['entity', 'entity_id', 'source', 'variable', 'vis', 'search', 'rca', 'startDate', 'endDate', 'similarity'],
   source: 'products',
   vis: 'treemap',
   variable: 'export_value',
   search: null,
-  startDate: null,
-  endDate: null,
+  startDate: '2009',
+  endDate: '2011',
   searchText: computed.oneWay('search'),
   builderNavDropDown: Ember.String.htmlSafe("<i class='icon-cidcon_placeholder-1 builder__icon--placeholder'></i>"),
 
@@ -50,6 +50,13 @@ export default Ember.Controller.extend({
       return get(d,'name').match(regexp) || get(d, 'code').match(regexp);
     });
   },
+  yearFilter: function(data) {
+    let timeRange = d3.range(this.get('startDate'), this.get('endDate'));
+
+    return _.filter(data, (d) => {
+      return _.contains(timeRange, get(d, 'year'));
+    });
+  },
   immutableData: computed('source','entity', 'entity_id',function() {
     let source = this.get('source');
     if(source  === 'products') {
@@ -60,9 +67,9 @@ export default Ember.Controller.extend({
   }),
   filteredData: computed('immutableData.[]', 'vis', 'search', function() {
     let data = this.get('immutableData');
-    this.get('')
     if(this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
     if(this.get('search')){ data = this.searchFilter(data); }
+    this.yearFilter(data);
     return data;
   }),
   visualizationComponent: computed('vis', function(){
