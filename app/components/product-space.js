@@ -3,7 +3,7 @@ import productSpace from '../fixtures/product_space';
 const { computed } = Ember;
 
 export default Ember.Component.extend({
-  tagName: 'svg',
+  tagName: 'div',
   attributeBindings: ['width','height'],
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
@@ -15,32 +15,45 @@ export default Ember.Component.extend({
     return this.get('height') - 60;
   }),
   productSpace: computed('data', function() {
-    return vistk.viz()
-      .nodes(productSpace.nodes)
-      .links(productSpace.edges)
-      .data(this.get('data'))
-      .height(this.get('h'))
-      .width(this.get('w'))
-      .type("nodelink")
-      .container(this.get('id'))
-      .x_var("nb_products")
-      .y_var("avg_products")
-      .id("product_id")
-      .group("category")
-      .size("value")
-      .time(2012)
-      .color("category")
-      .title("Product space")
-      .time({var_time: "year", current_time: 2008})
-      .ui(false);
+    return vistk.viz().params({
+        type: 'productspace',
+        height: 300,
+        width: 500,
+        container: this.get('id'),
+        margin: {top: 0, right: 0, bottom: 30, left: 30},
+        nodes: productSpace.nodes,
+        links: productSpace.edges,
+        data: this.get('data'),
+        var_x: 'x',
+        var_y: 'y',
+        x_axis_show: false,
+        x_grid_show: false,
+        y_axis_show: false,
+        y_grid_show: false,
+        var_id: this.get('varId'),
+        items: [{
+          attr: 'name',
+          marks: [{
+            type: 'circle',
+            var_r: 'export_value'
+          }]
+        }],
+        time: {
+          var_time: 'year',
+          current_time: '2012',
+          parse: function(d) { return d; },
+          filter: '2012'
+        },
+        selection: ['115', '116', '117', '118', '119', '120', '121', '122', '123', '124', '125'],
+        highlight: ['115', '201', '202', '203', '204', '205', '206', '207', '208', '161']
+      })
   }),
   draw: function() {
     d3.select(this.get('id'))
       .call(this.get('productSpace'));
   },
   didInsertElement: function() {
-    this.draw();
+    //this.draw();
   }
 });
-
 

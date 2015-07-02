@@ -11,6 +11,7 @@
   width: $sidebarWidth;
   height: 100%;
   text-align: center;
+  z-index: $zIndex-9;
 }
 
 
@@ -28,7 +29,7 @@
 }
 
 .branding__slogan {
-  color: $colorNavy200;
+  color: $colorWhite;
   font-size: $fontTiny;
 }
 
@@ -42,11 +43,28 @@
 // Buttons
 .sidebar__btn {
   font-size: $fontTiny;
-  color: $colorNavy600;
+  color: $colorNavy400;
+  &:hover {
+    color: $colorWhite;
+    .sidebar__btn__icon:before {
+      color: $colorWhite;
+    }
+  }
+}
+
+.sidebar__btn__icon:before {
+  display: block;
+  color: $colorNavy400;
+  font-size: $fontXLarge;
+  margin: 0 auto;
 }
 
 .sidebar__btn--is--active {
+  .sidebar__btn__icon:before {
+    color: $colorWhite;
+  }
   color: $colorWhite;
+  font-weight: 500;
 }
 
 
@@ -102,7 +120,7 @@
 }
 
 .toggle__label__text {
-  color: $colorNavy600;
+  color: $colorNavy400;
   font-size: $fontTiny;
   display: inline;
   vertical-align: 10px;

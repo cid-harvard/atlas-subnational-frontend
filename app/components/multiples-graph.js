@@ -1,29 +1,32 @@
 import Ember from 'ember';
-const {computed} = Ember;
+const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
-  classNames: ['multiples'],
   margin: { top: 20, right: 15, bottom: 30, left: 35 },
   height: 140,
+  firstSlice: 40,
   width: computed(function() {
     return this.$('.multiple:first').width() - this.get('margin.left') - this.get('margin.right');
   }),
   id: computed('elementId', function() {
-    return `#${this.get('elementId')}`;
+    return '#multiples';
   }),
-  xExtent: computed('data', function() {
-    return d3.extent(this.get('data'), function(d) { return d.year;} );
+  xExtent: computed('immutableData.[]', function() {
+    return d3.extent(this.get('immutableData'), function(d) { return d.year;} );
   }),
-  xRange: computed('data', function() {
-    return  _.chain( this.get('data') )
+  xRange: computed('immutableData.[]', function() {
+    return  _.chain( this.get('immutableData') )
       .pluck('year')
       .uniq()
       .value();
   }),
-  nestedData: computed('data', function() {
+  varId: computed(function() {
+    return 'name';
+  }),
+  nestedData: computed('data','firstSlice', function() {
     let key = this.get('varId');
     let xRange = this.get('xRange');
-    let varY = this.get('varY');
+    let varDependent = this.get('varDependent');
     var nest = d3.nest()
       .key(function(d) { return Ember.get(d, key); })
       .entries(this.get('data'));
@@ -34,9 +37,12 @@ export default Ember.Component.extend({
       .value();
 
     return _.sortBy(nest, function(d) {
-       return -Ember.get(_.last(d.values), varY);
-    }).slice(0, 40); //last year data
+       return -Ember.get(_.last(d.values), varDependent);
+    }); //last year data
   }),
+  firstSliceData: function(nested) {
+    return nested.slice(0, this.firstSlice);
+  },
   formatNumber: function(num) {
     var prefix = d3.formatPrefix(num);
     return prefix.scale(num).toFixed(0) + prefix.symbol.replace(/G/,'B');
@@ -44,13 +50,9 @@ export default Ember.Component.extend({
   truncateYear: function(year) {
     return '’' + year.toString().slice(-2);
   },
-  maxValue: computed(function () {
-    let nestedData = this.get('nestedData');
-    let varY = this.get('varY');
-    nestedData.forEach(function(year) {
-      year.maxValue = d3.max(year.values, function(d) { return Ember.get(d, varY); });
-    });
-    return d3.max(nestedData, function(d) { return d.maxValue; });
+  maxValue: computed('immutableData.[]', function () {
+    let varDependent = this.get('varDependent');
+    return d3.max(this.get('immutableData'), function(d) { return Ember.get(d, varDependent); });
   }),
   xScale: computed('width', function() {
     return d3.scale.linear()
@@ -72,25 +74,26 @@ export default Ember.Component.extend({
     .orient('left');
   }),
   area: computed(function() {
-    let varY = this.get('varY');
+    let varDependent = this.get('varDependent');
     return d3.svg.area()
       .x((d) => { return this.get('xScale')(d.year); })
-      .y((d) => { return this.get('yScale')(Ember.get(d, varY)); })
+      .y((d) => { return this.get('yScale')(Ember.get(d, varDependent)); })
       .y0(this.get('height'));
   }),
   line: computed(function() {
-    let varY = this.get('varY');
+    let varDependent = this.get('varDependent');
     return d3.svg.line()
       .x((d) => { return this.get('xScale')(d.year); })
-      .y((d) => { return this.get('yScale')(Ember.get(d, varY)); });
+      .y((d) => { return this.get('yScale')(Ember.get(d, varDependent)); });
   }),
   initCharts: function() {
 
-    let data = this.get('nestedData');
+    let data = this.firstSliceData(this.get('nestedData'));
 
-    var div = d3.select(this.get('id')).selectAll('div')
-      .data(data)
-    .enter().append('div')
+    var container = d3.select(this.get('id')).selectAll('div')
+      .data(data, function(d,i) { return [d.key, i]; });
+
+    var div = container.enter().append('div')
       .attr('class', 'multiple');
 
     let margin = this.get('margin');
@@ -103,10 +106,11 @@ export default Ember.Component.extend({
     let area = this.get('area');
     let formatNumber = this.get('formatNumber');
     let truncateYear = this.get('truncateYear');
-    let varY = this.get('varY');
+    let varDependent = this.get('varDependent');
 
     div.append('h3')
       .attr('class', 'chart__title')
+      .on('click', expandTitle)
       .text(function(d) { return d.key; });
 
     var svg = div.append('svg')
@@ -172,6 +176,10 @@ export default Ember.Component.extend({
       .attr('dy', 13)
       .attr('y', h);
 
+    function expandTitle() {
+      this.classList.add('chart__title--is--expanded');
+    }
+
     function mouseover() {
       hoverMarker.attr('opacity', 1);
       d3.selectAll('.static_year').classed( 'hidden', true);
@@ -188,21 +196,21 @@ export default Ember.Component.extend({
         .attr('y', function(d) {
           index = bisect(d.values, date, 0, d.values.length - 1);
 
-          let yValue = Ember.get(d.values[index], varY);
+          let yValue = Ember.get(d.values[index], varDependent);
           return y(yValue);
         })
         .attr('transform', function(d) {
-          let yValue = Ember.get(d.values[index], varY);
+          let yValue = Ember.get(d.values[index], varDependent);
           return 'translate(0, -3.54) rotate( 45 ' + x(date) + ' ' + y(yValue) + ')';
         });
 
       caption.attr('x', x(date))
         .attr('y', function(d) {
-          let yValue = Ember.get(d.values[index], varY);
+          let yValue = Ember.get(d.values[index], varDependent);
           return y(yValue);
         })
         .text(function(d) {
-          let yValue = Ember.get(d.values[index], varY);
+          let yValue = Ember.get(d.values[index], varDependent);
           return '$' + formatNumber(yValue);
         });
 
@@ -216,10 +224,26 @@ export default Ember.Component.extend({
       caption.text('');
       curYear.text('');
     }
+    container.exit().remove();
   },
+  graphIsActive: computed(function() {
+    return this.get('nestedData').length > this.firstSlice;
+  }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.initCharts();
     });
+  },
+  update: observer('data.[]', 'varDependent', 'dataType', 'vis', function() {
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      this.initCharts();
+    });
+  }),
+  actions: {
+    showAll: function() {
+      this.set('firstSlice', this.get('nestedData').length);
+      this.initCharts();
+    }
   }
 });
+

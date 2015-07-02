@@ -1,0 +1,120 @@
+/**
+*
+* Buildermod Drawer
+*
+**/
+
+.buildermod--is--open--settings {
+  .buildermod__drawer--settings {
+    display: block;
+  }
+  .buildermod__tool--settings {
+    background: $colorBrown300;
+    border-left-color: $colorBrown300;
+    .tool__btn__icon:before {
+      content: '\f00d';
+    }
+  }
+  .buildermod__tool--changegraph {
+    border-left-color: $colorBrown300;
+  }
+  .buildermod__vizwrap {
+    border-width: 0;
+  }
+  .buildermod__viz {
+    display: none;
+  }
+}
+
+.buildermod--is--open--changegraph {
+  .buildermod__drawer--changegraph {
+    display: block;
+  }
+  .buildermod__tool--changegraph {
+    background: $colorBrown300;
+    border-left-color: $colorBrown300;
+    .tool__btn__icon:before {
+      content: '\f00d';
+    }
+  }
+  .buildermod__vizwrap {
+    border-width: 0;
+    overflow-y: hidden;
+  }
+  .buildermod__viz {
+    // visibility: hidden;
+    display: none;
+  }
+}
+
+.buildermod__drawer {
+  background: $colorBrown300;
+  position: absolute;
+  z-index: $zIndex-2;
+  left: 0;
+  right: 0;
+  top: 0;
+  min-height: 100%;
+  padding: $baseSpace * 1.5;
+  display: none;
+}
+
+.changegraph__radioswrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.changegraph__radiowrap {
+  width: 25%;
+  &:nth-of-type(4n+1) {
+    padding: 0 $baseSpace*0.75 $baseSpace 0;
+  }
+  &:nth-of-type(4n+2) {
+    padding: 0 $baseSpace*0.5 $baseSpace $baseSpace*0.25;
+  }
+  &:nth-of-type(4n+3) {
+    padding: 0 $baseSpace*0.25 $baseSpace $baseSpace*0.5;
+  }
+  &:nth-of-type(4n) {
+    padding: 0 0 $baseSpace $baseSpace*0.75;
+  }
+}
+
+.changegraph__radio {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  &:checked ~ .changegraph__radio__target {
+    background: $colorBrown100;
+    color: $colorGrayDark;
+    border: 1px solid $colorBrown200;
+  }
+}
+
+.changegraph__radio__target {
+  transition: color 0.2s ease-in-out, background 0.2s ease-in-out;
+  background: $colorBrown200;
+  color: $colorGray;
+  padding: 6.2rem $baseSpace $baseSpace; // revisit for better horizontal centering mebbe
+  height: $baseSpace*9;
+  width: 100%;
+  pointer-events: none;
+  text-align: center;
+  line-height: 120%;
+  &:hover {
+    background: $colorBrown100;
+    color: $colorGrayDark;
+  }
+}
+
+.changegraph__radio--is--possible {
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.changegraph__icon {
+  display: block;
+  font-size: $fontXLarge;
+  margin: 0 auto $baseSpace/2;
+}

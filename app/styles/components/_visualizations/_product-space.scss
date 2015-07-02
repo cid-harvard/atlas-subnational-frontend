@@ -4,14 +4,36 @@
 *
 **/
 
-.node {
+.connect__line {
+  stroke: #E1DCD6;
+  stroke-opacity: .4;
+}
+
+.items__mark__star {
+  fill: yellow;
+  stroke-width: .5px;
+  stroke: black;
+}
+
+.items__mark__star.selected {
+  stroke-width: 1px;
+}
+
+.items__mark__star.highlighted {
+  fill: yellow;
+  stroke-width: 1.5px;
+}
+
+.items__mark__circle {
+  fill: #CDC5BC;
+}
+
+.items__mark__circle.highlighted {
+  fill: #CDC5BC;  
   stroke: black;
   stroke-width: 1.5px;
-  fill: white;
 }
 
-.link {
-  stroke: #999;
-  stroke-opacity: .6;
+.items__mark__circle.selected {
+  fill: #EA413D;
 }
-

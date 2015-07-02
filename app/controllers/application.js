@@ -2,6 +2,10 @@ import Ember from 'ember';
 const {observer, computed, on, set:set} = Ember;
 
 export default Ember.Controller.extend({
+  needs: ['location/show', 'graph-builder', 'search'],
+  //use entity and entity_id to build the nav links
+  entity: 'location',
+  entity_id: '1044',
   language: Ember.$.cookie('lang') === 'es',
   initLanguage: on('init', function(){
     var application = this.container.lookup('application:main');
@@ -33,5 +37,8 @@ export default Ember.Controller.extend({
   }),
   industriesMetadata: computed('model.industries', function() {
     return this.get('model.industries');
+  }),
+  profileLink: computed('entity', 'entity_id', function(){
+    if(this.get('entity') === 'location') { return 'location.show'; }
   })
 });

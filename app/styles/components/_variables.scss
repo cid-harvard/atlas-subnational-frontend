@@ -4,6 +4,12 @@
 *
 **/
 
+/* ==========  Type Palette  ========== */
+$icon: 'FontAwesome';
+$sans: 'Circular', arial, sans-serif;
+$sansAlt: 'Platform Web', 'Arial Black', arial, sans-serif;
+
+
 /* ==========  Color Palettes  ========== */
 
 $colorBlack: rgb( 25, 25, 20 );
@@ -12,7 +18,7 @@ $colorGray: rgb( 140, 140, 138 );
 $colorGrayLight: rgb( 198, 198, 196 );
 $colorGrayLighter: rgb( 221, 221, 220 );
 $colorGrayLightest: rgb( 232, 232, 232 );
-$colorWhite: rgb( 240, 240, 240 );
+$colorWhite: rgb( 255, 255, 255 );
 
 $colorBrown: rgb( 153, 131, 115 );
 $colorBrown900: rgb( 163, 143, 129 );
@@ -63,6 +69,7 @@ $huge: 160rem !default;
 $fontIcon: 'icons' !default;
 
 // Defining font sizes
+$fontXTiny: 1rem !default;
 $fontTiny: 1.3rem !default;
 $fontSmall: 1.6rem  !default;
 $fontBase: 2rem !default;
@@ -85,7 +92,7 @@ $animationEasing: cubic-bezier(0.455, 0.030, 0.515, 0.955) !default;
 
 /* ==========  Layout  ========== */
 
-$sidebarWidth: $baseSpace * 6;
+$sidebarWidth: 15%;
 
 
 /* ==========  Z-index  ========== */

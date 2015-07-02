@@ -6,6 +6,8 @@
 
 .stream__section {
   margin: $baseSpace*3;
+  z-index: $zIndex-2;
+  position: relative;
 }
 
 .section__header {
@@ -16,6 +18,7 @@
   font-size: $fontXLarge;
   line-height: $baseSpace * 1.5;
   padding-bottom: $baseSpace / 2;
+  font-family: $sansAlt;
 }
 
 .section__intro {
