@@ -19,21 +19,10 @@
   &:last-of-type {
     border-right-width: 0px;
   }
-  &:nth-of-type(2) {
-    width: 80%;
-    height: 200px;
-  }
 }
 
 .table__row--body:last-of-type .table__cell {
   border-bottom-width: 0px;
-}
-
-
-// Summary table
-.table--summaries {
-  margin-bottom: $baseSpace;
-  width: 100%;
 }
 
 
