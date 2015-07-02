@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
   needs: ['location/show', 'graph-builder', 'search'],
   //use entity and entity_id to build the nav links
   entity: 'location',
-  entity_id: 'colombia',
+  entity_id: '1044',
   language: Ember.$.cookie('lang') === 'es',
   initLanguage: on('init', function(){
     var application = this.container.lookup('application:main');
