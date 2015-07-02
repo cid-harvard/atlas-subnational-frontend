@@ -1,0 +1,23 @@
+/**
+*
+* Table Summaries
+* This is the one with the dot plots and spark lines
+*
+**/
+
+.table--summaries {
+  margin-bottom: $baseSpace;
+  width: 100%;
+}
+
+.table__header--summaries--dotplot {
+  width: 50%;
+}
+
+.table__header--summaries--spark {
+  width: 20%;
+}
+
+.table__cell--summaries {
+  height: 70px; // A reminder that height acts as min-height for table cells
+}

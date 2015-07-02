@@ -4,6 +4,8 @@
 *
 **/
 
+// Nested here instead of giving every el a class in the js
+.sparkline {
   .connect__path {
     fill: none;
     stroke: #000;
@@ -24,3 +26,4 @@
     fill: red;
     opacity: 1;
   }
+}

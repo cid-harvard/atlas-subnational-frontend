@@ -4,7 +4,7 @@ const { computed } = Ember;
 
 export default Ember.Component.extend({
   tagName: 'div',
-  classNames: ['something-something'],
+  classNames: ['sparkline'],
   attributeBindings: ['width','height'],
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
