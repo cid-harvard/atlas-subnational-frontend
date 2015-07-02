@@ -52,7 +52,6 @@ export default Ember.Controller.extend({
   },
   yearFilter: function(data) {
     let timeRange = d3.range(this.get('startDate'), this.get('endDate'));
-
     return _.filter(data, (d) => {
       return _.contains(timeRange, get(d, 'year'));
     });
@@ -69,7 +68,7 @@ export default Ember.Controller.extend({
     let data = this.get('immutableData');
     if(this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
     if(this.get('search')){ data = this.searchFilter(data); }
-    this.yearFilter(data);
+    data = this.yearFilter(data);
     return data;
   }),
   visualizationComponent: computed('vis', function(){

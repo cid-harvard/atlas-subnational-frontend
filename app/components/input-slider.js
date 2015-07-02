@@ -84,7 +84,7 @@ export default Ember.Component.extend({
     // Get array with range of all years
   },
   bindListeners: function() {
-    this.slider.noUiSlider.on('update', (values, handle)=> {
+    this.slider.noUiSlider.on('update', (values)=> {
       if(this.get('type') === 'time') {
         this.set('startDate', values[0]);
         this.set('endDate', values[1]);

@@ -12,7 +12,6 @@ export default Ember.Component.extend({
     return `#${this.get('elementId')}`;
   }),
   treemap: computed('data.[]', 'varDependent', 'dataType', 'vis', function() {
-    var maxYear = d3.max(this.get('data'), function(d) { return d.year;} );
     return d3plus.viz()
       .container(this.get('id'))
       .data({value: this.get('data'), padding: 5})
