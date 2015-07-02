@@ -17,6 +17,14 @@ export default Ember.Component.extend({
       pips: {
         mode: 'count',
         values: 9
+      },
+      format: {
+        to: function (value) {
+          return value;
+        },
+        from: function (value) {
+          return value.replace(',-', '');
+        }
       }
     };
   }),
@@ -65,19 +73,14 @@ export default Ember.Component.extend({
     let opt = this.get('sliderOptions');
 
     noUiSlider.create(this.slider, {
-      start: opt.start , // Handle start position
+      start: opt.start, // Handle start position
       step: opt.step, // Slider moves in increments of '10'
       margin: opt.margin, // Handles must be more than one step apart
       connect: opt.connect, // Display a colored bar between the handles
       behaviour: opt.behaviour, // Move handle on tap, bar is draggable
-      range: { // Slider can select '0' to '100'
-        'min': opt.range.min,
-        'max': opt.range.max
-      },
-      pips: { // Show a scale with the slider
-        mode: opt.pips.mode,
-        values: opt.pips.values
-      }
+      range: opt.range, // Slider can select '0' to '100',
+      pips: opt.pips, // Show a scale with the slider
+      format: opt.format // Convert vals from floats to ints
     });
   },
   setSliderRange: function() {
