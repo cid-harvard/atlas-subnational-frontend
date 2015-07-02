@@ -23,7 +23,6 @@ export default Ember.Component.extend({
       .color({value: 'grey'})
       .format({number: function(d) { return numeral(d).format('$ 0.0a');}})
       .zoom(false)
-      .time({value: "year", "solo": maxYear })
       .text({value: (d) => { return Ember.get(d, `name_${this.get('i18n').locale}`) || d.code;}})
       .timeline(false)
       .height(this.get('height'))
