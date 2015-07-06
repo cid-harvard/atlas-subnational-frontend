@@ -5,6 +5,42 @@
 * Only use woff2 and woff, re: http://davidensinger.com/2014/10/update-your-font-face-file-formats-to-just-use-woff-and-woff2/
 **/
 
+/* ==========  CIDcons  ========== */
+
+@font-face {
+  font-family: 'cidcons';
+  src: url('../fonts/cidcons.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-cidcon_"]:before, [class*=" icon-cidcon_-"]:before {
+  font-family: 'cidcons';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+
+  @include offset-text;
+}
+
+
 /* ==========  Platform  ========== */
 
 @font-face {
