@@ -1,19 +1,11 @@
 <article class="stream builder">
-  <div class="pentagon"></div>
   <header class="stream__header">
     <img src="assets/img/builder/pentagon-test.svg" class="builder__pentagon">
     <h2 class="stream__head">{{model.name_en}}</h2>
-    <ol class="breadcrumbs">
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Location</a></li>
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Colombia</a></li>
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">{{model.name_en}}</a></li>
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Graph Builder</a></li>
-    </ol>
   </header>
   <section class="stream__section">
     <header class="section__header builder__header">
       <h3 class="section__head">{{pageTitle}}</h3>
-      <p>Note: Values below are in Colombian pesos, but the symbols (M, B) are according to U.S. customs. 1M = 1,000,000 and 1B = 1,000,000,000.</p>
     </header>
     <div {{bind-attr class=":section__buildermod drawerSettingsIsOpen:buildermod--is--open--settings drawerChangeGraphIsOpen:buildermod--is--open--changegraph"}}>
       <header class="buildermod__header">
