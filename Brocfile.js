@@ -43,11 +43,8 @@ app.import('bower_components/font-awesome/fonts/fontawesome-webfont.woff2', { de
 app.import('bower_components/font-awesome/fonts/FontAwesome.otf', { destDir: 'fonts' });
 
 // CIDcons
-app.import('vendor/css/cidcons/cidcons.css');
-app.import('vendor/fonts/cidcons/cidcons.eot', { destDir: 'fonts' });
-app.import('vendor/fonts/cidcons/cidcons.svg', { destDir: 'fonts' });
-app.import('vendor/fonts/cidcons/cidcons.ttf', { destDir: 'fonts' });
-app.import('vendor/fonts/cidcons/cidcons.woff', { destDir: 'fonts' });
+app.import('bower_components/cidcons/css/cidcons-codes.css');
+app.import('bower_components/cidcons/font/cidcons.woff', { destDir: 'fonts' });
 
 // Platform
 app.import('vendor/fonts/platform/Platform-Bold-Web.eot', { destDir: 'fonts' });
