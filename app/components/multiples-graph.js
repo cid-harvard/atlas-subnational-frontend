@@ -43,6 +43,9 @@ export default Ember.Component.extend({
   firstSliceData: function(nested) {
     return nested.slice(0, this.firstSlice);
   },
+  hasMore: computed('nestedData.[]', function() {
+    return this.get('nestedData').length > this.firstSlice;
+  }),
   formatNumber: function(num) {
     var prefix = d3.formatPrefix(num);
     return prefix.scale(num).toFixed(0) + prefix.symbol.replace(/G/,'B');
