@@ -107,9 +107,6 @@ export default Ember.Controller.extend({
   }),
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
-  hasMore: computed('nestedData.[]', function() {
-    return this.get('nestedData').length > this.firstSlice;
-  }),
   actions: {
     search: function() {
       this.set('search', this.get('searchText'));
