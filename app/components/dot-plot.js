@@ -23,6 +23,8 @@ export default Ember.Component.extend({
         var_group: this.get('varId'),
         x_text: null,
         x_ticks: 2,
+        x_tickSize: 0,
+        x_tickPadding: 10,
         x_format: function(d) { return '$' + d3.format(".2s")(d); },
         items: [{
           marks: [{
