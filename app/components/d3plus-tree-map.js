@@ -43,13 +43,15 @@ export default Ember.Component.extend({
   },
   willDestroyElement: function() {
     this.removeObserver('i18n.locale', this, this.update);
+    this.removeObserver('data.[]', this, this.update);
   },
   update: observer('data.[]', 'i18n.locale', function() {
-    Ember.run.scheduleOnce('afterRender', this , function() {
+    if(!this.element){ return false; } //do not redraw if not there
+    Ember.run.later(this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
       this.get('treemap').draw();
-    }, 1000);
+    }, 500);
   })
 });
 
