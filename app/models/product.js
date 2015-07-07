@@ -1,7 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 const {attr} = DS;
-const {computed} = Ember;
 
 export default DS.Model.extend({
   code: attr('number', { defaultValue: 111}),
