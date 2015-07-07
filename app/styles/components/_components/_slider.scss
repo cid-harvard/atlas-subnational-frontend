@@ -1,0 +1,79 @@
+/**
+*
+* Slider
+* Many styles in here overwrite NoUISlider styles, so plz excuse messiness
+*
+**/
+
+// Label
+
+.settings__slider {
+  font-size: $fontSmall;
+  margin: 0 0 $baseSpace $baseSpace/-2;
+  color: $colorBlack;
+}
+
+// Slider
+
+.noUi-base {
+  transform: none;
+}
+
+.noUi-horizontal, .noUi-background {
+  height: 3px;
+  border: none;
+  background: $colorRed500;
+  box-shadow: none;
+}
+
+.noUi-horizontal .noUi-handle {
+  height: 20px;
+  width: 20px;
+  box-shadow: none;
+  cursor: pointer;
+  background: $colorRed;
+  border-radius: 0;
+  border: none;
+  transform: rotate(45deg);
+  top: -8px;
+  left: -10px;
+  &:before,
+  &:after {
+    height: 9px;
+    transform: rotate(-45deg);
+    width: 2px;
+  }
+  &:before {
+    left: 7px;
+    top: 7px;
+  }
+  &:after {
+    left: 10px;
+    top: 4px;
+  }
+}
+
+.noUi-connect {
+  background: $colorRed;
+  cursor: ew-resize;
+  box-shadow: none;
+}
+
+.noUi-marker-normal {
+  display: none;
+}
+
+.noUi-marker-large {
+  height: 10px;
+  width: 3px;
+  top: -9px;
+  background: $colorRed500;
+}
+
+.noUi-value-horizontal {
+  padding-top: 5px;
+  font-family: $sans;
+  font-size: $fontXTiny;
+  color: $colorGray;
+}
+

@@ -10,7 +10,6 @@ export default Ember.Component.extend({
     return `#${this.get('elementId')}`;
   }),
   scatter: computed('data.[]', 'dataType',function() {
-    var maxYear = d3.max(this.get('data'), function(d) {return d.year;} );
     return d3plus.viz()
       .container(this.get('id'))
       .data({value: this.get('data')})
@@ -22,7 +21,6 @@ export default Ember.Component.extend({
       .format({ number: function(d) { return numeral(d).format('0.0a');}})
       .text({value: (d) => { return Ember.get(d, `name_${this.get('i18n').locale}`) || d.code;}})
       .size(this.get('varRca'))
-      .time({'value': 'year', 'solo': maxYear })
       .timeline(false)
       .height(this.get('height'))
       .width(this.get('width'));

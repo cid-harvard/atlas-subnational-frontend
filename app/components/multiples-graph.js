@@ -8,25 +8,20 @@ export default Ember.Component.extend({
   height: 140,
   firstSlice: 40,
   varId: 'code',
+  id: '#multiples',
   width: computed(function() {
     return this.$('.multiple:first').width() - this.get('margin.left') - this.get('margin.right');
   }),
-  id: computed('elementId', function() {
-    return '#multiples';//TODO: SMELL
+  xExtent: computed('startDate', 'endDate', function() {
+    return [this.get('startDate'), this.get('endDate') - 1];
   }),
-  xExtent: computed('immutableData.[]', function() {
-    return d3.extent(this.get('immutableData'), function(d) { return d.year;} );
+  xRange: computed('startDate', 'endDate', function() {
+    return d3.range(this.get('startDate'), this.get('endDate'));
   }),
-  xRange: computed('immutableData.[]', function() {
-    return  _.chain( this.get('immutableData') )
-      .pluck('year')
-      .uniq()
-      .value();
-  }),
-  nestedData: computed('data','firstSlice','i18n.locale', function() {
+  nestedData: computed('data.[]', 'i18n.locale', function() {
     let key = this.get('varId');
-    let xRange = this.get('xRange');
     let varDependent = this.get('varDependent');
+
     var nest = d3.nest()
       .key(function(d) { return Ember.get(d, key); })
       .entries(this.get('data'));
@@ -36,14 +31,9 @@ export default Ember.Component.extend({
       d.name = Ember.get(d.values[0], `name_${this.get('i18n').locale}`) || d.key;
     });
 
-    nest = _.chain(nest)
-      .toArray()
-      .filter(function(d) { return d.values.length === xRange.length; })
-      .value();
-
     return _.sortBy(nest, function(d) {
-       return -Ember.get(_.last(d.values), varDependent);
-    }); //last year data
+       return -_.sum(d.values, varDependent);
+    });
   }),
   hasMore: computed('nestedData.[]', function() {
     return this.get('nestedData').length > this.firstSlice;
@@ -58,17 +48,17 @@ export default Ember.Component.extend({
     let varDependent = this.get('varDependent');
     return d3.max(this.get('immutableData'), function(d) { return Ember.get(d, varDependent); });
   }),
-  xScale: computed('width', function() {
+  xScale: computed('xExtent', 'width', function() {
     return d3.scale.linear()
       .domain(this.get('xExtent'))
       .range([ 0, this.get('width') ]);
   }),
-  yScale: computed('height', function() {
+  yScale: computed('maxValue', 'height', function() {
     return d3.scale.linear()
       .range([this.get('height'), 0])
       .domain([0, this.get('maxValue')]);
   }),
-  yAxis: computed('i18n.locale', function() {
+  yAxis: computed('yScale', 'width', 'i18n.locale', function() {
     return d3.svg.axis()
       .scale(this.get('yScale'))
       .ticks(3)
@@ -77,14 +67,14 @@ export default Ember.Component.extend({
       .tickSize(-this.get('width'))
       .orient('left');
   }),
-  area: computed(function() {
+  area: computed('xScale', 'yScale', 'height',function() {
     let varDependent = this.get('varDependent');
     return d3.svg.area()
       .x((d) => { return this.get('xScale')(d.year); })
       .y((d) => { return this.get('yScale')(Ember.get(d, varDependent)); })
       .y0(this.get('height'));
   }),
-  line: computed(function() {
+  line: computed('xScale', 'yScale',function() {
     let varDependent = this.get('varDependent');
     return d3.svg.line()
       .x((d) => { return this.get('xScale')(d.year); })
@@ -99,10 +89,11 @@ export default Ember.Component.extend({
     var div = container.enter().append('div')
       .attr('class', 'multiple');
 
+    //has to be retrieved after the 'multiple' div is appended.
+    let w = this.get('width');
     let margin = this.get('margin');
     let x = this.get('xScale');
     let y = this.get('yScale');
-    let w = this.get('width');
     let h = this.get('height');
     let yAxis = this.get('yAxis');
     let line = this.get('line');
@@ -137,7 +128,7 @@ export default Ember.Component.extend({
       .attr('dy', 13)
       .attr('y', h)
       .attr('x', 0)
-      .text('’08');
+      .text(truncateYear(this.get('xExtent')[0]));
 
     svg.append('text')
       .attr('class', 'static_year')
@@ -145,7 +136,7 @@ export default Ember.Component.extend({
       .attr('dy', 13)
       .attr('y', h)
       .attr('x', w)
-      .text('’13');
+      .text(truncateYear(this.get('xExtent')[1]));
 
     svg.append('g')
       .attr('class', 'axis axis--y')
@@ -229,7 +220,7 @@ export default Ember.Component.extend({
 
     container.exit().remove();
   },
-  graphIsActive: computed(function() {
+  graphIsActive: computed('nestedData.[]', function() {
     return this.get('nestedData').length > this.firstSlice;
   }),
   didInsertElement: function() {
