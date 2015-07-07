@@ -1,18 +1,17 @@
 import Ember from 'ember';
+import numeral from 'numeral';
+
 const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
+  i18n: Ember.inject.service(),
   tagName: 'div',
   attributeBindings: ['width','height'],
+  varIndependent: ['group', 'code'],
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  varIndependent: computed('dataType', function() {
-    // this should be based on i18n
-    return ['group_name_en','name'];
-  }),
   treemap: computed('data.[]', 'varDependent', 'dataType', 'vis', function() {
-    var maxYear = d3.max(this.get('data'), function(d) { return d.year;} );
     return d3plus.viz()
       .container(this.get('id'))
       .data({value: this.get('data'), padding: 5})
@@ -21,8 +20,14 @@ export default Ember.Component.extend({
       .depth(1)
       .tooltip({children: false})
       .color({value: 'grey'})
+      .format({
+        number: (d, data) => {
+          if('share' == data.key){ return numeral(d).divide(100).format('0.0%'); }
+          return numeral(d).format('$ 0.0a');
+        }
+      })
       .zoom(false)
-      .time({value: "year", "solo": maxYear })
+      .text({value: (d) => { return Ember.get(d, `name_${this.get('i18n').locale}`) || d.code;}})
       .timeline(false)
       .height(this.get('height'))
       .width(this.get('width'))
@@ -36,12 +41,15 @@ export default Ember.Component.extend({
       this.get('treemap').draw();
     });
   },
-  update: observer('data.[]', 'varDependent', 'dataType', 'vis', function() {
-    Ember.run.scheduleOnce('afterRender', this , function() {
+  willDestroyElement: function() {
+    this.removeObserver('i18n.locale', this, this.update);
+  },
+  update: observer('data.[]', 'vardependent', 'datatype', 'vis','i18n.locale', function() {
+    Ember.run.later(this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
       this.get('treemap').draw();
-    });
+    }, 1000);
   })
 });
 

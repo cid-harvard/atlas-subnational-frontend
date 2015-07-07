@@ -24,7 +24,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  What countries does {{model.name_en}} export to?
+                  {{t 'graph_builder.builder_nav.location.locations.export' name=model.name }}
                 {{/link-to}}
               </div>
             </li>
@@ -32,21 +32,27 @@
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What countries does {{model.name_en}} export <i class="icon-cidcon_placeholder-1 builder__icon--placeholder"></i> to?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.locations.export_to' name=model.name item=builderNavDropDown}}
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What countries does {{model.name_en}} import from?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.locations.import_from' name=model.name }}
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What countries does {{model.name_en}} import <i class="icon-cidcon_placeholder-1 builder__icon--placeholder"></i> from?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.locations.import_product_from' name=model.name item=builderNavDropDown }}
+                {{/link-to}}
               </div>
             </li>
           </ul>
@@ -57,56 +63,72 @@
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the exports from {{model.name_en}}?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.locations.export_subregions' name=model.name }}
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the exports of <i class="icon-cidcon_placeholder-1 builder__icon--placeholder"></i> from {{model.name_en}}?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.locations.export_subregions_products' name=model.name item=builderNavDropDown }}
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the exports from {{model.name_en}} to <i class="icon-cidcon_placeholder-1 builder__icon--placeholder"></i>?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.locations.export_subregions_locations' name=model.name place=builderNavDropDown }}
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the exports of <i class="icon-cidcon_placeholder-1 builder__icon--placeholder"></i> from {{model.name_en}} to <i class="icon-cidcon_placeholder-2 builder__icon--placeholder"></i>?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.locations.export_subregions_products_locations' name=model.name  place=builderNavDropDown item=builderNavDropDown }}
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the imports for {{model.name_en}}?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.locations.import_subregions' name=model.name item=builderNavDropDown }}
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the imports of <i class="icon-cidcon_placeholder-1 builder__icon--placeholder"></i> for {{model.name_en}}?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.locations.import_subregions_products' name=model.name item=builderNavDropDown }}
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the imports for {{model.name_en}} from <i class="icon-cidcon_placeholder-1 builder__icon--placeholder"></i>?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.locations.import_subregions_locations' name=model.name place=builderNavDropDown }}
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item builder__nav__item--unavailable">
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What subregions contribute to the imports of <i class="icon-cidcon_placeholder-1 builder__icon--placeholder"></i> for {{model.name_en}} from <i class="icon-cidcon_placeholder-2 builder__icon--placeholder"></i>?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.locations.import_subregions_products_locations' name=model.name place=builderNavDropDown item=builderNavDropDown }}
+                {{/link-to}}
               </div>
             </li>
           </ul>
@@ -123,7 +145,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source="products" variable='export_value' vis='treemap') class="builder__nav__question"}}
-                  What products does {{model.name_en}} export?
+                  {{t 'graph_builder.builder_nav.location.products.export_value' name=model.name}}
                 {{/link-to}}
               </div>
             </li>
@@ -131,7 +153,9 @@
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What products does {{model.name_en}} export to <i class="icon-cidcon_placeholder-1 builder__icon--placeholder"></i>?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.products.export_value_to' name=model.name place=builderNavDropDown}}
+                {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item">
@@ -139,7 +163,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='products' variable='import_value' vis='treemap') class="builder__nav__question"}}
-                  What products does {{model.name_en}} import?
+                  {{t 'graph_builder.builder_nav.location.products.import_value' name=model.name}}
                 {{/link-to}}
               </div>
             </li>
@@ -147,7 +171,9 @@
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What products does {{model.name_en}} import from <i class="icon-cidcon_placeholder-1 builder__icon--placeholder"></i>?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.products.import_value_from' name=model.name place=builderNavDropDown}}
+                {{/link-to}}
               </div>
             </li>
           </ul>
@@ -159,7 +185,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Scatterplot</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='products' vis='scatter') class="builder__nav__question"}}
-                  What products have the best combination of complexity and opportunity for {{model.name_en}}?
+                  {{t 'graph_builder.builder_nav.location.products.export_value.scatter' name=model.name}}
                 {{/link-to}}
               </div>
             </li>
@@ -167,7 +193,9 @@
               <i class="icon-cidcon_similarity builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Similarity map</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What does the product map look like for {{model.name_en}}?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.products.map' name=model.name}}
+                {{/link-to}}
               </div>
             </li>
           </ul>
@@ -184,7 +212,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source="industries" variable='employment' vis='treemap') class="builder__nav__question"}}
-                  What industries in {{model.name_en}} employ the most people?
+                  {{t 'graph_builder.builder_nav.location.industries.employment' name=model.name}}
                 {{/link-to}}
               </div>
             </li>
@@ -193,7 +221,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source="industries" variable='wages' vis='treemap') class="builder__nav__question"}}
-                  What industries are in {{model.name_en}}
+                  {{t 'graph_builder.builder_nav.location.industries.wages' name=model.name}}
                 {{/link-to}}
               </div>
             </li>
@@ -202,7 +230,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  What industries in {{model.name_en}} have the highest wages per worker?
+                  {{t 'graph_builder.builder_nav.location.industries.wages_highest_per_worker' name=model.name}}
                 {{/link-to}}
               </div>
             </li>
@@ -211,7 +239,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  What industries offer the highest wages for <i class="icon-cidcon_placeholder-1 builder__icon--placeholder"></i>?
+                  {{t 'graph_builder.builder_nav.location.industries.wages_highest' place=builderNavDropDown}}
                 {{/link-to}}
               </div>
             </li>
@@ -224,7 +252,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Scatterplot</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='industries' vis='scatter') class="builder__nav__question"}}
-                  What industries have the best combination of complexity and opportunity for {{model.name_en}}?
+                  {{t 'graph_builder.builder_nav.location.industries.wages.scatter' name=model.name}}
                 {{/link-to}}
               </div>
             </li>
@@ -232,7 +260,9 @@
               <i class="icon-cidcon_similarity builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Similarity map</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}What does the industry map look like for {{model.name_en}}?{{/link-to}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.industries.map' name=model.name}}
+                {{/link-to}}
               </div>
             </li>
           </ul>

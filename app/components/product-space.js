@@ -46,7 +46,7 @@ export default Ember.Component.extend({
         },
         selection: ['115', '116', '117', '118', '119', '120', '121', '122', '123', '124', '125'],
         highlight: ['115', '201', '202', '203', '204', '205', '206', '207', '208', '161']
-      })
+      });
   }),
   draw: function() {
     d3.select(this.get('id'))

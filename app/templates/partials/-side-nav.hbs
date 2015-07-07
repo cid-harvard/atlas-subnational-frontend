@@ -1,12 +1,12 @@
 <header class="header--sidebar">
   <div class="branding">
     <img src="assets/img/branding/logo.png" alt="" class="branding__logo">
-    <p class="branding__slogan">Using data to keep Colombia competitive</p>
+    <p class="branding__slogan"> {{ t 'side_nav.brand_slogan' }}</p>
   </div>
   {{#link-to "search" (query-params query="null") class="sidebar__search sidebar__section" tagName="div" }}
     {{#link-to "search"  class="sidebar__btn sidebar__btn--search" activeClass="sidebar__btn--is--active"}}
       <i class="icon-cidcon_search sidebar__btn__icon"></i>
-      Search
+      {{ t 'side_nav.search_link' }}
     {{/link-to}}
   {{/link-to}}
   <nav class="sidebar__section sidebar__nav">
@@ -15,7 +15,7 @@
         {{#link-to profileLink entity_id
           class="sidebar__btn nav__item__link"
           activeClass="sidebar__btn--is--active"}}
-          Profiles
+          {{ t 'side_nav.profile_link' }}
         {{/link-to}}
       </li>
       <li class="nav__item">
@@ -23,17 +23,25 @@
           (query-params entity=entity entity_id=entity_id)
           class="sidebar__btn nav__item__link"
           activeClass="sidebar__btn--is--active"}}
-          Graph Builder
+          {{ t 'side_nav.graph_builder_link' }}
         {{/link-to}}
       </li>
     </ul>
   </nav>
   <div class="sidebar__section sidebar__languages">
     <div class="togglemod togglemod--languages">
-      <p {{bind-attr class=":toggle__label__text isEnglish:toggle__label--is--active"}}>EN</p>
-       {{input type='checkbox' id='toggle--languages' class='toggle toggle--languages' checked=language}}
+      <p {{bind-attr class=":toggle__label__text isDefaultLocale::toggle__label--is--active"}}>
+        {{otherLanguage}}
+      </p>
+      {{input
+        type='checkbox'
+        id='toggle--languages'
+        class='toggle toggle--languages'
+        checked=isDefaultLocale}}
       <label class="toggle__label" for="toggle--languages"></label>
-      <p {{bind-attr class=":toggle__label__text isEnglish::toggle__label--is--active"}}>ES</p>
+      <p {{bind-attr class=":toggle__label__text isDefaultLocale:toggle__label--is--active"}}>
+        {{defaultLanguage}}
+      </p>
     </div>
   </div>
 </header>

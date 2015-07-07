@@ -28,10 +28,10 @@ export default Ember.Route.extend({
       return Ember.RSVP.allSettled([departments, municipalities])
         .then(function(array) {
           return _.chain(array)
-            .map(function(d){return d.value.data})
+            .map(function(d){return d.value.data; })
             .flatten()
-            .filter(function(d){ return _.deburr(get(d,'name_en')).match(regexp) || get(d, 'code').match(regexp)})
-            .value()
+            .filter(function(d){ return _.deburr(get(d,'name_en')).match(regexp) || get(d, 'code').match(regexp); })
+            .value();
         });
     }
   }
