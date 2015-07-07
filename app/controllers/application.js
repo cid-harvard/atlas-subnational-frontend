@@ -1,33 +1,46 @@
 import Ember from 'ember';
-const {observer, computed, on, set:set} = Ember;
+import ENV from '../config/environment';
+import numeral from 'numeral';
+
+const {observer, computed, on, set:set, getWithDefault} = Ember;
 
 export default Ember.Controller.extend({
-  needs: ['location/show', 'graph-builder', 'search'],
+  i18n: Ember.inject.service(),
   //use entity and entity_id to build the nav links
   entity: 'location',
   entity_id: '1044',
-  language: Ember.$.cookie('lang') === 'es',
-  initLanguage: on('init', function(){
-    var application = this.container.lookup('application:main');
-    if(Ember.$.cookie('lang') === 'es'){
-      set(this, 'isEnglish', false);
-      set(application, 'locale', 'es');
-    }else{
-      set(this, 'isEnglish', true);
-      set(application, 'locale', 'en');
+  //The language toggle is a checkbox
+  //currently the way it is,
+  //TRUE => 'es-' and FALSE => 'en
+  init: function(){
+    //refactor this later please...QL
+    this._super.apply(this, arguments);
+    this.set('i18n.locale', getWithDefault(Ember.$.cookie(), 'locale', 'es'));
+
+    numeral.language(this.get('i18n.locale'));
+    this.set('i18n.defaultLocale', 'es');
+    this.set('i18n.otherLocale', 'en');
+
+    this.set('i18n.localeOpposite', { en: 'es', es: 'en' } );
+    this.set('isDefaultLocale', this.get('i18n.locale') === this.get('i18n.defaultLocale'));
+  },
+  defaultLanguage: computed('i18n.default', function() {
+    return this.get('i18n.defaultLocale').substring(0,2);
+  }),
+  otherLanguage: computed('i18n.other', function() {
+    return this.get('i18n.otherLocale').substring(0,2);
+  }),
+  setLanguageToggle: observer('isDefaultLocale',function() {
+    if(this.get('i18n.locale') === this.get('i18n.defaultLocale')) {
+      this.set('i18n.locale', this.get('i18n.otherLocale'));
+      numeral.language(this.get('i18n.otherLocale'));
+    } else {
+      this.set('i18n.locale', this.get('i18n.defaultLocale'));
+      numeral.language(this.get('i18n.defaultLocale'));
     }
   }),
-  setLanguage: observer('language',function() {
-    var application = this.container.lookup('application:main');
-    if(this.get('isEnglish')){
-      set(application, 'locale', 'es');
-      Ember.$.cookie('lang', 'es');
-      set(this, 'isEnglish', false);
-    }else{
-      set(application, 'locale', 'en');
-      Ember.$.cookie('lang', 'en');
-      set(this, 'isEnglish', true);
-    }
+  setCookie: observer('i18n.locale', function() {
+    Ember.$.cookie('locale',this.get('i18n.locale'));
   }),
   productsMetadata: computed('model.products', function() {
     return this.get('model.products');
