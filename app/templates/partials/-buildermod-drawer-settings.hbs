@@ -1,14 +1,13 @@
 <div class="buildermod__drawer buildermod__drawer--settings">
   <div class="settings__input__wrap">
     <label for="settings__slider--time" class="settings__slider">Change time period:</label>
-    {{input-slider id="settings__slider--time" type="time" startDate=startDate endDate=endDate}}
+      {{input-slider
+        elementId="settings__slider--time"
+        type="time"
+        startDate=startDate
+        endDate=endDate
+        dateRange=dateRange
+      }}
   </div>
-{{!--   <div class="settings__input__wrap">
-    <label for="settings__slider--rca" class="settings__slider">RCA value needed to circle {{source}}:</label>
-    {{input-slider id="settings__slider--rca" type="rca"}}
-  </div>
-  <div class="settings__input__wrap">
-    <label for="settings__slider--similarity" class="settings__slider">Similarity value needed to connect {{source}}:</label>
-    {{input-slider id="settings__slider--similarity" type="similarity"}}
-  </div> --}}
 </div>
+
