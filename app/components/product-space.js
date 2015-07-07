@@ -56,13 +56,45 @@ export default Ember.Component.extend({
       return [];
 
     if(step == 1)
-      return ['115'];
+      return ['178'];
 
     if(step == 2)
-      return ['117'];
+      return ['178', '118', '606'];
 
     if(step == 3)
-      return ['202'];
+      return [];
+
+  }),
+  selection: computed('varActiveStep', function() {
+    var step = this.get('varActiveStep');
+
+    if(step == 0)
+      return [];
+
+    if(step == 1)
+      return ['178'];
+
+    if(step == 2)
+      return ['178'];
+
+    if(step == 3)
+      return ['178'];
+
+  }),
+  highlight: computed('varActiveStep', function() {
+    var step = this.get('varActiveStep');
+
+    if(step == 0)
+      return [];
+
+    if(step == 1)
+      return ['178'];
+
+    if(step == 2)
+      return ['178', '118', '606'];
+
+    if(step == 3)
+      return ['178', '118', '606'];
 
   }),
   draw: function() {
@@ -74,6 +106,6 @@ export default Ember.Component.extend({
     this.draw();
   }),
   didInsertElement: function() {
-    //this.draw();
+   //this.draw();
   }
 });
