@@ -28,6 +28,21 @@ export default DS.Model.extend({
   currentExports: attr(),
   products: attr(),
 
+  locale: computed('i18n.locale', function() {
+    return this.get('i18n.locale');
+  }),
+  _level: computed('locale', 'level', function() {
+    return this.get('i18n')
+      .t(`location.model.${this.get('level')}`);
+  }),
+  name: computed('locale', 'name_en', 'name_es', function() {
+    let attr = `name_${this.get('locale')}`
+    return this.get(attr) || `${attr} does not exist`;
+  }),
+  name_short: computed('locale', 'name_short_en', 'name_short_es', function() {
+    let attr = `name_${this.get('locale')}`
+    return this.get(attr) || `${attr} does not exist`;
+  }),
   sortedTimeSeries: computed('timeSeries', function() {
     return _.sortBy(this.get('timeSeries'), 'year');
   }),
