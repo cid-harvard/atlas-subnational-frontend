@@ -1,19 +1,20 @@
 import DS from 'ember-data';
 import Ember from 'ember';
-const { attr } = DS;
-const { computed } = Ember;
+const {attr} = DS;
+const {computed} = Ember;
 
 export default DS.Model.extend({
-  code: attr('number', { defaultValue: 111}),
+  i18n: Ember.inject.service(),
 
-  name_en: attr('string', { defaultValue: 'atlantico in english'}),
-  name_es: attr('string', { defaultValue: 'atlantico in spanish'}),
+  code: attr('string'),
 
-  name_short_en: attr('string', { defaultValue: 'english'}),
-  name_short_es: attr('string', { defaultValue: 'spanish'}),
+  name_en: attr('string'),
+  name_es: attr('string'),
 
-  population: attr('number', { defaultValue: 100000000}),
-  randomAttr: attr('number', { defaultValue: 100000000}),
+  name_short_en: attr('string'),
+  name_short_es: attr('string'),
+
+  population: attr('number'),
 
   productsData: attr(),
   industriesData: attr(),
