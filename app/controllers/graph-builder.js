@@ -24,18 +24,19 @@ export default Ember.Controller.extend({
     let variable = this.get('variable');
     let vis = this.get('vis');
     let name = this.get('model.name_en');
+    let level = this.get('model.level');
     if(variable === 'export_value' && vis === 'scatter') {
-      return `What products have the best combination of complexity and opportunity for ${name}`;
+      return `What products have the best combination of complexity and opportunity for the ${level} of ${name}`;
     } else if(variable === 'export_value') {
-      return `What products does ${name} export?`;
+      return `What products does the ${level} of ${name} export?`;
     } else if(variable === 'import_value') {
-      return `What products does ${name} import?`;
+      return `What products does the ${level} of ${name} import?`;
     } else if(variable === 'employment') {
-      return `What industries in ${name} employ the most people?`;
+      return `What industries in the ${level} of ${name} employ the most people?`;
     } else if(variable === 'wages' && vis === 'scatter') {
-      return `What industries have the best combination of complexity and opportunity for ${name}?`;
+      return `What industries have the best combination of complexity and opportunity for the ${level} of ${name}?`;
     } else if(variable === 'wages') {
-      return `What industries are in ${name}?`;
+      return `What industries are in the ${level} of ${name}?`;
     }
   }),
   // push to i18n later sorry :(
@@ -106,9 +107,6 @@ export default Ember.Controller.extend({
   }),
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
-  hasMore: computed('nestedData.[]', function() {
-    return this.get('nestedData').length > this.firstSlice;
-  }),
   actions: {
     search: function() {
       this.set('search', this.get('searchText'));
