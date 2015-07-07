@@ -1,7 +1,7 @@
 <article class="stream builder">
   <header class="stream__header">
     <img src="assets/img/builder/pentagon-test.svg" class="builder__pentagon">
-    <h2 class="stream__head">{{model.name_en}}</h2>
+    <h2 class="stream__head">{{model.name}}</h2>
   </header>
   <section class="stream__section">
     <header class="section__header builder__header">
@@ -38,7 +38,6 @@
         {{partial "partials/buildermod-search"}}
         {{component visualizationComponent
           classNames= 'buildermod__viz'
-          elementId='visualization'
           immutableData=immutableData
           data=filteredData
           dataType=source
