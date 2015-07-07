@@ -1,7 +1,9 @@
 import Ember from 'ember';
+
 const {computed, observer, get:get } = Ember;
 
 export default Ember.Controller.extend({
+  i18n: Ember.inject.service(),
   needs: 'application', // inject the application controller
   queryParams: ['entity', 'entity_id', 'source', 'variable', 'vis', 'search'],
   source: 'products',
@@ -9,8 +11,7 @@ export default Ember.Controller.extend({
   variable: 'export_value',
   search: null,
   searchText: computed.oneWay('search'),
-
-  isEnglish: computed.alias('controllers.application.isEnglish'),
+  builderNavDropDown: Ember.String.htmlSafe("<i class='icon-cidcon_placeholder-1 builder__icon--placeholder'></i>"),
 
   // observer the Query Params and set the links on the side nav
   setSideNav: observer('entity', 'entity_id', function() {
@@ -18,42 +19,22 @@ export default Ember.Controller.extend({
     applicationController.set('entity', this.get('entity'));
     applicationController.set('entity_id', this.get('entity_id'));
   }),
-
-  // push to i18n later sorry :(
-  pageTitle: computed('model', 'variable','vis', function() {
-    let variable = this.get('variable');
-    let vis = this.get('vis');
-    let name = this.get('model.name_en');
-    let level = this.get('model.level');
-    if(variable === 'export_value' && vis === 'scatter') {
-      return `What products have the best combination of complexity and opportunity for the ${level} of ${name}`;
-    } else if(variable === 'export_value') {
-      return `What products does the ${level} of ${name} export?`;
-    } else if(variable === 'import_value') {
-      return `What products does the ${level} of ${name} import?`;
-    } else if(variable === 'employment') {
-      return `What industries in the ${level} of ${name} employ the most people?`;
-    } else if(variable === 'wages' && vis === 'scatter') {
-      return `What industries have the best combination of complexity and opportunity for the ${level} of ${name}?`;
-    } else if(variable === 'wages') {
-      return `What industries are in the ${level} of ${name}?`;
-    }
+  pageTitle: computed('model','source', 'entity', 'variable', 'vis', 'i18n.locale', function() {
+    //locale file under graph_builder.page_title.<entity>.<source>.<variable>
+    let i18nString = `graph_builder.page_title.${this.get('entity')}.${this.get('source')}.${this.get('variable')}`
+    if(this.get('vis') === 'scatter') {
+      return this.get('i18n').t(`${i18nString}.${this.get('vis')}`, { name: this.get('model.name'), level: this.get('model._level') })
+    };
+    return this.get('i18n').t(i18nString, { name: this.get('model.name'), level: this.get('model._level') })
   }),
-  // push to i18n later sorry :(
-  builderModHeader: computed('variable','vis', function() {
-    let variable = this.get('variable');
-    if(this.get('vis') === 'scatter') { return 'Complexity and Opportunity'; }
-    if(variable === 'export_value') {
-      return 'Total Exports';
-    } else if(variable === 'import_value') {
-      return 'Total Imports';
-    } else if(variable === 'employment') {
-      return 'Total Employment';
-    } else if(variable === 'wages') {
-      return 'Total Wages';
-    }
+  builderModHeader: computed('model','source', 'entity', 'variable', 'vis', 'i18n.locale', function() {
+    //locale file under graph_builder.builder_mod_header.<entity>.<source>.<variable>
+    let i18nString = `graph_builder.builder_mod_header.${this.get('entity')}.${this.get('source')}.${this.get('variable')}`
+    if(this.get('vis') === 'scatter') {
+      return this.get('i18n').t(`${i18nString}.${this.get('vis')}`, { name: this.get('model.name') })
+    };
+    return this.get('i18n').t(i18nString, { name: this.get('model.name') })
   }),
-
   rcaFilter: function(data) {
     return _.filter(data, (d) => {
       return get(d, this.get('rca')) <= 1;
@@ -63,7 +44,6 @@ export default Ember.Controller.extend({
     let search = this.get('search');
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
-
     return _.filter(data, function(d) {
       return get(d,'name').match(regexp) || get(d, 'code').match(regexp);
     });
@@ -81,9 +61,6 @@ export default Ember.Controller.extend({
     if(this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
     if(this.get('search')){ data = this.searchFilter(data); }
     return data;
-  }),
-  departmentLocations: computed('locationsMetadata', function(){
-    return _.filter(this.get('locationsMetadata'), 'level', 'department');
   }),
   visualizationComponent: computed('vis', function(){
     let visualization = this.get('vis');
