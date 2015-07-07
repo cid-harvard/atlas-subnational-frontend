@@ -25,7 +25,7 @@ export default Ember.Route.extend({
       return this.setIndustries(model);
     }
   },
-  resetController: function(controller, isExiting, transition) {
+  resetController: function(controller, isExiting) {
     if(isExiting) {
       //when exiting from route, reset params
       controller.setProperties({ source: 'products', vis: 'treemap', variable: 'export_value', search: null, startDate: '2009', endDate: '2011'});
