@@ -30,9 +30,11 @@ export default Ember.Route.extend({
           let product = _.find(productsMetadata, {id:  productId});
           d.group = productId;
           d.group_name_en = product.name_en;
+          d.group_name_es = product.name_es;
         } else {
           d.group = d.id;
           d.group_name_en = d.name_en;
+          d.group_name_es = d.name_es;
         }
       });
 
@@ -42,9 +44,11 @@ export default Ember.Route.extend({
           let industry = _.find(industriesMetadata, { id: industryId });
           d.group = industryId;
           d.group_name_en = industry.name_en;
+          d.group_name_en = industry.name_es;
         } else {
           d.group = d.id;
           d.group_name_en = d.name_en;
+          d.group_name_es = d.name_es;
         }
       });
 
