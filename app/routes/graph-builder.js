@@ -25,6 +25,12 @@ export default Ember.Route.extend({
       return this.setIndustries(model);
     }
   },
+  resetController: function(controller, isExiting, transition) {
+    if(isExiting) {
+      //when exiting from route, reset params
+      controller.setProperties({ source: 'products', vis: 'treemap', variable: 'export_value', search: null, startDate: '2009', endDate: '2011'});
+    }
+  },
   setProducts: function(model){
     var products = Ember.$.getJSON(`${apiURL}data/products?location=${model.id}`);
     var productsData = Ember.$.getJSON(`${apiURL}data/products/scatterplot?location=${model.id}&year=2012`);
