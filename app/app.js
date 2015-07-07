@@ -12,8 +12,8 @@ App = Ember.Application.extend({
   podModulePrefix: config.podModulePrefix,
   Resolver: Resolver,
   ready: function() {
-    numeral.language('es', { delimiters: { thousands: '.', decimal: ',' }, abbreviations: { thousand: 'K', million: 'M', billion: 'TM', trillion: 'B' }})
-    numeral.language('en', { delimiters: { thousands: ',', decimal: '.' }, abbreviations: { thousand: 'K', million: 'M', billion: 'B', trillion: 'T' }})
+    numeral.language('es', { currency:{ symbol: 'COP' }, delimiters: { thousands: '.', decimal: ',' }, abbreviations: { thousand: 'K', million: 'M', billion: 'TM', trillion: 'B' }})
+    numeral.language('en', { currency:{ symbol: 'USD' }, delimiters: { thousands: ',', decimal: '.' }, abbreviations: { thousand: 'K', million: 'M', billion: 'B', trillion: 'T' }})
   }
 });
 
