@@ -228,7 +228,7 @@ export default Ember.Component.extend({
       this.initCharts();
     });
   },
-  update: observer('data.[]', 'varDependent', 'dataType', 'vis', 'i18n.locale', function() {
+  update: observer('data.[]', 'i18n.locale', function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       d3.select(this.get('id')).selectAll('*').remove(); /// TODO REMOVE THIS LATER FOR TRANSITIONS
       this.initCharts();

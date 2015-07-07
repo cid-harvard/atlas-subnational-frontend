@@ -44,8 +44,8 @@ export default Ember.Component.extend({
   willDestroyElement: function() {
     this.removeObserver('i18n.locale', this, this.update);
   },
-  update: observer('data.[]', 'vardependent', 'datatype', 'vis','i18n.locale', function() {
-    Ember.run.later(this , function() {
+  update: observer('data.[]', 'i18n.locale', function() {
+    Ember.run.scheduleOnce('afterRender', this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
       this.get('treemap').draw();
