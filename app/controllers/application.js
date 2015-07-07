@@ -1,8 +1,7 @@
 import Ember from 'ember';
-import ENV from '../config/environment';
 import numeral from 'numeral';
 
-const {observer, computed, on, set:set, getWithDefault} = Ember;
+const {observer, computed, getWithDefault} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),

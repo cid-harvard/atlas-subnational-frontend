@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {computed, on, observer} = Ember;
+const {computed, observer} = Ember;
 
 export default Ember.Controller.extend({
   needs: 'application', // inject the application controller

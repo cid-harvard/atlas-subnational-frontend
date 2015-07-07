@@ -21,19 +21,19 @@ export default Ember.Controller.extend({
   }),
   pageTitle: computed('model','source', 'entity', 'variable', 'vis', 'i18n.locale', function() {
     //locale file under graph_builder.page_title.<entity>.<source>.<variable>
-    let i18nString = `graph_builder.page_title.${this.get('entity')}.${this.get('source')}.${this.get('variable')}`
+    let i18nString = `graph_builder.page_title.${this.get('entity')}.${this.get('source')}.${this.get('variable')}`;
     if(this.get('vis') === 'scatter') {
-      return this.get('i18n').t(`${i18nString}.${this.get('vis')}`, { name: this.get('model.name'), level: this.get('model._level') })
-    };
-    return this.get('i18n').t(i18nString, { name: this.get('model.name'), level: this.get('model._level') })
+      return this.get('i18n').t(`${i18nString}.${this.get('vis')}`, { name: this.get('model.name'), level: this.get('model._level') });
+    }
+    return this.get('i18n').t(i18nString, { name: this.get('model.name'), level: this.get('model._level') });
   }),
   builderModHeader: computed('model','source', 'entity', 'variable', 'vis', 'i18n.locale', function() {
     //locale file under graph_builder.builder_mod_header.<entity>.<source>.<variable>
-    let i18nString = `graph_builder.builder_mod_header.${this.get('entity')}.${this.get('source')}.${this.get('variable')}`
+    let i18nString = `graph_builder.builder_mod_header.${this.get('entity')}.${this.get('source')}.${this.get('variable')}`;
     if(this.get('vis') === 'scatter') {
-      return this.get('i18n').t(`${i18nString}.${this.get('vis')}`, { name: this.get('model.name') })
-    };
-    return this.get('i18n').t(i18nString, { name: this.get('model.name') })
+      return this.get('i18n').t(`${i18nString}.${this.get('vis')}`, { name: this.get('model.name') });
+    }
+    return this.get('i18n').t(i18nString, { name: this.get('model.name') });
   }),
   rcaFilter: function(data) {
     return _.filter(data, (d) => {

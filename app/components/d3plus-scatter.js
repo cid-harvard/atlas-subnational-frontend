@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import numeral from 'numeral';
 const {computed, observer} = Ember;
 
 export default Ember.Component.extend({

@@ -107,7 +107,6 @@ export default Ember.Component.extend({
     let yAxis = this.get('yAxis');
     let line = this.get('line');
     let area = this.get('area');
-    let formatNumber = this.get('formatNumber');
     let truncateYear = this.get('truncateYear');
     let varDependent = this.get('varDependent');
 

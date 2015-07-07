@@ -37,11 +37,11 @@ export default DS.Model.extend({
       .t(`location.model.${this.get('level')}`);
   }),
   name: computed('locale', 'name_en', 'name_es', function() {
-    let attr = `name_${this.get('locale')}`
+    let attr = `name_${this.get('locale')}`;
     return this.get(attr) || `${attr} does not exist`;
   }),
   name_short: computed('locale', 'name_short_en', 'name_short_es', function() {
-    let attr = `name_${this.get('locale')}`
+    let attr = `name_${this.get('locale')}`;
     return this.get(attr) || `${attr} does not exist`;
   }),
   sortedTimeSeries: computed('timeSeries', function() {

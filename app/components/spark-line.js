@@ -46,7 +46,7 @@ export default Ember.Component.extend({
       var_text: 'department_id',
       selection: [this.get('currentLocation')],
       highlight: [this.get('currentLocation')]
-    })
+    });
   }),
   draw: function() {
     this.set('width', this.$().parent().width());
