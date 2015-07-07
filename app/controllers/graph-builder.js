@@ -1,5 +1,4 @@
 import Ember from 'ember';
-
 const {computed, observer, get:get } = Ember;
 
 export default Ember.Controller.extend({
@@ -64,7 +63,10 @@ export default Ember.Controller.extend({
       return this.get('model.industriesData');
     }
   }),
-  filteredData: computed('immutableData.[]', 'vis', 'search', function() {
+  dateRange: computed('immutableData.[]', function() {
+    return d3.extent(this.get('immutableData'), function(d) { return d.year; });
+  }),
+  filteredData: computed('immutableData.[]', 'vis', 'search', 'startDate', 'endDate', function() {
     let data = this.get('immutableData');
     if(this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
     if(this.get('search')){ data = this.searchFilter(data); }
