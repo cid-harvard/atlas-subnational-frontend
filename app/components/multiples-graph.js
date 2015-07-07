@@ -229,6 +229,7 @@ export default Ember.Component.extend({
     });
   },
   update: observer('data.[]', 'i18n.locale', function() {
+    if(!this.element){ return false; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
       d3.select(this.get('id')).selectAll('*').remove(); /// TODO REMOVE THIS LATER FOR TRANSITIONS
       this.initCharts();
