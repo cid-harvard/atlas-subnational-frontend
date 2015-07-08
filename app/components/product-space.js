@@ -108,7 +108,7 @@ export default Ember.Component.extend({
       .call(this.get('productSpace'));
   },
   redraw: observer('varActiveStep', function() {
-    this.get('productSpace').params({zoom: this.get('zoom')});
+    this.get('productSpace').params({zoom: this.get('zoom'), selection: this.get('selection'), highlight: this.get('highlight')});
     this.draw();
   }),
   didInsertElement: function() {
