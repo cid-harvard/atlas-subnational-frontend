@@ -3,111 +3,101 @@ import productSpace from '../fixtures/product_space';
 const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
+  i18n: Ember.inject.service(),
   tagName: 'div',
-  attributeBindings: ['width','height'],
+  attributeBindings: ['width'],
+  height: 500,
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  w: computed('width', function () {
-    return 600;
-  }),
-  h: computed('height', function () {
-    return 400;
-  }),
-  productSpace: computed('data', function() {
+  productSpace: computed('data.[]',  function() {
     return vistk.viz().params({
-        type: 'productspace',
-        height: this.get('h'),
-        width: this.get('w'),
-        container: this.get('id'),
-        margin: {top: 0, right: 0, bottom: 0, left: 0},
-        nodes: productSpace.nodes,
-        links: productSpace.edges,
-        data: this.get('data'),
-        var_x: 'x',
-        var_y: 'y',
-        var_id: this.get('varId'),
-        items: [{
-          attr: 'name',
-          marks: [{
-            type: 'circle',
-            var_r: 'export_value'
-          }, {
-            var_mark: '__highlighted',
-            type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
-          }, {
-            var_mark: '__selected',
-            type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
-          }]
-        }],
-        selection: this.get('selection'),
-        highlight: this.get('highlight'),
-        zoom: this.get('zoom'),
-      });
+      type: 'productspace',
+      height: this.get('height'),
+      width: this.get('width'),
+      container: this.get('id'),
+      margin: {top: 0, right: 0, bottom: 0, left: 0},
+      nodes: productSpace.nodes,
+      links: productSpace.edges,
+      data: this.get('data'),
+      var_text: `name_${this.get('i18n').locale}`, //TODO: update with langauge
+      var_x: 'x',
+      var_y: 'y',
+      var_id: this.get('varId'),
+      items: [{
+        attr: 'name',
+        marks: [{
+          type: 'circle',
+          var_r: 'export_value'
+        }, {
+          var_mark: '__highlighted',
+          type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
+        }, {
+          var_mark: '__selected',
+          type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
+        }]
+      }],
+      selection: this.get('selection'),
+      highlight: this.get('highlight'),
+      zoom: this.get('zoom')
+    })
   }),
   zoom: computed('varActiveStep', function() {
-    var step = this.get('varActiveStep');
-
-    if(step === 0)
+    let step = this.get('varActiveStep');
+    if(step === 0){
       return ['178'];
-
-    if(step === 1)
+    } else if(step === 1) {
       return ['178', '118', '606'];
-
-    if(step === 2)
+    } else if(step === 2) {
       return ['606'];
-
-    if(step === 3)
+    } else {
       return [];
-
-    return [];
-
+    }
   }),
   selection: computed('varActiveStep', function() {
-    var step = this.get('varActiveStep');
-
-    if(step === 0)
+    let step = this.get('varActiveStep');
+    if(step === 0){
       return ['178'];
-
-    if(step === 1)
+    } else if(step === 1) {
       return ['178', '118', '606'];
-
-    if(step === 2)
+    } else if(step === 2) {
       return ['606'];
-
-    if(step === 3)
+    } else {
       return [];
-
-    return [];
-
+    }
   }),
   highlight: computed('varActiveStep', function() {
-    var step = this.get('varActiveStep');
-
-    if(step === 0)
+    let step = this.get('varActiveStep');
+    if(step === 0){
       return ['178'];
-
-    if(step === 1)
+    } else if(step === 1) {
       return ['178', '118', '606'];
-
-    if(step === 2)
+    } else if(step === 2) {
       return ['606'];
-
-    if(step === 3)
+    } else {
       return [];
-
-    return [];
-
+    }
   }),
   draw: function() {
     d3.select(this.get('id'))
       .call(this.get('productSpace'));
   },
-  redraw: observer('varActiveStep', function() {
-    this.get('productSpace').params({zoom: this.get('zoom'), selection: this.get('selection'), highlight: this.get('highlight'), refresh: true});
-    this.draw();
+  redraw: observer('varActiveStep', 'i18n.locale', function() {
+    Ember.run.later(this , function() {
+      this.get('productSpace').params({
+        zoom: this.get('zoom'),
+        selection: this.get('selection'),
+        highlight: this.get('highlight'),
+        var_text: `name_${this.get('i18n').locale}`, //TODO: update with langauge
+        refresh: true
+      });
+      this.draw();
+    }, 100);
   }),
   didInsertElement: function() {
-   //this.draw();
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      this.set('width', this.$().parent().width());
+      this.draw();
+    });
   }
 });
