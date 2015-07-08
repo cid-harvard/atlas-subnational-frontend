@@ -64,6 +64,8 @@ export default Ember.Component.extend({
     if(step == 3)
       return [];
 
+    return [];
+
   }),
   selection: computed('varActiveStep', function() {
     var step = this.get('varActiveStep');
@@ -80,6 +82,8 @@ export default Ember.Component.extend({
     if(step == 3)
       return ['178'];
 
+    return [];
+
   }),
   highlight: computed('varActiveStep', function() {
     var step = this.get('varActiveStep');
@@ -95,6 +99,8 @@ export default Ember.Component.extend({
 
     if(step == 3)
       return ['178', '118', '606'];
+
+    return [];
 
   }),
   draw: function() {
