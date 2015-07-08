@@ -237,7 +237,7 @@ export default Ember.Component.extend({
       this.initCharts();
     });
   },
-  update: observer('data.[]', 'varDependent', 'dataType', 'vis', function() {
+  update: observer('data.[]', function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.initCharts();
     });
