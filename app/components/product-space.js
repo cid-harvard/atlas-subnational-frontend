@@ -32,18 +32,14 @@ export default Ember.Component.extend({
           marks: [{
             type: 'circle',
             var_r: 'export_value'
-          },{
+          }, {
             var_mark: '__highlighted',
-            type: d3.scale.ordinal().domain([true, false]).range(["text", "none"]),
-            rotate: "0"
+            type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
+          }, {
+            var_mark: '__selected',
+            type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
           }]
         }],
-        time: {
-          var_time: 'year',
-          current_time: '2012',
-          parse: function(d) { return d; },
-          filter: '2012'
-        },
         selection: this.get('selection'),
         highlight: this.get('highlight'),
         zoom: this.get('zoom'),
@@ -52,16 +48,16 @@ export default Ember.Component.extend({
   zoom: computed('varActiveStep', function() {
     var step = this.get('varActiveStep');
 
-    if(step == 0)
-      return [];
-
-    if(step == 1)
+    if(step === 0)
       return ['178'];
 
-    if(step == 2)
+    if(step === 1)
       return ['178', '118', '606'];
 
-    if(step == 3)
+    if(step === 2)
+      return ['606'];
+
+    if(step === 3)
       return [];
 
     return [];
@@ -70,17 +66,17 @@ export default Ember.Component.extend({
   selection: computed('varActiveStep', function() {
     var step = this.get('varActiveStep');
 
-    if(step == 0)
+    if(step === 0)
+      return ['178'];
+
+    if(step === 1)
+      return ['178', '118', '606'];
+
+    if(step === 2)
+      return ['606'];
+
+    if(step === 3)
       return [];
-
-    if(step == 1)
-      return ['178'];
-
-    if(step == 2)
-      return ['178'];
-
-    if(step == 3)
-      return ['178'];
 
     return [];
 
@@ -88,17 +84,17 @@ export default Ember.Component.extend({
   highlight: computed('varActiveStep', function() {
     var step = this.get('varActiveStep');
 
-    if(step == 0)
-      return [];
-
-    if(step == 1)
+    if(step === 0)
       return ['178'];
 
-    if(step == 2)
+    if(step === 1)
       return ['178', '118', '606'];
 
-    if(step == 3)
-      return ['178', '118', '606'];
+    if(step === 2)
+      return ['606'];
+
+    if(step === 3)
+      return [];
 
     return [];
 
@@ -108,7 +104,7 @@ export default Ember.Component.extend({
       .call(this.get('productSpace'));
   },
   redraw: observer('varActiveStep', function() {
-    this.get('productSpace').params({zoom: this.get('zoom'), selection: this.get('selection'), highlight: this.get('highlight')});
+    this.get('productSpace').params({zoom: this.get('zoom'), selection: this.get('selection'), highlight: this.get('highlight'), refresh: true});
     this.draw();
   }),
   didInsertElement: function() {
