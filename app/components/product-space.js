@@ -9,16 +9,16 @@ export default Ember.Component.extend({
     return `#${this.get('elementId')}`;
   }),
   w: computed('width', function () {
-    return this.get('width') - 60;
+    return 600;
   }),
   h: computed('height', function () {
-    return this.get('height') - 60;
+    return 400;
   }),
   productSpace: computed('data', function() {
     return vistk.viz().params({
         type: 'productspace',
-        height: 300,
-        width: 500,
+        height: this.get('h'),
+        width: this.get('w'),
         container: this.get('id'),
         margin: {top: 0, right: 0, bottom: 0, left: 0},
         nodes: productSpace.nodes,
@@ -44,8 +44,8 @@ export default Ember.Component.extend({
           parse: function(d) { return d; },
           filter: '2012'
         },
-        selection: ['115', '116', '117', '118', '119', '120', '121', '122', '123', '124', '125'],
-        highlight: ['115', '201', '202', '203', '204', '205', '206', '207', '208', '161'],
+        selection: this.get('selection'),
+        highlight: this.get('highlight'),
         zoom: this.get('zoom'),
       });
   }),
