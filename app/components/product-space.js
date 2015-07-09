@@ -39,7 +39,8 @@ export default Ember.Component.extend({
       }],
       selection: this.get('selection'),
       highlight: this.get('highlight'),
-      zoom: this.get('zoom')
+      zoom: this.get('zoom'),
+      ui: {legend: this.get('varLegend')}
     })
   }),
   zoom: computed('varActiveStep', function() {
