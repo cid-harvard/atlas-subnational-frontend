@@ -9,6 +9,9 @@ export default Ember.Route.extend({
     source: { refreshModel: true }, // products, industries,
     variable: { refreshModel: true }, //export_value, import_value, wages, employment
     vis: { refreshModel: false }, // treemap, multiples, scatter
+    rca: { refreshModel: false },
+    startDate: { refreshModel: false },
+    endDate: { refreshModel: false },
     search: { refreshModel: false }
   },
   model: function(queryParams) {

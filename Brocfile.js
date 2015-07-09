@@ -33,6 +33,10 @@ app.import('bower_components/lodash/lodash.js');
 app.import('bower_components/vis-toolkit/build/vistk.js');
 app.import('bower_components/d3plus/d3plus.js');
 
+// NoUISlider
+app.import('bower_components/nouislider/distribute/nouislider.js');
+app.import('bower_components/nouislider/distribute/nouislider.min.css');
+
 // Font Awesome
 // The npm package readme mentions refactoring this as a Broccoli tree, so consider that a TODO
 app.import('bower_components/font-awesome/fonts/fontawesome-webfont.eot', { destDir: 'fonts' });

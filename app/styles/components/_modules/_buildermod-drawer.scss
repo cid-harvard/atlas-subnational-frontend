@@ -58,6 +58,17 @@
   display: none;
 }
 
+
+// Settings drawer
+
+.settings__input {
+  margin-bottom: $baseSpace * 2;
+}
+
+
+
+// Change Graph drawer
+
 .changegraph__radioswrap {
   display: flex;
   flex-wrap: wrap;

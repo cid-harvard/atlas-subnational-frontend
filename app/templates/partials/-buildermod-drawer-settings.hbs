@@ -1,3 +1,13 @@
 <div class="buildermod__drawer buildermod__drawer--settings">
-
+  <div class="settings__input__wrap">
+    <label for="settings__slider--time" class="settings__slider">Change time period:</label>
+      {{input-slider
+        elementId="settings__slider--time"
+        type="time"
+        startDate=startDate
+        endDate=endDate
+        dateRange=dateRange
+      }}
+  </div>
 </div>
+

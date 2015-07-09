@@ -12,7 +12,6 @@ export default Ember.Component.extend({
     return `#${this.get('elementId')}`;
   }),
   treemap: computed('data.[]', 'varDependent', 'dataType', 'vis', function() {
-    var maxYear = d3.max(this.get('data'), function(d) { return d.year;} );
     return d3plus.viz()
       .container(this.get('id'))
       .data({value: this.get('data'), padding: 5})
@@ -21,9 +20,13 @@ export default Ember.Component.extend({
       .depth(1)
       .tooltip({children: false})
       .color({value: 'grey'})
-      .format({number: function(d) { return numeral(d).format('$ 0.0a');}})
+      .format({
+        number: (d, data) => {
+          if('share' == data.key){ return numeral(d).divide(100).format('0.0%'); }
+          return numeral(d).format('$ 0.0a');
+        }
+      })
       .zoom(false)
-      .time({value: "year", "solo": maxYear })
       .text({value: (d) => { return Ember.get(d, `name_${this.get('i18n').locale}`) || d.code;}})
       .timeline(false)
       .height(this.get('height'))
@@ -42,11 +45,11 @@ export default Ember.Component.extend({
     this.removeObserver('i18n.locale', this, this.update);
   },
   update: observer('data.[]', 'vardependent', 'datatype', 'vis','i18n.locale', function() {
-    Ember.run.scheduleOnce('afterRender', this , function() {
+    Ember.run.later(this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
       this.get('treemap').draw();
-    });
+    }, 1000);
   })
 });
 
