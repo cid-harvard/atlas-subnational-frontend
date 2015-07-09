@@ -35,7 +35,8 @@ export default Ember.Component.extend({
   willDestroyElement: function() {
     this.removeObserver('i18n.locale', this, this.update);
   },
-  update: observer('data.[]', 'dataType','i18n.locale', function() {
+  update: observer('data.[]', 'i18n.locale', function() {
+    if(!this.element){ return false; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
