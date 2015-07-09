@@ -27,12 +27,16 @@ export default Ember.Component.extend({
         }
       })
       .zoom(false)
-      .text({value: (d) => { return Ember.get(d, `name_${this.get('i18n').locale}`) || d.code;}})
+      .text({ value: (d) => {
+        return  Ember.get(d, `name_${this.get('i18n').locale}`) || d.code; }
+      })
       .timeline(false)
       .height(this.get('height'))
       .width(this.get('width'))
       .timing({transitions: 300})
-      .size(this.get('varDependent'));
+      .size(this.get('varDependent'))
+      .labels({resize: false, align: 'left', valign: 'top'})
+      .font({size: 20});
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
@@ -47,11 +51,12 @@ export default Ember.Component.extend({
   },
   update: observer('data.[]', 'i18n.locale', function() {
     if(!this.element){ return false; } //do not redraw if not there
+    this.$(this.element).empty();
     Ember.run.later(this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
       this.get('treemap').draw();
-    }, 500);
+    }, 1000);
   })
 });
 
