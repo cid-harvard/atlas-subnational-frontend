@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import Ember from 'ember';
 const {attr} = DS;
 
 export default DS.Model.extend({

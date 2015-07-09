@@ -22,7 +22,7 @@ export default Ember.Component.extend({
       .color({value: 'grey'})
       .format({
         number: (d, data) => {
-          if('share' == data.key){ return numeral(d).divide(100).format('0.0%'); }
+          if('share' === data.key){ return numeral(d).divide(100).format('0.0%'); }
           return numeral(d).format('$ 0.0a');
         }
       })
