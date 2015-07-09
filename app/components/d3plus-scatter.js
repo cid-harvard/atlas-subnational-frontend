@@ -1,14 +1,13 @@
 import Ember from 'ember';
+import numeral from 'numeral';
 const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
+  i18n: Ember.inject.service(),
   tagName: 'div',
+  varIndependent: 'code',
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
-  }),
-  varIndependent: computed('dataType', function() {
-    // this should be based on i18n
-    return 'name';
   }),
   scatter: computed('data.[]', 'dataType',function() {
     var maxYear = d3.max(this.get('data'), function(d) {return d.year;} );
@@ -20,6 +19,8 @@ export default Ember.Component.extend({
       .id(this.get('varIndependent'))
       .x(this.get('varX'))
       .y(this.get('varY'))
+      .format({ number: function(d) { return numeral(d).format('0.0a');}})
+      .text({value: (d) => { return Ember.get(d, `name_${this.get('i18n').locale}`) || d.code;}})
       .size(this.get('varRca'))
       .time({'value': 'year', 'solo': maxYear })
       .timeline(false)
@@ -33,12 +34,14 @@ export default Ember.Component.extend({
       this.get('scatter').draw();
     });
   },
-  update: observer('data.[]', 'dataType',  function() {
+  willDestroyElement: function() {
+    this.removeObserver('i18n.locale', this, this.update);
+  },
+  update: observer('data.[]', 'dataType','i18n.locale', function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
       this.get('scatter').draw();
-      window.scrollTo(0,0);
     });
   })
 });

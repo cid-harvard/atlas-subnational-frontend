@@ -1,19 +1,20 @@
 import DS from 'ember-data';
 import Ember from 'ember';
-const { attr } = DS;
-const { computed } = Ember;
+const {attr} = DS;
+const {computed} = Ember;
 
 export default DS.Model.extend({
-  code: attr('number', { defaultValue: 111}),
+  i18n: Ember.inject.service(),
 
-  name_en: attr('string', { defaultValue: 'atlantico in english'}),
-  name_es: attr('string', { defaultValue: 'atlantico in spanish'}),
+  code: attr('string'),
 
-  name_short_en: attr('string', { defaultValue: 'english'}),
-  name_short_es: attr('string', { defaultValue: 'spanish'}),
+  name_en: attr('string'),
+  name_es: attr('string'),
 
-  population: attr('number', { defaultValue: 100000000}),
-  randomAttr: attr('number', { defaultValue: 100000000}),
+  name_short_en: attr('string'),
+  name_short_es: attr('string'),
+
+  population: attr('number'),
 
   productsData: attr(),
   industriesData: attr(),
@@ -28,6 +29,21 @@ export default DS.Model.extend({
   currentExports: attr(),
   products: attr(),
 
+  locale: computed('i18n.locale', function() {
+    return this.get('i18n.locale');
+  }),
+  _level: computed('locale', 'level', function() {
+    return this.get('i18n')
+      .t(`location.model.${this.get('level')}`);
+  }),
+  name: computed('locale', 'name_en', 'name_es', function() {
+    let attr = `name_${this.get('locale')}`;
+    return this.get(attr) || `${attr} does not exist`;
+  }),
+  name_short: computed('locale', 'name_short_en', 'name_short_es', function() {
+    let attr = `name_${this.get('locale')}`;
+    return this.get(attr) || `${attr} does not exist`;
+  }),
   sortedTimeSeries: computed('timeSeries', function() {
     return _.sortBy(this.get('timeSeries'), 'year');
   }),

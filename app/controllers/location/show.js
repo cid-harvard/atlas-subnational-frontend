@@ -3,7 +3,7 @@ const {computed, observer} = Ember;
 
 export default Ember.Controller.extend({
   needs: 'application',
-  isEnglish: computed.alias("controllers.application.isEnglish"),
+  locale: computed.alias("controllers.application.locale"),
   departmentsData: computed.oneWay('model.departments'),
   productsData: computed.oneWay('model.productsData'),
   timeSeriesData: computed.oneWay('model.timeseries'),
@@ -17,15 +17,6 @@ export default Ember.Controller.extend({
 
   productsSortedByExports: computed('productsData', function() {
     return _.slice(_.sortBy(this.get('productsData'), function(d) { return -d.export_value;}), 0, 50);
-  }),
-  name: computed('model','isEnglish',function() {
-    if(!this.model.get('name_es')) { return this.model.get('name_en');}
-
-    if(this.get('isEnglish')) {
-      return this.model.get('name_en');
-    } else {
-      return this.model.get('name_es');
-    }
   }),
   activeStep: 0,
   stepStories: computed(function() {

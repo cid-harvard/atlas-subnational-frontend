@@ -37,7 +37,6 @@ export default Ember.Route.extend({
           _.each(products, function(d) {
             let product = productsMetadata[d.product_id];
             let productData = productsData[d.product_id];
-            d.name = product.name_en;
             _.extend(d, product);
             _.extend(d, productData);
           });
@@ -61,7 +60,6 @@ export default Ember.Route.extend({
         _.each(industries, function(d) {
           let industry = industriesMetadata[d.industry_id];
           let industryData = industriesData[d.industry_id];
-          d.name = industry.name_en;
           _.extend(d, industry);
           _.extend(d, industryData);
         });

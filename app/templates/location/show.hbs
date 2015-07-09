@@ -1,21 +1,21 @@
 <article class="profile stream">
   <img src="assets/img/department_profile/baranquilla-hero.jpg" class="stream__img--hero">
   <header class="stream__header profile__header">
-    <h2 class="stream__head">{{name}}</h2>
+    <h2 class="stream__head">{{model.name}}</h2>
     <ol class="breadcrumbs">
       <li class="breadcrumb"><a href="#" class="breadcrumb__link">Location</a></li>
       <li class="breadcrumb"><a href="#" class="breadcrumb__link">Colombia</a></li>
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">{{name}}</a></li>
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">{{model.name}}</a></li>
       <li class="breadcrumb"><a href="#" class="breadcrumb__link">Profile</a></li>
     </ol>
   </header>
   <section class="stream__section">
     <header class="section__header">
-    <h3 class="section__head">{{t 'location.overview'}}</h3>
+    <h3 class="section__head">{{t 'location.show.overview'}}</h3>
     </header>
     <ul class="list--section list--section--bullets">
       <li class="list__item--section--bullets">GDP grew {{format-percent model.gdpGrowth}} per year from {{model.yearRange}}</li>
-      <li class="list__item--section--bullets">{{name}} has the 9th highest GDP per capita at ${{format-largenumber model.latestGdp}}</li>
+      <li class="list__item--section--bullets">{{model.name}} has the 9th highest GDP per capita at ${{format-largenumber model.latestGdp}}</li>
       <li class="list__item--section--bullets">The population is {{format-largenumber model.latestPop}}, making {{name}} the 5th largest department</li>
     </ul>
     <table class="table--summaries">
@@ -58,9 +58,9 @@
       <h3 class="section__head">Exports and imports</h3>
     </header>
     <ul class="list--section list--section--bullets">
-      <li class="list__item--section--bullets">{{name}} exported USD $1.1B in 2013, 3% of Colombia's total exports</li>
-      <li class="list__item--section--bullets">{{name}}'s main export partners in 2013 were the United States, China, and Venezuela</li>
-      <li class="list__item--section--bullets">{{name}}'s main exports are metals, chemical products, and textiles</li>
+      <li class="list__item--section--bullets">{{model.name}} exported USD $1.1B in 2013, 3% of Colombia's total exports</li>
+      <li class="list__item--section--bullets">{{model.name}}'s main export partners in 2013 were the United States, China, and Venezuela</li>
+      <li class="list__item--section--bullets">{{model.name}}'s main exports are metals, chemical products, and textiles</li>
     </ul>
 
     <div class="tabmod">
@@ -207,7 +207,7 @@
       <table class="table table--scroller table--complexity">
         <thead class="table__thead table__thead--complexity table__thead--scroller">
           <tr class="table__row table__row--complexity table__row--scroller">
-            <th class="table__header table__header--scroller table__header--complexity">Current exports of {{name}}, ranked by complexity</th>
+            <th class="table__header table__header--scroller table__header--complexity">Current exports of {{model.name}}, ranked by complexity</th>
             <th class="table__header table__header--scroller table__header--complexity">Export value (2013)</th>
             <th class="table__header table__header--scroller table__header--complexity">Growth, annual (2009-2013)</th>
           </tr>
