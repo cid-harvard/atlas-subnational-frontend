@@ -45,7 +45,7 @@ export default Ember.Component.extend({
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
-      noUiSlider.create(this.element, this.get('sliderOptions'))
+      noUiSlider.create(this.element, this.get('sliderOptions'));
       this.element.noUiSlider
         .on('set', this.get('sliderSetterFunction'));
     });

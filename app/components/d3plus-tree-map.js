@@ -22,7 +22,7 @@ export default Ember.Component.extend({
       .color({value: 'grey'})
       .format({
         number: (d, data) => {
-          if('share' == data.key){ return numeral(d).divide(100).format('0.0%'); }
+          if('share' === data.key){ return numeral(d).divide(100).format('0.0%'); }
           return numeral(d).format('$ 0.0a');
         }
       })
@@ -43,13 +43,15 @@ export default Ember.Component.extend({
   },
   willDestroyElement: function() {
     this.removeObserver('i18n.locale', this, this.update);
+    this.removeObserver('data.[]', this, this.update);
   },
-  update: observer('data.[]', 'vardependent', 'datatype', 'vis','i18n.locale', function() {
+  update: observer('data.[]', 'i18n.locale', function() {
+    if(!this.element){ return false; } //do not redraw if not there
     Ember.run.later(this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
       this.get('treemap').draw();
-    }, 1000);
+    }, 500);
   })
 });
 

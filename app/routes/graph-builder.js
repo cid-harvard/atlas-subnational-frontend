@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import ENV from '../config/environment';
 const {apiURL} = ENV;
-
+const {getWithDefault, $} = Ember;
 export default Ember.Route.extend({
   queryParams: {
     entity: { refreshModel: true }, // location, product, industry
@@ -25,13 +25,20 @@ export default Ember.Route.extend({
       return this.setIndustries(model);
     }
   },
+  resetController: function(controller, isExiting) {
+    if(isExiting) {
+      //when exiting from route, reset params
+      controller.setProperties({ source: 'products', vis: 'treemap', variable: 'export_value', search: null, startDate: '2009', endDate: '2011'});
+    }
+  },
   setProducts: function(model){
-    var products = Ember.$.getJSON(`${apiURL}data/products?location=${model.id}`);
-    var productsData = Ember.$.getJSON(`${apiURL}data/products/scatterplot?location=${model.id}&year=2012`);
+    var products = $.getJSON(`${apiURL}data/products?location=${model.id}`);
+    var productsData = $.getJSON(`${apiURL}data/products/scatterplot?location=${model.id}&year=2012`);
+
     return Ember.RSVP.allSettled([products, productsData])
       .then((array) => {
-        let products = Ember.getWithDefault(array[0], 'value.data', []);
-        let productsData = Ember.getWithDefault(array[1], 'value.data', []);
+        let products = getWithDefault(array[0], 'value.data', []);
+        let productsData = getWithDefault(array[1], 'value.data', []);
         let productsMetadata = this.modelFor('application').products;
 
         //index on 'product_id'
@@ -48,13 +55,14 @@ export default Ember.Route.extend({
       .then(function() { window.scrollTo(0,0);});
   },
   setIndustries: function(model) {
-    var industries = Ember.$.getJSON(`${apiURL}data/industries?location=${model.id}`);
+    var industries = $.getJSON(`${apiURL}data/industries?location=${model.id}`);
     // industriesData has the RCA and Complexity
-    var industriesData = Ember.$.getJSON(`${apiURL}data/industries/scatterplot?location=${model.id}&year=2012`);
+    var industriesData = $.getJSON(`${apiURL}data/industries/scatterplot?location=${model.id}&year=2012`);
+
     return Ember.RSVP.allSettled([industries, industriesData])
       .then((array) => {
-        let industries = Ember.getWithDefault(array[0], 'value.data', []);
-        let industriesData = Ember.getWithDefault(array[1], 'value.data', []);
+        let industries = getWithDefault(array[0], 'value.data', []);
+        let industriesData = getWithDefault(array[1], 'value.data', []);
         let industriesMetadata = this.modelFor('application').industries;
 
         //index on 'industry_id'
