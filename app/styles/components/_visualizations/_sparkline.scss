@@ -12,21 +12,22 @@
   .connect__path {
     fill: none;
     stroke: #000;
-    stroke-width: 1.5px;
+    stroke-width: .5px;
   }
 
   .items__mark__diamond {
     fill: gray;
     opacity: .1;
   }
+  
+  .items__mark__diamond.selected {
+    stroke: #EBE6E3;
+    fill: red;
+    opacity: 1;
+  }
 
   .items__mark__diamond.highlighted {
     stroke: black;
     opacity: 1;
    }
-
-  .items__mark__diamond.selected {
-    fill: red;
-    opacity: 1;
-  }
 }
