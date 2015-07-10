@@ -28,14 +28,29 @@ var app = new EmberApp({
   }
 });
 
+// D3
 app.import('bower_components/d3/d3.min.js');
-app.import('bower_components/lodash/lodash.js');
-app.import('bower_components/vis-toolkit/build/vistk.js');
+
+// D3 "Plus"
 app.import('bower_components/d3plus/d3plus.js');
+
+// VizToolkit
+app.import('bower_components/vis-toolkit/build/vistk.js');
+
+// Lodash
+app.import('bower_components/lodash/lodash.js');
+
+// Geomap
+app.import('bower_components/d3-plugins/geo/tile/tile.js');
+app.import('bower_components/mapbox.js/mapbox.js');
+app.import('bower_components/mapbox.js/mapbox.css');
 
 // NoUISlider
 app.import('bower_components/nouislider/distribute/nouislider.js');
 app.import('bower_components/nouislider/distribute/nouislider.min.css');
+
+// Admin boundaries for geomap
+app.import('vendor/geodata/colombia_osm_adm4.geojson',  { destDir: 'assets/geodata' });
 
 // Font Awesome
 // The npm package readme mentions refactoring this as a Broccoli tree, so consider that a TODO
