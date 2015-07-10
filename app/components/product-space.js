@@ -23,6 +23,7 @@ export default Ember.Component.extend({
       var_text: `name_${this.get('i18n').locale}`, //TODO: update with langauge
       var_x: 'x',
       var_y: 'y',
+      y_invert: true,
       var_id: this.get('varId'),
       items: [{
         attr: 'name',
