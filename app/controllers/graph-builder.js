@@ -81,6 +81,8 @@ export default Ember.Controller.extend({
       return 'multiples-graph';
     } else if(visualization === 'scatter') {
       return 'd3plus-scatter';
+    } else if (visualization === 'geo') {
+      return 'geo-map';
     }
   }),
   canChangeVisualization: computed('vis', function() {
