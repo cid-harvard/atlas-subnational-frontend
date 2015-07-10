@@ -8,8 +8,14 @@
 .dotplot {
 
   .items__mark__diamond {
-      fill: gray;
-      opacity: .1;
+    fill: gray;
+    opacity: .1;
+  }
+
+  .items__mark__diamond.selected {
+    stroke: #EBE6E3;
+    fill: red;
+    opacity: 1;
   }
 
   .items__mark__diamond.highlighted {
@@ -17,17 +23,13 @@
     opacity: 1;
    }
 
-  .items__mark__diamond.selected {
-    fill: red;
-    opacity: 1;
-  }
-
   .axis > .label {
     display: none;
   }
 
   .axis > .domain {
     stroke: #000;
-    stroke-dasharray: 1,1
+    stroke-dasharray: 1,1;
+    stroke-width: .5px;
   }
 }
