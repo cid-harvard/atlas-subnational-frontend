@@ -43,8 +43,7 @@ export default Ember.Component.extend({
             }
           }]
         }],
-        selection: [this.get('currentLocation')],
-        highlight: [this.get('currentLocation')],
+        selection: [this.get('currentLocation')]
       });
  }),
   draw: function() {
