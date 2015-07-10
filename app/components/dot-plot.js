@@ -29,6 +29,18 @@ export default Ember.Component.extend({
         items: [{
           marks: [{
             type: "diamond"
+          }, {
+            var_mark: '__highlighted',
+            type: d3.scale.ordinal().domain([true, false]).range(["text", "none"]),
+            rotate: "0",
+            translate: [0, -15],
+            text_anchor: function(d) {
+              var parentGroup = d3.select(this.parentNode);
+              var parentSVG = d3.select(this.parentNode.parentNode.parentNode);
+              var parentX = d3.transform(parentGroup.attr("transform")).translate[0];
+              var svgWidth = +parentSVG.attr("width");
+              return parentX < svgWidth / 2 ? "start": "end";
+            }
           }]
         }],
         selection: [this.get('currentLocation')],
