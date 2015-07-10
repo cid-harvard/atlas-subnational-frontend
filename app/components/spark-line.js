@@ -25,11 +25,12 @@ export default Ember.Component.extend({
       container: this.get('id'),
       width: this.get('width') - 60,
       height: this.get('height'),
-      margin: {top: 10, right: 10, bottom: 10, left: 10},
+      margin: {top: 10, right: 10, bottom: 15, left: 15},
       data: data,
       var_y: this.get('yVar'),
       var_x: 'year',
-      var_id: 'department_id',
+      var_id: this.get('varId'),
+      var_text: 'department_id',
       var_group: this.get('varId'),
       time: {
         var_time: 'year',
@@ -39,14 +40,21 @@ export default Ember.Component.extend({
       items: [{
         attr: 'name',
         marks: [{
-          type: 'diamond',
-          width: 10,
-          height: 10
+          type: 'diamond'
+        }, {
+          var_mark: '__highlighted',
+          type: d3.scale.ordinal().domain([true, false]).range(['text', 'none']),
+          translate: [0, -15],
+          text_anchor: function(d) {
+            var parentGroup = d3.select(this.parentNode);
+            var parentSVG = d3.select(this.parentNode.parentNode.parentNode);
+            var parentX = d3.transform(parentGroup.attr('transform')).translate[0];
+            var svgWidth = +parentSVG.attr('width');
+            return parentX < svgWidth/2 ? 'start': 'end';
+          }
         }]
       }],
-      var_text: 'department_id',
-      selection: [this.get('currentLocation')],
-      highlight: [this.get('currentLocation')]
+      selection: [this.get('currentLocation')]
     });
   }),
   draw: function() {
