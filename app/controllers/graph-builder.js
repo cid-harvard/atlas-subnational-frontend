@@ -45,8 +45,8 @@ export default Ember.Controller.extend({
     let search = this.get('search');
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
-    return _.filter(data, function(d) {
-      return get(d,'name').match(regexp) || get(d, 'code').match(regexp);
+    return _.filter(data, (d) => {
+      return get(d,`name_${this.get('i18n').locale}`).match(regexp) || get(d, 'code').match(regexp);
     });
   },
   yearFilter: function(data) {
