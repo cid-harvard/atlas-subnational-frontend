@@ -23,6 +23,7 @@ export default Ember.Component.extend({
       var_text: `name_${this.get('i18n').locale}`, //TODO: update with langauge
       var_x: 'x',
       var_y: 'y',
+      color: d3.scale.ordinal().domain([0, 1, 2]).range(["#DDDDDD", "#AAAAAA", "#777777"]),
       y_invert: true,
       var_id: this.get('varId'),
       items: [{
