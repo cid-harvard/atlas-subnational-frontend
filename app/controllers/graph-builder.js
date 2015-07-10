@@ -12,6 +12,8 @@ export default Ember.Controller.extend({
   startDate: '2009',
   endDate: '2011',
   searchText: computed.oneWay('search'),
+  drawerSettingsIsOpen: false,
+  drawerChangeGraphIsOpen: false,
   builderNavDropDown: Ember.String.htmlSafe("<i class='icon-cidcon_placeholder-1 builder__icon--placeholder'></i>"),
 
   // observer the Query Params and set the links on the side nav
@@ -35,6 +37,12 @@ export default Ember.Controller.extend({
       return this.get('i18n').t(`${i18nString}.${this.get('vis')}`, { name: this.get('model.name') });
     }
     return this.get('i18n').t(i18nString, { name: this.get('model.name') });
+  }),
+  years: computed('startDate','endDate', function() {
+    let start = this.get('startDate');
+    let end = this.get('endDate') - 1; //range is Start to End -1
+    if(start == end) { return start; }
+    return  `01/01/${start}- 01/01/${end}`;
   }),
   rcaFilter: function(data) {
     return _.filter(data, (d) => {
@@ -93,8 +101,6 @@ export default Ember.Controller.extend({
     if(source === 'industries') { return 'rca'; }
     return 'export_rca';
   }),
-  drawerSettingsIsOpen: false,
-  drawerChangeGraphIsOpen: false,
   actions: {
     search: function() {
       this.set('search', this.get('searchText'));
@@ -104,18 +110,12 @@ export default Ember.Controller.extend({
       this.set('vis', visualization);
     },
     toggleDrawerSettings: function() {
-      // Turn off other drawers
-      this.set('drawerChangeGraphIsOpen', false);
-
-      // Turn on settings drawer
-      this.toggleProperty('drawerSettingsIsOpen');
+      this.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
+      this.toggleProperty('drawerSettingsIsOpen'); // toggle on 'Settings'
     },
     toggleDrawerChangeGraph: function() {
-      // Turn off other drawers
-      this.set('drawerSettingsIsOpen', false);
-
-      // Turn on settings drawer
-      this.toggleProperty('drawerChangeGraphIsOpen');
+      this.set('drawerSettingsIsOpen', false); // Turn off other drawers
+      this.toggleProperty('drawerChangeGraphIsOpen'); // toggle on 'Change Graph'
     },
     zoomOut: function() {
       if(this.get('zoom') === 1) { this.decrementProperty('zoom'); }
