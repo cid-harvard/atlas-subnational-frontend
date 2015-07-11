@@ -84,11 +84,6 @@ export default Ember.Route.extend({
         model.set('industriesData', industries);
       })
       .then(function() { window.scrollTo(0,0);});
-  },
-  actions: {
-    willTransition: function(transition) {
-      return true;
-    }
   }
 });
 

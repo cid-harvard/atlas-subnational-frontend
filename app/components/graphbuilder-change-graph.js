@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   classNames: ['changegraph__radiowrap'],
   tag: 'div',
   inputId:  computed('type', function() {
-    return `changegraph__radio--${this.get('type')}`
+    return `changegraph__radio--${this.get('type')}`;
   }),
   iconClass: computed('type', function() {
     return `icon-cidcon_${this.get('type')} changegraph__icon`;
