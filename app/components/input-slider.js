@@ -1,15 +1,15 @@
 import Ember from 'ember';
-const {computed} = Ember;
+const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
   classNames: ['settings__input'],
-  minDate: computed('dateRange', function() {
+  minDate: computed('dateRange.[]', function() {
     return this.get('dateRange')[0];
   }),
-  maxDate: computed('dateRange', function() {
+  maxDate: computed('dateRange.[]', function() {
     return this.get('dateRange')[1] + 1;
   }),
-  sliderOptions: computed('type','dateRange', function() {
+  sliderOptions: computed('type','dateRange.[]', 'startDate', 'endDate', function() {
     return {
       start: [this.get('startDate'), this.get('endDate')],
       step: 1,
@@ -45,6 +45,15 @@ export default Ember.Component.extend({
         this.set('rca', parseInt(values[0]));
       };
     }
+  }),
+  update: observer('startDate', 'endDate', function() {
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      this.element.noUiSlider.destroy(); //http://refreshless.com/nouislider/more/
+
+      noUiSlider.create(this.element, this.get('sliderOptions'));
+      this.element.noUiSlider
+        .on('set', this.get('sliderSetterFunction'));
+    });
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
