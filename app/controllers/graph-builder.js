@@ -41,7 +41,7 @@ export default Ember.Controller.extend({
   years: computed('startDate','endDate', function() {
     let start = this.get('startDate');
     let end = this.get('endDate') - 1; //range is Start to End -1
-    if(start == end) { return start; }
+    if(start === end) { return start; }
     return  `01/01/${start}- 01/01/${end}`;
   }),
   rcaFilter: function(data) {
