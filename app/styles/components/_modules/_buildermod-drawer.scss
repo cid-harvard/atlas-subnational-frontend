@@ -96,9 +96,6 @@
   top: -9999px;
   left: -9999px;
   &:checked ~ .changegraph__radio__target {
-    background: $colorBrown100;
-    color: $colorGrayDark;
-    border: 1px solid $colorBrown200;
   }
 }
 
@@ -116,6 +113,11 @@
     background: $colorBrown100;
     color: $colorGrayDark;
   }
+}
+.changegraph__radio__target--checked {
+  background: $colorBrown100;
+  color: $colorGrayDark;
+  border: 1px solid $colorBrown200;
 }
 
 .changegraph__radio--is--possible {
