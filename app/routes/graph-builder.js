@@ -8,17 +8,23 @@ export default Ember.Route.extend({
     entity_id: { refreshModel: true }, // Id of the entities
     source: { refreshModel: true }, // products, industries,
     variable: { refreshModel: true }, //export_value, import_value, wages, employment
-    vis: { refreshModel: false }, // treemap, multiples, scatter
+    vis: { refreshModel: true }, // treemap, multiples, scatter
     rca: { refreshModel: false },
     startDate: { refreshModel: false },
     endDate: { refreshModel: false },
     search: { refreshModel: false }
   },
+  beforeModel: function(transition) {
+    let queryParams = transition.queryParams;
+    if(queryParams.vis === 'multiples' && this.controller) {
+      this.controller.setProperties({startDate: '2007', endDate: '2014'});
+    }
+  },
   model: function(queryParams) {
     return this.store.find(queryParams.entity, queryParams.entity_id);
   },
   afterModel: function(model, transition) {
-    var data = Ember.getWithDefault(transition, 'queryParams.source', 'products');
+    var data = getWithDefault(transition, 'queryParams.source', 'products');
     if(data  === 'products'){
       return this.setProducts(model);
     } if (data === 'industries') {
@@ -78,6 +84,11 @@ export default Ember.Route.extend({
         model.set('industriesData', industries);
       })
       .then(function() { window.scrollTo(0,0);});
-   }
+  },
+  actions: {
+    willTransition: function(transition) {
+      return true;
+    }
+  }
 });
 
