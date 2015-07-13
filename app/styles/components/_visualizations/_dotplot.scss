@@ -23,6 +23,11 @@
     opacity: 1;
    }
 
+  .items__mark__text {
+    font-weight: 300;
+    font-size: 1.4rem;
+  }
+
   .axis > .label {
     display: none;
   }
@@ -31,5 +36,10 @@
     stroke: #000;
     stroke-dasharray: 1,1;
     stroke-width: .5px;
+  }
+
+  .tick > text {
+    font-weight: 300;
+    font-size: 1.4rem;
   }
 }
