@@ -9,6 +9,7 @@ export default Ember.Component.extend({
     return `#${this.get('elementId')}`;
   }),
   dotPlot: computed('id','data', function() {
+    let varX = this.get('varX');
     return vistk.viz()
       .params({
         type: 'dotplot',
@@ -34,12 +35,16 @@ export default Ember.Component.extend({
             type: d3.scale.ordinal().domain([true, false]).range(["text", "none"]),
             rotate: "0",
             translate: [0, -15],
-            text_anchor: function(d) {
+            text_anchor: function() {
               var parentGroup = d3.select(this.parentNode);
               var parentSVG = d3.select(this.parentNode.parentNode.parentNode);
               var parentX = d3.transform(parentGroup.attr("transform")).translate[0];
               var svgWidth = +parentSVG.attr("width");
               return parentX < svgWidth / 2 ? "start": "end";
+            },
+            text: function(d) {
+              var format = function(d) { return '$' + d3.format(".2s")(d); };
+              return d['name'] + ' (' + format(+d[varX]) + ')';
             }
           }]
         }],
