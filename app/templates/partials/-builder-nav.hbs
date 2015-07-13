@@ -189,11 +189,11 @@
                 {{/link-to}}
               </div>
             </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
+            <li class="builder__nav__item">
               <i class="icon-cidcon_similarity builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Similarity map</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source="products" variable='export_value' vis="similarity") class="builder__nav__question"}}
                   {{t 'graph_builder.builder_nav.location.products.map' name=model.name}}
                 {{/link-to}}
               </div>
