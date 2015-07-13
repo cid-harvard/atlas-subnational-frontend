@@ -3,14 +3,14 @@ const { computed } = Ember;
 
 export default Ember.Component.extend({
   classNames: ['geo__wrap'],
-
+  id: 'geo__wrap',
   southWest: L.latLng(-14.817, -100.547),
   northEast: L.latLng(21.371, -42.231),
   bounds: computed('southWest', 'northEast', function() {
     return L.latLngBounds(this.get('southWest'), this.get('northEast'));
   }),
-  map: computed('bounds', function() {
-    return new L.Map('map', {
+  map: computed('bounds', 'id', function() {
+    return new L.Map(this.get('id'), {
       center: [4.6,-74.0833333],
       zoom: 5,
       maxBounds: this.get('bounds'),
@@ -29,11 +29,10 @@ export default Ember.Component.extend({
     this.get('svg').append('g').attr('class', 'leaflet-zoom-hide');
   }),
   loadData: computed('valueMap', function() {
-    d3.json('/data/product_id_191.json', (d) => {
-      for (var i = d.data.length - 1; i >= 0; i--) {
-        this.get('valueMap').set(d.data[i].department_id, d.data[i].export_value);
-      }
-    });
+    let d = this.get('data');
+    for (var i = d.data.length - 1; i >= 0; i--) {
+      this.get('valueMap').set(d.data[i].department_id, d.data[i].export_value);
+    }
   }),
   createDeptFeatures: computed('g', 'valueMap', 'map', 'svg', function() {
 
@@ -80,5 +79,12 @@ export default Ember.Component.extend({
 
     });
 
-  })
+  }),
+  didInsertElement: function() {
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      this.get('initMap');
+      // this.get('loadData');
+      // this.get('createDeptFeatures');
+    });
+  }
 });

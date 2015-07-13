@@ -1,0 +1,37 @@
+/**
+*
+* Geomap
+*
+**/
+
+// Nested here instead of giving ever el a class in the js
+#geo__wrap {
+  height: 800px;
+
+  svg {
+    position: relative;
+  }
+
+  path {
+    fill: #000;
+    fill-opacity: .1;
+    stroke: #fff;
+    stroke-width: 1px;
+  }
+
+  path:hover {
+    fill: brown;
+    fill-opacity: .7;
+  }
+
+  /*.q0-9{fill:rgb(247,251,255)}*/
+  .q1-9{fill:rgb(222,235,247)}
+  .q2-9{fill:rgb(198,219,239)}
+  .q3-9{fill:rgb(158,202,225)}
+  .q4-9{fill:rgb(107,174,214)}
+  .q5-9{fill:rgb(66,146,198)}
+  .q6-9{fill:rgb(33,113,181)}
+  .q7-9{fill:rgb(8,81,156)}
+  .q8-9{fill:rgb(8,48,107)}
+
+}
