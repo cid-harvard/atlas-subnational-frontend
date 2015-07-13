@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
   attributeBindings: ['width','height'],
+  classNames: ['d3plus_tree-map'],
   varIndependent: ['group', 'code'],
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
