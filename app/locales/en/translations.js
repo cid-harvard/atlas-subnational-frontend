@@ -32,7 +32,7 @@ export default {
       'change_time' : 'Change time period:'
     },
     'search': {
-      'placeholder': 'Search for a product name or code'
+      'placeholder': 'Search for {{entity}}'
     },
     'change_graph': {
       'label': 'Change Graph',
