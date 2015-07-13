@@ -43,7 +43,7 @@ export default Ember.Component.extend({
       highlight: this.get('highlight'),
       zoom: this.get('zoom'),
       ui: {legend: this.get('varLegend')}
-    })
+    });
   }),
   zoom: computed('varActiveStep', function() {
     let step = this.get('varActiveStep');
