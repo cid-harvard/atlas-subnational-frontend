@@ -61,7 +61,6 @@
 
 .buildermod__vizwrap {
   height: 600px;
-  padding: $baseSpace * 1.5;
   border: 1px solid $colorBrown500;
   overflow-y: scroll;
   background: $colorBrown200;
@@ -69,11 +68,18 @@
   position: relative;
 }
 
+.buildermod__viz {
+  padding: $baseSpace*4.5 $baseSpace*1.5 $baseSpace*1.5;
+}
+
 .buildermod__searchwrap {
   display: flex;
   align-items: stretch;
   margin-bottom: $baseSpace;
-  box-shadow: 2px 2px 2px $colorGrayLighter;
+  padding: $baseSpace * 1.5;
+  position: absolute;
+  width: 100%;
+  z-index: $zIndex-1;
 }
 
 .buildermod__search {
@@ -83,6 +89,7 @@
   font-weight: 300;
   padding: $baseSpace/2 $baseSpace;
   flex: 1 1 auto;
+  box-shadow: 2px 2px 2px $colorGrayLighter;
   &:active, &:focus {
     outline: 0;
     &::-webkit-input-placeholder {
@@ -103,6 +110,7 @@
   background: $colorNavy800;
   color: $colorGrayLighter;
   cursor: pointer;
+  box-shadow: 2px 2px 2px $colorGrayLighter;
   &:hover, &:active, &:focus {
     background: $colorNavy;
     outline: 0;

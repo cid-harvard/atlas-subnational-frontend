@@ -5,8 +5,9 @@
 **/
 
 // Nested here instead of giving ever el a class in the js
-#geo__wrap {
-  height: 800px;
+.geo__wrap {
+  height: 100%;
+  padding: 0;
 
   svg {
     position: relative;

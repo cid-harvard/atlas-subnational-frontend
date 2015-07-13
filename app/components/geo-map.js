@@ -3,14 +3,13 @@ const { computed } = Ember;
 
 export default Ember.Component.extend({
   classNames: ['geo__wrap'],
-  id: 'geo__wrap',
   southWest: L.latLng(-14.817, -100.547),
   northEast: L.latLng(21.371, -42.231),
   bounds: computed('southWest', 'northEast', function() {
     return L.latLngBounds(this.get('southWest'), this.get('northEast'));
   }),
   map: computed('bounds', 'id', function() {
-    return new L.Map(this.get('id'), {
+    return new L.Map(this.get('elementId'), {
       center: [4.6,-74.0833333],
       zoom: 5,
       maxBounds: this.get('bounds'),
