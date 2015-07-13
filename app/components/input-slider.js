@@ -38,7 +38,7 @@ export default Ember.Component.extend({
         let endYear = parseInt(values[1]);
         this.set('newStartDate', startYear);
         this.set('newEndDate', endYear);
-        this.set('years', `01/01/${startYear}- 01/01/${endYear}`);
+        this.set('years', `01/01/${startYear} - 01/01/${endYear}`);
       };
     } else  { //rca, similarity
       return (values) => {
