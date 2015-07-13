@@ -18,6 +18,8 @@ export default Ember.Route.extend({
     let queryParams = transition.queryParams;
     if(queryParams.vis === 'multiples' && this.controller) {
       this.controller.setProperties({startDate: '2007', endDate: '2014'});
+    } else if(queryParams.vis === 'scatter' && this.controller) {
+      this.controller.setProperties({startDate: '2012', endDate: '2013'});
     }
   },
   model: function(queryParams) {
