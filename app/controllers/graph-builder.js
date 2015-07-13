@@ -46,7 +46,7 @@ export default Ember.Controller.extend({
   }),
   rcaFilter: function(data) {
     return _.filter(data, (d) => {
-      return get(d, this.get('rca')) <= 1;
+      return get(d,'rca') <= 1;
     });
   },
   searchFilter: function(data) {
@@ -63,7 +63,7 @@ export default Ember.Controller.extend({
       return _.contains(timeRange, get(d, 'year'));
     });
   },
-  immutableData: computed('source','entity', 'entity_id',function() {
+  immutableData: computed('source','entity','entity_id',function() {
     let source = this.get('source');
     if(source  === 'products') {
       return this.get('model.productsData');
@@ -89,6 +89,8 @@ export default Ember.Controller.extend({
       return 'multiples-graph';
     } else if(visualization === 'scatter') {
       return 'd3plus-scatter';
+    } else if(visualization === 'similarity') {
+      return 'd3plus-network'
     }
   }),
   canChangeVisualization: computed('vis', function() {
