@@ -19,6 +19,8 @@ export default Ember.Component.extend({
   },
   sparkLine: computed('data','yVar', function() {
    let data = this.cleanData(this.get('data'));
+   let yVar = this.get('yVar');
+   let currentLocationName = this.get('currentLocationName');
    return vistk.viz()
     .params({
       type: 'sparkline',
@@ -46,12 +48,16 @@ export default Ember.Component.extend({
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['text', 'none']),
           translate: [0, -15],
-          text_anchor: function(d) {
+          text_anchor: function() {
             var parentGroup = d3.select(this.parentNode);
             var parentSVG = d3.select(this.parentNode.parentNode.parentNode);
             var parentX = d3.transform(parentGroup.attr('transform')).translate[0];
             var svgWidth = +parentSVG.attr('width');
             return parentX < svgWidth/2 ? 'start': 'end';
+          },
+          text: function(d) {
+            var format = function(d) { return '$' + d3.format(".2s")(d); };
+            return currentLocationName + ' (' + format(+d[yVar]) + ')';
           }
         }]
       }],
