@@ -22,14 +22,19 @@ export default Ember.Component.extend({
 
     return map;
   }),
+  maxValue: computed('immutableData.[]', function () {
+    let varDependent = this.get('varDependent');
+    return d3.max(this.get('immutableData'), function(d) { return Ember.get(d, varDependent); });
+  }),
   valueMap: d3.map(),
   initMap: computed('map', function() {
     this.get('map').addLayer(new L.TileLayer('https://{s}.tiles.mapbox.com/v4/gwezerek.22ab4aa8/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZ3dlemVyZWsiLCJhIjoicXJkMjV6WSJ9.Iw_1c5zREHqNSfdtkjlqbA'));
   }),
   loadData: computed('valueMap', function() {
-    let d = this.get('data');
-    for (var i = d.length - 1; i >= 0; i--) {
-      this.get('valueMap').set(d[i].id, d[i].export_value);
+    let data = this.get('data');
+    let varDependent = this.get('varDependent');
+    for (var i = data.length - 1; i >= 0; i--) {
+      this.get('valueMap').set(data[i].id, data[i][varDependent]);
     }
   }),
   createDeptFeatures: computed('g', 'valueMap', 'map', function() {
@@ -43,13 +48,12 @@ export default Ember.Component.extend({
       let path = d3.geo.path().projection(transform);
       let valueMap = this.get('valueMap');
       let quantize = d3.scale.quantize()
-          .domain([0, 1871659410])
+          .domain([0, this.get('maxValue')])
           .range(d3.range(3).map(function(i) { return 'q' + i + '-3'; }));
 
       var feature = g.selectAll('path')
           .data(json.features)
         .enter().append('path')
-          // .classed('geo__department q1-3', true);
           .attr('class', function(d) { return 'geo__department ' + quantize(valueMap.get(d.properties.cid_id)); });
 
       this.get('map').on('viewreset', reset);
@@ -76,9 +80,7 @@ export default Ember.Component.extend({
         let point = that.get('map').latLngToLayerPoint(new L.LatLng(y, x));
         this.stream.point(point.x, point.y);
       }
-
     });
-
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
