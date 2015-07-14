@@ -74,6 +74,13 @@ export default Ember.Controller.extend({
   dateRange: computed('immutableData.[]', function() {
     return d3.extent(this.get('immutableData'), function(d) { return d.year; });
   }),
+  otherPossibleGraphs: computed('vis', function() {
+    let vis = this.get('vis');
+    if(vis === 'multiples' || vis === 'treemap'){
+      return ['treemap', 'multiples'];
+    }
+    return [vis];
+  }),
   filteredData: computed('immutableData.[]', 'vis', 'search', 'startDate', 'endDate', function() {
     let data = this.get('immutableData');
     if(this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
@@ -92,11 +99,6 @@ export default Ember.Controller.extend({
     } else if(visualization === 'similarity') {
       return 'd3plus-network'
     }
-  }),
-  canChangeVisualization: computed('vis', function() {
-    let visualization = this.get('vis');
-    if(visualization === 'scatter') { return false; }
-    return true;
   }),
   rca: computed('source', function() {
     let source = this.get('source');

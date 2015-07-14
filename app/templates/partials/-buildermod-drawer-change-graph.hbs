@@ -1,30 +1,12 @@
 <form class="buildermod__drawer buildermod__drawer--changegraph">
   <div class="changegraph__radioswrap">
-    {{component 'graphbuilder-change-graph'
-      toggleVisualization='toggleVisualization'
-      type='treemap'
-      vis=vis
-    }}
-    {{component 'graphbuilder-change-graph'
-      toggleVisualization='toggleVisualization'
-      type='multiples'
-      vis=vis
-    }}
-    {{component 'graphbuilder-change-graph'
-      toggleVisualization='toggleVisualization'
-      type='scatter'
-      vis=vis
-    }}
-    {{component 'graphbuilder-change-graph'
-      toggleVisualization='toggleVisualization'
-      type='geo'
-      vis=vis
-    }}
-    {{component 'graphbuilder-change-graph'
-      toggleVisualization='toggleVisualization'
-      type='similarity'
-      vis=vis
-    }}
+    {{#each change in otherPossibleGraphs}}
+      {{component 'graphbuilder-change-graph'
+        toggleVisualization='toggleVisualization'
+        type=change
+        vis=vis
+      }}
+    {{/each}}
   </div>
 </form>
 
