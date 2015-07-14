@@ -49,7 +49,7 @@ export default Ember.Component.extend({
   truncateYear: function(year) {
     return '’' + year.toString().slice(-2);
   },
-  maxValue: computed('immutableData.[]', function () {
+  maxValue: computed('immutableData.[]', 'varDependent', function () {
     let varDependent = this.get('varDependent');
     return d3.max(this.get('immutableData'), function(d) { return Ember.get(d, varDependent); });
   }),

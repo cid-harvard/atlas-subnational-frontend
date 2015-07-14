@@ -16,11 +16,15 @@ export default Ember.Route.extend({
   },
   beforeModel: function(transition) {
     let queryParams = transition.queryParams;
-    if(queryParams.vis === 'multiples' && this.controller) {
+    if(!this.controller) { return true }
+
+    if(queryParams.vis === 'multiples' && queryParams.source === 'industries') {
+      this.controller.setProperties({startDate: '2008', endDate: '2013'});
+    } else if(queryParams.vis === 'multiples' ) {
       this.controller.setProperties({startDate: '2007', endDate: '2014'});
-    } else if(queryParams.vis === 'scatter' && this.controller) {
+    } else if(queryParams.vis === 'scatter') {
       this.controller.setProperties({startDate: '2013', endDate: '2014'});
-    } else if(queryParams.vis === 'similarity' && this.controller) {
+    } else if(queryParams.vis === 'similarity') {
       this.controller.setProperties({startDate: '2013', endDate: '2014'});
     }
   },
@@ -92,7 +96,9 @@ export default Ember.Route.extend({
   setupController: function(controller, model, transition) {
     this._super(controller, model);
     let queryParams = transition.queryParams;
-    if(queryParams.vis === 'multiples') {
+    if(queryParams.vis === 'multiples' && queryParams.source === 'industries') {
+      controller.setProperties({startDate: '2008', endDate: '2013'});
+    } else if(queryParams.vis === 'multiples') {
       controller.setProperties({startDate: '2007', endDate: '2014'});
     } else if(queryParams.vis === 'scatter') {
       controller.setProperties({startDate: '2013', endDate: '2014'});
