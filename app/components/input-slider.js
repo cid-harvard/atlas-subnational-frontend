@@ -48,18 +48,22 @@ export default Ember.Component.extend({
   }),
   update: observer('startDate', 'endDate', function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
-      this.element.noUiSlider.destroy(); //http://refreshless.com/nouislider/more/
+      if(this.element) {
+        this.element.noUiSlider.destroy(); //http://refreshless.com/nouislider/more/
 
-      noUiSlider.create(this.element, this.get('sliderOptions'));
-      this.element.noUiSlider
-        .on('set', this.get('sliderSetterFunction'));
+        noUiSlider.create(this.element, this.get('sliderOptions'));
+        this.element.noUiSlider
+          .on('set', this.get('sliderSetterFunction'));
+      }
     });
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
-      noUiSlider.create(this.element, this.get('sliderOptions'));
-      this.element.noUiSlider
-        .on('set', this.get('sliderSetterFunction'));
+      if(this.get('minDate') && this.get('maxDate')) {
+        noUiSlider.create(this.element, this.get('sliderOptions'));
+        this.element.noUiSlider
+          .on('set', this.get('sliderSetterFunction'));
+      }
     });
   }
 });
