@@ -44,6 +44,7 @@ app.import('bower_components/lodash/lodash.js');
 app.import('bower_components/d3-plugins/geo/tile/tile.js');
 app.import('bower_components/mapbox.js/mapbox.js');
 app.import('bower_components/mapbox.js/mapbox.css');
+app.import('bower_components/mapbox.js/images/icons-000000@2x.png', { destDir: 'assets/img/geo' });
 
 // NoUISlider
 app.import('bower_components/nouislider/distribute/nouislider.js');

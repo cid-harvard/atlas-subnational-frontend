@@ -36,3 +36,16 @@
   .q8-9{fill:rgb(8,48,107)}
 
 }
+
+
+// Leaflet styling to fix image paths
+.leaflet-container.dark .map-tooltip .close,
+.leaflet-control-attribution:after,
+.leaflet-control-layers-toggle,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-popup-close-button,
+.map-tooltip .close,
+.mapbox-icon {
+  background-image: url(img/geo/icons-000000@2x.png);
+}
