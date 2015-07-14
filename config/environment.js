@@ -24,7 +24,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    ENV.apiURL = "http://atlas-colombia-master.cid-labs.com/api/";
+    ENV.apiURL = "http://atlas-colombia-master.cid-labs.com/api";
     ENV.contentSecurityPolicy = {
       'connect-src': "'self' 'localhost:4200' *",
       'style-src': "'self' 'unsafe-inline' *",
@@ -33,7 +33,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'edge') {
-    ENV.apiURL = "http://ec2-54-174-138-240.compute-1.amazonaws.com/api/";
+    ENV.apiURL = "http://ec2-54-174-138-240.compute-1.amazonaws.com/api";
     // need to fix for production mode
     ENV.contentSecurityPolicy = {
       'connect-src': "'self' 'localhost:4200' *",

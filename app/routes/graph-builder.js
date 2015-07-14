@@ -51,8 +51,8 @@ export default Ember.Route.extend({
     }
   },
   setProducts: function(model){
-    var products = $.getJSON(`${apiURL}data/products?location=${model.id}`);
-    var productsData = $.getJSON(`${apiURL}data/products/scatterplot?location=${model.id}&year=2012`);
+    var products = $.getJSON(`${apiURL}/data/products?location=${model.id}`);
+    var productsData = $.getJSON(`${apiURL}/data/products/scatterplot?location=${model.id}&year=2012`);
 
     return Ember.RSVP.allSettled([products, productsData])
       .then((array) => {
@@ -74,9 +74,9 @@ export default Ember.Route.extend({
       .then(function() { window.scrollTo(0,0);});
   },
   setIndustries: function(model) {
-    var industries = $.getJSON(`${apiURL}data/industries?location=${model.id}`);
+    var industries = $.getJSON(`${apiURL}/data/industries?location=${model.id}`);
     // industriesData has the RCA and Complexity
-    var industriesData = $.getJSON(`${apiURL}data/industries/scatterplot?location=${model.id}&year=2012`);
+    var industriesData = $.getJSON(`${apiURL}/data/industries/scatterplot?location=${model.id}&year=2012`);
 
     return Ember.RSVP.allSettled([industries, industriesData])
       .then((array) => {
