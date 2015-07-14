@@ -13,28 +13,29 @@
     position: relative;
   }
 
-  path {
+  .geo__department {
     fill: #000;
-    fill-opacity: .1;
-    stroke: #fff;
+    fill-opacity: .5;
+    stroke: $colorBrown500;
+    stroke-dasharray: 5, 5;
     stroke-width: 1px;
   }
 
-  path:hover {
-    fill: brown;
-    fill-opacity: .7;
+  .q0-3 {
+    fill: $colorWhite;
   }
 
-  /*.q0-9{fill:rgb(247,251,255)}*/
-  .q1-9{fill:rgb(222,235,247)}
-  .q2-9{fill:rgb(198,219,239)}
-  .q3-9{fill:rgb(158,202,225)}
-  .q4-9{fill:rgb(107,174,214)}
-  .q5-9{fill:rgb(66,146,198)}
-  .q6-9{fill:rgb(33,113,181)}
-  .q7-9{fill:rgb(8,81,156)}
-  .q8-9{fill:rgb(8,48,107)}
+  .q1-3 {
+    fill: $colorRed300;
+  }
 
+  .q2-3 {
+    fill: $colorRed600;
+  }
+
+  .q3-3 {
+    fill: $colorRed1000;
+  }
 }
 
 

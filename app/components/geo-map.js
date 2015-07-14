@@ -40,14 +40,17 @@ export default Ember.Component.extend({
       let svg = d3.select( this.get('map').getPanes().overlayPane ).append('svg');
       let g = svg.append('g').attr('class', 'leaflet-zoom-hide');
       let transform = d3.geo.transform({point: projectPoint});
-      let path = d3.geo.path();
+      let path = d3.geo.path().projection(transform);
       let valueMap = this.get('valueMap');
+      let quantize = d3.scale.quantize()
+          .domain([0, 1871659410])
+          .range(d3.range(3).map(function(i) { return 'q' + i + '-3'; }));
 
       var feature = g.selectAll('path')
           .data(json.features)
         .enter().append('path')
-          .attr('class', 'q1-9');
-          // .attr('class', function(d) { debugger; console.log(valueMap.get(d.properties.cid_id)); return quantize(valueMap.get(d.properties.cid_id)); });
+          // .classed('geo__department q1-3', true);
+          .attr('class', function(d) { return 'geo__department ' + quantize(valueMap.get(d.properties.cid_id)); });
 
       this.get('map').on('viewreset', reset);
       reset();
@@ -74,12 +77,6 @@ export default Ember.Component.extend({
         this.stream.point(point.x, point.y);
       }
 
-      function quantize() {
-        return d3.scale.quantize()
-          .domain([0, 1871659410])
-          .range(d3.range(9).map(function(i) { return 'q' + i + '-9'; }));
-      }
-
     });
 
   }),
@@ -87,7 +84,7 @@ export default Ember.Component.extend({
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.get('initMap');
       this.get('loadData');
-      // this.get('createDeptFeatures');
+      this.get('createDeptFeatures');
     });
   }
 });
