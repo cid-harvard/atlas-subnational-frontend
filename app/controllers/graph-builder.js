@@ -105,6 +105,10 @@ export default Ember.Controller.extend({
     if(source === 'industries') { return 'rca'; }
     return 'export_rca';
   }),
+  watchLocale: observer('i18n.locale', function() {
+    this.set('drawerSettingsIsOpen', false); // Turn off other drawers
+    this.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
+  }),
   actions: {
     search: function() {
       this.set('search', this.get('searchText'));
