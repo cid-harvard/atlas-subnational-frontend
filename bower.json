@@ -16,7 +16,7 @@
     "pretender": "~0.6.0",
     "ember-inflector": "~1.3.1",
     "font-awesome": "~4.3.0",
-    "cidcons": "https://github.com/cid-harvard/cidcons.git",
+    "cidcons": "cid-harvard/cidcons#0.3.1",
     "numeral": "~1.5.3",
     "nouislider": "~8.0.1"
   },

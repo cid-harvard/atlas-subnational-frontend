@@ -1,9 +1,10 @@
 <form class="buildermod__searchwrap">
   {{input
     class="buildermod__search"
-    placeholder="Search for a product name or code"
+    placeholder=(t 'graph_builder.search.placeholder' entity=source)
     value=searchText
     enter='search'
   }}
   <input class="buildermod__search__submit fa fa-search" type="submit" value="&#xf002;" {{action 'search'}}>
 </form>
+

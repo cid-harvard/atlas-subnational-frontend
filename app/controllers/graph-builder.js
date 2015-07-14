@@ -9,9 +9,11 @@ export default Ember.Controller.extend({
   vis: 'treemap',
   variable: 'export_value',
   search: null,
-  startDate: '2009',
-  endDate: '2011',
+  startDate: '2007',
+  endDate: '2014',
   searchText: computed.oneWay('search'),
+  drawerSettingsIsOpen: false,
+  drawerChangeGraphIsOpen: false,
   builderNavDropDown: Ember.String.htmlSafe("<i class='icon-cidcon_placeholder-1 builder__icon--placeholder'></i>"),
 
   // observer the Query Params and set the links on the side nav
@@ -36,17 +38,26 @@ export default Ember.Controller.extend({
     }
     return this.get('i18n').t(i18nString, { name: this.get('model.name') });
   }),
-  rcaFilter: function(data) {
-    return _.filter(data, (d) => {
-      return get(d, this.get('rca')) <= 1;
-    });
-  },
+  years: computed('startDate','endDate', function() {
+    let start = this.get('startDate');
+    let end = this.get('endDate') - 1; //range is Start to End -1
+    if(start === end) { return start; }
+    return  `01/01/${start} - 01/01/${end}`;
+  }),
+  rcaFilter: computed('rcaComputed','source', function() {
+    let rca = this.get('rcaComputed');
+    return  (data) => {
+      return _.filter(data, (d) => {
+        return get(d, rca) <= 1;
+      });
+    }
+  }),
   searchFilter: function(data) {
     let search = this.get('search');
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
-    return _.filter(data, function(d) {
-      return get(d,'name').match(regexp) || get(d, 'code').match(regexp);
+    return _.filter(data, (d) => {
+      return get(d,`name_${this.get('i18n').locale}`).match(regexp) || get(d, 'code').match(regexp);
     });
   },
   yearFilter: function(data) {
@@ -55,20 +66,28 @@ export default Ember.Controller.extend({
       return _.contains(timeRange, get(d, 'year'));
     });
   },
-  immutableData: computed('source','entity', 'entity_id',function() {
+  immutableData: computed('source','entity','entity_id',function() {
     let source = this.get('source');
     if(source  === 'products') {
-      return this.get('model.productsData');
+      return this.getWithDefault('model.productsData', []);
     } else if(source === 'industries') {
-      return this.get('model.industriesData');
+      return this.getWithDefault('model.industriesData', []);
     }
   }),
   dateRange: computed('immutableData.[]', function() {
-    return d3.extent(this.get('immutableData'), function(d) { return d.year; });
+    let data = this.get('immutableData');
+    return d3.extent(data, function(d) { return d.year; });
+  }),
+  otherPossibleGraphs: computed('vis', function() {
+    let vis = this.get('vis');
+    if(vis === 'multiples' || vis === 'treemap'){
+      return ['treemap', 'multiples'];
+    }
+    return [vis];
   }),
   filteredData: computed('immutableData.[]', 'vis', 'search', 'startDate', 'endDate', function() {
     let data = this.get('immutableData');
-    if(this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
+    if(this.get('vis') === 'scatter') { data = this.get('rcaFilter')(data); }
     if(this.get('search')){ data = this.searchFilter(data); }
     data = this.yearFilter(data);
     return data;
@@ -81,20 +100,22 @@ export default Ember.Controller.extend({
       return 'multiples-graph';
     } else if(visualization === 'scatter') {
       return 'd3plus-scatter';
+    } else if(visualization === 'similarity') {
+      return 'd3plus-network'
     }
   }),
-  canChangeVisualization: computed('vis', function() {
-    let visualization = this.get('vis');
-    if(visualization === 'scatter') { return false; }
-    return true;
-  }),
-  rca: computed('source', function() {
+  rcaComputed: computed( 'source', function() {
     let source = this.get('source');
-    if(source === 'industries') { return 'rca'; }
-    return 'export_rca';
+    if(source === 'industries') {
+      return 'rca';
+    } else if (source === 'products') {
+      return 'export_rca';
+    }
   }),
-  drawerSettingsIsOpen: false,
-  drawerChangeGraphIsOpen: false,
+  watchLocale: observer('i18n.locale', function() {
+    this.set('drawerSettingsIsOpen', false); // Turn off other drawers
+    this.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
+  }),
   actions: {
     search: function() {
       this.set('search', this.get('searchText'));
@@ -104,18 +125,12 @@ export default Ember.Controller.extend({
       this.set('vis', visualization);
     },
     toggleDrawerSettings: function() {
-      // Turn off other drawers
-      this.set('drawerChangeGraphIsOpen', false);
-
-      // Turn on settings drawer
-      this.toggleProperty('drawerSettingsIsOpen');
+      this.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
+      this.toggleProperty('drawerSettingsIsOpen'); // toggle on 'Settings'
     },
     toggleDrawerChangeGraph: function() {
-      // Turn off other drawers
-      this.set('drawerSettingsIsOpen', false);
-
-      // Turn on settings drawer
-      this.toggleProperty('drawerChangeGraphIsOpen');
+      this.set('drawerSettingsIsOpen', false); // Turn off other drawers
+      this.toggleProperty('drawerChangeGraphIsOpen'); // toggle on 'Change Graph'
     },
     zoomOut: function() {
       if(this.get('zoom') === 1) { this.decrementProperty('zoom'); }

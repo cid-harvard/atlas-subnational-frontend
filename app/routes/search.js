@@ -18,8 +18,8 @@ export default Ember.Route.extend({
     }
   },
   model: function(transition) {
-    var departments = Ember.$.getJSON(`${apiURL}metadata/locations/?level=department`);
-    var municipalities = Ember.$.getJSON(`${apiURL}metadata/locations/?level=municipality`);
+    var departments = Ember.$.getJSON(`${apiURL}/metadata/locations/?level=department`);
+    var municipalities = Ember.$.getJSON(`${apiURL}/metadata/locations/?level=municipality`);
     let search = _.deburr(transition.query);
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");

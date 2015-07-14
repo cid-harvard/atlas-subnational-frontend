@@ -14,10 +14,10 @@ export default Ember.Route.extend({
     // extract year out later
     var year = Ember.getWithDefault(transition, 'queryParams.year', 2012);
 
-    var products = Ember.$.getJSON(`${apiURL}data/products?location=${model.id}&year=${year}`);
+    var products = Ember.$.getJSON(`${apiURL}/data/products?location=${model.id}&year=${year}`);
     // one of these should be removed in the future because the points should be merged in
-    var departments = Ember.$.getJSON(`${apiURL}data/departments?year=${year}`);
-    var departmentsAll = Ember.$.getJSON(`${apiURL}data/departments/departmentyear/`);
+    var departments = Ember.$.getJSON(`${apiURL}/data/departments?year=${year}`);
+    var departmentsAll = Ember.$.getJSON(`${apiURL}/data/departments/departmentyear/`);
 
     return RSVP.allSettled([products, departments, departmentsAll]).then((array) => {
       var productsData = getWithDefault(array[0], 'value.data', []);

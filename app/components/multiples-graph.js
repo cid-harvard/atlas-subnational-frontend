@@ -31,8 +31,13 @@ export default Ember.Component.extend({
       d.name = Ember.get(d.values[0], `name_${this.get('i18n').locale}`) || d.key;
     });
 
-    return _.sortBy(nest, function(d) {
-       return -_.sum(d.values, varDependent);
+    return _.sortBy(nest, (d) => {
+      let lastDataPoint = _.find(d.values, { year: this.get('endDate') - 1 });
+      if(lastDataPoint) {
+        return - Ember.get(lastDataPoint, varDependent);
+      } else {
+        return 0;
+      }
     });
   }),
   hasMore: computed('nestedData.[]', function() {
@@ -44,7 +49,7 @@ export default Ember.Component.extend({
   truncateYear: function(year) {
     return '’' + year.toString().slice(-2);
   },
-  maxValue: computed('immutableData.[]', function () {
+  maxValue: computed('immutableData.[]', 'varDependent', function () {
     let varDependent = this.get('varDependent');
     return d3.max(this.get('immutableData'), function(d) { return Ember.get(d, varDependent); });
   }),

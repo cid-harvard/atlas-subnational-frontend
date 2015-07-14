@@ -1,39 +1,12 @@
 <form class="buildermod__drawer buildermod__drawer--changegraph">
   <div class="changegraph__radioswrap">
-    <div class="changegraph__radiowrap">
-      <input {{bind-attr class=":changegraph__radio"}} id="changegraph__radio--treemap" value="treemap" value="treemap" {{action 'toggleVisualization' 'treemap'}} type="radio" checked="checked">
-      <label class="changegraph__radio__target changegraph__radio--is--possible" for="changegraph__radio--treemap">
-        <i class="icon-cidcon_treemap changegraph__icon"></i>
-        Treemap
-      </label>
-    </div>
-    <div class="changegraph__radiowrap">
-      <input {{bind-attr class=":changegraph__radio"}} id="changegraph__radio--multiples" value="multiples" {{action 'toggleVisualization' 'multiples'}} type="radio">
-      <label class="changegraph__radio__target changegraph__radio--is--possible" for="changegraph__radio--multiples">
-        <i class="icon-cidcon_multiples changegraph__icon"></i>
-        Area multiples
-      </label>
-    </div>
-    <div class="changegraph__radiowrap">
-      <input {{bind-attr class=":changegraph__radio"}} id="changegraph__radio--geo" value="geo" {{action 'toggleVisualization' 'geo'}} type="radio">
-      <label class="changegraph__radio__target changegraph__radio--is--possible" for="changegraph__radio--geo">
-        <i class="icon-cidcon_geo changegraph__icon"></i>
-        Geographic map
-      </label>
-    </div>
-    <div class="changegraph__radiowrap">
-      <input {{bind-attr class=":changegraph__radio"}} id="changegraph__radio--scatter" value="scatter" {{action 'toggleVisualization' 'scatter'}} type="radio">
-      <label class="changegraph__radio__target changegraph__radio--is--possible" for="changegraph__radio--scatter">
-        <i class="icon-cidcon_scatter changegraph__icon"></i>
-        Scatterplot
-      </label>
-    </div>
-    <div class="changegraph__radiowrap">
-      <input {{bind-attr class=":changegraph__radio"}} id="changegraph__radio--similarity" value="similarity" {{action 'toggleVisualization' 'similarity'}} type="radio">
-      <label class="changegraph__radio__target changegraph__radio--is--possible" for="changegraph__radio--similarity">
-        <i class="icon-cidcon_similarity changegraph__icon"></i>
-        Similarity map
-      </label>
-    </div>
+    {{#each change in otherPossibleGraphs}}
+      {{component 'graphbuilder-change-graph'
+        toggleVisualization='toggleVisualization'
+        type=change
+        vis=vis
+      }}
+    {{/each}}
   </div>
 </form>
+
