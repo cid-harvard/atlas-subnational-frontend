@@ -69,7 +69,11 @@ export default Ember.Route.extend({
             _.extend(d, product);
             _.extend(d, productData);
           });
+
           model.set('productsData', products);
+        }, function(error) {
+          console.log(error);
+          model.set('productsData', []);
         })
       .then(function() { window.scrollTo(0,0);});
   },
@@ -95,6 +99,8 @@ export default Ember.Route.extend({
         });
 
         model.set('industriesData', industries);
+      }, function(error) {
+        model.set('industriesData', []);
       })
       .then(function() { window.scrollTo(0,0);});
   },

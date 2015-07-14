@@ -66,13 +66,14 @@ export default Ember.Controller.extend({
   immutableData: computed('source','entity','entity_id',function() {
     let source = this.get('source');
     if(source  === 'products') {
-      return this.get('model.productsData');
+      return this.getWithDefault('model.productsData', []);
     } else if(source === 'industries') {
-      return this.get('model.industriesData');
+      return this.getWithDefault('model.industriesData', []);
     }
   }),
   dateRange: computed('immutableData.[]', function() {
-    return d3.extent(this.get('immutableData'), function(d) { return d.year; });
+    let data = this.get('immutableData');
+    return d3.extent(data, function(d) { return d.year; });
   }),
   otherPossibleGraphs: computed('vis', function() {
     let vis = this.get('vis');
