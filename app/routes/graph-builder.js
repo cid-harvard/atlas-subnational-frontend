@@ -24,11 +24,11 @@ export default Ember.Route.extend({
     } else if(queryParams.vis === 'multiples' ) {
       controller.setProperties({startDate: '2007', endDate: '2014'});
     } else if(queryParams.vis === 'scatter' && queryParams.source === 'industries') {
-      controller.setProperties({startDate: '2011', endDate: '2012'});
+      controller.setProperties({startDate: '2012', endDate: '2013'});
     } else if(queryParams.vis === 'scatter') {
-      controller.setProperties({startDate: '2013', endDate: '2014'});
+      controller.setProperties({startDate: '2012', endDate: '2013'});
     } else if(queryParams.vis === 'similarity' && queryParams.source === 'industries') {
-      controller.setProperties({startDate: '2011', endDate: '2012'});
+      controller.setProperties({startDate: '2012', endDate: '2013'});
     } else if(queryParams.vis === 'similarity') {
       controller.setProperties({startDate: '2013', endDate: '2014'});
     }
@@ -72,7 +72,6 @@ export default Ember.Route.extend({
 
           model.set('productsData', products);
         }, function(error) {
-          console.log(error);
           model.set('productsData', []);
         })
       .then(function() { window.scrollTo(0,0);});

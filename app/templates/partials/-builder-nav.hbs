@@ -184,7 +184,7 @@
               <i class="icon-cidcon_scatter builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Scatterplot</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='products' vis='scatter') class="builder__nav__question"}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='products' variable='export_value'  vis='scatter') class="builder__nav__question"}}
                   {{t 'graph_builder.builder_nav.location.products.export_value.scatter' name=model.name}}
                 {{/link-to}}
               </div>
@@ -229,7 +229,7 @@
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="inudstrie") class="builder__nav__question"}}
                   {{t 'graph_builder.builder_nav.location.industries.wages_highest_per_worker' name=model.name}}
                 {{/link-to}}
               </div>
@@ -251,7 +251,7 @@
               <i class="icon-cidcon_scatter builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Scatterplot</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='industries' vis='scatter') class="builder__nav__question"}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='industries' variable='wages' vis='scatter') class="builder__nav__question"}}
                   {{t 'graph_builder.builder_nav.location.industries.wages.scatter' name=model.name}}
                 {{/link-to}}
               </div>

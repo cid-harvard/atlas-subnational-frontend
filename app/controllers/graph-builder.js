@@ -44,11 +44,14 @@ export default Ember.Controller.extend({
     if(start === end) { return start; }
     return  `01/01/${start} - 01/01/${end}`;
   }),
-  rcaFilter: function(data) {
-    return _.filter(data, (d) => {
-      return get(d,'rca') <= 1;
-    });
-  },
+  rcaFilter: computed('rcaComputed','source', function() {
+    let rca = this.get('rcaComputed');
+    return  (data) => {
+      return _.filter(data, (d) => {
+        return get(d, rca) <= 1;
+      });
+    }
+  }),
   searchFilter: function(data) {
     let search = this.get('search');
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
@@ -84,7 +87,7 @@ export default Ember.Controller.extend({
   }),
   filteredData: computed('immutableData.[]', 'vis', 'search', 'startDate', 'endDate', function() {
     let data = this.get('immutableData');
-    if(this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
+    if(this.get('vis') === 'scatter') { data = this.get('rcaFilter')(data); }
     if(this.get('search')){ data = this.searchFilter(data); }
     data = this.yearFilter(data);
     return data;
@@ -101,10 +104,13 @@ export default Ember.Controller.extend({
       return 'd3plus-network'
     }
   }),
-  rca: computed('source', function() {
+  rcaComputed: computed( 'source', function() {
     let source = this.get('source');
-    if(source === 'industries') { return 'rca'; }
-    return 'export_rca';
+    if(source === 'industries') {
+      return 'rca';
+    } else if (source === 'products') {
+      return 'export_rca';
+    }
   }),
   watchLocale: observer('i18n.locale', function() {
     this.set('drawerSettingsIsOpen', false); // Turn off other drawers
