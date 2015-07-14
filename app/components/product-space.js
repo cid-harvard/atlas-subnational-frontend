@@ -23,19 +23,22 @@ export default Ember.Component.extend({
       var_text: `name_${this.get('i18n').locale}`, //TODO: update with langauge
       var_x: 'x',
       var_y: 'y',
-      color: d3.scale.ordinal().domain([0, 1, 2]).range(["#DDDDDD", "#AAAAAA", "#777777"]),
+      radius: 4,
+      var_color: 'export_rca',
+      color: d3.scale.linear().domain(d3.extent(this.get('data'), function(d) { return d['export_rca']; })).range(["#DDDDDD", "#777777"]),
       y_invert: true,
       var_id: this.get('varId'),
       items: [{
-        attr: 'name',
+        attr: "name",
         marks: [{
-          type: 'circle',
-          var_r: 'export_value'
-        }, {
-          var_mark: '__highlighted',
+          var_mark: '__aggregated',
           type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
         }, {
-          var_mark: '__selected',
+          type: 'circle',
+          stroke: function(d) { return d.__selected ? 'black': 'none'; },
+          stroke_width: function(d) { return d['export_rca'] > 1 ? '1.5px': '0.5px'; }
+        }, {
+          var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
         }]
       }],
