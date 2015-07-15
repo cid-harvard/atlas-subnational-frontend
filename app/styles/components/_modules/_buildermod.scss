@@ -66,19 +66,15 @@
   background: $colorBrown200;
   margin-bottom: $baseSpace;
   position: relative;
-}
-
-.buildermod__viz {
   padding: $baseSpace*4.5 $baseSpace*1.5 $baseSpace*1.5;
 }
 
 .buildermod__searchwrap {
   display: flex;
   align-items: stretch;
-  margin-bottom: $baseSpace;
-  padding: $baseSpace * 1.5;
+  margin: $baseSpace*-3 0 0;
   position: absolute;
-  width: 100%;
+  width: calc(100% - 7.8rem); // TODO: Switch from calc
   z-index: $zIndex-1;
 }
 
