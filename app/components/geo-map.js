@@ -8,9 +8,10 @@ export default Ember.Component.extend({
   bounds: computed('southWest', 'northEast', function() {
     return L.latLngBounds(this.get('southWest'), this.get('northEast'));
   }),
-  map: computed('bounds', 'id', function() {
+  accessToken: 'pk.eyJ1IjoiZ3dlemVyZWsiLCJhIjoicXJkMjV6WSJ9.Iw_1c5zREHqNSfdtkjlqbA',
+  baseMap: computed('bounds', 'id', function() {
     let map = new L.mapbox.map(this.get('elementId'), 'gwezerek.22ab4aa8', {
-      accessToken: 'pk.eyJ1IjoiZ3dlemVyZWsiLCJhIjoicXJkMjV6WSJ9.Iw_1c5zREHqNSfdtkjlqbA',
+      accessToken: this.accessToken,
       center: [4.6,-74.0833333],
       zoom: 5,
       maxBounds: this.get('bounds'),
@@ -33,7 +34,7 @@ export default Ember.Component.extend({
     let varDependent = this.get('varDependent');
     return d3.max(this.get('data'), function(d) { return Ember.get(d, varDependent); });
   }),
-  createDeptFeatures: computed('g', 'valueMap', 'map', function() {
+  createDeptFeatures: computed('g', 'valueMap', 'baseMap', function() {
     d3.json('assets/geodata/colombia_osm_adm4.geojson', (json) => {
       let that = this;
       let transform = d3.geo.transform({point: projectPoint});
@@ -43,7 +44,7 @@ export default Ember.Component.extend({
           .domain([0, this.get('maxValue')])
           .range(d3.range(3).map(function(i) { return 'q' + i + '-3'; }));
 
-      let svg = d3.select( this.get('map').getPanes().overlayPane ).append('svg');
+      let svg = d3.select( this.get('baseMap').getPanes().overlayPane ).append('svg');
       let g = svg.append('g').attr('class', 'leaflet-zoom-hide');
       let feature = g.selectAll('path')
           .data(json.features)
@@ -54,7 +55,7 @@ export default Ember.Component.extend({
             return 'geo__department ' + shadeClass;
           });
 
-      this.get('map').on('viewreset', reset);
+      this.get('baseMap').on('viewreset', reset);
       reset();
 
       // Reposition the SVG to cover the features.
@@ -72,16 +73,26 @@ export default Ember.Component.extend({
 
       // Use Leaflet to implement a D3 geometric transformation.
       function projectPoint(x, y) {
-        let point = that.get('map').latLngToLayerPoint(new L.LatLng(y, x));
+        let point = that.get('baseMap').latLngToLayerPoint(new L.LatLng(y, x));
         this.stream.point(point.x, point.y);
       }
     });
   }),
+  addLabelsPane: computed('baseMap', function() {
+    let map = this.get('baseMap');
+    L.mapbox.accessToken = this.accessToken;
+    let topPane = map._createPane('geo__pane--labels', map.getPanes().mapPane);
+    let topLayer = L.mapbox.tileLayer('gwezerek.5c56c40b').addTo(map);
+    topPane.appendChild(topLayer.getContainer());
+    topLayer.setZIndex(10);
+    return;
+  }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
-      this.get('map');
+      this.get('baseMap');
       this.get('loadData');
       this.get('createDeptFeatures');
+      this.get('addLabelsPane');
     });
   }
 });
