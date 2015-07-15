@@ -18,6 +18,7 @@ export default Ember.Component.extend({
       zoomControl: false
     });
     map.addControl(L.control.zoom({ position: 'bottomleft' })); // Customize position of map zoom
+    map.attributionControl.setPrefix('<a class="geo__attribution" href=https://www.mapbox.com/about/maps/>© Mapbox © OpenStreetMap</a> | <a class="geo__attribution" href=https://www.mapbox.com/map-feedback/>Improve this map</a>');;
     return map;
   }),
   initMap: computed('map', function() {
