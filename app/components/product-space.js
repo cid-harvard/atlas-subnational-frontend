@@ -35,7 +35,7 @@ export default Ember.Component.extend({
           type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
         }, {
           type: 'circle',
-          stroke: function(d) { return d.__selected ? 'black': 'none'; },
+          stroke: function(d) { return d.__selected || d.__highlighted ? 'black': 'none'; },
           stroke_width: function(d) { return d['export_rca'] > 1 ? '1.5px': '0.5px'; }
         }, {
           var_mark: '__highlighted',
@@ -53,9 +53,9 @@ export default Ember.Component.extend({
     if(step === 0){
       return ['178'];
     } else if(step === 1) {
-      return ['178', '118', '606'];
+      return ['178', '175', '190'];
     } else if(step === 2) {
-      return ['606'];
+      return ['178', '175', '190'];
     } else {
       return [];
     }
@@ -65,11 +65,11 @@ export default Ember.Component.extend({
     if(step === 0){
       return ['178'];
     } else if(step === 1) {
-      return ['178', '118', '606'];
+      return ['178', '175', '190'];
     } else if(step === 2) {
       return ['606'];
     } else {
-      return [];
+      return ['178', '175', '190'];
     }
   }),
   highlight: computed('varActiveStep', function() {
@@ -77,11 +77,11 @@ export default Ember.Component.extend({
     if(step === 0){
       return ['178'];
     } else if(step === 1) {
-      return ['178', '118', '606'];
+      return ['178', '175', '190'];
     } else if(step === 2) {
-      return ['606'];
+      return ['178', '175', '190'];
     } else {
-      return [];
+      return ['178', '175', '190'];
     }
   }),
   draw: function() {
