@@ -61,7 +61,13 @@
 }
 
 .leaflet-left .leaflet-control {
+  box-shadow: -1px 2px 2px $colorGrayLighter;
   margin: 0 0 $baseSpace*1.5 $baseSpace*1.5;
+}
+
+.leaflet-bar {
+  border: none;
+  border-radius: 0;
 }
 
 .leaflet-container .leaflet-control-attribution .geo__attribution {
