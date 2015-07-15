@@ -21,19 +21,19 @@
     stroke-width: 1px;
   }
 
-  .q0-3 {
+  // If the value of the data is exactly 0
+  .q0 {
     fill: $colorWhite;
   }
 
-  .q1-3 {
+  // The scale if the value is positive
+  .q0-3 {
     fill: $colorRed300;
   }
-
-  .q2-3 {
+  .q1-3 {
     fill: $colorRed600;
   }
-
-  .q3-3 {
+  .q2-3 {
     fill: $colorRed1000;
   }
 }

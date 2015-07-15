@@ -4,11 +4,11 @@ const {apiURL} = ENV;
 const {getWithDefault, $} = Ember;
 export default Ember.Route.extend({
   queryParams: {
-    entity: { refreshModel: true }, // location, product, industry
-    entity_id: { refreshModel: true }, // Id of the entities
-    source: { refreshModel: true }, // products, industries,
-    variable: { refreshModel: true }, //export_value, import_value, wages, employment
-    vis: { refreshModel: false }, // treemap, multiples, scatter
+    entity: { refreshModel: true }, // What kind of entity the user searched for (location, product, industry, occupation)
+    entity_id: { refreshModel: true }, // The id of the entity
+    source: { refreshModel: true }, // What the rectangles in the treemap would represent (location, product, industry, occupation)
+    variable: { refreshModel: true }, // The dimension of the source that the user cares about (export_value, import_value, wages, employment)
+    vis: { refreshModel: false }, // The graph view (treemap, multiples, scatter)
     rca: { refreshModel: false },
     startDate: { refreshModel: false },
     endDate: { refreshModel: false },
@@ -18,10 +18,20 @@ export default Ember.Route.extend({
     return this.store.find(queryParams.entity, queryParams.entity_id);
   },
   afterModel: function(model, transition) {
+    var entity = Ember.getWithDefault(transition, 'queryParams.entity', 'location');
     var data = Ember.getWithDefault(transition, 'queryParams.source', 'products');
-    if(data  === 'products'){
+
+    // Special route for geomap
+    // TODO: Refactor this entire file when the API is updated
+    if(entity === 'product') {
+      return this.setLocations(model);
+    }
+
+    // Routes for ?entity=location
+    // TODO: Refactor this entire file when the API is updated
+    if(data  === 'products') {
       return this.setProducts(model);
-    } if (data === 'industries') {
+    } else if (data === 'industries') {
       return this.setIndustries(model);
     }
   },
@@ -78,6 +88,24 @@ export default Ember.Route.extend({
         model.set('industriesData', industries);
       })
       .then(function() { window.scrollTo(0,0);});
-   }
+   },
+   setLocations: function(model) {
+     var locations = $.getJSON(`${apiURL}data/locations?product=${model.id}`);
+
+     return Ember.RSVP.allSettled([locations])
+       .then((array) => {
+        let locations = getWithDefault(array[0], 'value.data', []);
+        let locationsMetadata = this.modelFor('application').locations;
+
+        // Merge the metadata names of the locations with their ids
+        _.each(locations, function(d) {
+         let department = locationsMetadata[d.department_id];
+         _.extend(d, department);
+        });
+
+        model.set('locationsData', locations);
+       })
+       .then(function() { window.scrollTo(0,0);});
+    }
 });
 

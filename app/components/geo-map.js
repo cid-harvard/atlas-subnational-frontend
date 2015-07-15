@@ -50,7 +50,11 @@ export default Ember.Component.extend({
       let feature = g.selectAll('path')
           .data(json.features)
         .enter().append('path')
-          .attr('class', function(d) { return 'geo__department ' + quantize(valueMap.get(d.properties.cid_id)); });
+          .attr('class', function(d) {
+            let value = valueMap.get(d.properties.cid_id);
+            let shadeClass = value === 0 ? 'q0' : quantize(value);
+            return 'geo__department ' + shadeClass;
+          });
 
       this.get('map').on('viewreset', reset);
       reset();

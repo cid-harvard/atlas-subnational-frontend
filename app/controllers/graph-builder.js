@@ -55,8 +55,15 @@ export default Ember.Controller.extend({
       return _.contains(timeRange, get(d, 'year'));
     });
   },
-  immutableData: computed('source','entity', 'entity_id',function() {
+  immutableData: computed('source','entity', 'entity_id', function() {
     let source = this.get('source');
+
+    // Special case for geomaps
+    // TODO: Refactor once the API is updated
+    if(this.get('entity') === 'product') {
+      return this.get('model.locationsData');
+    }
+
     if(source  === 'products') {
       return this.get('model.productsData');
     } else if(source === 'industries') {
