@@ -9,7 +9,8 @@ export default Ember.Component.extend({
     return L.latLngBounds(this.get('southWest'), this.get('northEast'));
   }),
   map: computed('bounds', 'id', function() {
-    let map = new L.Map(this.get('elementId'), {
+    let map = new L.mapbox.map(this.get('elementId'), 'gwezerek.22ab4aa8', {
+      accessToken: 'pk.eyJ1IjoiZ3dlemVyZWsiLCJhIjoicXJkMjV6WSJ9.Iw_1c5zREHqNSfdtkjlqbA',
       center: [4.6,-74.0833333],
       zoom: 5,
       maxBounds: this.get('bounds'),
@@ -18,11 +19,7 @@ export default Ember.Component.extend({
       zoomControl: false
     });
     map.addControl(L.control.zoom({ position: 'bottomleft' })); // Customize position of map zoom
-    map.attributionControl.setPrefix('<a class="geo__attribution" href=https://www.mapbox.com/about/maps/>© Mapbox © OpenStreetMap</a> | <a class="geo__attribution" href=https://www.mapbox.com/map-feedback/>Improve this map</a>');;
     return map;
-  }),
-  initMap: computed('map', function() {
-    this.get('map').addLayer(new L.TileLayer('https://{s}.tiles.mapbox.com/v4/gwezerek.22ab4aa8/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZ3dlemVyZWsiLCJhIjoicXJkMjV6WSJ9.Iw_1c5zREHqNSfdtkjlqbA'));
   }),
   valueMap: d3.map(),
   loadData: computed('valueMap', function() {
@@ -82,7 +79,7 @@ export default Ember.Component.extend({
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
-      this.get('initMap');
+      this.get('map');
       this.get('loadData');
       this.get('createDeptFeatures');
     });

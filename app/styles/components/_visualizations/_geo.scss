@@ -60,6 +60,10 @@
   background-image: url(img/geo/icons-000000@2x.png);
 }
 
+.mapbox-logo {
+  display: none;
+}
+
 .leaflet-left .leaflet-control {
   box-shadow: -1px 2px 2px $colorGrayLighter;
   margin: 0 0 $baseSpace*1.5 $baseSpace*1.5;
@@ -70,7 +74,7 @@
   border-radius: 0;
 }
 
-.leaflet-container .leaflet-control-attribution .geo__attribution {
+.leaflet-container .leaflet-control-attribution a {
   font-weight: 300;
   color: $colorGrayLight;
 }
