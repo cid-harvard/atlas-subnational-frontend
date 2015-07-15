@@ -31,9 +31,9 @@ export default Ember.Component.extend({
       this.get('valueMap').set(data[i].id, data[i][varDependent]);
     }
   }),
-  maxValue: computed('immutableData.[]', function () {
+  maxValue: computed('data.[]', function () {
     let varDependent = this.get('varDependent');
-    return d3.max(this.get('immutableData'), function(d) { return Ember.get(d, varDependent); });
+    return d3.max(this.get('data'), function(d) { return Ember.get(d, varDependent); });
   }),
   createDeptFeatures: computed('g', 'valueMap', 'map', function() {
     d3.json('assets/geodata/colombia_osm_adm4.geojson', (json) => {
