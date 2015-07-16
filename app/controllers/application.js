@@ -50,7 +50,15 @@ export default Ember.Controller.extend({
   industriesMetadata: computed('model.industries', function() {
     return this.get('model.industries');
   }),
-  profileLink: computed('entity', 'entity_id', function(){
+  profileLink: computed('entity', function(){
     if(this.get('entity') === 'location') { return 'location.show'; }
+    if(this.get('entity') === 'product') { return 'product.show'; }
+  }),
+  entity_and_id: computed('entity', 'entity_id', function() {
+    return `${this.get('entity')}-${this.get('entity_id')}`;
+  }),
+  source: computed('entity', function() {
+    if(this.get('entity') === 'location') { return 'products'; }
+    if(this.get('entity') === 'product') { return 'locations'; }
   })
 });

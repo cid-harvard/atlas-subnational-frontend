@@ -15,19 +15,18 @@ export default Ember.Controller.extend({
     }
   }),
   filteredResults: computed('model.[]', function() {
-    let search = this.get('search');
+    let search = _.deburr(this.get('search'));
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
     return this.get('model').filter(function(d){
       return _.deburr(get(d,'name')).match(regexp) || get(d, 'code').match(regexp);
-    })
+    });
   }),
   init: function(){
     this._super.apply(this, arguments);
     var applicationController = this.get('controllers.application');
     applicationController.set('entity', 'location');
     applicationController.set('entity_id', 1044);
-    applicationController.set('entity_and_id', 'location-1044');
   },
   actions: {
     search: function() {
