@@ -57,6 +57,8 @@ export default Ember.Component.extend({
       return ['178', '175', '190'];
     } else if(step === 2) {
       return ['178', '175', '190'];
+    } else if(step === 3) {
+      return [];
     } else {
       return [];
     }
@@ -69,8 +71,10 @@ export default Ember.Component.extend({
       return ['178', '175', '190'];
     } else if(step === 2) {
       return ['606'];
-    } else {
+    } else if(step === 3) {
       return ['178', '175', '190'];
+    } else {
+      return [];
     }
   }),
   highlight: computed('varActiveStep', function() {
@@ -81,8 +85,10 @@ export default Ember.Component.extend({
       return ['178', '175', '190'];
     } else if(step === 2) {
       return ['178', '175', '190'];
-    } else {
+    } else if(step === 3) {
       return ['178', '175', '190'];
+    } else {
+      return [];
     }
   }),
   draw: function() {
