@@ -22,10 +22,12 @@
               {{fa-icon "refresh" classNames="tool__btn__icon"}}
             </button>
           </div>
-          <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--settings" {{action 'toggleDrawerSettings'}}>
-            {{fa-icon "plus" classNames="tool__btn__icon"}}
-            {{t 'graph_builder.settings.label'}}
-          </button>
+          {{#unless isGeo }}
+            <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--settings" {{action 'toggleDrawerSettings'}}>
+              {{fa-icon "plus" classNames="tool__btn__icon"}}
+              {{t 'graph_builder.settings.label'}}
+            </button>
+          {{/unless}}
           <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--changegraph" {{action 'toggleDrawerChangeGraph'}}>
             {{fa-icon "plus" classNames="tool__btn__icon"}}
             {{t 'graph_builder.change_graph.label'}}
@@ -40,8 +42,10 @@
           isOpen=drawerSettingsIsOpen
           years=years
         }}
+        {{#unless isGeo }}
+          {{partial "partials/buildermod-search"}}
+        {{/unless}}
         {{partial "partials/buildermod-drawer-change-graph"}}
-        {{partial "partials/buildermod-search"}}
         {{component visualizationComponent
           classNames='buildermod__viz'
           immutableData=immutableData
@@ -61,10 +65,10 @@
   </section>
   <section class="stream__section">
     <header class="section__header">
-      <h3 class="section__head">{{t 'graph_builder.builder_nav.header'}}</h3>
+      <h3 class="section__head">{{t 'graph_builder.builder_nav.header' entity=entity-type}}</h3>
       <p class="section__intro">{{t 'graph_builder.builder_nav.intro' icon=builderNavDropDown}}</p>
     </header>
-    {{partial "partials/builder-nav" classNames="tool__btn__icon"}}
+    {{partial builderNavType classNames="tool__btn__icon"}}
   </section>
 
   <section class="stream__section stream__section--recirc">
