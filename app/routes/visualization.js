@@ -11,13 +11,12 @@ export default Ember.Route.extend({
     endDate: { refreshModel: false },
     search: { refreshModel: false }
   },
-  beforeModel(transition) {
-    let visualization_type = getWithDefault(transition,'params.visualization.visualization_type');
-  },
   model(params) {
     let source = Ember.Object.create(this.modelFor('source'));
     let visualization_type = params.visualization_type;
     source.set('visualization', visualization_type);
+    source.set('defaultParam', source.get(`defaultParams.${visualization_type}`))
+    source.set('requiredParams', _.keys(source.get('defaultParam')))
     return source;
   },
   setupController(controller, model) {
