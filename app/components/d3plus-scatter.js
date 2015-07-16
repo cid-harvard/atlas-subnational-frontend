@@ -16,8 +16,8 @@ export default Ember.Component.extend({
       .type('scatter')
       .color('#ccc1b9')
       .id(this.get('varIndependent'))
-      .x('complexity')
-      .y('distance')
+      .x('distance')
+      .y('complexity')
       .format({ number: function(d) { return numeral(d).format('0.0a');}})
       .text({value: (d) => { return Ember.get(d, `name_${this.get('i18n').locale}`) || d.code;}})
       .size(this.get('rca'))
@@ -31,8 +31,6 @@ export default Ember.Component.extend({
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
-      debugger
-      console.log(this.get(''))
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
       this.get('scatter').draw();
