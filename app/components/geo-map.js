@@ -9,7 +9,7 @@ export default Ember.Component.extend({
     return L.latLngBounds(this.get('southWest'), this.get('northEast'));
   }),
   accessToken: 'pk.eyJ1IjoiZ3dlemVyZWsiLCJhIjoicXJkMjV6WSJ9.Iw_1c5zREHqNSfdtkjlqbA',
-  baseMap: computed('bounds', 'id', function() {
+  baseMap: computed('elementId', function() {
     let map = new L.mapbox.map(this.get('elementId'), 'gwezerek.22ab4aa8,gwezerek.da867b0d', {
       accessToken: this.accessToken,
       center: [4.6,-74.0833333],
@@ -22,7 +22,7 @@ export default Ember.Component.extend({
     map.addControl(L.control.zoom({ position: 'bottomleft' })); // Customize position of map zoom
     return map;
   }),
-  valueMap: computed('data', 'varDependent', function() {
+  valueMap: computed('data.[]', 'varDependent', function() {
     let valueMap = d3.map();
     let data = this.get('data');
     let varDependent = this.get('varDependent');
@@ -35,7 +35,7 @@ export default Ember.Component.extend({
     let varDependent = this.get('varDependent');
     return d3.max(this.get('data'), function(d) { return Ember.get(d, varDependent); });
   }),
-  createDeptFeatures: computed('g', 'valueMap', 'baseMap', function() {
+  createDeptFeatures: computed('valueMap', 'baseMap', 'maxValue', function() {
     d3.json('assets/geodata/colombia_osm_adm4.geojson', (json) => {
       let that = this;
       let transform = d3.geo.transform({point: projectPoint});
@@ -79,21 +79,18 @@ export default Ember.Component.extend({
       }
     });
   }),
-  addLabelsPane: computed('baseMap', function() {
+  addLabelsPane: function() {
     let map = this.get('baseMap');
     L.mapbox.accessToken = this.accessToken;
     let topPane = map._createPane('geo__pane--labels', map.getPanes().mapPane);
     let topLayer = L.mapbox.tileLayer('gwezerek.5c56c40b').addTo(map);
     topPane.appendChild(topLayer.getContainer());
     topLayer.setZIndex(10);
-    return;
-  }),
+  },
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
-      this.get('baseMap');
-      this.get('loadData');
       this.get('createDeptFeatures');
-      this.get('addLabelsPane');
+      this.addLabelsPane();
     });
   }
 });
