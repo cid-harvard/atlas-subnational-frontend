@@ -18,7 +18,8 @@ export default {
   },
   'location.model':{
     'department': 'department',
-    'municipality': 'municipality'
+    'municipality': 'municipality',
+    'population_center': 'population center'
   },
   'location.show': { 'overview': 'Overview' },
   'ctas': {
