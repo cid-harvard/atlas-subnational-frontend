@@ -7,8 +7,7 @@ export default Ember.Route.extend({
     rca: { refreshModel: false },
     startDate: { refreshModel: false },
     endDate: { refreshModel: false },
-    search: { refreshModel: false },
-    rca: { refreshModel: false },
+    search: { refreshModel: false }
   },
   model(params) {
     let source = Ember.Object.create(this.modelFor('source'));
@@ -21,12 +20,15 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     this._super(controller, model);
     //if any  required queryParams on the controller are null
-    if(_.any(controller.getProperties(model.requiredParams), null)){
+    var paramValues = _.values(controller.getProperties(model.requiredParams));
+    if(_.any(paramValues, _.isNull)){
       controller.setProperties(model.get('defaultParam'));
     }
+    this.controllerFor('application').set('entity', model.get('entity_type'));
+    this.controllerFor('application').set('entity_id', model.get('model.entity.id'));
     window.scrollTo(0, 0);
   },
-  resetController: function (controller, isExiting, transition) {
+  resetController: function (controller, isExiting) {
     if (isExiting) {
       controller.setProperties({
         variable: null,
@@ -36,9 +38,6 @@ export default Ember.Route.extend({
         search: null
       });
     }
-  },
-  activate() {
-    this._super();
   }
 });
 
