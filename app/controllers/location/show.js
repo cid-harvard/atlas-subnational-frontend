@@ -13,8 +13,9 @@ export default Ember.Controller.extend({
 
   setSideNav: observer('model', function() {
     var applicationController = this.get('controllers.application');
-    applicationController.set('entity', 'location' );
+    applicationController.set('entity', 'location');
     applicationController.set('entity_id', this.get('model.id'));
+    applicationController.set('entity_and_id', `location-${this.get('model.id')}`);
   }),
   productsSortedByExports: computed('productsData', function() {
     return _.slice(_.sortBy(this.get('productsData'), function(d) { return -d.export_value;}), 0, 50);
