@@ -1,10 +1,13 @@
 import DS from 'ember-data';
 import Ember from 'ember';
+import ENV from '../config/environment';
+const {apiURL} = ENV;
 const {attr} = DS;
-const {computed} = Ember;
+const {computed, getWithDefault, $} = Ember;
 
 export default DS.Model.extend({
   i18n: Ember.inject.service(),
+  metaData: attr(),
 
   code: attr('string'),
 
@@ -14,21 +17,70 @@ export default DS.Model.extend({
   name_short_en: attr('string'),
   name_short_es: attr('string'),
 
-  population: attr('number'),
-
-  productsData: attr(),
-  industriesData: attr(),
-  scatterPlot: attr(),
-
-  departments: attr(),
-
   level: attr(),
 
+  //data that drives the profile
+  productsData: attr(),
+  departments: attr(),
   timeseries: attr(),
-  topExports: attr(),
-  currentExports: attr(),
-  products: attr(),
 
+  //following drives graphbuilder
+  graphbuilderProducts: computed('id', function() {
+    var products = $.getJSON(`${apiURL}/data/products?location=${this.get('id')}`);
+    var productsData = $.getJSON(`${apiURL}/data/products/scatterplot?location=${this.get('id')}&year=2013`);
+    var defaultParams = {
+      treemap: { variable: 'export_value', startDate: 2007, endDate: 2013 },
+      multiples: { variable: 'export_value', startDate: 2007, endDate: 2013 },
+      scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
+      similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
+    }
+
+    return Ember.RSVP.all([products, productsData])
+      .then((array) => {
+        let productsMetadata = this.get('metaData.products');
+        let products = getWithDefault(array[0], 'data', []);
+        let productsData = getWithDefault(array[1], 'data', []);
+        productsData = _.indexBy(productsData, 'product_id');
+
+        _.each(products, function(d) {
+          let product = productsMetadata[d.product_id];
+          let productData = productsData[d.product_id];
+          _.extend(d, product);
+          _.extend(d, productData);
+        });
+        return { entity: this, entity_type:'location', data: products, source: 'products' };
+      }, (error) => {
+        return { entity: this, entity_type:'location', data: [], source: 'products'};
+      })
+  }),
+  graphbuilderIndustries: computed('id', function() {
+    var industries = $.getJSON(`${apiURL}/data/industries?location=${this.get('id')}`);
+    var industriesData = $.getJSON(`${apiURL}/data/industries/scatterplot?location=${this.get('id')}&year=2013`);
+    var defaultParams = {
+      treemap: { variable: 'wages', startDate: 2007, endDate: 2013 },
+      multiples: { variable: 'wages', startDate: 2007, endDate: 2013 },
+      scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
+      similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
+    }
+    return Ember.RSVP.all([industries, industriesData])
+      .then((array) => {
+        let industriesMetadata = this.get('metaData.industries');
+        let industries = getWithDefault(array[0], 'data', []);
+        let industriesData = getWithDefault(array[1], 'data', []);
+        industriesData = _.indexBy(industriesData, 'industry_id');
+
+        _.each(industries, function(d) {
+          let industry = industriesMetadata[d.industry_id];
+          let industryData = industriesData[d.industry_id];
+          _.extend(d, industry);
+          _.extend(d, industryData);
+        });
+        console.log(industries);
+       return { entity: this, entity_type:'location', data: industries, source: 'industries' };
+      }, (error) => {
+       return { entity: this, entity_type:'location', data: [], source: 'industries' };
+      })
+  }),
   locale: computed('i18n.locale', function() {
     return this.get('i18n.locale');
   }),
@@ -44,6 +96,8 @@ export default DS.Model.extend({
     let attr = `name_${this.get('locale')}`;
     return this.get(attr) || `${attr} does not exist`;
   }),
+
+  //TODO: redo all the stuff below
   sortedTimeSeries: computed('timeSeries', function() {
     return _.sortBy(this.get('timeSeries'), 'year');
   }),
