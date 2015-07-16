@@ -46,7 +46,6 @@ export default DS.Model.extend({
         _.each(products, function(d) {
           let product = productsMetadata[d.product_id];
           let productData = productsData[`${d.product_id}_y${d.year}`];
-          console.log(productData);
           _.extend(d, product);
           _.extend(d, productData);
         });

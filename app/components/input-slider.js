@@ -34,7 +34,6 @@ export default Ember.Component.extend({
     let type = this.get('type');
     if(type === 'time') {
       return (values) => {
-        console.log(values);
         let startYear = parseInt(values[0]);
         let endYear = parseInt(values[1]);
         this.set('newStartDate', startYear);
