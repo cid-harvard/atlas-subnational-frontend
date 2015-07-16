@@ -104,6 +104,9 @@ export default Ember.Controller.extend({
       applicationController.set('entity_and_id', this.get('entity_and_id'));
     });
   },
+  scrollTopWhenUpdate: observer('variable', function() {
+    window.scrollTo(0,0);
+  }),
   actions: {
     search: function() {
       this.set('search', this.get('searchText'));
