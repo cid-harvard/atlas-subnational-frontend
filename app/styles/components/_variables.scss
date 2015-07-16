@@ -20,6 +20,11 @@ $colorGrayLighter: rgb( 221, 221, 220 );
 $colorGrayLightest: rgb( 232, 232, 232 );
 $colorWhite: rgb( 255, 255, 255 );
 
+// Accents/highlights
+$colorRed: rgb( 238, 64, 54 );
+$colorGreen: rgb( 238, 252, 206 );
+
+// Scales
 $colorBrown: rgb( 153, 131, 115 );
 $colorBrown900: rgb( 163, 143, 129 );
 $colorBrown800: rgb( 173, 156, 143 );
@@ -31,22 +36,31 @@ $colorBrown300: rgb( 224, 218, 213 );
 $colorBrown200: rgb( 235, 230, 227 );
 $colorBrown100: rgb( 245, 243, 241 );
 
+// Unlike other scales, colorRed has a 1000 version to complete the scale
+// So that plain old colorRed can be used as an accent (it's much more vibrant than colorRed1000)
+$colorRed1000: #f26d65;
+$colorRed900: #f37c75;
+$colorRed800: #f58a84;
+$colorRed700: #f69994;
+$colorRed600: #f7a8a4;
+$colorRed500: #f9b7b3;
+$colorRed400: #fac6c3;
+$colorRed300: #fbd5d3;
+$colorRed200: #fde4e2;
+$colorRed100: #fef3f2;
+
 $colorNavy200: rgb( 204, 204, 214 );
 $colorNavy400: rgb( 154, 153, 172 );
 $colorNavy600: rgb( 103, 102, 131 );
 $colorNavy800: rgb( 53, 51, 89 );
 $colorNavy: rgb( 2, 0, 48 );
 
+
+// Diverging scales, TODO: Flesh out
 $colorPink: rgb( 212, 175, 185 );
 $colorPink500:rgb( 229, 212, 213 );
-
 $colorBlue: rgb( 156, 173, 207 );
 $colorBlue500:rgb( 192, 214, 230 );
-
-// Accents/highlights
-$colorRed: rgb( 238, 64, 54 );
-$colorRed500: rgb( 247, 160, 155);
-$colorGreen: rgb( 238, 252, 206 );
 
 // Unused but saved here in case we decide to use more navy and need the depth
 // $colorNavy100: rgb( 245, 243, 241 );

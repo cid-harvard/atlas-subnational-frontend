@@ -31,6 +31,7 @@
 .branding__slogan {
   color: $colorWhite;
   font-size: $fontTiny;
+  @include offset-text;
 }
 
 
@@ -44,6 +45,7 @@
 .sidebar__btn {
   font-size: $fontTiny;
   color: $colorNavy400;
+  @include offset-text;
   &:hover {
     color: $colorWhite;
     .sidebar__btn__icon:before {
