@@ -16,6 +16,10 @@ export default Router.map(function() {
     });
   });
 
+  this.resource('product', { path: 'product'}, function() {
+    this.route('show', { path: ':product_id'});
+  });
+
   this.resource('location', { path: 'location'}, function() {
     this.route('show', { path: ':location_id'});
   });
