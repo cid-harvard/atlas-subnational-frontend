@@ -41,7 +41,7 @@
     "ember-data": "1.0.0-beta.18",
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.2",
-    "ember-i18n": "4.0.0",
+    "ember-i18n": "4.1.1",
     "ivy-tabs": "git://github.com/ivyapp/ivy-tabs.git"
   }
 }
