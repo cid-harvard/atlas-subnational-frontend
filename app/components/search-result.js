@@ -18,5 +18,13 @@ export default Ember.Component.extend({
     if(this.get('result.level')) {
       return 'location';
     }
+  }),
+  entity_and_id: computed('entity', 'result.id', function() {
+    return `${this.get('entity')}-${this.get('result.id')}`;
+  }),
+  source: computed('entity', function() {
+    if(this.get('entity') === 'location') {
+      return 'products'
+    }
   })
 });
