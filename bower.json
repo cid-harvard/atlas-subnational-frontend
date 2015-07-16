@@ -18,7 +18,9 @@
     "font-awesome": "~4.3.0",
     "cidcons": "cid-harvard/cidcons#0.3.1",
     "numeral": "~1.5.3",
-    "nouislider": "~8.0.1"
+    "nouislider": "~8.0.1",
+    "d3-plugins": "*",
+    "mapbox.js": "~2.2.1"
   },
   "devDependencies": {
     "d3": "~3.5.5",
