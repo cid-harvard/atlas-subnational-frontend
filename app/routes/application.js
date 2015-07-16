@@ -6,11 +6,11 @@ const {apiURL} = ENV;
 export default Ember.Route.extend({
   model: function() {
 
-    var productsMetadata = Ember.$.getJSON(apiURL+'metadata/products/');
-    var locationsMetadata = Ember.$.getJSON(apiURL+'metadata/locations/');
-    var productsHierarchy = Ember.$.getJSON(apiURL+'metadata/products/hierarchy?from_level=4digit&to_level=section');
-    var industriesMetadata = Ember.$.getJSON(apiURL+'metadata/industries');
-    var industriesHierarchy = Ember.$.getJSON(apiURL+'metadata/industries/hierarchy?from_level=4digit&to_level=section');
+    var productsMetadata = Ember.$.getJSON(apiURL+'/metadata/products/');
+    var locationsMetadata = Ember.$.getJSON(apiURL+'/metadata/locations/');
+    var productsHierarchy = Ember.$.getJSON(apiURL+'/metadata/products/hierarchy?from_level=4digit&to_level=section');
+    var industriesMetadata = Ember.$.getJSON(apiURL+'/metadata/industries');
+    var industriesHierarchy = Ember.$.getJSON(apiURL+'/metadata/industries/hierarchy?from_level=4digit&to_level=section');
     var promises = [productsMetadata, locationsMetadata, productsHierarchy, industriesMetadata, industriesHierarchy];
 
     return RSVP.allSettled(promises).then(function(array) {
