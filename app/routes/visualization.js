@@ -19,10 +19,21 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     this._super(controller, model);
     //if any  required queryParams on the controller are null
-    if(_.any(controller.getProperties(model.requiredParams), null)){
+    if(_.any(controller.getproperties(model.requiredParams), null)){
       controller.setProperties(model.get('defaultParam'));
     }
     window.scrollTo(0, 0);
+  },
+  resetController: function (controller, isExiting, transition) {
+    if (isExiting) {
+      controller.setProperties({
+        variable: null,
+        rca: null,
+        startDate: null,
+        endDate: null,
+        search: null
+      });
+    }
   },
   activate() {
     this._super();
