@@ -27,35 +27,43 @@ export default DS.Model.extend({
   //following drives graphbuilder
   graphbuilderProducts: computed('id', function() {
     var products = $.getJSON(`${apiURL}/data/products?location=${this.get('id')}`);
-    var productsData = $.getJSON(`${apiURL}/data/products/scatterplot?location=${this.get('id')}&year=2013`);
+    var productsData = $.getJSON(`${apiURL}/data/products/scatterplot?location=${this.get('id')}`);
     var defaultParams = {
       treemap: { variable: 'export_value', startDate: 2007, endDate: 2013 },
       multiples: { variable: 'export_value', startDate: 2007, endDate: 2013 },
       scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
       similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
     }
-
     return Ember.RSVP.all([products, productsData])
       .then((array) => {
         let productsMetadata = this.get('metaData.products');
         let products = getWithDefault(array[0], 'data', []);
         let productsData = getWithDefault(array[1], 'data', []);
-        productsData = _.indexBy(productsData, 'product_id');
+        productsData = _.indexBy(productsData, function(d) {
+          return `${d.product_id}_y${d.year}`;
+        });
 
         _.each(products, function(d) {
           let product = productsMetadata[d.product_id];
-          let productData = productsData[d.product_id];
+          let productData = productsData[`${d.product_id}_y${d.year}`];
+          console.log(productData);
           _.extend(d, product);
           _.extend(d, productData);
         });
-        return { entity: this, entity_type:'location', data: products, source: 'products' };
+        return {
+          entity: this,
+          entity_type:'location',
+          data: products,
+          source: 'products',
+          defaultParams:defaultParams
+       };
       }, (error) => {
         return { entity: this, entity_type:'location', data: [], source: 'products'};
       })
   }),
   graphbuilderIndustries: computed('id', function() {
     var industries = $.getJSON(`${apiURL}/data/industries?location=${this.get('id')}`);
-    var industriesData = $.getJSON(`${apiURL}/data/industries/scatterplot?location=${this.get('id')}&year=2013`);
+    var industriesData = $.getJSON(`${apiURL}/data/industries/scatterplot?location=${this.get('id')}`);
     var defaultParams = {
       treemap: { variable: 'wages', startDate: 2007, endDate: 2013 },
       multiples: { variable: 'wages', startDate: 2007, endDate: 2013 },
@@ -67,11 +75,13 @@ export default DS.Model.extend({
         let industriesMetadata = this.get('metaData.industries');
         let industries = getWithDefault(array[0], 'data', []);
         let industriesData = getWithDefault(array[1], 'data', []);
-        industriesData = _.indexBy(industriesData, 'industry_id');
+        industriesData = _.indexBy(industriesData, function(d) {
+          return `${d.industry_id}_y${d.year}`;
+        });
 
         _.each(industries, function(d) {
           let industry = industriesMetadata[d.industry_id];
-          let industryData = industriesData[d.industry_id];
+          let industryData = industriesData[`${d.industry_id}_y${d.year}`];
           _.extend(d, industry);
           _.extend(d, industryData);
         });
