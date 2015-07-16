@@ -1,8 +1,5 @@
 import Ember from 'ember';
-import ENV from '../config/environment';
-const {apiURL} = ENV;
-const {getWithDefault, $} = Ember;
-//treemap, multiples, scatter, geo, similarity
+
 export default Ember.Route.extend({
   queryParams: {
     variable: { refreshModel: false },
@@ -15,8 +12,8 @@ export default Ember.Route.extend({
     let source = Ember.Object.create(this.modelFor('source'));
     let visualization_type = params.visualization_type;
     source.set('visualization', visualization_type);
-    source.set('defaultParam', source.get(`defaultParams.${visualization_type}`))
-    source.set('requiredParams', _.keys(source.get('defaultParam')))
+    source.set('defaultParam', source.get(`defaultParams.${visualization_type}`));
+    source.set('requiredParams', _.keys(source.get('defaultParam')));
     return source;
   },
   setupController(controller, model) {

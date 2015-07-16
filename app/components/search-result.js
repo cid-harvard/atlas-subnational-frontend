@@ -24,7 +24,7 @@ export default Ember.Component.extend({
   }),
   source: computed('entity', function() {
     if(this.get('entity') === 'location') {
-      return 'products'
+      return 'products';
     }
   })
 });

@@ -62,9 +62,6 @@ export default Ember.Controller.extend({
     if(this.get('variable')) { return this.get('variable'); }
     if(this.get('source') === 'products') { return 'export_value'; }
   }),
-  varRca: computed('model.visualization', function() {
-    if(this.get('visualization') === 'products') { return 'export_rca' };
-  }),
   filteredData: computed('immutableData.[]', 'search', 'startDate', 'endDate', function() {
     let data = this.get('immutableData');
     if(this.get('vis') === 'scatter') { data = this.get('rcaFilter')(data); }
@@ -81,7 +78,7 @@ export default Ember.Controller.extend({
     } else if(visualization === 'scatter') {
       return 'd3plus-scatter';
     } else if(visualization === 'similarity') {
-      return 'd3plus-network'
+      return 'd3plus-network';
     }
   }),
   searchFilter: function(data) {
@@ -113,7 +110,7 @@ export default Ember.Controller.extend({
     },
     toggleVisualization: function(visualization) {
       let model = this.get('model');
-      let graph_builder_id = `${model.entity_type}-${model.entity.id}`
+      let graph_builder_id = `${model.entity_type}-${model.entity.id}`;
       this.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
       this.transitionToRoute('visualization', graph_builder_id, model.source, visualization, {
         queryParams: { variable: this.get('variable') }

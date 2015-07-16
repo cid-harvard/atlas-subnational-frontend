@@ -33,7 +33,7 @@ export default DS.Model.extend({
       multiples: { variable: 'export_value', startDate: 2007, endDate: 2013 },
       scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
       similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
-    }
+    };
     return Ember.RSVP.all([products, productsData])
       .then((array) => {
         let productsMetadata = this.get('metaData.products');
@@ -50,16 +50,10 @@ export default DS.Model.extend({
           _.extend(d, product);
           _.extend(d, productData);
         });
-        return {
-          entity: this,
-          entity_type:'location',
-          data: products,
-          source: 'products',
-          defaultParams:defaultParams
-       };
+        return { entity: this, entity_type:'location', data: products, source: 'products', defaultParams:defaultParams };
       }, (error) => {
-        return { entity: this, entity_type:'location', data: [], source: 'products'};
-      })
+        return { error: error, entity: this, entity_type:'location', data: [], source: 'products'};
+      });
   }),
   graphbuilderIndustries: computed('id', function() {
     var industries = $.getJSON(`${apiURL}/data/industries?location=${this.get('id')}`);
@@ -69,7 +63,7 @@ export default DS.Model.extend({
       multiples: { variable: 'wages', startDate: 2007, endDate: 2013 },
       scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
       similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
-    }
+    };
     return Ember.RSVP.all([industries, industriesData])
       .then((array) => {
         let industriesMetadata = this.get('metaData.industries');
@@ -85,11 +79,10 @@ export default DS.Model.extend({
           _.extend(d, industry);
           _.extend(d, industryData);
         });
-        console.log(industries);
-       return { entity: this, entity_type:'location', data: industries, source: 'industries' };
+       return { entity: this, entity_type:'location', data: industries, source: 'industries',  defaultParams: defaultParams};
       }, (error) => {
-       return { entity: this, entity_type:'location', data: [], source: 'industries' };
-      })
+       return { error: error, entity: this, entity_type:'location', data: [], source: 'industries' };
+      });
   }),
   locale: computed('i18n.locale', function() {
     return this.get('i18n.locale');

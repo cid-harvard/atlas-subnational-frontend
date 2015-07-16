@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import ENV from '../config/environment';
-const {apiURL} = ENV;
-const {getWithDefault, $} = Ember;
+
 export default Ember.Route.extend({
   model(params) {
     let entity_and_id = params.graph_builder_id;

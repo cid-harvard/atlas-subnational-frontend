@@ -32,7 +32,7 @@ export default Ember.Component.extend({
       .id('id')
       .height(this.get('height'))
       .width(this.get('width'))
-      .format({ number: (d, data) => { return numeral(d).format('$ 0.0a'); }})
+      .format({ number: (d) => { return numeral(d).format('$ 0.0a'); }})
       .size('value')
       .timeline(false)
       .ui(false)

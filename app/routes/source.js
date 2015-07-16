@@ -1,7 +1,4 @@
 import Ember from 'ember';
-import ENV from '../config/environment';
-const {apiURL} = ENV;
-const {getWithDefault, $} = Ember;
 
 export default Ember.Route.extend({
   model(params) {
