@@ -1,5 +1,4 @@
 import Ember from 'ember';
-
 export default Ember.Route.extend({
   model(params) {
     let entity_and_id = params.graph_builder_id;

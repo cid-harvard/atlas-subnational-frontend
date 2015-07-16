@@ -2,11 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   queryParams: {
-    variable: { refreshModel: false },
+    variable: { refreshModel: false }, // The dimension of the source that the user cares about
+                                      // (export_value, import_value, wages, employment)
     rca: { refreshModel: false },
     startDate: { refreshModel: false },
     endDate: { refreshModel: false },
-    search: { refreshModel: false }
+    search: { refreshModel: false },
+    rca: { refreshModel: false },
   },
   model(params) {
     let source = Ember.Object.create(this.modelFor('source'));
@@ -29,8 +31,8 @@ export default Ember.Route.extend({
       controller.setProperties({
         variable: null,
         rca: null,
-        startDate: null,
-        endDate: null,
+        startDate: 2007,
+        endDate: 2013,
         search: null
       });
     }
