@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   needs: 'application', // inject the application controller
   queryParams: ['variable', 'search', 'rca', 'startDate', 'endDate'],
   search: null,
+  rca: null,
   startDate: 2007,
   endDate: 2013,
   variable: null,
