@@ -33,4 +33,33 @@ export default DS.Model.extend({
     let attr = `name_${this.get('locale')}`;
     return this.get(attr) || `${attr} does not exist`;
   }),
+  graphbuilderLocations: computed('id', function() {
+    var locations = $.getJSON(`${apiURL}data/locations?product=${this.get('id')}`);
+    var defaultParams = {
+      treemap: { variable: 'export_value', startDate: 2007, endDate: 2013 },
+      multiples: { variable: 'export_value', startDate: 2007, endDate: 2013 },
+      geo: { variable: 'export_value', startDate: 2013, endDate: 2014 },
+      scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
+      similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
+    };
+    return Ember.RSVP.all([locations])
+      .then((array) => {
+       let locations = getWithDefault(array[0], 'data', []);
+       let locationsMetadata = this.get('metaData.locations');
+
+       // Merge the metadata names of the locations with their ids
+       _.each(locations, function(d) {
+        let department = locationsMetadata[d.department_id];
+        console.log(d)
+        _.extend(d, department);
+       });
+       debugger
+       return { entity: this,
+         entity_type:'product',
+         data: locations,
+         source: 'locations',
+         defaultParams: defaultParams
+       };
+      })
+   })
 });
