@@ -38,6 +38,9 @@ export default {
       'label': 'Change Graph',
     },
     'page_title': {
+      'product': {
+        'locations.export_value': 'What departments export {{name}}?',
+      },
       'location': {
         'products.export_value': 'What products does the {{level}} of {{name}} export?',
         'products.scatter': 'What products have the best combination of complexity and opportunity for the {{level}} of {{name}}?',
@@ -66,8 +69,11 @@ export default {
       }
     },
     'builder_nav': {
-      'header': 'More graphs for this location',
+      'header': 'More graphs for this {{entity_type}}',
       'intro': "Select a question to see the corresponding graph. If the question has missing parameters ({{icon}}) , you'll fill those in when you click.",
+      'product': {
+        'locations.export_value': 'What departments the export {{name}}?',
+      },
       'location': {
         'products.export_value': 'What products does {{name}} export?',
         'products.scatter': 'What products have the best combination of complexity and opportunity for {{name}}?',
@@ -96,6 +102,9 @@ export default {
       }
     },
     'builder_mod_header': {
+      'product': {
+        'locations.export_value': 'Departments of Colombia',
+      },
       'location': {
         'products.export_value': 'Total Exports',
         'products.scatter': 'Complexity and Opportunity',
