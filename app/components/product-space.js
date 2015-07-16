@@ -5,6 +5,7 @@ const {computed, observer} = Ember;
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
+  classNames: ['productspace'],
   attributeBindings: ['width'],
   height: 500,
   id: computed('elementId', function() {
