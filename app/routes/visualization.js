@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   queryParams: {
-    variable: { refreshModel: false }, // The dimension of the source that the user cares about
+    variable: { refreshModel: true }, // The dimension of the source that the user cares about
                                       // (export_value, import_value, wages, employment)
     rca: { refreshModel: false },
     startDate: { refreshModel: false },
@@ -24,8 +24,8 @@ export default Ember.Route.extend({
     if(_.any(paramValues, _.isNull)){
       controller.setProperties(model.get('defaultParam'));
     }
-    this.controllerFor('application').set('entity', model.get('entity_type'));
-    this.controllerFor('application').set('entity_id', model.get('model.entity.id'));
+    this.controllerFor('application').set('entity', model.get('entity.constructor.modelName'));
+    this.controllerFor('application').set('entity_id', model.get('.entity.id'));
     window.scrollTo(0, 0);
   },
   resetController: function (controller, isExiting) {

@@ -49,17 +49,22 @@ export default DS.Model.extend({
 
        // Merge the metadata names of the locations with their ids
        _.each(locations, function(d) {
-        let department = locationsMetadata[d.department_id];
-        console.log(d)
-        _.extend(d, department);
+         let department = locationsMetadata[d.department_id];
+         _.extend(d, department);
        });
-       debugger
        return { entity: this,
          entity_type:'product',
          data: locations,
          source: 'locations',
          defaultParams: defaultParams
        };
-      })
+      }, function() {
+       return { entity: this,
+         entity_type:'product',
+         data: [],
+         source: 'locations',
+         defaultParams: defaultParams
+       };
+      });
    })
 });

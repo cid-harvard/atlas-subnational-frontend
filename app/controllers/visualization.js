@@ -23,14 +23,6 @@ export default Ember.Controller.extend({
   entity_and_id: computed('model.entity.id', 'model.entity_type', function() {
     return `${this.get('model.entity_type')}-${this.get('model.entity.id')}`;
   }),
-  // observer the Query Params and set the links on the side nav
-  setSideNav: observer('entity_type', 'entity.id', function() {
-    var applicationController = this.get('controllers.application');
-    applicationController.set('entity', this.get('entity_type'));
-    applicationController.set('entity_id', this.get('entity.id'));
-    applicationController.set('entity_and_id', this.get('entity_and_id'));
-  }),
-
   pageTitle: computed('model','variable','i18n.locale', function() {
     //locale file under graph_builder.page_title.<entity>.<source>.<variable>
     let i18nString = `graph_builder.page_title.${this.get('model.entity_type')}.${this.get('source')}`;
@@ -66,9 +58,10 @@ export default Ember.Controller.extend({
     return  `01/01/${start} - 01/01/${end}`;
   }),
   varDependent: computed('variable', 'source', function() {
+    // if variable exists, it is varDependent
+    if(this.get('variable')) { return this.get('variable'); }
     if(this.get('source') === 'products') { return 'export_value'; }
     if(this.get('source') === 'location') { return ''; }
-    if(this.get('variable')) { return this.get('variable'); }
   }),
   filteredData: computed('immutableData.[]', 'search', 'startDate', 'endDate', function() {
     let data = this.get('immutableData');
@@ -113,12 +106,6 @@ export default Ember.Controller.extend({
   },
   init: function(){
     this._super(this, arguments);
-    Ember.run.scheduleOnce('afterRender', this , function() {
-      var applicationController = this.get('controllers.application');
-      applicationController.set('entity', this.get('model.entity_type'));
-      applicationController.set('entity_id', this.get('model.entity.id'));
-      applicationController.set('entity_and_id', this.get('entity_and_id'));
-    });
   },
   scrollTopWhenUpdate: observer('variable', function() {
     window.scrollTo(0,0);

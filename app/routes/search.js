@@ -1,7 +1,4 @@
 import Ember from 'ember';
-import ENV from '../config/environment';
-const {get: get} = Ember;
-const {apiURL} = ENV;
 
 export default Ember.Route.extend({
   queryParams: {
@@ -18,7 +15,6 @@ export default Ember.Route.extend({
     }
   },
   model: function(transition) {
-    let search = _.deburr(transition.query);
     var departments = this.store.find('location', {level: 'department'});
     var municipalities = this.store.find('location', {level: 'municipality'});
     var products = this.store.find('product', { level: '4digit' });
@@ -34,5 +30,11 @@ export default Ember.Route.extend({
           return [];
         });
     }
-  }
+  },
+  setupController(controller, model) {
+    this._super(controller, model);
+    this.controllerFor('application').set('entity', 'location');
+    this.controllerFor('application').set('entity_id', 1044);
+    window.scrollTo(0, 0);
+  },
 });

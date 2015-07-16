@@ -51,7 +51,7 @@ export default DS.Model.extend({
         });
         return { entity: this, entity_type:'location', data: products, source: 'products', defaultParams:defaultParams };
       }, (error) => {
-        return { error: error, entity: this, entity_type:'location', data: [], source: 'products'};
+        return { error: error, entity: this, entity_type:'location', data: [], source: 'products', defaultParams:defaultParams};
       });
   }),
   graphbuilderIndustries: computed('id', function() {
@@ -80,7 +80,7 @@ export default DS.Model.extend({
         });
        return { entity: this, entity_type:'location', data: industries, source: 'industries',  defaultParams: defaultParams};
       }, (error) => {
-       return { error: error, entity: this, entity_type:'location', data: [], source: 'industries' };
+       return { error: error, entity: this, entity_type:'location', data: [], source: 'industries', defaultParams:defaultParams};
       });
   }),
   locale: computed('i18n.locale', function() {

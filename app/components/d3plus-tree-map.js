@@ -57,11 +57,9 @@ export default Ember.Component.extend({
   },
   update: observer('data.[]', 'varDependent', 'i18n.locale', function() {
     if(!this.element){ return false; } //do not redraw if not there
-    Ember.run.later(this , function() {
-      this.set('width', this.$().parent().width());
-      this.set('height', this.$().parent().height());
-      this.get('treemap').draw();
-    }, 1000);
+    this.set('width', this.$().parent().width());
+    this.set('height', this.$().parent().height());
+    this.get('treemap').draw();
   })
 });
 
