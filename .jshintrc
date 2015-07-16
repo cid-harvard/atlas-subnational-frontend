@@ -8,7 +8,8 @@
     "vistk",
     "_",
     "d3plus",
-    "noUiSlider"
+    "noUiSlider",
+    "L"
   ],
   "browser": true,
   "boss": true,
