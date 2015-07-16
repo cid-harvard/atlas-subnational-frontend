@@ -196,7 +196,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Similarity map</h4>
                 {{#link-to 'visualization' entity_and_id 'products' 'similarity' (query-params variable='null' endDate=2014 startDate=2013) class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.products.map' name=name}}
+                  {{t 'graph_builder.builder_nav.location.products.similarity' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -264,7 +264,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Similarity map</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.industries.map' name=name}}
+                  {{t 'graph_builder.builder_nav.location.industries.similarity' name=name}}
                 {{/link-to}}
               </div>
             </li>
