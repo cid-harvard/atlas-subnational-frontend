@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   }),
   accessToken: 'pk.eyJ1IjoiZ3dlemVyZWsiLCJhIjoicXJkMjV6WSJ9.Iw_1c5zREHqNSfdtkjlqbA',
   baseMap: computed('bounds', 'id', function() {
-    let map = new L.mapbox.map(this.get('elementId'), 'gwezerek.22ab4aa8', {
+    let map = new L.mapbox.map(this.get('elementId'), 'gwezerek.22ab4aa8,gwezerek.da867b0d', {
       accessToken: this.accessToken,
       center: [4.6,-74.0833333],
       zoom: 5,

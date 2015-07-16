@@ -22,9 +22,12 @@
     font-weight: 300;
   }
 
+  .leaflet-overlay-pane {
+    mix-blend-mode: multiply;
+  }
+
   .geo__department {
     fill: #000;
-    // fill-opacity: .5;
     stroke: $colorBrown500;
     stroke-dasharray: 5, 5;
     stroke-width: 1px;
