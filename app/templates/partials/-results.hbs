@@ -1,7 +1,7 @@
 <h3 class="results__header">Results</h3>
-{{#if model.length}}
+{{#if filteredResults.length}}
   <ul class="search__results">
-    {{#each result in model}}
+    {{#each result in filteredResults}}
       {{search-result
         result=result
       }}
