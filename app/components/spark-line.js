@@ -4,7 +4,7 @@ const { computed } = Ember;
 
 export default Ember.Component.extend({
   tagName: 'div',
-  classNames: ['something-something'],
+  classNames: ['sparkline'],
   attributeBindings: ['width','height'],
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
@@ -19,33 +19,49 @@ export default Ember.Component.extend({
   },
   sparkLine: computed('data','yVar', function() {
    let data = this.cleanData(this.get('data'));
+   let yVar = this.get('yVar');
+   let currentLocationName = this.get('currentLocationName');
    return vistk.viz()
     .params({
       type: 'sparkline',
       container: this.get('id'),
-      width: this.get('width'),
+      width: this.get('width') - 60,
       height: this.get('height'),
-      margin: {top: 0, right: 0, bottom: 0, left: 0},
+      margin: {top: 15, right: 10, bottom: 0, left: 15},
       data: data,
       var_y: this.get('yVar'),
       var_x: 'year',
-      var_id: 'department_id',
+      var_id: this.get('varId'),
+      var_text: 'department_id',
+      var_group: this.get('varId'),
       time: {
         var_time: 'year',
         parse: d3.time.format("%Y").parse,
-        current_time: '2012'
+        current_time: '2012',
+        filter_interval: ['2000', '2012']
       },
       items: [{
         attr: 'name',
         marks: [{
-          type: 'diamond',
-          width: 10,
-          height: 10
+          type: 'diamond'
+        }, {
+          var_mark: '__highlighted',
+          type: d3.scale.ordinal().domain([true, false]).range(['text', 'none']),
+          translate: [0, -15],
+          text_anchor: function() {
+            var parentGroup = d3.select(this.parentNode);
+            var parentSVG = d3.select(this.parentNode.parentNode.parentNode);
+            var parentX = d3.transform(parentGroup.attr('transform')).translate[0];
+            var svgWidth = +parentSVG.attr('width');
+            return parentX < svgWidth/2 ? 'start': 'end';
+          },
+          text: function(d) {
+            var format = function(d) { return '$' + d3.format(".2s")(d); };
+            return currentLocationName + ' (' + format(+d[yVar]) + ')';
+          }
         }]
       }],
-      var_text: 'department_id',
-      selection: [this.get('currentLocation')],
-      highlight: [this.get('currentLocation')]
+      selection: [this.get('currentLocation')]
     });
   }),
   draw: function() {
