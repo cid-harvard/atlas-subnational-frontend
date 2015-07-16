@@ -1,15 +1,15 @@
 import Ember from 'ember';
-const {computed} = Ember;
+const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
   classNames: ['settings__input'],
-  minDate: computed('dateRange', function() {
+  minDate: computed('dateRange.[]', function() {
     return this.get('dateRange')[0];
   }),
-  maxDate: computed('dateRange', function() {
+  maxDate: computed('dateRange.[]', function() {
     return this.get('dateRange')[1] + 1;
   }),
-  sliderOptions: computed('type','dateRange', function() {
+  sliderOptions: computed('type','dateRange.[]', 'startDate', 'endDate', function() {
     return {
       start: [this.get('startDate'), this.get('endDate')],
       step: 1,
@@ -34,8 +34,12 @@ export default Ember.Component.extend({
     let type = this.get('type');
     if(type === 'time') {
       return (values) => {
-        this.set('startDate', parseInt(values[0]));
-        this.set('endDate', parseInt(values[1]));
+        console.log(values);
+        let startYear = parseInt(values[0]);
+        let endYear = parseInt(values[1]);
+        this.set('newStartDate', startYear);
+        this.set('newEndDate', endYear);
+        this.set('years', `01/01/${startYear} - 01/01/${endYear}`);
       };
     } else  { //rca, similarity
       return (values) => {
@@ -43,11 +47,24 @@ export default Ember.Component.extend({
       };
     }
   }),
+  update: observer('startDate', 'endDate', function() {
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      if(this.element) {
+        this.element.noUiSlider.destroy(); //http://refreshless.com/nouislider/more/
+
+        noUiSlider.create(this.element, this.get('sliderOptions'));
+        this.element.noUiSlider
+          .on('set', this.get('sliderSetterFunction'));
+      }
+    });
+  }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
-      noUiSlider.create(this.element, this.get('sliderOptions'));
-      this.element.noUiSlider
-        .on('set', this.get('sliderSetterFunction'));
+      if(this.get('minDate') && this.get('maxDate')) {
+        noUiSlider.create(this.element, this.get('sliderOptions'));
+        this.element.noUiSlider
+          .on('set', this.get('sliderSetterFunction'));
+      }
     });
   }
 });

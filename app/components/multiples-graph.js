@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   width: computed(function() {
     return this.$('.multiple:first').width() - this.get('margin.left') - this.get('margin.right');
   }),
-  xExtent: computed('startDate', 'endDate', function() {
+  xExtent: computed('dateRange', 'startDate', 'endDate', function() {
     return [this.get('startDate'), this.get('endDate') - 1];
   }),
   xRange: computed('startDate', 'endDate', function() {
@@ -31,8 +31,8 @@ export default Ember.Component.extend({
       d.name = Ember.get(d.values[0], `name_${this.get('i18n').locale}`) || d.key;
     });
 
-    return _.sortBy(nest, function(d) {
-       return -_.sum(d.values, varDependent);
+    return _.sortBy(nest, (d) => {
+      return -_.sum(d.values, varDependent);
     });
   }),
   hasMore: computed('nestedData.[]', function() {
@@ -44,7 +44,7 @@ export default Ember.Component.extend({
   truncateYear: function(year) {
     return '’' + year.toString().slice(-2);
   },
-  maxValue: computed('immutableData.[]', function () {
+  maxValue: computed('immutableData.[]', 'varDependent', function () {
     let varDependent = this.get('varDependent');
     return d3.max(this.get('immutableData'), function(d) { return Ember.get(d, varDependent); });
   }),
@@ -84,7 +84,7 @@ export default Ember.Component.extend({
     let data = this.firstSliceData(this.get('nestedData'));
 
     var container = d3.select(this.get('id')).selectAll('div')
-      .data(data, (d,i) => { return [d.key, i, this.get('i18n.locale')]; });
+      .data(data, (d,i) => { return [d.key, i, this.get('i18n').locale]; });
 
     var div = container.enter().append('div')
       .attr('class', 'multiple');
@@ -217,7 +217,6 @@ export default Ember.Component.extend({
       caption.text('');
       curYear.text('');
     }
-
     container.exit().remove();
   },
   graphIsActive: computed('nestedData.[]', function() {
