@@ -22,13 +22,14 @@ export default Ember.Component.extend({
     map.addControl(L.control.zoom({ position: 'bottomleft' })); // Customize position of map zoom
     return map;
   }),
-  valueMap: d3.map(),
-  loadData: computed('valueMap', function() {
+  valueMap: computed('data', 'varDependent', function() {
+    let valueMap = d3.map();
     let data = this.get('data');
     let varDependent = this.get('varDependent');
     for (let i = data.length - 1; i >= 0; i--) {
-      this.get('valueMap').set(data[i].id, data[i][varDependent]);
+      valueMap.set(data[i].id, data[i][varDependent]);
     }
+    return valueMap;
   }),
   maxValue: computed('data.[]', function () {
     let varDependent = this.get('varDependent');
