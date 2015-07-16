@@ -49,14 +49,28 @@ export default Ember.Controller.extend({
       return get(d,'name').match(regexp) || get(d, 'code').match(regexp);
     });
   },
-  yearFilter: function(data) {
+  filterToSelectedYears: function(data) {
     let timeRange = d3.range(this.get('startDate'), this.get('endDate'));
     return _.filter(data, (d) => {
       return _.contains(timeRange, get(d, 'year'));
     });
   },
-  immutableData: computed('source','entity', 'entity_id',function() {
+  filterTo2010: function(data) {
+    // TODO: This function shouldn't exist. We need a rollup function for non-d3plus charts.
+    // This serves until then, but should not be shipped to prod.
+    return _.filter(data, (d) => {
+      return _.contains('2010', get(d, 'year'));
+    });
+  },
+  immutableData: computed('source','entity', 'entity_id', function() {
     let source = this.get('source');
+
+    // Special case for geomaps
+    // TODO: Refactor once the API is updated
+    if(this.get('entity') === 'product') {
+      return this.get('model.locationsData');
+    }
+
     if(source  === 'products') {
       return this.get('model.productsData');
     } else if(source === 'industries') {
@@ -70,7 +84,11 @@ export default Ember.Controller.extend({
     let data = this.get('immutableData');
     if(this.get('vis') === 'scatter') { data = this.rcaFilter(data); }
     if(this.get('search')){ data = this.searchFilter(data); }
-    data = this.yearFilter(data);
+    data = this.filterToSelectedYears(data);
+
+    // TODO: This function shouldn't exist. We need a rollup function for non-d3plus charts.
+    if(this.get('vis') === 'geo') { data = this.filterTo2010(data); }
+
     return data;
   }),
   visualizationComponent: computed('vis', function(){
@@ -81,6 +99,8 @@ export default Ember.Controller.extend({
       return 'multiples-graph';
     } else if(visualization === 'scatter') {
       return 'd3plus-scatter';
+    } else if (visualization === 'geo') {
+      return 'geo-map';
     }
   }),
   canChangeVisualization: computed('vis', function() {

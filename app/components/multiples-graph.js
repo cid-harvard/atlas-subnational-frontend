@@ -220,9 +220,6 @@ export default Ember.Component.extend({
 
     container.exit().remove();
   },
-  graphIsActive: computed('nestedData.[]', function() {
-    return this.get('nestedData').length > this.firstSlice;
-  }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.initCharts();
