@@ -109,6 +109,9 @@ export default Ember.Component.extend({
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
+      if(this.$().parent().height() > 0) {
+        this.set('heigth', this.$().parent().height() - 80);
+      }
       this.set('width', this.$().parent().width());
       this.draw();
     });
