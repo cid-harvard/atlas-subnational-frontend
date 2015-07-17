@@ -12,18 +12,20 @@
     opacity: .1;
   }
 
+  .items__mark__diamond.selected {
+    stroke: #EBE6E3;
+    fill: red;
+    opacity: 1;
+  }
+
   .items__mark__diamond.highlighted {
     stroke: black;
     opacity: 1;
    }
 
-  .items__mark__diamond.selected {
-    fill: red;
-    opacity: 1;
-  }
-
   .items__mark__text {
-    display: none;
+    font-weight: 300;
+    font-size: 1.4rem;
   }
 
   .axis > .label {
@@ -32,11 +34,12 @@
 
   .axis > .domain {
     stroke: #000;
-    stroke-dasharray: 1,1
+    stroke-dasharray: 1,1;
+    stroke-width: .5px;
   }
 
   .tick > text {
-    font-size: 1.5rem;;
+    font-weight: 300;
+    font-size: 1.4rem;
   }
-
 }

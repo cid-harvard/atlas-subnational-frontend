@@ -22,15 +22,15 @@
       <thead>
         <tr class="table__row table__row--header">
           <th class="table__header"></th>
-          <th class="table__header">All 32 departments</th>
+          <th class="table__header table__header--summaries--dotplot">All 32 departments</th>
           <th class="table__header">Value</th>
-          <th class="table__header">Growth, annual (2009-2013)</th>
+          <th class="table__header table__header--summaries--spark">Growth, annual (2009-2013)</th>
         </tr>
       </thead>
       <tbody>
         <tr class="table__row table__row--body">
-          <td class="table__cell">GDP</td>
-          <td class="table__cell">
+          <td class="table__cell table__cell--summaries">GDP</td>
+          <td class="table__cell table__cell--summaries">
           {{dot-plot
             elementId='dotplot--gdp'
             data=departmentsData
@@ -40,14 +40,16 @@
             currentLocation=locationId
             }}
           </td>
-          <td class="table__cell">$8.2M</td>
-          <td class="table__cell">
+          <td class="table__cell table__cell--summaries">$8.2M</td>
+          <td class="table__cell table__cell--summaries">
             {{spark-line
-              yVar='gdp_real'
               data=timeSeriesData
+              varId='department_id'
+              yVar='gdp_real'
               elementId='spark--gdp'
               currentLocation=locationId
-              }} + 2.4%
+              currentLocationName=model.name
+            }} + 2.4%
           </td>
         </tr>
       </tbody>
@@ -85,15 +87,15 @@
             <thead>
               <tr class="table__row table__row--header">
                 <th class="table__header"></th>
-                <th class="table__header">All 32 departments</th>
+                <th class="table__header table__header--summaries--dotplot">All 32 departments</th>
                 <th class="table__header">Value</th>
-                <th class="table__header">Growth, annual (2009-2013)</th>
+                <th class="table__header table__header--summaries--spark">Growth, annual (2009-2013)</th>
               </tr>
             </thead>
             <tbody>
               <tr class="table__row table__row--body">
-                <td class="table__cell">Total exports</td>
-                <td class="table__cell">
+                <td class="table__cell table__cell--summaries">Total exports</td>
+                <td class="table__cell table__cell--summaries">
                   {{dot-plot
                     elementId='dotplot--exports'
                     data=departmentsData
@@ -101,15 +103,17 @@
                     varText='name'
                     varId='department_id'
                     currentLocation=locationId
-                    }}
+                  }}
                 </td>
-                <td class="table__cell">$8.2M</td>
-                <td class="table__cell">
+                <td class="table__cell table__cell--summaries">$8.2M</td>
+                <td class="table__cell table__cell--summaries">
                 {{spark-line
-                  yVar='gdp_real'
                   data=timeSeriesData
+                  varId='department_id'
+                  yVar='gdp_real'
                   elementId='spark--exports'
                   currentLocation=locationId
+                  currentLocationName=model.name
                 }}
                 + 1.2%</td>
               </tr>
@@ -124,6 +128,7 @@
                 varGroup='group'
                 varText='group_name_en'
                 varSize='export_value'
+                varSort='export_value'
               }}
             </div>
             <div class="vizmod__list__wrap">
@@ -159,15 +164,15 @@
       <thead>
         <tr class="table__row table__row--header">
           <th class="table__header"></th>
-          <th class="table__header">All 32 departments</th>
+          <th class="table__header table__header--summaries--dotplot">All 32 departments</th>
           <th class="table__header">Value</th>
-          <th class="table__header">Growth, annual (2009-2013)</th>
+          <th class="table__header table__header--summaries--spark">Growth, annual (2009-2013)</th>
         </tr>
       </thead>
       <tbody>
         <tr class="table__row table__row--body">
-          <td class="table__cell">Overall export complexity</td>
-          <td class="table__cell">
+          <td class="table__cell table__cell--summaries">Overall export complexity</td>
+          <td class="table__cell table__cell--summaries">
           {{dot-plot
             elementId='dotplot--complexity'
             data=departmentsData
@@ -175,15 +180,17 @@
             varText='name'
             varId='department_id'
             currentLocation=locationId
-            }}
+          }}
           </td>
-          <td class="table__cell">0.3</td>
-          <td class="table__cell">
+          <td class="table__cell table__cell--summaries">0.3</td>
+          <td class="table__cell table__cell--summaries">
             {{spark-line
-              yVar='population'
               data=timeSeriesData
+              varId='department_id'
+              yVar='population'
               elementId='spark--complexity'
               currentLocation=locationId
+              currentLocationName=model.name
             }}
             + TK%
           </td>
@@ -197,7 +204,19 @@
         {{/each}}
       </ol>
       <div class="stepper__vizmod">
-        <div class="stepper__vizmod__vizwrap"></div>
+        <div class="stepper__vizmod__vizwrap">
+        {{product-space
+          data=productsData
+          elementId='product-space-stepper'
+          varId='product_id'
+          varGroup='parent_id'
+          varColor='parent_code'
+          varText='parent_name'
+          varSize='export_value'
+          varActiveStep=activeStep
+          varLegend=false
+        }}
+        </div>
         <div class="stepper__controls">
           <button class="stepper__control stepper__control--left" {{action 'back'}}>Back</button>
           <p class="stepper__control__progress">{{activeStep}} of {{stepStories.length}}</p>
@@ -215,9 +234,9 @@
         <tbody class="table__tbody table__tbody--complexity table__tbody--scroller">
           {{#each export in model.currentExports }}
             <tr class="table__row table__row--complexity table__row--scroller">
-              <td class="table__cell table__cell--scroller table__cell--complexity">{{export.name}}</td>
-              <td class="table__cell table__cell--scroller table__cell--complexity">{{export.value}}</td>
-              <td class="table__cell table__cell--scroller table__cell--complexity">{{export.growth}}</td>
+              <td class="table__cell table__cell--summaries table__cell table__cell--summaries--scroller table__cell table__cell--summaries--complexity">{{export.name}}</td>
+              <td class="table__cell table__cell--summaries table__cell table__cell--summaries--scroller table__cell table__cell--summaries--complexity">{{export.value}}</td>
+              <td class="table__cell table__cell--summaries table__cell table__cell--summaries--scroller table__cell table__cell--summaries--complexity">{{export.growth}}</td>
             </tr>
           {{/each}}
         </tbody>
@@ -231,23 +250,24 @@
     <p class="section__intro">We've found that countries which export complex products grow faster than those which export simple products. Using the similarity map we built in the section above, we've highlighted  high potential products for {{name}}, ranked by which have the highest combination of opportunity and complexity.</p>
     <div class="vizmod">
       <div class="vizmod--treemod">
-        <div class="vizmod__legend">
+        <!--<div class="vizmod__legend">
           <ul class="vizmod__legend__list">
             <li class="vizmod__legend__item">Non-export</li>
             <li class="vizmod__legend__item">Export</li>
             <li class="vizmod__legend__item">Similarity link</li>
           </ul>
-        </div>
+        </div> -->
         <div class="vizmod__vizwrap">
-          {{product-space
-            data=productsData
-            elementId='product-space'
-            varId='product_id'
-            varGroup='parent_id'
-            varColor='parent_code'
-            varText='parent_name'
-            varSize='export_value'
-          }}
+        {{product-space
+          data=productsData
+          elementId='product-space-exports'
+          varId='product_id'
+          varGroup='parent_id'
+          varColor='parent_code'
+          varText='parent_name'
+          varSize='export_value'
+          varLegend=true
+        }}
         </div>
       </div>
       <div class="vizmod__list__wrap">

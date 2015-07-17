@@ -41,7 +41,6 @@
   text-align: center;
   padding-bottom: $baseSpace * 3;
   border-top: 1px solid $colorBrown600;
-  @include absolute(bottom 0);
 }
 
 .stepper__control {
