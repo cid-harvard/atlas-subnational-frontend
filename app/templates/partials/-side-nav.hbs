@@ -15,15 +15,14 @@
   <nav class="sidebar__section sidebar__nav">
     <ul class="nav__list">
       <li class="nav__item">
-        {{#link-to 'location.show' entity_id
+        {{#link-to profileLink entity_id
           class="sidebar__btn nav__item__link"
           activeClass="sidebar__btn--is--active"}}
           {{ t 'side_nav.profile_link' }}
         {{/link-to}}
       </li>
       <li class="nav__item">
-        {{#link-to "visualization" entity_and_id 'products' 'treemap'
-          (query-params variable='export_value')
+        {{#link-to "visualization" entity_and_id source 'treemap'
           current-when="visualization"
           class="sidebar__btn nav__item__link"
           activeClass="sidebar__btn--is--active"}}

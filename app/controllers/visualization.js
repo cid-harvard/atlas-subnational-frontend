@@ -14,6 +14,7 @@ export default Ember.Controller.extend({
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
   builderNavDropDown: Ember.String.htmlSafe("<i class='icon-cidcon_placeholder-1 builder__icon--placeholder'></i>"),
+
   immutableData: computed.alias('model.data.[]'),
   source: computed.alias('model.source'),
   visualization: computed.alias('model.visualization'),
@@ -22,14 +23,6 @@ export default Ember.Controller.extend({
   entity_and_id: computed('model.entity.id', 'model.entity_type', function() {
     return `${this.get('model.entity_type')}-${this.get('model.entity.id')}`;
   }),
-  // observer the Query Params and set the links on the side nav
-  setSideNav: observer('entity_type', 'entity.id', function() {
-    var applicationController = this.get('controllers.application');
-    applicationController.set('entity', this.get('entity_type'));
-    applicationController.set('entity_id', this.get('entity.id'));
-    applicationController.set('entity_and_id', this.get('entity_and_id'));
-  }),
-
   pageTitle: computed('model','variable','i18n.locale', function() {
     //locale file under graph_builder.page_title.<entity>.<source>.<variable>
     let i18nString = `graph_builder.page_title.${this.get('model.entity_type')}.${this.get('source')}`;
@@ -48,9 +41,14 @@ export default Ember.Controller.extend({
     }
     return this.get('i18n').t(`${i18nString}.${this.get('variable')}`, { name: this.get('model.entity.name') });
   }),
-  otherPossibleGraphs: computed('model.visualization', function() {
+  otherPossibleGraphs: computed('model.visualization', 'model.source',  function() {
     let vis = this.get('model.visualization');
-    if(vis === 'multiples' || vis === 'treemap'){ return ['treemap', 'multiples']; }
+    let source = this.get('model.source');
+    if(source === 'locations' && _.contains(['geo', 'treemap', 'multiples'], vis)){
+      return ['geo', 'treemap', 'multiples'];
+    } else if (_.contains(['treemap', 'multiples'], vis)){
+      return ['treemap', 'multiples'];
+    }
     return [vis];
   }),
   years: computed('startDate','endDate', function() {
@@ -60,15 +58,23 @@ export default Ember.Controller.extend({
     return  `01/01/${start} - 01/01/${end}`;
   }),
   varDependent: computed('variable', 'source', function() {
+    // if variable exists, it is varDependent
     if(this.get('variable')) { return this.get('variable'); }
     if(this.get('source') === 'products') { return 'export_value'; }
+    if(this.get('source') === 'location') { return ''; }
   }),
   filteredData: computed('immutableData.[]', 'search', 'startDate', 'endDate', function() {
     let data = this.get('immutableData');
-    if(this.get('vis') === 'scatter') { data = this.get('rcaFilter')(data); }
     if(this.get('search')){ data = this.searchFilter(data); }
-    data = this.yearFilter(data);
+    data = this.filterToSelectedYears(data);
     return data;
+  }),
+  isGeo: computed('visualization', function() {
+    if(this.get('visualization') === 'geo') { return true; }
+    return false;
+  }),
+  builderNavType: computed('model.entity_type', function() {
+    return`partials/${this.get('model.entity_type')}-builder-nav`;
   }),
   visualizationComponent: computed('visualization', function(){
     let visualization = this.get('visualization');
@@ -80,6 +86,8 @@ export default Ember.Controller.extend({
       return 'd3plus-scatter';
     } else if(visualization === 'similarity') {
       return 'd3plus-network';
+    } else if (visualization === 'geo') {
+      return 'geo-map';
     }
   }),
   searchFilter: function(data) {
@@ -87,10 +95,10 @@ export default Ember.Controller.extend({
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
     return _.filter(data, (d) => {
-      return get(d,`name_${this.get('i18n').locale}`).match(regexp) || get(d, 'code').match(regexp);
+      return (get(d,`name_${this.get('i18n').locale}`) || '').match(regexp) || get(d, 'code').match(regexp);
     });
   },
-  yearFilter: function(data) {
+  filterToSelectedYears: function(data) {
     let timeRange = d3.range(this.get('startDate'), this.get('endDate'));
     return _.filter(data, (d) => {
       return _.contains(timeRange, get(d, 'year'));
@@ -98,12 +106,6 @@ export default Ember.Controller.extend({
   },
   init: function(){
     this._super(this, arguments);
-    Ember.run.scheduleOnce('afterRender', this , function() {
-      var applicationController = this.get('controllers.application');
-      applicationController.set('entity', this.get('model.entity_type'));
-      applicationController.set('entity_id', this.get('model.entity.id'));
-      applicationController.set('entity_and_id', this.get('entity_and_id'));
-    });
   },
   scrollTopWhenUpdate: observer('variable', function() {
     window.scrollTo(0,0);

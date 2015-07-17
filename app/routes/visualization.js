@@ -2,7 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   queryParams: {
-    variable: { refreshModel: false },
+    variable: { refreshModel: true }, // The dimension of the source that the user cares about
+                                      // (export_value, import_value, wages, employment)
     rca: { refreshModel: false },
     startDate: { refreshModel: false },
     endDate: { refreshModel: false },
@@ -19,24 +20,24 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     this._super(controller, model);
     //if any  required queryParams on the controller are null
-    if(_.any(controller.getProperties(model.requiredParams), null)){
+    var paramValues = _.values(controller.getProperties(model.requiredParams));
+    if(_.any(paramValues, _.isNull)){
       controller.setProperties(model.get('defaultParam'));
     }
+    this.controllerFor('application').set('entity', model.get('entity.constructor.modelName'));
+    this.controllerFor('application').set('entity_id', model.get('.entity.id'));
     window.scrollTo(0, 0);
   },
-  resetController: function (controller, isExiting, transition) {
+  resetController: function (controller, isExiting) {
     if (isExiting) {
       controller.setProperties({
         variable: null,
         rca: null,
-        startDate: null,
-        endDate: null,
+        startDate: 2007,
+        endDate: 2013,
         search: null
       });
     }
-  },
-  activate() {
-    this._super();
   }
 });
 

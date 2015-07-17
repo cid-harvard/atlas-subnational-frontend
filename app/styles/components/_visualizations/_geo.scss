@@ -1,0 +1,83 @@
+/**
+*
+* Geomap
+*
+**/
+
+// Nested here instead of giving ever el a class in the js
+.geo__wrap {
+  height: 600px;
+  padding: 0;
+  margin: $baseSpace*-4.5 $baseSpace*-1.5 $baseSpace*-1.5;
+
+  svg {
+    position: relative;
+  }
+
+  .leaflet-control-attribution {
+    padding: 5px 7px;
+    background: $colorWhite;
+    color: $colorGrayLighter;
+    font-family: $sans;
+    font-weight: 300;
+  }
+
+  .leaflet-overlay-pane {
+    mix-blend-mode: multiply;
+  }
+
+  .geo__department {
+    fill: #000;
+    stroke: $colorBrown500;
+    stroke-dasharray: 5, 5;
+    stroke-width: 1px;
+  }
+
+  // If the value of the data is exactly 0
+  .q0 {
+    fill: $colorWhite;
+  }
+
+  // The scale if the value is positive
+  .q0-3 {
+    fill: $colorRed300;
+  }
+  .q1-3 {
+    fill: $colorRed600;
+  }
+  .q2-3 {
+    fill: $colorRed1000;
+  }
+}
+
+
+// Leaflet styling to fix image paths
+.leaflet-container.dark .map-tooltip .close,
+.leaflet-control-attribution:after,
+.leaflet-control-layers-toggle,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-popup-close-button,
+.map-tooltip .close,
+.mapbox-icon {
+  background-image: url(img/geo/icons-000000@2x.png);
+}
+
+.mapbox-logo {
+  display: none;
+}
+
+.leaflet-left .leaflet-control {
+  box-shadow: -1px 2px 2px $colorGrayLighter;
+  margin: 0 0 $baseSpace*1.5 $baseSpace*1.5;
+}
+
+.leaflet-bar {
+  border: none;
+  border-radius: 0;
+}
+
+.leaflet-container .leaflet-control-attribution a {
+  font-weight: 300;
+  color: $colorGrayLight;
+}
