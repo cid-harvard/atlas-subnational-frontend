@@ -8,11 +8,19 @@ var Router = Ember.Router.extend(googlePageview,{
 
 export default Router.map(function() {
   this.route('search');
-  this.route('graph_builder');
   this.route('ranking');
   this.route('colombia');
+  this.resource('graph_builder', { path: 'graph_builder/:graph_builder_id' }, function() {
+    this.resource('source', { path: 'source/:source_type' }, function() {
+      this.resource('visualization', { path: 'visualization/:visualization_type'});
+    });
+  });
 
-  this.route('location', { path: 'location'}, function() {
+  this.resource('product', { path: 'product'}, function() {
+    this.route('show', { path: ':product_id'});
+  });
+
+  this.resource('location', { path: 'location'}, function() {
     this.route('show', { path: ':location_id'});
   });
 });

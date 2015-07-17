@@ -2,19 +2,20 @@
   {{#ivy-tabs}}
     {{#ivy-tab-list classNames='tabmod__tabs'}}
       {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-        <a class="tab__link">Locations</a>
+        <a class="tab__link">{{t 'general.locations'}}</a>
       {{/ivy-tab}}
       {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-        <a class="tab__link">Exports and imports</a>
+        <a class="tab__link">{{t 'general.export_and_import'}}</a>
       {{/ivy-tab}}
       {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-        <a class="tab__link">Industries</a>
+        <a class="tab__link">{{t 'general.industries'}}</a>
       {{/ivy-tab}}
       {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-        <a class="tab__link">Occupations</a>
+        <a class="tab__link">{{t 'general.occupations'}}</a>
       {{/ivy-tab}}
     {{/ivy-tab-list}}
 
+    {{!-- LOCATION--}}
     {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
       <ul class="builder__nav__list">
         <li class="builder__list--nested">
@@ -23,8 +24,8 @@
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.export' name=model.name }}
+                {{#link-to 'visualization'  class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.locations.export' name=name }}
                 {{/link-to}}
               </div>
             </li>
@@ -33,7 +34,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.export_to' name=model.name item=builderNavDropDown}}
+                  {{t 'graph_builder.builder_nav.location.locations.export_to' name=name item=builderNavDropDown}}
                 {{/link-to}}
               </div>
             </li>
@@ -42,7 +43,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.import_from' name=model.name }}
+                  {{t 'graph_builder.builder_nav.location.locations.import_from' name=name }}
                 {{/link-to}}
               </div>
             </li>
@@ -51,7 +52,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.import_product_from' name=model.name item=builderNavDropDown }}
+                  {{t 'graph_builder.builder_nav.location.locations.import_product_from' name=name item=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -64,7 +65,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.export_subregions' name=model.name }}
+                  {{t 'graph_builder.builder_nav.location.locations.export_subregions' name=name }}
                 {{/link-to}}
               </div>
             </li>
@@ -73,7 +74,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.export_subregions_products' name=model.name item=builderNavDropDown }}
+                  {{t 'graph_builder.builder_nav.location.locations.export_subregions_products' name=name item=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -82,7 +83,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.export_subregions_locations' name=model.name place=builderNavDropDown }}
+                  {{t 'graph_builder.builder_nav.location.locations.export_subregions_locations' name=name place=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -91,7 +92,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.export_subregions_products_locations' name=model.name  place=builderNavDropDown item=builderNavDropDown }}
+                  {{t 'graph_builder.builder_nav.location.locations.export_subregions_products_locations' name=name  place=builderNavDropDown item=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -100,7 +101,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.import_subregions' name=model.name item=builderNavDropDown }}
+                  {{t 'graph_builder.builder_nav.location.locations.import_subregions' name=name item=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -109,7 +110,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.import_subregions_products' name=model.name item=builderNavDropDown }}
+                  {{t 'graph_builder.builder_nav.location.locations.import_subregions_products' name=name item=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -118,7 +119,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.import_subregions_locations' name=model.name place=builderNavDropDown }}
+                  {{t 'graph_builder.builder_nav.location.locations.import_subregions_locations' name=name place=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -127,7 +128,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.import_subregions_products_locations' name=model.name place=builderNavDropDown item=builderNavDropDown }}
+                  {{t 'graph_builder.builder_nav.location.locations.import_subregions_products_locations' name=name place=builderNavDropDown item=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -136,6 +137,7 @@
       </ul>
     {{/ivy-tab-panel}}
 
+    {{!-- IMPORT AND EXPORT --}}
     {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
       <ul class="builder__nav__list">
         <li class="builder__list--nested">
@@ -144,8 +146,8 @@
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source="products" variable='export_value' vis='treemap') class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.products.export_value' name=model.name}}
+                {{#link-to 'visualization' entity_and_id 'products' 'treemap' (query-params variable='export_value') class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.products.export_value' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -154,7 +156,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.products.export_value_to' name=model.name place=builderNavDropDown}}
+                  {{t 'graph_builder.builder_nav.location.products.export_value_to' name=name place=builderNavDropDown}}
                 {{/link-to}}
               </div>
             </li>
@@ -162,8 +164,8 @@
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='products' variable='import_value' vis='treemap') class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.products.import_value' name=model.name}}
+                {{#link-to 'visualization' entity_and_id 'products' 'treemap' (query-params variable='import_value') class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.products.import_value' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -172,7 +174,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.products.import_value_from' name=model.name place=builderNavDropDown}}
+                  {{t 'graph_builder.builder_nav.location.products.import_value_from' name=name place=builderNavDropDown}}
                 {{/link-to}}
               </div>
             </li>
@@ -184,17 +186,17 @@
               <i class="icon-cidcon_scatter builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Scatterplot</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='products' vis='scatter') class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.products.export_value.scatter' name=model.name}}
+                {{#link-to 'visualization' entity_and_id 'products' 'scatter' (query-params variable='null' endDate=2014 startDate=2013) class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.products.scatter' name=name}}
                 {{/link-to}}
               </div>
             </li>
-            <li class="builder__nav__item builder__nav__item--unavailable">
+            <li class="builder__nav__item">
               <i class="icon-cidcon_similarity builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Similarity map</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.products.map' name=model.name}}
+                {{#link-to 'visualization' entity_and_id 'products' 'similarity' (query-params variable='null' endDate=2014 startDate=2013) class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.products.similarity' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -203,6 +205,7 @@
       </ul>
     {{/ivy-tab-panel}}
 
+    {{!-- INDUSTRIES --}}
     {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
       <ul class="builder__nav__list">
         <li class="builder__list--nested">
@@ -211,8 +214,8 @@
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source="industries" variable='employment' vis='treemap') class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.industries.employment' name=model.name}}
+                {{#link-to 'visualization' entity_and_id 'industries' 'treemap' (query-params variable='employment') class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.industries.employment' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -220,8 +223,8 @@
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source="industries" variable='wages' vis='treemap') class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.industries.wages' name=model.name}}
+                {{#link-to 'visualization' entity_and_id 'industries' 'treemap' (query-params variable='wages') class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.industries.wages' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -229,8 +232,8 @@
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.industries.wages_highest_per_worker' name=model.name}}
+                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="inudstrie") class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.industries.wages_highest_per_worker' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -251,8 +254,8 @@
               <i class="icon-cidcon_scatter builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Scatterplot</h4>
-                {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id source='industries' vis='scatter') class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.industries.wages.scatter' name=model.name}}
+                {{#link-to 'visualization' entity_and_id 'industries' 'scatter' (query-params variable='null') class="builder__nav__question"}}
+                  {{t 'graph_builder.builder_nav.location.industries.scatter' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -261,7 +264,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Similarity map</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.industries.map' name=model.name}}
+                  {{t 'graph_builder.builder_nav.location.industries.similarity' name=name}}
                 {{/link-to}}
               </div>
             </li>

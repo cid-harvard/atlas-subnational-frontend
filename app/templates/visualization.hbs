@@ -1,7 +1,7 @@
 <article class="stream builder">
   <header class="stream__header">
     <img src="assets/img/builder/pentagon-test.svg" class="builder__pentagon">
-    <h2 class="stream__head">{{model.name}}</h2>
+    <h2 class="stream__head">{{name}}</h2>
   </header>
   <section class="stream__section">
     <header class="section__header builder__header">
@@ -9,7 +9,7 @@
     </header>
     <div {{bind-attr class=":section__buildermod drawerSettingsIsOpen:buildermod--is--open--settings drawerChangeGraphIsOpen:buildermod--is--open--changegraph"}}>
       <header class="buildermod__header">
-        <h4 class="buildermod__head">{{builderModHeader}}</h4>
+        <h4 class="buildermod__head">{{builderModHeader}} {{years}}</h4>
         <div class="buildermod__tools">
           <div class="buildermod__tool">
             <button class="btn buildermod__tool__btn buildermod__tool__btn--sub"{{action 'zoomIn' }}>
@@ -23,17 +23,23 @@
             </button>
           </div>
           <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--settings" {{action 'toggleDrawerSettings'}}>
-            {{fa-icon "plus" classNames="tool__btn__icon"}} Settings
+            {{fa-icon "plus" classNames="tool__btn__icon"}}
+            {{t 'graph_builder.settings.label'}}
           </button>
-          {{#if canChangeVisualization}}
-            <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--changegraph" {{action 'toggleDrawerChangeGraph'}}>
-              {{fa-icon "plus" classNames="tool__btn__icon"}} Change graph
-            </button>
-          {{/if}}
+          <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--changegraph" {{action 'toggleDrawerChangeGraph'}}>
+            {{fa-icon "plus" classNames="tool__btn__icon"}}
+            {{t 'graph_builder.change_graph.label'}}
+          </button>
         </div>
       </header>
       <div class="buildermod__vizwrap">
-        {{partial "partials/buildermod-drawer-settings"}}
+        {{component 'graphbuilder-settings'
+          startDate=startDate
+          endDate=endDate
+          dateRange=dateRange
+          isOpen=drawerSettingsIsOpen
+          years=years
+        }}
         {{partial "partials/buildermod-drawer-change-graph"}}
         {{partial "partials/buildermod-search"}}
         {{component visualizationComponent
@@ -41,13 +47,11 @@
           immutableData=immutableData
           data=filteredData
           dataType=source
-          varDependent=variable
-          varY='complexity'
-          varX='distance'
-          varRca=rca
+          varDependent=varDependent
           startDate=startDate
+          dateRange=dateRange
           endDate=endDate
-        }}
+          }}
       </div>
       {{partial "partials/buildermod-table"}}
     </div>
@@ -57,8 +61,8 @@
   </section>
   <section class="stream__section">
     <header class="section__header">
-      <h3 class="section__head">More graphs for this location</h3>
-      <p class="section__intro">Select a question to see the corresponding graph. If the question has missing parameters (<i class="icon-cidcon_placeholder-1 builder__icon--placeholder"></i>) , you'll fill those in when you click.</p>
+      <h3 class="section__head">{{t 'graph_builder.builder_nav.header'}}</h3>
+      <p class="section__intro">{{t 'graph_builder.builder_nav.intro' icon=builderNavDropDown}}</p>
     </header>
     {{partial "partials/builder-nav" classNames="tool__btn__icon"}}
   </section>

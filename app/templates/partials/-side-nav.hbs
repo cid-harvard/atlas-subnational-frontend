@@ -4,7 +4,10 @@
     <p class="branding__slogan"> {{ t 'side_nav.brand_slogan' }}</p>
   </div>
   {{#link-to "search" (query-params query="null") class="sidebar__search sidebar__section" tagName="div" }}
-    {{#link-to "search"  class="sidebar__btn sidebar__btn--search" activeClass="sidebar__btn--is--active"}}
+    {{#link-to "search"
+      current-when="search"
+      class="sidebar__btn sidebar__btn--search"
+      activeClass="sidebar__btn--is--active"}}
       <i class="icon-cidcon_search sidebar__btn__icon"></i>
       {{ t 'side_nav.search_link' }}
     {{/link-to}}
@@ -12,15 +15,16 @@
   <nav class="sidebar__section sidebar__nav">
     <ul class="nav__list">
       <li class="nav__item">
-        {{#link-to profileLink entity_id
+        {{#link-to 'location.show' entity_id
           class="sidebar__btn nav__item__link"
           activeClass="sidebar__btn--is--active"}}
           {{ t 'side_nav.profile_link' }}
         {{/link-to}}
       </li>
       <li class="nav__item">
-        {{#link-to "graph_builder"
-          (query-params entity=entity entity_id=entity_id)
+        {{#link-to "visualization" entity_and_id 'products' 'treemap'
+          (query-params variable='export_value')
+          current-when="visualization"
           class="sidebar__btn nav__item__link"
           activeClass="sidebar__btn--is--active"}}
           {{ t 'side_nav.graph_builder_link' }}

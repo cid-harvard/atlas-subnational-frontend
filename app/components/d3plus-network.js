@@ -1,3 +1,4 @@
+import productSpace from '../fixtures/product_space';
 import Ember from 'ember';
 import numeral from 'numeral';
 
@@ -7,48 +8,42 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
   attributeBindings: ['width','height'],
-  classNames: ['d3plus_tree-map'],
   varIndependent: ['group', 'code'],
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  treemap: computed('data.[]', 'varDependent', 'dataType', 'vis', function() {
+  networkData: computed('data.[]', function() {
+    return _.reduce(this.get('data'), function(memo, d) {
+      if(d.export_value){ memo.push({id: d.code, value: d.export_value}); }
+      return memo;
+      },[]);
+  }),
+  network: computed('data.[]', 'varDependent', 'dataType', 'vis', function() {
     return d3plus.viz()
       .container(this.get('id'))
-      .data({value: this.get('data'), padding: 5})
-      .type("tree_map")
-      .id({value: this.get('varIndependent'), grouping: true })
-      .depth(1)
-      .tooltip({children: false})
-      .color({value: 'grey'})
-      .format({
-        number: (d, data) => {
-          if('share' === data.key){
-            return numeral(d).divide(100).format('0.0%');
-          } else if( 'employment' === data.key) {
-            return numeral(d).format('0.0a');
-          } else {
-            return numeral(d).format('$ 0.0a');
-          }
-        }
-      })
-      .zoom(false)
-      .text({ value: (d) => {
-        return  Ember.get(d, `name_${this.get('i18n').locale}`) || d.code; }
-      })
-      .timeline(false)
+      .data({ value: this.get('networkData')})
+      .type("network")
+      .edges({ value: productSpace.edges, color: '#FFFF'})
+      .nodes({ value: productSpace.nodes })
+      .color({value: function(d){
+        if(d.value){ return 'black';}
+        return 'lightgrey';
+      }})
+      .id('id')
       .height(this.get('height'))
       .width(this.get('width'))
-      .timing({transitions: 300})
-      .size(this.get('varDependent'))
-      .labels({resize: false, align: 'left', valign: 'top'})
-      .font({size: 20});
+      .format({ number: (d) => { return numeral(d).format('$ 0.0a'); }})
+      .size('value')
+      .timeline(false)
+      .ui(false)
+      .legend(false)
+      .labels(false);
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
-      this.get('treemap').draw();
+      this.get('network').draw();
     });
   },
   willDestroyElement: function() {
@@ -60,8 +55,7 @@ export default Ember.Component.extend({
     Ember.run.later(this , function() {
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height());
-      this.get('treemap').draw();
+      this.get('network').draw();
     }, 1000);
   })
 });
-
