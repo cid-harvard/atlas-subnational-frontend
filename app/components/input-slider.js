@@ -48,7 +48,8 @@ export default Ember.Component.extend({
   }),
   update: observer('startDate', 'endDate', function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
-      if(this.element) {
+      if(this.element && this.element.noUiSlider) {
+
         this.element.noUiSlider.destroy(); //http://refreshless.com/nouislider/more/
 
         noUiSlider.create(this.element, this.get('sliderOptions'));
