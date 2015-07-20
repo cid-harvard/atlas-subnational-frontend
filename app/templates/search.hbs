@@ -9,8 +9,9 @@
         placeholder="Type here to search for a location, product, industry or occupation"
         value=search
         enter='search'
+        data-search-input=''
       }}
-      <button class="button search__button search__button--query"{{action 'search'}}>Search</button>
+      <button class="button search__button search__button--query"{{action 'search'}} data-search>Search</button>
     </div>
   </section>
   <section class="results__section">

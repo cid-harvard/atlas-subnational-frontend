@@ -1,7 +1,7 @@
 <header class="header--sidebar">
   <div class="branding">
     <img src="assets/img/branding/logo.png" alt="" class="branding__logo">
-    <p class="branding__slogan"> {{ t 'side_nav.brand_slogan' }}</p>
+    <p class="branding__slogan" data-slogan>{{ t 'side_nav.brand_slogan' }}</p>
   </div>
   {{#link-to "search" (query-params query="null") class="sidebar__search sidebar__section" tagName="div" }}
     {{#link-to "search"
@@ -15,17 +15,20 @@
   <nav class="sidebar__section sidebar__nav">
     <ul class="nav__list">
       <li class="nav__item">
-        {{#link-to profileLink entity_id
-          class="sidebar__btn nav__item__link"
-          activeClass="sidebar__btn--is--active"}}
-          {{ t 'side_nav.profile_link' }}
-        {{/link-to}}
+      {{#link-to
+        profileLink entity_id
+        class="sidebar__btn nav__item__link"
+        activeClass="sidebar__btn--is--active"
+        data-side-profile-link='' }}
+        {{ t 'side_nav.profile_link' }}
+      {{/link-to}}
       </li>
       <li class="nav__item">
         {{#link-to "visualization" entity_and_id source 'treemap'
           current-when="visualization"
           class="sidebar__btn nav__item__link"
-          activeClass="sidebar__btn--is--active"}}
+          activeClass="sidebar__btn--is--active"
+          data-side-graph-builder-link=''}}
           {{ t 'side_nav.graph_builder_link' }}
         {{/link-to}}
       </li>
@@ -40,7 +43,9 @@
         type='checkbox'
         id='toggle--languages'
         class='toggle toggle--languages'
-        checked=isDefaultLocale}}
+        checked=isDefaultLocale
+        data-language-toggle=''
+        }}
       <label class="toggle__label" for="toggle--languages"></label>
       <p {{bind-attr class=":toggle__label__text isDefaultLocale:toggle__label--is--active"}}>
         {{defaultLanguage}}
