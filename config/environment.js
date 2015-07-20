@@ -44,6 +44,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'test') {
+    ENV.apiURL = "http://atlas-colombia-master.cid-labs.com/api";
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'none';
