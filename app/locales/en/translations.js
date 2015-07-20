@@ -2,6 +2,7 @@ export default {
   'general': {
     'locations': 'Locations',
     'export_and_import': 'Exports and Imports',
+    'products': 'Products',
     'industries': 'Industries',
     'occupations': 'Occupations',
     'treemap': 'Treemap',
