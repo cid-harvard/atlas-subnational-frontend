@@ -28,6 +28,17 @@ export default {
     'download': 'Download this data'
   },
   'graph_builder': {
+    'table': {
+      'name': 'Name',
+      'export_value': 'Export',
+      'export_rca': 'RCA',
+      'rca': 'RCA',
+      'wages': 'Wages',
+      'employment': 'Employment',
+      'year': 'Year',
+      'complexity': 'Complexity',
+      'distance': 'Distance'
+    },
     'settings' : {
       'label': 'Settings',
       'change_time' : 'Change time period:'
