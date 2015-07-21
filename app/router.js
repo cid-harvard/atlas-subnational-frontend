@@ -8,7 +8,7 @@ var Router = Ember.Router.extend(googlePageview,{
 
 export default Router.map(function() {
   this.route('search');
-  this.route('ranking');
+  this.route('downloads');
   this.route('colombia');
   this.resource('graph_builder', { path: 'graph_builder/:graph_builder_id' }, function() {
     this.resource('source', { path: 'source/:source_type' }, function() {
