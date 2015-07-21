@@ -3,15 +3,17 @@
     <h2 class="search__header__head">Search</h2>
   </header>
   <section class="search__section">
-    <div class="search__wrap">
+    <p class='search__copy search__copy--intro'>First, search for the location, product, industry or occupation that you're interested in.</p>
+    <form class="search__wrap">
       {{input
         class="search__field"
-        placeholder="Type here to search for a location, product, industry or occupation"
+        placeholder="Type here to search"
         value=search
         enter='search'
+        data-search-input=''
       }}
-      <button class="button search__button search__button--query"{{action 'search'}}>Search</button>
-    </div>
+      <input class="btn search__btn fa fa-search" type="submit" value="&#xf002;" data-search{{action 'search'}}>
+    </form>
   </section>
   <section class="results__section">
     {{#if query }}
