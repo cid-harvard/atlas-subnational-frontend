@@ -1,6 +1,9 @@
 import Ember from 'ember';
 const {computed, observer, get:get } = Ember;
 
+Ember.depricate = function() {};
+Ember.warn = function() {};
+
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   needs: 'application', // inject the application controller
