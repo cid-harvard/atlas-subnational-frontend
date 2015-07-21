@@ -55,7 +55,10 @@
           endDate=endDate
           }}
       </div>
-      {{partial "partials/buildermod-table"}}
+      {{component 'graphbuilder-table'
+        data=filteredData
+        source=source
+      }}
     </div>
   </section>
   <section class="stream__section">
