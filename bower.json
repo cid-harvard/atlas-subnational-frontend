@@ -20,7 +20,10 @@
     "numeral": "~1.5.3",
     "nouislider": "~8.0.1",
     "d3-plugins": "*",
-    "mapbox.js": "~2.2.1"
+    "mapbox.js": "~2.2.1",
+    "antiscroll": "git://github.com/azirbel/antiscroll.git#90391fb371c7be769bc32e7287c5271981428356",
+    "jquery-mousewheel": "~3.1.4",
+    "jquery-ui": "~1.11.4"
   },
   "devDependencies": {
     "d3": "~3.5.5",
