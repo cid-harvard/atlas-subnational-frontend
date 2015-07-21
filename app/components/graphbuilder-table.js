@@ -25,26 +25,27 @@ var SortableColumnMixin = Ember.Object.create({
 export default EmberTableComponent.extend({
   i18n: Ember.inject.service(),
   hasFooter: false,
-  rowHeight: 35,
-  height: 400,
+  rowHeight: 50,
+  minHeaderHeight: 50,
+  height: 300,
   attributeBindings: ['height'],
   selectionMode: 'none',
   productsMap: [
-    { key: 'name', expand: true },
+    { key: 'name', expand: true, savedWidth: 300 },
     { key: 'export_value', type: 'int', expand: false},
     { key: 'export_rca', type: 'int', expand: false},
     { key: 'year' , expand: false, type: 'int'},
     { key: 'complexity' , expand: false, type: 'int'},
-    { key: 'distance' , expand: false, type: 'int'}
+    { key: 'distance' , expand: true, type: 'int'}
    ],
   locationsMap: [
-    { key: 'name', expand: true },
+    { key: 'name', expand: true, savedWidth: 300 },
     { key: 'export_value', type: 'int', expand: false},
     { key: 'export_rca', type: 'int', expand: false},
     { key: 'year' , expand: false, type: 'int'},
    ],
   industriesMap: [
-    { key: 'name', expand: true },
+    { key: 'name', expand: true, savedWidth: 300 },
     { key: 'wages', type: 'int', expand: false},
     { key: 'employment', type: 'int', expand: false},
     { key: 'rca', type: 'int', expand: false},
@@ -69,8 +70,8 @@ export default EmberTableComponent.extend({
   generateColumnDefinition: function(column) {
     return ColumnDefinition.create(SortableColumnMixin, {
       canAutoResize: column.expand,
-      textAlign: column.type === 'int' ? 'text-align-right' : 'text-align-left',
-      minWidth: 150,
+      textAlign: 'text-align-left',
+      savedWidth: column.savedWidth ? column.savedWidth : 150,
       headerCellName: `graph_builder.table.${column.key}`,
       getCellContent: this.generateCellContent(column)
     });
