@@ -2,8 +2,25 @@ import Ember from 'ember';
 import numeral from 'numeral';
 import ColumnDefinition from 'ember-table/models/column-definition';
 import EmberTableComponent from 'ember-table/components/ember-table';
+import HeaderCell from 'ember-table/views/header-cell';
+import TableCell from 'ember-table/views/table-cell';
 
 const { computed } = Ember;
+
+var SortableTableHeaderCell = HeaderCell.extend({
+  templateName: 'sortable-header-cell',
+});
+
+var SortableTableCell = TableCell.extend({
+  templateName: 'sortable-cell',
+});
+
+var SortableColumnMixin = Ember.Object.create({
+  supportSort: true,
+  sorted: false,
+  headerCellViewClass: SortableTableHeaderCell,
+  tableCellViewClass: SortableTableCell
+});
 
 export default EmberTableComponent.extend({
   i18n: Ember.inject.service(),
@@ -13,26 +30,26 @@ export default EmberTableComponent.extend({
   attributeBindings: ['height'],
   selectionMode: 'none',
   productsMap: [
-    { displayName: 'Name', key: 'name', expand: true },
-    { displayName: 'Export', key: 'export_value', type: 'int', expand: false},
-    { displayName: 'Rca', key: 'export_rca', type: 'int', expand: false},
-    { displayName: 'Year', key: 'year' , expand: false, type: 'int'},
-    { displayName: 'Complexity', key: 'complexity' , expand: false, type: 'int'},
-    { displayName: 'Distance', key: 'distance' , expand: false, type: 'int'}
+    { key: 'name', expand: true },
+    { key: 'export_value', type: 'int', expand: false},
+    { key: 'export_rca', type: 'int', expand: false},
+    { key: 'year' , expand: false, type: 'int'},
+    { key: 'complexity' , expand: false, type: 'int'},
+    { key: 'distance' , expand: false, type: 'int'}
    ],
   locationsMap: [
-    { displayName: 'Name', key: 'name', expand: true },
-    { displayName: 'Export', key: 'export_value', type: 'int', expand: false},
-    { displayName: 'Rca', key: 'export_rca', type: 'int', expand: false},
-    { displayName: 'Year', key: 'year' , expand: false, type: 'int'},
+    { key: 'name', expand: true },
+    { key: 'export_value', type: 'int', expand: false},
+    { key: 'export_rca', type: 'int', expand: false},
+    { key: 'year' , expand: false, type: 'int'},
    ],
   industriesMap: [
-    { displayName: 'Name', key: 'name', expand: true },
-    { displayName: 'Wages', key: 'wages', type: 'int', expand: false},
-    { displayName: 'Employment', key: 'employment', type: 'int', expand: false},
-    { displayName: 'Rca', key: 'rca', type: 'int', expand: false},
-    { displayName: 'Year', key: 'year' , expand: false, type: 'int'},
-    { displayName: 'Complexity', key: 'complexity' , expand: false, type: 'int'}
+    { key: 'name', expand: true },
+    { key: 'wages', type: 'int', expand: false},
+    { key: 'employment', type: 'int', expand: false},
+    { key: 'rca', type: 'int', expand: false},
+    { key: 'year' , expand: false, type: 'int'},
+    { key: 'complexity' , expand: false, type: 'int'}
    ],
   tableMap: computed('source', function() {
     let source = this.get('source');
@@ -46,12 +63,15 @@ export default EmberTableComponent.extend({
   content: computed('data', function() {
     return this.get('data');
   }),
+  refreshTable: Ember.observer('locale.i18n', function() {
+    this.content.clear()
+  }),
   generateColumnDefinition: function(column) {
-    return ColumnDefinition.create({
+    return ColumnDefinition.create(SortableColumnMixin, {
       canAutoResize: column.expand,
       textAlign: column.type === 'int' ? 'text-align-right' : 'text-align-left',
       minWidth: 150,
-      headerCellName: column.displayName,
+      headerCellName: `graph_builder.table.${column.key}`,
       getCellContent: this.generateCellContent(column)
     });
   },
