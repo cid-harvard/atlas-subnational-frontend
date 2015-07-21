@@ -20,7 +20,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
 
   //search for atlantico and click on GB page
   fillIn('input[data-search-input]', 'Atlántico');
-  click('button[data-search]');
+  click('input[data-search]');
   click('a[data-search-profile]');
 
   andThen(function() {

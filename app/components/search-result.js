@@ -4,7 +4,7 @@ const {computed} = Ember;
 export default Ember.Component.extend({
   breadcrumb: computed('result.level', function() {
     if(this.get('result.level')) {
-      return `Colombia > ${this.get('entity')} > ${_.capitalize(this.get('result.level'))}`;
+      return `${_.capitalize(this.get('entity'))} > ${_.capitalize(this.get('result.level'))}`;
     }
   }),
   name: computed('result.name', 'result.short_name', function() {

@@ -22,13 +22,13 @@ test('visiting /search', function(assert) {
   });
 
   fillIn('input[data-search-input]', 'Atlantico');
-  click('button[data-search]');
+  click('input[data-search]');
   andThen(function() {
     assert.equal(find('p[data-search-result-name]:first').text(), 'Atlántico');
   });
 
   fillIn('input[data-search-input]', 'gold');
-  click('button[data-search]');
+  click('input[data-search]');
   andThen(function() {
     assert.equal(find('p[data-search-result-name]:first').text(), 'Gold content');
   });
