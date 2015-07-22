@@ -5,8 +5,9 @@ const {computed, observer, get: get} = Ember;
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   needs: 'application', // inject the application controller
-  queryParams: ['query'],
+  queryParams: ['query', 'filter'],
   query: null,
+  filter: null,
   search: computed.oneWay('query'),
   placeholder: t('search.placeholder'),
   clearSearchIfEmpty: observer('query', function() {

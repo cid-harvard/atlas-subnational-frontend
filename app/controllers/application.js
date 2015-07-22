@@ -5,9 +5,10 @@ const {observer, computed, getWithDefault} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
+  allEntities: ['product', 'location', 'industry'],
   //use entity and entity_id to build the nav links
-  entity: 'location',
-  entity_id: '1044',
+  entity: null,
+  entity_id: null,
   //The language toggle is a checkbox
   //currently the way it is,
   //TRUE => 'es-' and FALSE => 'en
@@ -49,18 +50,5 @@ export default Ember.Controller.extend({
   }),
   industriesMetadata: computed('model.industries', function() {
     return this.get('model.industries');
-  }),
-  profileLink: computed('entity', function(){
-    if(this.get('entity') === 'location') { return 'location.show'; }
-    if(this.get('entity') === 'product') { return 'product.show'; }
-    if(this.get('entity') === 'industry') { return 'industry.show'; }
-  }),
-  entity_and_id: computed('entity', 'entity_id', function() {
-    return `${this.get('entity')}-${this.get('entity_id')}`;
-  }),
-  source: computed('entity', function() {
-    if(this.get('entity') === 'location') { return 'products'; }
-    if(this.get('entity') === 'product') { return 'locations'; }
-    if(this.get('entity') === 'industry') { return 'departments'; }
   })
 });
