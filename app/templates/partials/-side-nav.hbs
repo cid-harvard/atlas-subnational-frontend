@@ -15,54 +15,34 @@
     <ul class="nav__list">
       <li class="nav__item__wrap">
         <input type="checkbox" class="nav__item" id="nav__item--profiles" checked>
-        <label class="sidebar__btn nav__item__label" for="nav__item--profiles">
+        <label class="sidebar__btn nav__item__label" for="nav__item--profiles" data-side-nav-profile>
           Profiles
         </label>
         <ul class="nav__list--sub">
-          {{#link-to "search" (query-params query="null") class="sidebar__btn nav__item--sub" tagName="li" }}
-            {{#link-to "search"
-              class="sidebar__btn nav__item--sub"}}
-              {{ t 'general.locations' }}
-            {{/link-to}}
-          {{/link-to}}
-          {{#link-to "search" (query-params query="null") class="sidebar__btn nav__item--sub" tagName="li" }}
-            {{#link-to "search"
-              class="sidebar__btn nav__item--sub"}}
-              {{ t 'general.products' }}
-            {{/link-to}}
-          {{/link-to}}
-          {{#link-to "search" (query-params query="null") class="sidebar__btn nav__item--sub" tagName="li" }}
-            {{#link-to "search"
-              class="sidebar__btn nav__item--sub"}}
-              {{ t 'general.industries' }}
-            {{/link-to}}
-          {{/link-to}}
+          {{#each linkEntity in allEntities }}
+            {{component 'side-nav-link'
+              linkType='profile'
+              linkEntity=linkEntity
+              entity=entity
+              entity_id=entity_id
+            }}
+          {{/each}}
         </ul>
       </li>
       <li class="nav__item__wrap">
         <input type="checkbox" class="nav__item" id="nav__item--builder" checked>
-        <label class="sidebar__btn nav__item__label" for="nav__item--builder">
+        <label class="sidebar__btn nav__item__label" for="nav__item--builder" data-side-nav-graphbuilder>
           Graph Builder
         </label>
         <ul class="nav__list--sub">
-          {{#link-to "search" (query-params query="null") class="sidebar__btn nav__item--sub" tagName="li" }}
-            {{#link-to "search"
-              class="sidebar__btn nav__item--sub"}}
-              {{ t 'general.locations' }}
-            {{/link-to}}
-          {{/link-to}}
-          {{#link-to "search" (query-params query="null") class="sidebar__btn nav__item--sub" tagName="li" }}
-            {{#link-to "search"
-              class="sidebar__btn nav__item--sub"}}
-              {{ t 'general.products' }}
-            {{/link-to}}
-          {{/link-to}}
-          {{#link-to "search" (query-params query="null") class="sidebar__btn nav__item--sub" tagName="li" }}
-            {{#link-to "search"
-              class="sidebar__btn nav__item--sub"}}
-              {{ t 'general.industries' }}
-            {{/link-to}}
-          {{/link-to}}
+          {{#each linkEntity in allEntities }}
+            {{component 'side-nav-link'
+              linkType='graphbuilder'
+              linkEntity=linkEntity
+              entity=entity
+              entity_id=entity_id
+            }}
+          {{/each}}
         </ul>
       </li>
       <li class="nav__item__wrap">
