@@ -17,6 +17,13 @@ export default Ember.Controller.extend({
       this.set('search', null);
     }
   }),
+  searchCopy: computed('filter', 'i18n.locale' , function() {
+    if(this.get('filter')){
+      return this.get('i18n').t('search.single_intro_copy', { filter: this.get('filter') });
+    } else {
+      return this.get('i18n').t('search.all_intro_copy');
+    }
+  }),
   productResults: computed('model.[]', function() {
     // TODO DRY out the three results properties and remove entity hardcoding in filtering
     let search = _.deburr(this.get('search'));

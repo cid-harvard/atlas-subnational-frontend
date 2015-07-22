@@ -17,6 +17,11 @@ export default {
     'profile_link': 'Profile',
     'graph_builder_link': 'Graph Builder'
   },
+  'search': {
+    'header': 'Search',
+    'single_intro_copy': "First, search for the {{filter}} that you're interested in.",
+    'all_intro_copy': "First, search for the location, product, industry or occupation that you're interested in."
+  },
   'location.model':{
     'department': 'department',
     'municipality': 'municipality',
