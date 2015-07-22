@@ -3,7 +3,7 @@
     <img src="assets/img/branding/logo.png" alt="" class="branding__logo">
     <p class="branding__slogan" data-slogan>{{ t 'side_nav.brand_slogan' }}</p>
   </div>
-  {{#link-to "search" (query-params query="null") class="sidebar__search sidebar__section" tagName="div" }}
+  {{#link-to "search" (query-params query="null" filter="null") class="sidebar__search sidebar__section" tagName="div" }}
     {{#link-to "search"
       current-when="search"
       class="sidebar__btn sidebar__btn--search"
@@ -21,7 +21,7 @@
         <ul class="nav__list--sub">
           {{#each linkEntity in allEntities }}
             {{component 'side-nav-link'
-              linkType='profile'
+              linkView='profile'
               linkEntity=linkEntity
               entity=entity
               entity_id=entity_id
@@ -37,7 +37,8 @@
         <ul class="nav__list--sub">
           {{#each linkEntity in allEntities }}
             {{component 'side-nav-link'
-              linkType='graphbuilder'
+              linkView='graphbuilder'
+              visualizationType=visualizationType
               linkEntity=linkEntity
               entity=entity
               entity_id=entity_id

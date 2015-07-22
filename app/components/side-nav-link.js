@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import {  pluralize } from 'ember-inflector';
+import { pluralize } from 'ember-inflector';
 const { computed } = Ember;
 
 export default Ember.Component.extend({
@@ -23,11 +23,11 @@ export default Ember.Component.extend({
   linkText: computed('linkEntity','i18n.locale', function() {
     return this.get('i18n').t(`general.${pluralize(this.get('linkEntity'))}`);
   }),
-  isProfileLink: computed('linkType','isCurrentEntity', function() {
-    return this.get('linkType') === 'profile' && this.get('isCurrentEntity');
+  isProfileLink: computed('linkView','isCurrentEntity', function() {
+    return this.get('linkView') === 'profile' && this.get('isCurrentEntity');
   }),
-  isGraphBuilderLink: computed('linkType','isCurrentEntity',  function() {
-    return this.get('linkType') === 'graphbuilder' && this.get('isCurrentEntity');
+  isGraphBuilderLink: computed('linkView','isCurrentEntity',  function() {
+    return this.get('linkView') === 'graphbuilder' && this.get('isCurrentEntity');
   })
 });
 

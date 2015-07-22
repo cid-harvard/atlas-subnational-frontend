@@ -25,11 +25,13 @@ export default Ember.Route.extend({
       controller.setProperties(model.get('defaultParam'));
     }
     this.controllerFor('application').set('entity', model.get('entity.constructor.modelName'));
-    this.controllerFor('application').set('entity_id', model.get('.entity.id'));
+    this.controllerFor('application').set('entity_id', model.get('entity.id'));
+    this.controllerFor('application').set('visualizationType', model.get('visualization'));
     window.scrollTo(0, 0);
   },
   resetController: function (controller, isExiting) {
     if (isExiting) {
+      this.controllerFor('application').set('visualizationType', 'treemap');
       controller.setProperties({
         variable: null,
         rca: null,

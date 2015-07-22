@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
   //use entity and entity_id to build the nav links
   entity: null,
   entity_id: null,
+  visualizationType: 'treemap',
   //The language toggle is a checkbox
   //currently the way it is,
   //TRUE => 'es-' and FALSE => 'en
