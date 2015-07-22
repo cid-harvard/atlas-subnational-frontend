@@ -28,8 +28,8 @@ test('search for Alantico and go to GB and Profile', function(assert) {
     assert.equal(find('h2[data-location-name]').text(), 'Atlántico');
   });
 
-  click('a[data-side-graph-builder-link]');
-
+  click('label[data-side-nav-graphbuilder]');
+  click("a[data-side-graphbuilder]");
   andThen(function() {
     assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/treemap?endDate=2013&startDate=2007&variable=export_value');
   });
@@ -43,7 +43,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Switch to import source
-  click("a:contains('Exports and Imports')");
+  click("a[data-tab-product]");
   click("a:contains('What products does Atlántico import?')");
 
   andThen(function() {
@@ -51,7 +51,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to scatter plot
-  click("a:contains('Exports and Imports')");
+  click("a[data-tab-product]");
   click("a:contains('What products have the best combination of complexity and opportunity for Atlántico?')");
 
   andThen(function() {
@@ -59,7 +59,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to product space
-  click("a:contains('Exports and Imports')");
+  click("a[data-tab-product]");
   click("a:contains('What does the product map look like for Atlántico?')");
 
   andThen(function() {
@@ -67,7 +67,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to industry employment
-  click("a:contains('Industries')");
+  click("a[data-tab-industry]");
   click("a:contains('What industries in Atlántico employ the most people?')");
 
   andThen(function() {
@@ -75,7 +75,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to industry wages
-  click("a:contains('Industries')");
+  click("a[data-tab-industry]");
   click("a:contains('What industries in Atlántico are the largest by total wages?')");
 
   andThen(function() {
@@ -83,7 +83,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to industry scatter
-  click("a:contains('Industries')");
+  click("a[data-tab-industry]");
   click("a:contains('What industries have the best combination of complexity and opportunity for Atlántico?')");
 
   andThen(function() {
@@ -99,7 +99,8 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //return to profile
-  click('a[data-side-profile-link]');
+  click('label[data-side-nav-profile]');
+  click("a[data-side-profile]");
 
   andThen(function() {
     assert.equal(currentURL(), '/location/2');
