@@ -84,28 +84,29 @@
 .nav__item {
   display: none;
   &:checked ~ .nav__item__label {
-    font-weight: 500;
-    color: $colorNavy400;
+    font-weight: 700;
+    color: $colorWhite;
   }
   &:checked ~ .nav__list--sub {
-    display: none;
+    display: block;
   }
   &:checked ~ .nav__item__label:before {
-    content: '\f0da';
-  }
-}
-
-.nav__item__label {
-  font-weight: 700;
-  color: $colorWhite;
-  &:before {
-    font-size: $fontTiny;
-    font-family: $icon;
     content: '\f0d7';
   }
 }
 
+.nav__item__label {
+  font-weight: 500;
+  color: $colorNavy400;
+  &:before {
+    font-size: $fontTiny;
+    font-family: $icon;
+    content: '\f0da';
+  }
+}
+
 .nav__list--sub {
+  display: none;
   margin-left: $baseSpace/1.5;
 }
 
