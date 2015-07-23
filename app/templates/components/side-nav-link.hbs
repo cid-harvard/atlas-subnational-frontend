@@ -16,7 +16,8 @@
 {{else}}
   {{#link-to "search" (query-params filter=linkEntity query='null')
     data-side-search=linkEntity
-    class="sidebar__btn nav__item--sub" }}
+    class="sidebar__btn nav__item--sub"
+    activeClass="sidebar__btn--is--active"}}
     {{linkText}}
   {{/link-to}}
 {{/if}}
