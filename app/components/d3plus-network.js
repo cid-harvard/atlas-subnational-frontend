@@ -47,15 +47,14 @@ export default Ember.Component.extend({
     });
   },
   willDestroyElement: function() {
+    this.set('network',  null);
     this.removeObserver('i18n.locale', this, this.update);
     this.removeObserver('data.[]', this, this.update);
   },
   update: observer('data.[]', 'varDependent', 'i18n.locale', function() {
     if(!this.element){ return false; } //do not redraw if not there
     Ember.run.later(this , function() {
-      this.set('width', this.$().parent().width());
-      this.set('height', this.$().parent().height());
-      this.get('network').draw();
+      if(this.get('network')) { this.get('network').draw(); }
     }, 1000);
   })
 });

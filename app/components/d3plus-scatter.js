@@ -37,14 +37,14 @@ export default Ember.Component.extend({
     });
   },
   willDestroyElement: function() {
+    this.set('scatter',  null);
     this.removeObserver('i18n.locale', this, this.update);
+    this.removeObserver('data.[]', this, this.update);
   },
   update: observer('data.[]', 'varRca', 'i18n.locale', function() {
     if(!this.element){ return false; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
-      this.set('width', this.$().parent().width());
-      this.set('height', this.$().parent().height());
-      this.get('scatter').draw();
+      if(this.get('scatter')) { this.get('scatter').draw();}
     });
   })
 });
