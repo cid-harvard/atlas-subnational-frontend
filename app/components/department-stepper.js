@@ -12,6 +12,6 @@ export default Ember.Component.extend({
     return this.get('story.index') === this.get('activeStepIndex');
   }),
   i18nString: computed('story.index', function() {
-    return `stepper.${this.get('story.index')}`;
+    return `location.show.stepper.${this.get('story.index')}`;
   })
 });

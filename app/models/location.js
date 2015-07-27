@@ -1,13 +1,13 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 import ENV from '../config/environment';
+import numeral from 'numeral';
 const {apiURL} = ENV;
 const {attr} = DS;
-const {computed, getWithDefault, $} = Ember;
+const {computed, getWithDefault, $, get:get } = Ember;
 
 export default DS.Model.extend({
   i18n: Ember.inject.service(),
-  metaData: attr(),
 
   code: attr('string'),
 
@@ -21,6 +21,7 @@ export default DS.Model.extend({
 
   //data that drives the profile
   productsData: attr(),
+  industriesData: attr(),
   departments: attr(),
   timeseries: attr(),
 
@@ -99,35 +100,48 @@ export default DS.Model.extend({
     return this.get(attr) || `${attr} does not exist`;
   }),
 
-  //TODO: redo all the stuff below
-  sortedTimeSeries: computed('timeSeries', function() {
-    return _.sortBy(this.get('timeSeries'), 'year');
+  exportTotal: computed('productsData', function() {
+    var total = _.reduce(this.get('productsData'), function(memo, data) {
+      return memo + data.export_value;
+    }, 0);
+    return numeral(total).format('$ 0.00 a');
   }),
-  firstTimeSeries: computed(function(){
-    return _.first(this.get('sortedTimeSeries'));
+
+  yearSort: ['year'],
+
+  //validTimeseries is array of data points where all key,value pairs are not null
+  validTimeseries: computed.filter('timeseries', function(data) {
+    return ! _.any(_.values(data), _.isNull);
   }),
-  lastTimeSeries: computed(function(){
-    return _.last(this.get('sortedTimeSeries'));
+  sortedTimeseries: computed.sort('validTimeseries','yearSort'),
+
+  firstDataPoint: computed('validTimeseries', function() {
+    return _.first(this.get('validTimeseries'));
   }),
-  firstGdp: computed(function() {
-    return this.get('firstTimeSeries.gdp');
+  lastDataPoint: computed('validTimeseries', function() {
+    return _.last(this.get('validTimeseries'));
   }),
-  latestGdp: computed(function() {
-    return this.get('lastTimeSeries.gdp');
+  yearRange: computed('validTimeseries', function() {
+    var firstYear = get(this.get('firstDataPoint'), 'year');
+    var lastYear = get(this.get('lastDataPoint'), 'year');
+    return `${firstYear} - ${lastYear}`;
   }),
-  gdpGrowth: computed(function(){
-    return (this.get('latestGdp') - this.get('firstGdp')) / this.get('latestGdp');
-  }),
-  latestPop: computed(function() {
-    return this.get('lastTimeSeries.pop');
-  }),
-  firstYear: computed(function() {
-    return this.get('firstTimeSeries.year');
-  }),
-  lastYear: computed(function() {
-    return this.get('lastTimeSeries.year');
-  }),
-  yearRange: computed(function() {
-    return `${this.get('firstYear')}–${this.get('lastYear')}`;
+  lastPop: computed('validTimeseries','locale', function() {
+    let pop = get(this.get('lastDataPoint'), 'population');
+    return numeral(pop).format('0.00 a');
+   }),
+  lastGdp: computed('validTimeseries','locale', function() {
+    let gdp = get(this.get('lastDataPoint'), 'gdp_real');
+    return numeral(gdp).format('$ 0.00 a');
+   }),
+  lastGdpPerCapita: computed('validTimeseries','locale', function() {
+    let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_real');
+    return numeral(gdpPC).format('$ 0.00 a');
+   }),
+  gdpGrowth:computed('validTimeseries', function() {
+    var firstGdp = get(this.get('firstDataPoint'), 'gdp_real');
+    var lastGdp = get(this.get('lastDataPoint'), 'gdp_real');
+    var growth = (lastGdp - firstGdp) / firstGdp;
+    return numeral(growth).format('0.000%');
   })
 });
