@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import numeral from 'numeral';
 const { computed } = Ember;
 
 
@@ -17,7 +18,7 @@ export default Ember.Component.extend({
       return object;
     });
   },
-  sparkLine: computed('data','yVar', function() {
+  sparkLine: computed('data','yVar','type', function() {
    let data = this.cleanData(this.get('data'));
    let yVar = this.get('yVar');
    let currentLocationName = this.get('currentLocationName');
@@ -55,8 +56,11 @@ export default Ember.Component.extend({
             var svgWidth = +parentSVG.attr('width');
             return parentX < svgWidth/2 ? 'start': 'end';
           },
-          text: function(d) {
-            var format = function(d) { return '$' + d3.format(".2s")(d); };
+          text: (d) => {
+            let format = function(d) { return numeral(d).format('$ 0.00 a'); };
+            if(this.get('type') === 'population') {
+              format = function(d) { return numeral(d).format('0,00'); };
+            }
             return currentLocationName + ' (' + format(+d[yVar]) + ')';
           }
         }]

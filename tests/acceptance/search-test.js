@@ -33,3 +33,4 @@ test('visiting /search', function(assert) {
     assert.equal(find('p[data-search-result-name]:first').text(), 'Gold content');
   });
 });
+

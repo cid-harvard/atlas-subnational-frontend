@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import numeral from 'numeral';
 const { computed } = Ember;
 
 export default Ember.Component.extend({
@@ -17,7 +18,7 @@ export default Ember.Component.extend({
         container: this.get('id'),
         height: this.get('height'),
         width: this.get('width'),
-        margin: {top: 0, right: 0, bottom: 20, left: 20},
+        margin: {top: 0, right: 10, bottom: 20, left: 10},
         var_id: this.get('varId'),
         var_x: this.get('varX'),
         var_y: function() { return this.height/2; },
@@ -26,7 +27,13 @@ export default Ember.Component.extend({
         x_ticks: 2,
         x_tickSize: 0,
         x_tickPadding: 10,
-        x_format: function(d) { return '$' + d3.format(".2s")(d); },
+        x_format: (d) => {
+          let format = function(d) { return numeral(d).format('$ 0.00 a'); };
+          if(this.get('type') === 'population') {
+            format = function(d) { return numeral(d).format('0.00a'); };
+          }
+          return format(d);
+        },
         items: [{
           marks: [{
             type: "diamond"
@@ -42,8 +49,11 @@ export default Ember.Component.extend({
               var svgWidth = +parentSVG.attr("width");
               return parentX < svgWidth / 2 ? "start": "end";
             },
-            text: function(d) {
-              var format = function(d) { return '$' + d3.format(".2s")(d); };
+            text: (d)  => {
+              let format = function(d) { return numeral(d).format('0.00 a'); };
+              if(this.get('type') === 'population') {
+                format = function(d) { return numeral(d).format('0.00a'); };
+              }
               return d['name'] + ' (' + format(+d[varX]) + ')';
             }
           }]

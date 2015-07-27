@@ -65,7 +65,7 @@ export default EmberTableComponent.extend({
     return this.get('data');
   }),
   refreshTable: Ember.observer('locale.i18n', function() {
-    this.content.clear()
+    this.content.clear();
   }),
   generateColumnDefinition: function(column) {
     return ColumnDefinition.create(SortableColumnMixin, {
