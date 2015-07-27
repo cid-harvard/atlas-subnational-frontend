@@ -5,14 +5,14 @@ import EmberTableComponent from 'ember-table/components/ember-table';
 import HeaderCell from 'ember-table/views/header-cell';
 import TableCell from 'ember-table/views/table-cell';
 
-const { computed } = Ember;
+const { computed, observer } = Ember;
 
 var SortableTableHeaderCell = HeaderCell.extend({
-  templateName: 'sortable-header-cell',
+  templateName: 'sortable-header-cell'
 });
 
 var SortableTableCell = TableCell.extend({
-  templateName: 'sortable-cell',
+  templateName: 'sortable-cell'
 });
 
 var SortableColumnMixin = Ember.Object.create({
@@ -64,33 +64,56 @@ export default EmberTableComponent.extend({
   content: computed('data', function() {
     return this.get('data');
   }),
-  refreshTable: Ember.observer('locale.i18n', function() {
-    this.content.clear();
+  refreshTable: observer('i18n.locale', function() {
+    this.set('content', []);
+    this.set('content', this.get('data'));
   }),
   generateColumnDefinition: function(column) {
     return ColumnDefinition.create(SortableColumnMixin, {
       canAutoResize: column.expand,
       textAlign: 'text-align-left',
-      savedWidth: column.savedWidth ? column.savedWidth : 150,
+      savedWidth: column.savedWidth ? column.savedWidth : 160,
       headerCellName: `graph_builder.table.${column.key}`,
-      getCellContent: this.generateCellContent(column)
+      getCellContent: this.generateCellContent(column),
+      key: column.key
     });
   },
   generateCellContent: function(column) {
     return (row) => {
       if(_.isNumber(row.get(column.key))){
         let number = row.get(column.key);
-        if(column.key === 'export_value') {
-          return numeral(number).format('$ 0.00a');
-        } else {
-          return number;
-        }
+        return this.formatNumber(number, column.key);
       } else if(column.key === 'name'){
         return row.get(`name_${this.get('i18n').locale}`) || row.get('code');
       } else {
         return 'N/A';
       }
     };
-  }
+  },
+  formatNumber: function(number, key) {
+    if(key === 'export_value') {
+      return numeral(number).format('$ 0.00a');
+    } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'population'){
+      return numeral(number).format('0.00a');
+    } else {
+      return number;
+    }
+  },
+  actions: {
+    sortByColumn: function(content){
+      let key = content.key;
+      let nameKey = `name_${this.get('i18n').locale}`;
+      this.set('content', []);
+      let data;
+
+      if(content.get('sorted')) {
+        data = _.sortByOrder(this.get('data'),[key], ['desc']);
+      } else {
+        data = this.get('data');
+      }
+      this.set('content', data);
+      content.toggleProperty('sorted');
+    }
+ }
 });
 
