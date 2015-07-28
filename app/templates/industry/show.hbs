@@ -1,0 +1,68 @@
+<article class="profile stream">
+  <img src="assets/img/hero_images/location/loc_05.jpg" class="stream__img--hero">
+  <header class="stream__header profile__header">
+    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+    <ol class="breadcrumbs">
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Industry</a></li>
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">{{model.level}}</a></li>
+      <li class="breadcrumb"><a href="#" class="breadcrumb__link">{{model.name}}</a></li>
+    </ol>
+  </header>
+  <section class="stream__section">
+    <header class="section__header">
+      <h3 class="section__head">Employment and Wages</h3>
+    </header>
+    {{component 'graphbuilder-table'
+      data=model.classIndustries
+      source='industryClasses'
+    }}
+  </section>
+  <section class="stream__section">
+    <header class="section__header">
+      <h3 class="section__head">Employment and Wages</h3>
+    </header>
+    <div class="tabmod">
+      {{#ivy-tabs}}
+        {{#ivy-tab-list classNames='tabmod__tabs'}}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+            <a class="tab__link">Wages {{model.lastYear}}</a>
+          {{/ivy-tab}}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
+            <a class="tab__link">Employment {{model.lastYear}}</a>
+          {{/ivy-tab}}
+        {{/ivy-tab-list}}
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod">
+            <div class="vizmod--treemod">
+            </div>
+          </div>
+        {{/ivy-tab-panel}}
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod">
+            <div class="vizmod--treemod">
+            </div>
+          </div>
+        {{/ivy-tab-panel}}
+      {{/ivy-tabs}}
+    </div>
+  </section>
+  <div class="interstitial">
+    <h3 class="interstitial__head">Share</h3>
+    <div class="interstitial__btnmod">
+      <button class="interstitial__btn">Facebook</button>
+      <button class="interstitial__btn">Twitter</button>
+    </div>
+  </div>
+  <div class="interstitial">
+    <h3 class="interstitial__head">Download data for this profile</h3>
+    <div class="interstitial__btnmod">
+      <button class="interstitial__btn">CSV (13MB)</button>
+      <button class="interstitial__btn">Excel (41MB)</button>
+    </div>
+  </div>
+  <section class="stream__section">
+  </section>
+</article>
+<footer class="footer">
+  <p class="footer__text">Footer TK</p>
+</footer>

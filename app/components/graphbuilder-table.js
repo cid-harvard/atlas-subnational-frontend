@@ -30,6 +30,9 @@ export default EmberTableComponent.extend({
   height: 300,
   attributeBindings: ['height'],
   selectionMode: 'none',
+  industryClassesMap: [
+    { key: 'name', expand: true, savedWidth: 300 },
+  ],
   productsMap: [
     { key: 'name', expand: true, savedWidth: 300 },
     { key: 'export_value', type: 'int', expand: false},
@@ -61,7 +64,7 @@ export default EmberTableComponent.extend({
       return this.generateColumnDefinition(column);
     });
   }),
-  content: computed('data', function() {
+  content: computed('data.[]', function() {
     return this.get('data');
   }),
   refreshTable: observer('i18n.locale', function() {
@@ -102,7 +105,6 @@ export default EmberTableComponent.extend({
   actions: {
     sortByColumn: function(content){
       let key = content.key;
-      let nameKey = `name_${this.get('i18n').locale}`;
       this.set('content', []);
       let data;
 
