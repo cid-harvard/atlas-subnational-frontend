@@ -12,7 +12,7 @@ export default Ember.Route.extend({
   },
   afterModel: function(model, transition) {
     // extract year out later
-    var year = Ember.getWithDefault(transition, 'queryParams.year', 2012);
+    var year = getWithDefault(transition, 'queryParams.year', 2012);
 
     var products = Ember.$.getJSON(`${apiURL}/data/products?location=${model.id}&year=${year}`);
     var industries = Ember.$.getJSON(`${apiURL}/data/industries?location=${model.id}&year=${year}`);
