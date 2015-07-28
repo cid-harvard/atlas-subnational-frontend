@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  treemap: computed('data.[]', 'varDependent', 'dataType', 'vis', function() {
+  treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'vis', function() {
     return d3plus.viz()
       .container(this.get('id'))
       .data({value: this.get('data'), padding: 5})
@@ -46,20 +46,33 @@ export default Ember.Component.extend({
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
-      this.set('width', this.$().parent().width());
-      this.set('height', this.$().parent().height());
-      this.get('treemap').draw();
+      this.set('parent', this.get('parentView'));
+      if(this.get('parent.isVisible')) {
+        this.set('width', this.$().parent().width());
+        this.set('height', this.$().parent().height() || 500 );
+        this.get('treemap').draw();
+      }
     });
   },
+  profileTabUpdate: observer('parent.isVisible', function() {
+    if(this.get('isInTab')) {
+      Ember.run.later(this , function() {
+        this.set('width', this.$().parent().width());
+        this.set('height', this.$().parent().height() || 500 );
+        if(this.get('treemap')) { this.get('treemap').draw(); }
+      }, 10);
+    }
+  }),
   willDestroyElement: function() {
+    this.set('treemap',  null);
     this.removeObserver('i18n.locale', this, this.update);
     this.removeObserver('data.[]', this, this.update);
   },
   update: observer('data.[]', 'varDependent', 'i18n.locale', function() {
     if(!this.element){ return false; } //do not redraw if not there
-    this.set('width', this.$().parent().width());
-    this.set('height', this.$().parent().height());
-    this.get('treemap').draw();
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      if(this.get('treemap')) { this.get('treemap').draw(); }
+    });
   })
 });
 
