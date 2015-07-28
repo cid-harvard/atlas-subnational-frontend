@@ -129,6 +129,9 @@ export default Ember.Controller.extend({
     search: function() {
       this.set('search', this.get('searchText'));
     },
+    sortColumn: function() {
+      this.set('filteredData', []);
+    },
     toggleVisualization: function(visualization) {
       let model = this.get('model');
       let graph_builder_id = `${model.entity_type}-${model.entity.id}`;
