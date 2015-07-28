@@ -1,0 +1,6 @@
+<input {{bind-attr id=inputId}} class="changegraph__radio" {{action 'toggleVisualization' type}} type="radio" data-change-graph={{type}}>
+<label {{bind-attr class=":changegraph__radio__target :changegraph__radio--is--possible isChecked:changegraph__radio__target--checked" for=inputId}} >
+  <i class={{iconClass}}></i>
+  {{text}}
+</label>
+

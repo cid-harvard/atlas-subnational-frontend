@@ -7,7 +7,9 @@
     "d3",
     "vistk",
     "_",
-    "d3plus"
+    "d3plus",
+    "noUiSlider",
+    "L"
   ],
   "browser": true,
   "boss": true,

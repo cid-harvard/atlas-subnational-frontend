@@ -5,10 +5,10 @@
 *
 **/
 
+@import '_utils';
 @import '_font-face';
 @import 'bower_components/font-awesome/scss/font-awesome.scss';
 @import '_variables';
-@import '_utils';
 @import '_sanitize';
 
 // Icons - Need to add Font Awesome
@@ -22,6 +22,7 @@
 @import '_components/_link';
 @import '_components/_table';
 @import '_components/_form';
+@import '_components/_slider';
 @import '_components/_interstitial';
 
 // Modules
@@ -40,6 +41,8 @@
 @import '_modules/_stepper';
 @import '_modules/_ctas';
 @import '_modules/_spacemod';
+@import '_modules/_table-summaries';
+@import '_modules/_ember-table';
 @import '_modules/_navigator';
 @import '_modules/_footer';
 @import '_modules/_search';
@@ -50,3 +53,5 @@
 @import '_visualizations/_area-chart-multiples';
 @import '_visualizations/_product-space';
 @import '_visualizations/_scatterplot';
+@import '_visualizations/_d3plus';
+@import '_visualizations/_geo';

@@ -23,6 +23,7 @@ export default Ember.Component.extend({
         var_id: this.get('varId'),
         var_group: this.get('varGroup'),
         var_size: this.get('varSize'),
+        var_sort: this.get('varSort'),
         var_text: this.get('varText'),
         color: function() { return "#EAE6E3"; }
       });

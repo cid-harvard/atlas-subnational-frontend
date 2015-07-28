@@ -1,0 +1,80 @@
+<article class="stream builder">
+  <header class="stream__header">
+    <img src="assets/img/builder/pentagon-test.svg" class="builder__pentagon">
+    <h2 class="stream__head">{{name}}</h2>
+  </header>
+  <section class="stream__section">
+    <header class="section__header builder__header">
+      <h3 class="section__head">{{pageTitle}}</h3>
+    </header>
+    <div {{bind-attr class=":section__buildermod drawerSettingsIsOpen:buildermod--is--open--settings drawerChangeGraphIsOpen:buildermod--is--open--changegraph"}}>
+      <header class="buildermod__header">
+        <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
+        <div class="buildermod__tools">
+          <div class="buildermod__tool">
+            <button class="btn buildermod__tool__btn buildermod__tool__btn--sub"{{action 'zoomIn' }}>
+              {{fa-icon "search-plus" classNames="tool__btn__icon"}}
+            </button>
+            <button class="btn buildermod__tool__btn buildermod__tool__btn--sub"{{action 'zoomOut' }}>
+              {{fa-icon "search-minus" classNames="tool__btn__icon"}}
+            </button>
+            <button class="btn buildermod__tool__btn buildermod__tool__btn--sub">
+              {{fa-icon "refresh" classNames="tool__btn__icon"}}
+            </button>
+          </div>
+          <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--settings" {{action 'toggleDrawerSettings'}}>
+            {{fa-icon "plus" classNames="tool__btn__icon"}}
+            {{t 'graph_builder.settings.label'}}
+          </button>
+          <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--changegraph" {{action 'toggleDrawerChangeGraph'}}>
+            {{fa-icon "plus" classNames="tool__btn__icon"}}
+            {{t 'graph_builder.change_graph.label'}}
+          </button>
+        </div>
+      </header>
+      <div class="buildermod__vizwrap">
+        {{component 'graphbuilder-settings'
+          startDate=startDate
+          endDate=endDate
+          dateRange=dateRange
+          isOpen=drawerSettingsIsOpen
+          years=years
+        }}
+        {{#unless isGeo }}
+          {{partial "partials/buildermod-search"}}
+        {{/unless}}
+        {{partial "partials/buildermod-drawer-change-graph"}}
+        {{component visualizationComponent
+          classNames='buildermod__viz'
+          immutableData=immutableData
+          data=filteredData
+          dataType=source
+          varDependent=varDependent
+          startDate=startDate
+          dateRange=dateRange
+          endDate=endDate
+          }}
+      </div>
+      {{component 'graphbuilder-table'
+        data=filteredData
+        source=source
+      }}
+    </div>
+  </section>
+  <section class="stream__section">
+    {{partial "partials/ctas"}}
+  </section>
+  <section class="stream__section">
+    <header class="section__header">
+      <h3 class="section__head">{{t 'graph_builder.builder_nav.header' entity=entity-type}}</h3>
+      <p class="section__intro">{{t 'graph_builder.builder_nav.intro' icon=builderNavDropDown}}</p>
+    </header>
+    {{partial builderNavType classNames="tool__btn__icon"}}
+  </section>
+
+  <section class="stream__section stream__section--recirc">
+    <h3 class="section__head section__head--recirc">Read the profile and complexity analysis for this location</h3>
+    <a href="#" class="btn btn--standalone btn--recirc">View now</a>
+  </section>
+</article>
+

@@ -7,11 +7,12 @@
 .stream__img--hero {
   max-width: 100%;
   width: 100%;
+  opacity: 0.75;
 }
 
 .stream__header {
   text-align: center;
-  padding: $baseSpace*2 $baseSpace*2 0 $baseSpace*2;
+  margin: $baseSpace * 3;
   position: relative;
   z-index: $zIndex-1;
 }

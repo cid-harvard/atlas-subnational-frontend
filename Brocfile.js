@@ -28,10 +28,30 @@ var app = new EmberApp({
   }
 });
 
+// D3
 app.import('bower_components/d3/d3.min.js');
-app.import('bower_components/lodash/lodash.js');
-app.import('bower_components/vis-toolkit/build/vistk.js');
+
+// D3 "Plus"
 app.import('bower_components/d3plus/d3plus.js');
+
+// VizToolkit
+app.import('bower_components/vis-toolkit/build/vistk.js');
+
+// Lodash
+app.import('bower_components/lodash/lodash.js');
+
+// Geomap
+app.import('bower_components/d3-plugins/geo/tile/tile.js');
+app.import('bower_components/mapbox.js/mapbox.js');
+app.import('bower_components/mapbox.js/mapbox.css');
+app.import('bower_components/mapbox.js/images/icons-000000@2x.png', { destDir: 'assets/img/geo' });
+
+// NoUISlider
+app.import('bower_components/nouislider/distribute/nouislider.js');
+app.import('bower_components/nouislider/distribute/nouislider.min.css');
+
+// Admin boundaries for geomap
+app.import('vendor/geodata/colombia_osm_adm4.geojson',  { destDir: 'assets/geodata' });
 
 // Font Awesome
 // The npm package readme mentions refactoring this as a Broccoli tree, so consider that a TODO
@@ -43,11 +63,8 @@ app.import('bower_components/font-awesome/fonts/fontawesome-webfont.woff2', { de
 app.import('bower_components/font-awesome/fonts/FontAwesome.otf', { destDir: 'fonts' });
 
 // CIDcons
-app.import('vendor/css/cidcons/cidcons.css');
-app.import('vendor/fonts/cidcons/cidcons.eot', { destDir: 'fonts' });
-app.import('vendor/fonts/cidcons/cidcons.svg', { destDir: 'fonts' });
-app.import('vendor/fonts/cidcons/cidcons.ttf', { destDir: 'fonts' });
-app.import('vendor/fonts/cidcons/cidcons.woff', { destDir: 'fonts' });
+app.import('bower_components/cidcons/css/cidcons-codes.css');
+app.import('bower_components/cidcons/font/cidcons.woff', { destDir: 'fonts' });
 
 // Platform
 app.import('vendor/fonts/platform/Platform-Bold-Web.eot', { destDir: 'fonts' });

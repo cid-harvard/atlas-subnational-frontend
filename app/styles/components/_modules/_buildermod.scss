@@ -61,19 +61,21 @@
 
 .buildermod__vizwrap {
   height: 600px;
-  padding: $baseSpace * 1.5;
   border: 1px solid $colorBrown500;
   overflow-y: scroll;
   background: $colorBrown200;
   margin-bottom: $baseSpace;
   position: relative;
+  padding: $baseSpace*4.5 $baseSpace*1.5 $baseSpace*1.5;
 }
 
 .buildermod__searchwrap {
   display: flex;
   align-items: stretch;
-  margin-bottom: $baseSpace;
-  box-shadow: 2px 2px 2px $colorGrayLighter;
+  margin: $baseSpace*-3 0 0;
+  position: absolute;
+  width: calc(100% - 7.8rem); // TODO: Switch from calc
+  z-index: $zIndex-1;
 }
 
 .buildermod__search {
@@ -83,6 +85,7 @@
   font-weight: 300;
   padding: $baseSpace/2 $baseSpace;
   flex: 1 1 auto;
+  box-shadow: -1px 2px 2px $colorGrayLighter;
   &:active, &:focus {
     outline: 0;
     &::-webkit-input-placeholder {
@@ -103,6 +106,7 @@
   background: $colorNavy800;
   color: $colorGrayLighter;
   cursor: pointer;
+  box-shadow: 2px 2px 2px $colorGrayLighter;
   &:hover, &:active, &:focus {
     background: $colorNavy;
     outline: 0;

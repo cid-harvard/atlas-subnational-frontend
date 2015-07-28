@@ -1,7 +1,4 @@
 import Ember from 'ember';
-import ENV from '../config/environment';
-const {get: get} = Ember;
-const {apiURL} = ENV;
 
 export default Ember.Route.extend({
   queryParams: {
@@ -18,21 +15,26 @@ export default Ember.Route.extend({
     }
   },
   model: function(transition) {
-    var departments = Ember.$.getJSON(`${apiURL}metadata/locations/?level=department`);
-    var municipalities = Ember.$.getJSON(`${apiURL}metadata/locations/?level=municipality`);
-    let search = _.deburr(transition.query);
-    var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
-      .replace(/\s+/g, ''), "gi");
+    var departments = this.store.find('location', {level: 'department'});
+    var municipalities = this.store.find('location', {level: 'municipality'});
+    var products = this.store.find('product', { level: '4digit' });
 
     if(transition.query) {
-      return Ember.RSVP.allSettled([departments, municipalities])
+      return Ember.RSVP.all([departments, municipalities, products])
         .then(function(array) {
           return _.chain(array)
-            .map(function(d){return d.value.data})
+            .map(function(d){ return d.content; })
             .flatten()
-            .filter(function(d){ return _.deburr(get(d,'name_en')).match(regexp) || get(d, 'code').match(regexp)})
-            .value()
+            .value();
+        }, function() {
+          return [];
         });
     }
-  }
+  },
+  setupController(controller, model) {
+    this._super(controller, model);
+    this.controllerFor('application').set('entity', 'location');
+    this.controllerFor('application').set('entity_id', 1044);
+    window.scrollTo(0, 0);
+  },
 });

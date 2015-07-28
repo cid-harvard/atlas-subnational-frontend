@@ -1,61 +1,147 @@
 import DS from 'ember-data';
 import Ember from 'ember';
-const { attr } = DS;
-const { computed } = Ember;
+import ENV from '../config/environment';
+import numeral from 'numeral';
+const {apiURL} = ENV;
+const {attr} = DS;
+const {computed, getWithDefault, $, get:get } = Ember;
 
 export default DS.Model.extend({
-  code: attr('number', { defaultValue: 111}),
+  i18n: Ember.inject.service(),
 
-  name_en: attr('string', { defaultValue: 'atlantico in english'}),
-  name_es: attr('string', { defaultValue: 'atlantico in spanish'}),
+  code: attr('string'),
 
-  name_short_en: attr('string', { defaultValue: 'english'}),
-  name_short_es: attr('string', { defaultValue: 'spanish'}),
+  name_en: attr('string'),
+  name_es: attr('string'),
 
-  population: attr('number', { defaultValue: 100000000}),
-  randomAttr: attr('number', { defaultValue: 100000000}),
-
-  productsData: attr(),
-  industriesData: attr(),
-  scatterPlot: attr(),
-
-  departments: attr(),
+  name_short_en: attr('string'),
+  name_short_es: attr('string'),
 
   level: attr(),
 
+  //data that drives the profile
+  productsData: attr(),
+  industriesData: attr(),
+  departments: attr(),
   timeseries: attr(),
-  topExports: attr(),
-  currentExports: attr(),
-  products: attr(),
 
-  sortedTimeSeries: computed('timeSeries', function() {
-    return _.sortBy(this.get('timeSeries'), 'year');
+  //following drives graphbuilder
+  graphbuilderProducts: computed('id', function() {
+    var products = $.getJSON(`${apiURL}/data/products?location=${this.get('id')}`);
+    var productsData = $.getJSON(`${apiURL}/data/products/scatterplot?location=${this.get('id')}`);
+    var defaultParams = {
+      treemap: { variable: 'export_value', startDate: 2007, endDate: 2013 },
+      multiples: { variable: 'export_value', startDate: 2007, endDate: 2013 },
+      scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
+      similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
+    };
+    return Ember.RSVP.all([products, productsData])
+      .then((array) => {
+        let productsMetadata = this.get('metaData.products');
+        let products = getWithDefault(array[0], 'data', []);
+        let productsData = getWithDefault(array[1], 'data', []);
+        productsData = _.indexBy(productsData, function(d) {
+          return `${d.product_id}_y${d.year}`;
+        });
+
+        _.each(products, function(d) {
+          let product = productsMetadata[d.product_id];
+          let productData = productsData[`${d.product_id}_y${d.year}`];
+          _.extend(d, product);
+          _.extend(d, productData);
+        });
+        return { entity: this, entity_type:'location', data: products, source: 'products', defaultParams:defaultParams };
+      }, (error) => {
+        return { error: error, entity: this, entity_type:'location', data: [], source: 'products', defaultParams:defaultParams};
+      });
   }),
-  firstTimeSeries: computed(function(){
-    return _.first(this.get('sortedTimeSeries'));
+  graphbuilderIndustries: computed('id', function() {
+    var industries = $.getJSON(`${apiURL}/data/industries?location=${this.get('id')}`);
+    var industriesData = $.getJSON(`${apiURL}/data/industries/scatterplot?location=${this.get('id')}`);
+    var defaultParams = {
+      treemap: { variable: 'wages', startDate: 2007, endDate: 2013 },
+      multiples: { variable: 'wages', startDate: 2007, endDate: 2013 },
+      scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
+      similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
+    };
+    return Ember.RSVP.all([industries, industriesData])
+      .then((array) => {
+        let industriesMetadata = this.get('metaData.industries');
+        let industries = getWithDefault(array[0], 'data', []);
+        let industriesData = getWithDefault(array[1], 'data', []);
+        industriesData = _.indexBy(industriesData, function(d) {
+          return `${d.industry_id}_y${d.year}`;
+        });
+
+        _.each(industries, function(d) {
+          let industry = industriesMetadata[d.industry_id];
+          let industryData = industriesData[`${d.industry_id}_y${d.year}`];
+          _.extend(d, industry);
+          _.extend(d, industryData);
+        });
+       return { entity: this, entity_type:'location', data: industries, source: 'industries',  defaultParams: defaultParams};
+      }, (error) => {
+       return { error: error, entity: this, entity_type:'location', data: [], source: 'industries', defaultParams:defaultParams};
+      });
   }),
-  lastTimeSeries: computed(function(){
-    return _.last(this.get('sortedTimeSeries'));
+  locale: computed('i18n.locale', function() {
+    return this.get('i18n.locale');
   }),
-  firstGdp: computed(function() {
-    return this.get('firstTimeSeries.gdp');
+  _level: computed('locale', 'level', function() {
+    return this.get('i18n')
+      .t(`location.model.${this.get('level')}`);
   }),
-  latestGdp: computed(function() {
-    return this.get('lastTimeSeries.gdp');
+  name: computed('locale', 'name_en', 'name_es', function() {
+    let attr = `name_${this.get('locale')}`;
+    return this.get(attr) || `${attr} does not exist`;
   }),
-  gdpGrowth: computed(function(){
-    return (this.get('latestGdp') - this.get('firstGdp')) / this.get('latestGdp');
+  name_short: computed('locale', 'name_short_en', 'name_short_es', function() {
+    let attr = `name_${this.get('locale')}`;
+    return this.get(attr) || `${attr} does not exist`;
   }),
-  latestPop: computed(function() {
-    return this.get('lastTimeSeries.pop');
+
+  exportTotal: computed('productsData', function() {
+    var total = _.reduce(this.get('productsData'), function(memo, data) {
+      return memo + data.export_value;
+    }, 0);
+    return numeral(total).format('$ 0.00 a');
   }),
-  firstYear: computed(function() {
-    return this.get('firstTimeSeries.year');
+
+  yearSort: ['year'],
+
+  //validTimeseries is array of data points where all key,value pairs are not null
+  validTimeseries: computed.filter('timeseries', function(data) {
+    return ! _.any(_.values(data), _.isNull);
   }),
-  lastYear: computed(function() {
-    return this.get('lastTimeSeries.year');
+  sortedTimeseries: computed.sort('validTimeseries','yearSort'),
+
+  firstDataPoint: computed('validTimeseries', function() {
+    return _.first(this.get('validTimeseries'));
   }),
-  yearRange: computed(function() {
-    return `${this.get('firstYear')}–${this.get('lastYear')}`;
+  lastDataPoint: computed('validTimeseries', function() {
+    return _.last(this.get('validTimeseries'));
+  }),
+  yearRange: computed('validTimeseries', function() {
+    var firstYear = get(this.get('firstDataPoint'), 'year');
+    var lastYear = get(this.get('lastDataPoint'), 'year');
+    return `${firstYear} - ${lastYear}`;
+  }),
+  lastPop: computed('validTimeseries','locale', function() {
+    let pop = get(this.get('lastDataPoint'), 'population');
+    return numeral(pop).format('0.00 a');
+   }),
+  lastGdp: computed('validTimeseries','locale', function() {
+    let gdp = get(this.get('lastDataPoint'), 'gdp_real');
+    return numeral(gdp).format('$ 0.00 a');
+   }),
+  lastGdpPerCapita: computed('validTimeseries','locale', function() {
+    let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_real');
+    return numeral(gdpPC).format('$ 0.00 a');
+   }),
+  gdpGrowth:computed('validTimeseries', function() {
+    var firstGdp = get(this.get('firstDataPoint'), 'gdp_real');
+    var lastGdp = get(this.get('lastDataPoint'), 'gdp_real');
+    var growth = (lastGdp - firstGdp) / firstGdp;
+    return numeral(growth).format('0.000%');
   })
 });

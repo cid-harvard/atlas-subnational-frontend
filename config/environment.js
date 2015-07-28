@@ -12,9 +12,11 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       }
     },
-
+    i18n: {
+      defaultLocale: 'es',
+      otherLocale: 'en'
+    },
     APP: {
-      defaultLocale: 'en',
       env: environment
       // Here you can pass flags/options to your application instance
       // when it is created
@@ -22,7 +24,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    ENV.apiURL = "http://atlas-colombia-master.cid-labs.com/api/";
+    ENV.apiURL = "http://atlas-colombia-master.cid-labs.com/api";
     ENV.contentSecurityPolicy = {
       'connect-src': "'self' 'localhost:4200' *",
       'style-src': "'self' 'unsafe-inline' *",
@@ -31,7 +33,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'edge') {
-    ENV.apiURL = "http://ec2-54-174-138-240.compute-1.amazonaws.com/api/";
+    ENV.apiURL = "http://ec2-54-174-138-240.compute-1.amazonaws.com/api";
     // need to fix for production mode
     ENV.contentSecurityPolicy = {
       'connect-src': "'self' 'localhost:4200' *",
@@ -42,6 +44,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'test') {
+    ENV.apiURL = "http://atlas-colombia-master.cid-labs.com/api";
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'none';

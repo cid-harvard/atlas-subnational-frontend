@@ -1,18 +1,18 @@
 import Ember from 'ember';
+import numeral from 'numeral';
+
 const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
+  i18n: Ember.inject.service(),
   tagName: 'div',
   attributeBindings: ['width','height'],
+  classNames: ['d3plus_tree-map'],
+  varIndependent: ['group', 'code'],
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  varIndependent: computed('dataType', function() {
-    // this should be based on i18n
-    return ['group_name_en','name'];
-  }),
-  treemap: computed('data.[]', 'varDependent', 'dataType', 'vis', function() {
-    var maxYear = d3.max(this.get('data'), function(d) { return d.year;} );
+  treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'vis', function() {
     return d3plus.viz()
       .container(this.get('id'))
       .data({value: this.get('data'), padding: 5})
@@ -21,26 +21,57 @@ export default Ember.Component.extend({
       .depth(1)
       .tooltip({children: false})
       .color({value: 'grey'})
+      .format({
+        number: (d, data) => {
+          if('share' === data.key){
+            return numeral(d).divide(100).format('0.0%');
+          } else if( 'employment' === data.key) {
+            return numeral(d).format('0.0a');
+          } else {
+            return numeral(d).format('$ 0.0a');
+          }
+        }
+      })
       .zoom(false)
-      .time({value: "year", "solo": maxYear })
+      .text({ value: (d) => {
+        return  Ember.get(d, `name_${this.get('i18n').locale}`) || d.code; }
+      })
       .timeline(false)
       .height(this.get('height'))
       .width(this.get('width'))
       .timing({transitions: 300})
-      .size(this.get('varDependent'));
+      .size(this.get('varDependent'))
+      .labels({resize: false, align: 'left', valign: 'top'})
+      .font({size: 20});
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
-      this.set('width', this.$().parent().width());
-      this.set('height', this.$().parent().height());
-      this.get('treemap').draw();
+      this.set('parent', this.get('parentView'));
+      if(this.get('parent.isVisible')) {
+        this.set('width', this.$().parent().width());
+        this.set('height', this.$().parent().height() || 500 );
+        this.get('treemap').draw();
+      }
     });
   },
-  update: observer('data.[]', 'varDependent', 'dataType', 'vis', function() {
+  profileTabUpdate: observer('parent.isVisible', function() {
+    if(this.get('isInTab')) {
+      Ember.run.later(this , function() {
+        this.set('width', this.$().parent().width());
+        this.set('height', this.$().parent().height() || 500 );
+        if(this.get('treemap')) { this.get('treemap').draw(); }
+      }, 10);
+    }
+  }),
+  willDestroyElement: function() {
+    this.set('treemap',  null);
+    this.removeObserver('i18n.locale', this, this.update);
+    this.removeObserver('data.[]', this, this.update);
+  },
+  update: observer('data.[]', 'varDependent', 'i18n.locale', function() {
+    if(!this.element){ return false; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
-      this.set('width', this.$().parent().width());
-      this.set('height', this.$().parent().height());
-      this.get('treemap').draw();
+      if(this.get('treemap')) { this.get('treemap').draw(); }
     });
   })
 });

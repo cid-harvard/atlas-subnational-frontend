@@ -11,22 +11,28 @@ export default Ember.Route.extend({
     return this.store.find('location', params.location_id);
   },
   afterModel: function(model, transition) {
+    // extract year out later
     var year = Ember.getWithDefault(transition, 'queryParams.year', 2012);
 
-    var products = Ember.$.getJSON(`${apiURL}data/products?location=${model.id}&year=${year}`);
+    var products = Ember.$.getJSON(`${apiURL}/data/products?location=${model.id}&year=${year}`);
+    var industries = Ember.$.getJSON(`${apiURL}/data/industries?location=${model.id}&year=${year}`);
+    //
     // one of these should be removed in the future because the points should be merged in
-    var departments = Ember.$.getJSON(`${apiURL}data/departments?year=${year}`);
-    var departmentsAll = Ember.$.getJSON(`${apiURL}data/departments/departmentyear/`);
+    var departments = Ember.$.getJSON(`${apiURL}/data/departments?year=${year}`);
+    var departmentsAll = Ember.$.getJSON(`${apiURL}/data/departments/departmentyear/`);
 
-    return RSVP.allSettled([products, departments, departmentsAll]).then((array) => {
+    return RSVP.allSettled([products, departments, departmentsAll, industries]).then((array) => {
       var productsData = getWithDefault(array[0], 'value.data', []);
       var departmentsData = getWithDefault(array[1], 'value.data', []);
       var departmentsDataAll = getWithDefault(array[2], 'value.data', []);
+      var industriesData = getWithDefault(array[3], 'value.data', []);
 
       var productsDataIndex = _.indexBy(productsData, 'product_id');
+      var industriesDataIndex = _.indexBy(industriesData, 'industry_data');
 
       let productsMetadata = this.modelFor('application').products;
       let locationsMetadata = this.modelFor('application').locations;
+      let industriesMetadata = this.modelFor('application').industries;
 
       //get products data for the department
       _.each(productsData, (d) => {
@@ -38,9 +44,18 @@ export default Ember.Route.extend({
         _.extend(d, productData);
       });
 
-      //all department data for 2012
+      //get industry data for department
+      _.each(industriesData, (d) => {
+        let industry = industriesMetadata[d.industry_id];
+        let industryData = industriesDataIndex[d.industry_id];
+        d.name = industry.name_en;
+        _.extend(d, industry);
+        _.extend(d, industryData);
+      });
+
+      //all department data for  ${year}
       _.each(departmentsData, function(d) {
-        let department = _.find(departmentsDataAll, {department_id: d.department_id, year: 2012});
+        let department = _.find(departmentsDataAll, {department_id: d.department_id, year: year});
         d.name = locationsMetadata[d.department_id].name_en;
         _.extend(d, department);
       });
@@ -49,9 +64,16 @@ export default Ember.Route.extend({
       var departmentTimeseries = _.filter(departmentsDataAll, {department_id: parseInt(model.id)});
 
       model.set('productsData', productsData);
+      model.set('industriesData', industriesData);
       model.set('departments', departmentsData);
       model.set('timeseries', departmentTimeseries);
       return model;
     });
+  },
+  setupController(controller, model) {
+    this._super(controller, model);
+    this.controllerFor('application').set('entity', model.get('constructor.modelName'));
+    this.controllerFor('application').set('entity_id', model.get('id'));
+    window.scrollTo(0, 0);
   },
 });

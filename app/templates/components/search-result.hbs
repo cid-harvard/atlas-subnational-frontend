@@ -1,11 +1,17 @@
 <li class="search__result">
   <div class="search__result__text">
     <p class="search__result__breadcrumb">{{breadcrumb}}</p>
-    <p class="search__result__name">{{name}}</p>
+    <p class="search__result__name" data-search-result-name>{{name}}</p>
   </div>
-    {{link-to 'Profile' profileLink result.id  class="button search__button search__button--result"}}
-    {{link-to 'Graph Builder' 'graph_builder' (query-params entity=entity entity_id=result.id)  class="button search__button search__button--result"}}
+  {{link-to
+    'Profile' profileLink result.id
+    data-search-profile=''
+    class="btn search__btn search__btn--result"
+  }}
+  {{link-to
+    'Graph Builder' 'visualization' entity_and_id source 'treemap'
+    data-search-graph-builder=''
+    class="btn search__btn search__btn--result"
+    }}
 </li>
-
-
 
