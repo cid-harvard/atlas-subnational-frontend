@@ -9,7 +9,7 @@
     </header>
     <div {{bind-attr class=":section__buildermod drawerSettingsIsOpen:buildermod--is--open--settings drawerChangeGraphIsOpen:buildermod--is--open--changegraph"}}>
       <header class="buildermod__header">
-        <h4 class="buildermod__head">{{builderModHeader}} {{years}}</h4>
+        <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
         <div class="buildermod__tools">
           <div class="buildermod__tool">
             <button class="btn buildermod__tool__btn buildermod__tool__btn--sub"{{action 'zoomIn' }}>

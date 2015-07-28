@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import numeral from 'numeral';
 const {computed, observer, get:get } = Ember;
 
 Ember.depricate = function() {};
@@ -43,6 +44,17 @@ export default Ember.Controller.extend({
       return this.get('i18n').t(`${i18nString}.${visualization}`, { name: this.get('model.entity.name') });
     }
     return this.get('i18n').t(`${i18nString}.${this.get('variable')}`, { name: this.get('model.entity.name') });
+  }),
+  headerValue: computed('model', 'filteredData', 'variable', function() {
+    let allowedVariables = ['export_value','wages', 'employment'];
+    let variable = this.get('variable');
+    let data = this.get('filteredData');
+
+    if(! _.contains(allowedVariables, variable)){ return ''; }
+
+    var sum = _.sum(data, variable);
+    if(variable === 'employment') { return numeral(sum).format('0.00 a');}
+    return numeral(sum).format('$ 0.00 a');
   }),
   otherPossibleGraphs: computed('model.visualization', 'model.source',  function() {
     let vis = this.get('model.visualization');
