@@ -25,21 +25,38 @@
       {{#ivy-tabs}}
         {{#ivy-tab-list classNames='tabmod__tabs'}}
           {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-            <a class="tab__link">Wages {{model.lastYear}}</a>
+            <a class="tab__link">Average Wages ({{year}})</a>
           {{/ivy-tab}}
           {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
-            <a class="tab__link">Employment {{model.lastYear}}</a>
+            <a class="tab__link">Employment ({{year}})</a>
           {{/ivy-tab}}
         {{/ivy-tab-list}}
         {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
           <div class="vizmod">
             <div class="vizmod--treemod">
+              {{d3plus-tree-map
+                isInTab='true'
+                data=departmentsData
+                immutableData=departmentsData
+                varIndependent=treemapIndependentVars
+                elementId='wages-tree-map'
+                dataType='industries'
+                varDependent='avg_wage'
+              }}
             </div>
           </div>
         {{/ivy-tab-panel}}
         {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
           <div class="vizmod">
             <div class="vizmod--treemod">
+              {{d3plus-tree-map
+                isInTab='true'
+                data=departmentsData
+                immutableData=departmentsData
+                varIndependent=treemapIndependentVars
+                elementId='employment-tree-map'
+                varDependent='employment'
+              }}
             </div>
           </div>
         {{/ivy-tab-panel}}
