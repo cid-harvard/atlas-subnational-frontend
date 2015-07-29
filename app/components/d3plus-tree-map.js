@@ -16,7 +16,7 @@ export default Ember.Component.extend({
     return _.pluck(this.get('data'), 'code');
   }),
   noFiltered: computed('data.[]', 'immutableData.[]', function() {
-    return this.get('data').length === this.get('immutableData').length;
+    return this.get('data.length') === this.get('immutableData.length');
   }),
   treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'vis', function() {
     return d3plus.viz()
