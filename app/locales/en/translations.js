@@ -34,6 +34,9 @@ export default {
       'rca': 'RCA',
       'wages': 'Wages',
       'employment': 'Employment',
+      'avg_wage': 'Average Wage',
+      'employment_growth': 'Employment Growth, `08-`12',
+      'num_establishments': 'Number of Firms',
       'year': 'Year',
       'complexity': 'Complexity',
       'distance': 'Distance'
