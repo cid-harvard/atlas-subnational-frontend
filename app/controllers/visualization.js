@@ -19,7 +19,6 @@ export default Ember.Controller.extend({
   drawerChangeGraphIsOpen: false,
   builderNavDropDown: Ember.String.htmlSafe("<i class='icon-cidcon_placeholder-1 builder__icon--placeholder'></i>"),
 
-  immutableData: computed.alias('model.data.[]'),
   source: computed.alias('model.source'),
   visualization: computed.alias('model.visualization'),
   dateRange: computed.alias('model.dateRange'),
@@ -78,10 +77,12 @@ export default Ember.Controller.extend({
     if(this.get('source') === 'products') { return 'export_value'; }
     if(this.get('source') === 'location') { return ''; }
   }),
+  immutableData: computed('model.data.[]','endDate', 'startDate' , function() {
+    return this.filterToSelectedYears(this.get('model.data'));
+  }),
   filteredData: computed('immutableData.[]', 'search', 'startDate', 'endDate', function() {
     let data = this.get('immutableData');
     if(this.get('search')){ data = this.searchFilter(data); }
-    data = this.filterToSelectedYears(data);
     return data;
   }),
   isGeo: computed('visualization', function() {
