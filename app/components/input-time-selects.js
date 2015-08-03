@@ -2,32 +2,29 @@ import Ember from 'ember';
 const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
-  // inputSetterFunction: computed('type', 'dateRange.[]', function() {
-  //   let type = this.get('type');
-  //   if(type === 'time') {
-  //     return (values) => {
-  //       let startYear = this.get('dateRange')[0];
-  //       let endYear = this.get('dateRange')[1];
-  //       this.set('newStartDate', startYear);
-  //       this.set('newEndDate', endYear);
-  //       this.set('years', `${startYear} - ${endYear}`);
-  //     };
-  //   } else  { //rca, similarity
-  //     return (values) => {
-  //       this.set('rca', parseInt(values[0]));
-  //     };
-  //   }
-  // }),
-  update: observer('startDate', 'endDate', function() {
-    Ember.run.scheduleOnce('afterRender', this , function() {
-      console.log('did update');
-      // this.get('inputSetterFunction');
-    });
-  }),
-  didInsertElement: function() {
-    Ember.run.scheduleOnce('afterRender', this , function() {
-      console.log('did insert');
-      // this.get('inputSetterFunction');
-    });
+  content: null,
+  selectedValue: null,
+
+  didInitAttrs(attrs) {
+    this._super(...arguments);
+    var content = this.get('content');
+
+    if (!content) {
+      this.set('content', []);
+    }
+  },
+
+  actions: {
+    change() {
+      // const changeAction = this.get('action');
+      const selectedEl = this.$('select')[0];
+      const selectedIndex = selectedEl.selectedIndex;
+      const content = this.get('content');
+      const selectedValue = content[selectedIndex];
+
+      this.set('selectedValue', selectedValue);
+      this.set('startDate', selectedValue);
+      // changeAction(selectedValue);
+    }
   }
 });
