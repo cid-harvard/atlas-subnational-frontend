@@ -32,6 +32,11 @@ export default EmberTableComponent.extend({
   selectionMode: 'none',
   industryClassesMap: [
     { key: 'name', expand: true, savedWidth: 300 },
+    { key: 'avg_wage', expand: true, savedWidth: 200 },
+    { key: 'wages', expand: true, savedWidth: 200 },
+    { key: 'employment', expand: true, savedWidth: 200 },
+    { key: 'employment_growth', expand: true, savedWidth: 300 },
+    { key: 'num_establishments', expand: true, savedWidth: 200 },
   ],
   productsMap: [
     { key: 'name', expand: true, savedWidth: 300 },
@@ -48,6 +53,14 @@ export default EmberTableComponent.extend({
     { key: 'year' , expand: false, type: 'int'},
    ],
   industriesMap: [
+    { key: 'name', expand: true, savedWidth: 300 },
+    { key: 'wages', type: 'int', expand: false},
+    { key: 'employment', type: 'int', expand: false},
+    { key: 'rca', type: 'int', expand: false},
+    { key: 'year' , expand: false, type: 'int'},
+    { key: 'complexity' , expand: false, type: 'int'}
+   ],
+  participantsMap: [
     { key: 'name', expand: true, savedWidth: 300 },
     { key: 'wages', type: 'int', expand: false},
     { key: 'employment', type: 'int', expand: false},
@@ -94,10 +107,12 @@ export default EmberTableComponent.extend({
     };
   },
   formatNumber: function(number, key) {
-    if(key === 'export_value') {
+    if(key === 'export_value'|| key === 'wages' || key === 'avg_wage') {
       return numeral(number).format('$ 0.00a');
-    } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'population'){
+    } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'employment' || key === 'population'){
       return numeral(number).format('0.00a');
+    } else if(key === 'employment_growth'){
+      return numeral(number).format('0.00%');
     } else {
       return number;
     }

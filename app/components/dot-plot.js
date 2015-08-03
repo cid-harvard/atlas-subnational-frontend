@@ -29,8 +29,11 @@ export default Ember.Component.extend({
         x_tickPadding: 10,
         x_format: (d) => {
           let format = function(d) { return numeral(d).format('$ 0.00 a'); };
-          if(this.get('type') === 'population') {
+          let type = this.get('type');
+          if(type === 'population') {
             format = function(d) { return numeral(d).format('0.00a'); };
+          } else if(type === 'percentage') {
+            format = function(d) { return numeral(d).format('0.00%'); };
           }
           return format(d);
         },
@@ -51,10 +54,14 @@ export default Ember.Component.extend({
             },
             text: (d)  => {
               let format = function(d) { return numeral(d).format('0.00 a'); };
-              if(this.get('type') === 'population') {
+              let type = this.get('type');
+              if(type === 'population') {
                 format = function(d) { return numeral(d).format('0.00a'); };
+              } else if(type === 'percentage') {
+                format = function(d) { return numeral(d).format('0.00%'); };
               }
-              return d['name'] + ' (' + format(+d[varX]) + ')';
+              let name = Ember.get(d, 'name_en') || Ember.get(d, 'name_es');
+              return name + ' (' + format(+d[varX]) + ')';
             }
           }]
         }],
