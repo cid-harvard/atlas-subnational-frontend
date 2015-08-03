@@ -18,12 +18,14 @@ export default Ember.Controller.extend({
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
   builderNavDropDown: Ember.String.htmlSafe("<i class='icon-cidcon_placeholder-1 builder__icon--placeholder'></i>"),
-
   immutableData: computed.alias('model.data.[]'),
   source: computed.alias('model.source'),
   visualization: computed.alias('model.visualization'),
-  dateRange: computed.alias('model.dateRange'),
+  dateExtent: computed.alias('model.dateExtent'),
   name: computed.alias('model.entity.name'),
+  dateRange: computed('dateExtent', function() {
+    return d3.range(this.get('dateExtent')[0], this.get('dateExtent')[1] + 1);
+  }),
   entity_and_id: computed('model.entity.id', 'model.entity_type', function() {
     return `${this.get('model.entity_type')}-${this.get('model.entity.id')}`;
   }),
@@ -66,11 +68,11 @@ export default Ember.Controller.extend({
     }
     return [vis];
   }),
-  years: computed('startDate','endDate', function() {
+  years: computed('startDate', 'endDate', function() {
     let start = this.get('startDate');
     let end = this.get('endDate'); //range is Start to End -1
     if(start === end) { return start; }
-    return  `01/01/${start} - 01/01/${end}`;
+    return  `${start} - ${end}`;
   }),
   varDependent: computed('variable', 'source', function() {
     // if variable exists, it is varDependent

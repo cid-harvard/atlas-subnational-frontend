@@ -8,9 +8,9 @@ export default Ember.Route.extend({
   },
   afterModel(model) {
     if(Ember.get(model, 'data')) {
-      model.dateRange =  d3.extent(model.data, function(d) { return d.year; });
+      model.dateExtent =  d3.extent(model.data, function(d) { return d.year; });
     } else {
-      model.dateRange = [2007, 2013];
+      model.dateExtent = [2007, 2013];
     }
   }
 });

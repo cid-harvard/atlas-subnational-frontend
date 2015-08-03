@@ -215,18 +215,18 @@ nav ul {
 
 // style select like a standard input
 
-select {
-  -moz-appearance: none;    // Firefox 36+
-  -webkit-appearance: none; // Chrome 41+
+// select {
+//   -moz-appearance: none;    // Firefox 36+
+//   -webkit-appearance: none; // Chrome 41+
 
-  &::-ms-expand {
-    display: none;        // Internet Explorer 11+
-  }
+//   &::-ms-expand {
+//     display: none;        // Internet Explorer 11+
+//   }
 
-  &::-ms-value {
-    color: currentColor;  // Internet Explorer 11+
-  }
-}
+//   &::-ms-value {
+//     color: currentColor;  // Internet Explorer 11+
+//   }
+// }
 
 // specify the border styles of tables
 

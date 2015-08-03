@@ -1,16 +1,15 @@
-<div class="buildermod__drawer buildermod__drawer--settings">
-  <div class="settings__input__wrap">
-    <label for="settings__slider--time" class="settings__slider">{{t 'graph_builder.settings.change_time'}}</label>
-      {{input-slider
-        elementId="settings__slider--time"
+<form class="buildermod__drawer buildermod__drawer--settings">
+  <fieldset class="settings__input__wrap">
+      {{input-time-selects
+        elementId="settings__input--time"
         type="time"
-        years=years
         startDate=startDate
         endDate=endDate
         newStartDate=newStartDate
         newEndDate=newEndDate
+        dateExtent=dateExtent
         dateRange=dateRange
       }}
-  </div>
-</div>
+  </fieldset>
+</form>
 
