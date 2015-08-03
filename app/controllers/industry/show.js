@@ -17,6 +17,9 @@ export default Ember.Controller.extend({
 
     return (Math.pow(difference, power ) - 1);
   },
+  level: computed('model.level', function() {
+    return _.capitalize(this.get('model.level'));
+  }),
   employmentGrowthDotPlot: computed('model.industriesData', function() {
    return _.chain(this.get('model.industriesData'))
       .groupBy('id')
