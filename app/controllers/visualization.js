@@ -123,7 +123,7 @@ export default Ember.Controller.extend({
     if(start === end) {
       timeRange = String(start);
     } else {
-      timeRange = d3.range(start, end);
+      timeRange = d3.range(start, end + 1); // Makes the range inclusive
     }
 
     return _.filter(data, (d) => {

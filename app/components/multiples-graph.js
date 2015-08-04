@@ -13,7 +13,7 @@ export default Ember.Component.extend({
     return this.$('.multiple:first').width() - this.get('margin.left') - this.get('margin.right');
   }),
   xExtent: computed('dateExtent', 'startDate', 'endDate', function() {
-    return [this.get('startDate'), this.get('endDate') - 1];
+    return [this.get('startDate'), this.get('endDate')];
   }),
   xRange: computed('startDate', 'endDate', function() {
     return d3.range(this.get('startDate'), this.get('endDate'));
