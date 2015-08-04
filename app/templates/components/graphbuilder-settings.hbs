@@ -8,7 +8,7 @@
           </option>
         {{/each}}
       </select>
-      <span class="settings__input__text">to</span>
+      <span class="settings__input__text">{{t 'graph_builder.settings.to'}}</span>
       <select class="settings__input--select" data-dateIndex="end" {{action 'changeEnd' on='change'}}>
         {{#each dateRange key="@index" as |item|}}
           <option value="{{item}}" selected={{is-equal item endDate}}>
@@ -17,5 +17,6 @@
         {{/each}}
       </select>
   </fieldset>
+  <button class="settings__btn--close btn btn--standalone" {{action 'closeSettingsDrawer'}}>{{t 'graph_builder.settings.close_settings'}}</button>
 </form>
 

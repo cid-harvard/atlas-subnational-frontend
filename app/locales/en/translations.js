@@ -40,7 +40,9 @@ export default {
     },
     'settings' : {
       'label': 'Settings',
-      'change_time' : 'Change time period:'
+      'change_time' : 'Change time period:',
+      'close_settings': 'Save and close',
+      'to': 'to'
     },
     'search': {
       'placeholder': 'Search for {{entity}}'
