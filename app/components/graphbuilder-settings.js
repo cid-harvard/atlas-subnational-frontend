@@ -1,17 +1,25 @@
 import Ember from 'ember';
+const {computed} = Ember;
 
 export default Ember.Component.extend({
-  newStartDate: null,
-  newEndDate: null,
-  updateSettings: Ember.observer('isOpen', function() {
-    if(!this.get('isOpen')) { // trigger when is closing
-      let startDate = this.get('newStartDate') || this.get('startDate');
-      let endDate = this.get('newEndDate') || this.get('endDate');
-      this.setProperties({
-        startDate: startDate,
-        endDate: endDate
-      });
+  attributeBindings: ['data-dateIndex'],
+  actions: {
+    changeStart() {
+      let selectedEl = this.$('select[data-dateIndex="start"]')[0];
+      let selectedIndex = selectedEl.selectedIndex;
+      let content = this.get('dateRange');
+      let selectedValue = content[selectedIndex];
+
+      this.set('startDate', selectedValue);
+    },
+    changeEnd() {
+      let selectedEl = this.$('select[data-dateIndex="end"]')[0];
+      let selectedIndex = selectedEl.selectedIndex;
+      let content = this.get('dateRange');
+      let selectedValue = content[selectedIndex];
+
+      this.set('endDate', selectedValue);
     }
-  })
+  }
 });
 
