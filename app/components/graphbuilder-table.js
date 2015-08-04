@@ -102,7 +102,7 @@ export default EmberTableComponent.extend({
   actions: {
     sortByColumn: function(content){
       let key = content.key;
-      let nameKey = `name_${this.get('i18n').locale}`;
+      // let nameKey = `name_${this.get('i18n').locale}`;
       this.set('content', []);
       let data;
 

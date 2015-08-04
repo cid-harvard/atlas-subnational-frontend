@@ -1,17 +1,5 @@
 <form class="buildermod__drawer buildermod__drawer--settings">
   <fieldset class="settings__input__wrap">
-{{!--       {{input-time-selects
-        elementId="settings__input--time"
-        type="time"
-        startDate=startDate
-        endDate=endDate
-        newStartDate=newStartDate
-        newEndDate=newEndDate
-        dateExtent=dateExtent
-        dateRange=dateRange
-        content=dateRange
-        selectedValue=startDate
-      }} --}}
       <label for="settings__input--time" class="settings__input">{{t 'graph_builder.settings.change_time'}}</label>
       <select class="settings__input--select" data-dateIndex="start" {{action 'changeStart' on='change'}}>
         {{#each dateRange key="@index" as |item|}}

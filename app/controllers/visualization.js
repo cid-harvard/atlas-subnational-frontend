@@ -69,8 +69,8 @@ export default Ember.Controller.extend({
     return [vis];
   }),
   years: computed('startDate', 'endDate', function() {
-    let start = this.get('startDate');
-    let end = this.get('endDate'); //range is Start to End -1
+    let start = Number(this.get('startDate'));
+    let end = Number(this.get('endDate'));
     if(start === end) { return start; }
     return  `${start} - ${end}`;
   }),
@@ -116,7 +116,16 @@ export default Ember.Controller.extend({
     });
   },
   filterToSelectedYears: function(data) {
-    let timeRange = d3.range(this.get('startDate'), this.get('endDate'));
+    let start = Number(this.get('startDate'));
+    let end = Number(this.get('endDate'));
+    let timeRange = null;
+
+    if(start === end) {
+      timeRange = String(start);
+    } else {
+      timeRange = d3.range(start, end);
+    }
+
     return _.filter(data, (d) => {
       return _.contains(timeRange, get(d, 'year'));
     });
