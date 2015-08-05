@@ -19,8 +19,8 @@ export default DS.Model.extend(ModelAttribute, {
     var defaultParams = {
       treemap: { variable: 'export_value', startDate: 2007, endDate: 2013 },
       multiples: { variable: 'export_value', startDate: 2007, endDate: 2013 },
-      scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
-      similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
+      scatter: { variable: null,  startDate: 2013, endDate: 2014 },
+      similarty: { variable: null,  startDate: 2012, endDate: 2013 }
     };
     return $.getJSON(`${apiURL}/data/location/${this.get('id')}/products?level=class`)
       .then((response) => {
@@ -40,8 +40,8 @@ export default DS.Model.extend(ModelAttribute, {
     var defaultParams = {
       treemap: { variable: 'wages', startDate: 2007, endDate: 2013 },
       multiples: { variable: 'wages', startDate: 2007, endDate: 2013 },
-      scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
-      similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
+      scatter: { variable: null,  startDate: 2013, endDate: 2014 },
+      similarty: { variable: 'rca',  startDate: 2012, endDate: 2013 }
     };
     return $.getJSON(`${apiURL}/data/location/${this.get('id')}/industries?level=class`)
       .then((response) => {
@@ -50,8 +50,9 @@ export default DS.Model.extend(ModelAttribute, {
 
         data = _.map(data, (d) => {
           let industry = industriesMetadata[d.industry_id];
-          return _.merge(d, industry);
+          return _.merge(d, industry, { avg_wage: d.wages/d.employment});
         });
+
        return { entity: this, entity_type:'location', data: data, source: 'industries',  defaultParams: defaultParams};
       }, (error) => {
        return { error: error, entity: this, entity_type:'location', data: [], source: 'industries', defaultParams:defaultParams};
