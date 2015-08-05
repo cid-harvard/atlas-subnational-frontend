@@ -2,23 +2,12 @@ import DS from 'ember-data';
 import Ember from 'ember';
 import ENV from '../config/environment';
 import numeral from 'numeral';
+import ModelAttribute from '../mixins/model-attribute';
 const {apiURL} = ENV;
 const {attr} = DS;
-const {computed, getWithDefault, $, get:get } = Ember;
+const {computed, $, get:get } = Ember;
 
-export default DS.Model.extend({
-  i18n: Ember.inject.service(),
-
-  code: attr('string'),
-
-  name_en: attr('string'),
-  name_es: attr('string'),
-
-  name_short_en: attr('string'),
-  name_short_es: attr('string'),
-
-  level: attr(),
-
+export default DS.Model.extend(ModelAttribute, {
   //data that drives the profile
   productsData: attr(),
   industriesData: attr(),
@@ -27,77 +16,46 @@ export default DS.Model.extend({
 
   //following drives graphbuilder
   graphbuilderProducts: computed('id', function() {
-    var products = $.getJSON(`${apiURL}/data/products?location=${this.get('id')}`);
-    var productsData = $.getJSON(`${apiURL}/data/products/scatterplot?location=${this.get('id')}`);
     var defaultParams = {
       treemap: { variable: 'export_value', startDate: 2007, endDate: 2013 },
       multiples: { variable: 'export_value', startDate: 2007, endDate: 2013 },
       scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
       similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
     };
-    return Ember.RSVP.all([products, productsData])
-      .then((array) => {
+    return $.getJSON(`${apiURL}/data/location/${this.get('id')}/products?level=class`)
+      .then((response) => {
         let productsMetadata = this.get('metaData.products');
-        let products = getWithDefault(array[0], 'data', []);
-        let productsData = getWithDefault(array[1], 'data', []);
-        productsData = _.indexBy(productsData, function(d) {
-          return `${d.product_id}_y${d.year}`;
-        });
+        let data = response.data;
 
-        _.each(products, function(d) {
+        data = _.map(data, (d) => {
           let product = productsMetadata[d.product_id];
-          let productData = productsData[`${d.product_id}_y${d.year}`];
-          _.extend(d, product);
-          _.extend(d, productData);
+          return _.merge(d, product);
         });
-        return { entity: this, entity_type:'location', data: products, source: 'products', defaultParams:defaultParams };
+        return { entity: this, entity_type:'location', data: data, source: 'products', defaultParams:defaultParams };
       }, (error) => {
         return { error: error, entity: this, entity_type:'location', data: [], source: 'products', defaultParams:defaultParams};
       });
   }),
   graphbuilderIndustries: computed('id', function() {
-    var industries = $.getJSON(`${apiURL}/data/industries?location=${this.get('id')}`);
-    var industriesData = $.getJSON(`${apiURL}/data/industries/scatterplot?location=${this.get('id')}`);
     var defaultParams = {
       treemap: { variable: 'wages', startDate: 2007, endDate: 2013 },
       multiples: { variable: 'wages', startDate: 2007, endDate: 2013 },
       scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
       similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
     };
-    return Ember.RSVP.all([industries, industriesData])
-      .then((array) => {
+    return $.getJSON(`${apiURL}/data/location/${this.get('id')}/industries?level=class`)
+      .then((response) => {
         let industriesMetadata = this.get('metaData.industries');
-        let industries = getWithDefault(array[0], 'data', []);
-        let industriesData = getWithDefault(array[1], 'data', []);
-        industriesData = _.indexBy(industriesData, function(d) {
-          return `${d.industry_id}_y${d.year}`;
-        });
+        let data = response.data;
 
-        _.each(industries, function(d) {
+        data = _.map(data, (d) => {
           let industry = industriesMetadata[d.industry_id];
-          let industryData = industriesData[`${d.industry_id}_y${d.year}`];
-          _.extend(d, industry);
-          _.extend(d, industryData);
+          return _.merge(d, industry);
         });
-       return { entity: this, entity_type:'location', data: industries, source: 'industries',  defaultParams: defaultParams};
+       return { entity: this, entity_type:'location', data: data, source: 'industries',  defaultParams: defaultParams};
       }, (error) => {
        return { error: error, entity: this, entity_type:'location', data: [], source: 'industries', defaultParams:defaultParams};
       });
-  }),
-  locale: computed('i18n.locale', function() {
-    return this.get('i18n.locale');
-  }),
-  _level: computed('locale', 'level', function() {
-    return this.get('i18n')
-      .t(`location.model.${this.get('level')}`);
-  }),
-  name: computed('locale', 'name_en', 'name_es', function() {
-    let attr = `name_${this.get('locale')}`;
-    return this.get(attr) || `${attr} does not exist`;
-  }),
-  name_short: computed('locale', 'name_short_en', 'name_short_es', function() {
-    let attr = `name_${this.get('locale')}`;
-    return this.get(attr) || `${attr} does not exist`;
   }),
 
   exportTotal: computed('productsData', function() {
@@ -109,9 +67,10 @@ export default DS.Model.extend({
 
   yearSort: ['year'],
 
-  //validTimeseries is array of data points where all key,value pairs are not null
+  //validTimeseries is array of data points where all key(expect diversity cause fucking values are null),value pairs are not null
+  //TODO: fuck this shit, fucking data is invalid from the API just fucking check if gdp is fucking exists
   validTimeseries: computed.filter('timeseries', function(data) {
-    return ! _.any(_.values(data), _.isNull);
+    return data.gdp_real;
   }),
   sortedTimeseries: computed.sort('validTimeseries','yearSort'),
 

@@ -27,10 +27,10 @@ test('visiting /search', function(assert) {
     assert.equal(find('p[data-search-result-name]:first').text(), 'Atlántico');
   });
 
-  fillIn('input[data-search-input]', 'gold');
+  fillIn('input[data-search-input]', 'gold clad metals');
   click('input[data-search]');
   andThen(function() {
-    assert.equal(find('p[data-search-result-name]:first').text(), 'Gold content');
+    assert.equal(find('p[data-search-result-name]:first').text(), 'Gold clad metals');
   });
 });
 
