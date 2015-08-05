@@ -30,6 +30,14 @@ export default EmberTableComponent.extend({
   height: 300,
   attributeBindings: ['height'],
   selectionMode: 'none',
+  industryClassesMap: [
+    { key: 'name', expand: true, savedWidth: 300 },
+    { key: 'avg_wage', expand: true, savedWidth: 200 },
+    { key: 'wages', expand: true, savedWidth: 200 },
+    { key: 'employment', expand: true, savedWidth: 200 },
+    { key: 'employment_growth', expand: true, savedWidth: 300 },
+    { key: 'num_establishments', expand: true, savedWidth: 200 },
+  ],
   productsMap: [
     { key: 'name', expand: true, savedWidth: 300 },
     { key: 'export_value', type: 'int', expand: false},
@@ -52,6 +60,14 @@ export default EmberTableComponent.extend({
     { key: 'year' , expand: false, type: 'int'},
     { key: 'complexity' , expand: false, type: 'int'}
    ],
+  participantsMap: [
+    { key: 'name', expand: true, savedWidth: 300 },
+    { key: 'wages', type: 'int', expand: false},
+    { key: 'employment', type: 'int', expand: false},
+    { key: 'rca', type: 'int', expand: false},
+    { key: 'year' , expand: false, type: 'int'},
+    { key: 'complexity' , expand: false, type: 'int'}
+   ],
   tableMap: computed('source', function() {
     let source = this.get('source');
     return this.get(`${source}Map`);
@@ -61,7 +77,7 @@ export default EmberTableComponent.extend({
       return this.generateColumnDefinition(column);
     });
   }),
-  content: computed('data', function() {
+  content: computed('data.[]', function() {
     return this.get('data');
   }),
   refreshTable: observer('i18n.locale', function() {
@@ -91,10 +107,12 @@ export default EmberTableComponent.extend({
     };
   },
   formatNumber: function(number, key) {
-    if(key === 'export_value') {
+    if(key === 'export_value'|| key === 'wages' || key === 'avg_wage') {
       return numeral(number).format('$ 0.00a');
-    } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'population'){
+    } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'employment' || key === 'population'){
       return numeral(number).format('0.00a');
+    } else if(key === 'employment_growth'){
+      return numeral(number).format('0.00%');
     } else {
       return number;
     }
@@ -102,7 +120,6 @@ export default EmberTableComponent.extend({
   actions: {
     sortByColumn: function(content){
       let key = content.key;
-      // let nameKey = `name_${this.get('i18n').locale}`;
       this.set('content', []);
       let data;
 

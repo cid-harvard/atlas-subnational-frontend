@@ -24,6 +24,8 @@ export default Ember.Component.extend({
       return 'products';
     } else if(this.get('entity') === 'product') {
       return 'locations';
+    } else if(this.get('entity') === 'industry') {
+      return 'departments';
     }
   })
 });

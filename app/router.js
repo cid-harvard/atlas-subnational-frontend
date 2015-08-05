@@ -24,11 +24,14 @@ export default Router.map(function() {
     });
   });
 
-  // Profiles?
+  // Profiles
   this.resource('product', { path: 'product'}, function() {
     this.route('show', { path: ':product_id'});
   });
   this.resource('location', { path: 'location'}, function() {
     this.route('show', { path: ':location_id'});
+  });
+  this.resource('industry', { path: 'industry'}, function() {
+    this.route('show', { path: ':industry_id'});
   });
 });

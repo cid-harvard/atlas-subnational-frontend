@@ -12,20 +12,18 @@ export default Ember.Route.extend({
   },
   afterModel: function(model, transition) {
     // extract year out later
-    var year = Ember.getWithDefault(transition, 'queryParams.year', 2012);
+    var year = getWithDefault(transition, 'queryParams.year', 2012);
 
-    var products = Ember.$.getJSON(`${apiURL}/data/products?location=${model.id}&year=${year}`);
-    var industries = Ember.$.getJSON(`${apiURL}/data/industries?location=${model.id}&year=${year}`);
-    //
+    var products = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/products?level=class`);
+    var industries = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/industries?level=class`);
+
     // one of these should be removed in the future because the points should be merged in
-    var departments = Ember.$.getJSON(`${apiURL}/data/departments?year=${year}`);
-    var departmentsAll = Ember.$.getJSON(`${apiURL}/data/departments/departmentyear/`);
+    var departments = Ember.$.getJSON(`${apiURL}/data/location?level=department`);
 
-    return RSVP.allSettled([products, departments, departmentsAll, industries]).then((array) => {
+    return RSVP.allSettled([products, departments, industries]).then((array) => {
       var productsData = getWithDefault(array[0], 'value.data', []);
       var departmentsData = getWithDefault(array[1], 'value.data', []);
-      var departmentsDataAll = getWithDefault(array[2], 'value.data', []);
-      var industriesData = getWithDefault(array[3], 'value.data', []);
+      var industriesData = getWithDefault(array[2], 'value.data', []);
 
       var productsDataIndex = _.indexBy(productsData, 'product_id');
       var industriesDataIndex = _.indexBy(industriesData, 'industry_data');
@@ -35,37 +33,36 @@ export default Ember.Route.extend({
       let industriesMetadata = this.modelFor('application').industries;
 
       //get products data for the department
-      _.each(productsData, (d) => {
+      let products = _.map(productsData, (d) => {
         let product = productsMetadata[d.product_id];
         let productData = productsDataIndex[d.product_id];
-
-        d.name = product.name_en;
-        _.extend(d, product);
-        _.extend(d, productData);
+        return _.merge(d, product, productData);
       });
 
       //get industry data for department
-      _.each(industriesData, (d) => {
+      let industries = _.map(industriesData, (d) => {
         let industry = industriesMetadata[d.industry_id];
         let industryData = industriesDataIndex[d.industry_id];
-        d.name = industry.name_en;
-        _.extend(d, industry);
-        _.extend(d, industryData);
+        return _.merge(d, industry, industryData);
       });
 
-      //all department data for  ${year}
-      _.each(departmentsData, function(d) {
-        let department = _.find(departmentsDataAll, {department_id: d.department_id, year: year});
-        d.name = locationsMetadata[d.department_id].name_en;
-        _.extend(d, department);
+      var departments = [];
+      var departmentTimeseries = [];
+
+      _.reduce(departmentsData, function(memo, d) {
+        if(d.department_id === parseInt(model.id)) {
+          departmentTimeseries.push(d);
+        }
+        if(d.year === year) {
+          let location = locationsMetadata[d.department_id];
+          departments.push(_.merge(d, location, { name: location.name_en }));
+        }
+        return memo;
       });
 
-      //all time series data for the department with id = model.id
-      var departmentTimeseries = _.filter(departmentsDataAll, {department_id: parseInt(model.id)});
-
-      model.set('productsData', productsData);
-      model.set('industriesData', industriesData);
-      model.set('departments', departmentsData);
+      model.set('productsData', products);
+      model.set('industriesData', industries);
+      model.set('departments', departments);
       model.set('timeseries', departmentTimeseries);
       return model;
     });

@@ -14,7 +14,7 @@ export default Ember.Component.extend({
    return data.map((d) => {
       var object = { year: d.year};
       object[this.get('yVar')] = d[this.get('yVar')];
-      object['department_id'] = this.get('currentLocation');
+      object[this.get('varId')] = this.get('currentLocation');
       return object;
     });
   },

@@ -8,6 +8,8 @@ export default DS.RESTAdapter.extend({
       return 'metadata/locations';
     } else if(type === 'product') {
       return 'metadata/products';
+    } else if(type === 'industry') {
+      return 'metadata/industries';
     }
   }
 });
