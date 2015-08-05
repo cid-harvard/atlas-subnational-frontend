@@ -96,7 +96,7 @@ export default {
         'products.similarity': 'What does the product map look like for {{name}}?',
         'industries.employment': 'What industries in {{name}} employ the most people?',
         'industries.scatter': 'What industries have the best combination of complexity and opportunity for {{name}}?',
-        'industries.wages': 'What industries in {{place}} are the largest by total wages?',
+        'industries.wages': 'What industries in {{name}} are the largest by total wages?',
         'industries.wages_highest_per_worker': 'What industries in {{name}} have the highest wages per worker?',
         'industries.similarity': 'What does the industry map look like for {{name}}?',
         'locations.export': 'What countries does {{name}} export to?',

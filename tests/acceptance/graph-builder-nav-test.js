@@ -76,7 +76,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
 
   //Go to industry wages
   click("a:contains('Industries')");
-  click("a:contains('What industries are in Atlántico?')");
+  click("a:contains('What industries in Atlántico are the largest by total wages?')");
 
   andThen(function() {
     assert.equal(currentURL(), '/graph_builder/location-930/source/industries/visualization/treemap?endDate=2013&startDate=2007&variable=wages');
