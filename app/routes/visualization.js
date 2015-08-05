@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   queryParams: {
     variable: { refreshModel: true }, // The dimension of the source that the user cares about
-                                      // (export_value, import_value, wages, employment)
+                                      // (export_value, import_value, wages, employment, rca)
     rca: { refreshModel: false },
     startDate: { refreshModel: false },
     endDate: { refreshModel: false },

@@ -78,7 +78,8 @@ export default Ember.Controller.extend({
     // if variable exists, it is varDependent
     if(this.get('variable')) { return this.get('variable'); }
     if(this.get('source') === 'products') { return 'export_value'; }
-    if(this.get('source') === 'location') { return ''; }
+    if(this.get('source') === 'locations') { return ''; }
+    if(this.get('source') === 'industries') { return 'wages'; }
   }),
   immutableData: computed('model.data.[]','endDate', 'startDate' , function() {
     return this.filterToSelectedYears(this.get('model.data'));
