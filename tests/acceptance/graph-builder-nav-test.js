@@ -90,6 +90,14 @@ test('search for Alantico and go to GB and Profile', function(assert) {
     assert.equal(currentURL(), '/graph_builder/location-930/source/industries/visualization/scatter?endDate=2014&startDate=2013');
   });
 
+  //Go to industry simi-map
+  click("a:contains('Industries')");
+  click("a:contains('What does the industry map look like for Atlántico?')");
+
+  andThen(function() {
+    assert.equal(currentURL(), '/graph_builder/location-930/source/industries/visualization/similarity?endDate=2014&startDate=2013&variable=rca');
+  });
+
   //return to profile
   click('a[data-side-profile-link]');
 
