@@ -21,8 +21,7 @@ export default Ember.Component.extend({
       this.set('endDate', selectedValue);
     },
     closeSettingsDrawer() {
-      // I suspect this sort of bottom-up setting is a smell
-      this.set('parentController.drawerSettingsIsOpen', false);
+      this.set('isOpen', false);
     }
   }
 });

@@ -69,8 +69,8 @@ export default Ember.Controller.extend({
     return [vis];
   }),
   years: computed('startDate', 'endDate', function() {
-    let start = Number(this.get('startDate'));
-    let end = Number(this.get('endDate'));
+    let start = parseInt(this.get('startDate'), 10);
+    let end = parseInt(this.get('endDate'), 10);
     if(start === end) { return start; }
     return  `${start} - ${end}`;
   }),
