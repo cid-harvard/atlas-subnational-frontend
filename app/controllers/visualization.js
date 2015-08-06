@@ -114,11 +114,11 @@ export default Ember.Controller.extend({
     }
   }),
   searchFilter: function(data) {
-    let search = this.get('search');
+    let search = _.deburr(this.get('search'));
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
     return _.filter(data, (d) => {
-      return (get(d,`name_${this.get('i18n').locale}`) || '').match(regexp) || get(d, 'code').match(regexp);
+      return _.deburr(get(d,`name_${this.get('i18n').locale}`) || '').match(regexp) || get(d, 'code').match(regexp);
     });
   },
   filterToSelectedYears: function(data) {
