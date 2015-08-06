@@ -28,7 +28,7 @@ export default Ember.Component.extend({
 
     _.each(nest, (d) => {
       // terrible assumption, but assume that all value share the same name.
-      d.name = Ember.get(d.values[0], `name_${this.get('i18n').locale}`) || d.key;
+      d.name = Ember.get(d.values[0], `name_short_${this.get('i18n').locale}`) || d.key;
     });
 
     return _.sortBy(nest, (d) => {
@@ -204,7 +204,10 @@ export default Ember.Component.extend({
         })
         .text(function(d) {
           let yValue = Ember.get(d.values[index], varDependent);
-          return numeral(yValue).format('$ 0.00 a');
+          if(varDependent === 'export_value') {
+            return 'USD ' + numeral(yValue).format('0.00 a');
+          }
+          return numeral(yValue).format('0.00 a');
         });
 
       curYear.attr('x', x(date))

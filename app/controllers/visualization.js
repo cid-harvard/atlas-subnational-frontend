@@ -56,6 +56,9 @@ export default Ember.Controller.extend({
 
     var sum = _.sum(data, variable);
     if(variable === 'employment') { return numeral(sum).format('0.00 a');}
+    if(variable === 'export_value' || variable === 'import_value') {
+      return 'USD '+ numeral(sum).format('0.00 a');
+    }
     return numeral(sum).format('$ 0.00 a');
   }),
   otherPossibleGraphs: computed('model.visualization', 'model.source',  function() {
@@ -78,7 +81,8 @@ export default Ember.Controller.extend({
     // if variable exists, it is varDependent
     if(this.get('variable')) { return this.get('variable'); }
     if(this.get('source') === 'products') { return 'export_value'; }
-    if(this.get('source') === 'location') { return ''; }
+    if(this.get('source') === 'locations') { return ''; }
+    if(this.get('source') === 'industries') { return 'wages'; }
   }),
   immutableData: computed('model.data.[]','endDate', 'startDate' , function() {
     return this.filterToSelectedYears(this.get('model.data'));
@@ -110,11 +114,11 @@ export default Ember.Controller.extend({
     }
   }),
   searchFilter: function(data) {
-    let search = this.get('search');
+    let search = _.deburr(this.get('search'));
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
     return _.filter(data, (d) => {
-      return (get(d,`name_${this.get('i18n').locale}`) || '').match(regexp) || get(d, 'code').match(regexp);
+      return _.deburr(get(d,`name_${this.get('i18n').locale}`) || '').match(regexp) || get(d, 'code').match(regexp);
     });
   },
   filterToSelectedYears: function(data) {

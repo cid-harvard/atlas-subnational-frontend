@@ -100,19 +100,21 @@ export default EmberTableComponent.extend({
         let number = row.get(column.key);
         return this.formatNumber(number, column.key);
       } else if(column.key === 'name'){
-        return row.get(`name_${this.get('i18n').locale}`) || row.get('code');
+        return row.get(`name_short_${this.get('i18n').locale}`) || row.get('code');
       } else {
         return 'N/A';
       }
     };
   },
   formatNumber: function(number, key) {
-    if(key === 'export_value'|| key === 'wages' || key === 'avg_wage') {
+    if(key === 'wages' || key === 'avg_wage') {
       return numeral(number).format('$ 0.00a');
     } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'employment' || key === 'population'){
       return numeral(number).format('0.00a');
     } else if(key === 'employment_growth'){
       return numeral(number).format('0.00%');
+    } else if(key === 'export_value') {
+      return 'USD ' + numeral(number).format('0.00a');
     } else {
       return number;
     }

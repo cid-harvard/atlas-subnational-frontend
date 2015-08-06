@@ -38,8 +38,10 @@ export default Ember.Component.extend({
         number: (d, data) => {
           if('share' === data.key){
             return numeral(d).divide(100).format('0.0%');
-          } else if( 'employment' === data.key) {
+          } else if('employment' === data.key) {
             return numeral(d).format('0.0a');
+          } else if('export_value' === data.key) {
+            return 'USD ' + numeral(d).format('0.0a');
           } else {
             return numeral(d).format('$ 0.0a');
           }
@@ -47,7 +49,7 @@ export default Ember.Component.extend({
       })
       .zoom(false)
       .text({ value: (d) => {
-        return  Ember.get(d, `name_${this.get('i18n').locale}`) || d.code; }
+        return  Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code; }
       })
       .timeline(false)
       .height(this.get('height'))
