@@ -110,7 +110,7 @@
 }
 
 .search__results {
-  margin-top: $baseSpace;
+  margin: $baseSpace 0 $baseSpace*2;
 }
 
 .search__result {
@@ -118,8 +118,11 @@
   align-items:center;
   justify-content: space-between;
   border-bottom: solid 1px $colorNavy600;
-  margin-top: $baseSpace;
+  margin: $baseSpace 0 0;
   padding-bottom: $baseSpace;
+  &:last-of-type {
+    border-bottom: none;
+  }
 }
 
 .search__result__text {
