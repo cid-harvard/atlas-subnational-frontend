@@ -26,6 +26,12 @@ export default {
     'share': 'Share',
     'download': 'Download this data'
   },
+  'search': {
+    'results_products': 'Results: Products',
+    'results_locations': 'Results: Locations',
+    'results_industries': 'Results: Industries',
+    'didnt_find': "Didn't find what you were looking for? Let us know: TKTK@prosperia.com"
+  },
   'graph_builder': {
     'table': {
       'name': 'Name',

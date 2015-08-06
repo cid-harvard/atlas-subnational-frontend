@@ -1,5 +1,5 @@
 {{#if locationResults.length}}
-  <h3 class="results__header">Results: Locations</h3>
+  <h3 class="results__header">{{t 'search.results_locations'}}</h3>
   <ul class="search__results">
     {{#each result in locationResults}}
       {{search-result
@@ -11,7 +11,7 @@
   </ul>
 {{/if}}
 {{#if productResults.length}}
-  <h3 class="results__header">Results: Products</h3>
+  <h3 class="results__header">{{t 'search.results_products'}}</h3>
   <ul class="search__results">
     {{#each result in productResults}}
       {{search-result
@@ -23,7 +23,7 @@
   </ul>
 {{/if}}
 {{#if industryResults.length}}
-  <h3 class="results__header">Results: Industries</h3>
+  <h3 class="results__header">{{t 'search.results_industries'}}</h3>
   <ul class="search__results">
     {{#each result in industryResults}}
       {{search-result
@@ -34,5 +34,5 @@
     {{/each}}
   </ul>
 {{/if}}
-<p class='search__copy search__copy--postscript'>Didn't find what you were looking for? Let us know: TKTK@prospedia.com</p>
+<p class='search__copy search__copy--postscript'>{{t 'search.didnt_find'}}</p>
 
