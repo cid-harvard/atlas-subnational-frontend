@@ -14,12 +14,32 @@ export default Ember.Controller.extend({
       this.set('search', null);
     }
   }),
-  filteredResults: computed('model.[]', function() {
+  productResults: computed('model.[]', function() {
+    // TODO DRY out the three results properties and remove entity hardcoding in filtering
     let search = _.deburr(this.get('search'));
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
+
     return this.get('model').filter(function(d){
-      return _.deburr(get(d,'name')).match(regexp) || get(d, 'code').match(regexp);
+      return get(d,'constructor.modelName') === 'product' && _.deburr(get(d,'name')).match(regexp) || get(d, 'code').match(regexp);
+    });
+  }),
+  locationResults: computed('model.[]', function() {
+    let search = _.deburr(this.get('search'));
+    var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
+      .replace(/\s+/g, ''), "gi");
+
+    return this.get('model').filter(function(d){
+      return get(d,'constructor.modelName') === 'location' && _.deburr(get(d,'name')).match(regexp) || get(d, 'code').match(regexp);
+    });
+  }),
+  industryResults: computed('model.[]', function() {
+    let search = _.deburr(this.get('search'));
+    var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
+      .replace(/\s+/g, ''), "gi");
+
+    return this.get('model').filter(function(d){
+      return get(d,'constructor.modelName') === 'industry' && _.deburr(get(d,'name')).match(regexp) || get(d, 'code').match(regexp);
     });
   }),
   init: function(){
