@@ -100,7 +100,7 @@ export default EmberTableComponent.extend({
         let number = row.get(column.key);
         return this.formatNumber(number, column.key);
       } else if(column.key === 'name'){
-        return row.get(`name_${this.get('i18n').locale}`) || row.get('code');
+        return row.get(`name_short_${this.get('i18n').locale}`) || row.get('code');
       } else {
         return 'N/A';
       }

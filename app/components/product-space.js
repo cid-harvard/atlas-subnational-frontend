@@ -21,7 +21,7 @@ export default Ember.Component.extend({
       nodes: productSpace.nodes,
       links: productSpace.edges,
       data: this.get('data'),
-      var_text: `name_${this.get('i18n').locale}`, //TODO: update with langauge
+      var_text: `name_short_${this.get('i18n').locale}`, //TODO: update with langauge
       var_x: 'x',
       var_y: 'y',
       radius: 4,
@@ -101,7 +101,7 @@ export default Ember.Component.extend({
         zoom: this.get('zoom'),
         selection: this.get('selection'),
         highlight: this.get('highlight'),
-        var_text: `name_${this.get('i18n').locale}`, //TODO: update with langauge
+        var_text: `name_short_${this.get('i18n').locale}`, //TODO: update with langauge
         refresh: true
       });
       this.draw();

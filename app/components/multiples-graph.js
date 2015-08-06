@@ -28,7 +28,7 @@ export default Ember.Component.extend({
 
     _.each(nest, (d) => {
       // terrible assumption, but assume that all value share the same name.
-      d.name = Ember.get(d.values[0], `name_${this.get('i18n').locale}`) || d.key;
+      d.name = Ember.get(d.values[0], `name_short_${this.get('i18n').locale}`) || d.key;
     });
 
     return _.sortBy(nest, (d) => {

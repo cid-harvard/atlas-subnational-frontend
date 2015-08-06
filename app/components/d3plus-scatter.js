@@ -19,7 +19,7 @@ export default Ember.Component.extend({
       .x('distance')
       .y('complexity')
       .format({ number: function(d) { return numeral(d).format('0.0a');}})
-      .text({value: (d) => { return Ember.get(d, `name_${this.get('i18n').locale}`) || d.code;}})
+      .text({value: (d) => { return Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code;}})
       .size(this.get('rca'))
       .timeline(false)
       .height(this.get('height'))

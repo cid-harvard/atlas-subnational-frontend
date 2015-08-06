@@ -56,7 +56,7 @@ export default Ember.Component.extend({
       nodes: this.get('nodes'),
       links: this.get('edges'),
       data: this.get('data'),
-      var_text: `name_${this.get('i18n').locale}`, //TODO: update with langauge
+      var_text: `name_short_${this.get('i18n').locale}`, //TODO: update with langauge
       var_x: 'x',
       var_y: 'y',
       radius: 5,

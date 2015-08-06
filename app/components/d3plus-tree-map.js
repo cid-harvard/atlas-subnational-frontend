@@ -49,7 +49,7 @@ export default Ember.Component.extend({
       })
       .zoom(false)
       .text({ value: (d) => {
-        return  Ember.get(d, `name_${this.get('i18n').locale}`) || d.code; }
+        return  Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code; }
       })
       .timeline(false)
       .height(this.get('height'))
