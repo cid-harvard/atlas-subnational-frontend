@@ -53,6 +53,7 @@ export default Ember.Controller.extend({
   profileLink: computed('entity', function(){
     if(this.get('entity') === 'location') { return 'location.show'; }
     if(this.get('entity') === 'product') { return 'product.show'; }
+    if(this.get('entity') === 'industry') { return 'industry.show'; }
   }),
   entity_and_id: computed('entity', 'entity_id', function() {
     return `${this.get('entity')}-${this.get('entity_id')}`;
@@ -60,5 +61,6 @@ export default Ember.Controller.extend({
   source: computed('entity', function() {
     if(this.get('entity') === 'location') { return 'products'; }
     if(this.get('entity') === 'product') { return 'locations'; }
+    if(this.get('entity') === 'industry') { return 'departments'; }
   })
 });
