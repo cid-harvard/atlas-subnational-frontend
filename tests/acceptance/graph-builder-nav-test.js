@@ -55,7 +55,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   click("a:contains('What products have the best combination of complexity and opportunity for Atlántico?')");
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/scatter?endDate=2014&startDate=2013');
+    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/scatter?endDate=2013&startDate=2013');
   });
 
   //Go to product space
@@ -63,7 +63,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   click("a:contains('What does the product map look like for Atlántico?')");
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/similarity?endDate=2014&startDate=2013');
+    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/similarity?endDate=2013&startDate=2013');
   });
 
   //Go to industry employment
@@ -87,7 +87,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   click("a:contains('What industries have the best combination of complexity and opportunity for Atlántico?')");
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/scatter?endDate=2014&startDate=2013');
+    assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/scatter?endDate=2013&startDate=2013');
   });
 
   //Go to industry simi-map
@@ -95,7 +95,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   click("a:contains('What does the industry map look like for Atlántico?')");
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/similarity?endDate=2014&startDate=2013&variable=rca');
+    assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/similarity?endDate=2013&startDate=2013&variable=rca');
   });
 
   //return to profile

@@ -24,7 +24,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    ENV.apiURL = "http://52.3.54.93/api";
+    ENV.apiURL = "http://atlas-colombia-beta.cid-labs.com/api";
     ENV.contentSecurityPolicy = {
       'connect-src': "'self' 'localhost:4200' *",
       'style-src': "'self' 'unsafe-inline' *",
@@ -44,7 +44,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'test') {
-    ENV.apiURL = "http://52.3.54.93/api";
+    ENV.apiURL = "http://atlas-colombia-beta.cid-labs.com/api";
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'none';
