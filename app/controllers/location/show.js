@@ -10,8 +10,24 @@ export default Ember.Controller.extend({
   productsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
   timeSeriesData: computed.oneWay('model.timeseries'),
-  locationId: computed.readOnly('model.id'),
   year: 2013,
+  isDepartment: computed('model.level', function() {
+    return this.get('model.level') === 'department';
+  }),
+  locationId: computed('model.id','model.level', function() {
+    if(this.get('model.level') === 'department' || this.get('model.level') === 'country') {
+      return this.get('model.id');
+    } else {
+      return this.get('model.parent_id');
+    }
+  }),
+  imageCode: computed('model.level', 'model.code', function() {
+    if(this.get('model.level') === 'department' || this.get('model.level') === 'country') {
+      return this.get('model.code');
+    } else {
+      return (this.get('model.code')).substring(0,2);
+    }
+  }),
   productsSortedByExports: computed('productsData', function() {
     return _.slice(_.sortBy(this.get('productsData'), function(d) { return -d.export_value;}), 0, 50);
   }),

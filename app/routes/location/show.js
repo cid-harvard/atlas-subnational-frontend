@@ -48,9 +48,15 @@ export default Ember.Route.extend({
 
       var departments = [];
       var departmentTimeseries = [];
+      var department_id = model.id;
 
+      if(model.get('level') === 'municipality'){
+        department_id = model.get('parent_id');
+      }
+
+      //dot plot and time series data
       _.reduce(departmentsData, function(memo, d) {
-        if(d.department_id === parseInt(model.id)) {
+        if(d.department_id == department_id) {
           departmentTimeseries.push(d);
         }
         if(d.year === year) {

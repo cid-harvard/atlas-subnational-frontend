@@ -1,5 +1,5 @@
 <article class="profile stream">
-  <img src="assets/img/hero_images/location/loc_{{model.code}}.jpg" class="stream__img--hero">
+  <img src="assets/img/hero_images/location/loc_{{imageCode}}.jpg" class="stream__img--hero">
   <header class="stream__header profile__header">
     <h2 class="stream__head" data-location-name>{{model.name}}</h2>
     <ol class="breadcrumbs">
@@ -9,114 +9,113 @@
       <li class="breadcrumb"><a href="#" class="breadcrumb__link">Profile</a></li>
     </ol>
   </header>
-  <section class="stream__section">
-    <header class="section__header">
-    <h3 class="section__head">{{t 'location.show.overview'}}</h3>
-    </header>
-    <ul class="list--section list--section--bullets">
-      <li class="list__item--section--bullets">GDP grew {{model.gdpGrowth}} between {{model.yearRange}}</li>
-      <li class="list__item--section--bullets">{{model.name}} has a GDP per capita at {{model.lastGdpPerCapita}}</li>
-      <li class="list__item--section--bullets">The population is {{model.lastPop}}</li>
-    </ul>
-    <table class="table--summaries">
-      <thead>
-        <tr class="table__row table__row--header">
-          <th class="table__header"></th>
-          <th class="table__header table__header--summaries--dotplot">All 32 departments</th>
-          <th class="table__header">Value</th>
-          <th class="table__header table__header--summaries--spark">Growth, annual ({{model.yearRange}})</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table__row table__row--body">
-          <td class="table__cell table__cell--summaries">
-            GDP per Capita
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{dot-plot
-              elementId='dotplot--gdp-pc'
-              data=departmentsData
-              varX='gdp_pc_real'
-              varText='name'
-              varId='department_id'
-              currentLocation=locationId
-            }}
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{model.lastGdpPerCapita}}
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{spark-line
-              data=timeSeriesData
-              varId='department_id'
-              yVar='gdp_pc_real'
-              elementId='spark--gdp-pc'
-              currentLocation=locationId
-              currentLocationName=model.name
-            }}
-          </td>
-        </tr>
-        <tr class="table__row table__row--body">
-          <td class="table__cell table__cell--summaries">
-            GDP
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{dot-plot
-              elementId='dotplot--gdp'
-              data=departmentsData
-              varX='gdp_real'
-              varText='name'
-              varId='department_id'
-              currentLocation=locationId
-            }}
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{model.lastGdp}}
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{spark-line
-              data=timeSeriesData
-              varId='department_id'
-              yVar='gdp_real'
-              elementId='spark--gdp'
-              currentLocation=locationId
-              currentLocationName=model.name
-            }}
-          </td>
-        </tr>
-        <tr class="table__row table__row--body">
-          <td class="table__cell table__cell--summaries">
-           Population
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{dot-plot
-              elementId='dotplot--population'
-              data=departmentsData
-              varX='population'
-              varText='name'
-              varId='department_id'
-              type='population'
-              currentLocation=locationId
-            }}
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{model.lastPop}}
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{spark-line
-              data=timeSeriesData
-              varId='department_id'
-              yVar='population'
-              elementId='spark--population'
-              type='population'
-              currentLocation=locationId
-              currentLocationName=model.name
-            }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+  {{#if isDepartment }}
+    <section class="stream__section">
+      <header class="section__header">
+      <h3 class="section__head">{{t 'location.show.overview'}}</h3>
+      </header>
+      <ul class="list--section list--section--bullets">
+        <li class="list__item--section--bullets">GDP grew {{gdpGrowth}} between {{yearRange}}</li>
+        <li class="list__item--section--bullets">{{model.name}} has a GDP per capita at {{lastGdpPerCapita}}</li>
+        <li class="list__item--section--bullets">The population is {{lastPop}}</li>
+      </ul>
+      <table class="table--summaries">
+        <thead>
+          <tr class="table__row table__row--header">
+            <th class="table__header"></th>
+            <th class="table__header table__header--summaries--dotplot">All 32 departments</th>
+            <th class="table__header">Value</th>
+            <th class="table__header table__header--summaries--spark">Growth, annual ({{yearRange}})</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table__row table__row--body">
+            <td class="table__cell table__cell--summaries">
+              GDP per Capita
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{dot-plot
+                elementId='dotplot--gdp-pc'
+                data=departmentsData
+                varX='gdp_pc_real'
+                varText='name'
+                varId='department_id'
+                currentLocation=locationId
+              }}
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{lastGdpPerCapita}}
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{spark-line
+                data=timeSeriesData
+                varId='department_id'
+                yVar='gdp_pc_real'
+                elementId='spark--gdp-pc'
+                currentLocation=locationId
+              }}
+            </td>
+          </tr>
+          <tr class="table__row table__row--body">
+            <td class="table__cell table__cell--summaries">
+              GDP
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{dot-plot
+                elementId='dotplot--gdp'
+                data=departmentsData
+                varX='gdp_real'
+                varText='name'
+                varId='department_id'
+                currentLocation=locationId
+              }}
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{lastGdp}}
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{spark-line
+                data=timeSeriesData
+                varId='department_id'
+                yVar='gdp_real'
+                elementId='spark--gdp'
+                currentLocation=locationId
+              }}
+            </td>
+          </tr>
+          <tr class="table__row table__row--body">
+            <td class="table__cell table__cell--summaries">
+             Population
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{dot-plot
+                elementId='dotplot--population'
+                data=departmentsData
+                varX='population'
+                varText='name'
+                varId='department_id'
+                type='population'
+                currentLocation=locationId
+              }}
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{lastPop}}
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{spark-line
+                data=timeSeriesData
+                varId='department_id'
+                yVar='population'
+                elementId='spark--population'
+                type='population'
+                currentLocation=locationId
+              }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  {{/if}}
   <section class="stream__section">
     <header class="section__header">
       <h3 class="section__head">Employment and Wages</h3>
@@ -125,10 +124,10 @@
       {{#ivy-tabs}}
         {{#ivy-tab-list classNames='tabmod__tabs'}}
           {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-            <a class="tab__link">Wages {{model.lastYear}}</a>
+            <a class="tab__link">Wages {{lastYear}}</a>
           {{/ivy-tab}}
           {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
-            <a class="tab__link">Employment {{model.lastYear}}</a>
+            <a class="tab__link">Employment {{lastYear}}</a>
           {{/ivy-tab}}
         {{/ivy-tab-list}}
         {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
@@ -171,7 +170,7 @@
       {{#ivy-tabs}}
         {{#ivy-tab-list classNames='tabmod__tabs'}}
           {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-            <a class="tab__link">Exports, {{model.lastDataPoint.year}}</a>
+            <a class="tab__link">Exports, {{lastDataPoint.year}}</a>
           {{/ivy-tab}}
         {{/ivy-tab-list}}
 

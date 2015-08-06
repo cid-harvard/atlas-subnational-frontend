@@ -15,13 +15,13 @@ export default Ember.Component.extend({
       var object = { year: d.year};
       object[this.get('yVar')] = d[this.get('yVar')];
       object[this.get('varId')] = this.get('currentLocation');
+      object['name'] = d['name_es'];
       return object;
     });
   },
   sparkLine: computed('data','yVar','type', function() {
    let data = this.cleanData(this.get('data'));
    let yVar = this.get('yVar');
-   let currentLocationName = this.get('currentLocationName');
    return vistk.viz()
     .params({
       type: 'sparkline',
@@ -61,7 +61,7 @@ export default Ember.Component.extend({
             if(this.get('type') === 'population') {
               format = function(d) { return numeral(d).format('0,00'); };
             }
-            return currentLocationName + ' (' + format(+d[yVar]) + ')';
+            return d.name + ' (' + format(+d[yVar]) + ')';
           }
         }]
       }],
