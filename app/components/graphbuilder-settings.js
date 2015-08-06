@@ -2,6 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   attributeBindings: ['data-dateIndex'],
+  didInsertElement() {
+    this.set('newStartDate', this.get('startDate'));
+    this.set('newEndDate', this.get('endDate'));
+  },
   actions: {
     changeStart() {
       // TODO: DRY this out & move the date picker into its own component so many can exist on one page
@@ -10,7 +14,7 @@ export default Ember.Component.extend({
       let content = this.get('dateRange');
       let selectedValue = content[selectedIndex];
 
-      this.set('startDate', selectedValue);
+      this.set('newStartDate', selectedValue);
     },
     changeEnd() {
       let selectedEl = this.$('select[data-dateIndex="end"]')[0];
@@ -18,10 +22,18 @@ export default Ember.Component.extend({
       let content = this.get('dateRange');
       let selectedValue = String(content[selectedIndex]);
 
-      this.set('endDate', selectedValue);
+      this.set('newEndDate', selectedValue);
     },
     closeSettingsDrawer() {
       this.set('isOpen', false);
+      if(parseInt(this.get('newStartDate')) > parseInt(this.get('newEndDate'))){
+        this.set('endDate', this.get('newStartDate'));
+        this.set('startDate', this.get('newEndDate'));
+      } else {
+        this.set('startDate', this.get('newStartDate'));
+        this.set('endDate', this.get('newEndDate'));
+      }
+
     }
   }
 });

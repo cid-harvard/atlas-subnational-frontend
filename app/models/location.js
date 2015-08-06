@@ -18,8 +18,8 @@ export default DS.Model.extend(ModelAttribute, {
     var defaultParams = {
       treemap: { variable: 'export_value', startDate: 2007, endDate: 2013 },
       multiples: { variable: 'export_value', startDate: 2007, endDate: 2013 },
-      scatter: { variable: null,  startDate: 2013, endDate: 2014 },
-      similarity: { variable: null,  startDate: 2013, endDate: 2014 }
+      scatter: { variable: null,  startDate: 2013, endDate: 2013 },
+      similarity: { variable: null,  startDate: 2013, endDate: 2013 }
     };
     return $.getJSON(`${apiURL}/data/location/${this.get('id')}/products?level=class`)
       .then((response) => {
@@ -39,8 +39,8 @@ export default DS.Model.extend(ModelAttribute, {
     var defaultParams = {
       treemap: { variable: 'wages', startDate: 2007, endDate: 2013 },
       multiples: { variable: 'wages', startDate: 2007, endDate: 2013 },
-      scatter: { variable: null,  startDate: 2013, endDate: 2014 },
-      similarity: { variable: 'rca',  startDate: 2013, endDate: 2014 }
+      scatter: { variable: null,  startDate: 2013, endDate: 2013 },
+      similarity: { variable: 'rca',  startDate: 2013, endDate: 2013 }
     };
     return $.getJSON(`${apiURL}/data/location/${this.get('id')}/industries?level=class`)
       .then((response) => {
