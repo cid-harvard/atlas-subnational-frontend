@@ -204,7 +204,10 @@ export default Ember.Component.extend({
         })
         .text(function(d) {
           let yValue = Ember.get(d.values[index], varDependent);
-          return numeral(yValue).format('$ 0.00 a');
+          if(varDependent === 'export_value') {
+            return 'USD ' + numeral(yValue).format('0.00 a');
+          }
+          return numeral(yValue).format('0.00 a');
         });
 
       curYear.attr('x', x(date))

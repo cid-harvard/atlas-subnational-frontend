@@ -38,8 +38,10 @@ export default Ember.Component.extend({
         number: (d, data) => {
           if('share' === data.key){
             return numeral(d).divide(100).format('0.0%');
-          } else if( 'employment' === data.key) {
+          } else if('employment' === data.key) {
             return numeral(d).format('0.0a');
+          } else if('export_value' === data.key) {
+            return 'USD ' + numeral(d).format('0.0a');
           } else {
             return numeral(d).format('$ 0.0a');
           }

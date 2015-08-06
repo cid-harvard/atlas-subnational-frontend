@@ -56,6 +56,9 @@ export default Ember.Controller.extend({
 
     var sum = _.sum(data, variable);
     if(variable === 'employment') { return numeral(sum).format('0.00 a');}
+    if(variable === 'export_value' || variable === 'import_value') {
+      return 'USD '+ numeral(sum).format('0.00 a');
+    }
     return numeral(sum).format('$ 0.00 a');
   }),
   otherPossibleGraphs: computed('model.visualization', 'model.source',  function() {

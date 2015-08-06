@@ -107,12 +107,14 @@ export default EmberTableComponent.extend({
     };
   },
   formatNumber: function(number, key) {
-    if(key === 'export_value'|| key === 'wages' || key === 'avg_wage') {
+    if(key === 'wages' || key === 'avg_wage') {
       return numeral(number).format('$ 0.00a');
     } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'employment' || key === 'population'){
       return numeral(number).format('0.00a');
     } else if(key === 'employment_growth'){
       return numeral(number).format('0.00%');
+    } else if(key === 'export_value') {
+      return 'USD ' + numeral(number).format('0.00a');
     } else {
       return number;
     }
