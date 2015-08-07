@@ -31,7 +31,6 @@
   border-left: 2px solid $colorBrown400;
   display: inline-block;
   padding: $baseSpace/2 $baseSpace;
-  line-height: 100%;
   &:first-child {
     border-left: none;
   }
@@ -69,16 +68,16 @@
   padding: $baseSpace*4.5 $baseSpace*1.5 $baseSpace*1.5;
 }
 
-.buildermod__searchwrap {
+.buildermod__highlightwrap {
   display: flex;
   align-items: stretch;
   margin: $baseSpace*-3 0 0;
   position: absolute;
-  width: calc(100% - 7.8rem); // TODO: Switch from calc
+  width: calc(100% - 7.8rem); // TODO Switch from calc
   z-index: $zIndex-1;
 }
 
-.buildermod__search {
+.buildermod__highlight {
   transition: background 0.2s ease-in-out;
   background: $colorWhite;
   font-size: $fontSmall;
@@ -100,16 +99,36 @@
   }
 }
 
-.buildermod__search__submit {
-  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+.buildermod__highlight__submit {
   padding: $baseSpace/2 $baseSpace;
-  background: $colorNavy800;
-  color: $colorGrayLighter;
-  cursor: pointer;
   box-shadow: 2px 2px 2px $colorGrayLighter;
-  &:hover, &:active, &:focus {
-    background: $colorNavy;
-    outline: 0;
-    color: $colorWhite;
+}
+
+.buildermod__highlight__reset {
+  position: relative;
+  cursor: pointer;
+  background-color: transparent;
+  display: inline-block;
+  vertical-align: middle;
+  outline: 0;
+  &:before {
+    transition: color 0.2s ease-in-out;
+    display: block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: $baseSpace;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    cursor: pointer;
+    color: $colorGrayLight;
   }
+  &:hover:before {
+    color: $colorGrayDark;
+  }
+}
+
+.buildermod__highlight:invalid ~ .buildermod__highlight__reset {
+  display: none;
 }

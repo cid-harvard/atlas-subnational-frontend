@@ -12,6 +12,7 @@
 
 .items__mark__circle {
   stroke: $colorBlack;
+  stroke-width: 0;
 }
 
 .items__mark__circle.highlighted {

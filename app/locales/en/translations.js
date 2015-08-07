@@ -63,7 +63,7 @@ export default {
       'submit': 'Highlight'
     },
     'change_graph': {
-      'label': 'Change Graph',
+      'label': 'Graphs',
     },
     'multiples': {
       'show_all': 'Show All',
