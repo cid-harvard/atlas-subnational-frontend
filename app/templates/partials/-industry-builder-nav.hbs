@@ -15,8 +15,8 @@
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Geo Map</h4>
-                {{#link-to 'visualization' entity_and_id 'locations' 'geo' (query-params variable='export_value') class="builder__nav__question"}}
-                    What Departments export {{name}}
+                {{#link-to 'visualization' entity_and_id 'departments' 'treemap' (query-params variable='employment') class="builder__nav__question"}}
+                  {{t 'graph_builder.page_title.industry.participants.employment' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -24,8 +24,8 @@
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Geo Map</h4>
-                {{#link-to 'visualization' entity_and_id 'locations' 'geo' (query-params variable='import_value') class="builder__nav__question"}}
-                    What Departments import {{name}}
+                {{#link-to 'visualization' entity_and_id 'departments' 'treemap' (query-params variable='wages') class="builder__nav__question"}}
+                  {{t 'graph_builder.page_title.industry.participants.wages' name=name}}
                 {{/link-to}}
               </div>
             </li>

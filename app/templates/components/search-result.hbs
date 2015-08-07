@@ -2,13 +2,19 @@
   <p class="search__result__breadcrumb">{{breadcrumb}}</p>
   <p class="search__result__name" data-search-result-name>{{name}}</p>
 </div>
-{{link-to
-  'Profile' profileLink result.id
+{{#link-to
+  profileLink result.id
   data-search-profile=''
   class="btn search__btn search__btn--result"
 }}
-{{link-to
-  'Graph Builder' 'visualization' entity_and_id source 'treemap'
+  {{ t 'side_nav.profile_link' }}
+{{/link-to}}
+
+{{#link-to
+  'visualization' entity_and_id source 'treemap'
   data-search-graph-builder=''
   class="btn search__btn search__btn--result"
-  }}
+}}
+  {{ t 'side_nav.graph_builder_link' }}
+{{/link-to}}
+
