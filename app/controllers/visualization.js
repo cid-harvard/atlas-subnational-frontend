@@ -80,7 +80,7 @@ export default Ember.Controller.extend({
     let start = parseInt(this.get('startDate'), 10);
     let end = parseInt(this.get('endDate'), 10);
     if(start === end) { return start; }
-    return  `${start} - ${end}`;
+    return  `${start}–${end}`;
   }),
   varDependent: computed('variable', 'source', function() {
     // if variable exists, it is varDependent
