@@ -60,7 +60,7 @@ export default EmberTableComponent.extend({
     { key: 'year' , expand: false, type: 'int'},
     { key: 'complexity' , expand: false, type: 'int'}
    ],
-  participantsMap: [
+  departmentsMap: [
     { key: 'name', expand: true, savedWidth: 300 },
     { key: 'wages', type: 'int', expand: false},
     { key: 'employment', type: 'int', expand: false},

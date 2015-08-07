@@ -35,7 +35,7 @@ export default DS.Model.extend(ModelAttribute, {
   graphbuilderDepartments: computed('id', function() {
     var defaultParams = {
       treemap: { variable: 'employment', startDate: 2012, endDate: 2013 },
-      multiples: { variable: 'employment', startDate: 2012, endDate: 2013 },
+      multiples: { variable: 'employment', startDate: 2008, endDate: 2013 },
       scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
       similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
     };
@@ -51,7 +51,9 @@ export default DS.Model.extend(ModelAttribute, {
           let department = locationsMetadata[d.department_id];
           return _.merge(d, department);
         });
-        return { entity: this, entity_type:'industry', data: data, source: 'participants', defaultParams:defaultParams };
+        return { entity: this, entity_type:'industry', data: data, source: 'departments', defaultParams:defaultParams };
+      }, (error) => {
+        return { error: error, entity: this, entity_type:'industry', data: [], source: 'departments', defaultParams:defaultParams};
       });
   }),
   graphbuilderMunicipalities: computed('id', function() {

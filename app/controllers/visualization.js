@@ -21,7 +21,12 @@ export default Ember.Controller.extend({
 
   source: computed.alias('model.source'),
   visualization: computed.alias('model.visualization'),
-  dateExtent: computed.alias('model.dateExtent'),
+  dateExtent: computed('model.data.[]', function() {
+    if(this.get('model.data').length) {
+      return d3.extent(this.get('model.data'), function(d) { return d.year; });
+    }
+    return  [2007, 2013];
+  }),
   name: computed.alias('model.entity.name'),
   dateRange: computed('dateExtent', function() {
     return d3.range(this.get('dateExtent')[0], this.get('dateExtent')[1] + 1);
