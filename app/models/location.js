@@ -21,7 +21,7 @@ export default DS.Model.extend(ModelAttribute, {
       scatter: { variable: null,  startDate: 2013, endDate: 2013 },
       similarity: { variable: null,  startDate: 2013, endDate: 2013 }
     };
-    return $.getJSON(`${apiURL}/data/location/${this.get('id')}/products?level=class`)
+    return $.getJSON(`${apiURL}/data/location/${this.get('id')}/products?level=4digit`)
       .then((response) => {
         let productsMetadata = this.get('metaData.products');
         let data = response.data;
