@@ -72,7 +72,9 @@ export default Ember.Component.extend({
         }, {
           type: 'circle',
           stroke_width: (d) => {
-            if (d[this.get('varDependent')]) return '1px';
+            if (d[this.get('varDependent')]) {
+              return '1px';
+            }
           }
         }, {
           var_mark: '__highlighted',
