@@ -5,7 +5,7 @@ export default {
     'industries': 'Industries',
     'occupations': 'Occupations',
     'treemap': 'Treemap',
-    'multiples': 'Area multiples',
+    'multiples': 'Area charts',
     'geo': 'Geographic map',
     'scatter': 'Scatterplot',
     'similarity': 'Similarity map'
@@ -24,29 +24,36 @@ export default {
   'ctas': {
     'export': 'Export',
     'share': 'Share',
-    'download': 'Download this data'
+    'download': 'Download this data',
+    'pdf': 'PDF',
+    'png': 'PNG',
+    'embed': 'Insertar gráfico',
+    'twitter': 'Twitter',
+    'facebook': 'Facebook',
+    'csv': 'CSV',
+    'excel': 'Excel'
   },
   'search': {
     'header': 'Search',
-    'intro': "First, search for the location, product, industry or occupation that you're interested in.",
-    'placeholder': "Type here to search",
+    'intro': 'Search for the location, product, industry or occupation that you’re interested in.',
+    'placeholder': 'Type here to search',
     'results_products': 'Results: Products',
     'results_locations': 'Results: Locations',
     'results_industries': 'Results: Industries',
-    'didnt_find': "Didn't find what you were looking for? Let us know: TKTK@prosperia.com"
+    'didnt_find': 'Didn’t find what you were looking for? Let us know: TKTK@prosperia.com'
   },
   'graph_builder': {
     'read_more': 'Read the profile and complexity analysis for this location',
     'view_more': 'View More',
     'table': {
       'name': 'Name',
-      'export_value': 'Export',
+      'export_value': 'Exports',
       'export_rca': 'RCA',
       'rca': 'RCA',
       'wages': 'Wages',
       'employment': 'Employment',
       'avg_wage': 'Average Wage',
-      'employment_growth': 'Employment Growth, `08-`12',
+      'employment_growth': 'Employment Growth, (2008-2012)',
       'num_establishments': 'Number of Firms',
       'year': 'Year',
       'complexity': 'Complexity',
@@ -106,7 +113,7 @@ export default {
     },
     'builder_nav': {
       'header': 'More graphs for this {{entity_type}}',
-      'intro': "Select a question to see the corresponding graph. If the question has missing parameters ({{icon}}) , you'll fill those in when you click.",
+      'intro': 'Select a question to see the corresponding graph. If the question has missing parameters ({{icon}}) , you’ll fill those in when you click.',
     },
     'builder_mod_header': {
       'industry': {
@@ -146,7 +153,7 @@ export default {
     'exports_and_imports': 'Exports and imports',
     'exports': 'Exports, {{year}}',
     'export_possiblities': 'Export possiblities',
-    'export_possiblities.intro': "We've found that countries which export complex products grow faster than those which export simple products. Using the similarity map we built in the section above, we've highlighted  high potential products for {{name}}, ranked by which have the highest combination of opportunity and complexity.",
+    'export_possiblities.intro': 'We’ve found that countries which export complex products grow faster than those which export simple products. Using the similarity map we built in the section above, we’ve highlighted  high potential products for {{name}}, ranked by which have the highest combination of opportunity and complexity.',
     'export_possiblities.footer': 'Note that the list is dynamically generated.  Not all exports may make sense given local conditions not captured in our measure of product similarity.',
     'stepper': {
       1: `This circle represents bananas.
