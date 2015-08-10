@@ -13,7 +13,7 @@ export default DS.Model.extend(ModelAttribute, {
   departmentsData: attr(),
 
   timeseries: computed('industriesData','model.id', function() {
-    return _.filter(this.get('industriesData'), {id: parseInt(this.get('id'))});
+    return _.filter(this.get('industriesData'), {industry_id: parseInt(this.get('id'))});
   }),
   firstDataPoint: computed('timeseries', function() {
     return _.first(this.get('timeseries'));

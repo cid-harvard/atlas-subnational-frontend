@@ -18,12 +18,11 @@ export default Ember.Route.extend({
       .then((model) => {
         var groupIds = _.pluck(_.filter(industriesMetadata, 'parent_id', parseInt(model.id)), 'id');
         var classIndustries = _.filter(industriesMetadata, function(d) {
-          return _.contains(groupIds, d.parent_id);
+          return _.contains(groupIds, d.id);
         });
         return $.getJSON(`${apiURL}/data/industry?level=class`)
           .then((response) => {
             let data = _.groupBy(response.data, 'industry_id');
-
             _.forEach(classIndustries, (d) => {
               let classData = data[d.id];
               let lastClassData = _.last(classData);
