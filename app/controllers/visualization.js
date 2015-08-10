@@ -90,7 +90,7 @@ export default Ember.Controller.extend({
     if(this.get('source') === 'industries') { return 'wages'; }
   }),
   immutableData: computed('model.data.[]','endDate', 'startDate' , function() {
-    return this.filterToSelectedYears(this.get('model.data'));
+    return this.filterToSelectedYears(this.get('model.data'), this.get('startDate'), this.get('endDate'));
   }),
   filteredData: computed('immutableData.[]', 'search', 'startDate', 'endDate', function() {
     let data = this.get('immutableData');
@@ -123,26 +123,14 @@ export default Ember.Controller.extend({
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
     return _.filter(data, (d) => {
-      return _.deburr(get(d,`name_${this.get('i18n').locale}`) || '').match(regexp) || get(d, 'code').match(regexp);
+      return _.deburr(Ember.getWithDefault(d,`name_${this.get('i18n').locale}`, 'foo') || 'foo').match(regexp);
     });
   },
-  filterToSelectedYears: function(data) {
-    let start = Number(this.get('startDate'));
-    let end = Number(this.get('endDate'));
-    let timeRange = null;
-
-    if(start === end) {
-      timeRange = String(start);
-    } else {
-      timeRange = d3.range(start, end + 1); // Makes the range inclusive
-    }
-
-    return _.filter(data, (d) => {
+  filterToSelectedYears: function(data, start, end) {
+    let  timeRange = d3.range(start, end + 1); // Makes the range inclusive
+    return _.filter(data, function(d) {
       return _.contains(timeRange, get(d, 'year'));
     });
-  },
-  init: function(){
-    this._super(this, arguments);
   },
   scrollTopWhenUpdate: observer('variable', function() {
     window.scrollTo(0,0);
