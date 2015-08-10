@@ -1,6 +1,7 @@
 export default {
   'side_nav': {
     'brand_slogan': 'Utilizando datos para mantener Colombia competitiva',
+    'search_link': 'Buscar',
     'profile_link': 'Perfil',
     'graph_builder_link': 'Gráfico Constructor'
   },
