@@ -36,6 +36,10 @@
   }
 }
 
+.buildermod__tool--is--unnecessary {
+  display: none;
+}
+
 .buildermod__tool__btn  {
   color: $colorGray;
   &:hover, &:active, &:focus {

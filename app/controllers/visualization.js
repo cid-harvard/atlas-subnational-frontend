@@ -17,6 +17,14 @@ export default Ember.Controller.extend({
   searchText: computed.oneWay('search'),
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
+  drawerIsUnnecessary: computed('visualization', function() {
+    let visualization = this.get('visualization');
+    if(visualization === 'similarity') {
+      return true;
+    } else {
+      return false;
+    }
+  }),
   builderNavDropDown: Ember.String.htmlSafe("<i class='icon-cidcon_placeholder-1 builder__icon--placeholder'></i>"),
 
   source: computed.alias('model.source'),
