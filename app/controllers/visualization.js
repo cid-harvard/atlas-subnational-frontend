@@ -17,6 +17,14 @@ export default Ember.Controller.extend({
   searchText: computed.oneWay('search'),
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
+  drawerIsUnnecessary: computed('visualization', function() {
+    let visualization = this.get('visualization');
+    if(visualization === 'similarity') {
+      return true;
+    } else {
+      return false;
+    }
+  }),
   builderNavDropDown: Ember.String.htmlSafe("<i class='icon-cidcon_placeholder-1 builder__icon--placeholder'></i>"),
 
   source: computed.alias('model.source'),
@@ -80,7 +88,7 @@ export default Ember.Controller.extend({
     let start = parseInt(this.get('startDate'), 10);
     let end = parseInt(this.get('endDate'), 10);
     if(start === end) { return start; }
-    return  `${start} - ${end}`;
+    return  `${start}–${end}`;
   }),
   varDependent: computed('variable', 'source', function() {
     // if variable exists, it is varDependent

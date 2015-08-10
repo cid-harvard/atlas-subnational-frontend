@@ -1,45 +1,10 @@
+/**
+*
+* d3plus Resets
+*
+**/
+
+
 .d3plus_share {
   visibility: hidden;
-}
-.buildermod__viz {
-  .connect__line {
-    stroke: #E1DCD6;
-    stroke-opacity: .4;
-  }
-
-  .items__mark__star {
-    fill: #CBC0B8;
-    stroke-width: .5px;
-    stroke: red;
-    transform: scale(0.5);
-  }
-
-  .items__mark__star.selected {
-    stroke-width: 1px;
-  }
-
-  .items__mark__star.highlighted {
-    fill: yellow;
-    stroke-width: 1.5px;
-  }
-
-  .items__mark__circle {
-    fill: #CCC1B9;
-    stroke-width: .5px;
-  }
-
-  .items__mark__circle.highlighted {
-    fill: #191914;
-    stroke: black;
-    stroke-width: .5px;
-  }
-
-  .items__mark__circle.selected {
-    fill: #EA413D;
-  }
-
-  text {
-    font-size: 1.4rem;
-  }
-
 }

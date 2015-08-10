@@ -1,0 +1,51 @@
+/**
+*
+* Similarity Maps
+*
+**/
+
+
+.connect__line {
+  stroke: $colorGrayLight;
+  stroke-opacity: .4;
+}
+
+.items__mark__circle {
+  stroke: $colorBlack;
+  stroke-width: 0;
+}
+
+.items__mark__circle.highlighted {
+  fill: #191914;
+  stroke: black;
+}
+
+.items__mark__circle.selected {
+  fill: #EA413D;
+}
+
+text {
+  font-size: $fontTiny;
+}
+
+.items__mark__star {
+  fill: #CBC0B8;
+  stroke-width: .5px;
+  stroke: red;
+  transform: scale(0.5);
+}
+
+.items__mark__star.selected {
+  stroke-width: 1px;
+}
+
+.items__mark__star.highlighted {
+  fill: yellow;
+  stroke-width: 1.5px;
+}
+
+.legend_group {
+  text {
+    font-size: 1.4rem;
+  }
+}
