@@ -14,16 +14,19 @@ export default Ember.Component.extend({
       .container(this.get('id'))
       .data({value: this.get('data')})
       .type('scatter')
-      .color('#ccc1b9')
+      .color((d) => { return d.color ? d.color : '#ccc1b9';})
       .id(this.get('varIndependent'))
       .x('distance')
       .y('complexity')
       .format({ number: function(d) { return numeral(d).format('0.0a');}})
-      .text({value: (d) => { return Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code;}})
+      .text({value: (d) => {
+        return Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code;
+       }})
       .size(this.get('rca'))
       .timeline(false)
       .height(this.get('height'))
-      .width(this.get('width'));
+      .width(this.get('width'))
+      .legend(false);
   }),
   rca: computed('dataType', function() {
     if(this.get('dataType') === 'products') { return 'export_rca'; }
