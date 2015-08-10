@@ -1,70 +1,77 @@
 export default {
-  0: {
-    "name_es": "Agricultura, Ganadería, Caza Y Silvicultura",
-    "color": "#7ddaa1"
+  504: {
+    "color": "#7ddaa1",
+    "name_en": "Textiles & Furniture",
+    "name_es": "Textiles y Muebles",
   },
-  31: {
-    "name_es": "Pesca", //fishing
-    "color": '#c57bd9'
+  505: {
+    "color": "#dbd37d",
+    "name_en": "Vegetables, Animals, Foodstuffs, Wood",
+    "name_es": "Vegetales, Animales, Alimentos, y Madera",
   },
-  40: {
-    "name_es": "Explotación De Minas Y Canteras", //mining
-    "color": '#db987c'
+  506: {
+    "color": "#dab47d",
+    "name_en": "Stone & Glass",
+    "name_es": "Piedra y Vidrio",
   },
-  79: {
-    "name_es": "Industrias Manufactureras",
-    "color": '#7ba2d9',
+  507: {
+    "color": "#db987c",
+    "name_en": "Minerals",
+    "name_es": "Minerales",
   },
-  332: {
-    "name_es": "Suministro De Electricidad, Gas Y Agua", //electricity, gas and water
-    "color": '#b3b3b3'
+  508: {
+    "color": "#d97b7b",
+    "name_en": "Metals",
+    "name_es": "Metales",
   },
-  346: {
+  509: {
+    "color": "#c57bd9",
+    "name_en": "Chemicals & Plastics",
+    "name_es": "Químicos y Plásticos",
+  },
+  510: {
+    "color": "#8d7bd8",
+    "name_en": "Transportation",
+    "name_es": "Vehículos de Transporte",
+  },
+  511: {
+    "color": "#7ba2d9",
+    "name_en": "Machinery",
+    "name_es": "Maquinaria",
+  },
+  512: {
+    "color": "#7ddada",
+    "name_en": "Electronics",
+    "name_es": "Electrónicos",
+  },
+  513: {
+    "color": "#7bd9a5",
+    "name_en": "Social Services",
+    "name_es": "Servicios Sociales",
+  },
+  514: {
+    "color": "#b3b3b3",
+    "name_en": "Utilities",
+    "name_es": "Servicios Públicos",
+  },
+  515: {
+    "color": "#d9967b",
+    "name_en": "Construction",
     "name_es": "Construcción",
-    "color": '#d9967b'
   },
-  371: {
-    "name_es": "Comercio Al Por Mayor Y Al Por Menor; Reparación De Vehículos Automotores, Motocicletas, Efectos Personales Y Enseres Domésticos", //cars and everything about cars
-    'color': '#8d7bd8'
+  516: {
+    "color": "#ca73c6",
+    "name_en": "Transport & Communications",
+    "name_es": "Transporte y Comunicaciones",
   },
-  467: {
-    "name_es": "Hoteles Y Restaurantes",
-    'color': '#7ba2d9'
+  517: {
+    "color": "#abd97b",
+    "name_en": "Commerce",
+    "name_es": "Comercio",
   },
-  486: {
-    "name_es": "Transporte, Almacenamiento Y Comunicaciones",
-    "color": '#ca73c6'
-  },
-  544: {
-    "name_es": "Intermediación Financiera",
-    "color": '#d97ba8'
-  },
-  582: {
-    "name_es": "Actividades Inmobiliarias, Empresariales Y De Alquiler", //rent
-    'color': '#d9967b'
-  },
-  636: {
-    "name_es": "Administración Pública Y Defensa; Seguridad Social De Afiliación Obligatoria", //social services?
-    "color": '#7bd9a5'
-  },
-  655: {
-    "name_es": "Educación",
-    "color": '#7ddaa1'
-  },
-  680: {
-    "name_es": "Servicios Sociales Y De Salud",
-    "color": '#7bd9a5'
-  },
-  698: {
-    "name_es": "Otras Actividades De Servicios Comunitarios, Sociales Y Personales",
-    'color': '#abd97b'
-  },
-  736: {
-    "name_es": "Hogares Privados Con Servicio Doméstico",
-    'color': '#7ddaa1'
-  },
-  740: {
-    "name_es": "Organizaciones Y Órganos Extraterritoriales",
-    'color': '#7ddada'
+  518: {
+    "color": "#d97ba8",
+    "name_en": "Financial & Business Services",
+    "name_es": "Servicios Financieros y Empresariales",
   }
 };
