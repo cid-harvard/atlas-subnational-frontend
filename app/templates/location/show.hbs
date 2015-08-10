@@ -15,23 +15,35 @@
       <h3 class="section__head">{{t 'location.show.overview'}}</h3>
       </header>
       <ul class="list--section list--section--bullets">
-        <li class="list__item--section--bullets">GDP grew {{gdpGrowth}} between {{yearRange}}</li>
-        <li class="list__item--section--bullets">{{model.name}} has a GDP per capita at {{lastGdpPerCapita}}</li>
-        <li class="list__item--section--bullets">The population is {{lastPop}}</li>
+        <li class="list__item--section--bullets">
+          {{t 'location.show.bullet.gdp_grow_rate' gdpGrowth=gdpGrowth yearRange=yearRange}}
+        </li>
+        <li class="list__item--section--bullets">
+          {{t 'location.show.bullet.gdp_pc' name=model.name lastGdpPerCapita=lastGdpPerCapita}}
+        </li>
+        <li class="list__item--section--bullets">
+          {{t 'location.show.bullet.last_pop' lastPop=lastPop}}
+        </li>
       </ul>
       <table class="table--summaries">
         <thead>
           <tr class="table__row table__row--header">
             <th class="table__header"></th>
-            <th class="table__header table__header--summaries--dotplot">All 32 departments</th>
-            <th class="table__header">Value</th>
-            <th class="table__header table__header--summaries--spark">Growth, annual ({{yearRange}})</th>
+            <th class="table__header table__header--summaries--dotplot">
+              {{t 'location.show.all_departments'}}
+            </th>
+            <th class="table__header">
+              {{t 'location.show.value'}}
+            </th>
+            <th class="table__header table__header--summaries--spark">
+              {{t 'location.show.growth_annual' yearRange=yearRange}}
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr class="table__row table__row--body">
             <td class="table__cell table__cell--summaries">
-              GDP per Capita
+              {{t 'location.show.gdp_pc'}}
             </td>
             <td class="table__cell table__cell--summaries">
               {{dot-plot
@@ -58,7 +70,7 @@
           </tr>
           <tr class="table__row table__row--body">
             <td class="table__cell table__cell--summaries">
-              GDP
+              {{t 'location.show.gdp'}}
             </td>
             <td class="table__cell table__cell--summaries">
               {{dot-plot
@@ -85,7 +97,7 @@
           </tr>
           <tr class="table__row table__row--body">
             <td class="table__cell table__cell--summaries">
-             Population
+              {{t 'location.show.population'}}
             </td>
             <td class="table__cell table__cell--summaries">
               {{dot-plot
@@ -118,16 +130,20 @@
   {{/if}}
   <section class="stream__section">
     <header class="section__header">
-      <h3 class="section__head">Employment and Wages</h3>
+      <h3 class="section__head"></h3>
     </header>
     <div class="tabmod">
       {{#ivy-tabs}}
         {{#ivy-tab-list classNames='tabmod__tabs'}}
           {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-            <a class="tab__link">Wages {{lastYear}}</a>
+            <a class="tab__link">
+              {{t 'location.show.total_wages' lastYear=lastYear}}
+            </a>
           {{/ivy-tab}}
           {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
-            <a class="tab__link">Employment {{lastYear}}</a>
+            <a class="tab__link">
+              {{t 'location.show.employment' lastYear=lastYear}}
+            </a>
           {{/ivy-tab}}
         {{/ivy-tab-list}}
         {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
@@ -164,13 +180,17 @@
 
   <section class="stream__section">
     <header class="section__header">
-      <h3 class="section__head">Exports and imports</h3>
+      <h3 class="section__head">
+        {{t 'location.show.exports_imports'}}
+      </h3>
     </header>
     <div class="tabmod">
       {{#ivy-tabs}}
         {{#ivy-tab-list classNames='tabmod__tabs'}}
           {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-            <a class="tab__link">Exports, {{lastDataPoint.year}}</a>
+            <a class="tab__link">
+              {{t 'location.show.exports' year=lastDataPoint.year}}
+            </a>
           {{/ivy-tab}}
         {{/ivy-tab-list}}
 
@@ -274,9 +294,13 @@
   --}}
   <section class="stream__section">
     <header class="section__header">
-      <h3 class="section__head">Export possiblities</h3>
+      <h3 class="section__head">
+        {{t 'location.show.export_possiblities'}}
+      </h3>
     </header>
-    <p class="section__intro">We've found that countries which export complex products grow faster than those which export simple products. Using the similarity map we built in the section above, we've highlighted  high potential products for {{name}}, ranked by which have the highest combination of opportunity and complexity.</p>
+    <p class="section__intro">
+      {{t 'location.show.export_possiblities.intro' name=model.name}}
+    </p>
     <div class="vizmod">
       <div class="vizmod--treemod">
         <!--<div class="vizmod__legend">
@@ -301,8 +325,7 @@
       </div>
       <footer class="vizmod__footer">
       <p class="vizmod__footer__p">
-        Note that the list is dynamically generated.
-        Not all exports may make sense given local conditions not captured in our measure of product similarity.
+        {{t 'location.show.export_possiblities.footer'}}
       </p>
       </footer>
     </div>
@@ -312,13 +335,6 @@
     <div class="interstitial__btnmod">
       <button class="interstitial__btn">Facebook</button>
       <button class="interstitial__btn">Twitter</button>
-    </div>
-  </div>
-  <div class="interstitial">
-    <h3 class="interstitial__head">Download data for this profile</h3>
-    <div class="interstitial__btnmod">
-      <button class="interstitial__btn">CSV (13MB)</button>
-      <button class="interstitial__btn">Excel (41MB)</button>
     </div>
   </div>
   <section class="stream__section">

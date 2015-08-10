@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { translationMacro as t } from "ember-i18n";
 const {computed, observer, get: get} = Ember;
 
 export default Ember.Controller.extend({
@@ -7,6 +8,7 @@ export default Ember.Controller.extend({
   queryParams: ['query'],
   query: null,
   search: computed.oneWay('query'),
+  placeholder: t('search.placeholder'),
   clearSearchIfEmpty: observer('query', function() {
     // if query is empty, set the search to null
     // this is for route transitions that don't trigger `init`

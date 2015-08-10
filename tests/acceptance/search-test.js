@@ -7,6 +7,7 @@ var application;
 module('Acceptance | search', {
   beforeEach: function() {
     application = startApp();
+    application.$.cookie('locale', 'en');
     visit('/');
   },
 

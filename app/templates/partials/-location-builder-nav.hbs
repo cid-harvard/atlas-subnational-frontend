@@ -10,9 +10,6 @@
       {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
         <a class="tab__link">{{t 'general.industries'}}</a>
       {{/ivy-tab}}
-      {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-        <a class="tab__link">{{t 'general.occupations'}}</a>
-      {{/ivy-tab}}
     {{/ivy-tab-list}}
 
     {{!-- LOCATION--}}
@@ -25,7 +22,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'visualization'  class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.export' name=name }}
+                  {{t 'graph_builder.page_title.location.locations.export' name=name }}
                 {{/link-to}}
               </div>
             </li>
@@ -34,7 +31,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.export_to' name=name item=builderNavDropDown}}
+                  {{t 'graph_builder.page_title.location.locations.export_to' name=name item=builderNavDropDown}}
                 {{/link-to}}
               </div>
             </li>
@@ -43,7 +40,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.import_from' name=name }}
+                  {{t 'graph_builder.page_title.location.locations.import_from' name=name }}
                 {{/link-to}}
               </div>
             </li>
@@ -52,7 +49,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.import_product_from' name=name item=builderNavDropDown }}
+                  {{t 'graph_builder.page_title.location.locations.import_product_from' name=name item=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -65,7 +62,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.export_subregions' name=name }}
+                  {{t 'graph_builder.page_title.location.locations.export_subregions' name=name }}
                 {{/link-to}}
               </div>
             </li>
@@ -74,7 +71,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.export_subregions_products' name=name item=builderNavDropDown }}
+                  {{t 'graph_builder.page_title.location.locations.export_subregions_products' name=name item=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -83,7 +80,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.export_subregions_locations' name=name place=builderNavDropDown }}
+                  {{t 'graph_builder.page_title.location.locations.export_subregions_locations' name=name place=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -92,7 +89,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.export_subregions_products_locations' name=name  place=builderNavDropDown item=builderNavDropDown }}
+                  {{t 'graph_builder.page_title.location.locations.export_subregions_products_locations' name=name  place=builderNavDropDown item=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -101,7 +98,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.import_subregions' name=name item=builderNavDropDown }}
+                  {{t 'graph_builder.page_title.location.locations.import_subregions' name=name item=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -110,7 +107,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.import_subregions_products' name=name item=builderNavDropDown }}
+                  {{t 'graph_builder.page_title.location.locations.import_subregions_products' name=name item=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -119,7 +116,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.import_subregions_locations' name=name place=builderNavDropDown }}
+                  {{t 'graph_builder.page_title.location.locations.import_subregions_locations' name=name place=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -128,7 +125,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.locations.import_subregions_products_locations' name=name place=builderNavDropDown item=builderNavDropDown }}
+                  {{t 'graph_builder.page_title.location.locations.import_subregions_products_locations' name=name place=builderNavDropDown item=builderNavDropDown }}
                 {{/link-to}}
               </div>
             </li>
@@ -147,7 +144,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'visualization' entity_and_id 'products' 'treemap' (query-params variable='export_value') class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.products.export_value' name=name}}
+                  {{t 'graph_builder.page_title.location.products.export_value' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -156,7 +153,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.products.export_value_to' name=name place=builderNavDropDown}}
+                  {{t 'graph_builder.page_title.location.products.export_value_to' name=name place=builderNavDropDown}}
                 {{/link-to}}
               </div>
             </li>
@@ -165,7 +162,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'visualization' entity_and_id 'products' 'treemap' (query-params variable='import_value') class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.products.import_value' name=name}}
+                  {{t 'graph_builder.page_title.location.products.import_value' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -174,7 +171,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.products.import_value_from' name=name place=builderNavDropDown}}
+                  {{t 'graph_builder.page_title.location.products.import_value_from' name=name place=builderNavDropDown}}
                 {{/link-to}}
               </div>
             </li>
@@ -187,7 +184,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Scatterplot</h4>
                 {{#link-to 'visualization' entity_and_id 'products' 'scatter' (query-params variable='null' endDate=2014 startDate=2013) class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.products.scatter' name=name}}
+                  {{t 'graph_builder.page_title.location.products.scatter' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -196,7 +193,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Similarity map</h4>
                 {{#link-to 'visualization' entity_and_id 'products' 'similarity' (query-params variable='null' endDate=2014 startDate=2013) class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.products.similarity' name=name}}
+                  {{t 'graph_builder.page_title.location.products.similarity' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -215,7 +212,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'visualization' entity_and_id 'industries' 'treemap' (query-params variable='employment') class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.industries.employment' name=name}}
+                  {{t 'graph_builder.page_title.location.industries.employment' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -224,7 +221,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'visualization' entity_and_id 'industries' 'treemap' (query-params variable='wages') class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.industries.wages' name=name}}
+                  {{t 'graph_builder.page_title.location.industries.wages' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -233,7 +230,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="inudstrie") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.industries.wages_highest_per_worker' name=name}}
+                  {{t 'graph_builder.page_title.location.industries.wages_highest_per_worker' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -242,7 +239,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Treemap</h4>
                 {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.industries.wages_highest' place=builderNavDropDown}}
+                  {{t 'graph_builder.page_title.location.industries.wages_highest' place=builderNavDropDown}}
                 {{/link-to}}
               </div>
             </li>
@@ -255,7 +252,7 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Scatterplot</h4>
                 {{#link-to 'visualization' entity_and_id 'industries' 'scatter' (query-params variable='null') class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.industries.scatter' name=name}}
+                  {{t 'graph_builder.page_title.location.industries.scatter' name=name}}
                 {{/link-to}}
               </div>
             </li>
@@ -264,17 +261,13 @@
               <div class="builder__nav__item__textwrap">
                 <h4 class="label builder__nav__label">Similarity map</h4>
                 {{#link-to 'visualization' entity_and_id 'industries' 'similarity' (query-params variable='rca') class="builder__nav__question"}}
-                  {{t 'graph_builder.builder_nav.location.industries.similarity' name=name}}
+                  {{t 'graph_builder.page_title.location.industries.similarity' name=name}}
                 {{/link-to}}
               </div>
             </li>
           </ul>
         </li>
       </ul>
-    {{/ivy-tab-panel}}
-
-    {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-      <p>Occupation data is only available at the national level. <a class="link--inactive" href="#">View the Graph Builder for Colombia.</a></p>
     {{/ivy-tab-panel}}
   {{/ivy-tabs}}
 </div>

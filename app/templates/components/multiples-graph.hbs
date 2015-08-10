@@ -1,2 +1,4 @@
 <div id='multiples' class='multiples'></div>
-<button id="multiples__btn--showall" {{action 'showAll'}} {{bind-attr class=":btn :btn--standalone :multiples__btn--showall hasMore:multiples__btn--showall--is--relevant"}}>{{fa-icon "plus" classNames="tool__btn__icon"}} Show all</button>
+<button id="multiples__btn--showall" {{action 'showAll'}} {{bind-attr class=":btn :btn--standalone :multiples__btn--showall hasMore:multiples__btn--showall--is--relevant"}}>
+  {{fa-icon "plus" classNames="tool__btn__icon"}} {{t 'graph_builder.multiples.show_all'}}
+</button>

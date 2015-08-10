@@ -1,13 +1,13 @@
 <article class="stream search">
   <header class="search__header">
-    <h2 class="search__header__head">Search</h2>
+  <h2 class="search__header__head">{{t 'search.header'}}</h2>
   </header>
   <section class="search__section">
-    <p class='search__copy search__copy--intro'>First, search for the location, product, industry or occupation that you're interested in.</p>
+    <p class='search__copy search__copy--intro'>{{t 'search.intro'}}</p>
     <form class="search__wrap">
       {{input
         class="search__field"
-        placeholder="Type here to search"
+        placeholder=placeholder
         value=search
         enter='search'
         data-search-input=''

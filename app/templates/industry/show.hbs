@@ -10,20 +10,26 @@
   </header>
   <section class="stream__section">
     <header class="section__header">
-      <h3 class="section__head">Employment and Wages</h3>
+    <h3 class="section__head">
+      {{t 'industry.show.employment_and_wages'}}
+    </h3>
     </header>
     <table class="table--summaries">
       <thead>
         <tr class="table__row table__row--header">
           <th class="table__header"></th>
-          <th class="table__header table__header--summaries--dotplot">Industries</th>
-          <th class="table__header">Value</th>
+          <th class="table__header table__header--summaries--dotplot">
+            {{t 'industry.show.industries'}}
+          </th>
+          <th class="table__header">
+            {{t 'industry.show.value'}}
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr class="table__row table__row--body">
           <td class="table__cell table__cell--summaries">
-            Employment Growth (2008-2013)
+            {{t 'industry.show.employment_growth'}}
           </td>
           <td class="table__cell table__cell--summaries">
             {{dot-plot
@@ -55,7 +61,7 @@
         </tr>
         <tr class="table__row table__row--body">
           <td class="table__cell table__cell--summaries">
-            Average Wage (2013)
+            {{t 'industry.show.avg_wages' year=year}}
           </td>
           <td class="table__cell table__cell--summaries">
             {{dot-plot
@@ -77,10 +83,10 @@
       {{#ivy-tabs}}
         {{#ivy-tab-list classNames='tabmod__tabs'}}
           {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-            <a class="tab__link">Average Wages ({{year}})</a>
+            <a class="tab__link"> {{t 'industry.show.avg_wages' year=year}} </a>
           {{/ivy-tab}}
           {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
-            <a class="tab__link">Employment ({{year}})</a>
+            <a class="tab__link"> {{t 'industry.show.employment' year=year}} </a>
           {{/ivy-tab}}
         {{/ivy-tab-list}}
         {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
@@ -117,7 +123,7 @@
   </section>
   <section class="stream__section">
     <header class="section__header">
-      <h3 class="section__head">Industry Composition, 2012</h3>
+      <h3 class="section__head">{{t 'industry.show.industry_composition'}}</h3>
     </header>
     {{component 'graphbuilder-table'
       data=model.classIndustries
@@ -131,15 +137,6 @@
       <button class="interstitial__btn">Twitter</button>
     </div>
   </div>
-  <div class="interstitial">
-    <h3 class="interstitial__head">Download data for this profile</h3>
-    <div class="interstitial__btnmod">
-      <button class="interstitial__btn">CSV (13MB)</button>
-      <button class="interstitial__btn">Excel (41MB)</button>
-    </div>
-  </div>
-  <section class="stream__section">
-  </section>
 </article>
 <footer class="footer">
   <p class="footer__text">Footer TK</p>
