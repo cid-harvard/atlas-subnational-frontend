@@ -1,11 +1,15 @@
 export default {
   'general': {
     'locations': 'Locations',
-    'export_and_import': 'Exports and Imports',
+    'export_and_import': 'Products',
     'industries': 'Industries',
     'occupations': 'Occupations',
+    'location': 'location',
+    'product': 'product',
+    'industry': 'industry',
+    'occupation': 'occupation',
     'treemap': 'Treemap',
-    'multiples': 'Area multiples',
+    'multiples': 'Area charts',
     'geo': 'Geographic map',
     'scatter': 'Scatterplot',
     'similarity': 'Similarity map'
@@ -24,29 +28,36 @@ export default {
   'ctas': {
     'export': 'Export',
     'share': 'Share',
-    'download': 'Download this data'
+    'download': 'Download this data',
+    'pdf': 'PDF',
+    'png': 'PNG',
+    'embed': 'Insertar gráfico',
+    'twitter': 'Twitter',
+    'facebook': 'Facebook',
+    'csv': 'CSV',
+    'excel': 'Excel'
   },
   'search': {
     'header': 'Search',
-    'intro': "First, search for the location, product, industry or occupation that you're interested in.",
-    'placeholder': "Type here to search",
+    'intro': 'Search for the location, product, industry or occupation that you’re interested in.',
+    'placeholder': 'Type here to search',
     'results_products': 'Results: Products',
     'results_locations': 'Results: Locations',
     'results_industries': 'Results: Industries',
-    'didnt_find': "Didn't find what you were looking for? Let us know: TKTK@prosperia.com"
+    'didnt_find': 'Didn’t find what you were looking for? Let us know: TKTK@prosperia.com'
   },
   'graph_builder': {
     'read_more': 'Read the profile and complexity analysis for this location',
     'view_more': 'View More',
     'table': {
       'name': 'Name',
-      'export_value': 'Export',
-      'export_rca': 'RCA',
-      'rca': 'RCA',
+      'export_value': 'Exports',
+      'export_rca': 'Revealed competitive advantage',
+      'rca': 'Revealed competitive advantage',
       'wages': 'Wages',
       'employment': 'Employment',
       'avg_wage': 'Average Wage',
-      'employment_growth': 'Employment Growth, `08-`12',
+      'employment_growth': 'Employment Growth, (2008-2012)',
       'num_establishments': 'Number of Firms',
       'year': 'Year',
       'complexity': 'Complexity',
@@ -70,26 +81,15 @@ export default {
     },
     'page_title': {
       'industry': {
-        'departments.employment': 'What departments does {{name}} employ the most people',
-        'departments.wages': 'What departments does {{name}} pay the highest total wages',
-        'departments.wage_avg': 'What departments does {{name}} pay the highest average wages',
+        'locations.employment': 'Where in Colombia does {{name}} employ the most people?',
+        'locations.wages': 'Where in Colombia does {{name}} pay the highest total wages?',
+        'locations.wage_avg': 'Where in Colombia does {{name}} pay the highest wages per worker?',
       },
       'product': {
-        'locations.export_value': 'What departments the export {{name}}?',
-        'locations.import_value': 'What departments the export {{name}}?',
+        'locations.export_value': 'What places in Colombia export {{name}}?',
+        'locations.import_value': 'What places in Colombia import {{name}}?',
       },
       'location': {
-        'products.export_value': 'What products does {{name}} export?',
-        'products.scatter': 'What products have the best combination of complexity and opportunity for {{name}}?',
-        'products.export_value_to': 'What products does {{name}} export to {{place}}?',
-        'products.import_value': 'What products does {{name}} import?',
-        'products.import_value_from': 'What products does {{name}} import from {{place}}?',
-        'products.similarity': 'What does the product map look like for {{name}}?',
-        'industries.employment': 'What industries in {{name}} employ the most people?',
-        'industries.scatter': 'What industries have the best combination of complexity and opportunity for {{name}}?',
-        'industries.wages': 'What industries in {{name}} are the largest by total wages?',
-        'industries.wages_highest_per_worker': 'What industries in {{name}} have the highest wages per worker?',
-        'industries.similarity': 'What does the industry map look like for {{name}}?',
         'locations.export': 'What countries does {{name}} export to?',
         'locations.export_to': 'What countries does {{name}} export {{item}} to?',
         'locations.import_from': 'What countries does {{name}} import from?',
@@ -101,18 +101,29 @@ export default {
         'locations.import_subregions': 'What subregions contribute to the imports for {{name}}?',
         'locations.import_subregions_products': 'What subregions contribute to the imports of {{item}} for {{name}}?',
         'locations.import_subregions_locations': 'What subregions contribute to the imports for {{name}} from {{place}}?',
-        'locations.import_subregions_products_locations': 'What subregions contribute to the imports of {{item}} for {{name}} from {{place}}?'
+        'locations.import_subregions_products_locations': 'What subregions contribute to the imports of {{item}} for {{name}} from {{place}}?',
+        'products.export_value': 'What products does {{name}} export?',
+        'products.scatter': 'What products have the best combination of complexity and opportunity for {{name}}?',
+        'products.export_value_to': 'What products does {{name}} export to {{place}}?',
+        'products.import_value': 'What products does {{name}} import?',
+        'products.import_value_from': 'What products does {{name}} import from {{place}}?',
+        'products.similarity': 'What does the product map look like for {{name}}?',
+        'industries.employment': 'What industries in {{name}} employ the most people?',
+        'industries.scatter': 'What industries have the best combination of complexity and opportunity for {{name}}?',
+        'industries.wages': 'What industries in {{name}} are the largest by total wages?',
+        'industries.wages_highest_per_worker': 'What industries in {{name}} have the highest wages per worker?',
+        'industries.similarity': 'What does the industry map look like for {{name}}?'
       }
     },
     'builder_nav': {
-      'header': 'More graphs for this {{entity_type}}',
-      'intro': "Select a question to see the corresponding graph. If the question has missing parameters ({{icon}}) , you'll fill those in when you click.",
+      'header': 'More graphs for this {{entity}}',
+      'intro': 'Select a question to see the corresponding graph. If the question has missing parameters ({{icon}}) , you’ll fill those in when you click.',
     },
     'builder_mod_header': {
       'industry': {
-        'departments.employment': 'Total Employment',
-        'departments.wages': 'Total Wages (COP)',
-        'departments.wage_avg': 'Average Wages (COP)',
+        'locations.employment': 'Total Employment',
+        'locations.wages': 'Total Wages (COP)',
+        'locations.wage_avg': 'Average Wages (COP)',
       },
       'product': {
         'locations.export_value': 'Departments of Colombia',
@@ -146,7 +157,7 @@ export default {
     'exports_and_imports': 'Exports and imports',
     'exports': 'Exports, {{year}}',
     'export_possiblities': 'Export possiblities',
-    'export_possiblities.intro': "We've found that countries which export complex products grow faster than those which export simple products. Using the similarity map we built in the section above, we've highlighted  high potential products for {{name}}, ranked by which have the highest combination of opportunity and complexity.",
+    'export_possiblities.intro': 'We’ve found that countries which export complex products grow faster than those which export simple products. Using the similarity map we built in the section above, we’ve highlighted  high potential products for {{name}}, ranked by which have the highest combination of opportunity and complexity.',
     'export_possiblities.footer': 'Note that the list is dynamically generated.  Not all exports may make sense given local conditions not captured in our measure of product similarity.',
     'stepper': {
       1: `This circle represents bananas.

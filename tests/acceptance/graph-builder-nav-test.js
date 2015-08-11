@@ -43,7 +43,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Switch to import source
-  click("a:contains('Exports and Imports')");
+  click("a:contains('Products')");
   click("a:contains('What products does Atlántico import?')");
 
   andThen(function() {
@@ -51,7 +51,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to scatter plot
-  click("a:contains('Exports and Imports')");
+  click("a:contains('Products')");
   click("a:contains('What products have the best combination of complexity and opportunity for Atlántico?')");
 
   andThen(function() {
@@ -59,7 +59,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to product space
-  click("a:contains('Exports and Imports')");
+  click("a:contains('Products')");
   click("a:contains('What does the product map look like for Atlántico?')");
 
   andThen(function() {

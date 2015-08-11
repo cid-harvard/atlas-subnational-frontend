@@ -14,18 +14,18 @@
             <li class="builder__nav__item ">
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Geo Map</h4>
+                <h4 class="label builder__nav__label">{{t 'general.treemap'}}</h4>
                 {{#link-to 'visualization' entity_and_id 'departments' 'treemap' (query-params variable='employment') class="builder__nav__question"}}
-                  {{t 'graph_builder.page_title.industry.participants.employment' name=name}}
+                  {{t 'graph_builder.page_title.industry.locations.employment' name=name}}
                 {{/link-to}}
               </div>
             </li>
             <li class="builder__nav__item">
               <i class="icon-cidcon_treemap builder__nav__item__icon"></i>
               <div class="builder__nav__item__textwrap">
-                <h4 class="label builder__nav__label">Geo Map</h4>
+                <h4 class="label builder__nav__label">{{t 'general.treemap'}}</h4>
                 {{#link-to 'visualization' entity_and_id 'departments' 'treemap' (query-params variable='wages') class="builder__nav__question"}}
-                  {{t 'graph_builder.page_title.industry.participants.wages' name=name}}
+                  {{t 'graph_builder.page_title.industry.locations.wages' name=name}}
                 {{/link-to}}
               </div>
             </li>
