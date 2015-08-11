@@ -9,21 +9,28 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
+  rcaData: computed('data.[]', 'rca', function() {
+    let rca = this.get('rca');
+    return _.filter(this.get('data'), function(d) { return d[rca] >= 1;});
+  }),
   scatter: computed('data.[]',  'dataType',function() {
     return d3plus.viz()
       .container(this.get('id'))
-      .data({value: this.get('data')})
+      .data({value: this.get('rcaData')})
       .type('scatter')
-      .color('#ccc1b9')
+      .color((d) => { return d.color ? d.color : '#ccc1b9';})
       .id(this.get('varIndependent'))
       .x('distance')
       .y('complexity')
       .format({ number: function(d) { return numeral(d).format('0.0a');}})
-      .text({value: (d) => { return Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code;}})
+      .text({value: (d) => {
+        return Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code;
+       }})
       .size(this.get('rca'))
       .timeline(false)
       .height(this.get('height'))
-      .width(this.get('width'));
+      .width(this.get('width'))
+      .legend(false);
   }),
   rca: computed('dataType', function() {
     if(this.get('dataType') === 'products') { return 'export_rca'; }

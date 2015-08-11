@@ -15,15 +15,15 @@
 }
 
 .btn--standalone {
+  transition: 0.2s background ease-in-out;
   background: $colorBrown500;
   text-transform: uppercase;
   color: $colorWhite;
   font-family: $sansAlt;
   @include offset-text;
-}
-
-.btn--inline {
-
+  &:hover {
+    background: $colorBrown700;
+  }
 }
 
 .btn--recirc {

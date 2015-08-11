@@ -59,10 +59,11 @@ export default {
       'to': 'to'
     },
     'search': {
-      'placeholder': 'Search for {{entity}}'
+      'placeholder': 'Highlight {{entity}} on the graph below',
+      'submit': 'Highlight'
     },
     'change_graph': {
-      'label': 'Change Graph',
+      'label': 'Graphs',
     },
     'multiples': {
       'show_all': 'Show All',

@@ -27,11 +27,11 @@ export default Ember.Component.extend({
       .depth(1)
       .tooltip({children: false})
       .color((d) => {
-        if(this.get('noFiltered')) { return '#e0dad5'; }
+        if(this.get('noFiltered')) { return d.color; }
         if(_.contains(this.get('selectedData'), d.code)) {
           return '#f5f3f1';
         } else {
-          return '#e0dad5';
+          return d.color;
         }
       })
       .format({

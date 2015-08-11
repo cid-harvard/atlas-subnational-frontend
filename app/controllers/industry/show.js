@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
   }),
   employmentGrowthDotPlot: computed('model.industriesData', function() {
    return _.chain(this.get('model.industriesData'))
-      .groupBy('id')
+      .groupBy('industry_id')
       .reduce((memo,i) => {
         let datum = _.first(i);
         datum['employment_growth'] = this.employmentGrowthCalc(i);
@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
   }),
   displayEmploymentGrowth: computed('employmentGrowthDotPlot', function() {
     let datum = _.where(this.get('employmentGrowthDotPlot'),
-      { id: parseInt(this.get('model.id'))}
+      { industry_id: parseInt(this.get('model.id'))}
     );
     return numeral(datum[0].employment_growth).format('0.00 %');
   }),

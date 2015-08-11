@@ -9,7 +9,6 @@ export default Ember.Route.extend({
     let last = _.last(data);
     let difference = last.employment / first.employment;
     let power =  1/(data.length-1);
-
     return (Math.pow(difference, power ) - 1);
   },
   model: function(params) {
@@ -18,21 +17,23 @@ export default Ember.Route.extend({
       .then((model) => {
         var groupIds = _.pluck(_.filter(industriesMetadata, 'parent_id', parseInt(model.id)), 'id');
         var classIndustries = _.filter(industriesMetadata, function(d) {
-          return _.contains(groupIds, d.parent_id);
+          return _.contains(groupIds, d.id);
         });
         return $.getJSON(`${apiURL}/data/industry?level=class`)
           .then((response) => {
             let data = _.groupBy(response.data, 'industry_id');
-
-            _.forEach(classIndustries, (d) => {
+            let classData = _.reduce(classIndustries, (memo, d) => {
               let classData = data[d.id];
+              if(!classData) { return memo; }
+
               let lastClassData = _.last(classData);
               d.employment_growth = this.employmentGrowthCalc(classData);
               d.avg_wage = lastClassData.wages / lastClassData.employment;
-              _.merge(d, lastClassData);
-            });
+              memo.push(_.merge(d, lastClassData));
+              return memo;
+            },[]);
 
-            return model.set('classIndustries', classIndustries);
+            return model.set('classIndustries', classData);
           });
       });
   },

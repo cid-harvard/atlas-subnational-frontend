@@ -1,10 +1,12 @@
-<form class="buildermod__searchwrap">
+<form class="buildermod__highlightwrap">
   {{input
-    class="buildermod__search"
+    class="buildermod__highlight"
     placeholder=(t 'graph_builder.search.placeholder' entity=source)
     value=searchText
     enter='search'
+    required='required'
   }}
-  <input class="buildermod__search__submit fa fa-search" type="submit" value="&#xf002;" {{action 'search'}}>
+  <button class="buildermod__highlight__reset fa fa-close" type="reset"></button>
+  <input class="buildermod__highlight__submit btn btn--standalone" type="submit" value="{{t 'graph_builder.search.submit'}}" {{action 'search'}}>
 </form>
 
