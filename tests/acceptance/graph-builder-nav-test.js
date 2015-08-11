@@ -35,7 +35,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to multiples
-  click("button:contains('Change Graph')");
+  click("button:contains('Graph')");
   click("input[data-change-graph='multiples']");
 
   andThen(function() {

@@ -126,7 +126,7 @@ export default EmberTableComponent.extend({
       let data;
 
       if(content.get('sorted')) {
-        data = _.sortBy(this.get('data'), function(d) { return -d[key]});
+        data = _.sortBy(this.get('data'), function(d) { return -d[key]; });
       } else {
         data = this.get('data');
       }

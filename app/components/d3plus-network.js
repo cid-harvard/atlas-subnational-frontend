@@ -1,6 +1,5 @@
 import productSpace from '../fixtures/product_space';
 import industrySpace from '../fixtures/industry_space';
-import industrySpaceColors from '../fixtures/industry_space_colors';
 import Ember from 'ember';
 
 const {computed, observer} = Ember;
@@ -18,7 +17,7 @@ export default Ember.Component.extend({
     let indexedData = _.indexBy(this.get('data'), 'code');
     return _.map(this.get('nodes'), function(d) {
       let datum = indexedData[d.id];
-      if(datum && datum[this.get('varDependent')]) {
+      if(datum && datum[this.get('varDependent')] >= 1) {
         d.color = datum.color;
         d.name_short_en = datum.name_short_en;
         d.name_short_es = datum.name_short_es;
