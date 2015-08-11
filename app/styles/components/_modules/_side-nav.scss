@@ -49,6 +49,7 @@
   &:hover {
     color: $colorWhite;
     .sidebar__btn__icon:before {
+      cursor: pointer;
       color: $colorWhite;
     }
   }
@@ -69,6 +70,13 @@
   font-weight: 500;
 }
 
+.sidebar__btn__icon--search:before {
+  margin-bottom: $baseSpace/4;
+}
+
+.sidebar__btn--search {
+  display: inline-block;
+}
 
 // Toggle
 .toggle--languages {

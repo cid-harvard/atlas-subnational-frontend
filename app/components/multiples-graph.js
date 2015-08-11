@@ -4,9 +4,9 @@ const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
-  margin: { top: 20, right: 15, bottom: 30, left: 35 },
+  margin: { top: 20, right: 5, bottom: 30, left: 45 },
   height: 140,
-  firstSlice: 40,
+  firstSlice: 36,
   varId: 'code',
   id: '#multiples',
   width: computed(function() {
@@ -61,8 +61,8 @@ export default Ember.Component.extend({
   yAxis: computed('yScale', 'width', 'i18n.locale', function() {
     return d3.svg.axis()
       .scale(this.get('yScale'))
-      .ticks(3)
-      .tickFormat((d) => { return numeral(d).format('0.0 a'); })
+      .ticks(5)
+      .tickFormat((d) => { return numeral(d).format('0a'); })
       .outerTickSize(0)
       .tickSize(-this.get('width'))
       .orient('left');
@@ -95,6 +95,7 @@ export default Ember.Component.extend({
     let x = this.get('xScale');
     let y = this.get('yScale');
     let h = this.get('height');
+    let xExtent = this.get('xExtent');
     let yAxis = this.get('yAxis');
     let line = this.get('line');
     let area = this.get('area');
@@ -202,12 +203,26 @@ export default Ember.Component.extend({
           let yValue = Ember.get(d.values[index], varDependent);
           return y(yValue);
         })
+        .attr('class', function(d) {
+          if (date === parseInt(xExtent[0])) {
+            return 'chart__tooltip--edge--start';
+          } else if (date === parseInt(xExtent[1])) {
+            return 'chart__tooltip--edge--end';
+          }
+        })
+        .attr('dx', function(d) {
+          if (date === parseInt(xExtent[0])) {
+            return '-4';
+          } else if (date === parseInt(xExtent[1])) {
+            return '4';
+          }
+        })
         .text(function(d) {
           let yValue = Ember.get(d.values[index], varDependent);
           if(varDependent === 'export_value') {
-            return 'USD ' + numeral(yValue).format('0.00 a');
+            return '$' + numeral(yValue).format('0a');
           }
-          return numeral(yValue).format('0.00 a');
+          return numeral(yValue).format('0a');
         });
 
       curYear.attr('x', x(date))

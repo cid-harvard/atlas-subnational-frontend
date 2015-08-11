@@ -6,7 +6,7 @@
 
 // Nested here instead of giving ever el a class in the js
 .geo__wrap {
-  height: 600px;
+  height: $buildermodHeight;
   padding: 0;
   margin: $baseSpace*-4.5 $baseSpace*-1.5 $baseSpace*-1.5;
 
