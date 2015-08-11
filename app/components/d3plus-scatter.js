@@ -9,10 +9,14 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
+  rcaData: computed('data.[]', 'rca', function() {
+    let rca = this.get('rca');
+    return _.filter(this.get('data'), function(d) { return d[rca] >= 1;});
+  }),
   scatter: computed('data.[]',  'dataType',function() {
     return d3plus.viz()
       .container(this.get('id'))
-      .data({value: this.get('data')})
+      .data({value: this.get('rcaData')})
       .type('scatter')
       .color((d) => { return d.color ? d.color : '#ccc1b9';})
       .id(this.get('varIndependent'))

@@ -21,13 +21,19 @@ export default DS.Model.extend(ModelAttribute, {
       scatter: { variable: null,  startDate: 2013, endDate: 2013 },
       similarity: { variable: null,  startDate: 2013, endDate: 2013 }
     };
-    return $.getJSON(`${apiURL}/data/location/${this.get('id')}/products?level=4digit`)
+    let product = $.getJSON(`${apiURL}/data/location/${this.get('id')}/products?level=4digit`);
+    let productComplexity = $.getJSON(`${apiURL}/data/product?level=4digit`);
+    return Ember.RSVP.all([product, productComplexity])
       .then((response) => {
         let productsMetadata = this.get('metaData.products');
-        let data = response.data;
+
+        let data = response[0].data;
+        let productComplexity = _.indexBy(response[1].data, function(d){ return d.year + '_'+ d.product_id; });
 
         data = _.map(data, (d) => {
           let product = productsMetadata[d.product_id];
+          let complexity = productComplexity[ `${d.year}_${d.product_id}`];
+          d.complexity = complexity.pci;
           return _.merge(d, product);
         });
         return { entity: this, entity_type:'location', data: data, source: 'products', defaultParams:defaultParams };
@@ -42,13 +48,19 @@ export default DS.Model.extend(ModelAttribute, {
       scatter: { variable: null,  startDate: 2013, endDate: 2013 },
       similarity: { variable: 'rca',  startDate: 2013, endDate: 2013 }
     };
-    return $.getJSON(`${apiURL}/data/location/${this.get('id')}/industries?level=class`)
+    let industry = $.getJSON(`${apiURL}/data/location/${this.get('id')}/industries?level=class`);
+    let industryComplexity = $.getJSON(`${apiURL}/data/industry?level=class`);
+    return Ember.RSVP.all([industry, industryComplexity])
       .then((response) => {
         let industriesMetadata = this.get('metaData.industries');
-        let data = response.data;
+
+        let data = response[0].data;
+        let industryComplexity = _.indexBy(response[1].data, function(d){ return d.year + '_'+ d.industry_id; });
 
         data = _.map(data, (d) => {
           let industry = industriesMetadata[d.industry_id];
+          let complexity = industryComplexity[ `${d.year}_${d.industry_id}`];
+          d.complexity = complexity.complexity;
           return _.merge(d, industry, { avg_wage: d.wages/d.employment});
         });
 
