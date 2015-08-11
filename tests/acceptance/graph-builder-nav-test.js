@@ -91,7 +91,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to industry simi-map
-  click("a:contains('Industries')");
+  click("a[data-tab-industry]");
   click("a:contains('What does the industry map look like for Atlántico?')");
 
   andThen(function() {
