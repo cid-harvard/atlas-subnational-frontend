@@ -10,14 +10,15 @@
   left: 0;
   width: $sidebarWidth;
   height: 100%;
-  text-align: center;
+  box-shadow: 2px 0 4px rgba( 25, 25, 20, 0.2 );
   z-index: $zIndex-9;
 }
 
 
 // Branding
 .branding {
-  padding: $baseSpace;
+  text-align: center;
+  padding: $baseSpace $baseSpace $baseSpace*1.5;
 }
 
 .branding__logo {
@@ -30,28 +31,35 @@
 
 .branding__slogan {
   color: $colorWhite;
-  font-size: $fontTiny;
+  font-size: $fontSmall;
   @include offset-text;
 }
 
 
 // Layout
 .sidebar__section {
-  padding: $baseSpace;
+  padding: $baseSpace $baseSpace;
   border-top: 1px solid $colorNavy800;
 }
 
 // Buttons
 .sidebar__btn {
-  font-size: $fontTiny;
+  font-size: $fontSmall;
   color: $colorNavy400;
   @include offset-text;
+  cursor: pointer;
   &:hover {
     color: $colorWhite;
     .sidebar__btn__icon:before {
       color: $colorWhite;
     }
   }
+}
+
+.sidebar__btn--search:before {
+  font-size: $fontTiny;
+  font-family: $icon;
+  content: '\f002';
 }
 
 .sidebar__btn__icon:before {
@@ -68,6 +76,41 @@
   color: $colorWhite;
   font-weight: 500;
 }
+
+.nav__item__wrap {
+  margin-bottom: $baseSpace/2;
+}
+
+.nav__item {
+  display: none;
+  &:checked ~ .nav__item__label {
+    font-weight: 700;
+    color: $colorWhite;
+  }
+  &:checked ~ .nav__list--sub {
+    display: block;
+  }
+  &:checked ~ .nav__item__label:before {
+    content: '\f0d7';
+  }
+}
+
+.nav__item__label {
+  font-weight: 500;
+  color: $colorNavy400;
+  &:before {
+    font-size: $fontTiny;
+    font-family: $icon;
+    content: '\f0da';
+  }
+}
+
+.nav__list--sub {
+  display: none;
+  margin-left: $baseSpace/1.5;
+}
+
+
 
 
 // Toggle

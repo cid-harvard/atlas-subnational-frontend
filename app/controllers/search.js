@@ -5,8 +5,9 @@ const {computed, observer, get: get} = Ember;
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   needs: 'application', // inject the application controller
-  queryParams: ['query'],
+  queryParams: ['query', 'filter'],
   query: null,
+  filter: null,
   search: computed.oneWay('query'),
   placeholder: t('search.placeholder'),
   clearSearchIfEmpty: observer('query', function() {
@@ -14,6 +15,13 @@ export default Ember.Controller.extend({
     // this is for route transitions that don't trigger `init`
     if(!this.get('query')){
       this.set('search', null);
+    }
+  }),
+  searchCopy: computed('filter', 'i18n.locale' , function() {
+    if(this.get('filter')){
+      return this.get('i18n').t('search.single_intro_copy', { filter: this.get('filter') });
+    } else {
+      return this.get('i18n').t('search.all_intro_copy');
     }
   }),
   productResults: computed('model.[]', function() {

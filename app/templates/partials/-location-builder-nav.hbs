@@ -2,13 +2,13 @@
   {{#ivy-tabs}}
     {{#ivy-tab-list classNames='tabmod__tabs'}}
       {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-        <a class="tab__link">{{t 'general.locations'}}</a>
+        <a class="tab__link" data-tab-location>{{t 'general.locations'}}</a>
       {{/ivy-tab}}
       {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-        <a class="tab__link">{{t 'general.export_and_import'}}</a>
+        <a class="tab__link"data-tab-product>{{t 'general.export_and_import'}}</a>
       {{/ivy-tab}}
       {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-        <a class="tab__link">{{t 'general.industries'}}</a>
+        <a class="tab__link" data-tab-industry >{{t 'general.industries'}}</a>
       {{/ivy-tab}}
     {{/ivy-tab-list}}
 

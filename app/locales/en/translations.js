@@ -2,6 +2,7 @@ export default {
   'general': {
     'locations': 'Locations',
     'export_and_import': 'Exports and Imports',
+    'products': 'Products',
     'industries': 'Industries',
     'occupations': 'Occupations',
     'treemap': 'Treemap',
@@ -28,6 +29,8 @@ export default {
   },
   'search': {
     'header': 'Search',
+    'single_intro_copy': "First, search for the {{filter}} that you're interested in.",
+    'all_intro_copy': "First, search for the location, product, industry or occupation that you're interested in.",
     'intro': "First, search for the location, product, industry or occupation that you're interested in.",
     'placeholder': "Type here to search",
     'results_products': 'Results: Products',

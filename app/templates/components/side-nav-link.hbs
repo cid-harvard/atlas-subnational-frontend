@@ -1,0 +1,24 @@
+{{#if isProfileLink}}
+  {{#link-to profileLink entity_id
+    data-side-profile=''
+    class="sidebar__btn nav__item--sub"
+    activeClass="sidebar__btn--is--active"}}
+     {{linkText}}
+  {{/link-to}}
+{{else if isGraphBuilderLink}}
+  {{#link-to "visualization" entity_and_id source visualizationType
+    current-when="visualization"
+    data-side-graphbuilder=''
+    class="sidebar__btn nav__item--sub"
+    activeClass="sidebar__btn--is--active"}}
+    {{linkText}}
+  {{/link-to}}
+{{else}}
+  {{#link-to "search" (query-params filter=linkEntity query='null')
+    data-side-search=linkEntity
+    class="sidebar__btn nav__item--sub"
+    activeClass="sidebar__btn--is--active"}}
+    {{linkText}}
+  {{/link-to}}
+{{/if}}
+

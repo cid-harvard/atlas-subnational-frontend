@@ -3,35 +3,60 @@
     <img src="assets/img/branding/logo.png" alt="" class="branding__logo">
     <p class="branding__slogan" data-slogan>{{ t 'side_nav.brand_slogan' }}</p>
   </div>
-  {{#link-to "search" (query-params query="null") class="sidebar__search sidebar__section" tagName="div" }}
+  {{#link-to "search" (query-params query="null" filter="null") class="sidebar__search sidebar__section" tagName="div" }}
     {{#link-to "search"
       current-when="search"
       class="sidebar__btn sidebar__btn--search"
       activeClass="sidebar__btn--is--active"}}
-      <i class="icon-cidcon_search sidebar__btn__icon"></i>
       {{ t 'side_nav.search_link' }}
     {{/link-to}}
   {{/link-to}}
   <nav class="sidebar__section sidebar__nav">
     <ul class="nav__list">
-      <li class="nav__item">
-      {{#link-to
-        profileLink entity_id
-        class="sidebar__btn nav__item__link"
-        activeClass="sidebar__btn--is--active"
-        data-side-profile-link='' }}
-        {{ t 'side_nav.profile_link' }}
-      {{/link-to}}
+      <li class="nav__item__wrap">
+        <input type="radio" name="nav__item" class="nav__item" id="nav__item--profiles">
+        <label class="sidebar__btn nav__item__label" for="nav__item--profiles" data-side-nav-profile>
+          Profiles
+        </label>
+        <ul class="nav__list--sub">
+          {{#each linkEntity in allEntities }}
+            {{component 'side-nav-link'
+              linkView='profile'
+              linkEntity=linkEntity
+              entity=entity
+              entity_id=entity_id
+            }}
+          {{/each}}
+        </ul>
       </li>
-      <li class="nav__item">
-        {{#link-to "visualization" entity_and_id source 'treemap'
-          current-when="visualization"
-          class="sidebar__btn nav__item__link"
-          activeClass="sidebar__btn--is--active"
-          data-side-graph-builder-link=''}}
-          {{ t 'side_nav.graph_builder_link' }}
-        {{/link-to}}
+      <li class="nav__item__wrap">
+        <input type="radio" name="nav__item" class="nav__item" id="nav__item--builder">
+        <label class="sidebar__btn nav__item__label" for="nav__item--builder" data-side-nav-graphbuilder>
+          Graph Builder
+        </label>
+        <ul class="nav__list--sub">
+          {{#each linkEntity in allEntities }}
+            {{component 'side-nav-link'
+              linkView='graphbuilder'
+              visualizationType=visualizationType
+              linkEntity=linkEntity
+              entity=entity
+              entity_id=entity_id
+            }}
+          {{/each}}
+        </ul>
       </li>
+      <li class="nav__item__wrap">
+        <input type="radio" name="nav__item" class="nav__item" id="nav__item--about">
+        <label class="sidebar__btn nav__item__label" for="nav__item--about">
+          About
+        </label>
+        <ul class="nav__list--sub">
+          <li class="sidebar__btn nav__item--sub">Description</li>
+          <li class="sidebar__btn nav__item--sub">Glossary</li>
+        </ul>
+      </li>
+      <li class="sidebar__btn">Downloads</li>
     </ul>
   </nav>
   <div class="sidebar__section sidebar__languages">

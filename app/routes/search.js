@@ -2,7 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   queryParams: {
-    query: { refreshModel: true }
+    query: { refreshModel: true },
+    filter: { refreshModel: true }
   },
   beforeModel: function(transition) {
     var hasQuery = transition
@@ -11,7 +12,7 @@ export default Ember.Route.extend({
 
     // if search is empty, redirect to route without param
     if(hasQuery && !transition.queryParams.query){
-      this.transitionTo('search');
+      this.transitionTo('search', 'all');
     }
   },
   model: function(transition) {
@@ -34,8 +35,8 @@ export default Ember.Route.extend({
   },
   setupController(controller, model) {
     this._super(controller, model);
-    this.controllerFor('application').set('entity', 'location');
-    this.controllerFor('application').set('entity_id', 1044);
+    this.controllerFor('application').set('entity', null);
+    this.controllerFor('application').set('entity_id', null);
     window.scrollTo(0, 0);
   },
 });
