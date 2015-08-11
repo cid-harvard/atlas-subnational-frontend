@@ -1,7 +1,7 @@
 export default {
   'general': {
     'locations': 'Locations',
-    'export_and_import': 'Exports and Imports',
+    'export_and_import': 'Products',
     'industries': 'Industries',
     'occupations': 'Occupations',
     'treemap': 'Treemap',
@@ -77,26 +77,15 @@ export default {
     },
     'page_title': {
       'industry': {
-        'departments.employment': 'Where in Colombia does {{name}} employ the most people',
-        'departments.wages': 'Where in Colombia does {{name}} pay the highest total wages',
-        'departments.wage_avg': 'Where in Colombia does {{name}} pay the highest average wages',
+        'locations.employment': 'Where in Colombia does {{name}} employ the most people?',
+        'locations.wages': 'Where in Colombia does {{name}} pay the highest total wages?',
+        'locations.wage_avg': 'Where in Colombia does {{name}} pay the highest wages per worker?',
       },
       'product': {
         'locations.export_value': 'What places in Colombia export {{name}}?',
         'locations.import_value': 'What places in Colombia import {{name}}?',
       },
       'location': {
-        'products.export_value': 'What products does {{name}} export?',
-        'products.scatter': 'What products have the best combination of complexity and opportunity for {{name}}?',
-        'products.export_value_to': 'What products does {{name}} export to {{place}}?',
-        'products.import_value': 'What products does {{name}} import?',
-        'products.import_value_from': 'What products does {{name}} import from {{place}}?',
-        'products.similarity': 'What does the product map look like for {{name}}?',
-        'industries.employment': 'What industries in {{name}} employ the most people?',
-        'industries.scatter': 'What industries have the best combination of complexity and opportunity for {{name}}?',
-        'industries.wages': 'What industries in {{name}} are the largest by total wages?',
-        'industries.wages_highest_per_worker': 'What industries in {{name}} have the highest wages per worker?',
-        'industries.similarity': 'What does the industry map look like for {{name}}?',
         'locations.export': 'What countries does {{name}} export to?',
         'locations.export_to': 'What countries does {{name}} export {{item}} to?',
         'locations.import_from': 'What countries does {{name}} import from?',
@@ -108,11 +97,22 @@ export default {
         'locations.import_subregions': 'What subregions contribute to the imports for {{name}}?',
         'locations.import_subregions_products': 'What subregions contribute to the imports of {{item}} for {{name}}?',
         'locations.import_subregions_locations': 'What subregions contribute to the imports for {{name}} from {{place}}?',
-        'locations.import_subregions_products_locations': 'What subregions contribute to the imports of {{item}} for {{name}} from {{place}}?'
+        'locations.import_subregions_products_locations': 'What subregions contribute to the imports of {{item}} for {{name}} from {{place}}?',
+        'products.export_value': 'What products does {{name}} export?',
+        'products.scatter': 'What products have the best combination of complexity and opportunity for {{name}}?',
+        'products.export_value_to': 'What products does {{name}} export to {{place}}?',
+        'products.import_value': 'What products does {{name}} import?',
+        'products.import_value_from': 'What products does {{name}} import from {{place}}?',
+        'products.similarity': 'What does the product map look like for {{name}}?',
+        'industries.employment': 'What industries in {{name}} employ the most people?',
+        'industries.scatter': 'What industries have the best combination of complexity and opportunity for {{name}}?',
+        'industries.wages': 'What industries in {{name}} are the largest by total wages?',
+        'industries.wages_highest_per_worker': 'What industries in {{name}} have the highest wages per worker?',
+        'industries.similarity': 'What does the industry map look like for {{name}}?'
       }
     },
     'builder_nav': {
-      'header': 'More graphs for this {{entity_type}}',
+      'header': 'More graphs for this {{entity}}',
       'intro': 'Select a question to see the corresponding graph. If the question has missing parameters ({{icon}}) , you’ll fill those in when you click.',
     },
     'builder_mod_header': {
