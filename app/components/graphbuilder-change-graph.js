@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   iconClass: computed('type', function() {
     return `icon-cidcon_${this.get('type')} changegraph__icon`;
   }),
-  text: computed('type', function() {
+  text: computed('type', 'i18n.locale', function() {
     return this.get('i18n')
       .t(`general.${this.get('type')}`);
   }),
