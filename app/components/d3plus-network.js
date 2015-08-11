@@ -5,6 +5,7 @@ import Ember from 'ember';
 
 const {computed, observer} = Ember;
 
+// NOTE TO SELF: in the product/industry spaces the key value pair ID is === to CODE from the API
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
@@ -14,11 +15,19 @@ export default Ember.Component.extend({
     return `#${this.get('elementId')}`;
   }),
   networkData: computed('data.[]','nodes', function() {
+    let indexedData = _.indexBy(this.get('data'), 'code');
     return _.map(this.get('nodes'), function(d) {
-      d.name_en = d.code;
-      d.name_es = d.code;
+      let datum = indexedData[d.id];
+      if(datum && datum[this.get('varDependent')]) {
+        d.color = datum.color;
+        d.name_short_en = datum.name_short_en;
+        d.name_short_es = datum.name_short_es;
+        d[this.get('varDependent')] = datum[this.get('varDependent')];
+      } else {
+        d.color = '#FFF';
+      }
       return d;
-    });
+    }, this);
   }),
   graph: computed('dataType', function() {
     let type = this.get('dataType');
@@ -34,19 +43,7 @@ export default Ember.Component.extend({
   edges: computed('dataType', function() {
     return this.get('graph').edges;
   }),
-  colorMap: computed('dataType', function() {
-    let type = this.get('dataType');
-    if(type === 'industries') {
-      return function(id) {
-        return industrySpaceColors[id].color || '#ffff';
-      };
-    } else if(type === 'products') {
-      return d3.scale.linear()
-        .domain(d3.extent(this.get('data'), function(d) { return d['id']; }))
-        .range(["#DDDDDD", "#777777"]);
-    }
-  }),
-  network: computed('data.[]', 'varDependent', 'dataType', 'vis', function() {
+  network: computed('data.[]', 'varDependent', 'dataType', 'vis', 'i18n.locale', function() {
     return vistk.viz().params({
       type: 'productspace',
       height: this.get('height'),
@@ -55,13 +52,13 @@ export default Ember.Component.extend({
       margin: {top: 0, right: 0, bottom: 0, left: 0},
       nodes: this.get('nodes'),
       links: this.get('edges'),
-      data: this.get('data'),
+      data: this.get('networkData'),
       var_text: `name_short_${this.get('i18n').locale}`, //TODO: update with langauge
       var_x: 'x',
       var_y: 'y',
       radius: 4,
-      var_color: 'code',
-      color: this.get('colorMap'),
+      var_color: 'color',
+      color: function(d) { return d; },
       y_invert: true,
       var_id: 'code',
       items: [{
@@ -72,7 +69,7 @@ export default Ember.Component.extend({
         }, {
           type: 'circle',
           stroke_width: (d) => {
-            if (d[this.get('varDependent')]) {
+            if(d[this.get('varDependent')] >= 1) {
               return '1px';
             }
           }
@@ -103,6 +100,6 @@ export default Ember.Component.extend({
         d3.select(this.get('id'))
           .call(this.get('network'));
       }
-    }, 1000);
+    }, 100);
   })
 });
