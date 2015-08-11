@@ -4,11 +4,11 @@ export default {
     'export_and_import': 'exportaciones y importaciones',
     'industries': 'sectores',
     'occupations': 'ocupaciónes',
-    'treemap': 'MISSING',
-    'multiples': 'MISSING',
-    'geo': 'MISSING',
-    'scatter': 'MISSING',
-    'similarity': 'MISSING'
+    'treemap': 'Gráfico de composición',
+    'multiples': 'Gráficos de áreas',
+    'geo': 'Mapa geográfico',
+    'scatter': 'Gráfico de dispersión',
+    'similarity': 'Mapa similitud'
   },
   'side_nav': {
     'brand_slogan': 'Utilizando datos para mantener Colombia competitiva',
@@ -19,15 +19,15 @@ export default {
   'location.model':{
     'department': 'departamento',
     'municipality': 'municipio',
-    'population_center': 'MISSING'
+    'population_center': 'centro poblacional'
   },
   'ctas': {
-    'export': 'Export',
-    'share': 'Share',
-    'download': 'MISSING',
+    'export': 'Exportar',
+    'share': 'Compartir',
+    'download': 'Descargue estos datos',
     'pdf': 'PDF',
     'png': 'PNG',
-    'embed': 'Embed',
+    'embed': 'Insertar gráfico',
     'twitter': 'Twitter',
     'facebook': 'Facebook',
     'csv': 'CSV',
@@ -35,22 +35,22 @@ export default {
   },
   'search': {
     'header': 'Buscar',
-    'intro': 'MISSING',
-    'placeholder': 'MISSING',
+    'intro': 'Busque el lugar, producto, sector u ocupación que le interese',
+    'placeholder': 'Escriba aquí para buscar lo que quiere',
     'results_products': 'Resultados: Productos',
     'results_locations': 'Resultados: Lugares',
     'results_industries': 'Resultados: Sectores',
-    'didnt_find': 'MISSING'
+    'didnt_find': '¿Encontró lo que buscaba? Nos interesa saber.'
   },
   'graph_builder': {
-    'read_more': 'MISSING',
-    'view_more': 'MISSING',
+    'read_more': 'Lea el perfil de la actividad productiva y la complejidad de este lugar',
+    'view_more': 'Muestre más',
     'table': {
       'name': 'Nombre',
       'export_value': 'Exportaciones',
-      'export_rca': 'MISSING',
-      'rca': 'MISSING',
-      'wages': 'Salarios',
+      'export_rca': 'Ventaja comparativa revelada',
+      'rca': 'Ventaja comparativa revelada',
+      'wages': 'Salarios (COP)',
       'employment': 'Empleo',
       'avg_wage': 'Salario medio',
       'employment_growth': 'El crecimiento del empleo, (2008-2012)',
@@ -61,8 +61,8 @@ export default {
     },
     'settings' : {
       'label': 'Configuración',
-      'change_time' : 'Change time period:',
-      'close_settings': 'Guardar y cerrar',
+      'change_time' : 'Cambie el período:',
+      'close_settings': 'Archive y cierre',
       'to': 'a',
     },
     'search': {
@@ -111,20 +111,20 @@ export default {
       }
     },
     'builder_nav': {
-      'header': 'MISSING',
-      'intro': 'MISSING',
+      'header': 'Más gráficos para este {{entity_type}}',
+      'intro': 'Seleccione una pregunta para ver el gráfico correspondiente. Utilice las opciones que aparecen en {{icon}}.',
     },
     'builder_mod_header': {
       'industry': {
         'departments.employment': 'Empleo total',
         'departments.wages': 'Salarios totales (COP)',
-        'departments.wage_avg': 'Promedio de salarios (COP)',
+        'departments.wage_avg': 'Salarios promedio (COP)',
       },
       'product': {
         'locations.export_value': 'Departamentos de Colombia',
       },
       'location': {
-        'products.export_value': 'Las exportaciones totales',
+        'products.export_value': 'Exportaciones totales',
         'products.scatter': 'Complejidad y valor estratégico',
         'products.similarity': 'Complejidad y valor estratégico',
         'products.import_value': 'Las importaciones totales',
@@ -136,12 +136,12 @@ export default {
     }
   },
   'location.show': {
-    'overview': 'Información general',
+    'overview': 'Visión de conjunto',
     'bullet.gdp_grow_rate': 'MISSING',
     'bullet.gdp_pc': 'MISSING',
     'bullet.last_pop': 'MISSING',
     'all_departments': 'MISSING',
-    'value': 'MISSING',
+    'value': 'Valor',
     'growth_annual': 'MISSING',
     'gdp_pc': 'MISSING',
     'gdp': 'MISSING',

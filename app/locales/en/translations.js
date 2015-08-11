@@ -48,8 +48,8 @@ export default {
     'table': {
       'name': 'Name',
       'export_value': 'Exports',
-      'export_rca': 'RCA',
-      'rca': 'RCA',
+      'export_rca': 'Revealed competitive advantage',
+      'rca': 'Revealed competitive advantage',
       'wages': 'Wages',
       'employment': 'Employment',
       'avg_wage': 'Average Wage',
@@ -77,13 +77,13 @@ export default {
     },
     'page_title': {
       'industry': {
-        'departments.employment': 'What departments does {{name}} employ the most people',
-        'departments.wages': 'What departments does {{name}} pay the highest total wages',
-        'departments.wage_avg': 'What departments does {{name}} pay the highest average wages',
+        'departments.employment': 'Where in Colombia does {{name}} employ the most people',
+        'departments.wages': 'Where in Colombia does {{name}} pay the highest total wages',
+        'departments.wage_avg': 'Where in Colombia does {{name}} pay the highest average wages',
       },
       'product': {
-        'locations.export_value': 'What departments the export {{name}}?',
-        'locations.import_value': 'What departments the export {{name}}?',
+        'locations.export_value': 'What places in Colombia export {{name}}?',
+        'locations.import_value': 'What places in Colombia import {{name}}?',
       },
       'location': {
         'products.export_value': 'What products does {{name}} export?',
