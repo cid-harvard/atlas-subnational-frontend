@@ -83,7 +83,10 @@ export default {
       'industry': {
         'locations.employment': '¿Cuando en Colombia no {{name}} emplea a más gente?',
         'locations.wages': '¿Cuando en Colombia no {{name}} paga los salarios más altos del total?',
-        'locations.wages_avg': '¿Cuando en Colombia no {{name}} paga los salarios más altos por trabajador?'
+        'locations.wages_avg': '¿Cuando en Colombia no {{name}} paga los salarios más altos por trabajador?',
+        'departments.employment': '¿Cuando en Colombia no {{name}} emplea a más gente?',
+        'departments.wages': '¿Cuando en Colombia no {{name}} paga los salarios más altos del total?',
+        'departments.wages_avg': '¿Cuando en Colombia no {{name}} paga los salarios más altos por trabajador?'
       },
       'product': {
         'locations.export_value': '¿Qué lugares en Colombia exportar {{name}}?',
@@ -124,6 +127,9 @@ export default {
         'locations.employment': 'Empleo total',
         'locations.wages': 'Salarios totales (COP)',
         'locations.wage_avg': 'Salarios promedio (COP)',
+        'departments.employment': 'Empleo total',
+        'departments.wages': 'Salarios totales (COP)',
+        'departments.wage_avg': 'Salarios promedio (COP)',
       },
       'product': {
         'locations.export_value': 'Departamentos de Colombia',
