@@ -203,14 +203,14 @@ export default Ember.Component.extend({
           let yValue = Ember.get(d.values[index], varDependent);
           return y(yValue);
         })
-        .attr('class', function(d) {
+        .attr('class', function() {
           if (date === parseInt(xExtent[0])) {
             return 'chart__tooltip--edge--start';
           } else if (date === parseInt(xExtent[1])) {
             return 'chart__tooltip--edge--end';
           }
         })
-        .attr('dx', function(d) {
+        .attr('dx', function() {
           if (date === parseInt(xExtent[0])) {
             return '-4';
           } else if (date === parseInt(xExtent[1])) {
