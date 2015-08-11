@@ -17,11 +17,12 @@ export default Ember.Route.extend({
   model: function(transition) {
     var departments = this.store.find('location', {level: 'department'});
     var municipalities = this.store.find('location', {level: 'municipality'});
+    var country = this.store.find('location', {level: 'country'});
     var products = this.store.find('product', { level: '4digit' });
     var industries = this.store.find('industry', { level: 'division' });
 
     if(transition.query) {
-      return Ember.RSVP.all([industries, departments, municipalities, products])
+      return Ember.RSVP.all([industries, country, departments, municipalities, products])
         .then(function(array) {
           return _.chain(array)
             .map(function(d){ return d.content; })
