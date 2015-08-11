@@ -17,6 +17,7 @@ export default Ember.Controller.extend({
   searchText: computed.oneWay('search'),
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
+  drawerQuestionsIsOpen: false,
   drawerIsUnnecessary: computed('visualization', function() {
     let visualization = this.get('visualization');
     if(visualization === 'similarity') {
@@ -70,7 +71,7 @@ export default Ember.Controller.extend({
     var sum = _.sum(data, variable);
     if(variable === 'employment') { return numeral(sum).format('0.00 a');}
     if(variable === 'export_value' || variable === 'import_value') {
-      return 'USD '+ numeral(sum).format('0.00 a');
+      return '$' + numeral(sum).format('0.0a') + ' USD';
     }
     return numeral(sum).format('$ 0.00 a');
   }),
@@ -162,18 +163,28 @@ export default Ember.Controller.extend({
     toggleVisualization: function(visualization) {
       let model = this.get('model');
       let graph_builder_id = `${model.entity_type}-${model.entity.id}`;
-      this.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
+      this.set('drawerChangeGraphIsOpen', false); // Close graph change drawer
       this.transitionToRoute('visualization', graph_builder_id, model.source, visualization, {
         queryParams: { variable: this.get('variable') }
       });
     },
+    changeQuestion: function() {
+      this.set('drawerQuestionsIsOpen', false); // Close question change drawer
+    },
     toggleDrawerSettings: function() {
       this.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
+      this.set('drawerQuestionsIsOpen', false); // Turn off other drawers
       this.toggleProperty('drawerSettingsIsOpen'); // toggle on 'Settings'
     },
     toggleDrawerChangeGraph: function() {
       this.set('drawerSettingsIsOpen', false); // Turn off other drawers
+      this.set('drawerQuestionsIsOpen', false); // Turn off other drawers
       this.toggleProperty('drawerChangeGraphIsOpen'); // toggle on 'Change Graph'
+    },
+    toggleDrawerQuestions: function() {
+      this.set('drawerSettingsIsOpen', false); // Turn off other drawers
+      this.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
+      this.toggleProperty('drawerQuestionsIsOpen'); // toggle on 'Change Graph'
     },
     zoomOut: function() {
       if(this.get('zoom') === 1) { this.decrementProperty('zoom'); }

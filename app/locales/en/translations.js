@@ -76,6 +76,9 @@ export default {
     'change_graph': {
       'label': 'Graphs',
     },
+    'questions': {
+      'label': 'Change question'
+    },
     'multiples': {
       'show_all': 'Show All',
     },

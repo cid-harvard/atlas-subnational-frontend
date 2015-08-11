@@ -114,7 +114,7 @@ export default EmberTableComponent.extend({
     } else if(key === 'employment_growth'){
       return numeral(number).format('0.00%');
     } else if(key === 'export_value') {
-      return 'USD ' + numeral(number).format('0.00a');
+      return '$' + numeral(number).format('0.0a') + ' USD';
     } else {
       return number;
     }

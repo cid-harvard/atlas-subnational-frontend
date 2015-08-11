@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
     var total = _.reduce(this.get('productsData'), function(memo, data) {
       return memo + data.export_value;
     }, 0);
-    return "USD" + numeral(total).format('0.00 a');
+    return '$' + numeral(total).format('0.0a') + ' USD';
   }),
 
   yearSort: ['year'],
