@@ -117,9 +117,9 @@ export default {
     },
     'builder_mod_header': {
       'industry': {
-        'departments.employment': 'Total Employment',
-        'departments.wages': 'Total Wages (COP)',
-        'departments.wage_avg': 'Average Wages (COP)',
+        'locations.employment': 'Total Employment',
+        'locations.wages': 'Total Wages (COP)',
+        'locations.wage_avg': 'Average Wages (COP)',
       },
       'product': {
         'locations.export_value': 'Departments of Colombia',

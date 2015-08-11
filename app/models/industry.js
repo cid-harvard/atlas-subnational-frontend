@@ -51,9 +51,9 @@ export default DS.Model.extend(ModelAttribute, {
           let department = locationsMetadata[d.department_id];
           return _.merge(d, department);
         });
-        return { entity: this, entity_type:'industry', data: data, source: 'departments', defaultParams:defaultParams };
+        return { entity: this, entity_type:'industry', data: data, source: 'locations', defaultParams:defaultParams };
       }, (error) => {
-        return { error: error, entity: this, entity_type:'industry', data: [], source: 'departments', defaultParams:defaultParams};
+        return { error: error, entity: this, entity_type:'industry', data: [], source: 'locations', defaultParams:defaultParams};
       });
   }),
   graphbuilderMunicipalities: computed('id', function() {
