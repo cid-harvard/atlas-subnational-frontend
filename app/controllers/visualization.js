@@ -149,6 +149,10 @@ export default Ember.Controller.extend({
     window.scrollTo(0,0);
   }),
   actions: {
+    resetSearch: function() {
+      this.set('search', null);
+      this.set('searchText', null);
+    },
     search: function() {
       this.set('search', this.get('searchText'));
     },
