@@ -31,7 +31,7 @@ export default {
     'download': 'Download this data',
     'pdf': 'PDF',
     'png': 'PNG',
-    'embed': 'Insertar gráfico',
+    'embed': 'Embed',
     'twitter': 'Twitter',
     'facebook': 'Facebook',
     'csv': 'CSV',
