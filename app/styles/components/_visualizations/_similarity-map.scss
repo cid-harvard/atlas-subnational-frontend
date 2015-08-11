@@ -10,6 +10,11 @@
   stroke-opacity: .4;
 }
 
+.connect__line.highlighted {
+  stroke-width: 2.5px;
+  stroke-opacity: .6;
+}
+
 .items__mark__circle {
   stroke: $colorBlack;
   stroke-width: 0;
