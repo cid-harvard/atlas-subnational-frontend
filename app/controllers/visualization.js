@@ -97,6 +97,11 @@ export default Ember.Controller.extend({
     if(this.get('source') === 'locations') { return ''; }
     if(this.get('source') === 'industries') { return 'wages'; }
   }),
+  singularEntity: computed('model.entity_type', 'i18n.locale', function() {
+    if(this.get('model.entity_type') === 'product') { return this.get('i18n').t('general.product'); }
+    if(this.get('model.entity_type') === 'location') { return this.get('i18n').t('general.location'); }
+    if(this.get('model.entity_type') === 'industry') { return this.get('i18n').t('general.location'); }
+  }),
   immutableData: computed('model.data.[]','endDate', 'startDate' , function() {
     return this.filterToSelectedYears(this.get('model.data'), this.get('startDate'), this.get('endDate'));
   }),

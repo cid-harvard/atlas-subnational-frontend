@@ -4,6 +4,10 @@ export default {
     'export_and_import': 'Productos',
     'industries': 'Sectores',
     'occupations': 'Ocupaciónes',
+    'location': 'lugar',
+    'product': 'producto',
+    'industry': 'sector',
+    'occupation': 'ocupación',
     'treemap': 'Gráfico de composición',
     'multiples': 'Gráficos de áreas',
     'geo': 'Mapa geográfico',
@@ -66,7 +70,8 @@ export default {
       'to': 'a',
     },
     'search': {
-      'placeholder': 'Buscar {{entity}}',
+      'placeholder': 'Destaque {{entity}} en el gráfico siguiente',
+      'submit': 'Destacar'
     },
     'change_graph': {
       'label': 'Gráficos',
@@ -112,7 +117,7 @@ export default {
     },
     'builder_nav': {
       'header': 'Más gráficos para este {{entity}}',
-      'intro': 'Seleccione una pregunta para ver el gráfico correspondiente. Si en la pregunta faltan parámetros {{icon}}, los podrá llenar cuando haga click.',
+      'intro': 'Seleccione una pregunta para ver el gráfico correspondiente. Si en la pregunta faltan parámetros ({{icon}}), los podrá llenar cuando haga click.',
     },
     'builder_mod_header': {
       'industry': {
