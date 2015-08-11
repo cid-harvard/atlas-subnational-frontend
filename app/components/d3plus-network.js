@@ -4,7 +4,11 @@ import Ember from 'ember';
 
 const {computed, observer} = Ember;
 
-// NOTE TO SELF: in the product/industry spaces the key value pair ID is === to CODE from the API
+// NOTE TO SELF: in the industry spaces
+// the key value pair ID is === to CODE from the API
+//
+//product space: ID === ID
+//
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
@@ -13,8 +17,8 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  networkData: computed('data.[]','nodes', function() {
-    let indexedData = _.indexBy(this.get('data'), 'code');
+  networkData: computed('data.[]','nodes', 'identifier', function() {
+    let indexedData = _.indexBy(this.get('data'), this.get('identifier'));
     return _.map(this.get('nodes'), function(d) {
       let datum = indexedData[d.id];
       if(datum && datum[this.get('varDependent')] >= 1) {
@@ -34,6 +38,14 @@ export default Ember.Component.extend({
       return industrySpace;
     } else if (type === 'products') {
       return productSpace;
+    }
+  }),
+  identifier: computed('dataType', function() {
+    let type = this.get('dataType');
+    if(type === 'industries') {
+      return 'code';
+    } else if (type === 'products') {
+      return 'id';
     }
   }),
   nodes: computed('dataType', function() {
@@ -59,7 +71,7 @@ export default Ember.Component.extend({
       var_color: 'color',
       color: function(d) { return d; },
       y_invert: true,
-      var_id: 'code',
+      var_id: this.get('identifier'),
       items: [{
         attr: "name",
         marks: [{
