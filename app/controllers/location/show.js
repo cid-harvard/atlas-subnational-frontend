@@ -70,8 +70,9 @@ export default Ember.Controller.extend({
   gdpGrowth:computed('validTimeseries', function() {
     var firstGdp = get(this.get('firstDataPoint'), 'gdp_nominal');
     var lastGdp = get(this.get('lastDataPoint'), 'gdp_nominal');
-    var growth = (lastGdp - firstGdp) / firstGdp;
-    return numeral(growth).format('0.000%');
+    let difference = lastGdp / firstGdp;
+    let power =  1/(this.get('validTimeseries.length') -1);
+    return numeral(Math.pow(difference, power) -1).format('0.000%');
   }),
   activeStep: 1,
   stepStories: computed(function() {

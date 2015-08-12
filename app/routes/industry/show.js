@@ -9,7 +9,7 @@ export default Ember.Route.extend({
     let last = _.last(data);
     let difference = last.employment / first.employment;
     let power =  1/(data.length-1);
-    return (Math.pow(difference, power ) - 1);
+    return (Math.pow(difference, power) - 1);
   },
   model: function(params) {
     var industriesMetadata = this.modelFor('application').industries;
