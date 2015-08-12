@@ -49,7 +49,12 @@ export default Ember.Component.extend({
     }
   }),
   nodes: computed('dataType', function() {
-    return this.get('graph').nodes;
+    let type = this.get('dataType');
+    if(type === 'industries') {
+      return _.each(this.get('graph').nodes, function(d) { d.y = this.get('height') - d.y; }, this);
+    } else if (type === 'products') {
+      return this.get('graph').nodes;
+    }
   }),
   edges: computed('dataType', function() {
     return this.get('graph').edges;
