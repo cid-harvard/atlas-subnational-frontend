@@ -14,7 +14,7 @@ export default Ember.Route.extend({
     // extract year out later
     var year = getWithDefault(transition, 'queryParams.year', 2012);
 
-    var products = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/products?level=class`);
+    var products = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/products?level=4digit`);
     var industries = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/industries?level=class`);
 
     // one of these should be removed in the future because the points should be merged in
