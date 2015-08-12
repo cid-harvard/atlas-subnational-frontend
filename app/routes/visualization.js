@@ -29,6 +29,7 @@ export default Ember.Route.extend({
     window.scrollTo(0, 0);
   },
   resetController: function (controller, isExiting) {
+    controller.set('variable', null);
     if (isExiting) {
       controller.setProperties({
         variable: null,
