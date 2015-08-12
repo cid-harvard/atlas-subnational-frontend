@@ -36,8 +36,9 @@ export default DS.Model.extend(ModelAttribute, {
     var defaultParams = {
       treemap: { variable: 'employment', startDate: 2012, endDate: 2013 },
       multiples: { variable: 'employment', startDate: 2008, endDate: 2013 },
-      scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
-      similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
+      geo: { variable: 'employment', startDate: 2013, endDate: 2013 },
+      scatter: { variable: null,  startDate: 2012, endDate: 2013 },
+      similarty: { variable: null,  startDate: 2012, endDate: 2013 }
     };
     var baseUrl = `${apiURL}/data/industry/${this.get('id')}/participants`;
     var departmentUrl = baseUrl + '?level=department';
@@ -51,17 +52,17 @@ export default DS.Model.extend(ModelAttribute, {
           let department = locationsMetadata[d.department_id];
           return _.merge(d, department);
         });
-        return { entity: this, entity_type:'industry', data: data, source: 'locations', defaultParams:defaultParams };
+        return { entity: this, entity_type:'industry', data: data, source: 'departments', defaultParams:defaultParams };
       }, (error) => {
-        return { error: error, entity: this, entity_type:'industry', data: [], source: 'locations', defaultParams:defaultParams};
+        return { error: error, entity: this, entity_type:'industry', data: [], source: 'departments', defaultParams:defaultParams};
       });
   }),
   graphbuilderMunicipalities: computed('id', function() {
     var defaultParams = {
       treemap: { variable: 'employment', startDate: 2012, endDate: 2013 },
       multiples: { variable: 'employment', startDate: 2012, endDate: 2013 },
-      scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
-      similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
+      scatter: { variable: null,  startDate: 2012, endDate: 2013 },
+      similarty: { variable: null,  startDate: 2012, endDate: 2013 }
     };
     var baseUrl = `${apiURL}/data/industry/${this.get('id')}/participants`;
     var municipalityiUrl = baseUrl + '?level=municipality';

@@ -41,9 +41,7 @@ export default Ember.Controller.extend({
   yearSort: ['year'],
 
   //validTimeseries is array of data points where all key(expect diversity cause fucking values are null),value pairs are not null
-  validTimeseries: computed.filter('model.timeseries', function(data) {
-    return data.gdp_real;
-  }),
+  validTimeseries: computed.alias('model.timeseries'),
   sortedTimeseries: computed.sort('validTimeseries','yearSort'),
 
   firstDataPoint: computed('validTimeseries', function() {
@@ -62,16 +60,16 @@ export default Ember.Controller.extend({
     return numeral(pop).format('0.00 a');
    }),
   lastGdp: computed('validTimeseries','locale', function() {
-    let gdp = get(this.get('lastDataPoint'), 'gdp_real');
+    let gdp = get(this.get('lastDataPoint'), 'gdp_nominal');
     return numeral(gdp).format('$ 0.00 a');
    }),
   lastGdpPerCapita: computed('validTimeseries','locale', function() {
-    let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_real');
+    let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_nominal');
     return numeral(gdpPC).format('$ 0.00 a');
    }),
   gdpGrowth:computed('validTimeseries', function() {
-    var firstGdp = get(this.get('firstDataPoint'), 'gdp_real');
-    var lastGdp = get(this.get('lastDataPoint'), 'gdp_real');
+    var firstGdp = get(this.get('firstDataPoint'), 'gdp_nominal');
+    var lastGdp = get(this.get('lastDataPoint'), 'gdp_nominal');
     var growth = (lastGdp - firstGdp) / firstGdp;
     return numeral(growth).format('0.000%');
   }),

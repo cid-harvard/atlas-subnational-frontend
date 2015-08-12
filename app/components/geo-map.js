@@ -63,7 +63,7 @@ export default Ember.Component.extend({
     let g = svg.append('g').attr('class', 'leaflet-zoom-hide');
 
     _.forEach(json.features, function(d) {
-      d.value = valueMap.get(d.properties.cid_id);
+      d.value = valueMap.get(d.properties.cid_id) || 0;
     });
 
     let feature = g.selectAll('path')

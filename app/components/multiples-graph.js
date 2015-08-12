@@ -203,14 +203,14 @@ export default Ember.Component.extend({
           let yValue = Ember.get(d.values[index], varDependent);
           return y(yValue);
         })
-        .attr('class', function(d) {
+        .attr('class', function() {
           if (date === parseInt(xExtent[0])) {
             return 'chart__tooltip--edge--start';
           } else if (date === parseInt(xExtent[1])) {
             return 'chart__tooltip--edge--end';
           }
         })
-        .attr('dx', function(d) {
+        .attr('dx', function() {
           if (date === parseInt(xExtent[0])) {
             return '-4';
           } else if (date === parseInt(xExtent[1])) {
@@ -242,11 +242,17 @@ export default Ember.Component.extend({
       this.initCharts();
     });
   },
+  willDestroyElement: function() {
+    this.initCharts = null;
+    this.removeObserver('i18n.locale', this, this.update);
+    this.removeObserver('data.[]', this, this.update);
+    this.removeObserver('parent.isVisible', this, this.profileTabUpdate);
+  },
   update: observer('data.[]', 'i18n.locale', function() {
     if(!this.element){ return false; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
       d3.select(this.get('id')).selectAll('*').remove(); /// TODO REMOVE THIS LATER FOR TRANSITIONS
-      this.initCharts();
+      if(this.initCharts) { this.initCharts();}
     });
   }),
   actions: {

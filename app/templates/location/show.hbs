@@ -49,7 +49,7 @@
               {{dot-plot
                 elementId='dotplot--gdp-pc'
                 data=departmentsData
-                varX='gdp_pc_real'
+                varX='gdp_pc_nominal'
                 varText='name'
                 varId='department_id'
                 currentLocation=locationId
@@ -62,7 +62,7 @@
               {{spark-line
                 data=timeSeriesData
                 varId='department_id'
-                yVar='gdp_pc_real'
+                yVar='gdp_pc_nominal'
                 elementId='spark--gdp-pc'
                 currentLocation=locationId
               }}
@@ -76,7 +76,7 @@
               {{dot-plot
                 elementId='dotplot--gdp'
                 data=departmentsData
-                varX='gdp_real'
+                varX='gdp_nominal'
                 varText='name'
                 varId='department_id'
                 currentLocation=locationId
@@ -89,7 +89,7 @@
               {{spark-line
                 data=timeSeriesData
                 varId='department_id'
-                yVar='gdp_real'
+                yVar='gdp_nominal'
                 elementId='spark--gdp'
                 currentLocation=locationId
               }}
