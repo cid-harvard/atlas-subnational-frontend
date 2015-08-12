@@ -37,8 +37,8 @@ export default DS.Model.extend(ModelAttribute, {
       treemap: { variable: 'employment', startDate: 2012, endDate: 2013 },
       multiples: { variable: 'employment', startDate: 2008, endDate: 2013 },
       geo: { variable: 'employment', startDate: 2013, endDate: 2013 },
-      scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
-      similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
+      scatter: { variable: null,  startDate: 2012, endDate: 2013 },
+      similarty: { variable: null,  startDate: 2012, endDate: 2013 }
     };
     var baseUrl = `${apiURL}/data/industry/${this.get('id')}/participants`;
     var departmentUrl = baseUrl + '?level=department';
@@ -61,8 +61,8 @@ export default DS.Model.extend(ModelAttribute, {
     var defaultParams = {
       treemap: { variable: 'employment', startDate: 2012, endDate: 2013 },
       multiples: { variable: 'employment', startDate: 2012, endDate: 2013 },
-      scatter: { variauble: null,  startDate: 2012, endDate: 2013 },
-      similarty: { variauble: null,  startDate: 2012, endDate: 2013 }
+      scatter: { variable: null,  startDate: 2012, endDate: 2013 },
+      similarty: { variable: null,  startDate: 2012, endDate: 2013 }
     };
     var baseUrl = `${apiURL}/data/industry/${this.get('id')}/participants`;
     var municipalityiUrl = baseUrl + '?level=municipality';
