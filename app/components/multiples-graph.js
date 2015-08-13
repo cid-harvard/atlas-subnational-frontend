@@ -182,25 +182,27 @@ export default Ember.Component.extend({
 
     function mousemove() {
       var year = x.invert(d3.mouse(this)[0]);
-      var date = Math.round(year);
+      var date = Math.floor(year);
       var bisect = d3.bisector(function(d) { return d.year; }).left;
       var index = 0;
+
 
       hoverMarker.attr('x', x(date))
         .attr('y', function(d) {
           index = bisect(d.values, date, 0, d.values.length - 1);
-
-          let yValue = Ember.get(d.values[index], varDependent);
+          let yValue = d.values[index] ? Ember.get(d.values[index], varDependent, 0): 0;
           return y(yValue);
         })
         .attr('transform', function(d) {
-          let yValue = Ember.get(d.values[index], varDependent);
+          index = bisect(d.values, date, 0, d.values.length - 1);
+          let yValue = d.values[index] ? Ember.get(d.values[index], varDependent, 0): 0;
           return 'translate(0, -3.54) rotate( 45 ' + x(date) + ' ' + y(yValue) + ')';
         });
 
       caption.attr('x', x(date))
         .attr('y', function(d) {
-          let yValue = Ember.get(d.values[index], varDependent);
+          index = bisect(d.values, date, 0, d.values.length - 1);
+          let yValue = d.values[index] ? Ember.get(d.values[index], varDependent, 0): 0;
           return y(yValue);
         })
         .attr('class', function() {
@@ -218,12 +220,16 @@ export default Ember.Component.extend({
           }
         })
         .text(function(d) {
-          let yValue = Ember.get(d.values[index], varDependent);
+          index = bisect(d.values, date, 0, d.values.length - 1);
+          let yValue = d.values[index] ? Ember.get(d.values[index], varDependent) : 0;
+          if(d.values[index].year != date){ yValue = 0; }
+
           if(varDependent === 'export_value') {
             return '$' + numeral(yValue).format('0a');
           }
           return numeral(yValue).format('0a');
         });
+
 
       curYear.attr('x', x(date))
         .text(truncateYear(date));
