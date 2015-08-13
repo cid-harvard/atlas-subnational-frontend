@@ -1,0 +1,133 @@
+<div class="buildermod__drawer buildermod__drawer--questions">
+  <h4 class="builder__questions__header">Questions: Locations</h4>
+  <ul class="builder__questions__list">
+    <li class="builder__questions__item builder__questions__item--is--disabled">
+      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span {{action "closeDrawer"}}>
+          {{#link-to 'visualization'  class="builder__questions__question"}}
+            {{t 'graph_builder.page_title.location.locations.export' name=name }}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item builder__questions__item--is--disabled">
+      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span {{action "closeDrawer"}}>
+          {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__questions__question"}}
+            {{t 'graph_builder.page_title.location.locations.import_from' name=name }}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item builder__questions__item--is--disabled">
+      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span {{action "closeDrawer"}}>
+          {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__questions__question"}}
+            {{t 'graph_builder.page_title.location.locations.export_subregions' name=name }}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item builder__questions__item--is--disabled">
+      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span {{action "closeDrawer"}}>
+          {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products") class="builder__questions__question"}}
+            {{t 'graph_builder.page_title.location.locations.import_subregions' name=name item=builderquestionsDropDown }}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+  </ul>
+
+  <h4 class="builder__questions__header">Questions: Products</h4>
+  <ul class="builder__questions__list">
+    <li class="builder__questions__item">
+      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span {{action "closeDrawer"}}>
+          {{#link-to 'visualization' entity_and_id 'products' 'treemap' (query-params variable='export_value') class="builder__questions__question"}}
+            {{t 'graph_builder.page_title.location.products.export_value' name=name}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item">
+      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span {{action "closeDrawer"}}>
+          {{#link-to 'visualization' entity_and_id 'products' 'treemap' (query-params variable='import_value') class="builder__questions__question"}}
+            {{t 'graph_builder.page_title.location.products.import_value' name=name}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item">
+      <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span {{action "closeDrawer"}}>
+          {{#link-to 'visualization' entity_and_id 'products' 'scatter' (query-params variable='null' endDate=2014 startDate=2013) class="builder__questions__question"}}
+            {{t 'graph_builder.page_title.location.products.scatter' name=name}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item">
+      <i class="icon-cidcon_similarity builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span {{action "closeDrawer"}}>
+          {{#link-to 'visualization' entity_and_id 'products' 'similarity' (query-params variable='null' endDate=2014 startDate=2013) class="builder__questions__question"}}
+            {{t 'graph_builder.page_title.location.products.similarity' name=name}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+  </ul>
+
+  <h4 class="builder__questions__header">Questions: Industries</h4>
+  <ul class="builder__questions__list">
+    <li class="builder__questions__item">
+      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span {{action "closeDrawer"}}>
+          {{#link-to 'visualization' entity_and_id 'industries' 'treemap' (query-params variable='employment') class="builder__questions__question"}}
+            {{t 'graph_builder.page_title.location.industries.employment' name=name}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item">
+      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span {{action "closeDrawer"}}>
+          {{#link-to 'visualization' entity_and_id 'industries' 'treemap' (query-params variable='wages') class="builder__questions__question"}}
+            {{t 'graph_builder.page_title.location.industries.wages' name=name}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item">
+      <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span {{action "closeDrawer"}}>
+          {{#link-to 'visualization' entity_and_id 'industries' 'scatter' (query-params variable='null') class="builder__questions__question"}}
+            {{t 'graph_builder.page_title.location.industries.scatter' name=name}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item">
+      <i class="icon-cidcon_similarity builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span {{action "closeDrawer"}}>
+          {{#link-to 'visualization' entity_and_id 'industries' 'similarity' (query-params variable='rca') class="builder__questions__question"}}
+            {{t 'graph_builder.page_title.location.industries.similarity' name=name}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>

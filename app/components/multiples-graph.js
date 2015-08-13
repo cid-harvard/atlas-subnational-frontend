@@ -4,7 +4,7 @@ const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
-  margin: { top: 20, right: 5, bottom: 30, left: 45 },
+  margin: { top: 20, right: 10, bottom: 30, left: 45 },
   height: 140,
   firstSlice: 36,
   varId: 'code',
@@ -244,9 +244,9 @@ export default Ember.Component.extend({
     container.exit().remove();
   },
   didInsertElement: function() {
-    Ember.run.scheduleOnce('afterRender', this , function() {
+    Ember.run.later(this, function() {
       this.initCharts();
-    });
+    }, 100);
   },
   willDestroyElement: function() {
     this.initCharts = null;

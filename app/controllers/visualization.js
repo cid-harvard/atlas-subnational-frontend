@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
     if(this.get('model.data').length) {
       return d3.extent(this.get('model.data'), function(d) { return d.year; });
     }
-    return  [2007, 2013];
+    return  [2008, 2013];
   }),
   name: computed.alias('model.entity.name'),
   dateRange: computed('dateExtent', function() {
@@ -116,7 +116,7 @@ export default Ember.Controller.extend({
     return false;
   }),
   builderNavType: computed('model.entity_type', function() {
-    return`partials/${this.get('model.entity_type')}-builder-nav`;
+    return`partials/builder-questions-${this.get('model.entity_type')}`;
   }),
   visualizationComponent: computed('visualization', function(){
     let visualization = this.get('visualization');

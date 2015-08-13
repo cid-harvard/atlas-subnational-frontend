@@ -86,10 +86,7 @@ export default {
       'industry': {
         'departments.employment': 'Where in Colombia does {{name}} employ the most people?',
         'departments.wages': 'Where in Colombia does {{name}} pay the highest total wages?',
-        'departments.wage_avg': 'Where in Colombia does {{name}} pay the highest wages per worker?',
-        'locations.employment': 'Where in Colombia does {{name}} employ the most people?',
-        'locations.wages': 'Where in Colombia does {{name}} pay the highest total wages?',
-        'locations.wage_avg': 'Where in Colombia does {{name}} pay the highest wages per worker?',
+        'departments.wage_avg': 'Where in Colombia does {{name}} pay the highest wages per worker?'
       },
       'product': {
         'locations.export_value': 'What places in Colombia export {{name}}?',
