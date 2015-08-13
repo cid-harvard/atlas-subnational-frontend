@@ -11,7 +11,7 @@ export default Ember.Route.extend({
     var products4digit = Ember.$.getJSON(apiURL+'/metadata/products?level=4digit');
     var locationsMetadata = Ember.$.getJSON(apiURL+'/metadata/locations/');
     var productsHierarchy = Ember.$.getJSON(apiURL+'/metadata/products/hierarchy?from_level=4digit&to_level=section');
-    var industriesClass = Ember.$.getJSON(apiURL+'/metadata/industries?level=class');
+    var industriesClass = Ember.$.getJSON(apiURL+'/metadata/industries');
     var industriesHierarchy = Ember.$.getJSON(apiURL+'/metadata/industries/hierarchy?from_level=4digit&to_level=section');
 
     var promises = [
@@ -42,7 +42,7 @@ export default Ember.Route.extend({
 
       _.forEach(industriesMetadata, function(d) {
         let sectionId = industriesHierarchy[d.id];
-        let color = IndustrySectionColor[sectionId].color;
+        let color = sectionId ? IndustrySectionColor[sectionId].color : '#fff';
         d.group = sectionId;
         d.color = color;
       });
