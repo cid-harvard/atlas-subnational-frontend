@@ -21,22 +21,24 @@ export default DS.Model.extend(ModelAttribute, {
       scatter: { variable: null,  startDate: 2013, endDate: 2013 },
       similarity: { variable: null,  startDate: 2013, endDate: 2013 }
     };
-    let product = $.getJSON(`${apiURL}/data/location/${this.get('id')}/products?level=4digit`);
+    let products  = $.getJSON(`${apiURL}/data/location/${this.get('id')}/products?level=4digit`);
     let productComplexity = $.getJSON(`${apiURL}/data/product?level=4digit`);
-    return Ember.RSVP.all([product, productComplexity])
+    return Ember.RSVP.all([products, productComplexity])
       .then((response) => {
         let productsMetadata = this.get('metaData.products');
 
-        let data = response[0].data;
+        let products = response[0].data;
         let productComplexity = _.indexBy(response[1].data, function(d){ return d.year + '_'+ d.product_id; });
 
-        data = _.map(data, (d) => {
+        let visualizationData = _.map(products, (d) => {
           let product = productsMetadata[d.product_id];
           let complexity = productComplexity[ `${d.year}_${d.product_id}`];
-          d.complexity = complexity.pci;
+          if(complexity) {
+            d.complexity = complexity.pci;
+          }
           return _.merge(d, product);
         });
-        return { entity: this, entity_type:'location', data: data, source: 'products', defaultParams:defaultParams };
+        return { entity: this, entity_type:'location', data: visualizationData, source: 'products', defaultParams:defaultParams };
       }, (error) => {
         return { error: error, entity: this, entity_type:'location', data: [], source: 'products', defaultParams:defaultParams};
       });
