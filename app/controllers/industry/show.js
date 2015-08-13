@@ -26,6 +26,8 @@ export default Ember.Controller.extend({
       .reduce((memo,i) => {
         let datum = _.first(i);
         datum['employment_growth'] = this.employmentGrowthCalc(i);
+        console.log(datum)
+
         memo.push(datum);
         return memo;
       },[])
