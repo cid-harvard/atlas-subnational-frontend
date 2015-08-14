@@ -8,8 +8,8 @@ const {computed, $} = Ember;
 export default DS.Model.extend(ModelAttribute, {
   graphbuilderLocations: computed('id', function() {
     var defaultParams = {
-      treemap: { variable: 'export_value', startDate: 2007, endDate: 2013 },
-      multiples: { variable: 'export_value', startDate: 2007, endDate: 2013 },
+      treemap: { variable: 'export_value', startDate: 2013, endDate: 2013 },
+      multiples: { variable: 'export_value', startDate: 2013, endDate: 2013 },
       geo: { variable: 'export_value', startDate: 2013, endDate: 2014 },
       scatter: { variable: null,  startDate: 2012, endDate: 2013 },
       similarty: { variable: null,  startDate: 2012, endDate: 2013 }

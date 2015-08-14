@@ -16,8 +16,8 @@ export default DS.Model.extend(ModelAttribute, {
   //following drives graphbuilder
   graphbuilderProducts: computed('id', function() {
     var defaultParams = {
-      treemap: { variable: 'export_value', startDate: 2007, endDate: 2013 },
-      multiples: { variable: 'export_value', startDate: 2007, endDate: 2013 },
+      treemap: { variable: 'export_value', startDate: 2013, endDate: 2013 },
+      multiples: { variable: 'export_value', startDate: 2013, endDate: 2013 },
       scatter: { variable: null,  startDate: 2013, endDate: 2013 },
       similarity: { variable: null,  startDate: 2013, endDate: 2013 }
     };
@@ -45,8 +45,8 @@ export default DS.Model.extend(ModelAttribute, {
   }),
   graphbuilderIndustries: computed('id', function() {
     var defaultParams = {
-      treemap: { variable: 'wages', startDate: 2007, endDate: 2013 },
-      multiples: { variable: 'wages', startDate: 2007, endDate: 2013 },
+      treemap: { variable: 'wages', startDate: 2013, endDate: 2013 },
+      multiples: { variable: 'wages', startDate: 2013, endDate: 2013 },
       scatter: { variable: null,  startDate: 2013, endDate: 2013 },
       similarity: { variable: 'rca',  startDate: 2013, endDate: 2013 }
     };
