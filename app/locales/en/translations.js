@@ -52,6 +52,7 @@ export default {
     'table': {
       'name': 'Name',
       'export_value': 'Exports',
+      'import_value': 'Imports',
       'export_rca': 'Revealed competitive advantage',
       'rca': 'Revealed competitive advantage',
       'wages': 'Wages',
@@ -161,6 +162,7 @@ export default {
     'total_wages': 'Total Wages {{lastYear}}',
     'employment': 'Employment {{lastYear}}',
     'exports_and_imports': 'Exports and imports',
+    'imports': 'Imports, {{year}}',
     'exports': 'Exports, {{year}}',
     'export_possiblities': 'Export possiblities',
     'export_possiblities.intro': 'We’ve found that countries which export complex products grow faster than those which export simple products. Using the similarity map we built in the section above, we’ve highlighted  high potential products for {{name}}, ranked by which have the highest combination of opportunity and complexity.',
