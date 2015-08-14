@@ -22,15 +22,19 @@ export default Ember.Component.extend({
       .id(this.get('varIndependent'))
       .x('distance')
       .y('complexity')
-      .format({ number: function(d) { return numeral(d).format('0.0a');}})
+      .format({ number: function(d) { return numeral(d).format('0.00a');}})
       .text({value: (d) => {
         return Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code;
        }})
-      .size(this.get('rca'))
+      .size({value: this.get('varSize'), scale: { min: 1, max: 15 }})
       .timeline(false)
       .height(this.get('height'))
       .width(this.get('width'))
       .legend(false);
+  }),
+  varSize: computed('dataType', function() {
+    if(this.get('dataType') === 'products') { return 'cog'; }
+    if(this.get('dataType') === 'industries') { return 'cog'; }
   }),
   rca: computed('dataType', function() {
     if(this.get('dataType') === 'products') { return 'export_rca'; }
