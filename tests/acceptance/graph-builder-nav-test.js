@@ -35,7 +35,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to multiples
-  click("button:contains('Graph')");
+  click("button:contains('Change question')");
   click("input[data-change-graph='multiples']");
 
   andThen(function() {
@@ -43,7 +43,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Switch to import source
-  click("a:contains('Products')");
+  click("button:contains('Change question')");
   click("a:contains('What products does Atlántico import?')");
 
   andThen(function() {
@@ -51,7 +51,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to scatter plot
-  click("a:contains('Products')");
+  click("button:contains('Change question')");
   click("a:contains('What products have the best combination of complexity and opportunity for Atlántico?')");
 
   andThen(function() {
@@ -59,7 +59,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to product space
-  click("a:contains('Products')");
+  click("button:contains('Change question')");
   click("a:contains('What does the product map look like for Atlántico?')");
 
   andThen(function() {
@@ -67,7 +67,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to industry employment
-  click("a:contains('Industries')");
+  click("button:contains('Change question')");
   click("a:contains('What industries in Atlántico employ the most people?')");
 
   andThen(function() {
@@ -75,7 +75,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to industry wages
-  click("a:contains('Industries')");
+  click("button:contains('Change question')");
   click("a:contains('What industries in Atlántico are the largest by total wages?')");
 
   andThen(function() {
@@ -83,7 +83,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to industry scatter
-  click("a:contains('Industries')");
+  click("button:contains('Change question')");
   click("a:contains('What industries have the best combination of complexity and opportunity for Atlántico?')");
 
   andThen(function() {
@@ -91,7 +91,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   });
 
   //Go to industry simi-map
-  click("a:contains('Industries')");
+  click("button:contains('Change question')");
   click("a:contains('What does the industry map look like for Atlántico?')");
 
   andThen(function() {

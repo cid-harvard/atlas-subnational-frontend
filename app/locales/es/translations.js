@@ -76,14 +76,14 @@ export default {
     'change_graph': {
       'label': 'Gráficos',
     },
+    'questions': {
+      'label': 'Cambiar pregunta'
+    },
     'multiples': {
       'show_all': 'Mostrar todo',
     },
     'page_title': {
       'industry': {
-        'locations.employment': '¿Cuando en Colombia no {{name}} emplea a más gente?',
-        'locations.wages': '¿Cuando en Colombia no {{name}} paga los salarios más altos del total?',
-        'locations.wages_avg': '¿Cuando en Colombia no {{name}} paga los salarios más altos por trabajador?',
         'departments.employment': '¿Cuando en Colombia no {{name}} emplea a más gente?',
         'departments.wages': '¿Cuando en Colombia no {{name}} paga los salarios más altos del total?',
         'departments.wages_avg': '¿Cuando en Colombia no {{name}} paga los salarios más altos por trabajador?'

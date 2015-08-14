@@ -20,6 +20,7 @@
   }
   .buildermod__vizwrap {
     border-width: 0;
+    overflow-y: scroll;
   }
   .buildermod__viz {
     display: none;
@@ -39,7 +40,27 @@
   }
   .buildermod__vizwrap {
     border-width: 0;
-    overflow-y: hidden;
+    overflow-y: scroll;
+  }
+  .buildermod__viz {
+    display: none;
+  }
+}
+
+.buildermod--is--open--questions {
+  .buildermod__drawer--questions {
+    display: block;
+  }
+  .buildermod__tool--questions {
+    background: $colorBrown300;
+    border-left-color: $colorBrown300;
+    .tool__btn__icon:before {
+      content: '\f00d';
+    }
+  }
+  .buildermod__vizwrap {
+    border-width: 0;
+    overflow-y: scroll;
   }
   .buildermod__viz {
     display: none;

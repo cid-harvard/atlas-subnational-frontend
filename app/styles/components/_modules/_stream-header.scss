@@ -17,22 +17,8 @@
   z-index: $zIndex-1;
 }
 
-.builder__pentagon {
-  position: absolute;
-  width: 120vw;
-  z-index: -1;
-  transform: translate(-50%, -30vw);
-}
-
-.stream__header--builder:before {
-  content: '';
-  background-color: $colorGreen;
-  height: 120vw;
-  width: 120vw;
-  z-index: -1;
-  position: absolute;
-  transform: translate(-50%, -30vw);
-  clip-path: polygon(50% 0%, 100% 50%, 75% 75%, 25% 75%, 0 50%);
+.stream__header--builder {
+  text-align: left;
 }
 
 .stream__head {

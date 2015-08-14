@@ -5,7 +5,7 @@
 **/
 
 .stream__section {
-  margin: $baseSpace*3;
+  padding: $baseSpace*3;
   z-index: $zIndex-2;
   position: relative;
 }
@@ -24,6 +24,14 @@
 .section__intro {
   width: 66.66%;
   margin-bottom: $baseSpace;
+}
+
+// Builder
+.stream__section--builder--body {
+  background: $colorGreen;
+  &:first-of-type {
+    padding-bottom: 0;
+  }
 }
 
 
