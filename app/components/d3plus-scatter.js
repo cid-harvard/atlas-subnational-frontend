@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   }),
   rcaData: computed('data.[]', 'rca', function() {
     let rca = this.get('rca');
-    return _.filter(this.get('data'), function(d) { return d[rca] >= 1;});
+    return _.filter(this.get('data'), function(d) { return d[rca] < 1;});
   }),
   scatter: computed('data.[]',  'dataType',function() {
     return d3plus.viz()
@@ -26,7 +26,7 @@ export default Ember.Component.extend({
       .text({value: (d) => {
         return Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code;
        }})
-      .size({value: this.get('varSize'), scale: { min: 1, max: 15 }})
+      .size({value: this.get('varSize'), scale: { min: 0, max: 15 }})
       .timeline(false)
       .height(this.get('height'))
       .width(this.get('width'))
