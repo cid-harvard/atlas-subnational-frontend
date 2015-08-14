@@ -40,17 +40,19 @@ export default EmberTableComponent.extend({
   ],
   productsMap: [
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'export_value', type: 'int', expand: false},
-    { key: 'export_rca', type: 'int', expand: false},
-    { key: 'year' , expand: false, type: 'int'},
-    { key: 'complexity' , expand: false, type: 'int'},
-    { key: 'distance' , expand: true, type: 'int'}
+    { key: 'export_value', type: 'int', expand: false, savedWidth: 140 },
+    { key: 'import_value', type: 'int', expand: false, savedWidth: 140 },
+    { key: 'export_rca', type: 'int', expand: false, savedWidth: 120 },
+    { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
+    { key: 'complexity' , expand: false, type: 'int', savedWidth: 120 },
+    { key: 'distance' , expand: true, type: 'int', savedWidth: 120 }
    ],
   locationsMap: [
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'export_value', type: 'int', expand: false},
-    { key: 'export_rca', type: 'int', expand: false},
-    { key: 'year' , expand: false, type: 'int'},
+    { key: 'export_value', type: 'int', expand: false, savedWidth: 140 },
+    { key: 'import_value', type: 'int', expand: false, savedWidth: 140 },
+    { key: 'export_rca', type: 'int', expand: false, savedWidth: 100 },
+    { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
    ],
   industriesMap: [
     { key: 'name', expand: true, savedWidth: 300 },
@@ -64,9 +66,8 @@ export default EmberTableComponent.extend({
     { key: 'name', expand: true, savedWidth: 300 },
     { key: 'wages', type: 'int', expand: false},
     { key: 'employment', type: 'int', expand: false},
-    { key: 'rca', type: 'int', expand: false},
+    { key: 'num_establishments', type: 'int', expand: false},
     { key: 'year' , expand: false, type: 'int'},
-    { key: 'complexity' , expand: false, type: 'int'}
    ],
   tableMap: computed('source', function() {
     let source = this.get('source');
@@ -109,11 +110,17 @@ export default EmberTableComponent.extend({
   formatNumber: function(number, key) {
     if(key === 'wages' || key === 'avg_wage') {
       return numeral(number).format('$ 0.00a');
-    } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'employment' || key === 'population'){
+    } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'population'){
+      return numeral(number).format('0.00a');
+    } else if(key === 'employment'){
+      let format = parseInt(number) > 1000 ?  '0.00a' : '0';
+      return numeral(parseInt(number)).format(format);
+    } else if(key === 'num_establishments'){
+       if(parseInt(number) < 4) { return '1 - 3'; }
       return numeral(number).format('0.00a');
     } else if(key === 'employment_growth'){
       return numeral(number).format('0.00%');
-    } else if(key === 'export_value') {
+    } else if(key === 'export_value' || key === 'import_value') {
       return '$' + numeral(number).format('0.0a') + ' USD';
     } else {
       return number;

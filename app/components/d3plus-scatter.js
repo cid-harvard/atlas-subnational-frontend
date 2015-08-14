@@ -11,9 +11,9 @@ export default Ember.Component.extend({
   }),
   rcaData: computed('data.[]', 'rca', function() {
     let rca = this.get('rca');
-    return _.filter(this.get('data'), function(d) { return d[rca] >= 1;});
+    return _.filter(this.get('data'), function(d) { return d[rca] < 1;});
   }),
-  scatter: computed('data.[]',  'dataType',function() {
+  scatter: computed('rcaData', 'dataType', function() {
     return d3plus.viz()
       .container(this.get('id'))
       .data({value: this.get('rcaData')})
@@ -22,15 +22,20 @@ export default Ember.Component.extend({
       .id(this.get('varIndependent'))
       .x('distance')
       .y('complexity')
-      .format({ number: function(d) { return numeral(d).format('0.0a');}})
+      .format({ number: function(d) { return numeral(d).format('0.00a');}})
       .text({value: (d) => {
         return Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code;
        }})
-      .size(this.get('rca'))
+      .size({value: this.get('varSize'), scale: { min: 1, max: 5 }})
       .timeline(false)
       .height(this.get('height'))
       .width(this.get('width'))
+      .tooltip([this.get('rca'),'cog'])
       .legend(false);
+  }),
+  varSize: computed('dataType', function() {
+    if(this.get('dataType') === 'products') { return 'cog'; }
+    if(this.get('dataType') === 'industries') { return 'cog'; }
   }),
   rca: computed('dataType', function() {
     if(this.get('dataType') === 'products') { return 'export_rca'; }

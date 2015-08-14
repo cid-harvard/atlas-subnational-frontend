@@ -31,7 +31,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   click('a[data-side-graph-builder-link]');
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/treemap?endDate=2013&startDate=2007&variable=export_value');
+    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/treemap?endDate=2013&startDate=2013&variable=export_value');
   });
 
   //Go to multiples
@@ -39,7 +39,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   click("input[data-change-graph='multiples']");
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/multiples?endDate=2013&startDate=2007&variable=export_value');
+    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/multiples?endDate=2013&startDate=2008&variable=export_value');
   });
 
   //Switch to import source
@@ -47,7 +47,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   click("a:contains('What products does Atlántico import?')");
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/treemap?endDate=2013&startDate=2007&variable=import_value');
+    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/treemap?endDate=2013&startDate=2013&variable=import_value');
   });
 
   //Go to scatter plot
@@ -71,7 +71,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   click("a:contains('What industries in Atlántico employ the most people?')");
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/treemap?endDate=2013&startDate=2007&variable=employment');
+    assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/treemap?endDate=2013&startDate=2013&variable=employment');
   });
 
   //Go to industry wages
@@ -79,7 +79,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   click("a:contains('What industries in Atlántico are the largest by total wages?')");
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/treemap?endDate=2013&startDate=2007&variable=wages');
+    assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/treemap?endDate=2013&startDate=2013&variable=wages');
   });
 
   //Go to industry scatter

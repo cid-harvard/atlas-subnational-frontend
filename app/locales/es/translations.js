@@ -52,6 +52,7 @@ export default {
     'table': {
       'name': 'Nombre',
       'export_value': 'Exportaciones',
+      'import_value': 'Importaciones',
       'export_rca': 'Ventaja comparativa revelada',
       'rca': 'Ventaja comparativa revelada',
       'wages': 'Salarios (COP)',
@@ -161,6 +162,7 @@ export default {
     'total_wages': 'Salarios totales pagados {{lastYear}}',
     'employment': 'Empleo total {{lastYear}}',
     'exports_and_imports': 'Exportaciones e Importaciones',
+    'imports': 'Importaciones, {{year}}',
     'exports': 'Exportaciones {{lastYear}}',
     'export_possiblities': 'Posibilidades de exportación',
     'export_possiblities.intro': 'Hemos encontrado que los países que exportan productos más complejos crecen más rápido. Usando el "espacio del producto" presentado arriba, estamos destacando productos de alto potencial para {{name}}, ordenados por las mejores combinaciones de complejidad actual y complejidad potencial.',

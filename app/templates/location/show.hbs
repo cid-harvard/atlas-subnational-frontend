@@ -192,6 +192,11 @@
               {{t 'location.show.exports' year=lastDataPoint.year}}
             </a>
           {{/ivy-tab}}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+            <a class="tab__link">
+              {{t 'location.show.imports' year=lastDataPoint.year}}
+            </a>
+          {{/ivy-tab}}
         {{/ivy-tab-list}}
 
         {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
@@ -204,17 +209,19 @@
                 elementId='export-tree-map'
                 varDependent='export_value'
               }}
-              {{!--
-              {{tree-map
+            </div>
+          </div>
+        {{/ivy-tab-panel}}
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod">
+            <div class="vizmod--treemod">
+              {{d3plus-tree-map
+                isInTab='true'
                 data=productsData
-                elementId='tree-map'
-                varId='product_id'
-                varGroup='group'
-                varText='group_name_en'
-                varSize='export_value'
-                varSort='export_value'
+                immutableData=productsData
+                elementId='import-tree-map'
+                varDependent='import_value'
               }}
-               --}}
             </div>
           </div>
         {{/ivy-tab-panel}}

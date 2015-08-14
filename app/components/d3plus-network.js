@@ -21,7 +21,7 @@ export default Ember.Component.extend({
     let indexedData = _.indexBy(this.get('data'), this.get('identifier'));
     return _.map(this.get('nodes'), function(d) {
       let datum = indexedData[d.id];
-      if(datum && datum[this.get('varDependent')] >= 1) {
+      if(datum && datum[this.get('varDependent')] < 1) {
         d.color = datum.color;
         d.name_short_en = datum.name_short_en;
         d.name_short_es = datum.name_short_es;
