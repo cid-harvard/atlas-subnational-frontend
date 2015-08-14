@@ -39,7 +39,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   click("input[data-change-graph='multiples']");
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/multiples?endDate=2013&startDate=2013&variable=export_value');
+    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/multiples?endDate=2013&startDate=2008&variable=export_value');
   });
 
   //Switch to import source
