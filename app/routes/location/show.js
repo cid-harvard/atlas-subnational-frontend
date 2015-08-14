@@ -33,11 +33,13 @@ export default Ember.Route.extend({
       let industriesMetadata = this.modelFor('application').industries;
 
       //get products data for the department
-      let products = _.map(productsData, (d) => {
+      let products = _.reduce(productsData, (memo, d) => {
+        if(d.year != 2013) { return memo; }
         let product = productsMetadata[d.product_id];
         let productData = productsDataIndex[d.product_id];
-        return _.merge(d, product, productData);
-      });
+        memo.push(_.merge(d, product, productData));
+        return memo;
+      }, []);
 
       //get industry data for department
       let industries = _.map(industriesData, (d) => {
