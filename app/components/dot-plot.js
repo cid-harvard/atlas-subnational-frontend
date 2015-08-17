@@ -11,6 +11,8 @@ export default Ember.Component.extend({
   }),
   dotPlot: computed('id','data', function() {
     let varX = this.get('varX');
+    let varId = this.get('varId');
+    let currentSelection = +this.get('currentSelection');
     return vistk.viz()
       .params({
         type: 'dotplot',
@@ -39,19 +41,16 @@ export default Ember.Component.extend({
         },
         items: [{
           marks: [{
-            type: "diamond"
+            type: 'diamond',
+            class: function(d) {
+              if(d[varId] === currentSelection) {
+                return 'preselected';
+              }
+            }
           }, {
             var_mark: '__highlighted',
-            type: d3.scale.ordinal().domain([true, false]).range(["text", "none"]),
-            rotate: "0",
-            translate: [0, -15],
-            text_anchor: function() {
-              var parentGroup = d3.select(this.parentNode);
-              var parentSVG = d3.select(this.parentNode.parentNode.parentNode);
-              var parentX = d3.transform(parentGroup.attr("transform")).translate[0];
-              var svgWidth = +parentSVG.attr("width");
-              return parentX < svgWidth / 2 ? "start": "end";
-            },
+            type: d3.scale.ordinal().domain([true, false]).range(['divtext', 'none']),
+            class: function() { return 'items__mark__divtext__tooltip'; },
             text: (d)  => {
               let format = function(d) { return numeral(d).format('0.00 a'); };
               let type = this.get('type');
@@ -65,7 +64,7 @@ export default Ember.Component.extend({
             }
           }]
         }],
-        selection: [this.get('currentLocation')]
+        selection: [currentSelection]
       });
  }),
   draw: function() {
