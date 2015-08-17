@@ -12,7 +12,7 @@
     opacity: .1;
   }
 
-  .items__mark__diamond.selected {
+  .items__mark__diamond.preselected {
     stroke: #EBE6E3;
     fill: red;
     opacity: 1;
@@ -42,4 +42,16 @@
     font-weight: 300;
     font-size: 1.4rem;
   }
+
+  .items__mark__divtext__tooltip {
+      background: #333;
+      background: rgba(0,0,0,.8);
+      border-radius: 5px;
+      height: 100%;
+      color: #fff;
+      padding: 5px 15px;
+      z-index: 9999;
+      width: 220px;
+  }
+
 }
