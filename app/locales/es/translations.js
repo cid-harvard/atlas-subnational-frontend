@@ -12,7 +12,7 @@ export default {
     'multiples': 'Gráficos de áreas',
     'geo': 'Mapa geográfico',
     'scatter': 'Gráfico de dispersión',
-    'similarity': 'Mapa similitud'
+    'similarity': 'Espacio similitud'
   },
   'side_nav': {
     'brand_slogan': 'Utilizando datos para mantener Colombia competitiva',
@@ -111,10 +111,10 @@ export default {
         'products.export_value_to': '¿Qué productos importa {{name}} de {{place}}?',
         'products.import_value': '¿Qué productos importa {{name}}?',
         'products.import_value_from': '¿Qué productos importa {{name}} de {{place}}?',
-        'products.similarity': '¿Cómo es el mapa del producto de {{name}}?',
+        'products.similarity': '¿Cómo es el espacio del producto de {{name}}?',
         'industries.employment': '¿Qué sectores generan más empleo en {{name}}?',
         'industries.scatter': '¿Qué sectores relativamente complejos y que ayuden a elevar la complejidad podrían desarrollarse más en {{name}}?',
-        'industries.wages': '¿Qué sectores en Colombia son más grande de la masa salarial?',
+        'industries.wages': '¿Qué sectores pagan los salarios más altos?',
         'industries.wages_avg': '¿Qué sectores en {{name}} pagan los salarios más altos por trabajador?',
         'industries.similarity': '¿Cómo es el espacio de los sectores de {{name}}?'
       }
@@ -139,7 +139,7 @@ export default {
         'products.export_value': 'Exportaciones totales',
         'products.scatter': 'Complejidad y valor estratégico',
         'products.similarity': 'Complejidad y valor estratégico',
-        'products.import_value': 'Las importaciones totales',
+        'products.import_value': 'Importaciones totales',
         'industries.employment': 'Empleo total',
         'industries.scatter': 'Complejidad y valor estratégico',
         'industries.similarity': 'Complejidad y valor estratégico',
