@@ -4,7 +4,7 @@ const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
-  margin: { top: 20, right: 10, bottom: 30, left: 45 },
+  margin: { top: 20, right: 10, bottom: 30, left: 50 },
   height: 140,
   firstSlice: 36,
   varId: 'code',
