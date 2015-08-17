@@ -53,7 +53,7 @@ export default Ember.Component.extend({
     this.removeObserver('i18n.locale', this, this.update);
     this.removeObserver('data.[]', this, this.update);
   },
-  update: observer('data.[]', 'varRca', 'i18n.locale', function() {
+  update: observer('data.[]', 'varRca', 'i18n.locale', 'dataType', function() {
     if(!this.element){ return false; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
       if(this.get('scatter')) { this.get('scatter').draw();}

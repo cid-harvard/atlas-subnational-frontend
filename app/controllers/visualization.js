@@ -109,10 +109,19 @@ export default Ember.Controller.extend({
   immutableData: computed('model.data.[]','endDate', 'startDate' , function() {
     return this.filterToSelectedYears(this.get('model.data'), this.get('startDate'), this.get('endDate'));
   }),
-  filteredData: computed('immutableData.[]', 'search', 'startDate', 'endDate', function() {
+  filteredData: computed('immutableData.[]', 'search', 'startDate', 'endDate', 'filterRca', function() {
     let data = this.get('immutableData');
     if(this.get('search')){ data = this.searchFilter(data); }
+
+    if(this.get('visualization') === 'scatter'){
+      let rca = this.get('filterRca');
+      return _.filter(data, function(d) { return d[rca] < 1;});
+    }
     return data;
+  }),
+  filterRca: computed('source', function() {
+    if(this.get('source') === 'products') { return 'export_rca'; }
+    if(this.get('source') === 'industries') { return 'rca'; }
   }),
   isGeo: computed('visualization', function() {
     if(this.get('visualization') === 'geo') { return true; }
