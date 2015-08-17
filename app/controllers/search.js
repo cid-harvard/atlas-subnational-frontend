@@ -48,7 +48,7 @@ export default Ember.Controller.extend({
     this._super.apply(this, arguments);
     var applicationController = this.get('controllers.application');
     applicationController.set('entity', 'location');
-    applicationController.set('entity_id', 1044);
+    applicationController.set('entity_id', 3);
   },
   actions: {
     search: function() {
