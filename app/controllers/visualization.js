@@ -85,6 +85,9 @@ export default Ember.Controller.extend({
     }
     return [vis];
   }),
+  isMultipleYears: computed('startDate', 'endDate', function() {
+    return this.get('startDate') == this.get('endDate');
+  }),
   years: computed('startDate', 'endDate', function() {
     let start = parseInt(this.get('startDate'), 10);
     let end = parseInt(this.get('endDate'), 10);
