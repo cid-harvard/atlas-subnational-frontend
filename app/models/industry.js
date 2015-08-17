@@ -24,7 +24,7 @@ export default DS.Model.extend(ModelAttribute, {
   yearRange: computed('timeseries', function() {
     var firstYear = get(this.get('firstDataPoint'), 'year');
     var lastYear = get(this.get('lastDataPoint'), 'year');
-    return `${firstYear} - ${lastYear}`;
+    return `${firstYear}–${lastYear}`;
   }),
   lastEmployment: computed('lastDataPoint', function() {
     return numeral(this.get('lastDataPoint').employment).format('0.00 a');

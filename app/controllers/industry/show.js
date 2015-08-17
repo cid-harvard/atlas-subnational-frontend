@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
     let datum = _.where(this.get('employmentGrowthDotPlot'),
       { industry_id: parseInt(this.get('model.id'))}
     );
-    return numeral(datum[0].employment_growth).format('0.00 %');
+    return numeral(datum[0].employment_growth).format('0.0%');
   }),
   averageWageDotPlot: computed('model.industriesData', 'model.id', function() {
    return _.chain(this.get('model.industriesData'))
