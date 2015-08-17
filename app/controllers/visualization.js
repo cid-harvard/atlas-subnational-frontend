@@ -141,7 +141,7 @@ export default Ember.Controller.extend({
     });
   },
   filterToSelectedYears: function(data, start, end) {
-    let  timeRange = d3.range(start, end + 1); // Makes the range inclusive
+    let  timeRange = d3.range(parseInt(start), parseInt(end) + 1); // Makes the range inclusive
     return _.filter(data, function(d) {
       return _.contains(timeRange, get(d, 'year'));
     });
