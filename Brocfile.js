@@ -25,6 +25,10 @@ var app = new EmberApp({
   },
   emberCliFontAwesome: {
     includeFontAwesomeAssets: false
+  },
+  fingerprint: {
+    exclude: ['loc_'],
+    generateAssetMap: true
   }
 });
 
