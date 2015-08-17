@@ -35,9 +35,6 @@
             <th class="table__header">
               {{t 'location.show.value'}}
             </th>
-            <th class="table__header table__header--summaries--spark">
-              {{t 'location.show.growth_annual' yearRange=yearRange}}
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -58,15 +55,6 @@
             <td class="table__cell table__cell--summaries">
               {{lastGdpPerCapita}}
             </td>
-            <td class="table__cell table__cell--summaries">
-              {{spark-line
-                data=timeSeriesData
-                varId='department_id'
-                yVar='gdp_pc_nominal'
-                elementId='spark--gdp-pc'
-                currentLocation=locationId
-              }}
-            </td>
           </tr>
           <tr class="table__row table__row--body">
             <td class="table__cell table__cell--summaries">
@@ -84,15 +72,6 @@
             </td>
             <td class="table__cell table__cell--summaries">
               {{lastGdp}}
-            </td>
-            <td class="table__cell table__cell--summaries">
-              {{spark-line
-                data=timeSeriesData
-                varId='department_id'
-                yVar='gdp_nominal'
-                elementId='spark--gdp'
-                currentLocation=locationId
-              }}
             </td>
           </tr>
           <tr class="table__row table__row--body">
@@ -112,16 +91,6 @@
             </td>
             <td class="table__cell table__cell--summaries">
               {{lastPop}}
-            </td>
-            <td class="table__cell table__cell--summaries">
-              {{spark-line
-                data=timeSeriesData
-                varId='department_id'
-                yVar='population'
-                elementId='spark--population'
-                type='population'
-                currentLocation=locationId
-              }}
             </td>
           </tr>
         </tbody>
