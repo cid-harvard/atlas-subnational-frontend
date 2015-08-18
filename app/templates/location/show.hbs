@@ -29,11 +29,11 @@
         <thead>
           <tr class="table__row table__row--header">
             <th class="table__header"></th>
-            <th class="table__header table__header--summaries--dotplot">
-              {{t 'location.show.all_departments'}}
-            </th>
             <th class="table__header">
               {{t 'location.show.value'}}
+            </th>
+            <th class="table__header table__header--summaries--dotplot">
+              {{t 'location.show.all_departments'}}
             </th>
           </tr>
         </thead>
@@ -41,6 +41,9 @@
           <tr class="table__row table__row--body">
             <td class="table__cell table__cell--summaries">
               {{t 'location.show.gdp_pc'}}
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{lastGdpPerCapita}}
             </td>
             <td class="table__cell table__cell--summaries">
               {{dot-plot
@@ -52,13 +55,13 @@
                 currentSelection=locationId
               }}
             </td>
-            <td class="table__cell table__cell--summaries">
-              {{lastGdpPerCapita}}
-            </td>
           </tr>
           <tr class="table__row table__row--body">
             <td class="table__cell table__cell--summaries">
               {{t 'location.show.gdp'}}
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{lastGdp}}
             </td>
             <td class="table__cell table__cell--summaries">
               {{dot-plot
@@ -70,13 +73,13 @@
                 currentSelection=locationId
               }}
             </td>
-            <td class="table__cell table__cell--summaries">
-              {{lastGdp}}
-            </td>
           </tr>
           <tr class="table__row table__row--body">
             <td class="table__cell table__cell--summaries">
               {{t 'location.show.population'}}
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{lastPop}}
             </td>
             <td class="table__cell table__cell--summaries">
               {{dot-plot
@@ -89,9 +92,6 @@
                 currentSelection=locationId
               }}
             </td>
-            <td class="table__cell table__cell--summaries">
-              {{lastPop}}
-            </td>
           </tr>
         </tbody>
       </table>
@@ -100,35 +100,17 @@
   <section class="stream__section">
     <header class="section__header">
       <h3 class="section__head">{{t 'location.show.employment_and_wages'}}</h3>
+      {{lastYear}}
     </header>
     <div class="tabmod">
       {{#ivy-tabs}}
         {{#ivy-tab-list classNames='tabmod__tabs'}}
-          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-            <a class="tab__link">
-              {{t 'location.show.total_wages' lastYear=lastYear}}
-            </a>
-          {{/ivy-tab}}
           {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
             <a class="tab__link">
-              {{t 'location.show.employment' lastYear=lastYear}}
+              {{t 'location.show.employment' lastYear=lastDataPoint.year}}
             </a>
           {{/ivy-tab}}
         {{/ivy-tab-list}}
-        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-          <div class="vizmod">
-            <div class="vizmod--treemod">
-              {{d3plus-tree-map
-                isInTab='true'
-                data=industriesData
-                immutableData=industriesData
-                elementId='wages-tree-map'
-                dataType='industries'
-                varDependent='wages'
-              }}
-            </div>
-          </div>
-        {{/ivy-tab-panel}}
         {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
           <div class="vizmod">
             <div class="vizmod--treemod">
@@ -307,6 +289,3 @@
     </div>
   </section> --}}
 </article>
-<footer class="footer">
-  <p class="footer__text">Footer TK</p>
-</footer>

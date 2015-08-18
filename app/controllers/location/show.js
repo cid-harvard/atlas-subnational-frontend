@@ -53,26 +53,26 @@ export default Ember.Controller.extend({
   yearRange: computed('validTimeseries', function() {
     var firstYear = get(this.get('firstDataPoint'), 'year');
     var lastYear = get(this.get('lastDataPoint'), 'year');
-    return `${firstYear} - ${lastYear}`;
+    return `${firstYear}–${lastYear}`;
   }),
   lastPop: computed('validTimeseries','locale', function() {
     let pop = get(this.get('lastDataPoint'), 'population');
-    return numeral(pop).format('0.00 a');
+    return numeral(pop).format('0.0a');
    }),
   lastGdp: computed('validTimeseries','locale', function() {
     let gdp = get(this.get('lastDataPoint'), 'gdp_nominal');
-    return numeral(gdp).format('$ 0.00 a');
+    return numeral(gdp).format('$ 0.0a');
    }),
   lastGdpPerCapita: computed('validTimeseries','locale', function() {
     let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_nominal');
-    return numeral(gdpPC).format('$ 0.00 a');
+    return numeral(gdpPC).format('$ 0.0a');
    }),
   gdpGrowth:computed('validTimeseries', function() {
     var firstGdp = get(this.get('firstDataPoint'), 'gdp_nominal');
     var lastGdp = get(this.get('lastDataPoint'), 'gdp_nominal');
     let difference = lastGdp / firstGdp;
     let power =  1/(this.get('validTimeseries.length') -1);
-    return numeral(Math.pow(difference, power) -1).format('0.000%');
+    return numeral(Math.pow(difference, power) -1).format('0.0%');
   }),
   activeStep: 1,
   stepStories: computed(function() {
