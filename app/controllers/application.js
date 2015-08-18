@@ -55,6 +55,9 @@ export default Ember.Controller.extend({
     if(this.get('entity') === 'product') { return 'product.show'; }
     if(this.get('entity') === 'industry') { return 'industry.show'; }
   }),
+  entityId: computed('entity_id', function() {
+    return this.get('entity_id');
+  }),
   entity_and_id: computed('entity', 'entity_id', function() {
     return `${this.get('entity')}-${this.get('entity_id')}`;
   }),

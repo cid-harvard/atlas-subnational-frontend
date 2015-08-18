@@ -1,0 +1,149 @@
+/**
+*
+* Pageheader
+*
+**/
+
+.header--pageheader {
+  background: $colorRed;
+}
+
+.pageheader__wrap {
+  padding: $baseSpace*2.5 $baseSpace*3 0;
+  position: relative;
+}
+
+@media (min-width: 1200px) {
+  .pageheader__wrap {
+    padding-bottom: 1rem;
+  }
+}
+
+
+// Branding
+
+.branding {
+  margin-bottom: $baseSpace * 2;
+}
+
+.branding__logo {
+  color: $colorWhite;
+  font-weight: 300;
+  @include offset-text;
+  margin-bottom: $baseSpace/2;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.branding__slogan {
+  color: $colorWhite;
+  @include offset-text;
+}
+
+
+// Nav
+
+.pageheader__nav {
+  font-size: $fontSmall;
+}
+
+@media (min-width: 1200px) {
+  .pageheader__nav {
+    position: absolute;
+    bottom: 0;
+    right: $baseSpace * 3;
+    margin-bottom: 0;
+    .pageheader__search__wrap {
+      margin-left: auto;
+    }
+  }
+}
+
+.pageheader__link {
+  transition: $animationTime color $animationEasing;
+  color: $colorWhite;
+  margin: 0 $baseSpace $baseSpace/2 0;
+  font-weight: 500;
+  display: inline-block;
+  @include offset-text;
+  &:hover {
+    color: $colorWhite;
+  }
+}
+
+.pageheader__link--is--active {
+  color: $colorWhite;
+  font-weight: 500;
+}
+
+.pageheader__search__wrap {
+  width: 50rem;
+}
+
+
+// Toggle
+
+.togglemod--languages {
+  display: inline-block;
+  vertical-align: -6px;
+}
+
+.toggle--languages {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+  &:checked ~ .toggle__label:after {
+    margin-left: 15px;
+  }
+}
+
+.toggle__label {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  padding: $baseSpace / 10;
+  width: 35px;
+  height: 20px;
+  background-color: $colorWhite;
+  border-radius: 20px;
+  margin: 0 auto;
+  &:before,
+  &:after {
+    display: block;
+    position: absolute;
+    content: '';
+  }
+  &:before {
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    background-color: $colorRed;
+    border-radius: $baseSpace / 2;
+  }
+  &:after {
+    top: 6px;
+    left: 6px;
+    bottom: 6px;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background-color: $colorWhite;
+    border-radius: 8px;
+  }
+  &:hover:after {
+    background-color: $colorWhite;
+  }
+}
+
+.toggle__label__text {
+  color: $colorWhite;
+  font-size: $fontSmall;
+  display: inline;
+  font-weight: 500;
+  vertical-align: 6px;
+  @include offset-text;
+}
+
