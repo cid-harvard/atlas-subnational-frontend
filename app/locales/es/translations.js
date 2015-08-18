@@ -20,7 +20,7 @@ export default {
     'profile_link': 'Perfil',
     'about': '¿Quiénes somos?',
     'download': 'Descargue los datos',
-    'search_placeholder': 'Busque el lugar, producto u sector',
+    'search_placeholder': 'Busque el lugar, producto o sector',
     'graph_builder_link': 'Graficador'
   },
   'index': {
