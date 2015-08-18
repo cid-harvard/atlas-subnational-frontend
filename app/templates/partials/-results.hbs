@@ -1,38 +1,39 @@
+<h2 class="results__head">{{resultsLength}} {{t 'search.header'}}</h2>
 {{#if locationResults.length}}
-  <h3 class="results__header">{{t 'search.results_locations'}}</h3>
-  <ul class="search__results">
+  <h3 class="results__subhead">{{t 'search.results_locations'}}</h3>
+  <ul class="results__list">
     {{#each result in locationResults}}
       {{search-result
         result=result
         tagName="li"
-        class="search__result"
+        class="results__item"
       }}
     {{/each}}
   </ul>
 {{/if}}
 {{#if productResults.length}}
-  <h3 class="results__header">{{t 'search.results_products'}}</h3>
-  <ul class="search__results">
+  <h3 class="results__subhead">{{t 'search.results_products'}}</h3>
+  <ul class="results__list">
     {{#each result in productResults}}
       {{search-result
         result=result
         tagName="li"
-        class="search__result"
+        class="results__item"
       }}
     {{/each}}
   </ul>
 {{/if}}
 {{#if industryResults.length}}
-  <h3 class="results__header">{{t 'search.results_industries'}}</h3>
-  <ul class="search__results">
+  <h3 class="results__subhead">{{t 'search.results_industries'}}</h3>
+  <ul class="results__list">
     {{#each result in industryResults}}
       {{search-result
         result=result
         tagName="li"
-        class="search__result"
+        class="results__item"
       }}
     {{/each}}
   </ul>
 {{/if}}
-<p class='search__copy search__copy--postscript'>{{t 'search.didnt_find'}}</p>
+<p class='results__copy results__copy--postscript'>{{t 'search.didnt_find'}}</p>
 

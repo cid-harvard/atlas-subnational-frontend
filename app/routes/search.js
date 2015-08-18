@@ -4,16 +4,6 @@ export default Ember.Route.extend({
   queryParams: {
     query: { refreshModel: true }
   },
-  beforeModel: function(transition) {
-    var hasQuery = transition
-      .queryParams
-      .hasOwnProperty('query');
-
-    // if search is empty, redirect to route without param
-    if(hasQuery && !transition.queryParams.query){
-      this.transitionTo('search');
-    }
-  },
   model: function(transition) {
     var locations= this.store.find('location');
     var products = this.store.find('product', { level: '4digit' });
@@ -26,10 +16,11 @@ export default Ember.Route.extend({
             .map(function(d){ return d.content; })
             .flatten()
             .value();
-        }, function() {
+        },function() {
           return [];
         });
     }
+    return [];
   },
   setupController(controller, model) {
     this._super(controller, model);

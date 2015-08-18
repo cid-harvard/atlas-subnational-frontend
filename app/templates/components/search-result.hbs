@@ -1,20 +1,20 @@
-<div class="search__result__text">
-  <p class="search__result__breadcrumb">{{breadcrumb}}</p>
-  <p class="search__result__name" data-search-result-name>{{name}}</p>
+<div class="results__text">
+  <p class="results__breadcrumb">{{breadcrumb}}</p>
+  <p class="results__name" data-search-result-name>{{name}}</p>
 </div>
 {{#link-to
   profileLink result.id
   data-search-profile=''
-  class="btn search__btn search__btn--result"
+  class="btn btn--standalone btn--search results__btn"
 }}
-  {{ t 'side_nav.profile_link' }}
+  {{ t 'pageheader.profile_link' }}
 {{/link-to}}
 
 {{#link-to
-  'visualization' entity_and_id source 'treemap'
+  'visualization' entity_and_id source 'multiples'
   data-search-graph-builder=''
-  class="btn search__btn search__btn--result"
+  class="btn btn--standalone btn--search results__btn"
 }}
-  {{ t 'side_nav.graph_builder_link' }}
+  {{ t 'pageheader.graph_builder_link' }}
 {{/link-to}}
 
