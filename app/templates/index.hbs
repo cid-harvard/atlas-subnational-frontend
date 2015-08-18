@@ -1,1 +1,124 @@
 {{outlet}}
+<main class="stream index">
+  <article class="stream__article index__article">
+    <header class="stream__header index__header">
+      <h1 class="stream__head index__head">You haven't seen Colombia like this before</h1>
+      <h2 class="stream__subhead">Visualize the possibilities for industries, exports and locations across Colombia.</h2>
+      <form class="search__wrap pageheader__search__wrap">
+        {{input
+          class="search"
+          placeholder=( t 'pageheader.search_placeholder' )
+          value=query
+          enter='query'
+        }}
+        <button class="search__reset fa fa-close" type="reset"></button>
+        <input class="search__submit btn btn--standalone btn--search" type="submit" value="{{ t 'pageheader.search_link' }}" {{action 'query' query}}>
+      </form>
+    </header>
+    <section class="stream__section">
+      <h3 class="section__head">Start with our profiles</h3>
+      <p class="section__intro">Just the essentials, presented as a one-page summary</p>
+      <a href="" class="btn btn--standalone btn--stream">Read the profile for Antioquia</a>
+    </section>
+    <section class="stream__section">
+      <h3 class="section__head">Then dive into the graph builder</h3>
+      <p class="section__intro">Create graphs and maps for your presentations</p>
+      <a href="" class="btn btn--standalone btn--stream">Build graphs about coffee</a>
+    </section>
+    <section class="stream__section">
+      <h3 class="section__head">The complexity advantage</h3>
+      <p class="section__intro">Countries that export complex products, which require a lot of knowledge, grow faster than those that export raw materials. Researchers at Harvard University have pioneered a way to measure and visualize the complexity of every export and industry in Colombia.</p>
+      <figure class="index__figure">
+        <img src="" alt="">
+        <div>
+          <p class="section__intro">How good is it? Country growth predictions using economic complexity were more than 10 times as accurate as conventional metrics, such as the World Governance Indicators.</p>
+          <a href="" class="btn btn--standalone btn--stream">Read more about complexity</a>
+        </div>
+      </figure>
+      <h3 class="section__head section__head--spacey">Research featured in</h3>
+      <ul class="index__featuredin__list">
+        <li class="index__featuredin__item">
+          <img src="assets/img/index/nyt.png" alt="New York Times" class="index__featuredin__img">
+        </li>
+        <li class="index__featuredin__item">
+          <img src="assets/img/index/economist.png" alt="The Economist" class="index__featuredin__img">
+        </li>
+        <li class="index__featuredin__item">
+          <img src="assets/img/index/wsj.png" alt="The Wall Street Journal" class="index__featuredin__img">
+        </li>
+        <li class="index__featuredin__item">
+          <img src="assets/img/index/forbes.png" alt="Forbes" class="index__featuredin__img">
+        </li>
+        <li class="index__featuredin__item">
+          <img src="assets/img/index/ft_2.png" alt="Financial Times" class="index__featuredin__img">
+        </li>
+      </ul>
+    </section>
+    <section class="stream__section">
+      <h3 class="section__head">Charting the present</h3>
+      <p class="section__intro">Use our treemaps to break down your department, city or municipality’s exports and employment</p>
+      <h3 class="section__head">To map the future</h3>
+      <p class="section__intro">Find the untapped markets best suited to your location</p>
+    </section>
+    <section class="stream__section">
+      <h3 class="section__head">We're not a crystal ball</h3>
+      <p class="section__intro">But we can answer a lot of questions</p>
+      <ul class="index__topics__list">
+        <li class="index__topics__item">
+          <h4 class="section__subhead">Learn about a location</h4>
+          <ul>
+            <li class="index__questions__item">
+              <p class="label">Area charts</p>
+              <a href="" class="link--stream">What industries in Bogotá, D.C. (metro area) employ the most people?</a>
+            </li>
+            <li class="index__questions__item">
+              <p class="label">Similarity space</p>
+              <a href="" class="link--stream">What products have the highest potential in Antioquia?</a>
+            </li>
+          </ul>
+        </li>
+        <li class="index__topics__item">
+          <h4 class="section__subhead">Learn about an industry</h4>
+          <ul>
+            <li class="index__questions__item">
+              <p class="label">Area charts</p>
+              <a href="" class="link--stream">Where in Colombia does the insurance industry employ the most people?</a>
+            </li>
+            <li class="index__questions__item">
+              <p class="label">Treemap</p>
+              <a href="" class="link--stream">What are the skills needed by the chemical industry?</a>
+            </li>
+          </ul>
+        </li>
+        <li class="index__topics__item">
+          <h4 class="section__subhead">Learn about an export</h4>
+          <ul>
+            <li class="index__questions__item">
+              <p class="label">Area charts</p>
+              <a href="" class="link--stream">What places in Colombia export coffee?</a>
+            </li>
+            <li class="index__questions__item">
+              <p class="label">Area charts</p>
+              <a href="" class="link--stream">What places in Colombia import computers?</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <section class="stream__section">
+      <img src="" alt="">
+      <blockquote>
+        <p>"Prosperia is a game changer for Colombian policymakers and investors."</p>
+        <cite>Speaker name goes here</cite>
+      </blockquote>
+    </section>
+    <section class="stream__section stream__section--recirc index__recirc">
+      <h3 class="section__head section__head--recirc">
+        {{t 'index.colombia_profile'}}
+      </h3>
+      <a href="#" class="btn btn--standalone btn--stream">
+        {{t 'graph_builder.view_more'}}
+      </a>
+    </section>
+  </article>
+</main>
