@@ -1,115 +1,117 @@
-<article class="profile stream">
-  <img src="assets/img/hero_images/industry/industry_1.jpg" class="stream__img--hero">
-  <header class="stream__header profile__header">
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
-    <ol class="breadcrumbs">
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Industry</a></li>
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">{{level}}</a></li>
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">{{model.name}}</a></li>
-    </ol>
-  </header>
-  <section class="stream__section">
-    <header class="section__header">
-    <h3 class="section__head">
-      {{t 'industry.show.employment_and_wages'}}
-    </h3>
+<main class="stream builder">
+  <article class="stream__article builder__article">
+    {{ render "view-switch" controller='application' }}
+    <header class="stream__header stream__header--builder">
+      <h2 class="stream__head stream__head--builder" data-location-name>{{model.name}}</h2>
     </header>
-    <table class="table--summaries">
-      <thead>
-        <tr class="table__row table__row--header">
-          <th class="table__header"></th>
-          <th class="table__header">
-            {{t 'industry.show.value'}}
-          </th>
-          <th class="table__header table__header--summaries--dotplot">
-            {{t 'industry.show.industries'}}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table__row table__row--body">
-          <td class="table__cell table__cell--summaries">
-            {{t 'industry.show.employment_growth'}}
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{displayEmploymentGrowth}}
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{dot-plot
-              elementId='dotplot--employment-growth'
-              data=employmentGrowthDotPlot
-              varX='employment_growth'
-              varText='name_en'
-              varId='industry_id'
-              type='percentage'
-              currentSelection=model.id
-            }}
-          </td>
-          {{!--
-          <td class="table__cell table__cell--summaries">
-             {{spark-line
-              data=model.timeseries
-              varId='industry_id'
-              yVar='employment'
-              elementId='spark--employment'
-              type='population'
-              currentLocation=model.id
-              currentLocationName=model.name
+    <section class="stream__section">
+      <header class="section__header">
+        <h3 class="section__head">
+          {{t 'industry.show.employment_and_wages'}}
+        </h3>
+      </header>
+      <table class="table--summaries">
+        <thead>
+          <tr class="table__row table__row--header">
+            <th class="table__header"></th>
+            <th class="table__header table__header--summaries--dotplot">
+              {{t 'industry.show.industries'}}
+            </th>
+            <th class="table__header">
+              {{t 'industry.show.value'}}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table__row table__row--body">
+            <td class="table__cell table__cell--summaries">
+              {{t 'industry.show.employment_growth'}}
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{dot-plot
+                elementId='dotplot--employment-growth'
+                data=employmentGrowthDotPlot
+                varX='employment_growth'
+                varText='name_en'
+                varId='industry_id'
+                type='percentage'
+                currentSelection=model.id
               }}
-          </td>
-          --}}
-        </tr>
-        <tr class="table__row table__row--body">
-          <td class="table__cell table__cell--summaries">
-            {{t 'industry.show.avg_wages' year=year}}
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{model.lastAvgWage}}
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{dot-plot
-              elementId='dotplot--avg-wage'
-              data=averageWageDotPlot
-              varX='avg_wage'
-              varText='name_en'
-              varId='industry_id'
-              currentSelection=model.id
-            }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="tabmod">
-      {{#ivy-tabs}}
-        {{#ivy-tab-list classNames='tabmod__tabs'}}
-          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
-            <a class="tab__link"> {{t 'industry.show.employment' year=year}} </a>
-          {{/ivy-tab}}
-        {{/ivy-tab-list}}
-        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-          <div class="vizmod">
-            <div class="vizmod--treemod">
-              {{d3plus-tree-map
-                isInTab='true'
-                data=departmentsData
-                immutableData=departmentsData
-                varIndependent=treemapIndependentVars
-                elementId='employment-tree-map'
-                varDependent='employment'
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{displayEmploymentGrowth}}
+            </td>
+          </tr>
+          <tr class="table__row table__row--body">
+            <td class="table__cell table__cell--summaries">
+              {{t 'industry.show.avg_wages' year=year}}
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{dot-plot
+                elementId='dotplot--avg-wage'
+                data=averageWageDotPlot
+                varX='avg_wage'
+                varText='name_en'
+                varId='industry_id'
+                currentSelection=model.id
               }}
+            </td>
+            <td class="table__cell table__cell--summaries">
+              {{model.lastAvgWage}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="tabmod">
+        {{#ivy-tabs}}
+          {{#ivy-tab-list classNames='tabmod__tabs'}}
+            {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+              <a class="tab__link"> {{t 'industry.show.avg_wages' year=year}} </a>
+            {{/ivy-tab}}
+            {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
+              <a class="tab__link"> {{t 'industry.show.employment' year=year}} </a>
+            {{/ivy-tab}}
+          {{/ivy-tab-list}}
+          {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+            <div class="vizmod">
+              <div class="vizmod--treemod">
+                {{d3plus-tree-map
+                  isInTab='true'
+                  data=departmentsData
+                  immutableData=departmentsData
+                  varIndependent=treemapIndependentVars
+                  elementId='wages-tree-map'
+                  dataType='industries'
+                  varDependent='avg_wage'
+                }}
+              </div>
             </div>
-          </div>
-        {{/ivy-tab-panel}}
-      {{/ivy-tabs}}
-    </div>
-  </section>
-  <section class="stream__section">
-    <header class="section__header">
-      <h3 class="section__head">{{t 'industry.show.industry_composition'}}</h3>
-    </header>
-    {{component 'graphbuilder-table'
-      data=model.classIndustries
-      source='industryClasses'
-    }}
-  </section>
-</article>
+          {{/ivy-tab-panel}}
+          {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+            <div class="vizmod">
+              <div class="vizmod--treemod">
+                {{d3plus-tree-map
+                  isInTab='true'
+                  data=departmentsData
+                  immutableData=departmentsData
+                  varIndependent=treemapIndependentVars
+                  elementId='employment-tree-map'
+                  varDependent='employment'
+                }}
+              </div>
+            </div>
+          {{/ivy-tab-panel}}
+        {{/ivy-tabs}}
+      </div>
+    </section>
+    <section class="stream__section">
+      <header class="section__header">
+        <h3 class="section__head">{{t 'industry.show.industry_composition'}}</h3>
+      </header>
+      {{component 'graphbuilder-table'
+        data=model.classIndustries
+        source='industryClasses'
+      }}
+    </section>
+  </article>
+</main>

@@ -11,10 +11,7 @@
 }
 
 .stream__header {
-  text-align: center;
-  margin: $baseSpace * 3;
   position: relative;
-  z-index: $zIndex-1;
 }
 
 .stream__header--builder {
@@ -23,10 +20,19 @@
 
 .stream__head {
   font-size: $fontHuge;
-  margin: 0 auto $baseSpace/2;
+  margin-bottom: $baseSpace;
   letter-spacing: -2px;
   font-family: $sansAlt;
   line-height: 100%;
+}
+
+.stream__head--builder {
+  margin-bottom: $baseSpace * 3;
+}
+
+.stream__subhead {
+  margin-bottom: $baseSpace;
+  font-weight: 300;
 }
 
 .breadcrumb {

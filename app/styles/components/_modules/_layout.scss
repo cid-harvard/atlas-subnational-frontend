@@ -6,12 +6,16 @@
 
 .body {
   background: $colorNavy800;
+  height: 100%;
 }
 
 .stream {
-	margin-left: $sidebarWidth;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.footer {
-  margin-left: $sidebarWidth;
+.stream__article {
+  margin: $baseSpace*3 $baseSpace*3 0 0;
+  padding-left: $sidebarWidth;
+  flex: 1;
 }

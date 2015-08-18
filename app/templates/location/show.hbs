@@ -1,291 +1,196 @@
-<article class="profile stream">
-  <img src="assets/img/hero_images/location/loc_{{imageCode}}.jpg" class="stream__img--hero">
-  <header class="stream__header profile__header">
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
-    <ol class="breadcrumbs">
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Location</a></li>
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Colombia</a></li>
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">{{model.name}}</a></li>
-      <li class="breadcrumb"><a href="#" class="breadcrumb__link">Profile</a></li>
-    </ol>
-  </header>
-  {{#if isDepartment }}
+<main class="stream builder">
+  <article class="stream__article builder__article">
+    {{ render "view-switch" controller='application' }}
+    <header class="stream__header stream__header--builder">
+      <h2 class="stream__head stream__head--builder" data-location-name>{{model.name}}</h2>
+    </header>
+    {{#if isDepartment }}
+      <section class="stream__section">
+        <header class="section__header">
+        <h3 class="section__head">{{t 'location.show.overview'}}</h3>
+        </header>
+        <ul class="list--section list--section--bullets">
+          <li class="list__item--section--bullets">
+            {{t 'location.show.bullet.gdp_grow_rate' gdpGrowth=gdpGrowth yearRange=yearRange}}
+          </li>
+          <li class="list__item--section--bullets">
+            {{t 'location.show.bullet.gdp_pc' name=model.name lastGdpPerCapita=lastGdpPerCapita}}
+          </li>
+          <li class="list__item--section--bullets">
+            {{t 'location.show.bullet.last_pop' lastPop=lastPop}}
+          </li>
+        </ul>
+        <table class="table--summaries">
+          <thead>
+            <tr class="table__row table__row--header">
+              <th class="table__header"></th>
+              <th class="table__header table__header--summaries--dotplot">
+                {{t 'location.show.all_departments'}}
+              </th>
+              <th class="table__header">
+                {{t 'location.show.value'}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table__row table__row--body">
+              <td class="table__cell table__cell--summaries">
+                {{t 'location.show.gdp_pc'}}
+              </td>
+              <td class="table__cell table__cell--summaries">
+                {{dot-plot
+                  elementId='dotplot--gdp-pc'
+                  data=departmentsData
+                  varX='gdp_pc_nominal'
+                  varText='name'
+                  varId='department_id'
+                  currentSelection=locationId
+                }}
+              </td>
+              <td class="table__cell table__cell--summaries">
+                {{lastGdpPerCapita}}
+              </td>
+            </tr>
+            <tr class="table__row table__row--body">
+              <td class="table__cell table__cell--summaries">
+                {{t 'location.show.gdp'}}
+              </td>
+              <td class="table__cell table__cell--summaries">
+                {{dot-plot
+                  elementId='dotplot--gdp'
+                  data=departmentsData
+                  varX='gdp_nominal'
+                  varText='name'
+                  varId='department_id'
+                  currentSelection=locationId
+                }}
+              </td>
+              <td class="table__cell table__cell--summaries">
+                {{lastGdp}}
+              </td>
+            </tr>
+            <tr class="table__row table__row--body">
+              <td class="table__cell table__cell--summaries">
+                {{t 'location.show.population'}}
+              </td>
+              <td class="table__cell table__cell--summaries">
+                {{dot-plot
+                  elementId='dotplot--population'
+                  data=departmentsData
+                  varX='population'
+                  varText='name'
+                  varId='department_id'
+                  type='population'
+                  currentSelection=locationId
+                }}
+              </td>
+              <td class="table__cell table__cell--summaries">
+                {{lastPop}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    {{/if}}
     <section class="stream__section">
       <header class="section__header">
-      <h3 class="section__head">{{t 'location.show.overview'}}</h3>
+        <h3 class="section__head"></h3>
       </header>
-      <ul class="list--section list--section--bullets">
-        <li class="list__item--section--bullets">
-          {{t 'location.show.bullet.gdp_grow_rate' gdpGrowth=gdpGrowth yearRange=yearRange}}
-        </li>
-        <li class="list__item--section--bullets">
-          {{t 'location.show.bullet.gdp_pc' name=model.name lastGdpPerCapita=lastGdpPerCapita}}
-        </li>
-        <li class="list__item--section--bullets">
-          {{t 'location.show.bullet.last_pop' lastPop=lastPop}}
-        </li>
-      </ul>
-      <table class="table--summaries">
-        <thead>
-          <tr class="table__row table__row--header">
-            <th class="table__header"></th>
-            <th class="table__header">
-              {{t 'location.show.value'}}
-            </th>
-            <th class="table__header table__header--summaries--dotplot">
-              {{t 'location.show.all_departments'}}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="table__row table__row--body">
-            <td class="table__cell table__cell--summaries">
-              {{t 'location.show.gdp_pc'}}
-            </td>
-            <td class="table__cell table__cell--summaries">
-              {{lastGdpPerCapita}}
-            </td>
-            <td class="table__cell table__cell--summaries">
-              {{dot-plot
-                elementId='dotplot--gdp-pc'
-                data=departmentsData
-                varX='gdp_pc_nominal'
-                varText='name'
-                varId='department_id'
-                currentSelection=locationId
-              }}
-            </td>
-          </tr>
-          <tr class="table__row table__row--body">
-            <td class="table__cell table__cell--summaries">
-              {{t 'location.show.gdp'}}
-            </td>
-            <td class="table__cell table__cell--summaries">
-              {{lastGdp}}
-            </td>
-            <td class="table__cell table__cell--summaries">
-              {{dot-plot
-                elementId='dotplot--gdp'
-                data=departmentsData
-                varX='gdp_nominal'
-                varText='name'
-                varId='department_id'
-                currentSelection=locationId
-              }}
-            </td>
-          </tr>
-          <tr class="table__row table__row--body">
-            <td class="table__cell table__cell--summaries">
-              {{t 'location.show.population'}}
-            </td>
-            <td class="table__cell table__cell--summaries">
-              {{lastPop}}
-            </td>
-            <td class="table__cell table__cell--summaries">
-              {{dot-plot
-                elementId='dotplot--population'
-                data=departmentsData
-                varX='population'
-                varText='name'
-                varId='department_id'
-                type='population'
-                currentSelection=locationId
-              }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="tabmod">
+        {{#ivy-tabs}}
+          {{#ivy-tab-list classNames='tabmod__tabs'}}
+            {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+              <a class="tab__link">
+                {{t 'location.show.total_wages' lastYear=year}}
+              </a>
+            {{/ivy-tab}}
+            {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
+              <a class="tab__link">
+                {{t 'location.show.employment' lastYear=year}}
+              </a>
+            {{/ivy-tab}}
+          {{/ivy-tab-list}}
+          {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+            <div class="vizmod">
+              <div class="vizmod--treemod">
+                {{d3plus-tree-map
+                  isInTab='true'
+                  data=industriesData
+                  immutableData=industriesData
+                  elementId='wages-tree-map'
+                  dataType='industries'
+                  varDependent='wages'
+                }}
+              </div>
+            </div>
+          {{/ivy-tab-panel}}
+          {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+            <div class="vizmod">
+              <div class="vizmod--treemod">
+                {{d3plus-tree-map
+                  data=industriesData
+                  immutableData=industriesData
+                  isInTab='true'
+                  elementId='employment-tree-map'
+                  dataType='industries'
+                  varDependent='employment'
+                }}
+              </div>
+            </div>
+          {{/ivy-tab-panel}}
+        {{/ivy-tabs}}
+      </div>
     </section>
-  {{/if}}
-  <section class="stream__section">
-    <header class="section__header">
-      <h3 class="section__head">{{t 'location.show.employment_and_wages'}}</h3>
-      {{lastYear}}
-    </header>
-    <div class="tabmod">
-      {{#ivy-tabs}}
-        {{#ivy-tab-list classNames='tabmod__tabs'}}
-          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
-            <a class="tab__link">
-              {{t 'location.show.employment' lastYear=lastDataPoint.year}}
-            </a>
-          {{/ivy-tab}}
-        {{/ivy-tab-list}}
-        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-          <div class="vizmod">
-            <div class="vizmod--treemod">
-              {{d3plus-tree-map
-                data=industriesData
-                immutableData=industriesData
-                isInTab='true'
-                elementId='employment-tree-map'
-                dataType='industries'
-                varDependent='employment'
-              }}
-            </div>
-          </div>
-        {{/ivy-tab-panel}}
-      {{/ivy-tabs}}
-    </div>
-  </section>
+    <section class="stream__section">
+      <header class="section__header">
+        <h3 class="section__head">
+          {{t 'location.show.exports_and_imports'}}
+        </h3>
+      </header>
+      <div class="tabmod">
+        {{#ivy-tabs}}
+          {{#ivy-tab-list classNames='tabmod__tabs'}}
+            {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+              <a class="tab__link">
+                {{t 'location.show.exports' year=year}}
+              </a>
+            {{/ivy-tab}}
+            {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+              <a class="tab__link">
+                {{t 'location.show.imports' year=year}}
+              </a>
+            {{/ivy-tab}}
+          {{/ivy-tab-list}}
 
-  <section class="stream__section">
-    <header class="section__header">
-      <h3 class="section__head">
-        {{t 'location.show.exports_and_imports'}}
-      </h3>
-    </header>
-    <div class="tabmod">
-      {{#ivy-tabs}}
-        {{#ivy-tab-list classNames='tabmod__tabs'}}
-          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-            <a class="tab__link">
-              {{t 'location.show.exports' year=lastDataPoint.year}}
-            </a>
-          {{/ivy-tab}}
-          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-            <a class="tab__link">
-              {{t 'location.show.imports' year=lastDataPoint.year}}
-            </a>
-          {{/ivy-tab}}
-        {{/ivy-tab-list}}
+          {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+            <div class="vizmod">
+              <div class="vizmod--treemod">
+                {{d3plus-tree-map
+                  isInTab='true'
+                  data=productsData
+                  immutableData=productsData
+                  elementId='export-tree-map'
+                  varDependent='export_value'
+                }}
+              </div>
+            </div>
+          {{/ivy-tab-panel}}
+          {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+            <div class="vizmod">
+              <div class="vizmod--treemod">
+                {{d3plus-tree-map
+                  isInTab='true'
+                  data=productsData
+                  immutableData=productsData
+                  elementId='import-tree-map'
+                  varDependent='import_value'
+                }}
+              </div>
+            </div>
+          {{/ivy-tab-panel}}
+        {{/ivy-tabs}}
+      </div>
+    </section>
+  </article>
+</main>
 
-        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-          <div class="vizmod">
-            <div class="vizmod--treemod">
-              {{d3plus-tree-map
-                isInTab='true'
-                data=productsData
-                immutableData=productsData
-                elementId='export-tree-map'
-                varDependent='export_value'
-              }}
-            </div>
-          </div>
-        {{/ivy-tab-panel}}
-        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-          <div class="vizmod">
-            <div class="vizmod--treemod">
-              {{d3plus-tree-map
-                isInTab='true'
-                data=productsData
-                immutableData=productsData
-                elementId='import-tree-map'
-                varDependent='import_value'
-              }}
-            </div>
-          </div>
-        {{/ivy-tab-panel}}
-      {{/ivy-tabs}}
-    </div>
-  </section>
-  {{!--
-  <section class="stream__section">
-    <header class="section__header">
-      <h3 class="section__head">Export complexity</h3>
-    </header>
-    <table class="table--summaries">
-      <thead>
-        <tr class="table__row table__row--header">
-          <th class="table__header"></th>
-          <th class="table__header table__header--summaries--dotplot">All 32 departments</th>
-          <th class="table__header">Value</th>
-          <th class="table__header table__header--summaries--spark">Growth, annual (2009-2013)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table__row table__row--body">
-          <td class="table__cell table__cell--summaries">Overall export complexity</td>
-          <td class="table__cell table__cell--summaries">
-          {{dot-plot
-            elementId='dotplot--complexity'
-            data=departmentsData
-            varX='export_value'
-            varText='name'
-            varId='department_id'
-            currentLocation=locationId
-          }}
-          </td>
-          <td class="table__cell table__cell--summaries">0.3</td>
-          <td class="table__cell table__cell--summaries">
-            {{spark-line
-              data=timeSeriesData
-              varId='department_id'
-              yVar='population'
-              elementId='spark--complexity'
-              currentLocation=locationId
-              currentLocationName=model.name
-            }}
-            + TK%
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="stepper">
-      <ol class="stepper__list">
-        {{#each story in stepStories}}
-          {{component 'department-stepper' model=model story=story parentController=controller}}
-        {{/each}}
-      </ol>
-      <div class="stepper__vizmod">
-        <div class="stepper__vizmod__vizwrap">
-        {{product-space
-          data=productsData
-          elementId='product-space-stepper'
-          varId='product_id'
-          varGroup='parent_id'
-          varColor='parent_code'
-          varText='parent_name'
-          varSize='export_value'
-          varActiveStep=activeStep
-          varLegend=false
-        }}
-        </div>
-        <div class="stepper__controls">
-          <button class="stepper__control stepper__control--left" {{action 'back'}}>Back</button>
-          <p class="stepper__control__progress">{{activeStep}} of {{stepStories.length}}</p>
-          <button class="stepper__control stepper__control--right" {{action 'forward'}}>Forward</button>
-        </div>
-      </div>
-    </div>
-  </section>
-  --}}
-{{!--   <section class="stream__section">
-    <header class="section__header">
-      <h3 class="section__head">
-        {{t 'location.show.export_possiblities'}}
-      </h3>
-    </header>
-    <p class="section__intro">
-      {{t 'location.show.export_possiblities.intro' name=model.name}}
-    </p>
-    <div class="vizmod">
-      <div class="vizmod--treemod">
-        <!--<div class="vizmod__legend">
-          <ul class="vizmod__legend__list">
-            <li class="vizmod__legend__item">Non-export</li>
-            <li class="vizmod__legend__item">Export</li>
-            <li class="vizmod__legend__item">Similarity link</li>
-          </ul>
-        </div> -->
-        <div class="vizmod__vizwrap">
-        {{product-space
-          data=productsData
-          elementId='product-space-exports'
-          varId='product_id'
-          varGroup='parent_id'
-          varColor='parent_code'
-          varText='parent_name'
-          varSize='export_value'
-          varLegend=true
-        }}
-        </div>
-      </div>
-      <footer class="vizmod__footer">
-      <p class="vizmod__footer__p">
-        {{t 'location.show.export_possiblities.footer'}}
-      </p>
-      </footer>
-    </div>
-  </section> --}}
-</article>

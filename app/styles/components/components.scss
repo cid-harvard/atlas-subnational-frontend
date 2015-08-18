@@ -21,15 +21,18 @@
 @import '_components/_list';
 @import '_components/_link';
 @import '_components/_table';
+@import '_components/_search';
 @import '_components/_form';
 @import '_components/_interstitial';
 
 // Modules
 @import '_modules/_layout';
-@import '_modules/_side-nav';
+@import '_modules/_pageheader';
+@import '_modules/_index';
 @import '_modules/_profile';
 @import '_modules/_builder';
 @import '_modules/_builder-questions';
+@import '_modules/_viewswitch';
 @import '_modules/_stream-header';
 @import '_modules/_stream-section';
 @import '_modules/_tabmod';
@@ -45,7 +48,7 @@
 @import '_modules/_ember-table';
 @import '_modules/_navigator';
 @import '_modules/_footer';
-@import '_modules/_search';
+@import '_modules/_results';
 
 // Visualizations
 @import '_visualizations/_dotplot';

@@ -1,6 +1,6 @@
 /**
 *
-* Sidebar
+* Footer
 *
 **/
 
@@ -11,6 +11,6 @@
 }
 
 .footer__text {
-	padding-top: 0;
-  color: white;
+  color: $colorWhite;
+  @include offset-text;
 }

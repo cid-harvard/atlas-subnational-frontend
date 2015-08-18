@@ -5,9 +5,9 @@
 **/
 
 i:before {
-  transition: color 0.2s ease-in-out;
+  transition: color $animationTime $animationEasing;
 }
 
 .fa {
-  font-size: $fontSmall;
+  font-size: $fontTiny;
 }
