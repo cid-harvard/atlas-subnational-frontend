@@ -21,7 +21,7 @@ export default {
     'about': '¿Quiénes somos?',
     'download': 'Descargue los datos',
     'search_placeholder': 'Busque el lugar, producto u sector',
-    'graph_builder_link': 'Gráfico Constructor'
+    'graph_builder_link': 'Graficador'
   },
   'index': {
     'colombia_profile': 'Read the profile for Colombia'
