@@ -18,7 +18,7 @@
   padding-left: $baseSpace;
   font-size: $fontSmall;
   &~.buildermod__tools .buildermod__tool:first-child {
-    border-left: 2px solid $colorBrown400;
+    border-left: 1px solid $colorBrown400;
   }
 }
 
@@ -28,9 +28,10 @@
 }
 
 .buildermod__tool {
-  border-left: 2px solid $colorBrown400;
+  border-left: 1px solid $colorBrown400;
   display: inline-block;
   padding: $baseSpace/2 $baseSpace;
+  @include offset-text;
   &:first-child {
     border-left: none;
   }
@@ -40,15 +41,11 @@
   display: none;
 }
 
-.buildermod__tool__btn  {
-  color: $colorGray;
-  &:hover, &:active, &:focus {
-    color: $colorGrayDark;
-    .tool__btn__icon:before {
-      color: $colorGrayDark;
-    }
-  }
-}
+// .buildermod__tool__btn  {
+//   &:hover, &:active, &:focus {
+//     background: $colorGrayDark;
+//   }
+// }
 
 .tool__btn__icon:before {
   margin-right: $baseSpace/5;
@@ -63,76 +60,18 @@
 }
 
 .buildermod__vizwrap {
+  min-height: $minBuildermodHeight;
   height: $buildermodHeight;
-  border: 1px solid $colorBrown500;
   overflow-y: scroll;
-  background: $colorBrown200;
-  margin-bottom: $baseSpace;
+  background: $colorBrown300;
+  margin-bottom: $baseSpace*2;
   position: relative;
   padding: $baseSpace*5 $baseSpace*1.5 $baseSpace*1.5;
 }
 
-.buildermod__highlightwrap {
-  display: flex;
-  align-items: stretch;
+.buildermod__highlight__wrap {
   margin: $baseSpace*-3.5 0 0;
   position: absolute;
   width: calc(100% - 7.8rem); // TODO Switch from calc
   z-index: $zIndex-1;
-}
-
-.buildermod__highlight {
-  transition: background 0.2s ease-in-out;
-  background: $colorWhite;
-  font-size: $fontSmall;
-  font-weight: 300;
-  padding: $baseSpace/2 $baseSpace;
-  flex: 1 1 auto;
-  box-shadow: -1px 2px 2px $colorGrayLighter;
-  &:active, &:focus {
-    outline: 0;
-    &::-webkit-input-placeholder {
-      color: $colorGray;
-    }
-  }
-  &::-webkit-input-placeholder {
-    transition: color 0.2s ease-in-out;
-    color: $colorGrayLight;
-    weight: 500;
-    font-size: $fontSmall;
-  }
-}
-
-.buildermod__highlight__submit {
-  padding: $baseSpace/2 $baseSpace;
-  box-shadow: 2px 2px 2px $colorGrayLighter;
-}
-
-.buildermod__highlight__reset {
-  position: relative;
-  cursor: pointer;
-  background-color: transparent;
-  display: inline-block;
-  vertical-align: middle;
-  outline: 0;
-  &:before {
-    transition: color 0.2s ease-in-out;
-    display: block;
-    width: 15px;
-    height: 15px;
-    position: absolute;
-    right: $baseSpace;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    cursor: pointer;
-    color: $colorGrayLight;
-  }
-  &:hover:before {
-    color: $colorGrayDark;
-  }
-}
-
-.buildermod__highlight:invalid ~ .buildermod__highlight__reset {
-  display: none;
 }

@@ -18,17 +18,11 @@ export default Ember.Controller.extend({
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
   drawerQuestionsIsOpen: false,
-  drawerIsUnnecessary: computed('visualization', function() {
-    let visualization = this.get('visualization');
-    if(visualization === 'similarity') {
-      return true;
-    } else {
-      return false;
-    }
-  }),
-  builderNavDropDown: Ember.String.htmlSafe("<i class='icon-cidcon_placeholder-1 builder__icon--placeholder'></i>"),
-
+  name: computed.alias('model.entity.name'),
   source: computed.alias('model.source'),
+  entityId: computed.alias('model.entity.id'),
+  entity: computed.alias('model.entity'),
+  entityType: computed.alias('model.entity_type'),
   visualization: computed.alias('model.visualization'),
   dateExtent: computed('model.data.[]', function() {
     if(this.get('model.data').length) {
@@ -36,21 +30,37 @@ export default Ember.Controller.extend({
     }
     return  [2008, 2013];
   }),
-  name: computed.alias('model.entity.name'),
+  isPrescriptive: computed('entity.level', function() {
+    if(this.get('entity.level') === 'municipality') { return false; }
+    return true;
+  }),
   dateRange: computed('dateExtent', function() {
     return d3.range(this.get('dateExtent')[0], this.get('dateExtent')[1] + 1);
   }),
-  entity_and_id: computed('model.entity.id', 'model.entity_type', function() {
+  entity_and_id: computed('entityId', 'entityType', function() {
     return `${this.get('model.entity_type')}-${this.get('model.entity.id')}`;
   }),
-  pageTitle: computed('model','variable','i18n.locale', function() {
+  profileLink: computed('entityType', function() {
+    return `${this.get('model.entity_type')}.show`;
+  }),
+  drawerIsUnnecessary: computed('visualization', function() {
+    let visualization = this.get('visualization');
+    return visualization === 'similarity';
+  }),
+  pageTitle: computed('entityType','variable','i18n.locale', function() {
     //locale file under graph_builder.page_title.<entity>.<source>.<variable>
-    let i18nString = `graph_builder.page_title.${this.get('model.entity_type')}.${this.get('source')}`;
+    let i18nString = `graph_builder.page_title.${this.get('entityType')}.${this.get('source')}`;
     let visualization = this.get('visualization');
     if( visualization === 'scatter' || visualization === 'similarity' ) {
       return this.get('i18n').t(`${i18nString}.${visualization}`, { name: this.get('name') });
     }
    return this.get('i18n').t(`${i18nString}.${this.get('variable')}`, { name: this.get('name'), level: this.get('model.entity._level') });
+  }),
+  recircCopy: computed('model','variable','i18n.locale', 'singularEntity', function() {
+    //locale file under graph_builder.recirc.header
+    let i18nString = `graph_builder.recirc.header`;
+    let entityType = this.get('i18n').t(`general.${this.get('entityType')}`);
+    return this.get('i18n').t(`${i18nString}`, { entity: entityType });
   }),
   builderModHeader: computed('model','variable','i18n.locale', function() {
     //locale file under graph_builder.builder_mod_header.<entity>.<source>.<variable>
@@ -62,7 +72,7 @@ export default Ember.Controller.extend({
     return this.get('i18n').t(`${i18nString}.${this.get('variable')}`, { name: this.get('model.entity.name') });
   }),
   headerValue: computed('model', 'filteredData', 'variable', function() {
-    let allowedVariables = ['export_value','wages', 'employment'];
+    let allowedVariables = ['export_value', 'import_value', 'wages', 'employment'];
     let variable = this.get('variable');
     let data = this.get('filteredData');
 
@@ -177,7 +187,7 @@ export default Ember.Controller.extend({
       let graph_builder_id = `${model.entity_type}-${model.entity.id}`;
       this.set('drawerChangeGraphIsOpen', false); // Close graph change drawer
       this.transitionToRoute('visualization', graph_builder_id, model.source, visualization, {
-        queryParams: { variable: this.get('variable') }
+        queryParams: { variable: this.get('variable'), startDate: null, endDate: null }
       });
     },
     changeQuestion: function() {
