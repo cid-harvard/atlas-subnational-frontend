@@ -1,0 +1,26 @@
+<nav class="viewswitch">
+  <ul class="viewswitch__list">
+    <li class="viewswitch__item">
+    {{#link-to
+      profileLink entityId
+      class="viewswitch__item__link"
+      activeClass="viewswitch__item--is--active"
+      data-side-profile-link=''
+    }}
+      {{ t 'pageheader.profile_link' }}
+    {{/link-to}}
+    </li>
+    <li class="viewswitch__item">
+      {{#link-to
+        "visualization" entity_and_id source "multiples"
+        current-when="visualization source graph_builder"
+        class="viewswitch__item__link"
+        activeClass="viewswitch__item--is--active"
+        data-side-graph-builder-link=''
+      }}
+        {{ t 'pageheader.graph_builder_link' }}
+      {{/link-to}}
+    </li>
+  </ul>
+</nav>
+
