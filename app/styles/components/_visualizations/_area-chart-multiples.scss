@@ -84,17 +84,17 @@
 }
 
 .background {
-  fill: #eae6e3;
+  fill: $colorBrown300;
   pointer-events: all;
 }
 
 .area {
-  fill: #ccc1b9;
+  fill: $colorBrown500;
   pointer-events: none;
 }
 
 .line {
-  stroke: #b7a89d;
+  stroke: $colorBrown700;
   stroke-width: 1px;
   fill: none;
   pointer-events: none;
@@ -109,7 +109,7 @@
 
 .axis--y {
   line {
-    stroke: #e0d9d4;
+    stroke: $colorBrown100;
     fill: none;
     shape-rendering: crispEdges;
     pointer-events: none;

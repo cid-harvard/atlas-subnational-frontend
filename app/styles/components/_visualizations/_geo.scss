@@ -6,7 +6,7 @@
 
 // Nested here instead of giving ever el a class in the js
 .geo__wrap {
-  height: $buildermodHeight;
+  height: $minBuildermodHeight;
   padding: 0;
   margin: $baseSpace*-4.5 $baseSpace*-1.5 $baseSpace*-1.5;
 
@@ -40,13 +40,13 @@
 
   // The scale if the value is positive
   .q0-3 {
-    fill: $colorRed300;
+    fill: $colorRedScale300;
   }
   .q1-3 {
-    fill: $colorRed600;
+    fill: $colorRedScale600;
   }
   .q2-3 {
-    fill: $colorRed1000;
+    fill: $colorRedScale1000;
   }
 }
 

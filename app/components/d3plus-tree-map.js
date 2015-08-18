@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   attributeBindings: ['width','height'],
   classNames: ['d3plus_tree-map'],
   varIndependent: ['group', 'code'],
+  paddingWidth: 5,
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
@@ -21,17 +22,17 @@ export default Ember.Component.extend({
   treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'vis', function() {
     return d3plus.viz()
       .container(this.get('id'))
-      .data({value: this.get('immutableData'), padding: 5})
-      .type("tree_map")
+      .data({value: this.get('immutableData'), padding: this.paddingWidth})
+      .type('tree_map')
       .id({value: this.get('varIndependent'), grouping: true })
       .depth(1)
       .tooltip({children: false})
       .color((d) => {
-        if(this.get('noFiltered')) { return d.color; }
+        if(this.get('noFiltered')) { return d.color || '#fff'; }
         if(_.contains(this.get('selectedData'), d.code)) {
-          return '#f5f3f1';
+          return '#eefcce';
         } else {
-          return d.color;
+          return d.color || '#fff';
         }
       })
       .format({
@@ -52,12 +53,12 @@ export default Ember.Component.extend({
         return  Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code; }
       })
       .timeline(false)
-      .height(this.get('height'))
-      .width(this.get('width'))
+      .height(this.get('height') + (this.paddingWidth * 2))
+      .width(this.get('width') + (this.paddingWidth * 4))
       .timing({transitions: 300})
       .size(this.get('varDependent'))
       .labels({resize: false, align: 'left', valign: 'top'})
-      .font({size: 20})
+      .font({size: 13})
       .legend(false);
   }),
   didInsertElement: function() {
