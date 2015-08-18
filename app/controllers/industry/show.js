@@ -47,6 +47,6 @@ export default Ember.Controller.extend({
     return _.each(this.get('model.departmentsData'),
       function(d) { d.avg_wage = d.wages/d.employment; }
     );
-  }).readOnly(),
+  }).readOnly()
 });
 

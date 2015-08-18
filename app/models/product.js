@@ -10,7 +10,7 @@ export default DS.Model.extend(ModelAttribute, {
     var defaultParams = {
       treemap: { variable: 'export_value', startDate: 2013, endDate: 2013 },
       multiples: { variable: 'export_value', startDate: 2008, endDate: 2013 },
-      geo: { variable: 'export_value', startDate: 2013, endDate: 2014 },
+      geo: { variable: 'export_value', startDate: 2013, endDate: 2013 },
       scatter: { variable: null,  startDate: 2012, endDate: 2013 },
       similarty: { variable: null,  startDate: 2012, endDate: 2013 }
     };
