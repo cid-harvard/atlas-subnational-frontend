@@ -34,7 +34,7 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     this._super(controller, model);
     this.controllerFor('application').set('entity', 'location');
-    this.controllerFor('application').set('entity_id', 1044);
+    this.controllerFor('application').set('entity_id', 3);
     window.scrollTo(0, 0);
   },
 });

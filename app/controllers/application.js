@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   //use entity and entity_id to build the nav links
   entity: 'location',
-  entity_id: '1044',
+  entity_id: '3',
   //The language toggle is a checkbox
   //currently the way it is,
   //TRUE => 'es-' and FALSE => 'en

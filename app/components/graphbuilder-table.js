@@ -71,8 +71,13 @@ export default EmberTableComponent.extend({
    ],
   tableMap: computed('source', function() {
     let source = this.get('source');
-    return this.get(`${source}Map`);
+    let map = this.get(`${source}Map`);
+    if(this.get('isMultipleYears') && this.get('visualization') === 'similarity') {
+      map = _.reject(map, {key: 'year'});
+    }
+    return map;
   }),
+
   columns: computed('tableMap', function() {
     return this.get('tableMap').map((column) => {
       return this.generateColumnDefinition(column);
