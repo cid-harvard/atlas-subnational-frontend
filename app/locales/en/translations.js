@@ -14,11 +14,17 @@ export default {
     'scatter': 'Scatterplot',
     'similarity': 'Similarity map'
   },
-  'side_nav': {
+  'pageheader': {
     'brand_slogan': 'Using data to keep Colombia competitive',
     'search_link': 'Search',
     'profile_link': 'Profile',
+    'about': 'About',
+    'download': 'Download the data',
+    'search_placeholder': 'Search for a location, product or industry',
     'graph_builder_link': 'Graph Builder'
+  },
+  'index': {
+    'colombia_profile': 'Read the profile for Colombia'
   },
   'location.model':{
     'department': 'department',
@@ -38,23 +44,22 @@ export default {
     'excel': 'Excel'
   },
   'search': {
-    'header': 'Search',
+    'header': 'Results',
     'intro': 'Search for the location, product, industry or occupation that you’re interested in.',
     'placeholder': 'Type here to search',
-    'results_products': 'Results: Products',
-    'results_locations': 'Results: Locations',
-    'results_industries': 'Results: Industries',
+    'results_products': 'Products',
+    'results_locations': 'Locations',
+    'results_industries': 'Industries',
     'didnt_find': 'Didn’t find what you were looking for? Let us know: TKTK@prosperia.com'
   },
   'graph_builder': {
-    'read_more': 'Read the profile and complexity analysis for this location',
-    'view_more': 'View More',
+    'view_more': 'View more',
     'table': {
       'name': 'Name',
       'export_value': 'Exports',
       'import_value': 'Imports',
-      'export_rca': 'Revealed competitive advantage',
-      'rca': 'Revealed competitive advantage',
+      'export_rca': 'RCA',
+      'rca': 'RCA',
       'wages': 'Wages',
       'employment': 'Employment',
       'avg_wage': 'Average Wage',
@@ -107,13 +112,13 @@ export default {
         'locations.import_subregions_locations': 'What subregions contribute to the imports for {{name}} from {{place}}?',
         'locations.import_subregions_products_locations': 'What subregions contribute to the imports of {{item}} for {{name}} from {{place}}?',
         'products.export_value': 'What products does {{name}} export?',
-        'products.scatter': 'What products have the best combination of complexity and opportunity for {{name}}?',
+        'products.scatter': 'What products have the most potential for {{name}}?',
         'products.export_value_to': 'What products does {{name}} export to {{place}}?',
         'products.import_value': 'What products does {{name}} import?',
         'products.import_value_from': 'What products does {{name}} import from {{place}}?',
         'products.similarity': 'What does the product map look like for {{name}}?',
         'industries.employment': 'What industries in {{name}} employ the most people?',
-        'industries.scatter': 'What industries have the best combination of complexity and opportunity for {{name}}?',
+        'industries.scatter': 'What industries have the most potential for {{name}}?',
         'industries.wages': 'What industries in {{name}} are the largest by total wages?',
         'industries.wages_avg': 'What industries in {{name}} have the highest wages per worker?',
         'industries.similarity': 'What does the industry map look like for {{name}}?'
@@ -122,6 +127,9 @@ export default {
     'builder_nav': {
       'header': 'More graphs for this {{entity}}',
       'intro': 'Select a question to see the corresponding graph. If the question has missing parameters ({{icon}}) , you’ll fill those in when you click.',
+    },
+    'recirc' : {
+      'header': 'Read the profile for this {{entity}}'
     },
     'builder_mod_header': {
       'industry': {
@@ -133,7 +141,8 @@ export default {
         'locations.wage_avg': 'Average Wages (COP)',
       },
       'product': {
-        'locations.export_value': 'Departments of Colombia',
+        'locations.export_value': 'Total',
+        'locations.import_value': 'Total'
       },
       'location': {
         'products.export_value': 'Total Exports',

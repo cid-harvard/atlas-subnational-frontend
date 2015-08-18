@@ -36,18 +36,28 @@ $colorBrown300: rgb( 224, 218, 213 );
 $colorBrown200: rgb( 235, 230, 227 );
 $colorBrown100: rgb( 245, 243, 241 );
 
-// Unlike other scales, colorRed has a 1000 version to complete the scale
-// So that plain old colorRed can be used as an accent (it's much more vibrant than colorRed1000)
-$colorRed1000: #f26d65;
-$colorRed900: #f37c75;
-$colorRed800: #f58a84;
-$colorRed700: #f69994;
-$colorRed600: #f7a8a4;
-$colorRed500: #f9b7b3;
-$colorRed400: #fac6c3;
-$colorRed300: #fbd5d3;
-$colorRed200: #fde4e2;
-$colorRed100: #fef3f2;
+// UI Red
+$colorRed900: #ef534a;
+$colorRed800: #f1665e;
+$colorRed700: #f37972;
+$colorRed600: #f48c86;
+$colorRed500: #f69f9a;
+$colorRed400: #f8b2ae;
+$colorRed300: #f9c5c2;
+$colorRed200: #fbd8d6;
+$colorRed100: #fdebea;
+
+// Color scale red
+$colorRedScale1000: #f26d65;
+$colorRedScale900: #f37c75;
+$colorRedScale800: #f58a84;
+$colorRedScale700: #f69994;
+$colorRedScale600: #f7a8a4;
+$colorRedScale500: #f9b7b3;
+$colorRedScale400: #fac6c3;
+$colorRedScale300: #fbd5d3;
+$colorRedScale200: #fde4e2;
+$colorRedScale100: #fef3f2;
 
 $colorNavy200: rgb( 204, 204, 214 );
 $colorNavy400: rgb( 154, 153, 172 );
@@ -69,6 +79,17 @@ $colorBlue500:rgb( 192, 214, 230 );
 // $colorNavy700: rgb( 184, 168, 157 );
 // $colorNavy900: rgb( 163, 143, 129 );
 
+// Weak red
+// $colorRed1000: #f26d65;
+// $colorRed900: #f37c75;
+// $colorRed800: #f58a84;
+// $colorRed700: #f69994;
+// $colorRed600: #f7a8a4;
+// $colorRed500: #f9b7b3;
+// $colorRed400: #fac6c3;
+// $colorRed300: #fbd5d3;
+// $colorRed200: #fde4e2;
+// $colorRed100: #fef3f2;
 
 /* ==========  Breakpoints  ========== */
 
@@ -108,6 +129,7 @@ $animationEasing: cubic-bezier(0.455, 0.030, 0.515, 0.955) !default;
 /* ==========  Layout  ========== */
 
 $sidebarWidth: 15%;
+$minBuildermodHeight: 60rem;
 $buildermodHeight: 60vh;
 
 /* ==========  Z-index  ========== */

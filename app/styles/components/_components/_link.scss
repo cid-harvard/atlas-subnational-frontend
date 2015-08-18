@@ -5,13 +5,14 @@
 **/
 
 a {
-  transition: color 0.2s ease-in-out;
+  transition: color $animationTime $animationEasing;
 }
 
 .link--stream {
-  color: $colorGrayLight;
+  color: $colorGrayDark;
+  font-weight: 100;
   &:hover {
-    color: $colorGray;
+    color: $colorBlack;
   }
 }
 

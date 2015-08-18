@@ -14,11 +14,17 @@ export default {
     'scatter': 'Gráfico de dispersión',
     'similarity': 'Espacio similitud'
   },
-  'side_nav': {
+  'pageheader': {
     'brand_slogan': 'Utilizando datos para mantener Colombia competitiva',
     'search_link': 'Buscar',
     'profile_link': 'Perfil',
+    'about': '¿Quiénes somos?',
+    'download': 'Descargue los datos',
+    'search_placeholder': 'Busque el lugar, producto u sector',
     'graph_builder_link': 'Gráfico Constructor'
+  },
+  'index': {
+    'colombia_profile': 'Read the profile for Colombia'
   },
   'location.model':{
     'department': 'departamento',
@@ -38,23 +44,22 @@ export default {
     'excel': 'Excel'
   },
   'search': {
-    'header': 'Buscar',
+    'header': 'Resultados',
     'intro': 'Busque el lugar, producto, sector u ocupación que le interese',
     'placeholder': 'Escriba aquí para buscar lo que quiere',
-    'results_products': 'Resultados: Productos',
-    'results_locations': 'Resultados: Lugares',
-    'results_industries': 'Resultados: Sectores',
+    'results_products': 'Productos',
+    'results_locations': 'Lugares',
+    'results_industries': 'Sectores',
     'didnt_find': '¿Encontró lo que buscaba? Nos interesa saber: TKTK@prospedia.com.'
   },
   'graph_builder': {
-    'read_more': 'Lea el perfil de la actividad productiva y la complejidad de este lugar',
     'view_more': 'Muestre más',
     'table': {
       'name': 'Nombre',
       'export_value': 'Exportaciones',
       'import_value': 'Importaciones',
-      'export_rca': 'Ventaja comparativa revelada',
-      'rca': 'Ventaja comparativa revelada',
+      'export_rca': 'VCR',
+      'rca': 'VCR',
       'wages': 'Salarios (COP)',
       'employment': 'Empleo',
       'avg_wage': 'Salario medio',
@@ -107,7 +112,7 @@ export default {
         'locations.import_subregions_locations': '¿Cómo se descomponen por lugar de origen las importaciones de {{name}} a {{place}}?',
         'locations.import_subregions_products_locations': '¿Cómo se descomponen por lugar de origen las importaciones de {{item}} de {{name}} a {{place}}?',
         'products.export_value': '¿Qué exporta {{name}}?',
-        'products.scatter': '¿Qué productos ofrecen la mejor combinación de complejidad y valor estratégico para {{name}}?',
+        'products.scatter': '¿Qué productos tienen el mayor potencial para {{name}}?',
         'products.export_value_to': '¿Qué productos importa {{name}} de {{place}}?',
         'products.import_value': '¿Qué productos importa {{name}}?',
         'products.import_value_from': '¿Qué productos importa {{name}} de {{place}}?',
@@ -123,6 +128,9 @@ export default {
       'header': 'Más gráficos para este {{entity}}',
       'intro': 'Seleccione una pregunta para ver el gráfico correspondiente. Si en la pregunta faltan parámetros ({{icon}}), los podrá llenar cuando haga click.',
     },
+    'recirc' : {
+      'header': 'Lea el perfil de este  {{entity}}'
+    },
     'builder_mod_header': {
       'industry': {
         'locations.employment': 'Empleo total',
@@ -133,7 +141,8 @@ export default {
         'departments.wage_avg': 'Salarios promedio (COP)',
       },
       'product': {
-        'locations.export_value': 'Departamentos de Colombia',
+        'locations.export_value': 'Total',
+        'locations.import_value': 'Total'
       },
       'location': {
         'products.export_value': 'Exportaciones totales',

@@ -137,7 +137,7 @@
 }
 
 .changegraph__radio__target {
-  transition: color 0.2s ease-in-out, background 0.2s ease-in-out;
+  transition: color $animationTime $animationEasing, background $animationTime $animationEasing;
   background: $colorBrown200;
   color: $colorGray;
   padding: 6.2rem $baseSpace $baseSpace; // revisit for better horizontal centering mebbe

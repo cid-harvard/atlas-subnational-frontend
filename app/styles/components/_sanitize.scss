@@ -148,6 +148,7 @@ textarea {
   cursor: $root-cursor;
   font: #{$root-font-size}/#{$root-line-height} $root-font-family;
   text-rendering: $root-text-rendering;
+  height: 100%;
 }
 
 // specify the text decoration of anchors

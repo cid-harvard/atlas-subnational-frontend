@@ -1,80 +1,84 @@
-<article class="stream builder">
-  <header class="stream__header stream__header--builder">
-    <h2 class="stream__head">{{name}}</h2>
-  </header>
-  <section class="stream__section stream__section--builder--body">
+<main class="stream builder">
+  <article class="stream__article builder__article">
+    {{ render 'view-switch' controller='application'}}
+    <header class="stream__header stream__header--builder">
+      <h2 class="stream__head stream__head--builder">{{name}}</h2>
+    </header>
     <header class="section__header builder__header">
       <h3 class="section__head">{{pageTitle}}</h3>
     </header>
-    <div {{bind-attr class=":section__buildermod drawerSettingsIsOpen:buildermod--is--open--settings drawerChangeGraphIsOpen:buildermod--is--open--changegraph drawerQuestionsIsOpen:buildermod--is--open--questions"}}>
-      <header class="buildermod__header">
-        <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
-        <div class="buildermod__tools">
-          <button {{bind-attr class="drawerIsUnnecessary:buildermod__tool--is--unnecessary :btn :buildermod__tool__btn :buildermod__tool :buildermod__tool--settings"}} {{action 'toggleDrawerSettings'}}>
-            {{fa-icon "plus" classNames="tool__btn__icon"}}
-            {{t 'graph_builder.settings.label'}}
-          </button>
-          <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--changegraph" {{action 'toggleDrawerChangeGraph'}}>
-            {{fa-icon "plus" classNames="tool__btn__icon"}}
-            {{t 'graph_builder.change_graph.label'}}
-          </button>
-          <button class="btn buildermod__tool__btn buildermod__tool buildermod__tool--questions" {{action 'toggleDrawerQuestions'}}>
-            {{fa-icon "plus" classNames="tool__btn__icon"}}
-            {{t 'graph_builder.questions.label'}}
-          </button>
-        </div>
-      </header>
-      <div class="buildermod__vizwrap">
-        {{#unless isGeo }}
-          {{partial "partials/buildermod-search"}}
-        {{/unless}}
-        {{component 'graphbuilder-settings'
-          startDate=startDate
-          endDate=endDate
-          dateExtent=dateExtent
-          dateRange=dateRange
-          isOpen=drawerSettingsIsOpen
-          years=years
-        }}
-        {{partial "partials/buildermod-drawer-change-graph"}}
-        {{component 'graphbuilder-questions'
-          isOpen=drawerQuestionsIsOpen
-          name=name
-          entity=entity
-          entity_id=entity_id
-          entity_and_id=entity_and_id
-          builderNavType=builderNavType
-        }}
-        {{component visualizationComponent
-          classNames='buildermod__viz'
-          immutableData=immutableData
-          data=filteredData
-          dataType=source
-          varDependent=varDependent
-          startDate=startDate
-          dateExtent=dateExtent
-          endDate=endDate
+    <section class="stream__section">
+      <div {{bind-attr class=":section__buildermod drawerSettingsIsOpen:buildermod--is--open--settings drawerChangeGraphIsOpen:buildermod--is--open--changegraph drawerQuestionsIsOpen:buildermod--is--open--questions"}}>
+        <header class="buildermod__header">
+          <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
+          <div class="buildermod__tools">
+            <button {{bind-attr class="drawerIsUnnecessary:buildermod__tool--is--unnecessary :btn :btn--standalone :btn--stream :buildermod__tool :buildermod__tool--settings"}} {{action 'toggleDrawerSettings'}}>
+              {{fa-icon "plus" classNames="tool__btn__icon"}}
+              {{t 'graph_builder.settings.label'}}
+            </button>
+            <button class="btn btn--standalone btn--stream buildermod__tool buildermod__tool--changegraph" {{action 'toggleDrawerChangeGraph'}}>
+              {{fa-icon "plus" classNames="tool__btn__icon"}}
+              {{t 'graph_builder.change_graph.label'}}
+            </button>
+            <button class="btn btn--standalone btn--stream buildermod__tool buildermod__tool--questions" {{action 'toggleDrawerQuestions'}}>
+              {{fa-icon "plus" classNames="tool__btn__icon"}}
+              {{t 'graph_builder.questions.label'}}
+            </button>
+          </div>
+        </header>
+        <div class="buildermod__vizwrap">
+          {{#unless isGeo }}
+            {{partial "partials/buildermod-search"}}
+          {{/unless}}
+          {{component 'graphbuilder-settings'
+            startDate=startDate
+            endDate=endDate
+            dateExtent=dateExtent
+            dateRange=dateRange
+            isOpen=drawerSettingsIsOpen
+            years=years
           }}
-      </div>
+          {{partial "partials/buildermod-drawer-change-graph"}}
+          {{component 'graphbuilder-questions'
+            isOpen=drawerQuestionsIsOpen
+            name=name
+            entity=entity
+            entity_id=entity_id
+            entity_and_id=entity_and_id
+            builderNavType=builderNavType
+            isPrescriptive=isPrescriptive
+          }}
+          {{component visualizationComponent
+            classNames='buildermod__viz'
+            immutableData=immutableData
+            data=filteredData
+            dataType=source
+            varDependent=varDependent
+            startDate=startDate
+            dateExtent=dateExtent
+            endDate=endDate
+            }}
+        </div>
       {{component 'graphbuilder-table'
         data=filteredData
         source=source
         isMultipleYears=isMultipleYears
         visualization=visualization
       }}
-    </div>
-  </section>
-{{!--   <section class="stream__section stream__section--builder--body">
-    {{partial "partials/ctas"}}
-  </section>
-
-  <section class="stream__section stream__section--recirc">
-    <h3 class="section__head section__head--recirc">
-      {{t 'graph_builder.read_more'}}
-    </h3>
-    <a href="#" class="btn btn--standalone btn--recirc">
-      {{t 'graph_builder.view_more'}}
-    </a>
-  </section> --}}
-</article>
+      </div>
+    </section>
+    <section class="stream__section stream__section--recirc builder__recirc" style="background-image: url(assets/img/hero_images/{{model.entity_type}}/{{model.entity.code}}.jpg)">
+      <h3 class="section__head section__head--recirc">
+        {{recircCopy}}
+      </h3>
+      {{#link-to
+        profileLink entityId
+        class="btn btn--standalone btn--stream"
+        data-recirc-profile-link=''
+      }}
+        {{ t 'pageheader.profile_link' entity=singularEntity }}
+      {{/link-to}}
+    </section>
+  </article>
+</main>
 

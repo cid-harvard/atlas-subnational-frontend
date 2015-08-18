@@ -65,26 +65,28 @@
         </span>
       </div>
     </li>
-    <li class="builder__questions__item">
-      <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
-      <div class="builder__questions__item__textwrap">
-        <span {{action "closeDrawer"}}>
-          {{#link-to 'visualization' entity_and_id 'products' 'scatter' (query-params variable='null' endDate=2014 startDate=2013) class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.products.scatter' name=name}}
-          {{/link-to}}
-        </span>
-      </div>
-    </li>
-    <li class="builder__questions__item">
-      <i class="icon-cidcon_similarity builder__questions__item__icon"></i>
-      <div class="builder__questions__item__textwrap">
-        <span {{action "closeDrawer"}}>
-          {{#link-to 'visualization' entity_and_id 'products' 'similarity' (query-params variable='null' endDate=2014 startDate=2013) class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.products.similarity' name=name}}
-          {{/link-to}}
-        </span>
-      </div>
-    </li>
+    {{#if isPrescriptive }}
+      <li class="builder__questions__item">
+        <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
+        <div class="builder__questions__item__textwrap">
+          <span {{action "closeDrawer"}}>
+            {{#link-to 'visualization' entity_and_id 'products' 'scatter' (query-params variable='null' endDate=2014 startDate=2013) class="builder__questions__question"}}
+              {{t 'graph_builder.page_title.location.products.scatter' name=name}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+      <li class="builder__questions__item">
+        <i class="icon-cidcon_similarity builder__questions__item__icon"></i>
+        <div class="builder__questions__item__textwrap">
+          <span {{action "closeDrawer"}}>
+            {{#link-to 'visualization' entity_and_id 'products' 'similarity' (query-params variable='null' endDate=2014 startDate=2013) class="builder__questions__question"}}
+              {{t 'graph_builder.page_title.location.products.similarity' name=name}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+    {{/if}}
   </ul>
 
   <h4 class="builder__questions__header">Questions: Industries</h4>
@@ -109,25 +111,27 @@
         </span>
       </div>
     </li>
-    <li class="builder__questions__item">
-      <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
-      <div class="builder__questions__item__textwrap">
-        <span {{action "closeDrawer"}}>
-          {{#link-to 'visualization' entity_and_id 'industries' 'scatter' (query-params variable='null') class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.industries.scatter' name=name}}
-          {{/link-to}}
-        </span>
-      </div>
-    </li>
-    <li class="builder__questions__item">
-      <i class="icon-cidcon_similarity builder__questions__item__icon"></i>
-      <div class="builder__questions__item__textwrap">
-        <span {{action "closeDrawer"}}>
-          {{#link-to 'visualization' entity_and_id 'industries' 'similarity' (query-params variable='rca') class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.industries.similarity' name=name}}
-          {{/link-to}}
-        </span>
-      </div>
-    </li>
+    {{#if isPrescriptive }}
+      <li class="builder__questions__item">
+        <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
+        <div class="builder__questions__item__textwrap">
+          <span {{action "closeDrawer"}}>
+            {{#link-to 'visualization' entity_and_id 'industries' 'scatter' (query-params variable='null') class="builder__questions__question"}}
+              {{t 'graph_builder.page_title.location.industries.scatter' name=name}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+      <li class="builder__questions__item">
+        <i class="icon-cidcon_similarity builder__questions__item__icon"></i>
+        <div class="builder__questions__item__textwrap">
+          <span {{action "closeDrawer"}}>
+            {{#link-to 'visualization' entity_and_id 'industries' 'similarity' (query-params variable='rca') class="builder__questions__question"}}
+              {{t 'graph_builder.page_title.location.industries.similarity' name=name}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+    {{/if}}
   </ul>
 </div>

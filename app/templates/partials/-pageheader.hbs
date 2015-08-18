@@ -1,0 +1,51 @@
+<header class="header--pageheader">
+  <div class="pageheader__wrap">
+    <div class="branding">
+      {{#link-to "index"}}
+        <h1 class="branding__logo">Prosperia</h1>
+      {{/link-to}}
+      <p class="branding__slogan" data-slogan>{{ t 'pageheader.brand_slogan' }}</p>
+    </div>
+    <nav class="pageheader__nav">
+      {{#link-to "about" current-when="about" class="pageheader__link" activeClass="pageheader__link--is--active"}}
+        {{ t 'pageheader.about' }}
+      {{/link-to}}
+      {{#link-to "downloads" current-when="downloads" class="pageheader__link" activeClass="pageheader__btn--is--active"}}
+        {{ t 'pageheader.download' }}
+      {{/link-to}}
+      <div class="togglemod togglemod--languages">
+        <p {{bind-attr class=":toggle__label__text isDefaultLocale::toggle__label--is--active"}}>
+          {{otherLanguage}}
+        </p>
+        {{input
+          type='checkbox'
+          id='toggle--languages'
+          class='toggle toggle--languages'
+          checked=isDefaultLocale
+          data-language-toggle=''
+          }}
+        <label class="toggle__label" for="toggle--languages"></label>
+        <p {{bind-attr class=":toggle__label__text isDefaultLocale:toggle__label--is--active"}}>
+          {{defaultLanguage}}
+        </p>
+      </div>
+      <form class="search__wrap pageheader__search__wrap">
+        {{input
+          class="search"
+          placeholder=( t 'pageheader.search_placeholder' )
+          value=query
+          enter='query'
+          data-search-input=''
+        }}
+        <button class="search__reset fa fa-close" type="reset">
+        </button>
+        <input class="search__submit btn btn--standalone btn--search"
+          data-search
+          type="submit"
+          value="{{ t 'pageheader.search_link' }}"
+          {{action 'query' query}} >
+      </form>
+    </nav>
+  </div>
+</header>
+

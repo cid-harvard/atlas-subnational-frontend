@@ -27,7 +27,7 @@ var app = new EmberApp({
     includeFontAwesomeAssets: false
   },
   fingerprint: {
-    exclude: ['loc_'],
+    exclude: ['hero_images'],
     generateAssetMap: true
   }
 });

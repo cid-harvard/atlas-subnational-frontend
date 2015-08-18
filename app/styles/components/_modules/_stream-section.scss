@@ -5,9 +5,7 @@
 **/
 
 .stream__section {
-  padding: $baseSpace*3;
-  z-index: $zIndex-2;
-  position: relative;
+  margin-bottom: $baseSpace * 2;
 }
 
 .section__header {
@@ -17,12 +15,11 @@
 .section__head {
   font-size: $fontXLarge;
   line-height: $fontXLarge;
-  padding-bottom: $baseSpace / 2;
+  margin-bottom: $baseSpace / 2;
   font-family: $sansAlt;
 }
 
-.section__intro {
-  width: 66.66%;
+.section__head--spacey {
   margin-bottom: $baseSpace;
 }
 
@@ -31,17 +28,22 @@
   background: $colorGreen;
 }
 
-
-// Recirc
-.stream__section--recirc {
-  margin: 0;
-  padding: $baseSpace*3;
-  background: $colorBrown300;
-  text-align: center;
+.section__subhead {
+  margin-bottom: $baseSpace;
+  font-weight: 300;
 }
 
-.section__head--recirc {
-  text-align: center;
+.section__intro {
+  width: 66.66%;
+  max-width: 70rem;
   margin-bottom: $baseSpace;
+}
+
+
+// Recirc
+.section__head--recirc {
+  margin: 0 0 $baseSpace 0;
+  color: $colorWhite;
+  @include offset-text;
 }
 

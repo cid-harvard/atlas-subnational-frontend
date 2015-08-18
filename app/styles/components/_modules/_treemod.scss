@@ -6,7 +6,6 @@
 
 .vizmod--treemod {
   width: 100%;
-  background: $colorBrown100;
 }
 
 // Fuggin d3plus id styling let's get this shit outta here ASAP
@@ -15,8 +14,16 @@
 }
 
 .d3plus_tree-map {
+  margin: -10px 0 0 -10px;
+  text {
+    font-family: $sans !important;
+    fill: $colorGrayDark !important;
+    font-weight: 300 !important;
+  }
   .d3plus_data {
-    stroke: $colorBrown200  !important;
-    stroke-width: 1.5px !important;
+    opacity: 1;
+    // fill: $colorWhite;
+    // stroke: $colorBrown300  !important;
+    // stroke-width: 1.5px !important;
   }
 }

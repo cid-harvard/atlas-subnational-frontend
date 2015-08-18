@@ -39,6 +39,7 @@
   }
 }
 
+
 .builder__questions__item--is--disabled {
   pointer-events: none;
   .builder__questions__item__icon:before {
@@ -56,7 +57,7 @@
   margin-right: $baseSpace;
   min-width: 40px;
   &:before {
-    transition: color 0.2s ease-in-out;
+    transition: color $animationTime $animationEasing;
     color: $colorGray;
     margin: 0 auto;
     font-size: 40px;
@@ -64,7 +65,7 @@
 }
 
 .builder__questions__label {
-  transition: color 0.2s ease-in-out;
+  transition: color $animationTime $animationEasing;
   color: $colorGray;
 }
 

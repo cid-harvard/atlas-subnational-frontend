@@ -1,0 +1,35 @@
+/**
+*
+* View Switcher (profile to graph builder and back again)
+*
+**/
+
+.viewswitch {
+  width: $sidebarWidth;
+  text-align: right;
+  position: absolute;
+  left: 0;
+}
+
+.viewswitch__item {
+  border-bottom: 1px solid $colorBlack;
+  padding: $fontSmall 0 $fontSmall $baseSpace*1.5;
+  &:last-of-type {
+    border: none;
+    padding-bottom: 0;
+  }
+}
+
+.viewswitch__item__link {
+  transition: $animationTime color $animationEasing;
+  color: $colorGray;
+  font-size: $fontSmall;
+  display: block;
+  &:hover {
+    color: $colorGrayDark;
+  }
+}
+
+.viewswitch__item--is--active {
+  color: $colorBlack;
+}

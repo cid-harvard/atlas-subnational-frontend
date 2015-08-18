@@ -31,15 +31,14 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   click('a[data-side-graph-builder-link]');
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/treemap?endDate=2013&startDate=2013&variable=export_value');
+    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/multiples?endDate=2013&startDate=2008&variable=export_value');
   });
 
-  //Go to multiples
   click("button:contains('Change question')");
-  click("input[data-change-graph='multiples']");
+  click("input[data-change-graph='treemap']");
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/multiples?endDate=2013&startDate=2008&variable=export_value');
+    assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/treemap?endDate=2013&startDate=2013&variable=export_value');
   });
 
   //Switch to import source
@@ -52,7 +51,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
 
   //Go to scatter plot
   click("button:contains('Change question')");
-  click("a:contains('What products have the best combination of complexity and opportunity for Atlántico?')");
+  click("a:contains('What products have the most potential for Atlántico?')");
 
   andThen(function() {
     assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/scatter?endDate=2013&startDate=2013');
@@ -84,7 +83,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
 
   //Go to industry scatter
   click("button:contains('Change question')");
-  click("a:contains('What industries have the best combination of complexity and opportunity for Atlántico?')");
+  click("a:contains('What industries have the most potential for Atlántico?')");
 
   andThen(function() {
     assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/scatter?endDate=2013&startDate=2013');

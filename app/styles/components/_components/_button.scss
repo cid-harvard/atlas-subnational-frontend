@@ -5,8 +5,8 @@
 **/
 
 .btn {
-  transition: color 0.2s ease-in-out;
-  padding: $baseSpace / 2;
+  transition: color $animationTime $animationEasing;
+  padding: $baseSpace/2 $baseSpace;
   font-size: $fontSmall;
   cursor: pointer;
   &:active, &:focus {
@@ -15,17 +15,26 @@
 }
 
 .btn--standalone {
-  transition: 0.2s background ease-in-out;
-  background: $colorBrown500;
-  text-transform: uppercase;
-  color: $colorWhite;
-  font-family: $sansAlt;
+  transition: $animationTime background $animationEasing;
+  font-weight: 500;
   @include offset-text;
+}
+
+.btn--stream {
+  background: $colorBrown500;
+  color: $colorGray;
+  &:active, &:focus {
+    color: $colorGrayDark;
+  }
   &:hover {
-    background: $colorBrown700;
+    background: $colorBrown400;
   }
 }
 
-.btn--recirc {
-  margin: 0 auto;
+.btn--search {
+  background: $colorNavy600;
+  color: $colorWhite;
+  &:hover {
+    background: $colorNavy400;
+  }
 }

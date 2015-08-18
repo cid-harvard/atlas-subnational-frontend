@@ -16,6 +16,7 @@
 
 .ember-table-header-cell {
   background: inherit;
+  color: $colorBlack;
 }
 
 .ember-table-header-container {
@@ -37,14 +38,14 @@
 }
 
 .ember-table-cell {
-  border-right: 2px solid $colorGrayLightest;
+  border-right: 1px solid $colorBrown400;
   &:last-of-type {
     border-right: none;
   }
 }
 
 .ember-table-table-row {
-  border-bottom: 2px solid $colorGrayLightest;
+  border-bottom: 1px solid $colorBrown400;
 }
 
 .ember-table-hover div {

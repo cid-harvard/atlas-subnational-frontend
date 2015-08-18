@@ -57,8 +57,13 @@ export default Ember.Route.extend({
     });
   },
   actions: {
-    rerender: function() {
-      this.refresh();
+    query: function(query) {
+      if(query) {
+        if(query.length < 3) { return true;}
+        this.transitionTo('search', { queryParams: { query: query }});
+      } else {
+        this.transitionTo('search', { queryParams: { query: null }});
+      }
     }
   }
 });

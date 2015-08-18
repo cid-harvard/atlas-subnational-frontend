@@ -25,11 +25,16 @@ export default Ember.Route.extend({
       controller.setProperties(model.get('defaultParam'));
     }
     this.controllerFor('application').set('entity', model.get('entity.constructor.modelName'));
-    this.controllerFor('application').set('entity_id', model.get('.entity.id'));
+    this.controllerFor('application').set('entity_id', model.get('entity.id'));
+
+    controller.set('drawerSettingsIsOpen', false); // Turn off other drawers
+    controller.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
+    controller.set('drawerQuestionsIsOpen', false); // Turn off other drawers
     window.scrollTo(0, 0);
   },
   resetController: function (controller, isExiting) {
     controller.set('variable', null);
+
     if (isExiting) {
       controller.setProperties({
         variable: null,
