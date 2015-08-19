@@ -1,8 +1,9 @@
 <main class="stream about">
-  <article class="stream__article">
-    {{#linkTo "about.project-description"}}Project Description{{/linkTo}}
-    {{#linkTo "about.glossary"}}Glossary{{/linkTo}}
-
+  <article class="stream__article about__article">
+    {{partial 'partials/about-switch'}}
+    <header class="stream__header">
+      <h2 class="stream__head">About</h2>
+    </header>
     {{outlet}}
   </article>
 </main>
