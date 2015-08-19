@@ -27,7 +27,7 @@ export default EmberTableComponent.extend({
   hasFooter: false,
   rowHeight: 50,
   minHeaderHeight: 50,
-  height: 300,
+  height: 400,
   attributeBindings: ['height'],
   selectionMode: 'none',
   industryClassesMap: [
