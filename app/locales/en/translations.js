@@ -12,7 +12,7 @@ export default {
     'multiples': 'Area charts',
     'geo': 'Geographic map',
     'scatter': 'Scatterplot',
-    'similarity': 'Similarity map'
+    'similarity': 'Similarity space'
   },
   'pageheader': {
     'brand_slogan': 'Using data to keep Colombia competitive',
@@ -116,12 +116,12 @@ export default {
         'products.export_value_to': 'What products does {{name}} export to {{place}}?',
         'products.import_value': 'What products does {{name}} import?',
         'products.import_value_from': 'What products does {{name}} import from {{place}}?',
-        'products.similarity': 'What does the product map look like for {{name}}?',
+        'products.similarity': 'What does the product space look like for {{name}}?',
         'industries.employment': 'What industries in {{name}} employ the most people?',
         'industries.scatter': 'What industries have the most potential for {{name}}?',
         'industries.wages': 'What industries in {{name}} are the largest by total wages?',
         'industries.wages_avg': 'What industries in {{name}} have the highest wages per worker?',
-        'industries.similarity': 'What does the industry map look like for {{name}}?'
+        'industries.similarity': 'What does the industry space look like for {{name}}?'
       }
     },
     'builder_nav': {
@@ -174,7 +174,7 @@ export default {
     'imports': 'Imports ({{year}})',
     'exports': 'Exports ({{year}})',
     'export_possiblities': 'Export possiblities',
-    'export_possiblities.intro': 'We’ve found that countries which export complex products grow faster than those which export simple products. Using the similarity map we built in the section above, we’ve highlighted  high potential products for {{name}}, ranked by which have the highest combination of opportunity and complexity.',
+    'export_possiblities.intro': 'We’ve found that countries which export complex products grow faster than those which export simple products. Using the similarity space we built in the section above, we’ve highlighted  high potential products for {{name}}, ranked by which have the highest combination of opportunity and complexity.',
     'export_possiblities.footer': 'Note that the list is dynamically generated.  Not all exports may make sense given local conditions not captured in our measure of product similarity.',
     'stepper': {
       1: `This circle represents bananas.
