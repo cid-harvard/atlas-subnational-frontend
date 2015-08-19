@@ -12,15 +12,15 @@
         <header class="buildermod__header">
           <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
           <div class="buildermod__tools">
-            <button {{bind-attr class="drawerIsUnnecessary:buildermod__tool--is--unnecessary :btn :btn--standalone :btn--stream :buildermod__tool :buildermod__tool--settings"}} {{action 'toggleDrawerSettings'}}>
+            <button {{bind-attr class="drawerIsUnnecessary:buildermod__tool--is--unnecessary :btn :btn--standalone :btn--buildermod :buildermod__tool :buildermod__tool--settings"}} {{action 'toggleDrawerSettings'}}>
               {{fa-icon "plus" classNames="tool__btn__icon"}}
               {{t 'graph_builder.settings.label'}}
             </button>
-            <button class="btn btn--standalone btn--stream buildermod__tool buildermod__tool--changegraph" {{action 'toggleDrawerChangeGraph'}}>
+            <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--changegraph" {{action 'toggleDrawerChangeGraph'}}>
               {{fa-icon "plus" classNames="tool__btn__icon"}}
               {{t 'graph_builder.change_graph.label'}}
             </button>
-            <button class="btn btn--standalone btn--stream buildermod__tool buildermod__tool--questions" {{action 'toggleDrawerQuestions'}}>
+            <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--questions" {{action 'toggleDrawerQuestions'}}>
               {{fa-icon "plus" classNames="tool__btn__icon"}}
               {{t 'graph_builder.questions.label'}}
             </button>

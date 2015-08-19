@@ -22,11 +22,16 @@
 
 .btn--stream {
   background: $colorBrown500;
-  color: $colorGray;
-  &:active, &:focus {
-    color: $colorGrayDark;
+  color: $colorGrayDark;
+  &:hover, &:active, &:focus {
+    background: $colorBrown400;
   }
-  &:hover {
+}
+
+.btn--buildermod {
+  background: $colorBrown500;
+  color: $colorGray;
+  &:hover, &:active, &:focus {
     background: $colorBrown400;
   }
 }
