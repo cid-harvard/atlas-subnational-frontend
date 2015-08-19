@@ -67,17 +67,20 @@
       }}
       </div>
     </section>
-    <section class="stream__section stream__section--recirc builder__recirc" style="background-image: url(assets/img/hero_images/{{model.entity_type}}/{{model.entity.code}}.jpg)">
-      <h3 class="section__head section__head--recirc">
-        {{recircCopy}}
-      </h3>
-      {{#link-to
-        profileLink entityId
-        class="btn btn--standalone btn--stream"
-        data-recirc-profile-link=''
-      }}
-        {{ t 'pageheader.profile_link' entity=singularEntity }}
-      {{/link-to}}
+    <section class="stream__section recirc builder__recirc">
+      <div class="recirc__bground" style="background-image: url({{recircUrl}})"></div>
+      <div class="recirc__wrap">
+        <h3 class="section__head recirc__head">
+          {{recircCopy}}
+        </h3>
+        {{#link-to
+          profileLink entityId
+          class="btn btn--standalone btn--stream"
+          data-recirc-profile-link=''
+        }}
+          {{ t 'pageheader.profile_link' entity=singularEntity }}
+        {{/link-to}}
+      </div>
     </section>
   </article>
 </main>

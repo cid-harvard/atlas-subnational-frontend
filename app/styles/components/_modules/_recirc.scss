@@ -1,0 +1,31 @@
+/**
+*
+* Recirc
+*
+**/
+
+.recirc {
+  position: relative;
+}
+
+.recirc__bground {
+  background-color: $colorRed;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  opacity: 0.7;
+}
+
+.recirc__wrap {
+  padding: $baseSpace * 3;
+  position: relative;
+}
+
+.recirc__head {
+  margin: 0 0 $baseSpace 0;
+  color: $colorWhite;
+  @include offset-text;
+}
