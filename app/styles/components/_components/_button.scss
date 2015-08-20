@@ -17,6 +17,7 @@
 .btn--standalone {
   transition: $animationTime background $animationEasing;
   font-weight: 500;
+  display: inline-block;
   @include offset-text;
 }
 
