@@ -28,8 +28,9 @@ export default EmberTableComponent.extend({
   rowHeight: 50,
   minHeaderHeight: 50,
   height: 400,
+  enableContentSelection: true,
   attributeBindings: ['height'],
-  selectionMode: 'none',
+  selectionMode: 'mutiple',
   industryClassesMap: [
     { key: 'name', expand: true, savedWidth: 300 },
     { key: 'avg_wage', expand: true, savedWidth: 200 },
@@ -72,12 +73,11 @@ export default EmberTableComponent.extend({
   tableMap: computed('source', function() {
     let source = this.get('source');
     let map = this.get(`${source}Map`);
-    if(this.get('isMultipleYears') && this.get('visualization') === 'similarity') {
+    if(this.get('isSingleYear')) {
       map = _.reject(map, {key: 'year'});
     }
     return map;
   }),
-
   columns: computed('tableMap', function() {
     return this.get('tableMap').map((column) => {
       return this.generateColumnDefinition(column);
@@ -130,6 +130,11 @@ export default EmberTableComponent.extend({
     } else {
       return number;
     }
+  },
+  didInsertElement: function() {
+    this._super();
+    //FIXME: FLEXBOX!
+    this.set('_height', this.get('height'));
   },
   actions: {
     sortByColumn: function(content){
