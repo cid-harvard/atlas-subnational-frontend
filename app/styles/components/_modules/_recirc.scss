@@ -16,7 +16,7 @@
   top: 0;
   left: 0;
   background-size: cover;
-  opacity: 0.7;
+  opacity: 0.35;
 }
 
 .recirc__wrap {
@@ -26,6 +26,6 @@
 
 .recirc__head {
   margin: 0 0 $baseSpace 0;
-  color: $colorWhite;
+  // color: $colorWhite;
   @include offset-text;
 }
