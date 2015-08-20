@@ -48,6 +48,14 @@ export default Ember.Component.extend({
       return 'id';
     }
   }),
+  varDependent: computed('dataType', function() {
+    let type = this.get('dataType');
+    if(type === 'industries') {
+      return 'rca';
+    } else if (type === 'products') {
+      return 'export_rca';
+    }
+  }),
   nodes: computed('dataType', function() {
     let type = this.get('dataType');
     if(type === 'industries') {
