@@ -57,6 +57,11 @@ export default Ember.Route.extend({
     });
   },
   actions: {
+    willTransition: function(transition) {
+      if(transition.targetName != 'search') {
+        this.controller.set('query', null);
+      }
+    },
     query: function(query) {
       if(query) {
         if(query.length < 3) { return true;}
