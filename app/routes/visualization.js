@@ -30,6 +30,7 @@ export default Ember.Route.extend({
     controller.set('drawerSettingsIsOpen', false); // Turn off other drawers
     controller.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
     controller.set('drawerQuestionsIsOpen', false); // Turn off other drawers
+    controller.set('searchText', controller.get('search'));
     window.scrollTo(0, 0);
   },
   resetController: function (controller, isExiting) {
@@ -40,8 +41,7 @@ export default Ember.Route.extend({
         variable: null,
         rca: null,
         startDate: 2007,
-        endDate: 2013,
-        search: null
+        endDate: 2013
       });
     }
   }
