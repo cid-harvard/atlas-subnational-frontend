@@ -2,7 +2,7 @@
   <article class="stream__article builder__article">
     {{ render 'view-switch' controller='application'}}
     <header class="stream__header stream__header--builder">
-      <h2 class="stream__head stream__head--builder">{{name}}</h2>
+      <h2 class="stream__head">{{name}}</h2>
     </header>
     <header class="section__header builder__header">
       <h3 class="section__head">{{pageTitle}}</h3>
@@ -12,15 +12,15 @@
         <header class="buildermod__header">
           <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
           <div class="buildermod__tools">
-            <button {{bind-attr class="drawerIsUnnecessary:buildermod__tool--is--unnecessary :btn :btn--standalone :btn--stream :buildermod__tool :buildermod__tool--settings"}} {{action 'toggleDrawerSettings'}}>
+            <button {{bind-attr class="drawerIsUnnecessary:buildermod__tool--is--unnecessary :btn :btn--standalone :btn--buildermod :buildermod__tool :buildermod__tool--settings"}} {{action 'toggleDrawerSettings'}}>
               {{fa-icon "plus" classNames="tool__btn__icon"}}
               {{t 'graph_builder.settings.label'}}
             </button>
-            <button class="btn btn--standalone btn--stream buildermod__tool buildermod__tool--changegraph" {{action 'toggleDrawerChangeGraph'}}>
+            <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--changegraph" {{action 'toggleDrawerChangeGraph'}}>
               {{fa-icon "plus" classNames="tool__btn__icon"}}
               {{t 'graph_builder.change_graph.label'}}
             </button>
-            <button class="btn btn--standalone btn--stream buildermod__tool buildermod__tool--questions" {{action 'toggleDrawerQuestions'}}>
+            <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--questions" {{action 'toggleDrawerQuestions'}}>
               {{fa-icon "plus" classNames="tool__btn__icon"}}
               {{t 'graph_builder.questions.label'}}
             </button>
@@ -67,17 +67,20 @@
       }}
       </div>
     </section>
-    <section class="stream__section stream__section--recirc builder__recirc" style="background-image: url(assets/img/hero_images/{{model.entity_type}}/{{model.entity.code}}.jpg)">
-      <h3 class="section__head section__head--recirc">
-        {{recircCopy}}
-      </h3>
-      {{#link-to
-        profileLink entityId
-        class="btn btn--standalone btn--stream"
-        data-recirc-profile-link=''
-      }}
-        {{ t 'pageheader.profile_link' entity=singularEntity }}
-      {{/link-to}}
+    <section class="stream__section recirc builder__recirc">
+      <div class="recirc__bground" style="background-image: url({{recircUrl}})"></div>
+      <div class="recirc__wrap">
+        <h3 class="section__head recirc__head">
+          {{recircCopy}}
+        </h3>
+        {{#link-to
+          profileLink entityId
+          class="btn btn--standalone btn--stream"
+          data-recirc-profile-link=''
+        }}
+          {{ t 'pageheader.profile_link' entity=singularEntity }}
+        {{/link-to}}
+      </div>
     </section>
   </article>
 </main>

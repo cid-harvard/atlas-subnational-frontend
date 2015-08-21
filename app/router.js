@@ -13,8 +13,8 @@ export default Router.map(function() {
 
   // About
   this.resource('about', function() {
-    this.resource('project-description');
-    this.resource('glossary');
+    this.route('project-description', { path: 'project-description'});
+    this.route('glossary', { path: 'glossary'});
   });
 
   // Graph Builder

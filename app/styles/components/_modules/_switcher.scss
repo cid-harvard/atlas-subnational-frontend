@@ -4,14 +4,14 @@
 *
 **/
 
-.viewswitch {
+.switcher {
   width: $sidebarWidth;
   text-align: right;
   position: absolute;
   left: 0;
 }
 
-.viewswitch__item {
+.switcher__item {
   border-bottom: 1px solid $colorBlack;
   padding: $fontSmall 0 $fontSmall $baseSpace*1.5;
   &:last-of-type {
@@ -20,7 +20,7 @@
   }
 }
 
-.viewswitch__item__link {
+.switcher__item__link {
   transition: $animationTime color $animationEasing;
   color: $colorGray;
   font-size: $fontSmall;
@@ -30,6 +30,6 @@
   }
 }
 
-.viewswitch__item--is--active {
+.switcher__item--is--active {
   color: $colorBlack;
 }

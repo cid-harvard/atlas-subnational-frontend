@@ -15,7 +15,7 @@
 .section__head {
   font-size: $fontXLarge;
   line-height: $fontXLarge;
-  margin-bottom: $baseSpace / 2;
+  margin-bottom: $baseSpace;
   font-family: $sansAlt;
 }
 
@@ -33,17 +33,9 @@
   font-weight: 300;
 }
 
-.section__intro {
+.section__p {
   width: 66.66%;
   max-width: 70rem;
   margin-bottom: $baseSpace;
-}
-
-
-// Recirc
-.section__head--recirc {
-  margin: 0 0 $baseSpace 0;
-  color: $colorWhite;
-  @include offset-text;
 }
 

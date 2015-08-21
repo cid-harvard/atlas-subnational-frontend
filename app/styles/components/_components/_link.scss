@@ -9,10 +9,9 @@ a {
 }
 
 .link--stream {
-  color: $colorGrayDark;
-  font-weight: 100;
-  &:hover {
-    color: $colorBlack;
+  color: $colorNavy600;
+  &:hover, &:focus, &:active {
+    color: $colorNavy800;
   }
 }
 

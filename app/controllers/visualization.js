@@ -138,7 +138,7 @@ export default Ember.Controller.extend({
     return false;
   }),
   builderNavType: computed('model.entity_type', function() {
-    return`partials/builder-questions-${this.get('model.entity_type')}`;
+    return `partials/builder-questions-${this.get('model.entity_type')}`;
   }),
   visualizationComponent: computed('visualization', function(){
     let visualization = this.get('visualization');
@@ -153,6 +153,13 @@ export default Ember.Controller.extend({
     } else if (visualization === 'geo') {
       return 'geo-map';
     }
+  }),
+  recircUrl: computed('model.entity_type', 'model.entity.code', function() {
+    let entityType = this.get('model.entity_type');
+
+    if(entityType === 'location') { return `assets/img/hero_images/${this.get('model.entity_type')}/${this.get('model.entity.code')}.jpg`; }
+    if(entityType === 'product') { return 'assets/img/hero_images/product/product_1.jpg'; }
+    if(entityType === 'industry') { return 'assets/img/hero_images/industry/industry_1.jpg'; }
   }),
   searchFilter: function(data) {
     let search = _.deburr(this.get('search'));

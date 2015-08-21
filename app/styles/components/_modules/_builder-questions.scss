@@ -54,7 +54,7 @@
 }
 
 .builder__questions__item__icon {
-  margin-right: $baseSpace;
+  margin-right: $baseSpace/2;
   min-width: 40px;
   &:before {
     transition: color $animationTime $animationEasing;

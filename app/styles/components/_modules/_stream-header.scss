@@ -20,14 +20,10 @@
 
 .stream__head {
   font-size: $fontHuge;
-  margin-bottom: $baseSpace;
+  margin-bottom: $baseSpace * 3;
   letter-spacing: -2px;
   font-family: $sansAlt;
   line-height: 100%;
-}
-
-.stream__head--builder {
-  margin-bottom: $baseSpace * 3;
 }
 
 .stream__subhead {

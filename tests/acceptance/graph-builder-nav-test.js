@@ -59,7 +59,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
 
   //Go to product space
   click("button:contains('Change question')");
-  click("a:contains('What does the product map look like for Atlántico?')");
+  click("a:contains('What does the product space look like for Atlántico?')");
 
   andThen(function() {
     assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/similarity?endDate=2013&startDate=2013');
@@ -91,7 +91,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
 
   //Go to industry simi-map
   click("button:contains('Change question')");
-  click("a:contains('What does the industry map look like for Atlántico?')");
+  click("a:contains('What does the industry space look like for Atlántico?')");
 
   andThen(function() {
     assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/similarity?endDate=2013&startDate=2013&variable=rca');
