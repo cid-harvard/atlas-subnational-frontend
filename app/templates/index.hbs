@@ -5,13 +5,16 @@
       <h1 class="stream__head index__head">You haven't seen Colombia like this before</h1>
       <h2 class="stream__subhead">Visualize the possibilities for industries, exports and locations across Colombia.</h2>
       <form class="search__wrap pageheader__search__wrap">
-        {{input
-          class="search"
-          placeholder=( t 'pageheader.search_placeholder' )
-          value=query
-          enter='query'
-        }}
-        <button class="search__reset fa fa-close" type="reset"></button>
+        <div class="search__field__wrap pageheader__search__field__wrap">
+          {{input
+            class="search"
+            placeholder=( t 'pageheader.search_placeholder' )
+            value=query
+            enter='query'
+            required='required'
+          }}
+          <button class="search__reset fa fa-close" type="reset"></button>
+        </div>
         <input class="search__submit btn btn--standalone btn--search" type="submit" value="{{ t 'pageheader.search_link' }}" {{action 'query' query}}>
       </form>
     </header>

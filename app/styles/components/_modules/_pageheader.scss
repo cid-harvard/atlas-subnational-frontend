@@ -59,6 +59,10 @@
   }
 }
 
+.pageheader__search__wrap {
+  width: 50rem;
+}
+
 .pageheader__link {
   transition: $animationTime color $animationEasing;
   color: $colorWhite;
@@ -74,10 +78,6 @@
 .pageheader__link--is--active {
   color: $colorWhite;
   font-weight: 500;
-}
-
-.pageheader__search__wrap {
-  width: 50rem;
 }
 
 

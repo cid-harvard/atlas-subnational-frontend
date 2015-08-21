@@ -1,12 +1,14 @@
 <form class="search__wrap buildermod__highlight__wrap">
-  {{input
-    class="search"
-    placeholder=(t 'graph_builder.search.placeholder' entity=source)
-    value=searchText
-    enter='search'
-    required='required'
-  }}
-  <button class="search__reset fa fa-close" type="reset"{{action 'resetSearch'}}></button>
+  <div class="search__field__wrap">
+    {{input
+      class="search"
+      placeholder=(t 'graph_builder.search.placeholder' entity=source)
+      value=searchText
+      enter='search'
+      required='required'
+    }}
+    <button class="search__reset fa fa-close" type="reset"{{action 'resetSearch'}}></button>
+  </div>
   <input class="search__submit btn btn--standalone btn--buildermod" type="submit" value="{{t 'graph_builder.search.submit'}}" {{action 'search'}}>
 </form>
 
