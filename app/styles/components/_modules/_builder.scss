@@ -8,12 +8,6 @@
   background: $colorBrown200;
 }
 
-.builder__article  {
-  border-left: $baseSpace $colorRed solid;
-  border-image: url(../assets/img/general/border--red.svg);
-  border-image-slice: 0 100%;
-}
-
 .builder__recirc {
   width: 100%;
   margin-bottom: $baseSpace * 3;

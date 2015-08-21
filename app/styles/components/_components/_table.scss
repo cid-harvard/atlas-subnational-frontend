@@ -6,6 +6,7 @@
 
 .table {
   width: 100%;
+  margin-bottom: $baseSpace * 2;
 }
 
 .table__header,
@@ -21,79 +22,12 @@
   }
 }
 
+.table__header {
+  color: $colorBlack;
+}
+
 .table__row--body:last-of-type .table__cell {
   border-bottom-width: 0px;
-}
-
-
-// Scroller styles
-
-.table__thead--scroller,
-.table__tbody--scroller {
-  display: flex;
-  flex-direction: column;
-  flex: 0 0;
-  box-sizing:border-box;
-    overflow-y: scroll;
-}
-
-.table__thead--scroller::-webkit-scrollbar {
-  // background: transparent;
-}
-
-.table__tbody--scroller {
-  overflow-y: scroll;
-  height: 200px;
-}
-
-.table__row--scroller {
-  display: flex;
-  flex-direction: row;
-  flex: 1 0 auto;
-}
-
-.table__cell--scroller,
-.table__header--scroller {
-  display: block;
-  flex-direction: column;
-  box-sizing:border-box;
-  flex: 1 1 50px;
-}
-
-
-// Text table styles
-
-.table--text {
-  margin-top: $baseSpace * 2;
-}
-
-.table__cell--text,
-.table__header--text {
-  border-color: $colorBrown400;
-  &:nth-of-type(1) {
-    flex-grow: 2.5;
-  }
-  &:nth-of-type(3) {
-    flex-grow: 1.5;
-  }
-}
-
-.table__thead--text {
-  background: $colorBrown500;
-}
-
-.table__tbody--text {
-  background: $colorBrown300;
-}
-
-.table__header--text {
-  border-width: 0 2px 0 0;
-}
-
-.table__cell--text {
-  color: $colorGray;
-  border-color: $colorBrown200;
-  border-width: 0 2px 2px 0;
 }
 
 

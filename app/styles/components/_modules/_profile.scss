@@ -8,9 +8,3 @@
   background: $colorBrown200;
   padding-bottom: $baseSpace * 2;
 }
-
-.profile__article {
-  border-left: $baseSpace $colorRed solid;
-  border-image: url(../assets/img/general/border--red.svg);
-  border-image-slice: 0 100%;
-}
