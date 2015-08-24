@@ -8,7 +8,7 @@ import TableCell from 'ember-table/views/table-cell';
 const { computed, observer } = Ember;
 
 var SortableTableHeaderCell = HeaderCell.extend({
-  templateName: 'sortable-header-cell' ,
+  templateName: 'sortable-header-cell',
 
    // `event` here is a jQuery event
   onColumnResize: function(event, ui) {
@@ -42,6 +42,8 @@ var SortableTableCell = TableCell.extend({
 var SortableColumnMixin = Ember.Object.create({
   supportSort: true,
   sorted: 0,
+  isAscending: false,
+  isDescending: false,
   headerCellViewClass: SortableTableHeaderCell,
   tableCellViewClass: SortableTableCell
 });
@@ -168,6 +170,13 @@ export default EmberTableComponent.extend({
     //FIXME: FLEXBOX!
     this.set('_height', this.get('height'));
   },
+  clearSorting: function() {
+    let cols = this.get('columns');
+    cols.forEach(function(col) {
+      col.set('isAscending', false);
+      col.set('isDescending', false);
+    });
+  },
   actions: {
     sortByColumn: function(content){
       let key = content.key;
@@ -177,23 +186,26 @@ export default EmberTableComponent.extend({
         key = `name_short_${this.get('i18n').locale}`;
       }
       var sortFunction = function(d) {
-        if(_.isString(d[key])) { return d[key].toLowerCase();}
+        if(_.isString(d[key])) { return d[key].toLowerCase(); }
         return d[key];
       };
 
-      //0 unsorted
-      //1 sorted desc
-      //-1 sorted asc
+      //  0 unsorted
+      //  1 sorted desc
+      // -1 sorted asc
 
-      if(content.get('sorted') === 0) {
+      this.clearSorting();
+
+      if(content.get('sorted') === -1) {
         data = _.sortBy(this.get('data'), sortFunction).reverse();
+        content.set('isAscending', 0);
+        content.set('isDescending', 1);
         content.set('sorted', 1);
-      } else if(content.get('sorted') === 1) {
+      } else if(content.get('sorted') === 0 || content.get('sorted') === 1) {
         data = _.sortBy(this.get('data'), sortFunction);
+        content.set('isAscending', 1);
+        content.set('isDescending', 0);
         content.set('sorted', -1);
-      } else if(content.get('sorted') === -1) {
-        data = this.get('data');
-        content.set('sorted', 0);
       }
 
       this.set('content', data);
