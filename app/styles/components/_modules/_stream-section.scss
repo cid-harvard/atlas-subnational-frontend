@@ -6,6 +6,9 @@
 
 .stream__section {
   margin-bottom: $baseSpace * 2;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
 .section__header {

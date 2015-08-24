@@ -12,8 +12,9 @@
   margin-bottom: $baseSpace * 3;
 }
 
-.index__head {
+.stream__head.index__head {
   max-width: 100rem;
+  margin-bottom: $baseSpace;
 }
 
 .index__figure {

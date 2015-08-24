@@ -19,7 +19,7 @@
 }
 
 .stream__article--indent--left {
-  margin: $baseSpace*3 $baseSpace*3 0 0;
+  margin: $baseSpace*3 $baseSpace*3 $baseSpace*3 0;
   padding-left: $sidebarWidth;
   border-left: $baseSpace $colorRed solid;
   border-image: url(../assets/img/general/border--red.svg);
