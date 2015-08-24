@@ -59,7 +59,7 @@ export default EmberTableComponent.extend({
   selectionMode: 'mutiple',
   industryClassesMap: [
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'code', expand: true, savedWidth: 140 },
+    { key: 'code', expand: true, savedWidth: 120 },
     { key: 'avg_wage', expand: false, savedWidth: 200 },
     { key: 'wages', expand: true, savedWidth: 200 },
     { key: 'employment', expand: true, savedWidth: 200 },
@@ -68,7 +68,7 @@ export default EmberTableComponent.extend({
   ],
   productsMap: [
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'code', expand: true, savedWidth: 140 },
+    { key: 'code', expand: true, savedWidth: 120 },
     { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'export_rca', type: 'int', expand: true, savedWidth: 160 },
@@ -78,7 +78,7 @@ export default EmberTableComponent.extend({
    ],
   locationsMap: [
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'code', expand: true, savedWidth: 140 },
+    { key: 'code', expand: true, savedWidth: 120 },
     { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'export_rca', type: 'int', expand: true, savedWidth: 160 },
@@ -86,17 +86,17 @@ export default EmberTableComponent.extend({
    ],
   industriesMap: [
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'code', expand: true, savedWidth: 140 },
-    { key: 'wages', type: 'int', expand: false},
+    { key: 'code', expand: true, savedWidth: 120 },
+    { key: 'wages', type: 'int', expand: true },
     { key: 'employment', type: 'int', expand: false},
     { key: 'rca', type: 'int', expand: true},
     { key: 'year' , expand: false, type: 'int'},
     { key: 'complexity' , expand: false, type: 'int'}
    ],
   departmentsMap: [
-    { key: 'name', expand: true, savedWidth: 300 },
+    { key: 'name', expand: true, savedWidth: 200 },
     { key: 'code', expand: false },
-    { key: 'wages', type: 'int', expand: false},
+    { key: 'wages', type: 'int', expand: true },
     { key: 'employment', type: 'int', expand: false},
     { key: 'num_establishments', type: 'int', expand: false},
     { key: 'year' , expand: false, type: 'int'},
@@ -124,11 +124,12 @@ export default EmberTableComponent.extend({
   generateColumnDefinition: function(column) {
     return ColumnDefinition.create(SortableColumnMixin, {
       canAutoResize: column.expand,
-      textAlign: 'text-align-left',
+      textAlign: column.type === 'int' ? 'text-align-right' : 'text-align-left',
       savedWidth: column.savedWidth ? column.savedWidth : 160,
       headerCellName: `graph_builder.table.${column.key}`,
       getCellContent: this.generateCellContent(column),
       isResizable: true,
+      isNumber: '1',
       key: column.key
     });
   },
@@ -148,19 +149,18 @@ export default EmberTableComponent.extend({
   },
   formatNumber: function(number, key) {
     if(key === 'wages' || key === 'avg_wage') {
-      return numeral(number).format('$ 0.00a');
+      return '$ ' + numeral(number).divide(1000).format('0,0');
     } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'population'){
       return numeral(number).format('0.00a');
     } else if(key === 'employment'){
-      let format = parseInt(number) > 1000 ?  '0.00a' : '0';
-      return numeral(parseInt(number)).format(format);
+      return numeral(Math.ceil(number)).format('0,0');
     } else if(key === 'num_establishments'){
       if(parseInt(number) < 6) { return ' < 5'; }
-      return numeral(number).format('0.00a');
+      return numeral(number).format('0,0');
     } else if(key === 'employment_growth'){
       return numeral(number).format('0.00%');
     } else if(key === 'export_value' || key === 'import_value') {
-      return '$' + numeral(number).format('0.0a') + ' USD';
+      return '$ ' + numeral(number).format('0,0');
     } else {
       return number;
     }
