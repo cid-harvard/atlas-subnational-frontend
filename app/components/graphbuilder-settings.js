@@ -6,6 +6,10 @@ export default Ember.Component.extend({
     this.set('newStartDate', this.get('startDate'));
     this.set('newEndDate', this.get('endDate'));
   },
+  updateDates: Ember.observer('startDate', 'endDate', function(){
+    this.set('newStartDate', this.get('startDate'));
+    this.set('newEndDate', this.get('endDate'));
+  }),
   actions: {
     changeStart() {
       let selectedEl = this.$('select[data-dateIndex="start"]')[0];
@@ -32,9 +36,6 @@ export default Ember.Component.extend({
         this.set('startDate', this.get('newStartDate'));
         this.set('endDate', this.get('newEndDate'));
       }
-
-      this.set('newStartDate', this.get('startDate'));
-      this.set('newEndDate', this.get('endDate'));
     }
   }
 });
