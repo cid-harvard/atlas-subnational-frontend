@@ -40,26 +40,28 @@ export default EmberTableComponent.extend({
     { key: 'num_establishments', expand: true, savedWidth: 200 },
   ],
   productsMap: [
-    { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'export_value', type: 'int', expand: false, savedWidth: 140 },
-    { key: 'import_value', type: 'int', expand: false, savedWidth: 140 },
-    { key: 'export_rca', type: 'int', expand: false, savedWidth: 120 },
+    { key: 'name', expand: false, savedWidth: 300 },
+    { key: 'code', expand: false },
+    { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
+    { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
+    { key: 'export_rca', type: 'int', expand: true, savedWidth: 120 },
     { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
     { key: 'complexity' , expand: false, type: 'int', savedWidth: 120 },
     { key: 'distance' , expand: true, type: 'int', savedWidth: 120 }
    ],
   locationsMap: [
-    { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'export_value', type: 'int', expand: false, savedWidth: 140 },
-    { key: 'import_value', type: 'int', expand: false, savedWidth: 140 },
-    { key: 'export_rca', type: 'int', expand: false, savedWidth: 100 },
+    { key: 'name', expand: false, savedWidth: 300 },
+    { key: 'code', expand: false },
+    { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
+    { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
+    { key: 'export_rca', type: 'int', expand: true, savedWidth: 120 },
     { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
    ],
   industriesMap: [
     { key: 'name', expand: true, savedWidth: 300 },
     { key: 'wages', type: 'int', expand: false},
     { key: 'employment', type: 'int', expand: false},
-    { key: 'rca', type: 'int', expand: false},
+    { key: 'rca', type: 'int', expand: true},
     { key: 'year' , expand: false, type: 'int'},
     { key: 'complexity' , expand: false, type: 'int'}
    ],
@@ -141,14 +143,30 @@ export default EmberTableComponent.extend({
       let key = content.key;
       this.set('content', []);
       let data;
-
-      if(content.get('sorted')) {
-        data = _.sortBy(this.get('data'), function(d) { return -d[key]; });
-      } else {
-        data = this.get('data');
+      if(key === 'name') {
+        key = `name_short_${this.get('i18n').locale}`;
       }
+      var sortFunction = function(d) {
+        if(_.isString(d[key])) { return d[key].toLowerCase();}
+        return d[key];
+      };
+
+      //0 unsorted
+      //1 sorted desc
+      //-1 sorted asc
+
+      if(content.get('sorted') === 0) {
+        data = _.sortBy(this.get('data'), sortFunction).reverse();
+        content.set('sorted', 1);
+      } else if(content.get('sorted') === 1) {
+        data = _.sortBy(this.get('data'), sortFunction);
+        content.set('sorted', -1);
+      } else if(content.get('sorted') === -1) {
+        data = this.get('data');
+        content.set('sorted', 0);
+      }
+
       this.set('content', data);
-      content.toggleProperty('sorted');
     }
  }
 });
