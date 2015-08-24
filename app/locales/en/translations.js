@@ -57,6 +57,7 @@ export default {
     'table': {
       'name': 'Name',
       'export_value': 'Exports',
+      'code': 'Code',
       'import_value': 'Imports',
       'export_rca': 'RCA',
       'rca': 'RCA',

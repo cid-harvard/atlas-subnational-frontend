@@ -17,7 +17,7 @@ var SortableTableCell = TableCell.extend({
 
 var SortableColumnMixin = Ember.Object.create({
   supportSort: true,
-  sorted: false,
+  sorted: 0,
   headerCellViewClass: SortableTableHeaderCell,
   tableCellViewClass: SortableTableCell
 });
@@ -32,8 +32,9 @@ export default EmberTableComponent.extend({
   attributeBindings: ['height'],
   selectionMode: 'mutiple',
   industryClassesMap: [
-    { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'avg_wage', expand: true, savedWidth: 200 },
+    { key: 'name', expand: false, savedWidth: 300 },
+    { key: 'code', expand: false },
+    { key: 'avg_wage', expand: false, savedWidth: 200 },
     { key: 'wages', expand: true, savedWidth: 200 },
     { key: 'employment', expand: true, savedWidth: 200 },
     { key: 'employment_growth', expand: true, savedWidth: 300 },
@@ -58,7 +59,8 @@ export default EmberTableComponent.extend({
     { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
    ],
   industriesMap: [
-    { key: 'name', expand: true, savedWidth: 300 },
+    { key: 'name', expand: false, savedWidth: 300 },
+    { key: 'code', expand: false },
     { key: 'wages', type: 'int', expand: false},
     { key: 'employment', type: 'int', expand: false},
     { key: 'rca', type: 'int', expand: true},
@@ -66,7 +68,8 @@ export default EmberTableComponent.extend({
     { key: 'complexity' , expand: false, type: 'int'}
    ],
   departmentsMap: [
-    { key: 'name', expand: true, savedWidth: 300 },
+    { key: 'name', expand: false, savedWidth: 300 },
+    { key: 'code', expand: false },
     { key: 'wages', type: 'int', expand: false},
     { key: 'employment', type: 'int', expand: false},
     { key: 'num_establishments', type: 'int', expand: false},
@@ -99,6 +102,7 @@ export default EmberTableComponent.extend({
       savedWidth: column.savedWidth ? column.savedWidth : 160,
       headerCellName: `graph_builder.table.${column.key}`,
       getCellContent: this.generateCellContent(column),
+      isResizable: false,
       key: column.key
     });
   },
@@ -108,7 +112,9 @@ export default EmberTableComponent.extend({
         let number = row.get(column.key);
         return this.formatNumber(number, column.key);
       } else if(column.key === 'name'){
-        return row.get(`name_short_${this.get('i18n').locale}`) || row.get('code');
+        return row.get(`name_short_${this.get('i18n').locale}`);
+      } else if(column.key === 'code'){
+        return row.get('code');
       } else {
         return 'N/A';
       }
@@ -123,7 +129,7 @@ export default EmberTableComponent.extend({
       let format = parseInt(number) > 1000 ?  '0.00a' : '0';
       return numeral(parseInt(number)).format(format);
     } else if(key === 'num_establishments'){
-       if(parseInt(number) < 4) { return '1 - 3'; }
+      if(parseInt(number) < 6) { return ' < 5'; }
       return numeral(number).format('0.00a');
     } else if(key === 'employment_growth'){
       return numeral(number).format('0.00%');
