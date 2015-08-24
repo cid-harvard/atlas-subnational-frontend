@@ -6,9 +6,12 @@ export default Ember.Component.extend({
     this.set('newStartDate', this.get('startDate'));
     this.set('newEndDate', this.get('endDate'));
   },
+  updateDates: Ember.observer('startDate', 'endDate', function(){
+    this.set('newStartDate', this.get('startDate'));
+    this.set('newEndDate', this.get('endDate'));
+  }),
   actions: {
     changeStart() {
-      // TODO: DRY this out & move the date picker into its own component so many can exist on one page
       let selectedEl = this.$('select[data-dateIndex="start"]')[0];
       let selectedIndex = selectedEl.selectedIndex;
       let content = this.get('dateRange');
@@ -33,7 +36,6 @@ export default Ember.Component.extend({
         this.set('startDate', this.get('newStartDate'));
         this.set('endDate', this.get('newEndDate'));
       }
-
     }
   }
 });

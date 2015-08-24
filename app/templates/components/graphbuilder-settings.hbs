@@ -3,7 +3,7 @@
       <label for="settings__input--time" class="settings__input">{{t 'graph_builder.settings.change_time'}}</label>
       <select class="settings__input--select" data-dateIndex="start" {{action 'changeStart' on='change'}}>
         {{#each dateRange key="@index" as |item|}}
-          <option value="{{item}}" selected={{is-equal item startDate}}>
+          <option value="{{item}}" selected={{is-equal item newStartDate}}>
             {{item}}
           </option>
         {{/each}}
@@ -11,7 +11,7 @@
       <span class="settings__input__text">{{t 'graph_builder.settings.to'}}</span>
       <select class="settings__input--select" data-dateIndex="end" {{action 'changeEnd' on='change'}}>
         {{#each dateRange key="@index" as |item|}}
-          <option value="{{item}}" selected={{is-equal item endDate}}>
+          <option value="{{item}}" selected={{is-equal item newEndDate}}>
             {{item}}
           </option>
         {{/each}}

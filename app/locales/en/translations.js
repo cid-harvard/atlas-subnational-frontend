@@ -57,9 +57,10 @@ export default {
     'table': {
       'name': 'Name',
       'export_value': 'Exports',
+      'code': 'Code',
       'import_value': 'Imports',
-      'export_rca': 'RCA',
-      'rca': 'RCA',
+      'export_rca': 'Revealed Comparative Advantage',
+      'rca': 'Revealed Comparative Advantage',
       'wages': 'Wages',
       'employment': 'Employment',
       'avg_wage': 'Average Wage',

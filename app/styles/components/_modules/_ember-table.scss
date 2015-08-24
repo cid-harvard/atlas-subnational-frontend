@@ -31,6 +31,9 @@
 .ember-table-header-cell .ember-table-content-container .ember-table-content {
   font-weight: 300;
   padding: $baseSpace/2 $baseSpace;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .ember-table-body-container .ember-table-content, .ember-table-footer-container .ember-table-content {

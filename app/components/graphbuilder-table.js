@@ -8,7 +8,31 @@ import TableCell from 'ember-table/views/table-cell';
 const { computed, observer } = Ember;
 
 var SortableTableHeaderCell = HeaderCell.extend({
-  templateName: 'sortable-header-cell'
+  templateName: 'sortable-header-cell' ,
+
+   // `event` here is a jQuery event
+  onColumnResize: function(event, ui) {
+    var newWidth = Math.round(ui.size.width);
+    if (this.get('tableComponent.columnMode') === 'standard') {
+      this.get('column').resize(newWidth);
+      this.set('tableComponent.columnsFillTable', false);
+    } else {
+      var diff = this.get('width') - newWidth;
+      this.get('column').resize(newWidth);
+      this.get('nextResizableColumn').resize(
+          this.get('nextResizableColumn.width') + diff);
+    }
+
+    this.elementSizeDidChange();
+
+    // Trigger the table resize (and redraw of layout) when resizing is done
+    if (event.type === 'resizestop') {
+      this.get('tableComponent').elementSizeDidChange();
+    }
+
+    this.get('tableComponent').sendAction('onColumnResized', this.get('column'), newWidth);
+  }
+
 });
 
 var SortableTableCell = TableCell.extend({
@@ -17,7 +41,7 @@ var SortableTableCell = TableCell.extend({
 
 var SortableColumnMixin = Ember.Object.create({
   supportSort: true,
-  sorted: false,
+  sorted: 0,
   headerCellViewClass: SortableTableHeaderCell,
   tableCellViewClass: SortableTableCell
 });
@@ -28,11 +52,13 @@ export default EmberTableComponent.extend({
   rowHeight: 50,
   minHeaderHeight: 50,
   height: 400,
+  enableContentSelection: true,
   attributeBindings: ['height'],
-  selectionMode: 'none',
+  selectionMode: 'mutiple',
   industryClassesMap: [
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'avg_wage', expand: true, savedWidth: 200 },
+    { key: 'code', expand: true, savedWidth: 140 },
+    { key: 'avg_wage', expand: false, savedWidth: 200 },
     { key: 'wages', expand: true, savedWidth: 200 },
     { key: 'employment', expand: true, savedWidth: 200 },
     { key: 'employment_growth', expand: true, savedWidth: 300 },
@@ -40,30 +66,34 @@ export default EmberTableComponent.extend({
   ],
   productsMap: [
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'export_value', type: 'int', expand: false, savedWidth: 140 },
-    { key: 'import_value', type: 'int', expand: false, savedWidth: 140 },
-    { key: 'export_rca', type: 'int', expand: false, savedWidth: 120 },
+    { key: 'code', expand: true, savedWidth: 140 },
+    { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
+    { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
+    { key: 'export_rca', type: 'int', expand: true, savedWidth: 160 },
     { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
     { key: 'complexity' , expand: false, type: 'int', savedWidth: 120 },
     { key: 'distance' , expand: true, type: 'int', savedWidth: 120 }
    ],
   locationsMap: [
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'export_value', type: 'int', expand: false, savedWidth: 140 },
-    { key: 'import_value', type: 'int', expand: false, savedWidth: 140 },
-    { key: 'export_rca', type: 'int', expand: false, savedWidth: 100 },
+    { key: 'code', expand: true, savedWidth: 140 },
+    { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
+    { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
+    { key: 'export_rca', type: 'int', expand: true, savedWidth: 160 },
     { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
    ],
   industriesMap: [
     { key: 'name', expand: true, savedWidth: 300 },
+    { key: 'code', expand: true, savedWidth: 140 },
     { key: 'wages', type: 'int', expand: false},
     { key: 'employment', type: 'int', expand: false},
-    { key: 'rca', type: 'int', expand: false},
+    { key: 'rca', type: 'int', expand: true},
     { key: 'year' , expand: false, type: 'int'},
     { key: 'complexity' , expand: false, type: 'int'}
    ],
   departmentsMap: [
     { key: 'name', expand: true, savedWidth: 300 },
+    { key: 'code', expand: false },
     { key: 'wages', type: 'int', expand: false},
     { key: 'employment', type: 'int', expand: false},
     { key: 'num_establishments', type: 'int', expand: false},
@@ -72,12 +102,11 @@ export default EmberTableComponent.extend({
   tableMap: computed('source', function() {
     let source = this.get('source');
     let map = this.get(`${source}Map`);
-    if(this.get('isMultipleYears') && this.get('visualization') === 'similarity') {
+    if(this.get('isSingleYear')) {
       map = _.reject(map, {key: 'year'});
     }
     return map;
   }),
-
   columns: computed('tableMap', function() {
     return this.get('tableMap').map((column) => {
       return this.generateColumnDefinition(column);
@@ -97,6 +126,7 @@ export default EmberTableComponent.extend({
       savedWidth: column.savedWidth ? column.savedWidth : 160,
       headerCellName: `graph_builder.table.${column.key}`,
       getCellContent: this.generateCellContent(column),
+      isResizable: true,
       key: column.key
     });
   },
@@ -106,7 +136,9 @@ export default EmberTableComponent.extend({
         let number = row.get(column.key);
         return this.formatNumber(number, column.key);
       } else if(column.key === 'name'){
-        return row.get(`name_short_${this.get('i18n').locale}`) || row.get('code');
+        return row.get(`name_short_${this.get('i18n').locale}`);
+      } else if(column.key === 'code'){
+        return row.get('code');
       } else {
         return 'N/A';
       }
@@ -121,7 +153,7 @@ export default EmberTableComponent.extend({
       let format = parseInt(number) > 1000 ?  '0.00a' : '0';
       return numeral(parseInt(number)).format(format);
     } else if(key === 'num_establishments'){
-       if(parseInt(number) < 4) { return '1 - 3'; }
+      if(parseInt(number) < 6) { return ' < 5'; }
       return numeral(number).format('0.00a');
     } else if(key === 'employment_growth'){
       return numeral(number).format('0.00%');
@@ -131,19 +163,40 @@ export default EmberTableComponent.extend({
       return number;
     }
   },
+  didInsertElement: function() {
+    this._super();
+    //FIXME: FLEXBOX!
+    this.set('_height', this.get('height'));
+  },
   actions: {
     sortByColumn: function(content){
       let key = content.key;
       this.set('content', []);
       let data;
-
-      if(content.get('sorted')) {
-        data = _.sortBy(this.get('data'), function(d) { return -d[key]; });
-      } else {
-        data = this.get('data');
+      if(key === 'name') {
+        key = `name_short_${this.get('i18n').locale}`;
       }
+      var sortFunction = function(d) {
+        if(_.isString(d[key])) { return d[key].toLowerCase();}
+        return d[key];
+      };
+
+      //0 unsorted
+      //1 sorted desc
+      //-1 sorted asc
+
+      if(content.get('sorted') === 0) {
+        data = _.sortBy(this.get('data'), sortFunction).reverse();
+        content.set('sorted', 1);
+      } else if(content.get('sorted') === 1) {
+        data = _.sortBy(this.get('data'), sortFunction);
+        content.set('sorted', -1);
+      } else if(content.get('sorted') === -1) {
+        data = this.get('data');
+        content.set('sorted', 0);
+      }
+
       this.set('content', data);
-      content.toggleProperty('sorted');
     }
  }
 });
