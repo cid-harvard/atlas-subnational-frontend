@@ -32,7 +32,7 @@ export default EmberTableComponent.extend({
   attributeBindings: ['height'],
   selectionMode: 'mutiple',
   industryClassesMap: [
-    { key: 'name', expand: false, savedWidth: 300 },
+    { key: 'name', expand: true, savedWidth: 300 },
     { key: 'code', expand: false },
     { key: 'avg_wage', expand: false, savedWidth: 200 },
     { key: 'wages', expand: true, savedWidth: 200 },
@@ -41,7 +41,7 @@ export default EmberTableComponent.extend({
     { key: 'num_establishments', expand: true, savedWidth: 200 },
   ],
   productsMap: [
-    { key: 'name', expand: false, savedWidth: 300 },
+    { key: 'name', expand: true, savedWidth: 300 },
     { key: 'code', expand: false },
     { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
@@ -51,7 +51,7 @@ export default EmberTableComponent.extend({
     { key: 'distance' , expand: true, type: 'int', savedWidth: 120 }
    ],
   locationsMap: [
-    { key: 'name', expand: false, savedWidth: 300 },
+    { key: 'name', expand: true, savedWidth: 300 },
     { key: 'code', expand: false },
     { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
@@ -59,7 +59,7 @@ export default EmberTableComponent.extend({
     { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
    ],
   industriesMap: [
-    { key: 'name', expand: false, savedWidth: 300 },
+    { key: 'name', expand: true, savedWidth: 300 },
     { key: 'code', expand: false },
     { key: 'wages', type: 'int', expand: false},
     { key: 'employment', type: 'int', expand: false},
@@ -68,7 +68,7 @@ export default EmberTableComponent.extend({
     { key: 'complexity' , expand: false, type: 'int'}
    ],
   departmentsMap: [
-    { key: 'name', expand: false, savedWidth: 300 },
+    { key: 'name', expand: true, savedWidth: 300 },
     { key: 'code', expand: false },
     { key: 'wages', type: 'int', expand: false},
     { key: 'employment', type: 'int', expand: false},
@@ -102,7 +102,7 @@ export default EmberTableComponent.extend({
       savedWidth: column.savedWidth ? column.savedWidth : 160,
       headerCellName: `graph_builder.table.${column.key}`,
       getCellContent: this.generateCellContent(column),
-      isResizable: false,
+      isResizable: true,
       key: column.key
     });
   },
