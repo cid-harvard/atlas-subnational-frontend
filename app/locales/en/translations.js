@@ -64,7 +64,7 @@ export default {
       'employment': 'Employment',
       'avg_wage': 'Average Wage',
       'employment_growth': 'Employment Growth (2008-2012)',
-      'num_establishments': 'Number of Firms',
+      'num_establishments': 'Firms',
       'year': 'Year',
       'complexity': 'Complexity',
       'distance': 'Distance'
@@ -159,7 +159,7 @@ export default {
   'location.show': {
     'overview': 'Overview',
     'bullet.gdp_grow_rate': 'GDP grew {{gdpGrowth}} between {{yearRange}}',
-    'bullet.gdp_pc': '{{name}} has a GDP per capita at {{lastGdpPerCapita}}',
+    'bullet.gdp_pc': '{{name}} has a GDP per capita of {{lastGdpPerCapita}}',
     'bullet.last_pop': 'The population is {{lastPop}}',
     'all_departments': 'Compared to the other departments',
     'value': 'Value',

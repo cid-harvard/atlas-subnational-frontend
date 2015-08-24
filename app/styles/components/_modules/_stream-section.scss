@@ -17,6 +17,7 @@
   line-height: $fontXLarge;
   margin-bottom: $baseSpace;
   font-family: $sansAlt;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .section__head--spacey {

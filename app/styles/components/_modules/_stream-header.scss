@@ -24,6 +24,7 @@
   letter-spacing: -2px;
   font-family: $sansAlt;
   line-height: 100%;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .stream__subhead {

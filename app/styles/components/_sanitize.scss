@@ -58,6 +58,9 @@ input {
       -webkit-appearance: none; // Safari 8+
     }
   }
+  &:invalid {
+    box-shadow: none;
+  }
 }
 
 main {

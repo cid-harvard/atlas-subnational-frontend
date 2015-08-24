@@ -27,9 +27,9 @@
 }
 
 .index__featuredin__item {
-  width: 20%;
   text-align: center;
   padding: 0 $baseSpace/2;
+  flex: 1;
   &:first-of-type {
     padding: 0 $baseSpace 0 0;
   }
@@ -39,8 +39,7 @@
 }
 
 .index__featuredin__img {
-  max-width: 100%;
-  max-height: $baseSpace*4;
+  width: 100%;
 }
 
 // Crystal ball questions

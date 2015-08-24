@@ -30,15 +30,17 @@
         </p>
       </div>
       <form class="search__wrap pageheader__search__wrap">
-        {{input
-          class="search"
-          placeholder=( t 'pageheader.search_placeholder' )
-          value=query
-          enter='query'
-          data-search-input=''
-        }}
-        <button class="search__reset fa fa-close" type="reset">
-        </button>
+        <div class="search__field__wrap pageheader__search__field__wrap">
+          {{input
+            class="search"
+            placeholder=( t 'pageheader.search_placeholder' )
+            value=query
+            enter='query'
+            required='required'
+            data-search-input=''
+          }}
+          <button class="search__reset fa fa-close" type="reset"></button>
+        </div>
         <input class="search__submit btn btn--standalone btn--search"
           data-search
           type="submit"
