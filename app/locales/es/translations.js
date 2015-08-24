@@ -64,7 +64,7 @@ export default {
       'employment': 'Empleo',
       'avg_wage': 'Salario medio',
       'employment_growth': 'El crecimiento del empleo (2008–2012)',
-      'num_establishments': 'Número de empresas',
+      'num_establishments': 'Empresas',
       'year': 'Año',
       'complexity': 'Complejidad',
       'distance': 'Distancia'
