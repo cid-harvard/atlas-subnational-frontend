@@ -12,7 +12,7 @@
     background: $colorBrown300;
     border-left-color: $colorBrown300;
     .tool__btn__icon:before {
-      content: '\f00d';
+      content: $fa-var-remove;
     }
   }
   .buildermod__tool--changegraph {
@@ -35,7 +35,7 @@
     background: $colorBrown300;
     border-left-color: $colorBrown300;
     .tool__btn__icon:before {
-      content: '\f00d';
+      content: $fa-var-remove;
     }
   }
   .buildermod__vizwrap {
@@ -55,7 +55,7 @@
     background: $colorBrown300;
     border-left-color: $colorBrown300;
     .tool__btn__icon:before {
-      content: '\f00d';
+      content: $fa-var-remove;
     }
   }
   .buildermod__vizwrap {

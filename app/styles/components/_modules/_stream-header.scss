@@ -36,7 +36,7 @@
   display: inline-block;
   margin-right: $baseSpace / 2;
   &:after {
-    content: '>';
+    content: '/';
     margin-left: $baseSpace / 2;
     color: $colorGray;
   }
