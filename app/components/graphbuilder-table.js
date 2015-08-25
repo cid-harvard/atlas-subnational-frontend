@@ -19,8 +19,7 @@ var SortableTableHeaderCell = HeaderCell.extend({
     } else {
       var diff = this.get('width') - newWidth;
       this.get('column').resize(newWidth);
-      this.get('nextResizableColumn').resize(
-          this.get('nextResizableColumn.width') + diff);
+      this.get('nextResizableColumn').resize(this.get('nextResizableColumn.width') + diff);
     }
 
     this.elementSizeDidChange();
@@ -36,8 +35,7 @@ var SortableTableHeaderCell = HeaderCell.extend({
 });
 
 var SortableTableCell = TableCell.extend({
-  templateName: 'sortable-cell',
-  classNameBindings: 'column.isParent'
+  templateName: 'sortable-cell'
 });
 
 var SortableColumnMixin = Ember.Object.create({
@@ -114,11 +112,6 @@ export default EmberTableComponent.extend({
     }
     return map;
   }),
-  cells: computed('tableMap', function() {
-    return this.get('tableMap').map((column) => {
-      return this.generateColumnDefinition(column);
-    });
-  }),
   columns: computed('tableMap', function() {
     return this.get('tableMap').map((column) => {
       return this.generateColumnDefinition(column);
@@ -140,7 +133,6 @@ export default EmberTableComponent.extend({
       getCellContent: this.generateCellContent(column),
       isResizable: true,
       isNumber: '1',
-      isParent: column.isParentCol === true ? 'ember-table-content-is-parent' : '',
       key: column.key
     });
   },
@@ -152,7 +144,10 @@ export default EmberTableComponent.extend({
       } else if(column.key === 'name'){
         return row.get(`name_short_${this.get('i18n').locale}`);
       } else if(column.key === 'parent'){
-        return row.get(`parent_name_${this.get('i18n').locale}`);
+        // Forgive me, Father
+        let color = row.get('color');
+        let testSpan = Ember.String.htmlSafe('<i class="ember-table-color-marker" style=background-color:' + color + '></i>');
+        return testSpan + row.get(`parent_name_${this.get('i18n').locale}`);
       } else if(column.key === 'code'){
         return row.get('code');
       } else {
