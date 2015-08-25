@@ -68,7 +68,7 @@ export default EmberTableComponent.extend({
   productsMap: [
     { key: 'code', expand: true, savedWidth: 120 },
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'parent', isParentCol: true, expand: true, savedWidth: 300 },
+    { key: 'parent', expand: true, savedWidth: 300 },
     { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
     { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
@@ -88,6 +88,7 @@ export default EmberTableComponent.extend({
   industriesMap: [
     { key: 'code', expand: true, savedWidth: 120 },
     { key: 'name', expand: true, savedWidth: 300 },
+    { key: 'parent', expand: true, savedWidth: 300 },
     { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
     { key: 'wages', type: 'int', expand: true},
     { key: 'employment', type: 'int', expand: false},
