@@ -102,6 +102,12 @@ export default EmberTableComponent.extend({
     { key: 'employment', type: 'int', expand: false},
     { key: 'num_establishments', type: 'int', expand: false},
    ],
+  occupationsMap: [
+    { key: 'name', expand: true, savedWidth: 200 },
+    { key: 'code', expand: false },
+    { key: 'average_wages', type: 'int', expand: true },
+    { key: 'num_vacancies', type: 'int', expand: true },
+  ],
   tableMap: computed('source', function() {
     let source = this.get('source');
     let map = this.get(`${source}Map`);
@@ -154,7 +160,7 @@ export default EmberTableComponent.extend({
     };
   },
   formatNumber: function(number, key) {
-    if(key === 'wages' || key === 'avg_wage') {
+    if(key === 'wages' || key === 'avg_wage' || key === 'average_wages') {
       return numeral(number).divide(1000).format('0,0');
     } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'population'){
       return numeral(number).format('0.00a');
