@@ -61,7 +61,7 @@ export default {
       'import_value': 'Imports, USD',
       'export_rca': 'Revealed Comparative Advantage',
       'rca': 'Revealed Comparative Advantage',
-      'wages': 'Total Wages (thousands, COP)',
+      'wages': 'Total Wages, COP (in thousands)',
       'employment': 'Employment',
       'avg_wage': 'Average Wage',
       'employment_growth': 'Employment Growth (2008-2012)',

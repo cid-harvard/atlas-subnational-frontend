@@ -149,7 +149,7 @@ export default EmberTableComponent.extend({
   },
   formatNumber: function(number, key) {
     if(key === 'wages' || key === 'avg_wage') {
-      return '$ ' + numeral(number).divide(1000).format('0,0');
+      return numeral(number).divide(1000).format('0,0');
     } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'population'){
       return numeral(number).format('0.00a');
     } else if(key === 'employment'){
@@ -160,7 +160,7 @@ export default EmberTableComponent.extend({
     } else if(key === 'employment_growth'){
       return numeral(number).format('0.00%');
     } else if(key === 'export_value' || key === 'import_value') {
-      return '$ ' + numeral(number).format('0,0');
+      return numeral(number).format('0,0');
     } else {
       return number;
     }

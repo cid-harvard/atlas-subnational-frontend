@@ -61,7 +61,7 @@ export default {
       'code': 'Code',
       'export_rca': 'Ventaja comparativa revelada',
       'rca': 'Ventaja comparativa revelada',
-      'wages': 'Salarios totales pagados (mil, COP)',
+      'wages': 'Salarios totales pagados, COP (mil)',
       'employment': 'Empleo',
       'avg_wage': 'Salario medio',
       'employment_growth': 'El crecimiento del empleo (2008–2012)',
