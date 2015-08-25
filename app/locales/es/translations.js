@@ -97,7 +97,9 @@ export default {
       'rca': 'Ventaja comparativa revelada',
       'wages': 'Salarios totales pagados, COP (mil)',
       'employment': 'Empleo',
-      'avg_wage': 'Salario medio',
+      'num_vacancies': 'Number of Vacancies',
+      'avg_wage': 'Salario medio, COP (mil)',
+      'average_wages': 'Salario medio, COP (mil)',
       'employment_growth': 'El crecimiento del empleo (2008–2012)',
       'num_establishments': 'Empresas',
       'year': 'Año',
@@ -128,7 +130,8 @@ export default {
       'industry': {
         'departments.employment': '¿Cuando en Colombia no {{name}} emplea a más gente?',
         'departments.wages': '¿Cuando en Colombia no {{name}} paga los salarios más altos del total?',
-        'departments.wages_avg': '¿Cuando en Colombia no {{name}} paga los salarios más altos por trabajador?'
+        'departments.wages_avg': '¿Cuando en Colombia no {{name}} paga los salarios más altos por trabajador?',
+        'occupations.num_vacancies': 'What occupations are demanded by {{name}}?'
       },
       'product': {
         'locations.export_value': '¿Qué lugares en Colombia exportar {{name}}?',
@@ -175,6 +178,7 @@ export default {
         'departments.employment': 'Empleo total',
         'departments.wages': 'Salarios totales, COP',
         'departments.wage_avg': 'Salarios promedio, COP',
+        'occupations.num_vacancies': 'Total vacancies'
       },
       'product': {
         'locations.export_value': 'Total',
