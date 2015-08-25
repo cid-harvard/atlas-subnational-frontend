@@ -56,6 +56,7 @@ export default {
     'view_more': 'Muestre más',
     'table': {
       'name': 'Nombre',
+      'parent': 'TKTK',
       'export_value': 'Exportaciones, USD',
       'import_value': 'Importaciones, USD',
       'code': 'Code',

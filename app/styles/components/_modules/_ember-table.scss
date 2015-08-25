@@ -28,6 +28,16 @@
   font-size: $fontSmall;
 }
 
+.ember-table-content-is-parent span:before {
+  content: '';
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
+  margin-right: 2px;
+  background-color: #69b6d5;
+}
+
 .ember-table-header-cell .ember-table-content-container .ember-table-content {
   font-weight: 300;
   padding: $baseSpace/2 $baseSpace;
