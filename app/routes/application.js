@@ -15,6 +15,7 @@ export default Ember.Route.extend({
     var industriesHierarchy = Ember.$.getJSON(apiURL+'/metadata/industries/hierarchy?from_level=4digit&to_level=section');
     var productParentMetadata = Ember.$.getJSON(apiURL+'/metadata/products/?level=section');
     var industryParentMetadata = Ember.$.getJSON(apiURL+'/metadata/industries/?level=section');
+    var occupationsMetadata = Ember.$.getJSON(apiURL+'/metadata/occupations/');
 
     var promises = [
       products4digit,
@@ -23,7 +24,8 @@ export default Ember.Route.extend({
       industriesClass,
       industriesHierarchy,
       productParentMetadata,
-      industryParentMetadata
+      industryParentMetadata,
+      occupationsMetadata,
     ];
 
     return RSVP.allSettled(promises).then(function(array) {
@@ -34,6 +36,7 @@ export default Ember.Route.extend({
       let industriesHierarchy = array[4].value.data;
       let productParentMetadata = array[5].value.data;
       let industryParentMetadata = array[6].value.data;
+      let occupationsMetadata = array[7].value.data;
 
       // Finds the entity with the `1st digit` that matches
       // sets `group` to the `1st digit code`
@@ -69,7 +72,8 @@ export default Ember.Route.extend({
       return {
         products: _.indexBy(productsMetadata, 'id'),
         locations: _.indexBy(locationsMetadata, 'id'),
-        industries: _.indexBy(industriesMetadata, 'id')
+        industries: _.indexBy(industriesMetadata, 'id'),
+        occupations: _.indexBy(occupationsMetadata, 'id')
       };
     });
   },
