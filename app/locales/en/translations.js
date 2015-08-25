@@ -64,7 +64,9 @@ export default {
       'rca': 'Revealed Comparative Advantage',
       'wages': 'Total Wages, COP (in thousands)',
       'employment': 'Employment',
-      'avg_wage': 'Average Wage',
+      'num_vacancies': 'Number of Vacancies',
+      'avg_wage': 'Average Wage, COP (in thousands)',
+      'average_wages': 'Average Wage, COP (in thousands)',
       'employment_growth': 'Employment Growth (2008-2012)',
       'num_establishments': 'Firms',
       'year': 'Year',
@@ -94,7 +96,8 @@ export default {
       'industry': {
         'departments.employment': 'Where in Colombia does {{name}} employ the most people?',
         'departments.wages': 'Where in Colombia does {{name}} pay the highest total wages?',
-        'departments.wage_avg': 'Where in Colombia does {{name}} pay the highest wages per worker?'
+        'departments.wage_avg': 'Where in Colombia does {{name}} pay the highest wages per worker?',
+        'occupations.num_vacancies': 'What occupations are demanded by {{name}}?'
       },
       'product': {
         'locations.export_value': 'What places in Colombia export {{name}}?',
@@ -141,6 +144,7 @@ export default {
         'locations.employment': 'Total Employment',
         'locations.wages': 'Total Wages (COP)',
         'locations.wage_avg': 'Average Wages (COP)',
+        'occupations.num_vacancies': 'Total Vacancies'
       },
       'product': {
         'locations.export_value': 'Total',
