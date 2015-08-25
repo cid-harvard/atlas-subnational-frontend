@@ -26,6 +26,18 @@
   color: $colorBlack;
 }
 
+.table__header--is--descending:after {
+  font-family: $icon;
+  font-size: $fontTiny;
+  content: $fa-var-caret-down;
+}
+
+.table__header--is--ascending:after {
+  font-family: $icon;
+  font-size: $fontTiny;
+  content: $fa-var-caret-up;
+}
+
 .table__row--body:last-of-type .table__cell {
   border-bottom-width: 0px;
 }

@@ -55,12 +55,11 @@
 
 .builder__questions__item__icon {
   margin-right: $baseSpace/2;
-  min-width: 40px;
   &:before {
     transition: color $animationTime $animationEasing;
     color: $colorGray;
     margin: 0 auto;
-    font-size: 40px;
+    font-size: $fontLarge;
   }
 }
 
