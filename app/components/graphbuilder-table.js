@@ -198,13 +198,13 @@ export default EmberTableComponent.extend({
 
       if(content.get('sorted') === -1) {
         data = _.sortBy(this.get('data'), sortFunction).reverse();
-        content.set('isAscending', 0);
-        content.set('isDescending', 1);
+        content.set('isAscending', false);
+        content.set('isDescending', true);
         content.set('sorted', 1);
-      } else if(content.get('sorted') === 0 || content.get('sorted') === 1) {
+      } else {
         data = _.sortBy(this.get('data'), sortFunction);
-        content.set('isAscending', 1);
-        content.set('isDescending', 0);
+        content.set('isAscending', true);
+        content.set('isDescending', false);
         content.set('sorted', -1);
       }
 
