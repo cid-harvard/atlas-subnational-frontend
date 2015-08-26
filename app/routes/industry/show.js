@@ -42,13 +42,16 @@ export default Ember.Route.extend({
 
     var departments = $.getJSON(`${apiURL}/data/industry/${model.id}/participants?level=department`);
     var industries = $.getJSON(`${apiURL}/data/industry?level=division`);
+    var occupations = $.getJSON(`${apiURL}/data/industry/${model.id}/occupations/?level=minor_group`)
 
-    return RSVP.allSettled([departments, industries]).then((array) => {
+    return RSVP.allSettled([departments, industries, occupations]).then((array) => {
       var departmentsData = getWithDefault(array[0], 'value.data', []);
       var industriesData = getWithDefault(array[1], 'value.data', []);
+      var occupationsData = getWithDefault(array[2], 'value.data', []);
 
       let locationsMetadata = this.modelFor('application').locations;
       let industriesMetadata = this.modelFor('application').industries;
+      let occupationsMetadata = this.modelFor('application').occupations;
 
       //get products data for the department
       let departments = _.reduce(departmentsData, (memo, d) => {
@@ -64,8 +67,16 @@ export default Ember.Route.extend({
         return  _.merge(d, industriesMetadata[d.industry_id]);
       });
 
+      let occupations = _.map(occupationsData, function(d) {
+        let occupation = occupationsMetadata[d.occupation_id];
+        d.year = 2013;
+        d.group = occupation.code.split('-')[0];
+        return _.merge(d, occupation);
+      });
+      console.log(occupations);
       model.set('departmentsData', departments);
       model.set('industriesData', industries);
+      model.set('occupationsData', occupations);
       return model;
     });
   },

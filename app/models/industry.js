@@ -11,6 +11,7 @@ export default DS.Model.extend(ModelAttribute, {
   classIndustries: attr(),
   industriesData: attr(),
   departmentsData: attr(),
+  occupationsData: attr(),
 
   timeseries: computed('industriesData','model.id', function() {
     return _.filter(this.get('industriesData'), {industry_id: parseInt(this.get('id'))});
