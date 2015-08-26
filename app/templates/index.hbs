@@ -2,8 +2,8 @@
 <main class="stream index">
   <article class="stream__article stream__article--indent--left">
     <header class="stream__header index__header">
-      <h1 class="stream__head index__head">You haven't seen Colombia like this before</h1>
-      <h2 class="stream__subhead">Visualize the possibilities for industries, exports and locations across Colombia.</h2>
+      <h1 class="stream__head index__head">{{ t 'index.header_head' }}</h1>
+      <h2 class="stream__subhead">{{ t 'index.header_subhead' }}</h2>
       <form class="search__wrap pageheader__search__wrap">
         <div class="search__field__wrap pageheader__search__field__wrap">
           {{input
@@ -19,26 +19,26 @@
       </form>
     </header>
     <section class="stream__section">
-      <h3 class="section__head">Start with our profiles</h3>
-      <p class="section__p">Just the essentials, presented as a one-page summary</p>
-      <a href="/location/1" class="btn btn--standalone btn--stream">Read the profile for Antioquia</a>
+      <h3 class="section__head">{{ t 'index.profiles_head' }}</h3>
+      <p class="section__p">{{ t 'index.profiles_subhead' }}</p>
+      <a href="/location/1" class="btn btn--standalone btn--stream">{{ t 'index.profiles_cta' }}</a>
     </section>
     <section class="stream__section">
-      <h3 class="section__head">Then dive into the graph builder</h3>
-      <p class="section__p">Create graphs and maps for your presentations</p>
-      <a href="/graph_builder/product-87/source/locations/visualization/multiples?endDate=2013&startDate=2008&variable=export_value" class="btn btn--standalone btn--stream">Build graphs about coffee</a>
+      <h3 class="section__head">{{ t 'index.builder_head' }}</h3>
+      <p class="section__p">{{ t 'index.builder_subhead' }}</p>
+      <a href="/graph_builder/product-87/source/locations/visualization/multiples?endDate=2013&startDate=2008&variable=export_value" class="btn btn--standalone btn--stream">{{ t 'index.builder_cta' }}</a>
     </section>
     <section class="stream__section">
-      <h3 class="section__head">The complexity advantage</h3>
-      <p class="section__p">Countries that export complex products, which require a lot of knowledge, grow faster than those that export raw materials. Researchers at Harvard University have pioneered a way to measure and visualize the complexity of every export and industry in Colombia.</p>
+      <h3 class="section__head">{{ t 'index.complexity_head' }}</h3>
+      <p class="section__p">{{ t 'index.complexity_subhead' }}</p>
       <figure class="index__figure">
         <img src="" alt="">
         <div>
-          <p class="section__p">How good is it? Country growth predictions using economic complexity were more than 10 times as accurate as conventional metrics, such as the World Governance Indicators.</p>
-          <a href="/about/glossary" class="btn btn--standalone btn--stream">Read more about complexity</a>
+          <p class="section__p">{{ t 'index.complexity_caption' }}</p>
+          <a href="/about/glossary" class="btn btn--standalone btn--stream">{{ t 'index.complexity_cta' }}</a>
         </div>
       </figure>
-      <h3 class="section__head section__head--spacey">Research featured in</h3>
+      <h3 class="section__head section__head--spacey">{{ t 'index.research_head' }}</h3>
       <ul class="index__featuredin__list">
         <li class="index__featuredin__item">
           <img src="assets/img/index/nyt.png" alt="New York Times" class="index__featuredin__img">
@@ -58,64 +58,58 @@
       </ul>
     </section>
 {{!--     <section class="stream__section">
-      <h3 class="section__head">Charting the present</h3>
-      <p class="section__p">Use our treemaps to break down your department, city or municipality’s exports and employment</p>
-      <h3 class="section__head">To map the future</h3>
-      <p class="section__p">Find the untapped markets best suited to your location</p>
+      <h3 class="section__head">{{ t 'index.present_head' }}</h3>
+      <p class="section__p">{{ t 'index.present_subhead' }}</p>
+      <h3 class="section__head">{{ t 'index.future_head' }}</h3>
+      <p class="section__p">{{ t 'index.future_subhead' }}</p>
     </section> --}}
     <section class="stream__section">
-      <h3 class="section__head">We're not a crystal ball</h3>
-      <p class="section__p">But we can answer a lot of questions</p>
+      <h3 class="section__head">{{ t 'index.questions_head' }}</h3>
+      <p class="section__p">{{ t 'index.questions_subhead' }}</p>
       <ul class="index__topics__list">
         <li class="index__topics__item">
-          <h4 class="section__subhead">Learn about a location</h4>
+          <h4 class="section__subhead">{{ t 'index.location_head' }}</h4>
           <ul>
             <li class="index__questions__item">
-              {{!-- <p class="label">Area charts</p> --}}
-              <a href="/graph_builder/location-3/source/industries/visualization/treemap?endDate=2013&startDate=2013&variable=employment" class="link--stream">What industries in Bogotá, D.C. (metro area) employ the most people?</a>
+              <a href="/graph_builder/location-3/source/industries/visualization/treemap?endDate=2013&startDate=2013&variable=employment" class="link--stream">{{ t 'index.location_q1' }}</a>
             </li>
             <li class="index__questions__item">
-              {{!-- <p class="label">Similarity space</p> --}}
-              <a href="/graph_builder/location-1/source/products/visualization/scatter?endDate=2013&startDate=2013" class="link--stream">What products have the most potential in Antioquia?</a>
+              <a href="/graph_builder/location-1/source/products/visualization/scatter?endDate=2013&startDate=2013" class="link--stream">{{ t 'index.industry_q2' }}</a>
             </li>
           </ul>
         </li>
         <li class="index__topics__item">
-          <h4 class="section__subhead">Learn about an industry</h4>
+          <h4 class="section__subhead">{{ t 'index.industry_head' }}</h4>
           <ul>
             <li class="index__questions__item">
-              {{!-- <p class="label">Area charts</p> --}}
-              <a href="/graph_builder/industry-488/source/departments/visualization/multiples?endDate=2013&startDate=2008&variable=employment" class="link--stream">Where in Colombia does the insurance industry employ the most people?</a>
+              <a href="/graph_builder/industry-488/source/departments/visualization/multiples?endDate=2013&startDate=2008&variable=employment" class="link--stream">{{ t 'index.industry_q1' }}</a>
             </li>
             <li class="index__questions__item">
-              {{!-- <p class="label">Treemap</p> --}}
-              <a href="/graph_builder/product-1143/source/locations/visualization/treemap?endDate=2013&startDate=2013&variable=export_value" class="link--stream">What are the skills needed by the chemical industry?</a>
+              <a href="/graph_builder/product-1143/source/locations/visualization/treemap?endDate=2013&startDate=2013&variable=export_value" class="link--stream">{{ t 'index.industry_q2' }}</a>
             </li>
           </ul>
         </li>
         <li class="index__topics__item">
-          <h4 class="section__subhead">Learn about an export</h4>
+          <h4 class="section__subhead">{{ t 'index.product_head' }}</h4>
           <ul>
             <li class="index__questions__item">
-              {{!-- <p class="label">Area charts</p> --}}
-              <a href="/graph_builder/product-74/source/locations/visualization/multiples?endDate=2013&startDate=2008&variable=export_value" class="link--stream">What places in Colombia export bananas?</a>
+              <a href="/graph_builder/product-74/source/locations/visualization/multiples?endDate=2013&startDate=2008&variable=export_value" class="link--stream">{{ t 'index.product_q1' }}</a>
             </li>
             <li class="index__questions__item">
-              {{!-- <p class="label">Area charts</p> --}}
-              <a href="" class="link--stream">What places in Colombia import computers?</a>
+              <a href="" class="link--stream">{{ t 'index.industry_q2' }}</a>
             </li>
           </ul>
         </li>
       </ul>
     </section>
-    <section class="stream__section">
+{{!--     <section class="stream__section">
       <img src="" alt="">
       <blockquote>
         <p>"Prosperia is a game changer for Colombian policymakers and investors."</p>
         <cite>Speaker name goes here</cite>
       </blockquote>
     </section>
-    <section class="stream__section recirc">
+ --}}    <section class="stream__section recirc">
       <div class="recirc__bground" style="background-image: url(assets/img/hero_images/location/COL.jpg)"></div>
       <div class="recirc__wrap">
         <h3 class="section__head recirc__head">
