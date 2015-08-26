@@ -245,7 +245,9 @@ export default {
     'employment_growth': 'Employment Growth (2008-2013)',
     'avg_wages': 'Average Wages ({{year}})',
     'employment': 'Employment ({{year}})',
-    'industry_composition': 'Industry Composition, 2012'
+    'industry_composition': 'Industry Composition, 2013',
+    'occupation': 'Occupations Demanded by Industry',
+    'occupation_demand': 'Occupations most demanded, 2013'
   },
   'about': {
     'project_description_name': 'Project Description',
