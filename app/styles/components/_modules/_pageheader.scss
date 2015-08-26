@@ -27,12 +27,8 @@
 }
 
 .branding__logo {
-  color: $colorWhite;
-  font-weight: 300;
-  @include offset-text;
-  margin-bottom: $baseSpace/2;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  width: 14rem;
+  margin-bottom: $baseSpace / 2;
 }
 
 .branding__slogan {
