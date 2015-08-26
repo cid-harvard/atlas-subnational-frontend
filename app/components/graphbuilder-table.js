@@ -19,8 +19,7 @@ var SortableTableHeaderCell = HeaderCell.extend({
     } else {
       var diff = this.get('width') - newWidth;
       this.get('column').resize(newWidth);
-      this.get('nextResizableColumn').resize(
-          this.get('nextResizableColumn.width') + diff);
+      this.get('nextResizableColumn').resize(this.get('nextResizableColumn.width') + diff);
     }
 
     this.elementSizeDidChange();
@@ -58,48 +57,50 @@ export default EmberTableComponent.extend({
   attributeBindings: ['height'],
   selectionMode: 'mutiple',
   industryClassesMap: [
+    { key: 'code', expand: false, savedWidth: 100 },
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'code', expand: true, savedWidth: 120 },
     { key: 'avg_wage', expand: false, savedWidth: 200 },
-    { key: 'wages', expand: true, savedWidth: 200 },
+    { key: 'wages', type: 'int', expand: true },
     { key: 'employment', expand: true, savedWidth: 200 },
     { key: 'employment_growth', expand: true, savedWidth: 300 },
     { key: 'num_establishments', expand: true, savedWidth: 200 },
   ],
   productsMap: [
+    { key: 'code', expand: false, savedWidth: 100 },
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'code', expand: true, savedWidth: 120 },
+    { key: 'parent', expand: true, savedWidth: 300 },
+    { key: 'year' , expand: false, savedWidth: 100 },
     { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'export_rca', type: 'int', expand: true, savedWidth: 160 },
-    { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
     { key: 'complexity' , expand: false, type: 'int', savedWidth: 120 },
     { key: 'distance' , expand: true, type: 'int', savedWidth: 120 }
    ],
   locationsMap: [
+    { key: 'code', expand: false, savedWidth: 100 },
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'code', expand: true, savedWidth: 120 },
+    { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
     { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'export_rca', type: 'int', expand: true, savedWidth: 160 },
-    { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
    ],
   industriesMap: [
+    { key: 'code', expand: false, savedWidth: 100 },
     { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'code', expand: true, savedWidth: 120 },
-    { key: 'wages', type: 'int', expand: true },
+    { key: 'parent', expand: true, savedWidth: 300 },
+    { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
+    { key: 'wages', type: 'int', expand: true},
     { key: 'employment', type: 'int', expand: false},
     { key: 'rca', type: 'int', expand: true},
-    { key: 'year' , expand: false, type: 'int'},
     { key: 'complexity' , expand: false, type: 'int'}
    ],
   departmentsMap: [
-    { key: 'name', expand: true, savedWidth: 200 },
-    { key: 'code', expand: false },
-    { key: 'wages', type: 'int', expand: true },
+    { key: 'code', expand: false, savedWidth: 100 },
+    { key: 'name', expand: true, savedWidth: 300 },
+    { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
+    { key: 'wages', type: 'int', expand: true},
     { key: 'employment', type: 'int', expand: false},
     { key: 'num_establishments', type: 'int', expand: false},
-    { key: 'year' , expand: false, type: 'int'},
    ],
   tableMap: computed('source', function() {
     let source = this.get('source');
@@ -140,6 +141,11 @@ export default EmberTableComponent.extend({
         return this.formatNumber(number, column.key);
       } else if(column.key === 'name'){
         return row.get(`name_short_${this.get('i18n').locale}`);
+      } else if(column.key === 'parent'){
+        // Forgive me, Father
+        let color = row.get('color');
+        let testSpan = Ember.String.htmlSafe('<i class="ember-table-color-marker" style=background-color:' + color + '></i>');
+        return testSpan + row.get(`parent_name_${this.get('i18n').locale}`);
       } else if(column.key === 'code'){
         return row.get('code');
       } else {
@@ -184,6 +190,8 @@ export default EmberTableComponent.extend({
       let data;
       if(key === 'name') {
         key = `name_short_${this.get('i18n').locale}`;
+      } else if (key === 'parent') {
+        key = `parent_name_${this.get('i18n').locale}`;
       }
       var sortFunction = function(d) {
         if(_.isString(d[key])) { return d[key].toLowerCase(); }

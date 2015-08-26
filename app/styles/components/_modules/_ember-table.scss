@@ -17,6 +17,7 @@
 .ember-table-header-cell {
   background: inherit;
   color: $colorBlack;
+  text-align: left;
 }
 
 .ember-table-header-container {
@@ -26,6 +27,15 @@
 
 .ember-table-content {
   font-size: $fontSmall;
+}
+
+.ember-table-color-marker {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
+  margin-right: 0.5rem;
+  border: 1px solid $colorGray;
 }
 
 .ember-table-header-cell .ember-table-content-container .ember-table-content {

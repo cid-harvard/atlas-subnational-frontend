@@ -56,6 +56,7 @@ export default {
     'view_more': 'View more',
     'table': {
       'name': 'Name',
+      'parent': 'Parent',
       'export_value': 'Exports, USD',
       'code': 'Code',
       'import_value': 'Imports, USD',
