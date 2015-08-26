@@ -5,13 +5,25 @@
 **/
 
 a {
-  transition: color $animationTime $animationEasing;
+  transition: color 0 $animationEasing;
 }
 
 .link--stream {
-  color: $colorNavy600;
+  color: $colorGrayDark;
+  background-image: linear-gradient(to top,
+    transparent 11%,
+    $colorGray 11%,
+    $colorGray 16%,
+    transparent 16%
+  );
   &:hover, &:focus, &:active {
-    color: $colorNavy800;
+    color: $colorBlack;
+    background-image: linear-gradient(to top,
+      transparent 11%,
+      $colorBlack 11%,
+      $colorBlack 16%,
+      transparent 16%
+    );
   }
 }
 

@@ -34,6 +34,11 @@ export default {
     'builder_cta': 'Build graphs about coffee',
     'complexity_head': 'The complexity advantage',
     'complexity_subhead': 'Countries that export complex products, which require a lot of knowledge, grow faster than those that export raw materials. Researchers at Harvard University have pioneered a way to measure and visualize the complexity of every export and industry in Colombia.',
+    'complexity_figure': {
+      'head': 'Percentage contribution to variance in economic growth, 10-year',
+      'WEF_name': 'WEF competitiveness ranking',
+      'complexity_name': 'Complexity ranking'
+    },
     'complexity_caption': 'How good is it? Country growth predictions using economic complexity were more than 10 times as accurate as conventional metrics, such as the World Governance Indicators.',
     'complexity_cta': 'Read more about complexity',
     'research_head': 'Research featured in',

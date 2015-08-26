@@ -8,17 +8,68 @@
   background: $colorBrown200;
 }
 
+.index__section {
+  max-width: 100rem;
+}
+
 .index__header {
   margin-bottom: $baseSpace * 3;
 }
 
 .stream__head.index__head {
-  max-width: 100rem;
   margin-bottom: $baseSpace;
+  max-width: 100rem;
+}
+
+.index__search__wrap {
+  width: 50rem;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+
+// Complexity figure
+
+.index__complexity__wrap {
+  background: $colorBrown300;
+  padding: $baseSpace * 2;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.index__figure__wrap {
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: $baseSpace;
+  border-right: 1px solid $colorBrown500;
+  align-content: center;
+}
+
+.index__figure__head {
+  width: 100%;
+  margin-bottom: $baseSpace;
+  font-weight: 300;
 }
 
 .index__figure {
-  margin-bottom: $baseSpace * 2;
+  width: 50%;
+  &:first-of-type {
+    padding-right: $baseSpace;
+  }
+  &:last-of-type {
+    padding-left: $baseSpace;
+  }
+}
+
+.index__figure__bignum{
+  font-size: $fontHuge;
+  font-family: $sansAlt;
+  letter-spacing: -2px;
+  line-height: 100%;
+}
+
+.index__cta__wrap {
+  width: 40%;
+  padding-left: $baseSpace;
 }
 
 // Research featured in media grid
@@ -51,7 +102,7 @@
 .index__topics__item {
   width: 33.33333%;
   padding: $baseSpace;
-  background: $colorWhite;
+  background: $colorBrown300;
   &:first-of-type {
     margin-right: $baseSpace;
   }

@@ -34,6 +34,11 @@ export default {
     'builder_cta': 'Explore las gráficas sobre el café',
     'complexity_head': 'La ventaja de la complejidad',
     'complexity_subhead': 'Los países que exportan productos complejos, que requieren una gran cantidad de conocimientos, crecen más rápido que los que exportan materias primas. Usando los métodos de medir y visualizar la complejidad desarrollados por la Universidad de Harvard, Datlas permite entender la complejidad y las posibilidades productivas y de exportación de los departamentos y ciudades colombianas.',
+    'complexity_figure': {
+      'head': 'Percentage contribution to variance in economic growth, 10-year',
+      'WEF_name': 'Foro Económico Mundial índice de competitividad global',
+      'complexity_name': 'Índice de complejidad económica'
+    },
     'complexity_caption': '¿Qué tan bueno es? Las predicciones de crecimiento de los países basadas en la complejidad económica son 10 veces más precisas que las basadas en variables convencionales, como los Indicadores de Gobernabilidad Mundial.',
     'complexity_cta': 'Lea más sobre complejidad',
     'research_head': 'Investigación mencionada en',
