@@ -269,7 +269,9 @@ export default {
     'employment_growth': 'Crecimiento del empleo (2008-2013)',
     'avg_wages': 'Promedio de salarios ({{year}})',
     'employment': 'Empleo ({{year}})',
-    'industry_composition': 'Composición de la industria (2012)',
+    'industry_composition': 'Composición de la industria (2013)',
+    'occupation': 'Occupations Demanded by Industry',
+    'occupation_demand': 'Occupations most demanded, 2013'
   },
   'about': {
     'project_description_name': 'TKTK',
