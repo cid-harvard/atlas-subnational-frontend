@@ -45,7 +45,7 @@ export default Ember.Route.extend({
       _.forEach(productsMetadata, function(d) {
         let sectionId = productsHierarchy[d.id];
         let section = productSectionMap[sectionId];
-        let color = !_.isUndefined(sectionId) ? ProductSectionColor[sectionId].color : '#fff';
+        let color = _.isUndefined(sectionId) ? '#fff' : ProductSectionColor[sectionId].color;
 
         d.color = color;
         d.parent_name_en = section.name_en;
@@ -56,7 +56,7 @@ export default Ember.Route.extend({
       _.forEach(industriesMetadata, function(d) {
         let sectionId = industriesHierarchy[d.id];
         let section = industrySectionMap[sectionId];
-        let color = !_.isUndefined(sectionId) ? IndustrySectionColor[sectionId].color : '#fff';
+        let color = _.isUndefined(sectionId) ? '#fff' : IndustrySectionColor[sectionId].color ;
 
         d.group = sectionId;
         d.parent_name_en = section.name_en;
