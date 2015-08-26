@@ -97,7 +97,8 @@ export default {
       'num_establishments': 'Firms',
       'year': 'Year',
       'complexity': 'Complexity',
-      'distance': 'Distance'
+      'distance': 'Distance',
+      'read_more': 'Unfamiliar with any of the indicators above? Find definitions in our <a href="/about/glossary" class="link--stream">glossary</a>.'
     },
     'settings' : {
       'label': 'Settings',
