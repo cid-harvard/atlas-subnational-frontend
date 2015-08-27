@@ -47,7 +47,6 @@
 .index__figure__head {
   width: 100%;
   margin-bottom: $baseSpace;
-  font-weight: 500;
   max-width: 40rem;
 }
 
@@ -116,10 +115,15 @@
 }
 
 .index__questions__item {
-  margin-bottom: $baseSpace;
+  margin-bottom: $baseSpace / 2;
   &:last-of-type {
     margin-bottom: 0;
   }
+}
+
+.index__questions__link {
+  font-size: $fontSmall;
+  display: block;
 }
 
 .index__recirc {

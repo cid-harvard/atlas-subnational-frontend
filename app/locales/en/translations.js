@@ -35,11 +35,11 @@ export default {
     'complexity_head': 'The complexity advantage',
     'complexity_subhead': 'Countries that export complex products, which require a lot of knowledge, grow faster than those that export raw materials. Researchers at Harvard University have pioneered a way to measure and visualize the complexity of every export and industry in Colombia.',
     'complexity_figure': {
-      'head': 'Percentage contribution to variance in economic growth, 10-year',
+      'head': 'Contribution to variance in economic growth, percentage (10-year)',
       'WEF_name': 'WEF competitiveness ranking',
       'complexity_name': 'Complexity ranking'
     },
-    'complexity_caption': 'How good is it? Country growth predictions using economic complexity were more than 10 times as accurate as conventional metrics, such as the World Governance Indicators.',
+    'complexity_caption': 'How good is it? Country growth predictions using economic complexity were <a href="http://atlas.cid.harvard.edu/media/atlas/pdf/HarvardMIT_AtlasOfEconomicComplexity.pdf" class="link--stream">more than six times as accurate</a> as conventional metrics, such as the World Governance Indicators.',
     'complexity_cta': 'Read more about complexity',
     'research_head': 'Research featured in',
     'present_head': 'Charting the present',
@@ -103,7 +103,7 @@ export default {
       'year': 'Year',
       'complexity': 'Complexity',
       'distance': 'Distance',
-      'read_more': 'Unfamiliar with any of the indicators above? Find definitions in our <a href="/about/glossary" class="link--stream">glossary</a>.'
+      'read_more': 'Unfamiliar with any of the indicators above? Find definitions in our <a href="/about/glossary" class="link--stream link--stream--inline--tiny">glossary</a>.'
     },
     'settings' : {
       'label': 'Settings',

@@ -12,9 +12,14 @@ a {
   color: $colorGrayDark;
   font-family: $sans;
   font-weight: 300;
+  font-size: $fontBase-decrement; // A bit smaller to make x-heights match Plantin's
   &:hover, &:focus, &:active {
     color: $colorBlack;
   }
+}
+
+.link--stream--inline--tiny {
+  font-size: $fontTiny-decrement;
 }
 
 .link--inactive {

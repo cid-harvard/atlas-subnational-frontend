@@ -34,6 +34,7 @@
 .branding__slogan {
   color: $colorWhite;
   font-weight: 700;
+  font-size: $fontSmall;
   @include offset-text;
 }
 

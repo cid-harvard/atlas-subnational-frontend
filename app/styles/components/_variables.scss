@@ -116,6 +116,16 @@ $fontXXLarge: 6.8rem !default;
 $fontHuge: 11rem !default;
 
 
+// Decremented font sizes for making x-heights match across typefaces
+$fontXTiny-decrement: 0.95rem !default;
+$fontTiny-decrement: 1.25rem !default;
+$fontSmall-decrement: 1.5rem  !default;
+$fontBase-decrement: 1.9rem !default;
+$fontLarge-decrement: 2.5rem !default;
+$fontXLarge-decrement: 4.1rem !default;
+$fontXXLarge-decrement: 6.7rem !default;
+$fontHuge-decrement: 10.9rem !default;
+
 /* ==========  Spacing  ========== */
 
 $baseSpace: 2.6rem !default;
