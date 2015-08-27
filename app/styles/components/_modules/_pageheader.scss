@@ -33,6 +33,7 @@
 
 .branding__slogan {
   color: $colorWhite;
+  font-weight: 700;
   @include offset-text;
 }
 
@@ -66,6 +67,7 @@
   font-weight: 500;
   display: inline-block;
   @include offset-text;
+  font-family: $sans;
   &:hover {
     color: $colorWhite;
   }
@@ -140,6 +142,7 @@
   display: inline;
   font-weight: 500;
   vertical-align: 6px;
+  font-family: $sans;
   @include offset-text;
 }
 

@@ -19,8 +19,6 @@
 }
 
 .results__subhead {
-  font-size: $fontLarge;
-  margin: 0 auto $baseSpace;
   color: $colorWhite;
   @include offset-text;
 }
@@ -60,6 +58,7 @@
 
 .results__name {
   color: $colorGrayLightest;
+  font-weight: 700;
   @include offset-text;
 }
 

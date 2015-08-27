@@ -26,16 +26,22 @@
   color: $colorBlack;
 }
 
-.table__header--is--descending:after {
-  font-family: $icon;
-  font-size: $fontTiny;
-  content: $fa-var-caret-down;
+.table__header--is--descending {
+  color: $colorBlack;
+  &:after {
+    font-family: $icon;
+    font-size: $fontTiny;
+    content: $fa-var-caret-down;
+  }
 }
 
-.table__header--is--ascending:after {
-  font-family: $icon;
-  font-size: $fontTiny;
-  content: $fa-var-caret-up;
+.table__header--is--ascending {
+  color: $colorBlack;
+  &:after {
+    font-family: $icon;
+    font-size: $fontTiny;
+    content: $fa-var-caret-up;
+  }
 }
 
 .table__row--body:last-of-type .table__cell {
