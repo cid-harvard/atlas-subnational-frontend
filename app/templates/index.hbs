@@ -21,12 +21,23 @@
     <section class="stream__section index__section">
       <h3 class="section__head">{{ t 'index.profiles_head' }}</h3>
       <p class="section__p">{{ t 'index.profiles_subhead' }}</p>
-      <a href="/location/1" class="btn btn--standalone btn--stream">{{ t 'index.profiles_cta' }}</a>
+      {{#link-to 'location.show' 1
+        data-home-page-location=''
+        class='btn btn--standalone btn--stream'
+      }}
+        {{ t 'index.profiles_cta' }}
+      {{/link-to}}
     </section>
     <section class="stream__section index__section">
       <h3 class="section__head">{{ t 'index.builder_head' }}</h3>
       <p class="section__p">{{ t 'index.builder_subhead' }}</p>
-      <a href="/graph_builder/product-87/source/locations/visualization/multiples?endDate=2013&startDate=2008&variable=export_value" class="btn btn--standalone btn--stream">{{ t 'index.builder_cta' }}</a>
+      {{#link-to
+        'visualization' 'product-87' 'locations' 'multiples' (query-params endDate=2013 startDate=2008 variable='export_value')
+        data-home-page-product=''
+        class="btn btn--standalone btn--stream"
+      }}
+        {{ t 'index.builder_cta' }}
+      {{/link-to}}
     </section>
     <section class="stream__section index__section">
       <h3 class="section__head">{{ t 'index.complexity_head' }}</h3>
@@ -45,7 +56,12 @@
         </figure>
         <div class="index__cta__wrap">
           <p class="section__p">{{ t 'index.complexity_caption' }}</p>
-          <a href="/about/glossary" class="btn btn--standalone btn--stream">{{ t 'index.complexity_cta' }}</a>
+            {{#link-to 'about.glossary'
+              data-home-page-product=''
+              class="btn btn--standalone btn--stream"
+            }}
+              {{ t 'index.complexity_cta' }}
+            {{/link-to}}
         </div>
       </div>
     </section>
@@ -93,10 +109,22 @@
           <h4 class="section__subhead">{{ t 'index.location_head' }}</h4>
           <ul>
             <li class="index__questions__item">
-              <a href="/graph_builder/location-3/source/industries/visualization/treemap?endDate=2013&startDate=2013&variable=employment" class="link--stream index__questions__link">{{ t 'index.location_q1' }}</a>
+              {{#link-to
+                'visualization' 'location-3' 'industries' 'treemap' (query-params endDate=2013 startDate=2008 variable='employment')
+                data-home-page-location-question='1'
+                class="link--stream index__questions__link"
+              }}
+                {{ t 'index.location_q1' }}
+              {{/link-to}}
             </li>
             <li class="index__questions__item">
-              <a href="/graph_builder/location-1/source/products/visualization/scatter?endDate=2013&startDate=2013" class="link--stream index__questions__link">{{ t 'index.industry_q2' }}</a>
+              {{#link-to
+                'visualization' 'location-1' 'products' 'scatter' (query-params endDate=2013 startDate=2008)
+                data-home-page-location-question='2'
+                class="link--stream index__questions__link"
+              }}
+                {{ t 'index.location_q2' }}
+              {{/link-to}}
             </li>
           </ul>
         </li>
@@ -104,10 +132,22 @@
           <h4 class="section__subhead">{{ t 'index.industry_head' }}</h4>
           <ul>
             <li class="index__questions__item">
-              <a href="/graph_builder/industry-488/source/departments/visualization/multiples?endDate=2013&startDate=2008&variable=employment" class="link--stream index__questions__link">{{ t 'index.industry_q1' }}</a>
+              {{#link-to
+                'visualization' 'industry-488' 'departments' 'multiples' (query-params endDate=2013 startDate=2008 variable='employment')
+                data-home-page-product-question='1'
+                class="link--stream index__questions__link"
+              }}
+                {{ t 'index.industry_q1' }}
+              {{/link-to}}
             </li>
             <li class="index__questions__item">
-              <a href="/graph_builder/product-1143/source/locations/visualization/treemap?endDate=2013&startDate=2013&variable=export_value" class="link--stream index__questions__link">{{ t 'index.industry_q2' }}</a>
+              {{#link-to
+                'visualization' 'industry-461' 'departments' 'multiples' (query-params endDate=2013 startDate=2008 variable='employment')
+                data-home-page-product-question='2'
+                class="link--stream index__questions__link"
+              }}
+                {{ t 'index.industry_q2' }}
+              {{/link-to}}
             </li>
           </ul>
         </li>
@@ -115,10 +155,22 @@
           <h4 class="section__subhead">{{ t 'index.product_head' }}</h4>
           <ul>
             <li class="index__questions__item">
-              <a href="/graph_builder/product-74/source/locations/visualization/multiples?endDate=2013&startDate=2008&variable=export_value" class="link--stream index__questions__link">{{ t 'index.product_q1' }}</a>
+              {{#link-to
+                'visualization' 'product-74' 'locations' 'multiples' (query-params endDate=2013 startDate=2008 variable='export_value')
+                data-home-page-industry-question='1'
+                class="link--stream index__questions__link"
+              }}
+                {{ t 'index.product_q1' }}
+              {{/link-to}}
             </li>
             <li class="index__questions__item">
-              <a href="" class="link--stream index__questions__link">{{ t 'index.industry_q2' }}</a>
+              {{#link-to
+                'visualization' 'product-1143' 'locations' 'multiples' (query-params endDate=2013 startDate=2008 variable='import_value')
+                data-home-page-industry-question='2'
+                class="link--stream index__questions__link"
+              }}
+                {{ t 'index.product_q2' }}
+              {{/link-to}}
             </li>
           </ul>
         </li>
@@ -131,16 +183,22 @@
         <cite>Speaker name goes here</cite>
       </blockquote>
     </section>
- --}}    <section class="stream__section index__section recirc">
+    --}}
+    <section class="stream__section index__section recirc">
       <div class="recirc__bground" style="background-image: url(assets/img/hero_images/location/COL.jpg)"></div>
       <div class="recirc__wrap">
         <h3 class="section__head recirc__head">
           {{t 'index.colombia_profile'}}
         </h3>
-        <a href="/location/0" class="btn btn--standalone btn--stream">
+        {{#link-to
+          'location.show' 0
+          data-home-page-industry-question='2'
+          class="btn btn--standalone btn--stream"
+        }}
           {{ t 'pageheader.profile_link' }}
-        </a>
+        {{/link-to}}
       </div>
     </section>
   </article>
 </main>
+
