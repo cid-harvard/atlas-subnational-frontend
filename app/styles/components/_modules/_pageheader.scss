@@ -36,6 +36,9 @@
   font-weight: 700;
   font-size: $fontSmall;
   @include offset-text;
+  .index & {
+    display: none;
+  }
 }
 
 
