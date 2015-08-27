@@ -4,11 +4,6 @@ import Ember from 'ember';
 
 const {computed, observer} = Ember;
 
-// NOTE TO SELF: in the industry spaces
-// the key value pair ID is === to CODE from the API
-//
-//product space: ID === ID
-//
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
@@ -17,20 +12,23 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  networkData: computed('data.[]','nodes', 'identifier', function() {
-    let indexedData = _.indexBy(this.get('data'), this.get('identifier'));
+  networkData: computed('data.[]','nodes', 'dataMetadata', function() {
+    let indexedData = _.indexBy(this.get('data'), 'id');
+    let metadataIndex = this.get('dataMetadata');
     return _.map(this.get('nodes'), function(d) {
-      let datum = indexedData[d.id];
-      if(datum && datum[this.get('varDependent')] > 1) {
+      let datum = indexedData[d.id] || metadataIndex[d.id];
+      if(datum) {
         d.color = datum.color;
-        d.name_short_en = datum.name_short_en;
-        d.name_short_es = datum.name_short_es;
+        d.name_short_en = datum.name_short_en + ` (${datum.code})`;
+        d.name_short_es = datum.name_short_es + ` (${datum.code})`;
         d[this.get('varDependent')] = datum[this.get('varDependent')];
-      } else {
-        d.color = '#FFF';
       }
       return d;
     }, this);
+  }),
+  dataMetadata: computed('dataType','metadata', function() {
+    let type = this.get('dataType');
+    return this.get(`metadata.${type}`);
   }),
   graph: computed('dataType', function() {
     let type = this.get('dataType');
@@ -38,14 +36,6 @@ export default Ember.Component.extend({
       return industrySpace;
     } else if (type === 'products') {
       return productSpace;
-    }
-  }),
-  identifier: computed('dataType', function() {
-    let type = this.get('dataType');
-    if(type === 'industries') {
-      return 'code';
-    } else if (type === 'products') {
-      return 'id';
     }
   }),
   varDependent: computed('dataType', function() {
@@ -84,7 +74,7 @@ export default Ember.Component.extend({
       var_color: 'color',
       color: function(d) { return d; },
       y_invert: true,
-      var_id: this.get('identifier'),
+      var_id: 'id',
       items: [{
         attr: "name",
         marks: [{
@@ -94,7 +84,7 @@ export default Ember.Component.extend({
           type: 'circle',
           stroke_width: (d) => {
             if(d[this.get('varDependent')] >= 1) {
-              return '1px';
+              return '1.3px';
             }
           }
         }, {
