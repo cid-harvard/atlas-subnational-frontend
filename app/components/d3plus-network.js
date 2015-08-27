@@ -84,12 +84,19 @@ export default Ember.Component.extend({
           type: 'circle',
           stroke_width: (d) => {
             if(d[this.get('varDependent')] >= 1) {
-              return '1.3px';
+              return '1.1px';
             }
           }
         }, {
           var_mark: '__highlighted',
-          type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
+          type: d3.scale.ordinal().domain([true, false]).range(["divtext", "none"]),
+          class: function() { return 'items__mark__divtext__tooltip'; },
+          text: (d) => { return d[`name_short_${this.get('i18n').locale}`]; }
+        }, {
+          var_mark: '__selected',
+          type: d3.scale.ordinal().domain([true, false]).range(["divtext", "none"]),
+          class: function() { return 'items__mark__divtext__tooltip'; },
+          text: (d) => { return d[`name_short_${this.get('i18n').locale}`]; }
         }]
       }]
     });
