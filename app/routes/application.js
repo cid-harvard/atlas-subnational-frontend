@@ -73,7 +73,9 @@ export default Ember.Route.extend({
         products: _.indexBy(productsMetadata, 'id'),
         locations: _.indexBy(locationsMetadata, 'id'),
         industries: _.indexBy(industriesMetadata, 'id'),
-        occupations: _.indexBy(occupationsMetadata, 'id')
+        occupations: _.indexBy(occupationsMetadata, 'id'),
+        productParents: _.indexBy(productParentMetadata, 'id'),
+        industryParents: _.indexBy(industryParentMetadata, 'id')
       };
     });
   },

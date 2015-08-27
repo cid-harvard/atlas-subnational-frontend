@@ -28,7 +28,7 @@ export default Ember.Route.extend({
 
               let lastClassData = _.last(classData);
               d.employment_growth = this.employmentGrowthCalc(classData);
-              d.avg_wage = lastClassData.wages / lastClassData.employment;
+              d.avg_wage = lastClassData.monthly_wages;
               memo.push(_.merge(d, lastClassData));
               return memo;
             },[]);
@@ -43,14 +43,15 @@ export default Ember.Route.extend({
     var departments = $.getJSON(`${apiURL}/data/industry/${model.id}/participants?level=department`);
     var industries = $.getJSON(`${apiURL}/data/industry?level=division`);
     var occupations = $.getJSON(`${apiURL}/data/industry/${model.id}/occupations/?level=minor_group`)
+    var industryDivisions  = Ember.$.getJSON(apiURL+'/metadata/industries?level=division');
 
-    return RSVP.allSettled([departments, industries, occupations]).then((array) => {
+    return RSVP.allSettled([departments, industries, occupations, industryDivisions]).then((array) => {
       var departmentsData = getWithDefault(array[0], 'value.data', []);
       var industriesData = getWithDefault(array[1], 'value.data', []);
       var occupationsData = getWithDefault(array[2], 'value.data', []);
 
       let locationsMetadata = this.modelFor('application').locations;
-      let industriesMetadata = this.modelFor('application').industries;
+      let industryDivisions = _.indexBy(getWithDefault(array[3], 'value.data', []), 'id')
       let occupationsMetadata = this.modelFor('application').occupations;
 
       //get products data for the department
@@ -63,8 +64,8 @@ export default Ember.Route.extend({
       },[]);
 
       let industries = _.map(industriesData, function(d) {
-        d.avg_wage = d.wages/d.employment;
-        return  _.merge(d, industriesMetadata[d.industry_id]);
+        d.avg_wage = d.monthy_wages;
+        return  _.merge(d, industryDivisions[d.industry_id]);
       });
 
       let occupations = _.map(occupationsData, function(d) {
@@ -73,7 +74,6 @@ export default Ember.Route.extend({
         d.group = occupation.code.split('-')[0];
         return _.merge(d, occupation);
       });
-      console.log(occupations);
       model.set('departmentsData', departments);
       model.set('industriesData', industries);
       model.set('occupationsData', occupations);
