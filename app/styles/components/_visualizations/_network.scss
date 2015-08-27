@@ -1,0 +1,52 @@
+/**
+*
+* Product space, industry space
+*
+**/
+
+.node--is--highlighted {
+  r:3.5;
+  stroke: $colorGray;
+  stroke-width: 1px;
+}
+
+.connect__line {
+  stroke: $colorGrayLight;
+  stroke-opacity: 1;
+}
+
+.connect__line.highlighted {
+  stroke: $colorRed;
+  stroke-width: 2px;
+}
+
+.items__mark__circle.highlighted__adjacent {
+  r: 3.5;
+  stroke-width: 1px;
+  stroke: $colorRed500;
+}
+
+
+// Tooltip
+.items__mark__divtext {
+  // width: auto !important;
+  body {
+    font-style: inherit !important;
+    font-variant: inherit !important;
+    font-weight: inherit !important;
+    font-stretch: inherit !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    font-family: inherit !important;
+  }
+}
+
+.items__mark__divtext__tooltip {
+  background: $colorWhite;
+  height: 100%;
+  padding: $baseSpace/2;
+  width: auto !important;
+  z-index: $zIndex-9;
+  max-width: 30rem;
+}
+

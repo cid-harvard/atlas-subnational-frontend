@@ -70,7 +70,7 @@ export default Ember.Component.extend({
       var_text: `name_short_${this.get('i18n').locale}`, //TODO: update with langauge
       var_x: 'x',
       var_y: 'y',
-      radius: 4,
+      radius: 2.5,
       var_color: 'color',
       color: function(d) { return d; },
       y_invert: true,
@@ -82,9 +82,9 @@ export default Ember.Component.extend({
           type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
         }, {
           type: 'circle',
-          stroke_width: (d) => {
+          class: (d) => {
             if(d[this.get('varDependent')] >= 1) {
-              return '1.1px';
+              return 'node--is--highlighted';
             }
           }
         }, {
