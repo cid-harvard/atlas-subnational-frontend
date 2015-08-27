@@ -15,6 +15,8 @@ export default Ember.Route.extend({
     source.set('visualization', visualization_type);
     source.set('defaultParam', source.get(`defaultParams.${visualization_type}`));
     source.set('requiredParams', _.keys(source.get('defaultParam')));
+    source.set('metaData', this.modelFor('application'));
+
     return source;
   },
   setupController(controller, model) {
