@@ -18,6 +18,10 @@ a {
   }
 }
 
+.link--stream--inline--small {
+  font-size: $fontSmall-decrement;
+}
+
 .link--stream--inline--tiny {
   font-size: $fontTiny-decrement;
 }
