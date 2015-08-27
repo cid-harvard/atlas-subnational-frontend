@@ -170,11 +170,11 @@ export default {
     'builder_mod_header': {
       'industry': {
         'locations.employment': 'Empleo total',
-        'locations.wages': 'Salarios totales (COP)',
-        'locations.wage_avg': 'Salarios promedio (COP)',
+        'locations.wages': 'Salarios totales, COP',
+        'locations.wage_avg': 'Salarios promedio, COP',
         'departments.employment': 'Empleo total',
-        'departments.wages': 'Salarios totales (COP)',
-        'departments.wage_avg': 'Salarios promedio (COP)',
+        'departments.wages': 'Salarios totales, COP',
+        'departments.wage_avg': 'Salarios promedio, COP',
       },
       'product': {
         'locations.export_value': 'Total',

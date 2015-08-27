@@ -169,26 +169,26 @@ export default {
     },
     'builder_mod_header': {
       'industry': {
-        'departments.employment': 'Total Employment',
-        'departments.wages': 'Total Wages (COP)',
-        'departments.wage_avg': 'Average Wages (COP)',
-        'locations.employment': 'Total Employment',
-        'locations.wages': 'Total Wages (COP)',
-        'locations.wage_avg': 'Average Wages (COP)',
+        'departments.employment': 'Total employment',
+        'departments.wages': 'Total wages, COP',
+        'departments.wage_avg': 'Average wages, COP',
+        'locations.employment': 'Total employment',
+        'locations.wages': 'Total wages, COP',
+        'locations.wage_avg': 'Average wages, COP',
       },
       'product': {
         'locations.export_value': 'Total',
         'locations.import_value': 'Total'
       },
       'location': {
-        'products.export_value': 'Total Exports',
-        'products.scatter': 'Complexity and Opportunity',
-        'products.similarity': 'Complexity and Opportunity',
-        'products.import_value': 'Total Imports',
-        'industries.employment': 'Total Employment',
-        'industries.scatter': 'Complexity and Opportunity',
-        'industries.similarity': 'Complexity and Opportunity',
-        'industries.wages': 'Total Wages'
+        'products.export_value': 'Total exports',
+        'products.scatter': 'Complexity and opportunity',
+        'products.similarity': 'Complexity and opportunity',
+        'products.import_value': 'Total imports',
+        'industries.employment': 'Total employment',
+        'industries.scatter': 'Complexity and opportunity',
+        'industries.similarity': 'Complexity and opportunity',
+        'industries.wages': 'Total wages'
       }
     }
   },
