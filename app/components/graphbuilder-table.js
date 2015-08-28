@@ -73,6 +73,7 @@ export default EmberTableComponent.extend({
     { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'export_rca', type: 'int', expand: true, savedWidth: 160 },
+    { key: 'cog' , expand: false, type: 'int', savedWidth: 100 },
     { key: 'complexity' , expand: false, type: 'int', savedWidth: 120 },
     { key: 'distance' , expand: true, type: 'int', savedWidth: 120 }
    ],
@@ -80,17 +81,23 @@ export default EmberTableComponent.extend({
     { key: 'code', expand: false, savedWidth: 100 },
     { key: 'name', expand: true, savedWidth: 300 },
     { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
+    { key: 'distance' , expand: true, type: 'int', savedWidth: 120 },
     { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
     { key: 'export_rca', type: 'int', expand: true, savedWidth: 160 },
+    { key: 'cog' , expand: false, type: 'int', savedWidth: 100 },
+    { key: 'export_num_plants' , expand: true, type: 'int', savedWidth: 120 },
    ],
   industriesMap: [
     { key: 'code', expand: false, savedWidth: 100 },
     { key: 'name', expand: true, savedWidth: 300 },
     { key: 'parent', expand: true, savedWidth: 300 },
     { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
+    { key: 'monthly_wages', type: 'int', expand: true},
     { key: 'wages', type: 'int', expand: true},
     { key: 'employment', type: 'int', expand: false},
+    { key: 'distance' , expand: true, type: 'int', savedWidth: 120 },
+    { key: 'num_establishments' , expand: true, type: 'int', savedWidth: 50 },
     { key: 'rca', type: 'int', expand: true},
     { key: 'complexity' , expand: false, type: 'int'}
    ],
@@ -98,9 +105,12 @@ export default EmberTableComponent.extend({
     { key: 'code', expand: false, savedWidth: 100 },
     { key: 'name', expand: true, savedWidth: 300 },
     { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
+    { key: 'cog' , expand: false, type: 'int', savedWidth: 100 },
+    { key: 'monthly_wages', type: 'int', expand: true},
     { key: 'wages', type: 'int', expand: true},
     { key: 'employment', type: 'int', expand: false},
-    { key: 'num_establishments', type: 'int', expand: false},
+    { key: 'distance' , expand: true, type: 'int', savedWidth: 120 },
+    { key: 'num_establishments' , expand: true, type: 'int', savedWidth: 50 }
    ],
   tableMap: computed('source', function() {
     let source = this.get('source');
@@ -154,9 +164,12 @@ export default EmberTableComponent.extend({
     };
   },
   formatNumber: function(number, key) {
-    if(key === 'wages' || key === 'avg_wage') {
+    var decimal_vars = ['export_rca','rca','complexity', 'distance', 'cog', 'population'];
+    var wage_vars = ['wages', 'avg_wages', 'monthly_wages'];
+
+    if(_.include(wage_vars, key)){
       return numeral(number).divide(1000).format('0,0');
-    } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'population'){
+    } else if(_.include(decimal_vars, key)){
       return numeral(number).format('0.00a');
     } else if(key === 'employment'){
       return numeral(Math.ceil(number)).format('0,0');
