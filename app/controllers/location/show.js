@@ -60,16 +60,16 @@ export default Ember.Controller.extend({
     return numeral(pop).format('0.0a');
    }),
   lastGdp: computed('validTimeseries','locale', function() {
-    let gdp = get(this.get('lastDataPoint'), 'gdp_nominal');
+    let gdp = get(this.get('lastDataPoint'), 'gdp_real');
     return numeral(gdp).format('$ 0.0a');
    }),
   lastGdpPerCapita: computed('validTimeseries','locale', function() {
-    let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_nominal');
+    let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_real');
     return numeral(gdpPC).format('$ 0.0a');
    }),
   gdpGrowth:computed('validTimeseries', function() {
-    var firstGdp = get(this.get('firstDataPoint'), 'gdp_nominal');
-    var lastGdp = get(this.get('lastDataPoint'), 'gdp_nominal');
+    var firstGdp = get(this.get('firstDataPoint'), 'gdp_real');
+    var lastGdp = get(this.get('lastDataPoint'), 'gdp_real');
     let difference = lastGdp / firstGdp;
     let power =  1/(this.get('validTimeseries.length') -1);
     return numeral(Math.pow(difference, power) -1).format('0.0%');
