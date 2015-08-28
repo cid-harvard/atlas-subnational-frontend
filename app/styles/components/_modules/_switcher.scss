@@ -21,10 +21,11 @@
 }
 
 .switcher__item__link {
-  transition: $animationTime color $animationEasing;
   color: $colorGray;
   font-size: $fontSmall;
   display: block;
+  font-family: $sans;
+  font-weight: 300;
   &:hover {
     color: $colorGrayDark;
   }

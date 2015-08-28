@@ -14,7 +14,7 @@
 
 .buildermod__head {
   display: inline-block;
-  font-weight: 300;
+  font-weight: 500;
   padding-left: $baseSpace;
   font-size: $fontSmall;
   &~.buildermod__tools .buildermod__tool:first-child {
@@ -40,12 +40,6 @@
 .buildermod__tool--is--unnecessary {
   display: none;
 }
-
-// .buildermod__tool__btn  {
-//   &:hover, &:active, &:focus {
-//     background: $colorGrayDark;
-//   }
-// }
 
 .tool__btn__icon:before {
   margin-right: $baseSpace/5;

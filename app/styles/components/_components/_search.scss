@@ -23,6 +23,7 @@
   flex: 1 1 auto;
   width: 100%;
   height: 100%;
+  font-family: $sans;
   &:active, &:focus {
     outline: 0;
     &::-webkit-input-placeholder {
@@ -32,7 +33,6 @@
   &::-webkit-input-placeholder {
     transition: color $animationTime $animationEasing;
     color: $colorGrayLight;
-    weight: 500;
     font-size: $fontSmall;
   }
 }

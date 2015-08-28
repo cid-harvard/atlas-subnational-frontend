@@ -18,6 +18,16 @@
   width: 30%;
 }
 
+.table__header--summaries--value:before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background-color: $colorRed;
+  display: inline-block;
+  margin-right: 1px;
+  transform: rotate(45deg);
+}
+
 .table__cell--summaries {
   height: 70px; // A reminder that height acts as min-height for table cells
 }

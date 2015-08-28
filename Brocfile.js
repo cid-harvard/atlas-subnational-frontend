@@ -83,6 +83,12 @@ app.import('vendor/fonts/circular/circular-medium.woff', { destDir: 'fonts' });
 app.import('vendor/fonts/circular/circular-bold.woff2', { destDir: 'fonts' });
 app.import('vendor/fonts/circular/circular-bold.woff', { destDir: 'fonts' });
 
+// Platin
+app.import('vendor/fonts/plantin/PlantinMTStd-Italic.woff2', { destDir: 'fonts' });
+app.import('vendor/fonts/plantin/PlantinMTStd-Light.woff2', { destDir: 'fonts' });
+app.import('vendor/fonts/plantin/PlantinMTStd-Regular.woff2', { destDir: 'fonts' });
+app.import('vendor/fonts/plantin/PlantinMTStd-Semibold.woff2', { destDir: 'fonts' });
+
 // Use `app.import` to add additional libraries to the generated
 // output files.
 //

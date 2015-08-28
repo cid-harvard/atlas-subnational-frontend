@@ -5,14 +5,25 @@
 **/
 
 a {
-  transition: color $animationTime $animationEasing;
+  transition: color 0s $animationEasing;
 }
 
 .link--stream {
-  color: $colorNavy600;
+  color: $colorGrayDark;
+  font-family: $sans;
+  font-weight: 300;
+  font-size: $fontBase-decrement; // A bit smaller to make x-heights match Plantin's
   &:hover, &:focus, &:active {
-    color: $colorNavy800;
+    color: $colorBlack;
   }
+}
+
+.link--stream--inline--small {
+  font-size: $fontSmall-decrement;
+}
+
+.link--stream--inline--tiny {
+  font-size: $fontTiny-decrement;
 }
 
 .link--inactive {

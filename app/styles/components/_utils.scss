@@ -7,115 +7,115 @@
 
 /*==========  MIXINS  ==========*/
 
-  @mixin media-query($media-query) {
-    @if $media-query == small {
-      @media only screen and (max-width: $medium - 1) { @content; }
-    }
-
-    @if $media-query == medium {
-      @media only screen and (min-width: $medium) { @content; }
-    }
-
-    @if $media-query == medium-only {
-      @media only screen and (min-width: $medium) and (max-width: $wide - 1) { @content; }
-    }
-
-    @if $media-query == wide {
-      @media only screen and (min-width: $wide) { @content; }
-    }
-
-    @if $media-query == huge {
-      @media only screen and (min-width: $huge) { @content; }
-    }
+@mixin media-query($media-query) {
+  @if $media-query == small {
+    @media only screen and (max-width: $medium - 1) { @content; }
   }
 
-  // Just some helpers...
-  @mixin small-only { @include media-query(small) { @content }; }
-  @mixin medium { @include media-query(medium) { @content }; }
-  @mixin medium-only { @include media-query(medium-only) { @content }; }
-  @mixin wide { @include media-query(wide) { @content }; }
-  @mixin huge { @include media-query(huge) { @content }; }
+  @if $media-query == medium {
+    @media only screen and (min-width: $medium) { @content; }
+  }
+
+  @if $media-query == medium-only {
+    @media only screen and (min-width: $medium) and (max-width: $wide - 1) { @content; }
+  }
+
+  @if $media-query == wide {
+    @media only screen and (min-width: $wide) { @content; }
+  }
+
+  @if $media-query == huge {
+    @media only screen and (min-width: $huge) { @content; }
+  }
+}
+
+// Just some helpers...
+@mixin small-only { @include media-query(small) { @content }; }
+@mixin medium { @include media-query(medium) { @content }; }
+@mixin medium-only { @include media-query(medium-only) { @content }; }
+@mixin wide { @include media-query(wide) { @content }; }
+@mixin huge { @include media-query(huge) { @content }; }
 
 
-  // Positioning
-  @mixin position($position, $args: ()) {
-    $offsets: top right bottom left;
-    position: $position;                                               // 1
+// Positioning
+@mixin position($position, $args: ()) {
+  $offsets: top right bottom left;
+  position: $position;                                               // 1
 
-    @each $offset in $offsets {                                        // 3
-      $index: index($args, $offset);                                   // 4
+  @each $offset in $offsets {                                        // 3
+    $index: index($args, $offset);                                   // 4
 
-      @if $index {                                                     // 5
-        @if $index == length($args) {                                  // 6
-          #{$offset}: 0;                                               // 7
+    @if $index {                                                     // 5
+      @if $index == length($args) {                                  // 6
+        #{$offset}: 0;                                               // 7
+      }
+      @else {                                                        // 8
+        $next: nth($args, $index + 1);                               // 9
+        @if is-valid-length($next) {                                 // 10
+          #{$offset}: $next;                                         // 11
         }
-        @else {                                                        // 8
-          $next: nth($args, $index + 1);                               // 9
-          @if is-valid-length($next) {                                 // 10
-            #{$offset}: $next;                                         // 11
-          }
-          @else if index($offsets, $next) {                            // 12
-            #{$offset}: 0;                                             // 13
-          }
-          @else {                                                      // 14
-            @warn "Invalid value `#{$next}` for offset `#{$offset}`."; // 15
-          }
+        @else if index($offsets, $next) {                            // 12
+          #{$offset}: 0;                                             // 13
+        }
+        @else {                                                      // 14
+          @warn "Invalid value `#{$next}` for offset `#{$offset}`."; // 15
         }
       }
     }
   }
+}
 
-  @mixin absolute($args: ()) {
-    @include position(absolute, $args);
-  }
+@mixin absolute($args: ()) {
+  @include position(absolute, $args);
+}
 
-  @mixin offset-text {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+@mixin offset-text {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  // Function checking if $value is a valid length
-  // ---
-  // @param [literal] $value: value to test
-  // ---
-  // @return [bool]
+// Function checking if $value is a valid length
+// ---
+// @param [literal] $value: value to test
+// ---
+// @return [bool]
 
-  @function is-valid-length($value) {
-    @return (type-of($value) == "number" and not unitless($value))
-         or (index(auto initial inherit 0, $value) != false);
-  }
+@function is-valid-length($value) {
+  @return (type-of($value) == "number" and not unitless($value))
+       or (index(auto initial inherit 0, $value) != false);
+}
 
-  // LISTS
-  @mixin bullet-type($bullet, $icon: false) {
-    &::before {
-      @if $icon {
-        font-family: $fontIcon;
-        @extend .#{$icon}::before;
-        font-size: $fontSmall;
-      }
-      @else {
-        content: $bullet;
-        font-family: $fontHighlight;
-      }
-
-      display: block;
-      font-weight: 400;
-      position: absolute;
-      top: 0;
-      left: 0;
-      line-height: $baseSpace;
-
+// LISTS
+@mixin bullet-type($bullet, $icon: false) {
+  &::before {
+    @if $icon {
+      font-family: $fontIcon;
+      @extend .#{$icon}::before;
+      font-size: $fontSmall;
     }
-  }
-
-  @mixin numbered-list() {
-    &::before {
-      counter-increment: list;
-      content: '0' counter(list);
-      color: inherit;
-      font-weight: 400;
-      display: inline-block;
-      position: absolute;
-      left: 0;
+    @else {
+      content: $bullet;
+      font-family: $fontHighlight;
     }
+
+    display: block;
+    font-weight: 400;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: $baseSpace;
+
   }
+}
+
+@mixin numbered-list() {
+  &::before {
+    counter-increment: list;
+    content: '0' counter(list);
+    color: inherit;
+    font-weight: 400;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+  }
+}
