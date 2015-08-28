@@ -38,11 +38,9 @@ export default Ember.Route.extend({
       });
   },
   afterModel: function(model, transition) {
-    var year = getWithDefault(transition, 'queryParams.year', 2013);
-
     var departments = $.getJSON(`${apiURL}/data/industry/${model.id}/participants?level=department`);
     var industries = $.getJSON(`${apiURL}/data/industry?level=division`);
-    var occupations = $.getJSON(`${apiURL}/data/industry/${model.id}/occupations/?level=minor_group`)
+    var occupations = $.getJSON(`${apiURL}/data/industry/${model.id}/occupations/?level=minor_group`);
     var industryDivisions  = Ember.$.getJSON(apiURL+'/metadata/industries?level=division');
 
     return RSVP.allSettled([departments, industries, occupations, industryDivisions]).then((array) => {
@@ -51,7 +49,7 @@ export default Ember.Route.extend({
       var occupationsData = getWithDefault(array[2], 'value.data', []);
 
       let locationsMetadata = this.modelFor('application').locations;
-      let industryDivisions = _.indexBy(getWithDefault(array[3], 'value.data', []), 'id')
+      let industryDivisions = _.indexBy(getWithDefault(array[3], 'value.data', []), 'id');
       let occupationsMetadata = this.modelFor('application').occupations;
 
       //get products data for the department
