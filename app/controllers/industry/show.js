@@ -48,6 +48,9 @@ export default Ember.Controller.extend({
       function(d) { d.avg_wage = d.monthly_wages; }
     );
   }).readOnly(),
+  recentDepartmentsData: computed('departmentsData', function() {
+    return _.filter(this.get('departmentsData'), { year: 2013 });
+  }),
   occupationsData: computed.alias('model.occupationsData')
 });
 
