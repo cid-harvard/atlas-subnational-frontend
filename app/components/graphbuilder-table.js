@@ -181,7 +181,7 @@ export default EmberTableComponent.extend({
       return numeral(number).format('0.00a');
     } else if(key === 'employment'){
       return numeral(Math.ceil(number)).format('0,0');
-    } else if(key === 'num_establishments'){
+    } else if(key === 'num_establishments' || key === 'export_num_plants'){
       if(parseInt(number) < 6) {
         return i18n.t('graph_builder.table.less_than_5');
       }
