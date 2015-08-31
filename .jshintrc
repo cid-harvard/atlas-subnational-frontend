@@ -10,7 +10,8 @@
     "d3plus",
     "noUiSlider",
     "L",
-    "Papa"
+    "Papa",
+    "saveAs"
   ],
   "browser": true,
   "boss": true,
