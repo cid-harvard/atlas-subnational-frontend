@@ -65,7 +65,12 @@
         source=source
         isSingleYear=isSingleYear
       }}
-      <small class="table__footer">{{{ t 'graph_builder.table.read_more' }}}</small>
+        <small class="table__footer">
+          {{ t 'graph_builder.table.read_more' }}
+          {{#link-to 'about.glossary' class='link--stream link--stream--inline--tiny'}}
+            {{t 'general.glossary'}}
+          {{/link-to}}
+        </small>
       </div>
     </section>
     <section class="stream__section recirc builder__recirc">

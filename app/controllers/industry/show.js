@@ -40,13 +40,17 @@ export default Ember.Controller.extend({
   averageWageDotPlot: computed('model.industriesData', 'model.id', function() {
    return _.chain(this.get('model.industriesData'))
       .filter({year: this.get('year')})
-      .each(function(d) { d.avg_wage = d.wages/d.employment; })
+      .each(function(d) { d.avg_wage = d.monthly_wages; })
       .value();
   }),
   departmentsData: computed('model.departmentsData', function() {
     return _.each(this.get('model.departmentsData'),
-      function(d) { d.avg_wage = d.wages/d.employment; }
+      function(d) { d.avg_wage = d.monthly_wages; }
     );
-  }).readOnly()
+  }).readOnly(),
+  recentDepartmentsData: computed('departmentsData', function() {
+    return _.filter(this.get('departmentsData'), { year: 2013 });
+  }),
+  occupationsData: computed.alias('model.occupationsData')
 });
 
