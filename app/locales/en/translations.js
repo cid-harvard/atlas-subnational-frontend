@@ -112,27 +112,34 @@ export default {
   },
   'graph_builder': {
     'view_more': 'View more',
+    'builder_questions': {
+      'location': 'Questions: Locations',
+      'product': 'Questions: Products',
+      'industry': 'Questions: Industries',
+      'occupation':'Questions: Occupations'
+    },
     'table': {
       'less_than_5': 'Less than 5',
       'name': 'Name',
       'parent': 'Parent',
       'export_value': 'Exports, USD',
       'export_code': 'Export Code',
+      'location_code': 'Location Code',
       'industry_code': 'Industry Code',
       'code': 'Code',
       'import_value': 'Imports, USD',
       'export_rca': 'Revealed Comparative Advantage',
       'rca': 'Revealed Comparative Advantage',
-      'wages': 'Total Wages, COP (in thousands)',
-      'monthly_wages': 'Monthly Wages, COP (in thousands)',
+      'wages': 'Total Wages (thousands of pesos)',
+      'monthly_wages': 'Average Monthly Wage (thousands of pesos)',
       'cog': 'Complexity Opportunity Gain',
       'employment': 'Employment',
       'num_vacancies': 'Number of Vacancies',
       'avg_wage': 'Average Wage, COP (in thousands)',
       'average_wages': 'Average Wage, COP (in thousands)',
       'employment_growth': 'Employment Growth (2008-2012)',
-      'num_establishments': 'Firms',
-      'export_num_plants': 'Firms',
+      'num_establishments': 'Number of Firms',
+      'export_num_plants': 'Number of Firms',
       'year': 'Year',
       'complexity': 'Complexity',
       'distance': 'Distance',
@@ -212,8 +219,8 @@ export default {
         'occupations.num_vacancies': 'Total vacancies'
       },
       'product': {
-        'locations.export_value': 'Total',
-        'locations.import_value': 'Total'
+        'locations.export_value': 'Total Exports',
+        'locations.import_value': 'Total Imports'
       },
       'location': {
         'products.export_value': 'Total exports',
