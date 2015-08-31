@@ -34,6 +34,9 @@ var app = new EmberApp({
 });
 
 
+// PapaParse
+app.import('bower_components/papaparse/papaparse.min.js');
+
 // D3
 app.import('bower_components/d3/d3.min.js');
 
