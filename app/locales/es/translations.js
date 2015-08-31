@@ -113,10 +113,13 @@ export default {
   'graph_builder': {
     'view_more': 'Muestre más',
     'table': {
+      'less_than_5': 'Menos de 5',
       'name': 'Nombre',
       'parent': 'Gropo',
       'export_value': 'Exportaciones, USD',
       'import_value': 'Importaciones, USD',
+      'export_code': 'Exportaciones Código',
+      'industry_code': 'Sector Código',
       'code': 'Código',
       'export_rca': 'Ventaja comparativa revelada',
       'rca': 'Ventaja comparativa revelada',
