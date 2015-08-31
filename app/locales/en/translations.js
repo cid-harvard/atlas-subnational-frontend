@@ -12,7 +12,8 @@ export default {
     'multiples': 'Area charts',
     'geo': 'Geographic map',
     'scatter': 'Scatterplot',
-    'similarity': 'Similarity space'
+    'similarity': 'Similarity space',
+    'glossary': 'Glossary'
   },
   'pageheader': {
     'brand_slogan': 'Using data to keep Colombia competitive',
@@ -107,7 +108,7 @@ export default {
     'results_products': 'Products',
     'results_locations': 'Locations',
     'results_industries': 'Industries',
-    'didnt_find': 'Didn’t find what you were looking for? Let us know: TKTK@prosperia.com'
+    'didnt_find': 'Didn’t find what you were looking for? Let us know: help@datlas.com'
   },
   'graph_builder': {
     'view_more': 'View more',
@@ -129,7 +130,7 @@ export default {
       'year': 'Year',
       'complexity': 'Complexity',
       'distance': 'Distance',
-      'read_more': 'Unfamiliar with any of the indicators above? Find definitions in our <a href="/about/glossary" class="link--stream link--stream--inline--tiny">glossary</a>.'
+      'read_more': 'Unfamiliar with any of the indicators above? Find definitions in our '
     },
     'settings' : {
       'label': 'Settings',
