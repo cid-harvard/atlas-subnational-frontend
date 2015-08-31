@@ -125,6 +125,7 @@ export default {
       'export_value': 'Exportaciones, USD',
       'import_value': 'Importaciones, USD',
       'export_code': 'Exportaciones Código',
+      'location_code': 'Lugar Código',
       'industry_code': 'Sector Código',
       'code': 'Código',
       'export_rca': 'Ventaja comparativa revelada',
@@ -219,7 +220,7 @@ export default {
       },
       'product': {
         'locations.export_value': 'Exportaciones totales',
-        'locations.import_value': 'Importacione'
+        'locations.import_value': 'Importaciones totales'
       },
       'location': {
         'products.export_value': 'Exportaciones totales',

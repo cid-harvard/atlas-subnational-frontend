@@ -80,7 +80,7 @@ export default EmberTableComponent.extend({
     { key: 'distance' , expand: true, type: 'int', savedWidth: 120 }
    ],
   locationsMap: [
-    { key: 'code', expand: false, savedWidth: 100 },
+    { key: 'code', copy: 'location_code',  expand: false, savedwidth: 100 },
     { key: 'name', expand: true, savedWidth: 300 },
     { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
     { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
@@ -104,7 +104,7 @@ export default EmberTableComponent.extend({
     { key: 'distance' , expand: true, type: 'int', savedWidth: 120 },
    ],
   departmentsMap: [
-    { key: 'code', expand: false, savedWidth: 100 },
+    { key: 'code', copy: 'location_code',  expand: false, savedwidth: 100 },
     { key: 'name', expand: true, savedWidth: 300 },
     { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
     { key: 'monthly_wages', type: 'int', expand: true},
