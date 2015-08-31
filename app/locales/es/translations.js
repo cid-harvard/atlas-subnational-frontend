@@ -112,6 +112,12 @@ export default {
   },
   'graph_builder': {
     'view_more': 'Muestre más',
+    'builder_questions': {
+      'location': 'Preguntas: lugares',
+      'product': 'Preguntas: productos de exportación',
+      'industry': 'Preguntas: productos de exportación',
+      'occupation': 'Preguntas: ocupaciones'
+    },
     'table': {
       'less_than_5': 'Menos de 5',
       'name': 'Nombre',
@@ -123,16 +129,16 @@ export default {
       'code': 'Código',
       'export_rca': 'Ventaja comparativa revelada',
       'rca': 'Ventaja comparativa revelada',
-      'wages': 'Salarios totales pagados, COP (mil)',
-      'monthly_wages': 'Salarios, COP (mil)',
+      'wages': 'Salarios totales pagados, COP (miles de pesos)',
+      'monthly_wages': 'Salarios, COP (miles de pesos)',
       'cog': 'Complejidad potencial',
       'employment': 'Empleo',
-      'num_vacancies': 'Number of Vacancies',
-      'avg_wage': 'Salario medio, COP (mil)',
-      'average_wages': 'Salario medio, COP (mil)',
+      'num_vacancies': 'Número de vacantes',
+      'avg_wage': 'Salarios promedio, COP (miles de pesos)',
+      'average_wages': 'Salarios promedio, COP (miles de pesos)',
       'employment_growth': 'El crecimiento del empleo (2008–2012)',
-      'num_establishments': 'Empresas',
-      'export_num_plants': 'Empresas',
+      'num_establishments': 'Número de empresas',
+      'export_num_plants': 'Número de empresas',
       'year': 'Año',
       'complexity': 'Complejidad',
       'distance': 'Distancia',
@@ -165,8 +171,8 @@ export default {
         'occupations.num_vacancies': 'Ocupaciones demandadas por {{name}}?'
       },
       'product': {
-        'locations.export_value': '¿Qué lugares en Colombia exportar {{name}}?',
-        'locations.import_value': '¿Qué lugares en Colombia importar {{name}}?'
+        'locations.export_value': '¿Qué lugares en Colombia exportan {{name}}?',
+        'locations.import_value': '¿Qué lugares en Colombia importan {{name}}?'
       },
       'location': {
         'locations.export': '¿A qué países exporta {{name}}?',
@@ -209,11 +215,11 @@ export default {
         'departments.employment': 'Empleo total',
         'departments.wages': 'Salarios totales, COP',
         'departments.wage_avg': 'Salarios promedio, COP',
-        'occupations.num_vacancies': 'Total vacancies'
+        'occupations.num_vacancies': 'Total de vacantes'
       },
       'product': {
-        'locations.export_value': 'Total',
-        'locations.import_value': 'Total'
+        'locations.export_value': 'Exportaciones totales',
+        'locations.import_value': 'Importacione'
       },
       'location': {
         'products.export_value': 'Exportaciones totales',
@@ -274,7 +280,7 @@ export default {
     'industries': 'Sectores',
     'value': 'Valor',
     'employment_growth': 'Crecimiento del empleo (2008-2013)',
-    'avg_wages': 'Promedio de salarios ({{year}})',
+    'avg_wages': 'Salarios promedio ({{year}})',
     'employment': 'Empleo ({{year}})',
     'industry_composition': 'Composición de la industria (2013)',
     'occupation': 'Ocupaciones demandadas por sector',
