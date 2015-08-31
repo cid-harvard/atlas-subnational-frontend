@@ -125,7 +125,7 @@ export default {
       'rca': 'Ventaja comparativa revelada',
       'wages': 'Salarios totales pagados, COP (mil)',
       'monthly_wages': 'Salarios, COP (mil)',
-      'cog': 'Complexity Opportunity Gain',
+      'cog': 'Complejidad potencial',
       'employment': 'Empleo',
       'num_vacancies': 'Number of Vacancies',
       'avg_wage': 'Salario medio, COP (mil)',
