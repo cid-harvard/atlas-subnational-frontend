@@ -24,8 +24,10 @@
     "jquery-ui": "~1.11.4"
   },
   "devDependencies": {
+    "FileSaver.js": "~0.0.2",
     "d3": "~3.5.5",
-    "d3plus": "~1.7.3"
+    "d3plus": "~1.7.3",
+    "papaparse": "~4.1.2"
   },
   "resolutions": {
     "d3": "~3.5.5",
