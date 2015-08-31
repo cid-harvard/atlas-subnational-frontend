@@ -60,16 +60,20 @@
             metadata=metadata
             }}
         </div>
-      {{component 'graphbuilder-table'
-        data=filteredData
-        source=source
-        isSingleYear=isSingleYear
-      }}
+        {{component 'graphbuilder-table'
+          data=filteredData
+          source=source
+          isSingleYear=isSingleYear
+        }}
         <small class="table__footer">
           {{ t 'graph_builder.table.read_more' }}
           {{#link-to 'about.glossary' class='link--stream link--stream--inline--tiny'}}
             {{t 'general.glossary'}}
           {{/link-to}}
+          {{component 'table-download'
+            name=builderModHeader
+            data=immutableData
+          }}
         </small>
       </div>
     </section>
