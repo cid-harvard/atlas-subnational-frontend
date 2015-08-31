@@ -88,9 +88,12 @@ export default {
   'graph_builder': {
     'view_more': 'View more',
     'table': {
+      'less_than_5': 'Less than 5',
       'name': 'Name',
       'parent': 'Parent',
       'export_value': 'Exports, USD',
+      'export_code': 'Export Code',
+      'industry_code': 'Industry Code',
       'code': 'Code',
       'import_value': 'Imports, USD',
       'export_rca': 'Revealed Comparative Advantage',
