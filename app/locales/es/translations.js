@@ -236,7 +236,7 @@ export default {
   },
   'location.show': {
     'overview': 'Visión de conjunto',
-    'bullet.gdp_grow_rate': 'La tasa de crecimiento del PIB entre {{yearRange}} fue {{gdpGrowth}}',
+    'bullet.gdp_grow_rate': 'La tasa de crecimiento del PIB entre 2008 y 2013 fue {{gdpGrowth}}',//FIXME: dynamic years
     'bullet.gdp_pc': 'El PIB per capita de {{name}} es {{lastGdpPerCapita}}',
     'bullet.last_pop': 'La población es {{lastPop}}',
     'all_departments': 'Comparación con otros departamentos',
