@@ -62,7 +62,7 @@ export default Ember.Component.extend({
     return d3.svg.axis()
       .scale(this.get('yScale'))
       .ticks(5)
-      .tickFormat((d) => { return numeral(d).format('0a'); })
+      .tickFormat((d) => { return numeral(d).format('0.0a'); })
       .outerTickSize(0)
       .tickSize(-this.get('width'))
       .orient('left');
@@ -225,9 +225,9 @@ export default Ember.Component.extend({
           if(d.values[index].year != date){ yValue = 0; }
 
           if(varDependent === 'export_value') {
-            return '$' + numeral(yValue).format('0a');
+            return '$' + numeral(yValue).format('0.0a');
           }
-          return numeral(yValue).format('0a');
+          return numeral(yValue).format('0.0a');
         });
 
 
