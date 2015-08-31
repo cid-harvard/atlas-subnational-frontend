@@ -108,7 +108,7 @@ export default {
     'results_products': 'Productos',
     'results_locations': 'Lugares',
     'results_industries': 'Sectores',
-    'didnt_find': '¿Encontró lo que buscaba? Nos interesa saber: help@datlas.com'
+    'didnt_find': '¿Encontró lo que buscaba? Nos interesa saber: eduardo_lora@hks.harvard.edu'
   },
   'graph_builder': {
     'view_more': 'Muestre más',
@@ -131,7 +131,7 @@ export default {
       'export_rca': 'Ventaja comparativa revelada',
       'rca': 'Ventaja comparativa revelada',
       'wages': 'Salarios totales pagados, COP (miles de pesos)',
-      'monthly_wages': 'Salarios, COP (miles de pesos)',
+      'monthly_wages': 'Salarios promedio, COP (miles de pesos)',
       'cog': 'Complejidad potencial',
       'employment': 'Empleo',
       'num_vacancies': 'Número de vacantes',

@@ -108,7 +108,7 @@ export default {
     'results_products': 'Products',
     'results_locations': 'Locations',
     'results_industries': 'Industries',
-    'didnt_find': 'Didn’t find what you were looking for? Let us know: help@datlas.com'
+    'didnt_find': 'Didn’t find what you were looking for? Let us know: eduardo_lora@hks.harvard.edu'
   },
   'graph_builder': {
     'view_more': 'View more',
