@@ -41,16 +41,13 @@
 
 .ember-table-header-cell .ember-table-content-container .ember-table-content {
   font-weight: 300;
-  padding: $baseSpace/2 $baseSpace;
+  padding: $baseSpace/2 $baseSpace/2;
   position: initial;
-}
-
-.ember-table-header-cell {
-  text-align: center;
+  white-space: nowrap;
 }
 
 .ember-table-body-container .ember-table-content, .ember-table-footer-container .ember-table-content {
-  padding: $baseSpace/2 $baseSpace;
+  padding: $baseSpace/2 $baseSpace/2;
 }
 
 .ember-table-cell {
