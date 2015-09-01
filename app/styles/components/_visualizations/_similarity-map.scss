@@ -7,12 +7,13 @@
 
 .connect__line {
   stroke: $colorGrayLight;
-  stroke-opacity: .4;
+  stroke-opacity: .6;
 }
 
 .connect__line.highlighted {
-  stroke-width: 2.5px;
-  stroke-opacity: .6;
+  stroke-width: 3px;
+  stroke: $colorGray;
+  stroke-opacity: 1;
 }
 
 .items__mark__circle {
@@ -27,6 +28,12 @@
 
 .items__mark__circle.selected {
   fill: #EA413D;
+}
+
+.items__mark__circle.highlighted__adjacent {
+  opacity: 1;
+  stroke-width: 1px;
+  stroke: $colorGray;
 }
 
 text {
@@ -54,3 +61,16 @@ text {
     font-size: 1.4rem;
   }
 }
+
+.items__mark__divtext__tooltip {
+    background: #333;
+    background: rgba(0,0,0,.8);
+    border-radius: 5px;
+    height: 100%;
+    color: #fff;
+    padding: 5px 15px;
+    z-index: 9999;
+    width: 220px;
+}
+
+

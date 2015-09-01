@@ -19,6 +19,7 @@ export default Ember.Controller.extend({
   drawerChangeGraphIsOpen: false,
   drawerQuestionsIsOpen: false,
   name: computed.alias('model.entity.name'),
+  metadata: computed.alias('model.metaData'),
   source: computed.alias('model.source'),
   entityId: computed.alias('model.entity.id'),
   entity: computed.alias('model.entity'),
