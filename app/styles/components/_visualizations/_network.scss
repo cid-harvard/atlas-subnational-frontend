@@ -28,25 +28,28 @@
 
 
 // Tooltip
-.items__mark__divtext {
-  // width: auto !important;
-  body {
-    font-style: inherit !important;
-    font-variant: inherit !important;
-    font-weight: inherit !important;
-    font-stretch: inherit !important;
-    font-size: inherit !important;
-    line-height: inherit !important;
-    font-family: inherit !important;
-  }
-}
-
 .items__mark__divtext__tooltip {
   background: $colorWhite;
   height: 100%;
   padding: $baseSpace/2;
   width: auto !important;
+  height: auto !important;
   z-index: $zIndex-9;
   max-width: 30rem;
+  font-size: $fontTiny;
+  &:before{
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid black;
+    left: -8px;
+
+    top: 7px;
+  }
 }
 

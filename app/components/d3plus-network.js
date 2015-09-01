@@ -76,11 +76,8 @@ export default Ember.Component.extend({
       y_invert: true,
       var_id: 'id',
       items: [{
-        attr: "name",
+        attr: 'name',
         marks: [{
-          var_mark: '__aggregated',
-          type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
-        }, {
           type: 'circle',
           class: (d) => {
             if(d[this.get('varDependent')] >= 1) {
@@ -89,12 +86,12 @@ export default Ember.Component.extend({
           }
         }, {
           var_mark: '__highlighted',
-          type: d3.scale.ordinal().domain([true, false]).range(["divtext", "none"]),
+          type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
           class: function() { return 'items__mark__divtext__tooltip'; },
           text: (d) => { return d[`name_short_${this.get('i18n').locale}`]; }
         }, {
           var_mark: '__selected',
-          type: d3.scale.ordinal().domain([true, false]).range(["divtext", "none"]),
+          type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
           class: function() { return 'items__mark__divtext__tooltip'; },
           text: (d) => { return d[`name_short_${this.get('i18n').locale}`]; }
         }]
