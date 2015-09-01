@@ -12,7 +12,8 @@ export default {
     'multiples': 'Area charts',
     'geo': 'Geographic map',
     'scatter': 'Scatterplot',
-    'similarity': 'Similarity space'
+    'similarity': 'Similarity space',
+    'glossary': 'Glossary'
   },
   'pageheader': {
     'brand_slogan': 'Using data to keep Colombia competitive',
@@ -83,7 +84,7 @@ export default {
     'results_products': 'Products',
     'results_locations': 'Locations',
     'results_industries': 'Industries',
-    'didnt_find': 'Didn’t find what you were looking for? Let us know: TKTK@prosperia.com'
+    'didnt_find': 'Didn’t find what you were looking for? Let us know: help@datlas.com'
   },
   'graph_builder': {
     'view_more': 'View more',
@@ -97,13 +98,15 @@ export default {
       'rca': 'Revealed Comparative Advantage',
       'wages': 'Total Wages, COP (in thousands)',
       'employment': 'Employment',
-      'avg_wage': 'Average Wage',
+      'num_vacancies': 'Number of Vacancies',
+      'avg_wage': 'Average Wage, COP (in thousands)',
+      'average_wages': 'Average Wage, COP (in thousands)',
       'employment_growth': 'Employment Growth (2008-2012)',
       'num_establishments': 'Firms',
       'year': 'Year',
       'complexity': 'Complexity',
       'distance': 'Distance',
-      'read_more': 'Unfamiliar with any of the indicators above? Find definitions in our <a href="/about/glossary" class="link--stream link--stream--inline--tiny">glossary</a>.'
+      'read_more': 'Unfamiliar with any of the indicators above? Find definitions in our '
     },
     'settings' : {
       'label': 'Settings',
@@ -128,7 +131,8 @@ export default {
       'industry': {
         'departments.employment': 'Where in Colombia does {{name}} employ the most people?',
         'departments.wages': 'Where in Colombia does {{name}} pay the highest total wages?',
-        'departments.wage_avg': 'Where in Colombia does {{name}} pay the highest wages per worker?'
+        'departments.wage_avg': 'Where in Colombia does {{name}} pay the highest wages per worker?',
+        'occupations.num_vacancies': 'What occupations are demanded by {{name}}?'
       },
       'product': {
         'locations.export_value': 'What places in Colombia export {{name}}?',
@@ -175,6 +179,7 @@ export default {
         'locations.employment': 'Total employment',
         'locations.wages': 'Total wages, COP',
         'locations.wage_avg': 'Average wages, COP',
+        'occupations.num_vacancies': 'Total vacancies'
       },
       'product': {
         'locations.export_value': 'Total',
@@ -241,7 +246,9 @@ export default {
     'employment_growth': 'Employment Growth (2008-2013)',
     'avg_wages': 'Average Wages ({{year}})',
     'employment': 'Employment ({{year}})',
-    'industry_composition': 'Industry Composition, 2012'
+    'industry_composition': 'Industry Composition, 2013',
+    'occupation': 'Occupations Demanded by Industry',
+    'occupation_demand': 'Occupations most demanded, 2013'
   },
   'about': {
     'project_description_name': 'Project Description',

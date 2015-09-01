@@ -22,4 +22,18 @@
       </div>
     </li>
   </ul>
+  <h4 class="builder__questions__header">Questions: Occupations</h4>
+  <ul class="builder__questions__list">
+    <li class="builder__questions__item">
+      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span {{action "closeDrawer"}}>
+          {{#link-to 'visualization' entity_and_id 'occupations' 'treemap' (query-params variable='num_vacancies' startDate=2013 endDate=2013) class="builder__questions__question"}}
+            {{t 'graph_builder.page_title.industry.occupations.num_vacancies' name=name}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+  </ul>
 </div>
+
