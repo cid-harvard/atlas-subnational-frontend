@@ -61,7 +61,7 @@ export default EmberTableComponent.extend({
   industryClassesMap: [
     { key: 'code', copy: 'industry_code',  expand: false },
     { key: 'name', expand: true },
-    { key: 'avg_wage', expand: false },
+    { key: 'avg_wage', type:'int', expand: false },
     { key: 'wages', type: 'int', expand: true },
     { key: 'employment', expand: true },
     { key: 'employment_growth', expand: true },
@@ -173,7 +173,7 @@ export default EmberTableComponent.extend({
   },
   formatNumber: (number, key, i18n) => {
     var decimal_vars = ['export_rca','rca','complexity', 'distance', 'cog', 'population'];
-    var wage_vars = ['wages', 'avg_wages', 'monthly_wages'];
+    var wage_vars = ['wages', 'avg_wages', 'monthly_wages', 'avg_wage'];
 
     if(_.include(wage_vars, key)){
       return numeral(number).divide(1000).format('0,0');
