@@ -54,6 +54,7 @@ export default EmberTableComponent.extend({
   i18n: Ember.inject.service(),
   hasFooter: false,
   rowHeight: 50,
+  minHeaderHeight: 50,
   height: 420,
   enableContentSelection: true,
   attributeBindings: ['height'],
