@@ -225,6 +225,7 @@ export default Ember.Controller.extend({
       let graph_builder_id = `${model.entity_type}-${model.entity.id}`;
       this.set('drawerChangeGraphIsOpen', false); // Close graph change drawer
       this.set('searchText', this.get('search'));
+      if(this.get('visualization') === visualization) { return true; } //do nothing if currently on the same visualization
       this.transitionToRoute('visualization', graph_builder_id, model.source, visualization, {
         queryParams: { variable: this.get('variable'), startDate: null, endDate: null, search: this.get('search') }
       });
