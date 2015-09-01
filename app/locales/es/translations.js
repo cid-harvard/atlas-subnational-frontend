@@ -121,7 +121,7 @@ export default {
     'table': {
       'less_than_5': 'Menos de 5',
       'name': 'Nombre',
-      'parent': 'Gropo',
+      'parent': 'Grupo',
       'export_value': 'Exportaciones, USD',
       'import_value': 'Importaciones, USD',
       'export_code': 'Exportaciones Código',
