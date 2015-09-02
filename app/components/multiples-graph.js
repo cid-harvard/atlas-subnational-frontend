@@ -62,7 +62,7 @@ export default Ember.Component.extend({
     return d3.svg.axis()
       .scale(this.get('yScale'))
       .ticks(5)
-      .tickFormat((d) => { return numeral(d).format('0a'); })
+      .tickFormat((d) => { return numeral(d).format('0.0a'); })
       .outerTickSize(0)
       .tickSize(-this.get('width'))
       .orient('left');
@@ -225,9 +225,9 @@ export default Ember.Component.extend({
           if(d.values[index].year != date){ yValue = 0; }
 
           if(varDependent === 'export_value') {
-            return '$' + numeral(yValue).format('0a');
+            return '$' + numeral(yValue).format('0.0a');
           }
-          return numeral(yValue).format('0a');
+          return numeral(yValue).format('0.0a');
         });
 
 
@@ -245,6 +245,7 @@ export default Ember.Component.extend({
   },
   didInsertElement: function() {
     Ember.run.later(this, function() {
+      this.set('parent', this.get('parentView'));
       this.initCharts();
     }, 100);
   },
@@ -254,6 +255,15 @@ export default Ember.Component.extend({
     this.removeObserver('data.[]', this, this.update);
     this.removeObserver('parent.isVisible', this, this.profileTabUpdate);
   },
+  profileTabUpdate: observer('parent.isVisible', function() {
+    if(this.get('isInTab')) {
+      Ember.run.scheduleOnce('afterRender', this , function() {
+        this.set('hasMore', true);
+        this.set('firstSlice', 12);
+        this.initCharts();
+      });
+    }
+  }),
   update: observer('data.[]', 'i18n.locale', function() {
     if(!this.element){ return false; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
@@ -264,6 +274,7 @@ export default Ember.Component.extend({
   actions: {
     showAll: function() {
       this.set('firstSlice', this.get('nestedData').length);
+      this.set('hasMore', false);
       this.initCharts();
     }
   }
