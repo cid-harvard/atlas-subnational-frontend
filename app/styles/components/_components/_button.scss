@@ -51,10 +51,12 @@ button::-moz-focus-inner {
   }
 }
 
-.btn--download {
-  background: $colorNavy600;
-  color: $colorWhite;
-  &:hover {
-    background: $colorNavy400;
-  }
+.btn--cta {
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: $baseSpace / 2;
 }
