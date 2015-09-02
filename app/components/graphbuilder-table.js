@@ -257,7 +257,7 @@ export default EmberTableComponent.extend({
   },
   formatNumber: (number, key, i18n) => {
     var decimal_vars = ['export_rca','rca','complexity', 'distance', 'cog', 'population'];
-    var wage_vars = ['wages', 'avg_wages'];
+    var wage_vars = ['wages', 'avg_wages', 'monthly_wages', 'avg_wage'];
 
     if(_.include(wage_vars, key)){
       return numeral(number).divide(1000).format('0,0');
