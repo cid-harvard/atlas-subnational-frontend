@@ -1,15 +1,8 @@
-<div class="ember__table__wrap">
-  {{#if hasHeader}}
-    {{view "header-table-container"}}
-  {{/if}}
+{{#if hasHeader}}
+  {{view "header-table-container"}}
+{{/if}}
 
-  {{view "body-table-container"}}
+{{view "body-table-container"}}
 
-  {{view "scroll-container"}}
-  {{view "column-sortable-indicator"}}
-</div>
-
-{{component 'table-download'
-  name=name
-  data=data
-}}
+{{view "scroll-container"}}
+{{view "column-sortable-indicator"}}
