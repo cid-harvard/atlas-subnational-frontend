@@ -12,7 +12,8 @@ export default {
     'multiples': 'Area charts',
     'geo': 'Geographic map',
     'scatter': 'Scatterplot',
-    'similarity': 'Similarity space'
+    'similarity': 'Similarity space',
+    'glossary': 'Glossary'
   },
   'pageheader': {
     'brand_slogan': 'Using data to keep Colombia competitive',
@@ -76,6 +77,30 @@ export default {
     'csv': 'CSV',
     'excel': 'Excel'
   },
+  'downloads': {
+    'head': 'Download the data',
+    'cta_download': 'Download',
+    'cta_na': 'Not available',
+    'thead_national': 'National',
+    'thead_departments': 'Departments',
+    'thead_met': 'Cities',
+    'thead_muni': 'Municipalities',
+    'trade_head': 'Trade data (DIAN)',
+    'trade_copy': 'The source of all data on exports and imports by department and municipality is DIAN’s Customs Data (DIAN is the National Tax and Customs Authority). It may not correspond to official export/import data because some transactions were not included due to lack of information on the industry of the exporter and/or the municipality or department of origin (or destination) of the export (or import). Colombian Customs data use a modified version of the Harmonized System (HS) classification, which is compatible with the International Standard Industrial Classification of All Economic Activities (ISIC).',
+    'trade_row_1': 'Export values (2008–2013)',
+    'trade_row_2': 'Import values (2008–2013)',
+    'trade_row_3': 'Export complexity',
+    'industry_head': 'Industry data (PILA)',
+    'industry_copy': 'PILA (the Integrated Report of Social Security Contributions), managed by the Ministry of Health) is the main source of industry data. It contains information on formal employment, wages and number of firms by municipality and industry. Colombia’s industry classification is a modified version of the International Standard Industrial Classification of All Economic Activities (ISIC).',
+    'industry_row_1': 'Employment, wages and number of firms (2008–2013)',
+    'industry_row_2': 'Industry complexity',
+    'occupations_head': 'Occupations data',
+    'occupations_copy': 'All data on occupations (entry wage levels by occupation and location, and occupational structure by industry) come from job vacancy announcements placed by firms in public and private Internet job sites during 2014. Occupations are classified according to the Occupational Information Network Numerical Index (ONET). The data were processed by Jeisson Arley Cárdenas Rubio, researcher of Universidad del Rosario, Bogotá, and Jaime Mauricio Montaña Doncel, Masters student at the Paris School of Economics.',
+    'occupations_row_1': 'Job vacancies and entry wages (2014)',
+    'other_head': 'Other data (DANE)',
+    'other_copy': 'DANE (the National Statistical Office) is the source of all data on GDP and population.',
+    'other_row_1': 'GDP and demographic variables'
+  },
   'search': {
     'header': 'Results',
     'intro': 'Search for the location, product, industry or occupation that you’re interested in.',
@@ -83,27 +108,42 @@ export default {
     'results_products': 'Products',
     'results_locations': 'Locations',
     'results_industries': 'Industries',
-    'didnt_find': 'Didn’t find what you were looking for? Let us know: TKTK@prosperia.com'
+    'didnt_find': 'Didn’t find what you were looking for? Let us know: eduardo_lora@hks.harvard.edu'
   },
   'graph_builder': {
     'view_more': 'View more',
+    'builder_questions': {
+      'location': 'Questions: Locations',
+      'product': 'Questions: Products',
+      'industry': 'Questions: Industries',
+      'occupation':'Questions: Occupations'
+    },
     'table': {
+      'less_than_5': 'Less than 5',
       'name': 'Name',
       'parent': 'Parent',
       'export_value': 'Exports, USD',
+      'export_code': 'Export Code',
+      'location_code': 'Location Code',
+      'industry_code': 'Industry Code',
       'code': 'Code',
       'import_value': 'Imports, USD',
       'export_rca': 'Revealed Comparative Advantage',
       'rca': 'Revealed Comparative Advantage',
-      'wages': 'Total Wages, COP (in thousands)',
+      'wages': 'Total Wages (thousands of pesos)',
+      'monthly_wages': 'Average Monthly Wage (thousands of pesos)',
+      'cog': 'Complexity Opportunity Gain',
       'employment': 'Employment',
-      'avg_wage': 'Average Wage',
+      'num_vacancies': 'Number of Vacancies',
+      'avg_wage': 'Average Wage, COP (in thousands)',
+      'average_wages': 'Average Wage, COP (in thousands)',
       'employment_growth': 'Employment Growth (2008-2012)',
-      'num_establishments': 'Firms',
+      'num_establishments': 'Number of Firms',
+      'export_num_plants': 'Number of Firms',
       'year': 'Year',
       'complexity': 'Complexity',
       'distance': 'Distance',
-      'read_more': 'Unfamiliar with any of the indicators above? Find definitions in our <a href="/about/glossary" class="link--stream link--stream--inline--tiny">glossary</a>.'
+      'read_more': 'Unfamiliar with any of the indicators above? Find definitions in our '
     },
     'settings' : {
       'label': 'Settings',
@@ -128,7 +168,8 @@ export default {
       'industry': {
         'departments.employment': 'Where in Colombia does {{name}} employ the most people?',
         'departments.wages': 'Where in Colombia does {{name}} pay the highest total wages?',
-        'departments.wage_avg': 'Where in Colombia does {{name}} pay the highest wages per worker?'
+        'departments.wage_avg': 'Where in Colombia does {{name}} pay the highest wages per worker?',
+        'occupations.num_vacancies': 'What occupations are demanded by {{name}}?'
       },
       'product': {
         'locations.export_value': 'What places in Colombia export {{name}}?',
@@ -175,10 +216,11 @@ export default {
         'locations.employment': 'Total employment',
         'locations.wages': 'Total wages, COP',
         'locations.wage_avg': 'Average wages, COP',
+        'occupations.num_vacancies': 'Total vacancies'
       },
       'product': {
-        'locations.export_value': 'Total',
-        'locations.import_value': 'Total'
+        'locations.export_value': 'Total Exports',
+        'locations.import_value': 'Total Imports'
       },
       'location': {
         'products.export_value': 'Total exports',
@@ -194,7 +236,7 @@ export default {
   },
   'location.show': {
     'overview': 'Overview',
-    'bullet.gdp_grow_rate': 'GDP grew {{gdpGrowth}} between {{yearRange}}',
+    'bullet.gdp_grow_rate': 'The GDP growth rate between {{yearRange}} was {{gdpGrowth}}',
     'bullet.gdp_pc': '{{name}} has a GDP per capita of {{lastGdpPerCapita}}',
     'bullet.last_pop': 'The population is {{lastPop}}',
     'all_departments': 'Compared to the other departments',
@@ -241,7 +283,9 @@ export default {
     'employment_growth': 'Employment Growth (2008-2013)',
     'avg_wages': 'Average Wages ({{year}})',
     'employment': 'Employment ({{year}})',
-    'industry_composition': 'Industry Composition, 2012'
+    'industry_composition': 'Industry Composition, 2013',
+    'occupation': 'Occupations Demanded by Industry',
+    'occupation_demand': 'Occupations most demanded, 2013'
   },
   'about': {
     'project_description_name': 'Project Description',

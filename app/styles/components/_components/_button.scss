@@ -50,3 +50,11 @@ button::-moz-focus-inner {
     background: $colorNavy400;
   }
 }
+
+.btn--download {
+  background: $colorNavy600;
+  color: $colorWhite;
+  &:hover {
+    background: $colorNavy400;
+  }
+}

@@ -66,7 +66,7 @@
         {{#ivy-tabs}}
           {{#ivy-tab-list classNames='tabmod__tabs'}}
             {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-              <a class="tab__link"> {{t 'industry.show.avg_wages' year=year}} </a>
+              <a class="tab__link"> {{t 'industry.show.avg_wages' year='2008 - 2013'}} </a>
             {{/ivy-tab}}
             {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
               <a class="tab__link"> {{t 'industry.show.employment' year=year}} </a>
@@ -75,14 +75,14 @@
           {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
             <div class="vizmod">
               <div class="vizmod--treemod">
-                {{d3plus-tree-map
-                  isInTab='true'
+                {{multiples-graph
                   data=departmentsData
                   immutableData=departmentsData
-                  varIndependent=treemapIndependentVars
-                  elementId='wages-tree-map'
-                  dataType='industries'
-                  varDependent='avg_wage'
+                  isInTab='true'
+                  varDependent='monthly_wages'
+                  startDate=2008
+                  endDate=2013
+                  firstSlice=12
                 }}
               </div>
             </div>
@@ -92,8 +92,8 @@
               <div class="vizmod--treemod">
                 {{d3plus-tree-map
                   isInTab='true'
-                  data=departmentsData
-                  immutableData=departmentsData
+                  data=recentDepartmentsData
+                  immutableData=recentDepartmentsData
                   varIndependent=treemapIndependentVars
                   elementId='employment-tree-map'
                   varDependent='employment'
@@ -103,6 +103,31 @@
           {{/ivy-tab-panel}}
         {{/ivy-tabs}}
       </div>
+    </section>
+    <section class="stream__section">
+      <header class="section__header">
+        <h3 class="section__head">{{t 'industry.show.occupation'}}</h3>
+      </header>
+        {{#ivy-tabs}}
+          {{#ivy-tab-list classNames='tabmod__tabs'}}
+            {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+              <a class="tab__link"> {{t 'industry.show.occupation_demand' year=2014}} </a>
+            {{/ivy-tab}}
+          {{/ivy-tab-list}}
+          {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+            <div class="vizmod">
+              <div class="vizmod--treemod">
+                {{d3plus-tree-map
+                  isInTab='true'
+                  data=occupationsData
+                  immutableData=occupationsData
+                  elementId='occupation-tree-map'
+                  varDependent='num_vacancies'
+                }}
+              </div>
+            </div>
+          {{/ivy-tab-panel}}
+        {{/ivy-tabs}}
     </section>
     <section class="stream__section">
       <header class="section__header">

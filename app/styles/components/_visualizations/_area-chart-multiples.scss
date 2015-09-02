@@ -88,6 +88,10 @@
   pointer-events: all;
 }
 
+.tabmod__card .background {
+  fill: $colorBrown200;
+}
+
 .area {
   fill: $colorBrown500;
   pointer-events: none;
@@ -109,7 +113,7 @@
 
 .axis--y {
   line {
-    stroke: $colorBrown100;
+    stroke: $colorWhite;
     fill: none;
     shape-rendering: crispEdges;
     pointer-events: none;

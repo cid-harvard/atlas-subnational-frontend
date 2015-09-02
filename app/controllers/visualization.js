@@ -36,11 +36,13 @@ export default Ember.Controller.extend({
     if(this.get('visualization') === 'geo') { return true; }
     return false;
   }),
-  drawerIsUnnecessary: computed('visualization', function() { //TODO: Depricate this out
+  drawerIsUnnecessary: computed('visualization','source', function() { //TODO: Depricate this out
     let visualization = this.get('visualization');
+    let source = this.get('source');
     if(visualization === 'similarity' || visualization === 'scatter'){
       return true;
-     }
+    }
+    if(source === 'occupations') { return true; }
     return false;
   }),
   isSingleYear: computed('visualization', function() {
@@ -116,6 +118,8 @@ export default Ember.Controller.extend({
     let source = this.get('model.source');
     if(source === 'locations' && _.contains(['geo', 'treemap', 'multiples'], vis)){
       return ['geo', 'treemap', 'multiples'];
+    } else if (source === 'occupations' && _.contains(['treemap'], vis)){
+      return ['treemap'];
     } else if (_.contains(['treemap', 'multiples'], vis)){
       return ['treemap', 'multiples'];
     }
@@ -221,6 +225,7 @@ export default Ember.Controller.extend({
       let graph_builder_id = `${model.entity_type}-${model.entity.id}`;
       this.set('drawerChangeGraphIsOpen', false); // Close graph change drawer
       this.set('searchText', this.get('search'));
+      if(this.get('visualization') === visualization) { return true; } //do nothing if currently on the same visualization
       this.transitionToRoute('visualization', graph_builder_id, model.source, visualization, {
         queryParams: { variable: this.get('variable'), startDate: null, endDate: null, search: this.get('search') }
       });

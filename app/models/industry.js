@@ -11,6 +11,7 @@ export default DS.Model.extend(ModelAttribute, {
   classIndustries: attr(),
   industriesData: attr(),
   departmentsData: attr(),
+  occupationsData: attr(),
 
   timeseries: computed('industriesData','model.id', function() {
     return _.filter(this.get('industriesData'), {industry_id: parseInt(this.get('id'))});
@@ -59,8 +60,8 @@ export default DS.Model.extend(ModelAttribute, {
   }),
   graphbuilderMunicipalities: computed('id', function() {
     var defaultParams = {
-      treemap: { variable: 'employment', startDate: 2012, endDate: 2013 },
-      multiples: { variable: 'employment', startDate: 2012, endDate: 2013 },
+      treemap: { variable: 'num_vacancies', startDate: 2012, endDate: 2013 },
+      multiples: { variable: 'num_vacancies', startDate: 2012, endDate: 2013 },
       scatter: { variable: null,  startDate: 2012, endDate: 2013 },
       similarty: { variable: null,  startDate: 2012, endDate: 2013 }
     };
@@ -79,6 +80,26 @@ export default DS.Model.extend(ModelAttribute, {
           return _.merge(d, municipality);
         });
         return { entity: this, entity_type:'industry', data: data, source: 'participants', defaultParams:defaultParams };
+      });
+  }),
+  graphbuilderOccupations: computed('id', function() {
+    var defaultParams = {
+      treemap: { variable: 'num_vacancies', startDate: 2013, endDate: 2013 },
+    };
+    var baseUrl = `${apiURL}/data/industry/${this.get('id')}/occupations/?level=minor_group`;
+
+    return $.getJSON(baseUrl)
+      .then((response) => {
+        let data = response.data;
+        let occupationsMetadata = this.get('metaData.occupations');
+
+        data = _.map(data, (d) => {
+          let occupation = occupationsMetadata[d.occupation_id];
+          d.year = 2013;
+          d.group = occupation.code.split('-')[0];
+          return _.merge(d, occupation);
+        });
+        return { entity: this, entity_type:'industry', data: data, source: 'occupations', defaultParams:defaultParams };
       });
   })
 });

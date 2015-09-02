@@ -35,10 +35,12 @@ var SortableTableHeaderCell = HeaderCell.extend({
 });
 
 var SortableTableCell = TableCell.extend({
+  i18n: Ember.inject.service(),
   templateName: 'sortable-cell'
 });
 
 var SortableColumnMixin = Ember.Object.create({
+  i18n: Ember.inject.service(),
   supportSort: true,
   sorted: 0,
   isAscending: false,
@@ -51,57 +53,74 @@ export default EmberTableComponent.extend({
   i18n: Ember.inject.service(),
   hasFooter: false,
   rowHeight: 50,
-  minHeaderHeight: 50,
+  minHeaderHeight: 100,
   height: 400,
   enableContentSelection: true,
   attributeBindings: ['height'],
   selectionMode: 'mutiple',
   industryClassesMap: [
-    { key: 'code', expand: false, savedWidth: 100 },
-    { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'avg_wage', expand: false, savedWidth: 200 },
+    { key: 'code', copy: 'industry_code',  expand: false },
+    { key: 'name', expand: true },
+    { key: 'avg_wage', type:'int', expand: false },
     { key: 'wages', type: 'int', expand: true },
-    { key: 'employment', expand: true, savedWidth: 200 },
-    { key: 'employment_growth', expand: true, savedWidth: 300 },
-    { key: 'num_establishments', expand: true, savedWidth: 200 },
+    { key: 'employment', expand: true },
+    { key: 'employment_growth', expand: true },
+    { key: 'num_establishments', expand: true },
   ],
   productsMap: [
-    { key: 'code', expand: false, savedWidth: 100 },
-    { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'parent', expand: true, savedWidth: 300 },
-    { key: 'year' , expand: false, savedWidth: 100 },
-    { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
-    { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
-    { key: 'export_rca', type: 'int', expand: true, savedWidth: 160 },
-    { key: 'complexity' , expand: false, type: 'int', savedWidth: 120 },
-    { key: 'distance' , expand: true, type: 'int', savedWidth: 120 }
+    { key: 'code',  copy: 'export_code', expand: false },
+    { key: 'name', expand: true },
+    { key: 'parent', expand: true },
+    { key: 'year' , expand: false, type: 'int' },
+    { key: 'export_value', type: 'int', expand: true },
+    { key: 'import_value', type: 'int', expand: true },
+    { key: 'export_rca', type: 'int', expand: true },
+    { key: 'cog' , expand: false, type: 'int' },
+    { key: 'complexity' , expand: false, type: 'int' },
+    { key: 'distance' , expand: true, type: 'int' }
    ],
   locationsMap: [
-    { key: 'code', expand: false, savedWidth: 100 },
-    { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
-    { key: 'export_value', type: 'int', expand: true, savedWidth: 140 },
-    { key: 'import_value', type: 'int', expand: true, savedWidth: 140 },
-    { key: 'export_rca', type: 'int', expand: true, savedWidth: 160 },
+    { key: 'code', copy: 'location_code',  expand: false },
+    { key: 'name', expand: true },
+    { key: 'year' , expand: false, type: 'int' },
+    { key: 'export_value', type: 'int', expand: true },
+    { key: 'import_value', type: 'int', expand: true },
+    { key: 'export_num_plants' , expand: true, type: 'int' },
+    { key: 'export_rca', type: 'int', expand: true },
+    { key: 'cog' , expand: false, type: 'int' },
+    { key: 'distance' , expand: true, type: 'int' },
    ],
   industriesMap: [
-    { key: 'code', expand: false, savedWidth: 100 },
-    { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'parent', expand: true, savedWidth: 300 },
-    { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
+    { key: 'code', copy: 'industry_code',  expand: false },
+    { key: 'name', expand: true },
+    { key: 'parent', expand: true },
+    { key: 'year' , expand: false, type: 'int' },
+    { key: 'monthly_wages', type: 'int', expand: true},
     { key: 'wages', type: 'int', expand: true},
     { key: 'employment', type: 'int', expand: false},
-    { key: 'rca', type: 'int', expand: true},
-    { key: 'complexity' , expand: false, type: 'int'}
+    { key: 'num_establishments' , expand: true, type: 'int' },
+    { key: 'rca', type: 'int', expand: true },
+    { key: 'complexity' , expand: false, type: 'int'},
+    { key: 'distance' , expand: true, type: 'int' },
    ],
   departmentsMap: [
-    { key: 'code', expand: false, savedWidth: 100 },
-    { key: 'name', expand: true, savedWidth: 300 },
-    { key: 'year' , expand: false, type: 'int', savedWidth: 100 },
+    { key: 'code', copy: 'location_code',  expand: false },
+    { key: 'name', expand: true },
+    { key: 'year' , expand: false, type: 'int' },
+    { key: 'monthly_wages', type: 'int', expand: true},
     { key: 'wages', type: 'int', expand: true},
-    { key: 'employment', type: 'int', expand: false},
-    { key: 'num_establishments', type: 'int', expand: false},
+    { key: 'num_establishments' , expand: true, type: 'int'},
+    { key: 'employment', type: 'int', expand: false },
+    { key: 'rca', type: 'int', expand: true },
+    { key: 'cog' , expand: false, type: 'int'},
+    { key: 'distance' , expand: true, type: 'int' },
    ],
+  occupationsMap: [
+    { key: 'name', expand: true },
+    { key: 'code', expand: false },
+    { key: 'average_wages', type: 'int', expand: true },
+    { key: 'num_vacancies', type: 'int', expand: true },
+  ],
   tableMap: computed('source', function() {
     let source = this.get('source');
     let map = this.get(`${source}Map`);
@@ -126,11 +145,10 @@ export default EmberTableComponent.extend({
     return ColumnDefinition.create(SortableColumnMixin, {
       canAutoResize: column.expand,
       textAlign: column.type === 'int' ? 'text-align-right' : 'text-align-left',
-      savedWidth: column.savedWidth ? column.savedWidth : 160,
-      headerCellName: `graph_builder.table.${column.key}`,
+      headerCellName: column.copy ? `graph_builder.table.${column.copy}`: `graph_builder.table.${column.key}`,
       getCellContent: this.generateCellContent(column),
       isResizable: true,
-      isNumber: '1',
+      minWidth: 140,
       key: column.key
     });
   },
@@ -138,7 +156,7 @@ export default EmberTableComponent.extend({
     return (row) => {
       if(_.isNumber(row.get(column.key))){
         let number = row.get(column.key);
-        return this.formatNumber(number, column.key);
+        return this.formatNumber(number, column.key, this.get('i18n'));
       } else if(column.key === 'name'){
         return row.get(`name_short_${this.get('i18n').locale}`);
       } else if(column.key === 'parent'){
@@ -153,15 +171,20 @@ export default EmberTableComponent.extend({
       }
     };
   },
-  formatNumber: function(number, key) {
-    if(key === 'wages' || key === 'avg_wage') {
+  formatNumber: (number, key, i18n) => {
+    var decimal_vars = ['export_rca','rca','complexity', 'distance', 'cog', 'population'];
+    var wage_vars = ['wages', 'avg_wages', 'monthly_wages', 'avg_wage'];
+
+    if(_.include(wage_vars, key)){
       return numeral(number).divide(1000).format('0,0');
-    } else if(key === 'export_rca' || key === 'rca' || key === 'complexity' || key === 'distance' || key === 'population'){
+    } else if(_.include(decimal_vars, key)){
       return numeral(number).format('0.00a');
     } else if(key === 'employment'){
       return numeral(Math.ceil(number)).format('0,0');
-    } else if(key === 'num_establishments'){
-      if(parseInt(number) < 6) { return ' < 5'; }
+    } else if(key === 'num_establishments' || key === 'export_num_plants'){
+      if(parseInt(number) < 6) {
+        return i18n.t('graph_builder.table.less_than_5');
+      }
       return numeral(number).format('0,0');
     } else if(key === 'employment_growth'){
       return numeral(number).format('0.00%');
