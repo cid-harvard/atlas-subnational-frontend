@@ -67,7 +67,8 @@ export default EmberTableComponent.extend({
       savedWidth: 270
     }, {
       key: 'avg_wage',
-      savedWidth: 130
+      type: 'int',
+      savedWidth: 270
     }, {
       key: 'code',
       savedWidth: 100
@@ -89,7 +90,8 @@ export default EmberTableComponent.extend({
       savedWidth: 130
     }, {
       key: 'employment_growth',
-      savedWidth: 80
+      type: 'int',
+      savedWidth: 280
     }, {
       key: 'export_num_plants' ,
       type: 'int',
