@@ -83,7 +83,7 @@ export default EmberTableComponent.extend({
     }, {
       key: 'distance' ,
       type: 'int',
-      savedWidth: 100
+      savedWidth: 110
     }, {
       key: 'employment',
       type: 'int',
@@ -134,7 +134,7 @@ export default EmberTableComponent.extend({
     }, {
       key: 'wages',
       type: 'int',
-      savedWidth: 370
+      savedWidth: 380
     }, {
       key: 'year' ,
       type: 'int',
