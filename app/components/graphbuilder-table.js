@@ -234,7 +234,7 @@ export default EmberTableComponent.extend({
       textAlign: colSettings.type === 'int' ? 'text-align-right' : 'text-align-left',
       headerCellName: column.copy ? `graph_builder.table.${column.copy}`: `graph_builder.table.${column.key}`,
       getCellContent: this.generateCellContent(column),
-      isResizable: true,
+      isResizable: false,
       savedWidth: colSettings.savedWidth ? colSettings.savedWidth : 160,
       key: column.key
     });
