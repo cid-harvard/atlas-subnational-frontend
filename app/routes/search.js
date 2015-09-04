@@ -7,10 +7,11 @@ export default Ember.Route.extend({
   model: function(transition) {
     var locations= this.store.find('location');
     var products = this.store.find('product', { level: '4digit' });
-    var industries = this.store.find('industry', { level: 'division' });
+    var industriesDivision = this.store.find('industry', { level: 'division' });
+    var industriesClass = this.store.find('industry', { level: 'class' });
 
     if(transition.query) {
-      return Ember.RSVP.all([industries, locations, products])
+      return Ember.RSVP.all([industriesDivision, industriesClass, locations, products])
         .then(function(array) {
           return _.chain(array)
             .map(function(d){ return d.content; })
@@ -22,10 +23,5 @@ export default Ember.Route.extend({
     }
     return [];
   },
-  setupController(controller, model) {
-    this._super(controller, model);
-    this.controllerFor('application').set('entity', 'location');
-    this.controllerFor('application').set('entity_id', 3);
-    window.scrollTo(0, 0);
-  },
 });
+
