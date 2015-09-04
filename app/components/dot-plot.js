@@ -1,9 +1,11 @@
 import Ember from 'ember';
 import numeral from 'numeral';
-const { computed } = Ember;
+const { computed, observer } = Ember;
 
 export default Ember.Component.extend({
+  i18n: Ember.inject.service(), //TODO: this should work, but doesn't, ODD -ql
   tagName: 'div',
+  locale: computed.alias('i18n.locale'),
   classNames: ['dotplot'],
   attributeBindings: ['width','height'],
   id: computed('elementId', function() {
@@ -59,7 +61,8 @@ export default Ember.Component.extend({
               } else if(type === 'percentage') {
                 format = function(d) { return numeral(d).format('0.00%'); };
               }
-              let name = Ember.get(d, 'name_en') || Ember.get(d, 'name_es');
+              let locale = this.get('locale');
+              let name = Ember.get(d, 'name_'+locale);
               return name + ' (' + format(+d[varX]) + ')';
             }
           }]
@@ -72,6 +75,11 @@ export default Ember.Component.extend({
     this.set('height', this.$().parent().height());
     d3.select(this.get('id')).call(this.get('dotPlot'));
   },
+  update: observer('locale', function() {
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      d3.select(this.get('id')).call(this.get('dotPlot'));
+    });
+  }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.draw();
