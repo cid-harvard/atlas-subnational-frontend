@@ -123,6 +123,7 @@ export default {
       'export': 'Exportación',
       'industry': 'Sector',
       'location': 'Lugar',
+      'name': 'Nombre',
       'occupation': 'Ocupación',
       'parent': 'Grupo',
       'export_value': 'Exportaciones, USD',
@@ -168,7 +169,6 @@ export default {
       'industry': {
         'departments.employment': '¿Cuando en Colombia no {{name}} emplea a más gente?',
         'departments.wages': '¿Cuando en Colombia no {{name}} paga los salarios más altos del total?',
-        'departments.wages_avg': '¿Cuando en Colombia no {{name}} paga los salarios más altos por trabajador?',
         'occupations.num_vacancies': 'Ocupaciones demandadas por {{name}}?'
       },
       'product': {

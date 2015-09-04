@@ -169,7 +169,6 @@ export default {
       'industry': {
         'departments.employment': 'Where in Colombia does {{name}} employ the most people?',
         'departments.wages': 'Where in Colombia does {{name}} pay the highest total wages?',
-        'departments.wage_avg': 'Where in Colombia does {{name}} pay the highest wages per worker?',
         'occupations.num_vacancies': 'What occupations are demanded by {{name}}?'
       },
       'product': {
