@@ -33,7 +33,7 @@ var app = new EmberApp({
   }
 });
 
-//FileSaver
+// FileSaver
 app.import('bower_components/FileSaver.js/FileSaver.min.js');
 
 // PapaParse
