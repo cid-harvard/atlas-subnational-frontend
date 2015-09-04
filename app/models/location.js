@@ -2,9 +2,10 @@ import DS from 'ember-data';
 import Ember from 'ember';
 import ENV from '../config/environment';
 import ModelAttribute from '../mixins/model-attribute';
+import numeral from 'numeral';
 const {apiURL} = ENV;
 const {attr} = DS;
-const {computed, $} = Ember;
+const {computed, $, get:get} = Ember;
 
 export default DS.Model.extend(ModelAttribute, {
   //data that drives the profile
@@ -13,6 +14,38 @@ export default DS.Model.extend(ModelAttribute, {
   departments: attr(),
   timeseries: attr(),
 
+  sortedTimeseries: computed.sort('timeseries','yearSort'),
+
+  firstDataPoint: computed('timeseries', function() {
+    return _.first(this.get('timeseries')) || {};
+  }),
+  lastDataPoint: computed('timeseries', function() {
+    return _.last(this.get('timeseries')) || {};
+  }),
+  yearRange: computed('timeseries', function() {
+    var firstYear = get(this.get('firstDataPoint'), 'year');
+    var lastYear = get(this.get('lastDataPoint'), 'year');
+    return `${firstYear}–${lastYear}`;
+  }),
+  lastPop: computed('timeseries','locale', function() {
+    let pop = get(this.get('lastDataPoint'), 'population');
+    return numeral(pop).format('0.0a');
+   }),
+  lastGdp: computed('timeseries','locale', function() {
+    let gdp = get(this.get('lastDataPoint'), 'gdp_real');
+    return numeral(gdp).format('$ 0.0a');
+   }),
+  lastGdpPerCapita: computed('timeseries','locale', function() {
+    let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_real');
+    return numeral(gdpPC).format('$ 0.0a');
+   }),
+  gdpGrowth:computed('timeseries','locale', function() {
+    var firstGdp = get(this.get('firstDataPoint'), 'gdp_real');
+    var lastGdp = get(this.get('lastDataPoint'), 'gdp_real');
+    let difference = lastGdp / firstGdp;
+    let power =  1/(this.get('timeseries.length') -1);
+    return numeral(Math.pow(difference, power) -1).format('0.0%');
+  }),
   //following drives graphbuilder
   graphbuilderProducts: computed('id', function() {
     var defaultParams = {
