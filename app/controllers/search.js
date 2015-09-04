@@ -11,8 +11,11 @@ export default Ember.Controller.extend({
     let search = _.deburr(this.get('query'));
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
-    return this.get('model').filter(function(d){
-      return _.deburr(get(d,'name')).match(regexp) || get(d, 'code').match(regexp);
+    return this.get('model').filter((d) => {
+      let longName = get(d,`name_${this.get('i18n').locale}`);
+      let shortName = get(d,`name_short_${this.get('i18n').locale}`);
+      let code = get(d, 'code');
+      return _.deburr(`${shortName} ${longName} ${code}`).match(regexp);
     });
   }),
   resultsLength: computed('results.[]', function() {
@@ -33,12 +36,5 @@ export default Ember.Controller.extend({
       return get(d,'constructor.modelName') === 'industry';
     });
   }),
-  //TODO: is this needed?
-  init: function(){
-    this._super.apply(this, arguments);
-    var applicationController = this.get('controllers.application');
-    applicationController.set('entity', 'location');
-    applicationController.set('entity_id', 3);
-  }
 });
 

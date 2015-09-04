@@ -331,7 +331,8 @@ export default Ember.Controller.extend({
     return _.filter(data, (d) => {
       let longName = get(d,`name_${this.get('i18n').locale}`);
       let shortName = get(d,`name_short_${this.get('i18n').locale}`);
-      return _.deburr(shortName+ ' '+ longName).match(regexp);
+      let code = get(d, 'code');
+      return _.deburr(`${shortName} ${longName} ${code}`).match(regexp);
     });
   },
   filterToSelectedYears: function(data, start, end) {
