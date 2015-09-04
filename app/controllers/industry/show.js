@@ -1,6 +1,4 @@
 import Ember from 'ember';
-import numeral from 'numeral';
-
 const {computed} = Ember;
 
 export default Ember.Controller.extend({

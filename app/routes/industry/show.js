@@ -37,7 +37,7 @@ export default Ember.Route.extend({
           });
       });
   },
-  afterModel: function(model, transition) {
+  afterModel: function(model) {
     var departments = $.getJSON(`${apiURL}/data/industry/${model.id}/participants?level=department`);
     var industries = $.getJSON(`${apiURL}/data/industry?level=division`);
     var occupations = $.getJSON(`${apiURL}/data/industry/${model.id}/occupations/?level=minor_group`);
