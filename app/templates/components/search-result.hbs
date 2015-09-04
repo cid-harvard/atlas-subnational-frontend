@@ -2,13 +2,15 @@
   <p class="results__breadcrumb">{{breadcrumb}}</p>
   <p class="results__name" data-search-result-name>{{name}}</p>
 </div>
-{{#link-to
-  profileLink result.id
-  data-search-profile=''
-  class="btn btn--standalone btn--search results__btn"
-}}
-  {{ t 'pageheader.profile_link' }}
-{{/link-to}}
+{{#if hasProfile }}
+  {{#link-to
+    profileLink result.id
+    data-search-profile=''
+    class="btn btn--standalone btn--search results__btn"
+  }}
+    {{ t 'pageheader.profile_link' }}
+  {{/link-to}}
+{{/if}}
 
 {{#link-to
   'visualization' entity_and_id source 'multiples'
