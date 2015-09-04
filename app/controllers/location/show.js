@@ -3,13 +3,11 @@ import numeral from 'numeral';
 const {computed, get:get } = Ember;
 
 export default Ember.Controller.extend({
-  needs: 'application',
-  locale: computed.alias("controllers.application.locale"),
+  i18n: Ember.inject.service(),
   queryParams: ['year'],
   departmentsData: computed.oneWay('model.departments'),
   productsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
-  timeSeriesData: computed.oneWay('model.timeseries'),
   year: 2013,
   isDepartment: computed('model.level', function() {
     return this.get('model.level') === 'department';
@@ -42,38 +40,6 @@ export default Ember.Controller.extend({
 
   //validTimeseries is array of data points where all key(expect diversity cause fucking values are null),value pairs are not null
   validTimeseries: computed.alias('model.timeseries'),
-  sortedTimeseries: computed.sort('validTimeseries','yearSort'),
-
-  firstDataPoint: computed('validTimeseries', function() {
-    return _.first(this.get('validTimeseries')) || {};
-  }),
-  lastDataPoint: computed('validTimeseries', function() {
-    return _.last(this.get('validTimeseries')) || {};
-  }),
-  yearRange: computed('validTimeseries', function() {
-    var firstYear = get(this.get('firstDataPoint'), 'year');
-    var lastYear = get(this.get('lastDataPoint'), 'year');
-    return `${firstYear}–${lastYear}`;
-  }),
-  lastPop: computed('validTimeseries','locale', function() {
-    let pop = get(this.get('lastDataPoint'), 'population');
-    return numeral(pop).format('0.0a');
-   }),
-  lastGdp: computed('validTimeseries','locale', function() {
-    let gdp = get(this.get('lastDataPoint'), 'gdp_real');
-    return numeral(gdp).format('$ 0.0a');
-   }),
-  lastGdpPerCapita: computed('validTimeseries','locale', function() {
-    let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_real');
-    return numeral(gdpPC).format('$ 0.0a');
-   }),
-  gdpGrowth:computed('validTimeseries', function() {
-    var firstGdp = get(this.get('firstDataPoint'), 'gdp_real');
-    var lastGdp = get(this.get('lastDataPoint'), 'gdp_real');
-    let difference = lastGdp / firstGdp;
-    let power =  1/(this.get('validTimeseries.length') -1);
-    return numeral(Math.pow(difference, power) -1).format('0.0%');
-  }),
   activeStep: 1,
   stepStories: computed(function() {
     return [ { index: 1 }, { index: 2 }, { index: 3 }, { index: 4 } ];

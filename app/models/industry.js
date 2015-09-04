@@ -8,10 +8,19 @@ const {attr} = DS;
 const {computed, $, get:get } = Ember;
 
 export default DS.Model.extend(ModelAttribute, {
+  i18n: Ember.inject.service(),
   classIndustries: attr(),
   industriesData: attr(),
   departmentsData: attr(),
   occupationsData: attr(),
+  employmentGrowthCalc: function(data) {
+    let first = _.first(data);
+    let last = _.last(data);
+    let difference = last.employment / first.employment;
+    let power =  1/(data.length-1);
+
+    return (Math.pow(difference, power ) - 1);
+  },
 
   timeseries: computed('industriesData','model.id', function() {
     return _.filter(this.get('industriesData'), {industry_id: parseInt(this.get('id'))});
@@ -27,10 +36,28 @@ export default DS.Model.extend(ModelAttribute, {
     var lastYear = get(this.get('lastDataPoint'), 'year');
     return `${firstYear}–${lastYear}`;
   }),
-  lastEmployment: computed('lastDataPoint', function() {
+  employmentGrowthDotPlot: computed('industriesData', function() {
+   return _.chain(this.get('industriesData'))
+      .groupBy('industry_id')
+      .reduce((memo,i) => {
+        let datum = _.first(i);
+        datum['employment_growth'] = this.employmentGrowthCalc(i);
+        memo.push(datum);
+        return memo;
+      },[])
+      .value();
+  }),
+  displayEmploymentGrowth: computed('employmentGrowthDotPlot','i18n.locale', function() {
+    let datum = _.where(this.get('employmentGrowthDotPlot'),
+      { industry_id: parseInt(this.get('id'))}
+    );
+    var display = numeral(datum[0].employment_growth).format('0.0%');
+    return display;
+  }),
+  lastEmployment: computed('lastDataPoint','i18n.locale', function() {
     return numeral(this.get('lastDataPoint').employment).format('0.00 a');
   }),
-  lastAvgWage: computed('lastDataPoint', function() {
+  lastAvgWage: computed('lastDataPoint','i18n.locale', function() {
     return numeral(this.get('lastDataPoint').avg_wage).format('$ 0.00 a');
   }),
   graphbuilderDepartments: computed('id', function() {

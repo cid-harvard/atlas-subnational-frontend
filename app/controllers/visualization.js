@@ -7,7 +7,6 @@ Ember.warn = function() {};
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
-  needs: 'application', // inject the application controller
   queryParams: ['variable', 'search', 'rca', 'startDate', 'endDate'],
   search: null,
   rca: null,
@@ -97,7 +96,7 @@ export default Ember.Controller.extend({
     }
     return this.get('i18n').t(`${i18nString}.${this.get('variable')}`, { name: this.get('model.entity.name') });
   }),
-  headerValue: computed('model', 'filteredData', 'variable', function() {
+  headerValue: computed('model', 'filteredData', 'variable', 'i18n.locale', function() {
     let allowedVariables = ['export_value', 'import_value', 'wages', 'employment'];
     let variable = this.get('variable');
     let data = this.get('filteredData');
