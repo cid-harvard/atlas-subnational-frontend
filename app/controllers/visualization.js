@@ -32,6 +32,7 @@ export default Ember.Controller.extend({
   }),
   isPrescriptive: computed('entity.level', function() {
     if(this.get('entity.level') === 'municipality') { return false; }
+    if(this.get('entity.level') === 'class') { return false; }
     return true;
   }),
   isOneYear: computed('startDate', 'endDate', function() {
