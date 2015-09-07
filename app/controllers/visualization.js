@@ -17,7 +17,6 @@ export default Ember.Controller.extend({
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
   drawerQuestionsIsOpen: false,
-  name: computed.alias('model.entity.name'),
   metadata: computed.alias('model.metaData'),
   source: computed.alias('model.source'),
   entityId: computed.alias('model.entity.id'),
@@ -72,16 +71,24 @@ export default Ember.Controller.extend({
   profileLink: computed('entityType', function() {
     return `${this.get('model.entity_type')}.show`;
   }),
-  pageTitle: computed('entityType','variable','i18n.locale', function() {
-    //locale file under graph_builder.page_title.<entity>.<source>.<variable>
-    let i18nString = `graph_builder.page_title.${this.get('entityType')}.${this.get('source')}`;
-    let visualization = this.get('visualization');
-    if( visualization === 'scatter' || visualization === 'similarity' ) {
-      return this.get('i18n').t(`${i18nString}.${visualization}`, { name: this.get('name') });
+  name: computed('entityType', 'model.entity.name', 'i18n.locale', function() {
+    if(this.get('entityType') === 'location') {
+      return this.get('model.entity.name');
+    } else {
+      return `${this.get('model.entity.name')} (${this.get('entity.code')})`;
     }
-   return this.get('i18n').t(`${i18nString}.${this.get('variable')}`, { name: this.get('name') });
   }),
-  recircCopy: computed('model','variable','i18n.locale', 'singularEntity', function() {
+  pageTitle: computed('entityType', 'entity', 'variable', 'i18n.locale', function() {
+    let i18nString = `graph_builder.page_title.${this.get('entityType')}.${this.get('source')}`;
+    let level = this.get('i18n').t(`location.model.${this.get('entity.level')}`);
+    let visualization = this.get('visualization');
+
+    if( visualization === 'scatter' || visualization === 'similarity' ) {
+      return this.get('i18n').t(`${i18nString}.${visualization}`, { level: level });
+    }
+    return this.get('i18n').t(`${i18nString}.${this.get('variable')}`, { level: level });
+  }),
+  recircCopy: computed('model','variable','i18n.locale', 'entityType', function() {
     //locale file under graph_builder.recirc.header
     let i18nString = `graph_builder.recirc.header`;
     let entityType = this.get('i18n').t(`general.${this.get('entityType')}`);
