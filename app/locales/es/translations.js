@@ -102,13 +102,19 @@ export default {
     'other_row_1': 'El PIB y variables demográficas'
   },
   'search': {
-    'header': 'Resultados',
+    'header': 'resultados',
     'intro': 'Busque el lugar, producto, sector u ocupación que le interese',
     'placeholder': 'Escriba aquí para buscar lo que quiere',
     'results_products': 'Productos',
     'results_locations': 'Lugares',
     'results_industries': 'Sectores',
-    'didnt_find': '¿Encontró lo que buscaba? Nos interesa saber: eduardo_lora@hks.harvard.edu'
+    'didnt_find': '¿Encontró lo que buscaba? Nos interesa saber: eduardo_lora@hks.harvard.edu',
+    'level': {
+      'department': 'Departamento',
+      'municipality': 'Municipio',
+      '4digit': 'SA4',
+      'division': 'CIIU'
+    }
   },
   'graph_builder': {
     'view_more': 'Muestre más',

@@ -102,13 +102,19 @@ export default {
     'other_row_1': 'GDP and demographic variables'
   },
   'search': {
-    'header': 'Results',
+    'header': 'results',
     'intro': 'Search for the location, product, industry or occupation that you’re interested in.',
     'placeholder': 'Type here to search',
     'results_products': 'Products',
     'results_locations': 'Locations',
     'results_industries': 'Industries',
-    'didnt_find': 'Didn’t find what you were looking for? Let us know: eduardo_lora@hks.harvard.edu'
+    'didnt_find': 'Didn’t find what you were looking for? Let us know: eduardo_lora@hks.harvard.edu',
+    'level': {
+      'department': 'Department',
+      'municipality': 'Municipality',
+      '4digit': 'HS4',
+      'division': 'ISIC'
+    }
   },
   'graph_builder': {
     'view_more': 'View more',

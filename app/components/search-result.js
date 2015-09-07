@@ -2,9 +2,16 @@ import Ember from 'ember';
 const {computed} = Ember;
 
 export default Ember.Component.extend({
-  breadcrumb: computed('result.level', function() {
+  i18n: Ember.inject.service(),
+  breadcrumb: computed('result.level', 'entity', 'i18n.locale', function() {
     if(this.get('result.level')) {
-      return `${_.capitalize(this.get('entity'))} / ${_.capitalize(this.get('result.level'))}`;
+      let level = this.get('i18n').t(`search.level.${this.get('result.level')}`);
+
+      if(this.get('entity') === 'location') {
+        return `${level}`;
+      } else {
+        return `${level}: ${this.get('result.code')}`;
+      }
     }
   }),
   name: computed('result.name', 'result.short_name', function() {
