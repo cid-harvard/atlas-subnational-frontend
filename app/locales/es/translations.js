@@ -120,10 +120,10 @@ export default {
   'graph_builder': {
     'view_more': 'Muestre más',
     'builder_questions': {
-      'location': 'Preguntas: lugares',
-      'product': 'Preguntas: productos de exportación',
-      'industry': 'Preguntas: productos de exportación',
-      'occupation': 'Preguntas: ocupaciones'
+      'location': 'Preguntas: Lugares',
+      'product': 'Preguntas: Productos de exportación',
+      'industry': 'Preguntas: Productos de exportación',
+      'occupation': 'Preguntas: Ocupaciones'
     },
     'table': {
       'less_than_5': 'Menos de 5',
