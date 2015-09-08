@@ -122,7 +122,7 @@ export default {
     'builder_questions': {
       'location': 'Preguntas: Lugares',
       'product': 'Preguntas: Productos de exportación',
-      'industry': 'Preguntas: Productos de exportación',
+      'industry': 'Preguntas: Sectores',
       'occupation': 'Preguntas: Ocupaciones'
     },
     'table': {
