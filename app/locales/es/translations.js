@@ -174,8 +174,8 @@ export default {
     },
     'page_title': {
       'industry': {
-        'departments.employment': '¿Cuando en Colombia no este sector emplea a más gente?',
-        'departments.wages': '¿Cuando en Colombia no este sector paga los salarios más altos del total?',
+        'departments.employment': '¿Qué lugares en Colombia ocupan más gente en este sector?',
+        'departments.wages': '¿Qué lugares en Colombia pagan más salarios en total en este sector?',
         'occupations.num_vacancies': 'Ocupaciones demandadas por este sector?'
       },
       'product': {
