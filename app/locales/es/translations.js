@@ -165,6 +165,12 @@ export default {
     },
     'change_graph': {
       'label': 'Gráficos',
+      'multiples_description': 'Compare growth over time',
+      'treemap_description': 'Analyze hierarchy and composition',
+      'geo_description': 'Analyze geographic context',
+      'scatter_description': 'Balance gains in complexity with distance',
+      'similarity_description': 'Compare competitiveness across clusters',
+      'unavailable': 'Graph is unavailable for this question'
     },
     'questions': {
       'label': 'Cambiar pregunta'

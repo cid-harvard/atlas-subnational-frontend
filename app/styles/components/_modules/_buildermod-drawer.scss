@@ -20,7 +20,7 @@
   }
   .buildermod__vizwrap {
     border-width: 0;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
   .buildermod__viz {
     display: none;
@@ -40,7 +40,7 @@
   }
   .buildermod__vizwrap {
     border-width: 0;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
   .buildermod__viz {
     display: none;
@@ -60,7 +60,7 @@
   }
   .buildermod__vizwrap {
     border-width: 0;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
   .buildermod__viz {
     display: none;
@@ -94,10 +94,6 @@
   margin-bottom: $baseSpace * 2;
 }
 
-.settings__input--select {
-  // font-size: $fontSmall;
-}
-
 .settings__btn--close {
   float: right;
 }
@@ -110,20 +106,19 @@
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
+  justify-content: center;
 }
 
 .changegraph__radiowrap {
-  width: 25%;
-  &:nth-of-type(4n+1) {
+  width: 33.3333%;
+  width: calc(100% / 3);
+  &:nth-of-type(3n+1) {
     padding: 0 $baseSpace*0.75 $baseSpace 0;
   }
-  &:nth-of-type(4n+2) {
+  &:nth-of-type(3n+2) {
     padding: 0 $baseSpace*0.5 $baseSpace $baseSpace*0.25;
   }
-  &:nth-of-type(4n+3) {
-    padding: 0 $baseSpace*0.25 $baseSpace $baseSpace*0.5;
-  }
-  &:nth-of-type(4n) {
+  &:nth-of-type(3n) {
     padding: 0 0 $baseSpace $baseSpace*0.75;
   }
 }
@@ -132,34 +127,50 @@
   position: absolute;
   top: -9999px;
   left: -9999px;
-  &:checked ~ .changegraph__radio__target {
-  }
 }
 
 .changegraph__radio__target {
-  transition: color $animationTime $animationEasing, background $animationTime $animationEasing;
-  background: $colorBrown200;
-  color: $colorGray;
-  padding: 6.2rem $baseSpace $baseSpace; // revisit for better horizontal centering mebbe
-  height: $baseSpace*9;
+  min-height: $baseSpace*9;
   width: 100%;
   pointer-events: none;
   text-align: center;
   line-height: 120%;
-  &:hover {
-    background: $colorBrown100;
-    color: $colorGrayDark;
-  }
-}
-.changegraph__radio__target--checked {
-  background: $colorBrown100;
-  color: $colorGrayDark;
-  border: 1px solid $colorBrown200;
+  background: $colorBrown200;
+  color: $colorGrayLight;
+  display: flex;
+  align-items: center;
 }
 
 .changegraph__radio--is--possible {
+  background: $colorBrown500;
+  color: $colorGray;
   pointer-events: all;
   cursor: pointer;
+  &:hover {
+    background: $colorBrown500;
+    color: $colorBlack;
+  }
+}
+
+.changegraph__radio__target--checked {
+  color: $colorBlack;
+  &:hover {
+    background: $colorBrown500;
+  }
+}
+
+.changegraph__copy__wrap {
+  display: block;
+  margin: 0 auto;
+}
+
+.changegraph__subhead--is--available .changegraph__graph__description{
+  &:nth-of-type(1) {
+    display: block;
+  }
+  &:nth-of-type(2) {
+    display: none;
+  }
 }
 
 .changegraph__icon {
@@ -167,3 +178,20 @@
   font-size: $fontXLarge;
   margin: 0 auto $baseSpace/2;
 }
+
+.changegraph__graph__head {
+  margin-bottom: $baseSpace/4;
+  display: block;
+}
+
+.changegraph__graph__description {
+  font-family: $serif;
+  font-size: $fontSmall;
+  &:nth-of-type(1) {
+    display: none;
+  }
+  &:nth-of-type(2) {
+    display: block;
+  }
+}
+
