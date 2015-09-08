@@ -54,7 +54,7 @@ export default {
     'location_q2': 'What products have the most potential in Antioquia?',
     'industry_head': 'Learn about an industry',
     'industry_q1': 'Where in Colombia does the insurance industry employ the most people?',
-    'industry_q2': 'What are the skills needed by the chemical industry?',
+    'industry_q2': 'What occupations does the chemical industry employ?',
     'product_head': 'Learn about an export',
     'product_q1': 'What places in Colombia export bananas?',
     'product_q2': 'What places in Colombia import computers?',
@@ -176,7 +176,7 @@ export default {
       'industry': {
         'departments.employment': 'Where in Colombia does this industry employ the most people?',
         'departments.wages': 'Where in Colombia does this industry pay the highest total wages?',
-        'occupations.num_vacancies': 'What occupations are demanded by this industry?'
+        'occupations.num_vacancies': 'What occupations does this industry employ?'
       },
       'product': {
         'locations.export_value': 'What places in Colombia export this product?',
@@ -284,15 +284,15 @@ export default {
      }
   },
   'industry.show': {
-    'employment_and_wages': 'Employment and Wages',
+    'employment_and_wages': 'Employment and wages',
     'industries': 'Industries',
     'value': 'Value',
-    'employment_growth': 'Employment Growth (2008-2013)',
-    'avg_wages': 'Average Wages ({{year}})',
+    'employment_growth': 'Employment growth (2008-2013)',
+    'avg_wages': 'Average wages ({{year}})',
     'employment': 'Employment ({{year}})',
-    'industry_composition': 'Industry Composition, 2013',
-    'occupation': 'Occupations Demanded by Industry',
-    'occupation_demand': 'Occupations most demanded, 2013'
+    'industry_composition': 'Industry composition, 2013',
+    'occupation': 'Occupations employed by industry',
+    'occupation_demand': 'Occupations employed, 2013'
   },
   'about': {
     'project_description_name': 'Project Description',
