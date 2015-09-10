@@ -166,10 +166,10 @@ export default {
     'change_graph': {
       'label': 'Graphs',
       'multiples_description': 'Compare growth over time',
-      'treemap_description': 'Analyze hierarchy and composition',
-      'geo_description': 'Analyze geographic context',
-      'scatter_description': 'Balance gains in complexity with distance',
-      'similarity_description': 'Compare competitiveness across clusters',
+      'treemap_description': 'See composition at different levels',
+      'geo_description': 'Map the data',
+      'scatter_description': 'Plot complexity and distance',
+      'similarity_description': 'Analyze revealed comparative advantages',
       'unavailable': 'Graph is unavailable for this question'
     },
     'questions': {

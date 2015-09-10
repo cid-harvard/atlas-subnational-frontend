@@ -131,6 +131,7 @@ export default Ember.Controller.extend({
     let source = this.get('model.source');
 
     if(source === 'locations' && _.contains(['geo', 'treemap', 'multiples'], vis)){
+      // TODO Refactor these settings and abstract them to some external map
       return [
         {
           type: 'multiples',
