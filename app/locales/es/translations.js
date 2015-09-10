@@ -63,7 +63,7 @@ export default {
   'location.model':{
     'department': 'departamento',
     'municipality': 'municipio',
-    'population_center': 'centro poblacional'
+    'msa': 'ciudad'
   },
   'ctas': {
     'export': 'Exportar',
@@ -112,7 +112,7 @@ export default {
     'level': {
       'department': 'Departamento',
       'municipality': 'Municipio',
-      'population_center': 'Centro poblacional',
+      'msa': 'Ciudad',
       '4digit': 'SA4',
       'division': 'CIIU'
     }
@@ -176,7 +176,7 @@ export default {
       'industry': {
         'departments.employment': '¿Qué lugares en Colombia ocupan más gente en este sector?',
         'departments.wages': '¿Qué lugares en Colombia pagan más salarios en total en este sector?',
-        'occupations.num_vacancies': '¿Ocupaciones demandadas por este sector?'
+        'occupations.num_vacancies': '¿Qué ocupaciones demanda este sector?'
       },
       'product': {
         'locations.export_value': '¿Qué lugares en Colombia exportan este producto?',
@@ -203,7 +203,7 @@ export default {
         'products.similarity': '¿Cómo es el espacio del producto de este {{level}}?',
         'industries.employment': '¿Qué sectores generan más empleo en este {{level}}?',
         'industries.scatter': '¿Qué sectores relativamente complejos y que ayuden a elevar la complejidad podrían desarrollarse más en este {{level}}?',
-        'industries.wages': '¿Qué sectores pagan los salarios más altos?',
+        'industries.wages': '¿Qué sectores en este {{level}} tienen las mayores nóminas salariales?',
         'industries.wages_avg': '¿Qué sectores en este {{level}} pagan los salarios más altos por trabajador?',
         'industries.similarity': '¿Cómo es el espacio de los sectores de este {{level}}?'
       }

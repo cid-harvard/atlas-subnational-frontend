@@ -63,7 +63,7 @@ export default {
   'location.model':{
     'department': 'department',
     'municipality': 'municipality',
-    'population_center': 'population center'
+    'msa': 'city'
   },
   'ctas': {
     'export': 'Export',
@@ -112,7 +112,7 @@ export default {
     'level': {
       'department': 'Department',
       'municipality': 'Municipality',
-      'population_center': 'Population center',
+      'msa': 'City',
       '4digit': 'HS4',
       'division': 'ISIC'
     }
