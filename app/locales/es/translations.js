@@ -176,7 +176,7 @@ export default {
       'industry': {
         'departments.employment': '¿Qué lugares en Colombia ocupan más gente en este sector?',
         'departments.wages': '¿Qué lugares en Colombia pagan más salarios en total en este sector?',
-        'occupations.num_vacancies': 'Ocupaciones demandadas por este sector?'
+        'occupations.num_vacancies': '¿Ocupaciones demandadas por este sector?'
       },
       'product': {
         'locations.export_value': '¿Qué lugares en Colombia exportan este producto?',
@@ -189,15 +189,15 @@ export default {
         'locations.import_product_from': '¿De qué países este {{level}} importa {{item}}?',
         'locations.export_subregions': '¿Cómo se descomponen por lugar de origen las exportaciones de este {{level}}?',
         'locations.export_subregions_products': '¿Cómo se descomponen por lugar de origen las exportaciones de {{item}} de este {{level}}?',
-        'locations.export_subregions_locations':'¿Cómo se descomponen por lugar de origen las exportaciones de este {{level}} a {{place}}?',
-        'locations.export_subregions_products_locations':' ¿Cómo se descomponen por lugar de origen las exportaciones de {{item}} de este {{level}} a {{place}}?',
+        'locations.export_subregions_locations': '¿Cómo se descomponen por lugar de origen las exportaciones de este {{level}} a {{place}}?',
+        'locations.export_subregions_products_locations': '¿Cómo se descomponen por lugar de origen las exportaciones de {{item}} de este {{level}} a {{place}}?',
         'locations.import_subregions': '¿Cómo se descomponen por lugar de origen las importaciones de este {{level}}?',
         'locations.import_subregions_products': '¿Cómo se descomponen por lugar de origen las importaciones de {{item}} de este {{level}}?',
         'locations.import_subregions_locations': '¿Cómo se descomponen por lugar de origen las importaciones de este {{level}} a {{place}}?',
         'locations.import_subregions_products_locations': '¿Cómo se descomponen por lugar de origen las importaciones de {{item}} de este {{level}} a {{place}}?',
         'products.export_value': '¿Qué exporta este {{level}}?',
         'products.scatter': '¿Qué productos tienen el mayor potencial para este {{level}}?',
-        'products.export_value_to': '¿Qué productos importa este {{level}} de {{place}}?',
+        'products.export_value_to': '¿Qué productos exporta este {{level}} de {{place}}?',
         'products.import_value': '¿Qué productos importa este {{level}}?',
         'products.import_value_from': '¿Qué productos importa este {{level}} de {{place}}?',
         'products.similarity': '¿Cómo es el espacio del producto de este {{level}}?',
