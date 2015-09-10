@@ -12,7 +12,7 @@
         <header class="buildermod__header">
           <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
           <div class="buildermod__tools">
-            <button {{bind-attr class="drawerIsUnnecessary:buildermod__tool--is--unnecessary :btn :btn--standalone :btn--buildermod :buildermod__tool :buildermod__tool--settings"}} {{action 'toggleDrawerSettings'}}>
+            <button {{bind-attr class="drawerIsUnnecessary:buildermod__tool--is--unnecessary :btn :btn--standalone :btn--buildermod :buildermod__tool :buildermod__tool--settings"}} {{action 'toggleDrawerSettings'}} data-settings-open=''>
               {{fa-icon "plus" classNames="tool__btn__icon"}}
               {{t 'graph_builder.settings.label'}}
             </button>

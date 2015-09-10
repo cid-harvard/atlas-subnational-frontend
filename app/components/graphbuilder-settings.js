@@ -6,36 +6,31 @@ export default Ember.Component.extend({
     this.set('newStartDate', this.get('startDate'));
     this.set('newEndDate', this.get('endDate'));
   },
-  updateDates: Ember.observer('startDate', 'endDate', function(){
-    this.set('newStartDate', this.get('startDate'));
-    this.set('newEndDate', this.get('endDate'));
+  updateDates: Ember.observer('isOpen', function(){
+    if(this.get('isOpen') === false) {
+      this.set('newStartDate', this.get('startDate'));
+      this.set('newEndDate', this.get('endDate'));
+    }
   }),
   actions: {
-    changeStart() {
-      let selectedEl = this.$('select[data-dateIndex="start"]')[0];
-      let selectedIndex = selectedEl.selectedIndex;
-      let content = this.get('dateRange');
-      let selectedValue = content[selectedIndex];
-
-      this.set('newStartDate', selectedValue);
-    },
-    changeEnd() {
-      let selectedEl = this.$('select[data-dateIndex="end"]')[0];
-      let selectedIndex = selectedEl.selectedIndex;
-      let content = this.get('dateRange');
-      let selectedValue = String(content[selectedIndex]);
-
-      this.set('newEndDate', selectedValue);
-    },
     closeSettingsDrawer() {
-      this.set('isOpen', false);
-      if(parseInt(this.get('newStartDate')) > parseInt(this.get('newEndDate'))){
-        this.set('endDate', this.get('newStartDate'));
-        this.set('startDate', this.get('newEndDate'));
+      let content = this.get('dateRange');
+      let startDate = this.$('select[data-date-index="start"]')[0];
+      let endDate = this.$('select[data-date-index="end"]')[0];
+      let selectedEndDateIndex = endDate.selectedIndex;
+      let selectedStartDateIndex = startDate.selectedIndex;
+
+      var newEndDate = parseInt(content[selectedEndDateIndex]);
+      var newStartDate = parseInt(content[selectedStartDateIndex]);
+
+      if(newStartDate > newEndDate){
+        this.set('endDate', newStartDate);
+        this.set('startDate', newEndDate);
       } else {
-        this.set('startDate', this.get('newStartDate'));
-        this.set('endDate', this.get('newEndDate'));
+        this.set('startDate', newStartDate);
+        this.set('endDate', newEndDate);
       }
+      this.set('isOpen', false);
     }
   }
 });
