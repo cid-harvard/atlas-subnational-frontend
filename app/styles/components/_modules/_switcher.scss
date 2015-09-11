@@ -21,6 +21,7 @@
 }
 
 .switcher__item__link {
+  transition: color $animationTime $animationEasing;
   color: $colorGray;
   font-size: $fontSmall;
   display: block;

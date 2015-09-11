@@ -23,6 +23,13 @@ export default Ember.Controller.extend({
   entity: computed.alias('model.entity'),
   entityType: computed.alias('model.entity_type'),
   visualization: computed.alias('model.visualization'),
+  isFixedHeight: computed('model.visualization', function() {
+    let vis = this.get('model.visualization');
+    if (_.contains(['geo', 'treemap', 'scatter', 'similarity'], vis)) {
+      return true;
+    }
+    return false;
+  }),
   isPrescriptive: computed('entity.level', function() {
     if(this.get('entity.level') === 'municipality') { return false; }
     return true;
@@ -47,7 +54,7 @@ export default Ember.Controller.extend({
     let visualization = this.get('visualization');
     if(visualization === 'similarity' || visualization === 'scatter'){
       return true;
-     }
+    }
     return false;
   }),
   years: computed('startDate', 'endDate', function() {
@@ -122,13 +129,130 @@ export default Ember.Controller.extend({
   otherPossibleGraphs: computed('model.visualization', 'model.source',  function() {
     let vis = this.get('model.visualization');
     let source = this.get('model.source');
+
     if(source === 'locations' && _.contains(['geo', 'treemap', 'multiples'], vis)){
-      return ['geo', 'treemap', 'multiples'];
+      // TODO Refactor these settings and abstract them to some external map
+      return [
+        {
+          type: 'multiples',
+          description: 'graph_builder.change_graph.multiples_description',
+          available: true
+        }, {
+          type: 'treemap',
+          description: 'graph_builder.change_graph.treemap_description',
+          available: true
+        }, {
+          type: 'geo',
+          description: 'graph_builder.change_graph.geo_description',
+          available: true
+        }, {
+          type: 'scatter',
+          description: 'graph_builder.change_graph.scatter_description',
+          available: false
+        }, {
+          type: 'similarity',
+          description: 'graph_builder.change_graph.similarity_description',
+          available: false
+        }
+      ];
     } else if (source === 'occupations' && _.contains(['treemap'], vis)){
-      return ['treemap'];
+      return [
+        {
+          type: 'multiples',
+          description: 'graph_builder.change_graph.multiples_description',
+          available: false
+        }, {
+          type: 'treemap',
+          description: 'graph_builder.change_graph.treemap_description',
+          available: true
+        }, {
+          type: 'geo',
+          description: 'graph_builder.change_graph.geo_description',
+          available: false
+        }, {
+          type: 'scatter',
+          description: 'graph_builder.change_graph.scatter_description',
+          available: false
+        }, {
+          type: 'similarity',
+          description: 'graph_builder.change_graph.similarity_description',
+          available: false
+        }
+      ];
     } else if (_.contains(['treemap', 'multiples'], vis)){
-      return ['treemap', 'multiples'];
+      return [
+        {
+          type: 'multiples',
+          description: 'graph_builder.change_graph.multiples_description',
+          available: true
+        }, {
+          type: 'treemap',
+          description: 'graph_builder.change_graph.treemap_description',
+          available: true
+        }, {
+          type: 'geo',
+          description: 'graph_builder.change_graph.geo_description',
+          available: false
+        }, {
+          type: 'scatter',
+          description: 'graph_builder.change_graph.scatter_description',
+          available: false
+        }, {
+          type: 'similarity',
+          description: 'graph_builder.change_graph.similarity_description',
+          available: false
+        }
+      ];
+    } else if (vis === 'scatter'){
+      return [
+        {
+          type: 'multiples',
+          description: 'graph_builder.change_graph.multiples_description',
+          available: false
+        }, {
+          type: 'treemap',
+          description: 'graph_builder.change_graph.treemap_description',
+          available: false
+        }, {
+          type: 'geo',
+          description: 'graph_builder.change_graph.geo_description',
+          available: false
+        }, {
+          type: 'scatter',
+          description: 'graph_builder.change_graph.scatter_description',
+          available: true
+        }, {
+          type: 'similarity',
+          description: 'graph_builder.change_graph.similarity_description',
+          available: false
+        }
+      ];
+    } else if (vis === 'similarity'){
+      return [
+        {
+          type: 'multiples',
+          description: 'graph_builder.change_graph.multiples_description',
+          available: false
+        }, {
+          type: 'treemap',
+          description: 'graph_builder.change_graph.treemap_description',
+          available: false
+        }, {
+          type: 'geo',
+          description: 'graph_builder.change_graph.geo_description',
+          available: false
+        }, {
+          type: 'scatter',
+          description: 'graph_builder.change_graph.scatter_description',
+          available: false
+        }, {
+          type: 'similarity',
+          description: 'graph_builder.change_graph.similarity_description',
+          available: true
+        }
+      ];
     }
+
     return [vis];
   }),
   varDependent: computed('variable', 'source', function() {

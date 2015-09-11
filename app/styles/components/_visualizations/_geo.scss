@@ -8,7 +8,8 @@
 .geo__wrap {
   height: $minBuildermodHeight;
   padding: 0;
-  margin: $baseSpace*-4.5 $baseSpace*-1.5 $baseSpace*-1.5;
+  margin: $baseSpace*-5 $baseSpace*-1.5 $baseSpace*-1.5;
+  border: 1px solid $colorBrown500;
 
   svg {
     position: relative;

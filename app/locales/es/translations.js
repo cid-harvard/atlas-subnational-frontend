@@ -165,6 +165,12 @@ export default {
     },
     'change_graph': {
       'label': 'Gráficos',
+      'multiples_description': 'Muestra el crecimiento en varios períodos',
+      'treemap_description': 'Muestra la descomposición en varios niveles',
+      'geo_description': 'Mapea los datos',
+      'scatter_description': 'Muestra la complejidad y la distancia ',
+      'similarity_description': 'Presenta las ventajas comparativas reveladas existentes',
+      'unavailable': 'Este gráfico no está disponible para esta pregunta'
     },
     'questions': {
       'label': 'Cambiar pregunta'

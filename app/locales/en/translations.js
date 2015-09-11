@@ -165,6 +165,12 @@ export default {
     },
     'change_graph': {
       'label': 'Graphs',
+      'multiples_description': 'Compare growth over time',
+      'treemap_description': 'See composition at different levels',
+      'geo_description': 'Map the data',
+      'scatter_description': 'Plot complexity and distance',
+      'similarity_description': 'Analyze revealed comparative advantages',
+      'unavailable': 'Graph is unavailable for this question'
     },
     'questions': {
       'label': 'Change question'

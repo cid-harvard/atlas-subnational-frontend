@@ -4,10 +4,6 @@
 *
 **/
 
-i:before {
-  transition: color $animationTime $animationEasing;
-}
-
 .fa {
   font-size: $fontTiny;
 }

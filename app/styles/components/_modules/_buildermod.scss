@@ -64,6 +64,10 @@
   padding: $baseSpace*5 $baseSpace*1.5 $baseSpace*1.5;
 }
 
+.buildermod__vizwrap--is--fixedheight {
+  overflow-y: visible;
+}
+
 .buildermod__highlight__wrap {
   margin: $baseSpace*-3.5 0 0;
   position: absolute;
