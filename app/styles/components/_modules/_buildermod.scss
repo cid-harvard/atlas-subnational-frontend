@@ -9,14 +9,15 @@
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
 }
 
 .buildermod__head {
   display: inline-block;
   font-weight: 500;
-  padding-left: $baseSpace;
+  padding: $baseSpace/2 $baseSpace;
   font-size: $fontSmall;
+  align-self: center;
   &~.buildermod__tools .buildermod__tool:first-child {
     border-left: 1px solid $colorBrown400;
   }

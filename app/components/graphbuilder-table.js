@@ -258,12 +258,12 @@ export default EmberTableComponent.extend({
     };
   },
   formatNumber: (number, key, i18n) => {
-    var decimal_vars = ['export_rca','rca','complexity', 'distance', 'cog', 'population'];
-    var wage_vars = ['wages', 'avg_wages', 'monthly_wages', 'avg_wage'];
+    var decimalVars = ['export_rca','rca','complexity', 'distance', 'cog', 'population'];
+    var wageVarsInThousands = ['wages', 'avg_wages', 'avg_wage', 'average_wages'];
 
-    if(_.include(wage_vars, key)){
+    if(_.include(wageVarsInThousands, key)){
       return numeral(number).divide(1000).format('0,0');
-    } else if(_.include(decimal_vars, key)){
+    } else if(_.include(decimalVars, key)){
       return numeral(number).format('0.00a');
     } else if(key === 'employment'){
       return numeral(Math.ceil(number)).format('0,0');

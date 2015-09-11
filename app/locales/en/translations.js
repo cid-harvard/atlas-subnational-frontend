@@ -54,7 +54,7 @@ export default {
     'location_q2': 'What products have the most potential in Antioquia?',
     'industry_head': 'Learn about an industry',
     'industry_q1': 'Where in Colombia does the insurance industry employ the most people?',
-    'industry_q2': 'What are the skills needed by the chemical industry?',
+    'industry_q2': 'What occupations does the chemical industry employ?',
     'product_head': 'Learn about an export',
     'product_q1': 'What places in Colombia export bananas?',
     'product_q2': 'What places in Colombia import computers?',
@@ -63,7 +63,7 @@ export default {
   'location.model':{
     'department': 'department',
     'municipality': 'municipality',
-    'population_center': 'population center'
+    'msa': 'city'
   },
   'ctas': {
     'export': 'Export',
@@ -102,13 +102,20 @@ export default {
     'other_row_1': 'GDP and demographic variables'
   },
   'search': {
-    'header': 'Results',
+    'header': 'results',
     'intro': 'Search for the location, product, industry or occupation that you’re interested in.',
     'placeholder': 'Type here to search',
     'results_products': 'Products',
     'results_locations': 'Locations',
     'results_industries': 'Industries',
-    'didnt_find': 'Didn’t find what you were looking for? Let us know: eduardo_lora@hks.harvard.edu'
+    'didnt_find': 'Didn’t find what you were looking for? Let us know: eduardo_lora@hks.harvard.edu',
+    'level': {
+      'department': 'Department',
+      'municipality': 'Municipality',
+      'msa': 'City',
+      '4digit': 'HS4',
+      'division': 'ISIC'
+    }
   },
   'graph_builder': {
     'view_more': 'View more',
@@ -167,38 +174,38 @@ export default {
     },
     'page_title': {
       'industry': {
-        'departments.employment': 'Where in Colombia does {{name}} employ the most people?',
-        'departments.wages': 'Where in Colombia does {{name}} pay the highest total wages?',
-        'occupations.num_vacancies': 'What occupations are demanded by {{name}}?'
+        'departments.employment': 'Where in Colombia does this industry employ the most people?',
+        'departments.wages': 'Where in Colombia does this industry pay the highest total wages?',
+        'occupations.num_vacancies': 'What occupations does this industry employ?'
       },
       'product': {
-        'locations.export_value': 'What places in Colombia export {{name}}?',
-        'locations.import_value': 'What places in Colombia import {{name}}?',
+        'locations.export_value': 'What places in Colombia export this product?',
+        'locations.import_value': 'What places in Colombia import this product?',
       },
       'location': {
-        'locations.export': 'What countries does {{name}} export to?',
-        'locations.export_to': 'What countries does {{name}} export {{item}} to?',
-        'locations.import_from': 'What countries does {{name}} import from?',
-        'locations.import_product_from': 'What countries does {{name}} import {{item}} from?',
-        'locations.export_subregions': 'What subregions contribute to the exports from {{name}}?',
-        'locations.export_subregions_products': 'What subregions contribute to the exports of {{item}} from {{name}}?',
-        'locations.export_subregions_locations':'What subregions contribute to the exports from {{name}} to {{place}}?',
-        'locations.export_subregions_products_locations':' What subregions contribute to the exports of {{item}} from {{name}} to {{place}}?',
-        'locations.import_subregions': 'What subregions contribute to the imports for {{name}}?',
-        'locations.import_subregions_products': 'What subregions contribute to the imports of {{item}} for {{name}}?',
-        'locations.import_subregions_locations': 'What subregions contribute to the imports for {{name}} from {{place}}?',
-        'locations.import_subregions_products_locations': 'What subregions contribute to the imports of {{item}} for {{name}} from {{place}}?',
-        'products.export_value': 'What products does {{name}} export?',
-        'products.scatter': 'What products have the most potential for {{name}}?',
-        'products.export_value_to': 'What products does {{name}} export to {{place}}?',
-        'products.import_value': 'What products does {{name}} import?',
-        'products.import_value_from': 'What products does {{name}} import from {{place}}?',
-        'products.similarity': 'What does the product space look like for {{name}}?',
-        'industries.employment': 'What industries in {{name}} employ the most people?',
-        'industries.scatter': 'What industries have the most potential for {{name}}?',
-        'industries.wages': 'What industries in {{name}} are the largest by total wages?',
-        'industries.wages_avg': 'What industries in {{name}} have the highest wages per worker?',
-        'industries.similarity': 'What does the industry space look like for {{name}}?'
+        'locations.export': 'What countries does this {{level}} export to?',
+        'locations.export_to': 'What countries does this {{level}} export {{item}} to?',
+        'locations.import_from': 'What countries does this {{level}} import from?',
+        'locations.import_product_from': 'What countries does this {{level}} import {{item}} from?',
+        'locations.export_subregions': 'What subregions contribute to the exports from this {{level}}?',
+        'locations.export_subregions_products': 'What subregions contribute to the exports of {{item}} from this {{level}}?',
+        'locations.export_subregions_locations':'What subregions contribute to the exports from this {{level}} to {{place}}?',
+        'locations.export_subregions_products_locations':' What subregions contribute to the exports of {{item}} from this {{level}} to {{place}}?',
+        'locations.import_subregions': 'What subregions contribute to the imports for this {{level}}?',
+        'locations.import_subregions_products': 'What subregions contribute to the imports of {{item}} for this {{level}}?',
+        'locations.import_subregions_locations': 'What subregions contribute to the imports for this {{level}} from {{place}}?',
+        'locations.import_subregions_products_locations': 'What subregions contribute to the imports of {{item}} for this {{level}} from {{place}}?',
+        'products.export_value': 'What products does this {{level}} export?',
+        'products.scatter': 'What products have the most potential for this {{level}}?',
+        'products.export_value_to': 'What products does this {{level}} export to {{place}}?',
+        'products.import_value': 'What products does this {{level}} import?',
+        'products.import_value_from': 'What products does this {{level}} import from {{place}}?',
+        'products.similarity': 'What does the product space look like for this {{level}}?',
+        'industries.employment': 'What industries in this {{level}} employ the most people?',
+        'industries.scatter': 'What industries have the most potential for this {{level}}?',
+        'industries.wages': 'What industries in this {{level}} are the largest by total wages?',
+        'industries.wages_avg': 'What industries in this {{level}} have the highest wages per worker?',
+        'industries.similarity': 'What does the industry space look like for this {{level}}?'
       }
     },
     'builder_nav': {
@@ -277,15 +284,15 @@ export default {
      }
   },
   'industry.show': {
-    'employment_and_wages': 'Employment and Wages',
+    'employment_and_wages': 'Employment and wages',
     'industries': 'Industries',
     'value': 'Value',
-    'employment_growth': 'Employment Growth (2008-2013)',
-    'avg_wages': 'Average Wages ({{year}})',
+    'employment_growth': 'Employment growth (2008-2013)',
+    'avg_wages': 'Average wages ({{year}})',
     'employment': 'Employment ({{year}})',
-    'industry_composition': 'Industry Composition, 2013',
-    'occupation': 'Occupations Demanded by Industry',
-    'occupation_demand': 'Occupations most demanded, 2013'
+    'industry_composition': 'Industry composition, 2013',
+    'occupation': 'Occupations employed by industry',
+    'occupation_demand': 'Occupations employed, 2013'
   },
   'about': {
     'project_description_name': 'Project Description',

@@ -63,7 +63,7 @@ export default {
   'location.model':{
     'department': 'departamento',
     'municipality': 'municipio',
-    'population_center': 'centro poblacional'
+    'msa': 'ciudad'
   },
   'ctas': {
     'export': 'Exportar',
@@ -102,21 +102,28 @@ export default {
     'other_row_1': 'El PIB y variables demográficas'
   },
   'search': {
-    'header': 'Resultados',
+    'header': 'resultados',
     'intro': 'Busque el lugar, producto, sector u ocupación que le interese',
     'placeholder': 'Escriba aquí para buscar lo que quiere',
     'results_products': 'Productos',
     'results_locations': 'Lugares',
     'results_industries': 'Sectores',
-    'didnt_find': '¿Encontró lo que buscaba? Nos interesa saber: eduardo_lora@hks.harvard.edu'
+    'didnt_find': '¿Encontró lo que buscaba? Nos interesa saber: eduardo_lora@hks.harvard.edu',
+    'level': {
+      'department': 'Departamento',
+      'municipality': 'Municipio',
+      'msa': 'Ciudad',
+      '4digit': 'SA4',
+      'division': 'CIIU'
+    }
   },
   'graph_builder': {
     'view_more': 'Muestre más',
     'builder_questions': {
-      'location': 'Preguntas: lugares',
-      'product': 'Preguntas: productos de exportación',
-      'industry': 'Preguntas: productos de exportación',
-      'occupation': 'Preguntas: ocupaciones'
+      'location': 'Preguntas: Lugares',
+      'product': 'Preguntas: Productos de exportación',
+      'industry': 'Preguntas: Sectores',
+      'occupation': 'Preguntas: Ocupaciones'
     },
     'table': {
       'less_than_5': 'Menos de 5',
@@ -167,38 +174,38 @@ export default {
     },
     'page_title': {
       'industry': {
-        'departments.employment': '¿Cuando en Colombia no {{name}} emplea a más gente?',
-        'departments.wages': '¿Cuando en Colombia no {{name}} paga los salarios más altos del total?',
-        'occupations.num_vacancies': 'Ocupaciones demandadas por {{name}}?'
+        'departments.employment': '¿Qué lugares en Colombia ocupan más gente en este sector?',
+        'departments.wages': '¿Qué lugares en Colombia pagan más salarios en total en este sector?',
+        'occupations.num_vacancies': '¿Qué ocupaciones demanda este sector?'
       },
       'product': {
-        'locations.export_value': '¿Qué lugares en Colombia exportan {{name}}?',
-        'locations.import_value': '¿Qué lugares en Colombia importan {{name}}?'
+        'locations.export_value': '¿Qué lugares en Colombia exportan este producto?',
+        'locations.import_value': '¿Qué lugares en Colombia importan este producto?'
       },
       'location': {
-        'locations.export': '¿A qué países exporta {{name}}?',
-        'locations.export_to': '¿A qué países {{name}} exporta {{item}}?',
-        'locations.import_from': '¿De qué países importa {{name}}?',
-        'locations.import_product_from': '¿De qué países {{name}} importa {{item}}?',
-        'locations.export_subregions': '¿Cómo se descomponen por lugar de origen las exportaciones de {{name}}?',
-        'locations.export_subregions_products': '¿Cómo se descomponen por lugar de origen las exportaciones de {{item}} de {{name}}?',
-        'locations.export_subregions_locations':'¿Cómo se descomponen por lugar de origen las exportaciones de {{name}} a {{place}}?',
-        'locations.export_subregions_products_locations':' ¿Cómo se descomponen por lugar de origen las exportaciones de {{item}} de {{name}} a {{place}}?',
-        'locations.import_subregions': '¿Cómo se descomponen por lugar de origen las importaciones de {{name}}?',
-        'locations.import_subregions_products': '¿Cómo se descomponen por lugar de origen las importaciones de {{item}} de {{name}}?',
-        'locations.import_subregions_locations': '¿Cómo se descomponen por lugar de origen las importaciones de {{name}} a {{place}}?',
-        'locations.import_subregions_products_locations': '¿Cómo se descomponen por lugar de origen las importaciones de {{item}} de {{name}} a {{place}}?',
-        'products.export_value': '¿Qué exporta {{name}}?',
-        'products.scatter': '¿Qué productos tienen el mayor potencial para {{name}}?',
-        'products.export_value_to': '¿Qué productos importa {{name}} de {{place}}?',
-        'products.import_value': '¿Qué productos importa {{name}}?',
-        'products.import_value_from': '¿Qué productos importa {{name}} de {{place}}?',
-        'products.similarity': '¿Cómo es el espacio del producto de {{name}}?',
-        'industries.employment': '¿Qué sectores generan más empleo en {{name}}?',
-        'industries.scatter': '¿Qué sectores relativamente complejos y que ayuden a elevar la complejidad podrían desarrollarse más en {{name}}?',
-        'industries.wages': '¿Qué sectores pagan los salarios más altos?',
-        'industries.wages_avg': '¿Qué sectores en {{name}} pagan los salarios más altos por trabajador?',
-        'industries.similarity': '¿Cómo es el espacio de los sectores de {{name}}?'
+        'locations.export': '¿A qué países exporta este {{level}}?',
+        'locations.export_to': '¿A qué países este {{level}} exporta {{item}}?',
+        'locations.import_from': '¿De qué países importa este {{level}}?',
+        'locations.import_product_from': '¿De qué países este {{level}} importa {{item}}?',
+        'locations.export_subregions': '¿Cómo se descomponen por lugar de origen las exportaciones de este {{level}}?',
+        'locations.export_subregions_products': '¿Cómo se descomponen por lugar de origen las exportaciones de {{item}} de este {{level}}?',
+        'locations.export_subregions_locations': '¿Cómo se descomponen por lugar de origen las exportaciones de este {{level}} a {{place}}?',
+        'locations.export_subregions_products_locations': '¿Cómo se descomponen por lugar de origen las exportaciones de {{item}} de este {{level}} a {{place}}?',
+        'locations.import_subregions': '¿Cómo se descomponen por lugar de origen las importaciones de este {{level}}?',
+        'locations.import_subregions_products': '¿Cómo se descomponen por lugar de origen las importaciones de {{item}} de este {{level}}?',
+        'locations.import_subregions_locations': '¿Cómo se descomponen por lugar de origen las importaciones de este {{level}} a {{place}}?',
+        'locations.import_subregions_products_locations': '¿Cómo se descomponen por lugar de origen las importaciones de {{item}} de este {{level}} a {{place}}?',
+        'products.export_value': '¿Qué exporta este {{level}}?',
+        'products.scatter': '¿Qué productos tienen el mayor potencial para este {{level}}?',
+        'products.export_value_to': '¿Qué productos exporta este {{level}} de {{place}}?',
+        'products.import_value': '¿Qué productos importa este {{level}}?',
+        'products.import_value_from': '¿Qué productos importa este {{level}} de {{place}}?',
+        'products.similarity': '¿Cómo es el espacio del producto de este {{level}}?',
+        'industries.employment': '¿Qué sectores generan más empleo en este {{level}}?',
+        'industries.scatter': '¿Qué sectores relativamente complejos y que ayuden a elevar la complejidad podrían desarrollarse más en este {{level}}?',
+        'industries.wages': '¿Qué sectores en este {{level}} tienen las mayores nóminas salariales?',
+        'industries.wages_avg': '¿Qué sectores en este {{level}} pagan los salarios más altos por trabajador?',
+        'industries.similarity': '¿Cómo es el espacio de los sectores de este {{level}}?'
       }
     },
     'builder_nav': {

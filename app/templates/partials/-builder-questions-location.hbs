@@ -6,7 +6,7 @@
       <div class="builder__questions__item__textwrap">
         <span {{action "closeDrawer"}}>
           {{#link-to 'visualization'  class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.locations.export' name=name }}
+            {{t 'graph_builder.page_title.location.locations.export' level=level }}
           {{/link-to}}
         </span>
       </div>
@@ -16,7 +16,7 @@
       <div class="builder__questions__item__textwrap">
         <span {{action "closeDrawer"}}>
           {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products" search=search) class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.locations.import_from' name=name }}
+            {{t 'graph_builder.page_title.location.locations.import_from' level=level }}
           {{/link-to}}
         </span>
       </div>
@@ -26,7 +26,7 @@
       <div class="builder__questions__item__textwrap">
         <span {{action "closeDrawer"}}>
           {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products" search=search) class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.locations.export_subregions' name=name }}
+            {{t 'graph_builder.page_title.location.locations.export_subregions' level=level }}
           {{/link-to}}
         </span>
       </div>
@@ -36,7 +36,7 @@
       <div class="builder__questions__item__textwrap">
         <span {{action "closeDrawer"}}>
           {{#link-to 'graph_builder' (query-params entity=entity entity_id=entity_id data_source="products" search=search) class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.locations.import_subregions' name=name item=builderquestionsDropDown }}
+            {{t 'graph_builder.page_title.location.locations.import_subregions' level=level item=builderquestionsDropDown }}
           {{/link-to}}
         </span>
       </div>
@@ -50,7 +50,7 @@
       <div class="builder__questions__item__textwrap">
         <span {{action "closeDrawer"}}>
           {{#link-to 'visualization' entity_and_id 'products' 'treemap' (query-params variable='export_value' search='null') class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.products.export_value' name=name}}
+            {{t 'graph_builder.page_title.location.products.export_value' level=level}}
           {{/link-to}}
         </span>
       </div>
@@ -60,7 +60,7 @@
       <div class="builder__questions__item__textwrap">
         <span {{action "closeDrawer"}}>
           {{#link-to 'visualization' entity_and_id 'products' 'treemap' (query-params variable='import_value' search='null') class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.products.import_value' name=name}}
+            {{t 'graph_builder.page_title.location.products.import_value' level=level}}
           {{/link-to}}
         </span>
       </div>
@@ -71,7 +71,7 @@
         <div class="builder__questions__item__textwrap">
           <span {{action "closeDrawer"}}>
             {{#link-to 'visualization' entity_and_id 'products' 'scatter' (query-params variable='null' endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
-              {{t 'graph_builder.page_title.location.products.scatter' name=name}}
+              {{t 'graph_builder.page_title.location.products.scatter' level=level}}
             {{/link-to}}
           </span>
         </div>
@@ -81,7 +81,7 @@
         <div class="builder__questions__item__textwrap">
           <span {{action "closeDrawer"}}>
             {{#link-to 'visualization' entity_and_id 'products' 'similarity' (query-params variable='null' endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
-              {{t 'graph_builder.page_title.location.products.similarity' name=name}}
+              {{t 'graph_builder.page_title.location.products.similarity' level=level}}
             {{/link-to}}
           </span>
         </div>
@@ -96,7 +96,7 @@
       <div class="builder__questions__item__textwrap">
         <span {{action "closeDrawer"}}>
           {{#link-to 'visualization' entity_and_id 'industries' 'treemap' (query-params variable='employment' endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.industries.employment' name=name}}
+            {{t 'graph_builder.page_title.location.industries.employment' level=level}}
           {{/link-to}}
         </span>
       </div>
@@ -106,7 +106,7 @@
       <div class="builder__questions__item__textwrap">
         <span {{action "closeDrawer"}}>
           {{#link-to 'visualization' entity_and_id 'industries' 'treemap' (query-params variable='wages' endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.industries.wages' name=name}}
+            {{t 'graph_builder.page_title.location.industries.wages' level=level}}
           {{/link-to}}
         </span>
       </div>
@@ -117,7 +117,7 @@
         <div class="builder__questions__item__textwrap">
           <span {{action "closeDrawer"}}>
             {{#link-to 'visualization' entity_and_id 'industries' 'scatter' (query-params variable='null' endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
-              {{t 'graph_builder.page_title.location.industries.scatter' name=name}}
+              {{t 'graph_builder.page_title.location.industries.scatter' level=level}}
             {{/link-to}}
           </span>
         </div>
@@ -127,7 +127,7 @@
         <div class="builder__questions__item__textwrap">
           <span {{action "closeDrawer"}}>
             {{#link-to 'visualization' entity_and_id 'industries' 'similarity' (query-params variable='rca'endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
-              {{t 'graph_builder.page_title.location.industries.similarity' name=name}}
+              {{t 'graph_builder.page_title.location.industries.similarity' level=level}}
             {{/link-to}}
           </span>
         </div>
