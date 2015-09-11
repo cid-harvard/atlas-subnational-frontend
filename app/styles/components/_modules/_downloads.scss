@@ -7,3 +7,10 @@
 .downloads {
   background: $colorBrown200;
 }
+
+.downloads__table__header {
+  width: 15%;
+  &:first-of-type {
+    width: 40%;
+  }
+}
