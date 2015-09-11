@@ -54,7 +54,7 @@ export default {
     'location_q2': '¿Qué exportaciones tienen el mayor potencial en Antioquia?',
     'industry_head': 'Entérese de una industria',
     'industry_q1': '¿Dónde emplea más gente el sector de seguros en Colombia?',
-    'industry_q2': '¿Cuáles son las habilidades que está demandando la industria química?',
+    'industry_q2': '¿Qué ocupaciones demanda la industria química?',
     'product_head': 'Aprenda sobre un producto de exportación',
     'product_q1': '¿Qué lugares de Colombia exportan café?',
     'product_q2': '¿Qué lugares de Colombia importan computadores?',
