@@ -50,6 +50,13 @@ export default Ember.Controller.extend({
   industriesMetadata: computed('model.industries', function() {
     return this.get('model.industries');
   }),
+  hasProfile: computed('entity', 'entity_level', function() {
+    let entity = this.get('entity');
+    let level = this.get('entity_level');
+    if(entity === 'product') { return false; }
+    if(entity === 'industry' && level === 'class') { return false; }
+    return true;
+  }),
   profileLink: computed('entity', function(){
     if(this.get('entity') === 'location') { return 'location.show'; }
     if(this.get('entity') === 'product') { return 'product.show'; }

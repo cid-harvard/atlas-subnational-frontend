@@ -28,6 +28,7 @@ export default Ember.Route.extend({
     }
     this.controllerFor('application').set('entity', model.get('entity.constructor.modelName'));
     this.controllerFor('application').set('entity_id', model.get('entity.id'));
+    this.controllerFor('application').set('entity_level', model.get('entity.level'));
 
     controller.set('drawerSettingsIsOpen', false); // Turn off other drawers
     controller.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
