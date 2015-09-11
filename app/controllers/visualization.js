@@ -86,15 +86,21 @@ export default Ember.Controller.extend({
       return `${this.get('model.entity.name')} (${this.get('entity.code')})`;
     }
   }),
-  pageTitle: computed('entityType', 'entity', 'variable', 'i18n.locale', function() {
-    let i18nString = `graph_builder.page_title.${this.get('entityType')}.${this.get('source')}`;
+  thisLevel: computed('entity', 'i18n.locale', function() {
     let level = this.get('i18n').t(`location.model.${this.get('entity.level')}`);
-    let visualization = this.get('visualization');
-
-    if( visualization === 'scatter' || visualization === 'similarity' ) {
-      return this.get('i18n').t(`${i18nString}.${visualization}`, { level: level });
+    let thisLevel = `this ${level}`;
+    if(this.get('i18n.locale') === 'es') {
+      level.string === 'ciudad' ? thisLevel = `esta ${level}` : thisLevel = `este ${level}`;
     }
-    return this.get('i18n').t(`${i18nString}.${this.get('variable')}`, { level: level });
+    return thisLevel;
+  }),
+  pageTitle: computed('entityType', 'entity', 'variable', 'i18n.locale', 'thisLevel', function() {
+    let i18nString = `graph_builder.page_title.${this.get('entityType')}.${this.get('source')}`;
+    let visualization = this.get('visualization');
+    if(visualization === 'scatter' || visualization === 'similarity') {
+      return this.get('i18n').t(`${i18nString}.${visualization}`, { thisLevel: this.get('thisLevel') });
+    }
+    return this.get('i18n').t(`${i18nString}.${this.get('variable')}`, { thisLevel: this.get('thisLevel') });
   }),
   recircCopy: computed('model','variable','i18n.locale', 'entityType', function() {
     //locale file under graph_builder.recirc.header
