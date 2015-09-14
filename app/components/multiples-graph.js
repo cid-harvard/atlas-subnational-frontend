@@ -4,9 +4,9 @@ const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
-  margin: { top: 20, right: 10, bottom: 30, left: 50 },
+  margin: { top: 20, right: 10, bottom: 30, left: 70 },
   height: 140,
-  firstSlice: 36,
+  firstSlice: 48,
   varId: 'code',
   id: '#multiples',
   width: computed(function() {
@@ -62,7 +62,7 @@ export default Ember.Component.extend({
     return d3.svg.axis()
       .scale(this.get('yScale'))
       .ticks(5)
-      .tickFormat((d) => { return numeral(d).format('0.0a'); })
+      .tickFormat((d) => { return numeral(d).format('0,0.0 a'); })
       .outerTickSize(0)
       .tickSize(-this.get('width'))
       .orient('left');
