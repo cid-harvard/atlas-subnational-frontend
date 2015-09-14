@@ -101,8 +101,12 @@ export default Ember.Component.extend({
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
-      this.set('width', this.$().parent().width());
-      this.set('height', this.$().parent().height());
+      if(!this.get('width')){
+        this.set('width', this.$().parent().width());
+      }
+      if(!this.get('height')){
+        this.set('height', this.$().parent().height());
+      }
       d3.select(this.get('id')).call(this.get('network'));
     });
   },
