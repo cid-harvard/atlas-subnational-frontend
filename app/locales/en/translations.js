@@ -61,6 +61,7 @@ export default {
     'colombia_profile': 'Read the profile for Colombia'
   },
   'location.model':{
+    'country': 'Colombia',
     'department': 'department',
     'municipality': 'municipality',
     'msa': 'city'
@@ -110,6 +111,7 @@ export default {
     'results_industries': 'Industries',
     'didnt_find': 'Didn’t find what you were looking for? Let us know: eduardo_lora@hks.harvard.edu',
     'level': {
+      'country': 'Country',
       'department': 'Department',
       'municipality': 'Municipality',
       'msa': 'City',

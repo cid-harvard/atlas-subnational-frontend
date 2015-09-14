@@ -61,6 +61,7 @@ export default {
     'colombia_profile': 'Lea el perfil de Colombia'
   },
   'location.model':{
+    'country': 'Colombia',
     'department': 'departamento',
     'municipality': 'municipio',
     'msa': 'ciudad'
@@ -110,6 +111,7 @@ export default {
     'results_industries': 'Sectores',
     'didnt_find': '¿Encontró lo que buscaba? Nos interesa saber: eduardo_lora@hks.harvard.edu',
     'level': {
+      'country': 'País',
       'department': 'Departamento',
       'municipality': 'Municipio',
       'msa': 'Ciudad',
