@@ -129,6 +129,11 @@
             {{t 'location.show.exports' year=year}}
           </a>
         {{/ivy-tab}}
+        {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+          <a class="tab__link">
+            {{t 'country.show.export_composition' year=year}}
+          </a>
+        {{/ivy-tab}}
       {{/ivy-tab-list}}
 
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
@@ -139,6 +144,20 @@
               data=productsData
               immutableData=productsData
               elementId='export-tree-map'
+              varDependent='export_value'
+              metadata=model.metaData
+            }}
+          </div>
+        </div>
+      {{/ivy-tab-panel}}
+      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+        <div class="vizmod">
+          <div class="vizmod--treemod">
+            {{d3plus-tree-map
+              isInTab='true'
+              data=departmentsData
+              immutableData=departmentsData
+              elementId='export-department-map'
               varDependent='export_value'
               metadata=model.metaData
             }}
