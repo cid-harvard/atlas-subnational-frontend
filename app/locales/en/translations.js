@@ -116,7 +116,8 @@ export default {
       'municipality': 'Municipality',
       'msa': 'City',
       '4digit': 'HS4',
-      'division': 'ISIC'
+      'division': 'ISIC',
+      'class': 'ISIC'
     }
   },
   'graph_builder': {

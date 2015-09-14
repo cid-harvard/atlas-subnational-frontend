@@ -116,7 +116,8 @@ export default {
       'municipality': 'Municipio',
       'msa': 'Ciudad',
       '4digit': 'SA4',
-      'division': 'CIIU'
+      'division': 'CIIU',
+      'class': 'CIIU'
     }
   },
   'graph_builder': {
