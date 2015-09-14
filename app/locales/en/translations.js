@@ -249,9 +249,9 @@ export default {
   },
   'location.show': {
     'overview': 'Overview',
-    'bullet.gdp_grow_rate': 'The GDP growth rate between {{yearRange}} was {{gdpGrowth}}',
-    'bullet.gdp_pc': '{{name}} has a GDP per capita of {{lastGdpPerCapita}}',
-    'bullet.last_pop': 'The population is {{lastPop}}',
+    'bullet.gdp_grow_rate': 'The GDP growth rate between {{yearRange}} was {{gdpGrowth}}, compared to 5.3% for Colombia',
+    'bullet.gdp_pc': '{{name}} has a GDP per capita of {{lastGdpPerCapita}}, compared to Col$15.1 M for Colombia',
+    'bullet.last_pop': 'The population is {{lastPop}} of Colombia\'s 45.8 M',
     'all_departments': 'Compared to the other departments',
     'value': 'Value',
     'growth_annual': 'Growth, annual ({{yearRange}})',
