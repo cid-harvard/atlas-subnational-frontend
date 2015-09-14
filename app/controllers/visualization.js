@@ -90,7 +90,7 @@ export default Ember.Controller.extend({
     let level = this.get('i18n').t(`location.model.${this.get('entity.level')}`);
     let thisLevel = `this ${level}`;
     if(this.get('i18n.locale') === 'es') {
-      level.string === 'ciudad' ? thisLevel = `esta ${level}` : thisLevel = `este ${level}`;
+      thisLevel = level.string === 'ciudad' ? `esta ${level}` :  `este ${level}`;
     }
     return thisLevel;
   }),
