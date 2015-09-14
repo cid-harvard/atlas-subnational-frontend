@@ -7,7 +7,6 @@ export default Ember.Route.extend({
 // `this.store.find` makes an api call for `params.location_id` and returns a promise
 // in the `then` function call, another API call is made to get the topExports data
   model: function(params) {
-    if(params.location_id === 'colombia'){ this.transitionTo('colombia');}
     return this.store.find('location', params.location_id);
   },
   afterModel: function(model, transition) {
@@ -72,6 +71,7 @@ export default Ember.Route.extend({
       model.set('industriesData', industries);
       model.set('departments', departments);
       model.set('timeseries', departmentTimeseries);
+      if(model.id == '0') { model.set('metaData', this.modelFor('application')); }
       return model;
     });
   },

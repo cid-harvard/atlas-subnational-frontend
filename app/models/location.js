@@ -13,6 +13,8 @@ export default DS.Model.extend(ModelAttribute, {
   industriesData: attr(),
   departments: attr(),
   timeseries: attr(),
+  metaData: attr(),
+  yearSort: ['year'],
 
   sortedTimeseries: computed.sort('timeseries','yearSort'),
 
