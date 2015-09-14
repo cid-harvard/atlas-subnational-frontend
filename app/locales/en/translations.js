@@ -63,7 +63,8 @@ export default {
   'location.model':{
     'department': 'department',
     'municipality': 'municipality',
-    'msa': 'city'
+    'msa': 'city',
+    'country': 'country'
   },
   'ctas': {
     'export': 'Export',
@@ -110,6 +111,7 @@ export default {
     'results_industries': 'Industries',
     'didnt_find': 'Didn’t find what you were looking for? Let us know: eduardo_lora@hks.harvard.edu',
     'level': {
+      'country': 'Country',
       'department': 'Department',
       'municipality': 'Municipality',
       'msa': 'City',

@@ -63,7 +63,8 @@ export default {
   'location.model':{
     'department': 'departamento',
     'municipality': 'municipio',
-    'msa': 'ciudad'
+    'msa': 'ciudad',
+    'country': 'país'
   },
   'ctas': {
     'export': 'Exportar',
@@ -110,6 +111,7 @@ export default {
     'results_industries': 'Sectores',
     'didnt_find': '¿Encontró lo que buscaba? Nos interesa saber: eduardo_lora@hks.harvard.edu',
     'level': {
+      'country': 'País',
       'department': 'Departamento',
       'municipality': 'Municipio',
       'msa': 'Ciudad',
