@@ -252,9 +252,9 @@ export default {
   },
   'location.show': {
     'overview': 'Visión de conjunto',
-    'bullet.gdp_grow_rate': 'La tasa de crecimiento del PIB entre 2008 y 2013 fue {{gdpGrowth}}',//FIXME: dynamic years
-    'bullet.gdp_pc': 'El PIB per capita de {{name}} es {{lastGdpPerCapita}}',
-    'bullet.last_pop': 'La población es {{lastPop}}',
+    'bullet.gdp_grow_rate': 'La tasa de crecimiento del PIB entre {{yearRange}} fue {{gdpGrowth}}, comparada con 5,3% para toda Colombia',//FIXME: dynamic years
+    'bullet.gdp_pc': 'El PIB per capita de {{name}} es {{lastGdpPerCapita}}, comparado con Col$15,1 mill para toda Colombia (año 2013).',
+    'bullet.last_pop': 'La población es {{lastPop}} de personas, frente a 45,8 mill de personas en todo el país  (año 2013).' ,
     'all_departments': 'Comparación con otros departamentos',
     'value': 'Valor',
     'growth_annual': 'Tendencia ({{yearRange}})',
