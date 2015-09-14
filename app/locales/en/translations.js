@@ -144,10 +144,10 @@ export default {
       'cog': 'Opportunity gain',
       'employment': 'Employment',
       'num_vacancies': 'Vacancies',
-      'wages': 'Total wages, COP (in thousands)',
-      'monthly_wages': 'Avg. monthly wage, COP',
-      'avg_wage': 'Avg. wage, COP (in thousands)',
-      'average_wages': 'Avg. wage, COP (in thousands)',
+      'wages': 'Total wages, Col$ (in thousands)',
+      'monthly_wages': 'Avg. monthly wage, Col$',
+      'avg_wage': 'Avg. wage, Col$ (in thousands)',
+      'average_wages': 'Avg. wage, Col$ (in thousands)',
       'employment_growth': 'Employment growth (2008-2012)',
       'num_establishments': 'Firms',
       'export_num_plants': 'Firms',
@@ -227,11 +227,11 @@ export default {
     'builder_mod_header': {
       'industry': {
         'departments.employment': 'Total employment',
-        'departments.wages': 'Total wages, COP',
-        'departments.wage_avg': 'Average wages, COP',
+        'departments.wages': 'Total wages, Col$',
+        'departments.wage_avg': 'Average wages, Col$',
         'locations.employment': 'Total employment',
-        'locations.wages': 'Total wages, COP',
-        'locations.wage_avg': 'Average wages, COP',
+        'locations.wages': 'Total wages, Col$',
+        'locations.wage_avg': 'Average wages, Col$',
         'occupations.num_vacancies': 'Total vacancies'
       },
       'product': {

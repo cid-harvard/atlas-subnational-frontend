@@ -141,13 +141,13 @@ export default {
       'code': 'Código',
       'export_rca': 'Ventaja comparativa revelada',
       'rca': 'Ventaja comparativa revelada',
-      'wages': 'Salarios totales pagados, COP (miles de pesos)',
-      'monthly_wages': 'Salarios promedio, COP',
+      'wages': 'Salarios totales pagados, Col$ (miles de pesos)',
+      'monthly_wages': 'Salarios promedio, Col$',
       'cog': 'Complejidad potencial',
       'employment': 'Empleo',
       'num_vacancies': 'Vacantes',
-      'avg_wage': 'Salarios promedio, COP (miles de pesos)',
-      'average_wages': 'Salarios promedio, COP (miles de pesos)',
+      'avg_wage': 'Salarios promedio, Col$ (miles de pesos)',
+      'average_wages': 'Salarios promedio, Col$ (miles de pesos)',
       'employment_growth': 'El crecimiento del empleo (2008–2012)',
       'num_establishments': 'Empresas',
       'export_num_plants': 'Empresas',
@@ -227,11 +227,11 @@ export default {
     'builder_mod_header': {
       'industry': {
         'locations.employment': 'Empleo total',
-        'locations.wages': 'Salarios totales, COP',
-        'locations.wage_avg': 'Salarios promedio, COP',
+        'locations.wages': 'Salarios totales, Col$',
+        'locations.wage_avg': 'Salarios promedio, Col$',
         'departments.employment': 'Empleo total',
-        'departments.wages': 'Salarios totales, COP',
-        'departments.wage_avg': 'Salarios promedio, COP',
+        'departments.wages': 'Salarios totales, Col$',
+        'departments.wage_avg': 'Salarios promedio, Col$',
         'occupations.num_vacancies': 'Total de vacantes'
       },
       'product': {
