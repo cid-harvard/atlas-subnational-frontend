@@ -22,7 +22,7 @@ export default Ember.Component.extend({
         container: this.get('id'),
         height: this.get('height'),
         width: this.get('width'),
-        margin: {top: 0, right: 10, bottom: 20, left: 10},
+        margin: {top: 0, right: 5, bottom: 20, left: 0},
         var_id: this.get('varId'),
         var_x: this.get('varX'),
         var_y: function() { return this.height/2; },
