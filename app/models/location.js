@@ -31,15 +31,15 @@ export default DS.Model.extend(ModelAttribute, {
   }),
   lastPop: computed('timeseries','locale', function() {
     let pop = get(this.get('lastDataPoint'), 'population');
-    return numeral(pop).format('0.0a');
+    return numeral(pop).format('0.00 a');
    }),
   lastGdp: computed('timeseries','locale', function() {
     let gdp = get(this.get('lastDataPoint'), 'gdp_real');
-    return numeral(gdp).format('$ 0.0a');
+    return numeral(gdp).format('$ 0.00 a');
    }),
   lastGdpPerCapita: computed('timeseries','locale', function() {
     let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_real');
-    return numeral(gdpPC).format('$ 0.0a');
+    return numeral(gdpPC).format('$ 0.00 a');
    }),
   gdpGrowth:computed('timeseries','locale', function() {
     var firstGdp = get(this.get('firstDataPoint'), 'gdp_real');
