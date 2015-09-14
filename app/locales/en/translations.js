@@ -113,8 +113,9 @@ export default {
       'department': 'Department',
       'municipality': 'Municipality',
       'msa': 'City',
-      '4digit': 'HS4',
-      'division': 'ISIC'
+      '4digit': 'HS 4',
+      'division': 'ISIC 2',
+      'class': 'ISIC 4'
     }
   },
   'graph_builder': {
