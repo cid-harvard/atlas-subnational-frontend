@@ -221,11 +221,11 @@ export default EmberTableComponent.extend({
   content: computed('data.[]', function() {
     return this.get('data');
   }),
-  refreshTable: observer('i18n.locale', function() {
-    this.set('content',
-      []);
-    this.set('content',
-      this.get('data'));
+  refreshTable: observer('i18n.locale','source', function() {
+    Ember.run.once(this, function(){
+      this.set('content', []);
+      this.set('content', this.get('data'));
+    });
   }),
   generateColumnDefinition: function(column) {
     let colSettings = _.find(this.columnSettingsMap, { 'key': column.key });
