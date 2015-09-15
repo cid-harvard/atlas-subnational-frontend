@@ -68,6 +68,10 @@
   overflow-y: visible;
 }
 
+.buildermod__viz {
+  position: relative;
+}
+
 .buildermod__highlight__wrap {
   margin: $baseSpace*-3.5 0 0;
   position: absolute;
