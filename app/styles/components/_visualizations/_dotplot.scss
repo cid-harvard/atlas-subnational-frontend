@@ -6,6 +6,7 @@
 
 // Nested here instead of giving ever el a class in the js
 .dotplot {
+  position: relative;
 
   .items__mark__diamond {
     fill: gray;
