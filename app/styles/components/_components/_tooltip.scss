@@ -1,0 +1,32 @@
+/**
+*
+* Tooltip
+*
+**/
+
+.tooltip {
+  background: $colorWhite;
+  height: 100%;
+  padding: $baseSpace/2;
+  z-index: $zIndex-9;
+  min-width: 15rem;
+  max-width: 25rem;
+  font-size: $fontTiny;
+  overflow: initial !important;
+  box-shadow: -1px -1px 5px rgba(0,0,0,0.2);
+  transform: translate(-50%, calc(-100% - 10px));
+  &:after {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: '';
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255, 255, 255, 0);
+    border-top-color: $colorWhite;
+    border-width: 10px;
+    margin-left: -10px;
+  }
+}
