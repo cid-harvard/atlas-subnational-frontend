@@ -286,7 +286,7 @@ export default {
     'industry_space': 'Industry Space',
     'exports': 'Exports',
     'exports_composition_by_products': 'Export Composition by Product ({{year}})',
-    'exports_composition_by_department': 'Export Composition by Department({{year}})',
+    'exports_composition_by_department': 'Export Composition by Department ({{year}})',
     'product_space': 'Product Space',
     'exports.copy.p1': 'Colombia exported US$54.8 billion dollars in 2014, down from $58.8 billion in 2013 and $60.1 billion in 2012. Its main export partners are the United States, Venezuela, Ecuador and Peru. In 2014, mining products (of which oil, coal and nickel are the largest items) comprised 59.3% of total merchandise exports, manufactured goods contributed 35.6%, and agricultural products totaled 4.6% of exports. The following graphs provide further details.',
     'export_complexity_possibilities': 'Export Complexity and Possibilities',
