@@ -95,29 +95,15 @@
       {{#ivy-tab-list classNames='tabmod__tabs'}}
         {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
           <a class="tab__link">
-            {{t 'location.show.total_wages' lastYear=year}}
+            {{t 'location.show.employment' lastYear=year}}
           </a>
         {{/ivy-tab}}
         {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
           <a class="tab__link">
-            {{t 'location.show.employment' lastYear=year}}
+            {{t 'location.show.total_wages' lastYear=year}}
           </a>
         {{/ivy-tab}}
       {{/ivy-tab-list}}
-      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod">
-          <div class="vizmod--treemod">
-            {{d3plus-tree-map
-              isInTab='true'
-              data=industriesData
-              immutableData=industriesData
-              elementId='wages-tree-map'
-              dataType='industries'
-              varDependent='wages'
-            }}
-          </div>
-        </div>
-      {{/ivy-tab-panel}}
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod">
           <div class="vizmod--treemod">
@@ -128,6 +114,20 @@
               elementId='employment-tree-map'
               dataType='industries'
               varDependent='employment'
+            }}
+          </div>
+        </div>
+      {{/ivy-tab-panel}}
+      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+        <div class="vizmod">
+          <div class="vizmod--treemod">
+            {{d3plus-tree-map
+              isInTab='true'
+              data=industriesData
+              immutableData=industriesData
+              elementId='wages-tree-map'
+              dataType='industries'
+              varDependent='wages'
             }}
           </div>
         </div>
