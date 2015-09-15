@@ -283,10 +283,12 @@ export default {
     'industry_space': 'Industry Space',
     'exports': 'Exports',
     'export_composition': 'Export Composition ({{year}})',
+    'product_space': 'Product Space',
     'exports.copy.p1': 'Colombia exported US$54.8 billion dollars in 2014, down from $58.8 billion in 2013 and $60.1 billion in 2012. Its main export partners are the United States, Venezuela, Ecuador and Peru. In 2014, mining products (of which oil, coal and nickel are the largest items) comprised 59.3% of total merchandise exports, manufactured goods contributed 35.6%, and agricultural products totaled 4.6% of exports. The following graphs provide further details.',
     'export_complexity_possibilities': 'Export Complexity and Possibilities',
     'export_complexity_possibilities.copy.p1': 'The concept of export complexity is similar to that of industry complexity introduced above. It has been found that countries that export products that are relatively complex for their level of economic development tend to grow faster than countries that export relatively simple products. Based on the complexity of its export basket in 2013, Colombia ranks 53rd among 124 countries and is predicted to grow at an annual rate of 3.3% in the period 2013-2023 based on its economic complexity.',
-    'export_complexity_possibilities.copy.p2': 'The highlighted nodes represent the products that Colombia exports in relatively large amounts (more precisely, with revealed comparative advantage higher than one, see the Glossary). Colors represent product groupings (which match the colors used in the industry technological space shown above). The figure further below and the accompanying table show what export products offer the best possibilities for Colombia, given the capabilities the country already has and how ‘distant’ are those capabilities to the ones needed for each product.'
+    'export_complexity_possibilities.copy.p2': 'The highlighted nodes represent the products that Colombia exports in relatively large amounts (more precisely, with revealed comparative advantage higher than one, see the Glossary). Colors represent product groupings (which match the colors used in the industry technological space shown above). The figure further below and the accompanying table show what export products offer the best possibilities for Colombia, given the capabilities the country already has and how ‘distant’ are those capabilities to the ones needed for each product.',
+     'export_complexity_possibilities.copy.p3': ''
   },
   'industry.show': {
     'employment_and_wages': 'Employment and wages',
