@@ -42,6 +42,10 @@ export default Ember.Controller.extend({
     if(this.get('visualization') === 'geo') { return true; }
     return false;
   }),
+  isCountry: computed('model', function() {
+    if(this.get('entity.level') === 'country') { return true; }
+    return false;
+  }),
   drawerIsUnnecessary: computed('visualization','source', function() { //TODO: Depricate this out
     let visualization = this.get('visualization');
     let source = this.get('source');

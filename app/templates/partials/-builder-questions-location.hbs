@@ -112,16 +112,18 @@
       </div>
     </li>
     {{#if isPrescriptive }}
-      <li class="builder__questions__item">
-        <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
-        <div class="builder__questions__item__textwrap">
-          <span {{action "closeDrawer"}}>
-            {{#link-to 'visualization' entity_and_id 'industries' 'scatter' (query-params variable='null' endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
-              {{t 'graph_builder.page_title.location.industries.scatter' thisLevel=thisLevel}}
-            {{/link-to}}
-          </span>
-        </div>
-      </li>
+      {{#unless isCountry}}
+        <li class="builder__questions__item">
+          <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
+          <div class="builder__questions__item__textwrap">
+            <span {{action "closeDrawer"}}>
+              {{#link-to 'visualization' entity_and_id 'industries' 'scatter' (query-params variable='null' endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
+                {{t 'graph_builder.page_title.location.industries.scatter' thisLevel=thisLevel}}
+              {{/link-to}}
+            </span>
+          </div>
+        </li>
+      {{/unless}}
       <li class="builder__questions__item">
         <i class="icon-cidcon_similarity builder__questions__item__icon"></i>
         <div class="builder__questions__item__textwrap">
