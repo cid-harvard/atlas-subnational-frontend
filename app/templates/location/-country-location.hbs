@@ -3,7 +3,10 @@
      <h3 class="section__head">{{t 'country.show.economic_structure' }}</h3>
   </header>
   <p class="section__p">
-    {{t 'country.show.economic_structure.copy' }}
+    {{t 'country.show.economic_structure.copy.p1' }}
+  </p>
+  <p class="section__p">
+    {{t 'country.show.economic_structure.copy.p2' }}
   </p>
   {{partial 'location/country-dotplots'}}
 </section>
@@ -25,29 +28,15 @@
       {{#ivy-tab-list classNames='tabmod__tabs'}}
         {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
           <a class="tab__link">
-            {{t 'location.show.total_wages' lastYear=year}}
+            {{t 'location.show.employment' lastYear=year}}
           </a>
         {{/ivy-tab}}
         {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
           <a class="tab__link">
-            {{t 'location.show.employment' lastYear=year}}
+            {{t 'location.show.total_wages' lastYear=year}}
           </a>
         {{/ivy-tab}}
       {{/ivy-tab-list}}
-      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod">
-          <div class="vizmod--treemod">
-            {{d3plus-tree-map
-              isInTab='true'
-              data=lastIndustryData
-              immutableData=lastIndustryData
-              elementId='wages-tree-map'
-              dataType='industries'
-              varDependent='wages'
-            }}
-          </div>
-        </div>
-      {{/ivy-tab-panel}}
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod">
           <div class="vizmod--treemod">
@@ -58,6 +47,20 @@
               elementId='employment-tree-map'
               dataType='industries'
               varDependent='employment'
+            }}
+          </div>
+        </div>
+      {{/ivy-tab-panel}}
+      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+        <div class="vizmod">
+          <div class="vizmod--treemod">
+            {{d3plus-tree-map
+              isInTab='true'
+              data=lastIndustryData
+              immutableData=lastIndustryData
+              elementId='wages-tree-map'
+              dataType='industries'
+              varDependent='wages'
             }}
           </div>
         </div>
@@ -126,12 +129,12 @@
       {{#ivy-tab-list classNames='tabmod__tabs'}}
         {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
           <a class="tab__link">
-            {{t 'location.show.exports' year=year}}
+            {{t 'country.show.exports_composition_by_products' year=year}}
           </a>
         {{/ivy-tab}}
         {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
           <a class="tab__link">
-            {{t 'country.show.export_composition' year=year}}
+            {{t 'country.show.exports_composition_by_department' year=year}}
           </a>
         {{/ivy-tab}}
       {{/ivy-tab-list}}
