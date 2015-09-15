@@ -43,13 +43,13 @@ app.import('bower_components/papaparse/papaparse.min.js');
 app.import('bower_components/d3/d3.min.js');
 
 // D3 "Plus"
-app.import('bower_components/d3plus/d3plus.js');
+app.import('bower_components/d3plus/d3plus.min.js');
 
 // VizToolkit
 app.import('bower_components/vis-toolkit/build/vistk.js');
 
 // Lodash
-app.import('bower_components/lodash/lodash.js');
+app.import('bower_components/lodash/lodash.min.js');
 
 // Geomap
 app.import('bower_components/d3-plugins/geo/tile/tile.js');
