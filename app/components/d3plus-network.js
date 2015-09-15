@@ -94,7 +94,7 @@ export default Ember.Component.extend({
           type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
           class: function() { return 'tooltip'; },
           text: (d) => { return d[`name_short_${this.get('i18n').locale}`]; },
-          translate: [-100, 10],
+          // translate: [-100, 0],
           exit: function() {}
         }, {
           var_mark: '__selected',

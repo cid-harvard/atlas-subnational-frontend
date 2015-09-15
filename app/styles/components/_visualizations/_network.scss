@@ -40,14 +40,15 @@
   background: $colorWhite;
   height: 100%;
   padding: $baseSpace/2;
-  width: 200px !important;
   z-index: $zIndex-9;
-  max-width: 30rem;
+  min-width: 15rem;
+  max-width: 25rem;
   font-size: $fontTiny;
   overflow: initial !important;
-  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+  box-shadow: -1px -1px 5px rgba(0,0,0,0.2);
+  transform: translate(-50%, calc(-100% - 10px));
   &:after {
-    bottom: 100%;
+    top: 100%;
     left: 50%;
     border: solid transparent;
     content: '';
@@ -56,7 +57,7 @@
     position: absolute;
     pointer-events: none;
     border-color: rgba(255, 255, 255, 0);
-    border-bottom-color: $colorWhite;
+    border-top-color: $colorWhite;
     border-width: 10px;
     margin-left: -10px;
   }
