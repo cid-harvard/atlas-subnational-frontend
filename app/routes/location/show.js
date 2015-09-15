@@ -18,7 +18,7 @@ export default Ember.Route.extend({
 
     // one of these should be removed in the future because the points should be merged in
     var departments = Ember.$.getJSON(`${apiURL}/data/location?level=department`);
-    var departments_trade = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/subregions_trade/?level=department`)
+    var departments_trade = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/subregions_trade/?level=department`);
 
     return RSVP.allSettled([products, departments, industries, departments_trade]).then((array) => {
       var productsData = getWithDefault(array[0], 'value.data', []);
@@ -79,8 +79,6 @@ export default Ember.Route.extend({
       model.set('timeseries', departmentTimeseries);
       if(model.id == '0') { model.set('metaData', this.modelFor('application')); }
       return model;
-    }).then((model) => {
-
     });
   },
   setupController(controller, model) {
