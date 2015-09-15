@@ -43,7 +43,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
 
   //Switch to import source
   click("button:contains('Change question')");
-  click("a:contains('What products does Atlántico import?')");
+  click("a[data-location-product='imports']");
 
   andThen(function() {
     assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/treemap?endDate=2013&startDate=2013&variable=import_value');
@@ -51,7 +51,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
 
   //Go to scatter plot
   click("button:contains('Change question')");
-  click("a:contains('What products have the most potential for Atlántico?')");
+  click("a[data-location-product='scatter']");
 
   andThen(function() {
     assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/scatter?endDate=2013&startDate=2013');
@@ -59,7 +59,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
 
   //Go to product space
   click("button:contains('Change question')");
-  click("a:contains('What does the product space look like for Atlántico?')");
+  click("a[data-location-product='similarity']");
 
   andThen(function() {
     assert.equal(currentURL(), '/graph_builder/location-2/source/products/visualization/similarity?endDate=2013&startDate=2013');
@@ -67,7 +67,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
 
   //Go to industry employment
   click("button:contains('Change question')");
-  click("a:contains('What industries in Atlántico employ the most people?')");
+  click("a[data-location-industry='employment']");
 
   andThen(function() {
     assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/treemap?endDate=2013&startDate=2013&variable=employment');
@@ -75,7 +75,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
 
   //Go to industry wages
   click("button:contains('Change question')");
-  click("a:contains('What industries in Atlántico are the largest by total wages?')");
+  click("a[data-location-industry='wages']");
 
   andThen(function() {
     assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/treemap?endDate=2013&startDate=2013&variable=wages');
@@ -83,7 +83,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
 
   //Go to industry scatter
   click("button:contains('Change question')");
-  click("a:contains('What industries have the most potential for Atlántico?')");
+  click("a[data-location-industry='scatter']");
 
   andThen(function() {
     assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/scatter?endDate=2013&startDate=2013');
@@ -91,7 +91,7 @@ test('search for Alantico and go to GB and Profile', function(assert) {
 
   //Go to industry simi-map
   click("button:contains('Change question')");
-  click("a:contains('What does the industry space look like for Atlántico?')");
+  click("a[data-location-industry='similarity']");
 
   andThen(function() {
     assert.equal(currentURL(), '/graph_builder/location-2/source/industries/visualization/similarity?endDate=2013&startDate=2013&variable=rca');
