@@ -72,13 +72,18 @@ export default Ember.Component.extend({
       var_y: 'y',
       radius: 3,
       var_color: 'color',
-      color: function(d) { return d; },
+      color: (d) => { return d; },
       y_invert: true,
       var_id: 'id',
       items: [{
         attr: 'name',
         marks: [{
           type: 'circle',
+          fill: (d) => {
+            if(d[this.get('varDependent')] >= 1) {
+              return d.color;
+            }
+          },
           class: (d) => {
             if(d[this.get('varDependent')] >= 1) {
               return 'node--is--highlighted';
