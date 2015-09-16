@@ -80,6 +80,7 @@ export default Ember.Component.extend({
         marks: [{
           type: 'circle',
           fill: (d) => {
+            if(this.get('showAllColors')){ return d.color; }
             if(d[this.get('varDependent')] >= 1) {
               return d.color;
             }

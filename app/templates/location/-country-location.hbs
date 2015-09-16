@@ -90,12 +90,13 @@
         {{/ivy-tab}}
       {{/ivy-tab-list}}
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod buildermod__vizwrap--is--fixedheight">
+        <div class="vizmod buildermod__viz">
           {{d3plus-network
             data=lastIndustryData
             immutableData=lastIndustryData
             elementId='industry-space'
             dataType='industries'
+            showAllColors='true'
             height=600
           }}
         </div>
@@ -196,17 +197,16 @@
       {{/ivy-tab-list}}
 
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod">
-          <div class="vizmod--treemod">
+        <div class="vizmod buildermod__viz">
           {{d3plus-network
             data=productsData
             immutableData=productsData
             elementId='product-space'
             dataType='products'
             metadata=model.metaData
+            showAllColors='true'
             height=600
           }}
-          </div>
         </div>
       {{/ivy-tab-panel}}
     {{/ivy-tabs}}
