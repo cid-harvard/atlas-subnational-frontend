@@ -32,7 +32,7 @@ export default Ember.Component.extend({
         x_tickSize: 0,
         x_tickPadding: 10,
         x_format: (d) => {
-          let format = function(d) { return numeral(d).format('$ 0.00 a'); };
+          let format = function(d) { return numeral(d).format('$ 0.00a'); };
           let type = this.get('type');
           if(type === 'population') {
             format = function(d) { return numeral(d).format('0.00a'); };
@@ -54,7 +54,7 @@ export default Ember.Component.extend({
             type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
             class: function() { return 'tooltip'; },
             text: (d)  => {
-              let format = function(d) { return numeral(d).format('0.00 a'); };
+              let format = function(d) { return numeral(d).format('0.00a'); };
               let type = this.get('type');
               if(type === 'population') {
                 format = function(d) { return numeral(d).format('0.00a'); };
