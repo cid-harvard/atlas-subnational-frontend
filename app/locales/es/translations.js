@@ -138,13 +138,13 @@ export default {
       'code': 'Código',
       'export_rca': 'Ventaja comparativa revelada',
       'rca': 'Ventaja comparativa revelada',
-      'wages': 'Salarios totales pagados, COP (miles de pesos)',
-      'monthly_wages': 'Salarios promedio, COP',
+      'wages': 'Salarios totales pagados, Col$ (miles de pesos)',
+      'monthly_wages': 'Salarios promedio, Col$',
       'cog': 'Complejidad potencial',
       'employment': 'Empleo',
       'num_vacancies': 'Vacantes',
-      'avg_wage': 'Salarios promedio, COP (miles de pesos)',
-      'average_wages': 'Salarios promedio, COP (miles de pesos)',
+      'avg_wage': 'Salarios promedio, Col$ (miles de pesos)',
+      'average_wages': 'Salarios promedio, Col$ (miles de pesos)',
       'employment_growth': 'El crecimiento del empleo (2008–2012)',
       'num_establishments': 'Empresas',
       'export_num_plants': 'Empresas',
@@ -224,11 +224,11 @@ export default {
     'builder_mod_header': {
       'industry': {
         'locations.employment': 'Empleo total',
-        'locations.wages': 'Salarios totales, COP',
-        'locations.wage_avg': 'Salarios promedio, COP',
+        'locations.wages': 'Salarios totales, Col$',
+        'locations.wage_avg': 'Salarios promedio, Col$',
         'departments.employment': 'Empleo total',
-        'departments.wages': 'Salarios totales, COP',
-        'departments.wage_avg': 'Salarios promedio, COP',
+        'departments.wages': 'Salarios totales, Col$',
+        'departments.wage_avg': 'Salarios promedio, Col$',
         'occupations.num_vacancies': 'Total de vacantes'
       },
       'product': {
@@ -249,9 +249,9 @@ export default {
   },
   'location.show': {
     'overview': 'Visión de conjunto',
-    'bullet.gdp_grow_rate': 'La tasa de crecimiento del PIB entre 2008 y 2013 fue {{gdpGrowth}}',//FIXME: dynamic years
-    'bullet.gdp_pc': 'El PIB per capita de {{name}} es {{lastGdpPerCapita}}',
-    'bullet.last_pop': 'La población es {{lastPop}}',
+    'bullet.gdp_grow_rate': 'La tasa de crecimiento del PIB entre {{yearRange}} fue {{gdpGrowth}}, comparada con 5,3% para toda Colombia',//FIXME: dynamic years
+    'bullet.gdp_pc': 'El PIB per capita de {{name}} es {{lastGdpPerCapita}}, comparado con Col$15,1 mill para toda Colombia (año 2013).',
+    'bullet.last_pop': 'La población es {{lastPop}} de personas, frente a 45,8 mill de personas en todo el país  (año 2013).' ,
     'all_departments': 'Comparación con otros departamentos',
     'value': 'Valor',
     'growth_annual': 'Tendencia ({{yearRange}})',
@@ -267,27 +267,32 @@ export default {
     'export_possiblities': 'Posibilidades de exportación',
     'export_possiblities.intro': 'Hemos encontrado que los países que exportan productos más complejos crecen más rápido. Usando el "espacio del producto" presentado arriba, estamos destacando productos de alto potencial para {{name}}, ordenados por las mejores combinaciones de complejidad actual y complejidad potencial.',
     'export_possiblities.footer': 'Los productos indicados pueden no ser viables debido a condiciones del lugar que no se consideran en el análisis de similitud tecnológica.',
-    'stepper': {
-      1: `This circle represents bananas.
-        Think of it as a container for all
-        the capabilities needed to extract
-        and transport bananas.`,
-      2: `Bananas are lucrative, but the
-        capabilities needed to extract it can't
-        be used to make many other products. That's
-        why bananas are a low opportunity product.`,
-      3: `Here we arrange products by the similarity of the
-        capabilities required in their production, given international
-        patterns. {{name}}'s current exports are circled in
-        blue. Follow the links from those exports to see more products
-        that {{name}} could start exporting`,
-      4: `But {{name}} doesn't just want more products,
-        it wants complex products that require sophisticated capabilities
-        that are not common to many countries. This is not the
-        case of bananas, which is produced by almost every country
-        that has banana trees. We shade products green by their
-        complexity—that is, how many countries export them.`
-     }
+  },
+  'country.show': {
+    'dotplot-column': 'Departamentos de Colombia',
+    'total': 'Totales',
+    'gdp': 'Col $15.864.953',
+    'gdp_per_capita':' Col $756.152',
+    'population': '48,1 millones',
+    'economic_structure': 'Estructura Económica',
+    'economic_structure.copy.p1': 'Con una población de 48,1 millones (a mayo 2015), Colombia es el tercer país más grande de América Latina. Su PIB total en 2014 fue Col $756.152 miles de millones, o US$377,9 miles de millones a la tasa de cambio promedio (1 US dólar = 2000,6 pesos colombianos). En 2014, se alcanzó un nivel de ingreso per cápita de Col $15.864.953 o US$7.930. La tasa de crecimiento desde 2008 ha sido en promedio 4.3% (o 3.1% por persona). ',
+    'economic_structure.copy.p2': 'Los servicios empresariales y financieros son el sector más grande, con una contribución al PIB de 18,8%, seguidos por los servicios de gobierno, sociales y personales (16,5%) y las actividades manufactureras (11,2%). Bogotá D.C., Antioquia y el Valle del Cauca concentran aproximadamente la mitad de la actividad productiva, con participaciones en el PIB de 24,7, 13,1 y 9,2%, respectivamente. Sin embargo, los departamentos con más alto PIB per cápita son Casanare y Meta, ambos importantes productores de petróleo. Los gráficos siguientes presentan más detalles.',
+    'employment_wage_occupation': 'Empleo Formal, Ocupaciones y Salarios',
+    'employment_wage_occupation.copy.p1': 'En 2014, aproximadamente 21,6 millones de personas fueron ocupadas en empleos formales o informales, con un leve aumento respecto al año anterior (21,1  millones). Los registros de la PILA, que cubren el universo de los trabajadores que hacen contribuciones al sistema de seguridad social, indican que 13,3 millones de personas estuvieron ocupadas en algún momento en empleos formales en 2013. Teniendo en cuenta el número de meses empleados, el número efectivo de trabajadores-año en el sector formal en 2013 fue 6,7 millones. Bogotá DC, Antioquia y el Valle del Cauca generan, respectivamente 32,7, 16,7, and 10,7% del empleo formal (efectivo).',
+    'employment_wage_occupation.copy.p2': 'Los siguientes gráficos ofrecen información más detallada de los patrones de empleo formal y los salarios pagados según los registros de PILA. También se incluye información de vacantes anunciadas y salarios ofrecidos por ocupación, calculados a partir de los anuncios colocados por empresas en sitios de Internet durante 2014.',
+    'industry_complex': 'Complejidad Productiva',
+    'industry_complex.copy.p1': 'La complejidad productiva es una medida de la amplitud de las capacidades y habilidades –know-how– que se requiere en un sector productivo. Se dice que sectores tales como químicos o maquinaria son altamente complejos porque requieren un nivel sofisticado de conocimientos productivos que solo es factible encontrar en grandes empresas donde interactúa un número de individuos altamente capacitados. En contraste, sectores como el comercio minorista o restaurantes requieren solo niveles básicos de capacitación que pueden encontrarse incluso en una pequeña empresa familiar. Los sectores más complejos son más productivos y contribuyen más a elevar el ingreso per cápita. Los departamentos y ciudades con sectores más complejos tienen una base productiva más diversificada y tienden a crear más empleo formal.',
+    'industry_complex.copy.p2':'El ‘Espacio de Similitud Tecnológica’ que se presenta enseguida es una representación gráfica de la similitud de las capacidades y habilidades entre pares de sectores. Cada punto (o nodo) representa un sector; los nodos conectados por líneas requieren capacidades semejantes. Los sectores con más conexiones usan capacidades que pueden ser utilizadas en muchos otros sectores. Los colores representan grupos de sectores.',
+    'industry_space': 'Espacio de los sectores',
+    'exports': 'Exportaciones',
+    'exports_composition_by_products': 'Composición de las exportaciones ({{year}})',
+    'exports_composition_by_department': 'Composición de las exportaciones por departamento ({{year}})',
+    'product_space': 'Espacio del producto',
+    'exports.copy.p1': 'Colombia exportó US$54,8 miles de millones en 2014, comparado con $58,8 miles de millones en 2013 y $60,1 miles de millones en 2012. Sus principales destinos de exportación son los Estados Unidos, Venezuela, Ecuador y Perú. En 2014, los productos mineros (entre los cuales, petróleo, carbón y ferroníquel son los más importantes) representaron 59,3% de las exportaciones totales de bienes; los productos manufacturados 35,6%, y los productos agrícolas 4,6%. Los siguientes gráficos presentan más detalles.',
+    'export_complexity_possibilities': 'Complejidad Exportadora y Posibilidades de Exportación',
+    'export_complexity_possibilities.copy.p1': 'El concepto de complejidad exportadora es análogo al de complejidad productiva presentado arriba. Se ha comprobado que los países que exportan productos que son relativamente complejos con respecto a su nivel de desarrollo tienden a crecer más rápido que los países que exportan bienes relativamente simples. Según la complejidad de su canasta exportadora en 2013, Colombia ocupa el puesto 53 entre 124 países. La tasa de crecimiento proyectada para Colombia con base en su complejidad y su nivel de desarrollo es 3,3% por año en el período 2013-2023.',
+    'export_complexity_possibilities.copy.p2': 'El ‘Espacio del Producto’ que se presenta enseguida es una representación gráfica de la similitud tecnológica entre todos los productos de exportación, según los patrones de exportación de todos los países. Cada punto o nodo representa un producto; los nodos conectados entre sí requieren capacidades productivas semejantes. Los productos que están más conectados tienden a agruparse en el centro de la red, lo cual implica que las capacidades que ellos usan pueden ser utilizadas en la producción de muchos otros productos.',
+     'export_complexity_possibilities.copy.p3': 'Los puntos que aparecen destacados representan productos que Colombia exporta en cantidades relativamente importantes (más exactamente, con ventaja comparativa revelada mayor de uno, véase el Glosario). Los colores representan grupos de productos (son los mismos colores usados para los sectores correspondientes en el espacio de similitud tecnológica presentado arriba). El gráfico que aparece más abajo, junto con el cuadro que lo acompaña, indica qué productos ofrecen las mejores posibilidades para Colombia, dadas las capacidades productivas que ya tiene el país y que tan ‘distantes’ son esas capacidades de las que requieren para exportar otras cosas. '
   },
   'industry.show': {
     'employment_and_wages': 'Actividad económica formal por sectores',

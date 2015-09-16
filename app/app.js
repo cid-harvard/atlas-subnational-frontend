@@ -13,12 +13,12 @@ App = Ember.Application.extend({
   Resolver: Resolver,
   ready: function() {
     numeral.language('es', {
-      currency:{ symbol: 'COP' },
+      currency:{ symbol: 'Col$' },
       delimiters: { thousands: '.', decimal: ',' },
-      abbreviations: { thousand: 'K', million: 'M', billion: 'TM', trillion: 'B' }
+      abbreviations: { thousand: 'miles', million: 'mill', billion: 'mm', trillion: 'bill' }
     });
     numeral.language('en', {
-      currency:{ symbol: 'COP' },
+      currency:{ symbol: 'Col$' },
       delimiters: { thousands: ',', decimal: '.' },
       abbreviations: { thousand: 'K', million: 'M', billion: 'B', trillion: 'T' }
     });

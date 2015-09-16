@@ -55,10 +55,10 @@ export default DS.Model.extend(ModelAttribute, {
     return display;
   }),
   lastEmployment: computed('lastDataPoint','i18n.locale', function() {
-    return numeral(this.get('lastDataPoint').employment).format('0.00 a');
+    return numeral(this.get('lastDataPoint').employment).format('0.00a');
   }),
   lastAvgWage: computed('lastDataPoint','i18n.locale', function() {
-    return numeral(this.get('lastDataPoint').avg_wage).format('$ 0.00 a');
+    return numeral(this.get('lastDataPoint').avg_wage).format('$ 0.00a');
   }),
   graphbuilderDepartments: computed('id', function() {
     var defaultParams = {

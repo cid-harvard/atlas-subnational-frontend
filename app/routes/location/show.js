@@ -7,26 +7,28 @@ export default Ember.Route.extend({
 // `this.store.find` makes an api call for `params.location_id` and returns a promise
 // in the `then` function call, another API call is made to get the topExports data
   model: function(params) {
-    if(params.location_id === 'colombia'){ this.transitionTo('colombia');}
     return this.store.find('location', params.location_id);
   },
   afterModel: function(model, transition) {
     // extract year out later
-    var year = getWithDefault(transition, 'queryParams.year', 2012);
+    var year = getWithDefault(transition, 'queryParams.year', 2013);
 
     var products = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/products?level=4digit`);
     var industries = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/industries?level=class`);
 
     // one of these should be removed in the future because the points should be merged in
     var departments = Ember.$.getJSON(`${apiURL}/data/location?level=department`);
+    var departments_trade = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/subregions_trade/?level=department`);
 
-    return RSVP.allSettled([products, departments, industries]).then((array) => {
+    return RSVP.allSettled([products, departments, industries, departments_trade]).then((array) => {
       var productsData = getWithDefault(array[0], 'value.data', []);
       var departmentsData = getWithDefault(array[1], 'value.data', []);
       var industriesData = getWithDefault(array[2], 'value.data', []);
+      var departmentsTradeData = _.filter(getWithDefault(array[3], 'value.data', []), { 'year': year });
 
       var productsDataIndex = _.indexBy(productsData, 'product_id');
       var industriesDataIndex = _.indexBy(industriesData, 'industry_data');
+      var departmentsTradeDataIndex = _.indexBy(departmentsTradeData, 'location_id');
 
       let productsMetadata = this.modelFor('application').products;
       let locationsMetadata = this.modelFor('application').locations;
@@ -63,7 +65,10 @@ export default Ember.Route.extend({
         }
         if(d.year === year) {
           let location = locationsMetadata[d.department_id];
-          departments.push(_.merge(d, location, { name: location.name_en }));
+          let tradeData = departmentsTradeDataIndex[d.department_id];
+          let extra = { name: location.name_en, group: d.department_id };
+          let datum = _.merge(d, location, tradeData, extra );
+          departments.push(datum);
         }
         return memo;
       });
@@ -72,6 +77,7 @@ export default Ember.Route.extend({
       model.set('industriesData', industries);
       model.set('departments', departments);
       model.set('timeseries', departmentTimeseries);
+      if(model.id == '0') { model.set('metaData', this.modelFor('application')); }
       return model;
     });
   },

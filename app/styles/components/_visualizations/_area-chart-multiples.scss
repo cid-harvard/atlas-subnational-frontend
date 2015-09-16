@@ -25,7 +25,7 @@
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1600px) {
   .multiple {
     width: 25%;
     &:nth-of-type(4n+1) {
@@ -60,7 +60,7 @@
 }
 
 .chart__wrap {
-  font-size: $fontXTiny;
+  font-size: $fontTiny;
   text {
     fill: $colorGrayDark;
   }

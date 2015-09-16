@@ -64,7 +64,7 @@ export default {
     'country': 'Colombia',
     'department': 'department',
     'municipality': 'municipality',
-    'msa': 'city'
+    'msa': 'city',
   },
   'ctas': {
     'export': 'Export',
@@ -141,10 +141,10 @@ export default {
       'cog': 'Opportunity gain',
       'employment': 'Employment',
       'num_vacancies': 'Vacancies',
-      'wages': 'Total wages, COP (in thousands)',
-      'monthly_wages': 'Avg. monthly wage, COP',
-      'avg_wage': 'Avg. wage, COP (in thousands)',
-      'average_wages': 'Avg. wage, COP (in thousands)',
+      'wages': 'Total wages, Col$ (in thousands)',
+      'monthly_wages': 'Avg. monthly wage, Col$',
+      'avg_wage': 'Avg. wage, Col$ (in thousands)',
+      'average_wages': 'Avg. wage, Col$ (in thousands)',
       'employment_growth': 'Employment growth (2008-2012)',
       'num_establishments': 'Firms',
       'export_num_plants': 'Firms',
@@ -224,11 +224,11 @@ export default {
     'builder_mod_header': {
       'industry': {
         'departments.employment': 'Total employment',
-        'departments.wages': 'Total wages, COP',
-        'departments.wage_avg': 'Average wages, COP',
+        'departments.wages': 'Total wages, Col$',
+        'departments.wage_avg': 'Average wages, Col$',
         'locations.employment': 'Total employment',
-        'locations.wages': 'Total wages, COP',
-        'locations.wage_avg': 'Average wages, COP',
+        'locations.wages': 'Total wages, Col$',
+        'locations.wage_avg': 'Average wages, Col$',
         'occupations.num_vacancies': 'Total vacancies'
       },
       'product': {
@@ -249,9 +249,9 @@ export default {
   },
   'location.show': {
     'overview': 'Overview',
-    'bullet.gdp_grow_rate': 'The GDP growth rate between {{yearRange}} was {{gdpGrowth}}',
-    'bullet.gdp_pc': '{{name}} has a GDP per capita of {{lastGdpPerCapita}}',
-    'bullet.last_pop': 'The population is {{lastPop}}',
+    'bullet.gdp_grow_rate': 'The GDP growth rate between {{yearRange}} was {{gdpGrowth}}, compared to 5.3% for Colombia',
+    'bullet.gdp_pc': '{{name}} has a GDP per capita of {{lastGdpPerCapita}}, compared to Col$15.1 M for Colombia',
+    'bullet.last_pop': 'The population is {{lastPop}} of Colombia\'s 45.8 M',
     'all_departments': 'Compared to the other departments',
     'value': 'Value',
     'growth_annual': 'Growth, annual ({{yearRange}})',
@@ -267,27 +267,32 @@ export default {
     'export_possiblities': 'Export possiblities',
     'export_possiblities.intro': 'We’ve found that countries which export complex products grow faster than those which export simple products. Using the similarity space we built in the section above, we’ve highlighted  high potential products for {{name}}, ranked by which have the highest combination of opportunity and complexity.',
     'export_possiblities.footer': 'Note that the list is dynamically generated.  Not all exports may make sense given local conditions not captured in our measure of product similarity.',
-    'stepper': {
-      1: `This circle represents bananas.
-        Think of it as a container for all
-        the capabilities needed to extract
-        and transport bananas.`,
-      2: `Bananas are lucrative, but the
-        capabilities needed to extract it can't
-        be used to make many other products. That's
-        why bananas are a low opportunity product.`,
-      3: `Here we arrange products by the similarity of the
-        capabilities required in their production, given international
-        patterns. {{name}}'s current exports are circled in
-        blue. Follow the links from those exports to see more products
-        that {{name}} could start exporting`,
-      4: `But {{name}} doesn't just want more products,
-        it wants complex products that require sophisticated capabilities
-        that are not common to many countries. This is not the
-        case of bananas, which is produced by almost every country
-        that has banana trees. We shade products green by their
-        complexity—that is, how many countries export them.`
-     }
+  },
+  'country.show': {
+    'dotplot-column': 'Departments Across Colombia',
+    'total': 'Total',
+    'gdp': 'Col $15,864,953',
+    'gdp_per_capita':' Col $756,152',
+    'population': '48.1 million',
+    'economic_structure': 'Economic Structure',
+    'economic_structure.copy.p1': 'With a population of 48.1 million (as of May 2015), Colombia is the third largest country in Latin America. Its total GDP in 2014 was Col$756,152 billion, or US$377.9 billion at the average exchange rate (1 US dollar = 2000.6 Colombian pesos). In 2014, income per capita reached Col$15,864,953 or US$7,930. Yearly economic growth since 2008 has averaged 4.3% (or 3.1% in per capita terms).',
+    'economic_structure.copy.p2': 'Business and financial services contribute 18.8% of GDP, making it the largest industry, followed by governmental, communal and personal services (16.5%) and manufacturing activities (11.2%). Bogotá D.C., Antioquia and Valle del Cauca represent nearly half of economic activity, contributing 24.7, 13.1 and 9.2% to total GDP, respectively. However, two oil-producing departments – Casanare and Meta – boast the highest GDP per capita. The following graphs provide more details.',
+    'employment_wage_occupation': 'Formal Employment, Occupations and Wages',
+    'employment_wage_occupation.copy.p1': 'In 2014, approximately 21.6 million Colombians were occupied in either a formal or an informal job, increasing slightly over 2013, at 21.1 million. The registries of the PILA, which cover the universe of workers who make contributions to the social security system, indicate that 13.3 million workers were occupied for some period in a formal job in 2013. Taking into account the number of months occupied, the effective number of year-round workers in the formal sector in 2013 was 6.7 million. Bogotá DC, Antioquia and Valle del Cauca generate, respectively 32.7, 16.7, and 10.7% of (effective) formal employment.',
+    'employment_wage_occupation.copy.p2': 'The following graphs present more detailed information on the patterns of formal employment and wages paid based on PILA. Also included is data on vacancies announced and wages offered by occupation, computed from job announcements placed by firms on internet sites in 2014.',
+    'industry_complex': 'Industry complexity',
+    'industry_complex.copy.p1': 'Industry complexity is a measure of the range of capabilities, skills or know-how required by an industry. Industries such as chemicals and machinery are said to be highly complex, because they require a sophisticated level of productive knowledge likely to be present only in large organizations where a number of highly specialized individuals interact. Conversely, industries such as retail trade or restaurants require only a basic level of know-how which may be found at a family-run business. More complex industries pay higher salaries and contribute to raising productivity and income per- capita. Departments and cities with more complex industries have a more diversified industrial base and tend to create more formal employment.',
+    'industry_complex.copy.p2':'The industry ‘Technological Similarity Space’ shown below is a graphical representation of the similarity between the capabilities and know-how required by pairs of industries. Each dot or node represents an industry; nodes connected by lines require similar capabilities. More connected industries use capabilities that can be deployed in many other industries. Colors represent industry groupings.',
+    'industry_space': 'Industry Space',
+    'exports': 'Exports',
+    'exports_composition_by_products': 'Export Composition by Product ({{year}})',
+    'exports_composition_by_department': 'Export Composition by Department ({{year}})',
+    'product_space': 'Product Space',
+    'exports.copy.p1': 'Colombia exported US$54.8 billion dollars in 2014, down from $58.8 billion in 2013 and $60.1 billion in 2012. Its main export partners are the United States, Venezuela, Ecuador and Peru. In 2014, mining products (of which oil, coal and nickel are the largest items) comprised 59.3% of total merchandise exports, manufactured goods contributed 35.6%, and agricultural products totaled 4.6% of exports. The following graphs provide further details.',
+    'export_complexity_possibilities': 'Export Complexity and Possibilities',
+    'export_complexity_possibilities.copy.p1': 'The concept of export complexity is similar to that of industry complexity introduced above. It has been found that countries that export products that are relatively complex for their level of economic development tend to grow faster than countries that export relatively simple products. Based on the complexity of its export basket in 2013, Colombia ranks 53rd among 124 countries and is predicted to grow at an annual rate of 3.3% in the period 2013-2023 based on its economic complexity.',
+    'export_complexity_possibilities.copy.p2': 'The highlighted nodes represent the products that Colombia exports in relatively large amounts (more precisely, with revealed comparative advantage higher than one, see the Glossary). Colors represent product groupings (which match the colors used in the industry technological space shown above). The figure further below and the accompanying table show what export products offer the best possibilities for Colombia, given the capabilities the country already has and how ‘distant’ are those capabilities to the ones needed for each product.',
+     'export_complexity_possibilities.copy.p3': ''
   },
   'industry.show': {
     'employment_and_wages': 'Employment and wages',

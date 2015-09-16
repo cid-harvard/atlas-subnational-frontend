@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import numeral from 'numeral';
-const {computed} = Ember;
+const {computed, get:get} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
@@ -9,6 +9,9 @@ export default Ember.Controller.extend({
   productsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
   year: 2013,
+  isCountry: computed('model.level', function() {
+    return this.get('model.level') === 'country';
+  }),
   isDepartment: computed('model.level', function() {
     return this.get('model.level') === 'department';
   }),
@@ -35,9 +38,9 @@ export default Ember.Controller.extend({
     }, 0);
     return '$' + numeral(total).format('0.0a') + ' USD';
   }),
-
-  yearSort: ['year'],
-
+  lastIndustryData: computed.filter('industriesData', function(datum) {
+    return parseInt(get(datum, 'year')) === 2013;
+  }),
   //validTimeseries is array of data points where all key(expect diversity cause fucking values are null),value pairs are not null
   validTimeseries: computed.alias('model.timeseries'),
   activeStep: 1,

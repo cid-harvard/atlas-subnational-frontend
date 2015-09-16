@@ -48,7 +48,7 @@
     <li class="builder__questions__item">
       <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
-        <span {{action "closeDrawer"}}>
+        <span data-location-product="exports" {{action "closeDrawer"}}>
           {{#link-to 'visualization' entity_and_id 'products' 'treemap' (query-params variable='export_value' search='null') class="builder__questions__question"}}
             {{t 'graph_builder.page_title.location.products.export_value' thisLevel=thisLevel}}
           {{/link-to}}
@@ -59,7 +59,10 @@
       <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
         <span {{action "closeDrawer"}}>
-          {{#link-to 'visualization' entity_and_id 'products' 'treemap' (query-params variable='import_value' search='null') class="builder__questions__question"}}
+          {{#link-to 'visualization' entity_and_id 'products' 'treemap'
+            (query-params variable='import_value' search='null')
+            data-location-product="imports"
+            class="builder__questions__question"}}
             {{t 'graph_builder.page_title.location.products.import_value' thisLevel=thisLevel}}
           {{/link-to}}
         </span>
@@ -70,7 +73,10 @@
         <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
         <div class="builder__questions__item__textwrap">
           <span {{action "closeDrawer"}}>
-            {{#link-to 'visualization' entity_and_id 'products' 'scatter' (query-params variable='null' endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
+            {{#link-to 'visualization' entity_and_id 'products' 'scatter'
+              (query-params variable='null' endDate='2013' startDate='2013' search='null')
+              data-location-product="scatter"
+              class="builder__questions__question"}}
               {{t 'graph_builder.page_title.location.products.scatter' thisLevel=thisLevel}}
             {{/link-to}}
           </span>
@@ -80,7 +86,10 @@
         <i class="icon-cidcon_similarity builder__questions__item__icon"></i>
         <div class="builder__questions__item__textwrap">
           <span {{action "closeDrawer"}}>
-            {{#link-to 'visualization' entity_and_id 'products' 'similarity' (query-params variable='null' endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
+            {{#link-to 'visualization' entity_and_id 'products' 'similarity'
+              (query-params variable='null' endDate='2013' startDate='2013' search='null')
+              data-location-product="similarity"
+              class="builder__questions__question"}}
               {{t 'graph_builder.page_title.location.products.similarity' thisLevel=thisLevel}}
             {{/link-to}}
           </span>
@@ -95,7 +104,10 @@
       <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
         <span {{action "closeDrawer"}}>
-          {{#link-to 'visualization' entity_and_id 'industries' 'treemap' (query-params variable='employment' endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
+          {{#link-to 'visualization' entity_and_id 'industries' 'treemap'
+            (query-params variable='employment' endDate='2013' startDate='2013' search='null')
+            data-location-industry="employment"
+            class="builder__questions__question"}}
             {{t 'graph_builder.page_title.location.industries.employment' thisLevel=thisLevel}}
           {{/link-to}}
         </span>
@@ -105,28 +117,39 @@
       <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
         <span {{action "closeDrawer"}}>
-          {{#link-to 'visualization' entity_and_id 'industries' 'treemap' (query-params variable='wages' endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
+          {{#link-to 'visualization' entity_and_id 'industries' 'treemap'
+            (query-params variable='wages' endDate='2013' startDate='2013' search='null')
+            data-location-industry="wages"
+            class="builder__questions__question"}}
             {{t 'graph_builder.page_title.location.industries.wages' thisLevel=thisLevel}}
           {{/link-to}}
         </span>
       </div>
     </li>
     {{#if isPrescriptive }}
-      <li class="builder__questions__item">
-        <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
-        <div class="builder__questions__item__textwrap">
-          <span {{action "closeDrawer"}}>
-            {{#link-to 'visualization' entity_and_id 'industries' 'scatter' (query-params variable='null' endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
-              {{t 'graph_builder.page_title.location.industries.scatter' thisLevel=thisLevel}}
-            {{/link-to}}
-          </span>
-        </div>
-      </li>
+      {{#unless isCountry}}
+        <li class="builder__questions__item">
+          <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
+          <div class="builder__questions__item__textwrap">
+            <span {{action "closeDrawer"}}>
+              {{#link-to 'visualization' entity_and_id 'industries' 'scatter'
+                (query-params variable='null' endDate='2013' startDate='2013' search='null')
+                data-location-industry="scatter"
+                class="builder__questions__question"}}
+                {{t 'graph_builder.page_title.location.industries.scatter' thisLevel=thisLevel}}
+              {{/link-to}}
+            </span>
+          </div>
+        </li>
+      {{/unless}}
       <li class="builder__questions__item">
         <i class="icon-cidcon_similarity builder__questions__item__icon"></i>
         <div class="builder__questions__item__textwrap">
           <span {{action "closeDrawer"}}>
-            {{#link-to 'visualization' entity_and_id 'industries' 'similarity' (query-params variable='rca'endDate='2013' startDate='2013' search='null') class="builder__questions__question"}}
+            {{#link-to 'visualization' entity_and_id 'industries' 'similarity'
+              (query-params variable='rca'endDate='2013' startDate='2013' search='null')
+              data-location-industry="similarity"
+              class="builder__questions__question"}}
               {{t 'graph_builder.page_title.location.industries.similarity' thisLevel=thisLevel}}
             {{/link-to}}
           </span>

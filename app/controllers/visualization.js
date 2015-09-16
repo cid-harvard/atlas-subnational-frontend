@@ -42,6 +42,10 @@ export default Ember.Controller.extend({
     if(this.get('visualization') === 'geo') { return true; }
     return false;
   }),
+  isCountry: computed('model', function() {
+    if(this.get('entity.level') === 'country') { return true; }
+    return false;
+  }),
   drawerIsUnnecessary: computed('visualization','source', function() { //TODO: Depricate this out
     let visualization = this.get('visualization');
     let source = this.get('source');
@@ -130,12 +134,12 @@ export default Ember.Controller.extend({
 
     var sum = _.sum(data, variable);
     if(variable === 'employment') {
-      return numeral(sum).format('0.00 a');
+      return numeral(sum).format('0,00');
     }
     if(variable === 'export_value' || variable === 'import_value') {
-      return '$' + numeral(sum).format('0.0a') + ' USD';
+      return '$' + numeral(sum).format('0,0') + ' USD';
     }
-    return numeral(sum).format('$ 0.00 a');
+    return numeral(sum).format('$ 0,0');
   }),
   otherPossibleGraphs: computed('model.visualization', 'model.source',  function() {
     let vis = this.get('model.visualization');
