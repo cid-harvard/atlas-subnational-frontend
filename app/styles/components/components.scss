@@ -24,6 +24,7 @@
 @import '_components/_search';
 @import '_components/_form';
 @import '_components/_interstitial';
+@import '_components/_tooltip';
 
 // Modules
 @import '_modules/_layout';
@@ -57,7 +58,7 @@
 @import '_visualizations/_dotplot';
 @import '_visualizations/_sparkline';
 @import '_visualizations/_area-chart-multiples';
-@import '_visualizations/_similarity-map';
+@import '_visualizations/_network';
 @import '_visualizations/_scatterplot';
 @import '_visualizations/_geo';
 @import '_visualizations/_d3plus';

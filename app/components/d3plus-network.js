@@ -70,33 +70,31 @@ export default Ember.Component.extend({
       var_text: `name_short_${this.get('i18n').locale}`, //TODO: update with langauge
       var_x: 'x',
       var_y: 'y',
-      radius: 4,
+      radius: 3,
       var_color: 'color',
-      color: function(d) { return d; },
+      color: (d) => { return d; },
       y_invert: true,
       var_id: 'id',
       items: [{
-        attr: "name",
+        attr: 'name',
         marks: [{
-          var_mark: '__aggregated',
-          type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
-        }, {
           type: 'circle',
-          stroke_width: (d) => {
+          fill: (d) => {
             if(d[this.get('varDependent')] >= 1) {
-              return '1.1px';
+              return d.color;
+            }
+          },
+          class: (d) => {
+            if(d[this.get('varDependent')] >= 1) {
+              return 'node--is--highlighted';
             }
           }
         }, {
           var_mark: '__highlighted',
-          type: d3.scale.ordinal().domain([true, false]).range(["divtext", "none"]),
-          class: function() { return 'items__mark__divtext__tooltip'; },
-          text: (d) => { return d[`name_short_${this.get('i18n').locale}`]; }
-        }, {
-          var_mark: '__selected',
-          type: d3.scale.ordinal().domain([true, false]).range(["divtext", "none"]),
-          class: function() { return 'items__mark__divtext__tooltip'; },
-          text: (d) => { return d[`name_short_${this.get('i18n').locale}`]; }
+          type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
+          class: function() { return 'tooltip'; },
+          text: (d) => { return d[`name_short_${this.get('i18n').locale}`]; },
+          exit: function() {}
         }]
       }]
     });

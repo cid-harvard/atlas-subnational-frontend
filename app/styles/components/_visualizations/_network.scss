@@ -1,0 +1,35 @@
+/**
+*
+* Product space, industry space
+*
+**/
+
+.node--is--highlighted {
+  stroke: $colorBlack;
+  stroke-width: 1px;
+}
+
+.items__mark__circle.highlighted.node--is--highlighted,
+.items__mark__circle.highlighted__adjacent.node--is--highlighted {
+  stroke: $colorRed;
+}
+
+.connect__line {
+  stroke: $colorGrayLight;
+  stroke-opacity: 1;
+}
+
+.connect__line.highlighted {
+  stroke: $colorRed500;
+  stroke-width: 2px;
+}
+
+.items__mark__circle {
+  fill: $colorBrown500;
+}
+
+.items__mark__circle.highlighted,
+.items__mark__circle.highlighted__adjacent {
+  stroke-width: 1px;
+  stroke: $colorRed500;
+}
