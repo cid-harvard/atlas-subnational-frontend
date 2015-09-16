@@ -101,15 +101,19 @@ export default Ember.Component.extend({
     });
   }),
   didInsertElement: function() {
-    Ember.run.scheduleOnce('afterRender', this , function() {
-      if(!this.get('width')){
-        this.set('width', this.$().parent().width());
-      }
-      if(!this.get('height')){
-        this.set('height', this.$().parent().height());
-      }
-      d3.select(this.get('id')).call(this.get('network'));
-    });
+    if(this.get('delay')) {
+      Ember.run.later(this , function() {
+        if(!this.get('width')){ this.set('width', this.$().parent().width()); }
+        if(!this.get('height')){ this.set('height', this.$().parent().height()); }
+        d3.select(this.get('id')).call(this.get('network'));
+      }, this.get('delay'));
+    } else {
+      Ember.run.scheduleOnce('afterRender', this , function() {
+        if(!this.get('width')){ this.set('width', this.$().parent().width()); }
+        if(!this.get('height')){ this.set('height', this.$().parent().height()); }
+        d3.select(this.get('id')).call(this.get('network'));
+      });
+    }
   },
   willDestroyElement: function() {
     this.set('network',  null);
