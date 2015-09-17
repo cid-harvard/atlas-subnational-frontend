@@ -1,5 +1,6 @@
 export default {
   'general': {
+    'total': 'Total',
     'locations': 'Locations',
     'export_and_import': 'Products',
     'industries': 'Industries',
@@ -112,9 +113,9 @@ export default {
       'department': 'Department',
       'municipality': 'Municipality',
       'msa': 'City',
-      '4digit': 'HS 4',
-      'division': 'ISIC 2',
-      'class': 'ISIC 4'
+      '4digit': 'HS 4-Digit',
+      'division': 'ISIC 2-Digit',
+      'class': 'ISIC 4-Digit'
     }
   },
   'graph_builder': {

@@ -1,5 +1,6 @@
 export default {
   'general': {
+    'total': 'Totales',
     'locations': 'Lugares',
     'export_and_import': 'Productos',
     'industries': 'Sectores',
@@ -112,9 +113,9 @@ export default {
       'department': 'Departamento',
       'municipality': 'Municipio',
       'msa': 'Ciudad',
-      '4digit': 'SA 4',
-      'division': 'CIIU 2',
-      'class': 'CIIU 4'
+      '4digit': 'SA 4-Dígitos',
+      'division': 'CIIU 2-Dígitos',
+      'class': 'CIIU 4-Dígitos'
     }
   },
   'graph_builder': {
