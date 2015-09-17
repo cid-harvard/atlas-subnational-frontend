@@ -55,6 +55,9 @@ export default Ember.Controller.extend({
     if(source === 'occupations') { return true; }
     return false;
   }),
+  isFiltered: computed('search', function() {
+    return Boolean(this.get('search'));
+  }),
   isSingleYear: computed('visualization', function() {
     let visualization = this.get('visualization');
     if(visualization === 'similarity' || visualization === 'scatter'){
@@ -322,7 +325,7 @@ export default Ember.Controller.extend({
     if( visualization === 'treemap') {
       return 'd3plus-tree-map';
     } else if(visualization === 'multiples') {
-      return 'multiples-graph';
+      return 'small-multiples-set';
     } else if(visualization === 'scatter') {
       return 'd3plus-scatter';
     } else if(visualization === 'similarity') {
