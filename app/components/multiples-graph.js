@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import numeral from 'numeral';
-const {computed, observer} = Ember;
+const {computed, observer, get:get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
@@ -28,7 +28,8 @@ export default Ember.Component.extend({
 
     _.each(nest, (d) => {
       // terrible assumption, but assume that all value share the same name.
-      d.name = Ember.get(d.values[0], `name_short_${this.get('i18n').locale}`) || d.key;
+      d.name = get(d.values[0], `name_short_${this.get('i18n').locale}`) || d.key;
+      d.color = get(d.values[0], 'color') || '#ccc1b9';
     });
 
     return _.sortBy(nest, (d) => {
