@@ -1,0 +1,28 @@
+{{#unless isFiltered }}
+  <h3 class="section__head">{{t 'general.total'}}</h3>
+  {{component 'multiples-graph'
+    classNames='buildermod__viz'
+    immutableData=totalSet
+    data=totalSet
+    dataType=source
+    varDependent=varDependent
+    startDate=startDate
+    dateExtent=dateExtent
+    endDate=endDate
+    markerGroup='total'
+  }}
+{{/unless}}
+
+<h3 class="section__head">{{breadcrumb}}</h3>
+{{component 'multiples-graph'
+  classNames='buildermod__viz'
+  immutableData=immutableData
+  data=data
+  dataType=source
+  varDependent=varDependent
+  startDate=startDate
+  dateExtent=dateExtent
+  endDate=endDate
+  markerGroup='subsets'
+}}
+
