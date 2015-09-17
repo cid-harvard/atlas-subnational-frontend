@@ -71,12 +71,36 @@
 
 .index__complexity__mod {
   padding: 0 $baseSpace * 3;
-  margin-bottom: $baseSpace * 3;
 }
 
 .index__complexity__wrap {
-  max-width: 100rem;
+  max-width: 80.6rem;
   margin: 0 auto;
+  display: flex;
+}
+
+.section__complexity__graph {
+  position: relative;
+}
+
+.section__complexity__copy {
+  margin-left: $baseSpace * 6;
+}
+
+.section__complexity__bar {
+  position: absolute;
+  bottom: 0;
+  width: $baseSpace*1.5;
+  background: $colorRed;
+}
+
+.section__complexity__bar--wef {
+  top: 84.5304%;
+}
+
+.section__complexity__bar--complexity {
+  top: 0;
+  left: $baseSpace * 2.5;
 }
 
 .index__complexity__figure__wrap {
@@ -121,6 +145,10 @@
 .index__cta__wrap {
   width: 40%;
   padding-left: $baseSpace;
+}
+
+.index__complexity__cta {
+  margin-bottom: $baseSpace * 2;
 }
 
 // Research featured in media grid

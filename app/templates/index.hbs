@@ -51,29 +51,43 @@
     </div>
     <div class="index__complexity__mod">
       <section class="stream__section index__section index__complexity__wrap">
-        <h3 class="section__head">{{ t 'index.complexity_head' }}</h3>
-        <p class="section__p">{{ t 'index.complexity_subhead' }}</p>
-        <div class="index__complexity__figure__wrap">
-          <figure class="index__figure__wrap">
-            <h4 class="index__figure__head">{{ t 'index.complexity_figure.head' }}</h4>
-            <figure class="index__figure">
-              <h5 class="index__figure__bignum">2.8</h5>
-              <figcaption class="index__figure__caption">{{ t 'index.complexity_figure.WEF_name' }}</figcaption>
+        <div class="section__complexity__graph">
+          <div class="section__complexity__bar section__complexity__bar--wef"></div>
+          <div class="section__complexity__bar section__complexity__bar--complexity"></div>
+        </div>
+        <div class="section__complexity__copy">
+          <h3 class="section__head">{{ t 'index.complexity_head' }}</h3>
+          <p class="section__p">{{ t 'index.complexity_subhead' }}</p>
+          <p class="section__p">{{ t 'index.complexity_caption' }}</p>
+          {{#link-to 'about.glossary'
+            data-home-page-product=''
+            class="btn btn--standalone btn--stream index__complexity__cta"
+          }}
+            {{ t 'index.complexity_cta' }}
+          {{/link-to}}
+{{!--
+          <div class="index__complexity__figure__wrap">
+            <figure class="index__figure__wrap">
+              <h4 class="index__figure__head">{{ t 'index.complexity_figure.head' }}</h4>
+              <figure class="index__figure">
+                <h5 class="index__figure__bignum">2.8</h5>
+                <figcaption class="index__figure__caption">{{ t 'index.complexity_figure.WEF_name' }}</figcaption>
+              </figure>
+              <figure class="index__figure">
+                <h5 class="index__figure__bignum">18.1</h5>
+                <figcaption class="index__figure__caption">{{ t 'index.complexity_figure.complexity_name' }}</figcaption>
+              </figure>
             </figure>
-            <figure class="index__figure">
-              <h5 class="index__figure__bignum">18.1</h5>
-              <figcaption class="index__figure__caption">{{ t 'index.complexity_figure.complexity_name' }}</figcaption>
-            </figure>
-          </figure>
-          <div class="index__cta__wrap">
-            <p class="section__p">{{ t 'index.complexity_caption' }}</p>
-              {{#link-to 'about.glossary'
-                data-home-page-product=''
-                class="btn btn--standalone btn--stream"
-              }}
-                {{ t 'index.complexity_cta' }}
-              {{/link-to}}
-          </div>
+            <div class="index__cta__wrap">
+              <p class="section__p">{{ t 'index.complexity_caption' }}</p>
+                {{#link-to 'about.glossary'
+                  data-home-page-product=''
+                  class="btn btn--standalone btn--stream"
+                }}
+                  {{ t 'index.complexity_cta' }}
+                {{/link-to}}
+            </div>
+          </div> --}}
         </div>
       </section>
     </div>
