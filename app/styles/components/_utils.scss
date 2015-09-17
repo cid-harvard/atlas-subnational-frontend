@@ -7,6 +7,14 @@
 
 /*==========  MIXINS  ==========*/
 
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
 @mixin media-query($media-query) {
   @if $media-query == small {
     @media only screen and (max-width: $medium - 1) { @content; }
