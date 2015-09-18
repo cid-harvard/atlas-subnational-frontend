@@ -84,23 +84,37 @@
 }
 
 .section__complexity__copy {
-  margin-left: $baseSpace * 6;
+  margin: $baseSpace*2 0 $baseSpace*2 $baseSpace*6;
+
 }
 
 .section__complexity__bar {
   position: absolute;
   bottom: 0;
-  width: $baseSpace*1.5;
-  background: $colorRed;
+  width: $baseSpace * 1.5;
+  background: $colorBrown500;
+  &:before {
+    font-size: $fontTiny;
+    position: absolute;
+    top: -2rem;
+    width: $baseSpace * 1.5;
+    text-align: center;
+  }
 }
 
 .section__complexity__bar--wef {
   top: 84.5304%;
+  // &:before {
+  //   content: '2.8%';
+  // }
 }
 
 .section__complexity__bar--complexity {
   top: 0;
   left: $baseSpace * 2.5;
+  // &:before {
+  //   content: '18.1%';
+  // }
 }
 
 .index__complexity__figure__wrap {
@@ -193,6 +207,7 @@
 
 .index__topics__list {
   display: flex;
+  align-items: center;
 }
 
 .index__topics__item__wrap {
