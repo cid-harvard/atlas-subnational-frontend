@@ -97,8 +97,6 @@
 }
 
 .line {
-  stroke: $colorBrown700;
-  stroke-width: 1px;
   fill: none;
   pointer-events: none;
 }
@@ -112,7 +110,7 @@
 
 .axis--y {
   line {
-    stroke: $colorWhite;
+    stroke: $colorBrown500;
     fill: none;
     shape-rendering: crispEdges;
     pointer-events: none;
