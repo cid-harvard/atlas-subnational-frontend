@@ -92,6 +92,7 @@
 
 .settings__input {
   margin-bottom: $baseSpace * 2;
+  line-height: 100%;
 }
 
 .settings__btn--close {
@@ -106,6 +107,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
+  align-content: stretch;
   justify-content: center;
 }
 
@@ -120,6 +122,9 @@
   }
   &:nth-of-type(3n) {
     padding: 0 0 $baseSpace $baseSpace*0.75;
+  }
+  &:nth-child(n+3) {
+    padding-bottom: 0;
   }
 }
 

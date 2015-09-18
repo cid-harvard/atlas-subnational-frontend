@@ -12,8 +12,17 @@
   max-width: 100rem;
 }
 
+.index__header__wrap {
+  background: $colorNavy800;
+  padding: $baseSpace*3 $baseSpace*3 $baseSpace*6;
+}
+
 .index__header {
-  margin-bottom: $baseSpace * 3;
+  max-width: 100rem;
+  margin: $baseSpace * 3;
+  padding: $baseSpace * 3;
+  background: $colorBrown200;
+  margin: 0 auto;
 }
 
 .stream__head.index__head {
@@ -26,9 +35,89 @@
   box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
 }
 
+// Views
+
+.index__viewmod {
+  @include clearfix;
+  background: $colorBrown200;
+  padding: $baseSpace * 3;
+  margin-bottom: $baseSpace * 6;
+}
+
+.index__view__wrap {
+  display: flex;
+  flex-direction: row;
+  &:first-of-type {
+    margin-top: $baseSpace * -5;
+    margin-bottom: $baseSpace * 2;
+  }
+  &:nth-of-type(2) {
+    float: right;
+    margin-bottom: $baseSpace * -5;
+  }
+}
+
+.index__view__img {
+  max-width: 20rem;
+  max-height: 20rem;
+}
+
+.index__view__copy {
+  padding: $baseSpace * 2;
+  background: $colorBrown300;
+}
+
 // Complexity figure
 
+.index__complexity__mod {
+  padding: 0 $baseSpace * 3;
+}
+
 .index__complexity__wrap {
+  max-width: 80.6rem;
+  margin: 0 auto;
+  display: flex;
+}
+
+.section__complexity__graph {
+  position: relative;
+}
+
+.section__complexity__copy {
+  margin: $baseSpace*2 0 $baseSpace*2 $baseSpace*6;
+
+}
+
+.section__complexity__bar {
+  position: absolute;
+  bottom: 0;
+  width: $baseSpace * 1.5;
+  background: $colorBrown500;
+  &:before {
+    font-size: $fontTiny;
+    position: absolute;
+    top: -2rem;
+    width: $baseSpace * 1.5;
+    text-align: center;
+  }
+}
+
+.section__complexity__bar--wef {
+  top: 84.5304%;
+  // &:before {
+  //   content: '2.8%';
+  // }
+}
+
+.section__complexity__bar--complexity {
+  top: 0;
+  left: $baseSpace * 2.5;
+  // &:before {
+  //   content: '18.1%';
+  // }
+}
+
+.index__complexity__figure__wrap {
   background: $colorBrown300;
   padding: $baseSpace * 2;
   display: flex;
@@ -72,7 +161,17 @@
   padding-left: $baseSpace;
 }
 
+.index__complexity__cta {
+  margin-bottom: $baseSpace * 2;
+}
+
 // Research featured in media grid
+.index__featuredin__wrap {
+  margin: 0 $baseSpace*3;
+  background: $colorBrown300;
+  padding: $baseSpace * 2;
+}
+
 .index__featuredin__list {
   display: flex;
   align-items: center;
@@ -95,13 +194,24 @@
 }
 
 // Crystal ball questions
-.index__topics__list {
-  display: flex;
+
+.index__questions__mod {
+  padding: 0 $baseSpace * 3;
+  margin-bottom: $baseSpace * 3;
 }
 
-.index__topics__item {
+.index__questions__wrap {
+  max-width: 100rem;
+  margin: 0 auto;
+}
+
+.index__topics__list {
+  display: flex;
+  align-items: center;
+}
+
+.index__topics__item__wrap {
   width: 33.33333%;
-  padding: $baseSpace;
   background: $colorBrown300;
   &:first-of-type {
     margin-right: $baseSpace;
@@ -112,6 +222,15 @@
   &:nth-of-type(3) {
     margin-left: $baseSpace;
   }
+}
+
+.index__topics__image {
+  width: 100%;
+}
+
+.index__topics__item {
+  padding: $baseSpace;
+  background: $colorBrown300;
 }
 
 .index__questions__item {
