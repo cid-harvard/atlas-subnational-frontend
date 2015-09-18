@@ -12,6 +12,10 @@ export default Ember.Component.extend({
       return `${level}`;
     }
   }),
+  setTitle: computed('entityType','variable','i18n.locale', function() {
+    let i18nString = `graph_builder.builder_mod_header.${this.get('entityType')}.${this.get('dataType')}`;
+    return this.get('i18n').t(`${i18nString}.${this.get('variable')}`);
+  }),
   dataSet: computed('parentSet.[]', 'data.[]', function() {
     let data = this.get('data');
     let parents = this.get('parentSet');
