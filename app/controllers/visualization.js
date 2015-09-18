@@ -55,6 +55,9 @@ export default Ember.Controller.extend({
     if(source === 'occupations') { return true; }
     return false;
   }),
+  isFiltered: computed('search', function() {
+    return Boolean(this.get('search'));
+  }),
   isSingleYear: computed('visualization', function() {
     let visualization = this.get('visualization');
     if(visualization === 'similarity' || visualization === 'scatter'){
@@ -125,12 +128,14 @@ export default Ember.Controller.extend({
     }
     return this.get('i18n').t(`${i18nString}.${this.get('variable')}`, { name: this.get('model.entity.name') });
   }),
-  headerValue: computed('model', 'filteredData', 'variable', 'i18n.locale', function() {
+  headerValue: computed('model', 'visualization','filteredData', 'variable', 'i18n.locale', function() {
     let allowedVariables = ['export_value', 'import_value', 'wages', 'employment'];
     let variable = this.get('variable');
     let data = this.get('filteredData');
+    let visualization = this.get('visualization');
 
     if(! _.contains(allowedVariables, variable)){ return ''; }
+    if(visualization === 'multiples') { return ''; }
 
     var sum = _.sum(data, variable);
     if(variable === 'employment') {
@@ -322,7 +327,7 @@ export default Ember.Controller.extend({
     if( visualization === 'treemap') {
       return 'd3plus-tree-map';
     } else if(visualization === 'multiples') {
-      return 'multiples-graph';
+      return 'small-multiples-set';
     } else if(visualization === 'scatter') {
       return 'd3plus-scatter';
     } else if(visualization === 'similarity') {

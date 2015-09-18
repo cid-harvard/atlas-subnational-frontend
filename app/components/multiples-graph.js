@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import numeral from 'numeral';
-const {computed, observer} = Ember;
+const {computed, observer, get:get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
@@ -23,14 +23,14 @@ export default Ember.Component.extend({
     let varDependent = this.get('varDependent');
 
     var nest = d3.nest()
-      .key(function(d) { return Ember.get(d, key); })
+      .key(function(d) { return get(d, key); })
       .entries(this.get('data'));
 
     _.each(nest, (d) => {
       // terrible assumption, but assume that all value share the same name.
-      d.name = Ember.get(d.values[0], `name_short_${this.get('i18n').locale}`) || d.key;
+      d.name = get(d.values[0], `name_short_${this.get('i18n').locale}`) || d.key;
+      d.color = get(d.values[0], 'color') || '#ccc1b9';
     });
-
     return _.sortBy(nest, (d) => {
       return -_.sum(d.values, varDependent);
     });
@@ -83,7 +83,7 @@ export default Ember.Component.extend({
   initCharts: function() {
     let data = this.firstSliceData(this.get('nestedData'));
 
-    var container = d3.select(this.get('id')).selectAll('div')
+    var container = d3.select("#"+this.get('elementId')).select('.multiples').selectAll('div')
       .data(data, (d,i) => { return [d.key, i, this.get('i18n').locale]; });
 
     var div = container.enter().append('div')
@@ -101,6 +101,7 @@ export default Ember.Component.extend({
     let area = this.get('area');
     let truncateYear = this.get('truncateYear');
     let varDependent = this.get('varDependent');
+    let markerGroup = this.get('markerGroup');
 
     div.append('h3')
       .attr('class', 'chart__title')
@@ -145,7 +146,8 @@ export default Ember.Component.extend({
 
     svg.append('path')
       .attr('class', 'area')
-      .attr('d', function(d) { return area(d.values); });
+      .attr('d', function(d) { return area(d.values); })
+      .attr('fill', function(d) { return d.color; });
 
     svg.append('path')
       .attr('class', 'line')
@@ -153,19 +155,22 @@ export default Ember.Component.extend({
         return line(d.values);
       });
 
-    var hoverMarker = svg.append('rect')
+    svg.append('rect')
       .classed('marker', true)
+      .classed(this.get('markerGroup'), true)
       .attr('width', 5)
       .attr('height', 5)
       .attr('opacity', 0);
 
-    var caption = svg.append('text')
-      .attr('class', 'caption')
+    svg.append('text')
+      .classed('caption', true)
+      .classed(this.get('markerGroup'), true)
       .attr('text-anchor', 'middle')
       .attr('dy', -8);
 
-    var curYear = svg.append('text')
-      .attr('class', 'year')
+    svg.append('text')
+      .classed('year', true)
+      .classed(markerGroup, true)
       .attr('text-anchor', 'middle')
       .attr('dy', 13)
       .attr('y', h);
@@ -175,7 +180,7 @@ export default Ember.Component.extend({
     }
 
     function mouseover() {
-      hoverMarker.attr('opacity', 1);
+      d3.selectAll('rect.marker.'+markerGroup).attr('opacity', 1);
       d3.selectAll('.static_year').classed('hidden', true);
       mousemove.call(this);
     }
@@ -186,8 +191,8 @@ export default Ember.Component.extend({
       var bisect = d3.bisector(function(d) { return d.year; }).left;
       var index = 0;
 
-
-      hoverMarker.attr('x', x(date))
+      d3.selectAll('rect.marker.'+markerGroup)
+        .attr('x', x(date))
         .attr('y', function(d) {
           index = bisect(d.values, date, 0, d.values.length - 1);
           let yValue = d.values[index] ? Ember.get(d.values[index], varDependent, 0): 0;
@@ -199,19 +204,20 @@ export default Ember.Component.extend({
           return 'translate(0, -3.54) rotate( 45 ' + x(date) + ' ' + y(yValue) + ')';
         });
 
-      caption.attr('x', x(date))
+      d3.selectAll('text.caption.'+markerGroup)
+        .attr('x', x(date))
         .attr('y', function(d) {
           index = bisect(d.values, date, 0, d.values.length - 1);
           let yValue = d.values[index] ? Ember.get(d.values[index], varDependent, 0): 0;
           return y(yValue);
         })
-        .attr('class', function() {
+        .classed(function() {
           if (date === parseInt(xExtent[0])) {
             return 'chart__tooltip--edge--start';
           } else if (date === parseInt(xExtent[1])) {
             return 'chart__tooltip--edge--end';
           }
-        })
+        },true)
         .attr('dx', function() {
           if (date === parseInt(xExtent[0])) {
             return '-4';
@@ -231,15 +237,16 @@ export default Ember.Component.extend({
         });
 
 
-      curYear.attr('x', x(date))
+      d3.selectAll('text.year.'+markerGroup)
+        .attr('x', x(date))
         .text(truncateYear(date));
     }
 
     function mouseout() {
-      hoverMarker.attr('opacity', 0);
+      d3.selectAll('rect.marker').attr('opacity', 0);
       d3.selectAll('.static_year').classed('hidden', false);
-      caption.text('');
-      curYear.text('');
+      d3.selectAll('text.caption').text('');
+      d3.selectAll('text.year').text('');
     }
     container.exit().remove();
   },
@@ -267,7 +274,10 @@ export default Ember.Component.extend({
   update: observer('data.[]', 'i18n.locale', function() {
     if(!this.element){ return false; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
-      d3.select(this.get('id')).selectAll('*').remove(); /// TODO REMOVE THIS LATER FOR TRANSITIONS
+      d3.select("#"+this.get('elementId'))
+        .select('.multiples')
+        .selectAll('*')
+        .remove(); /// TODO REMOVE THIS LATER FOR TRANSITIONS
       if(this.initCharts) { this.initCharts();}
     });
   }),
