@@ -6,7 +6,19 @@ export default Ember.Component.extend({
   result: computed('data.[]', function(){
     return _.first(this.get('data'));
   }),
-  breadcrumb: computed('result.level', 'i18n.locale', function() {
+  showParent: computed('dataType', function() {
+    let dataType = this.get('dataType');
+    if(dataType === 'industries') { return true; }
+    if(dataType === 'products') { return true; }
+    return false
+  }),
+  parentBreadcrumb: computed('result.level', 'i18n.locale', function() {
+    if(this.get('result.level')) {
+      let level = this.get('i18n').t(`search.level.parent.${this.get('result.level')}`);
+      return `${level}`;
+    }
+  }),
+  childBreadcrumb: computed('result.level', 'i18n.locale', function() {
     if(this.get('result.level')) {
       let level = this.get('i18n').t(`search.level.${this.get('result.level')}`);
       return `${level}`;
@@ -46,7 +58,7 @@ export default Ember.Component.extend({
   parentSet: computed('data.[]', function() {
     let data = this.get('data');
 
-    return _.chain(data)
+    return  _.chain(data)
       .groupBy(function(d) {return d.group +'/'+ d.year;})
       .values()
       .reduce((memo, d) => {
@@ -65,6 +77,7 @@ export default Ember.Component.extend({
         memo.push(value);
         return memo;
        }, [] )
+      .sortBy('year')
       .value();
   })
 });
