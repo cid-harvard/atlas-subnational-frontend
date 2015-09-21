@@ -221,7 +221,7 @@ export default EmberTableComponent.extend({
   content: computed('data.[]', function() {
     return this.get('data');
   }),
-  refreshTable: observer('i18n.locale','source', function() {
+  refreshTable: observer('i18n.locale','source','search', function() {
     Ember.run.once(this, function(){
       this.set('content', []);
       this.set('content', this.get('data'));
