@@ -20,8 +20,8 @@ export default Ember.Component.extend({
       .type('scatter')
       .color((d) => { return d.color ? d.color : '#ccc1b9';})
       .id(this.get('varIndependent'))
-      .x('distance')
-      .y('complexity')
+      .x({ "value": 'distance', "label": this.get('i18n').t('graph_builder.table.distance').string })
+      .y({ "value": 'complexity', label: this.get('i18n').t('graph_builder.table.complexity').string })
       .format({ number: function(d) { return numeral(d).format('0.00a');}})
       .text({value: (d) => {
         return Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code;
@@ -56,7 +56,12 @@ export default Ember.Component.extend({
   update: observer('data.[]', 'varRca', 'i18n.locale', 'dataType', function() {
     if(!this.element){ return false; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
-      if(this.get('scatter')) { this.get('scatter').draw();}
+      if(this.get('scatter')) {
+      this.get('scatter')
+        .x({ "value": 'distance', "label": this.get('i18n').t('graph_builder.table.distance').string })
+        .y({ "value": 'complexity', label: this.get('i18n').t('graph_builder.table.complexity').string })
+        .draw();
+      }
     });
   })
 });

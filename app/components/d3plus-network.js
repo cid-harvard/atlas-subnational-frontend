@@ -70,7 +70,7 @@ export default Ember.Component.extend({
       var_text: `name_short_${this.get('i18n').locale}`, //TODO: update with langauge
       var_x: 'x',
       var_y: 'y',
-      radius: 3,
+      radius: 3.5,
       var_color: 'color',
       color: (d) => { return d; },
       y_invert: true,
@@ -80,10 +80,7 @@ export default Ember.Component.extend({
         marks: [{
           type: 'circle',
           fill: (d) => {
-            if(this.get('showAllColors')){ return d.color; }
-            if(d[this.get('varDependent')] >= 1) {
-              return d.color;
-            }
+            return d.color;
           },
           class: (d) => {
             if(d[this.get('varDependent')] >= 1) {

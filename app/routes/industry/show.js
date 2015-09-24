@@ -13,43 +13,47 @@ export default Ember.Route.extend({
   },
   model: function(params) {
     var industriesMetadata = this.modelFor('application').industries;
-    return this.store.find('industry', params.industry_id)
-      .then((model) => {
-        if(model.get('level') === 'class') {
-          this.transitionTo('visualization',
-            `industry-${params.industry_id}`,
-            'departments',
-            'multiples',
-            {queryParams: {'variable': 'employment'}}
-            );
-        }
-          var groupIds = _.pluck(_.filter(industriesMetadata, 'parent_id', parseInt(model.id)), 'id');
-          var classIndustries = _.filter(industriesMetadata, function(d) {
-            return _.contains(groupIds, d.id);
-          });
-        return Ember.run.bind(this, function() {
-          return $.getJSON(`${apiURL}/data/industry?level=class`)
-            .then((response) => {
-              let data = _.groupBy(response.data, 'industry_id');
-              let classData = _.reduce(classIndustries, (memo, d) => {
-                let classData = data[d.id];
-                if(!classData) { return memo; }
-                console.log(classData);
+    var classMetadata = $.getJSON(`${apiURL}/data/industry?level=class`);
+    return RSVP.hash({
+      model: this.store.find('industry', params.industry_id),
+      classMetadata: classMetadata
+    }).then((hash) => {
+      let model = hash['model'];
+      if(model.get('level') === 'class') {
+        this.transitionTo('visualization',
+          `industry-${params.industry_id}`,
+          'departments',
+          'multiples',
+          {queryParams: {'variable': 'employment'}}
+          );
+      }
+      return hash;
+    }).then((hash) => {
+      let model = hash['model'];
+      let data = _.groupBy(hash['classMetadata'].data, 'industry_id');
 
-                let lastClassData = _.last(classData);
-                d.employment_growth = this.employmentGrowthCalc(classData);
-                d.avg_wage = lastClassData.monthly_wages;
-                memo.push(_.merge(d, lastClassData));
-                return memo;
-              },[]);
-
-              model.set('classIndustries', classData);
-              return model;
-            });
-        }, model);
+      var groupIds = _.pluck(_.filter(industriesMetadata, 'parent_id', parseInt(model.id)), 'id');
+      var classIndustries = _.filter(industriesMetadata, function(d) {
+        return _.contains(groupIds, d.id);
       });
+
+      let classData = _.reduce(classIndustries, (memo, d) => {
+        let classData = data[d.id];
+        if(!classData) { return memo; }
+
+        let lastClassData = _.last(classData);
+        d.employment_growth = this.employmentGrowthCalc(classData);
+        d.avg_wage = lastClassData.monthly_wages;
+        memo.push(_.merge(d, lastClassData));
+        return memo;
+      },[]);
+
+      model.set('classIndustries', classData);
+      return model;
+    });
   },
   afterModel: function(model) {
+
     var departments = $.getJSON(`${apiURL}/data/industry/${model.id}/participants?level=department`);
     var industries = $.getJSON(`${apiURL}/data/industry?level=division`);
     var occupations = $.getJSON(`${apiURL}/data/industry/${model.id}/occupations/?level=minor_group`);
@@ -82,6 +86,7 @@ export default Ember.Route.extend({
         d.group = occupation.code.split('-')[0];
         return _.merge(d, occupation);
       });
+
       model.set('departmentsData', departments);
       model.set('industriesData', industries);
       model.set('occupationsData', occupations);

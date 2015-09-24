@@ -45,6 +45,8 @@ export default Ember.Component.extend({
             return numeral(d).format('0,0');
           } else if('export_value' === data.key) {
             return '$ ' + numeral(d).format('0.0a') + ' USD';
+          } else if('import_value' === data.key) {
+            return '$ ' + numeral(d).format('0.0a') + ' USD';
           } else {
             return numeral(d).format('$ 0.0a');
           }
