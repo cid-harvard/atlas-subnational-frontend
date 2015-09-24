@@ -30,15 +30,16 @@ export default Ember.Route.extend({
       return hash;
     }).then((hash) => {
       let model = hash['model'];
+      let data = _.groupBy(hash['classMetadata'].data, 'industry_id');
+
       var groupIds = _.pluck(_.filter(industriesMetadata, 'parent_id', parseInt(model.id)), 'id');
       var classIndustries = _.filter(industriesMetadata, function(d) {
         return _.contains(groupIds, d.id);
       });
-      let data = _.groupBy(hash['classMetadata'], 'industry_id');
+
       let classData = _.reduce(classIndustries, (memo, d) => {
         let classData = data[d.id];
         if(!classData) { return memo; }
-        console.log(classData);
 
         let lastClassData = _.last(classData);
         d.employment_growth = this.employmentGrowthCalc(classData);
