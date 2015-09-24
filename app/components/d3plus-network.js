@@ -38,7 +38,7 @@ export default Ember.Component.extend({
       return productSpace;
     }
   }),
-  varDependent: computed('dataType', function() {
+  varHighlight: computed('dataType', function() {
     let type = this.get('dataType');
     if(type === 'industries') {
       return 'rca';
@@ -83,7 +83,7 @@ export default Ember.Component.extend({
             return d.color;
           },
           class: (d) => {
-            if(d[this.get('varDependent')] >= 1) {
+            if(d[this.get('varHighlight')] >= 1) {
               return 'node--is--highlighted';
             }
           }
