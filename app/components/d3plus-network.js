@@ -18,10 +18,11 @@ export default Ember.Component.extend({
     return _.map(this.get('nodes'), function(d) {
       let datum = indexedData[d.id] || metadataIndex[d.id];
       if(datum) {
-        d.color = datum.color;
         d.name_short_en = datum.name_short_en + ` (${datum.code})`;
         d.name_short_es = datum.name_short_es + ` (${datum.code})`;
+        d.color = datum.color;
         d[this.get('varDependent')] = datum[this.get('varDependent')];
+        d[this.get('varRCA')] = datum[this.get('varRCA')];
       }
       return d;
     }, this);
@@ -38,7 +39,7 @@ export default Ember.Component.extend({
       return productSpace;
     }
   }),
-  varHighlight: computed('dataType', function() {
+  varRCA: computed('dataType', function() {
     let type = this.get('dataType');
     if(type === 'industries') {
       return 'rca';
@@ -80,10 +81,23 @@ export default Ember.Component.extend({
         marks: [{
           type: 'circle',
           fill: (d) => {
-            return d.color;
+            //show colors if all colors is enabled
+            if(this.get('showAllColors')) {
+              return d.color;
+            }
+            //if there is a search, color nodes with Truth-y
+            //export_value (products)  or 'rca' (industries)
+            if(this.get('search') && d[this.get('varDependent')]) {
+              return d.color;
+            }
+            //if there is no search, color products export > 0 and rca > 1
+            // industries if RCA > 1 ( varDependent for industries is also rca )
+            if(d[this.get('varDependent')] && d[this.get('varRCA')] > 1){
+              return d.color;
+            }
           },
           class: (d) => {
-            if(d[this.get('varHighlight')] >= 1) {
+            if(d[this.get('varRCA')] > 1) {
               return 'node--is--highlighted';
             }
           }
@@ -91,7 +105,13 @@ export default Ember.Component.extend({
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
           class: function() { return 'tooltip'; },
-          text: (d) => { return d[`name_short_${this.get('i18n').locale}`]; },
+          text: (d) => {
+            let rcaValue = d[this.get('varRCA')];
+            let rcaLabel = this.get('i18n').t('graph_builder.table.rca');
+            let rcaString = `${rcaLabel}: ${numeral(rcaValue).format('0.00a')}`;
+
+            return d[`name_short_${this.get('i18n').locale}`] + '</br>' + rcaString;
+          },
           exit: function() {}
         }]
       }]
