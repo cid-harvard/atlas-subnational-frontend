@@ -24,7 +24,7 @@ export default Ember.Component.extend({
     let varText = `name_short_${this.get('i18n').locale}` || 'code';
     return vistk.viz()
         .params({
-          dev: false,
+          dev: true,
           type: 'treemap',
           container: this.get('id'),
           height: this.get('height') + (this.paddingWidth * 2),
@@ -40,7 +40,7 @@ export default Ember.Component.extend({
           items: [{
             marks: [{
               type: "divtext",
-              filter: function(d, i) { return d.depth == 1 && d.dx > 30 && d.dy > 30; },
+              filter: function(d) { return d.depth == 1 && d.dx > 30 && d.dy > 30; },
               translate: [5, 0]
             }, {
               type: "rect",
@@ -79,28 +79,35 @@ export default Ember.Component.extend({
               },
               text: function(d) {
 
-/*                  {
-                    number: (d, data) => {
-                      if('share' === data.key){
-                        return numeral(d).divide(100).format('0.0%');
-                      } else if('employment' === data.key) {
-                        return numeral(d).format('0.0a');
-                      } else if('num_vacancies' === data.key) {
-                        return numeral(d).format('0,0');
-                      } else if('export_value' === data.key) {
-                        return '$ ' + numeral(d).format('0.0a') + ' USD';
-                      } else if('import_value' === data.key) {
-                        return '$ ' + numeral(d).format('0.0a') + ' USD';
-                      } else {
-                        return numeral(d).format('$ 0.0a');
-                      }
-                    }
+                var data = [{
+                  'key': varDependent,
+                  'value': d[varDependent]
+                }, {
+                  'key': 'share',
+                  'value': d[varDependent]
+                }];
+
+                function format(key, value) {
+                  if('share' === key){
+                    return numeral(value).divide(100).format('0.0%');
+                  } else if('employment' === key) {
+                    return numeral(value).format('0.0a');
+                  } else if('num_vacancies' === key) {
+                    return numeral(value).format('0,0');
+                  } else if('export_value' === key) {
+                    return '$ ' + numeral(value).format('0.0a') + ' USD';
+                  } else if('import_value' === key) {
+                    return '$ ' + numeral(value).format('0.0a') + ' USD';
+                  } else {
+                    return numeral(value).format('$ 0.0a');
                   }
-*/
+                }
 
                 var tooltip_text = '<span style="color: ' +  d.color + '">' + d['parent_name_en'] + '</span>';
-                   tooltip_text += '<br>' + varDependent + ': ' + d[varDependent];
-                   tooltip_text += '<br>Share: ' + d[varDependent];
+                data.forEach(function(d) {
+                   tooltip_text += '<br>' + d.key + ': ' + format(d.key, d.value);
+                 });
+
                 return tooltip_text;
               },
               translate: [0, -10],
