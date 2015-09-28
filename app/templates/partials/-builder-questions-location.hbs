@@ -49,7 +49,9 @@
       <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
         <span data-location-product="exports" {{action "closeDrawer"}}>
-          {{#link-to 'visualization' entity_and_id 'products' 'treemap' (query-params variable='export_value' search='null') class="builder__questions__question"}}
+          {{#link-to 'visualization' entity_and_id 'products' 'treemap'
+            (query-params variable='export_value' search='null' startDate=2013  endDate=2013)
+            class="builder__questions__question"}}
             {{t 'graph_builder.page_title.location.products.export_value' thisLevel=thisLevel}}
           {{/link-to}}
         </span>
@@ -60,7 +62,7 @@
       <div class="builder__questions__item__textwrap">
         <span {{action "closeDrawer"}}>
           {{#link-to 'visualization' entity_and_id 'products' 'treemap'
-            (query-params variable='import_value' search='null')
+            (query-params variable='import_value' search='null' startDate=2013  endDate=2013)
             data-location-product="imports"
             class="builder__questions__question"}}
             {{t 'graph_builder.page_title.location.products.import_value' thisLevel=thisLevel}}
