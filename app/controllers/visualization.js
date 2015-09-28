@@ -312,7 +312,7 @@ export default Ember.Controller.extend({
   visualizationComponent: computed('visualization', function(){
     let visualization = this.get('visualization');
     if( visualization === 'treemap') {
-      return 'd3plus-tree-map';
+      return 'tree-map';
     } else if(visualization === 'multiples') {
       return 'small-multiples-set';
     } else if(visualization === 'scatter') {
