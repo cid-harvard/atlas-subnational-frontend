@@ -21,7 +21,8 @@
     "mapbox.js": "~2.2.1",
     "antiscroll": "*",
     "jquery-mousewheel": "~3.1.4",
-    "jquery-ui": "~1.11.4"
+    "jquery-ui": "~1.11.4",
+    "vis-toolkit": "https://github.com/cid-harvard/vis-toolkit.git#master"
   },
   "devDependencies": {
     "FileSaver.js": "~0.0.2",
