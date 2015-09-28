@@ -21,9 +21,10 @@ export default Ember.Component.extend({
   }),
   treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'vis', function() {
     let varDependent = this.get('varDependent');
+    let varText = `name_short_${this.get('i18n').locale}` || 'code';
     return vistk.viz()
         .params({
-          dev: true,
+          dev: false,
           type: 'treemap',
           container: this.get('id'),
           height: this.get('height') + (this.paddingWidth * 2),
@@ -34,7 +35,7 @@ export default Ember.Component.extend({
           var_group: 'group',
           padding: 4,
           var_color: 'color',
-          var_text: 'parent_name_en',
+          var_text: varText,
           var_sort: this.get('varDependent'),
           items: [{
             marks: [{
@@ -49,13 +50,21 @@ export default Ember.Component.extend({
               width: function(d) { return d.dx; },
               height: function(d) { return d.dy; },
               fill: (d) => {
-              if(this.get('noFiltered')) { return d.color || '#fff'; }
-              if(_.contains(this.get('selectedData'), d.code)) {
-                return '#eefcce';
-              } else {
-                return d.color || '#fff';
-              }
-              }
+                if(this.get('noFiltered')) { return d.color || '#fff'; }
+                if(_.contains(this.get('selectedData'), d.code)) {
+                  return d.color || '#fff';
+                } else {
+                  return 'none';
+                }
+              },
+              stroke: (d) => {
+                if(this.get('noFiltered')) { return '#fff'; }
+                if(!_.contains(this.get('selectedData'), d.code)) {
+                  return d.color || '#fff';
+                } else {
+                  return 'none';
+                }
+              },
             }, {
               var_mark: '__highlighted',
               type: d3.scale.ordinal().domain([false, true]).range(['none', 'div']),
@@ -63,19 +72,40 @@ export default Ember.Component.extend({
                 return 'tooltip';
               },
               x: function(d, i, vars) {
-                return  vars.x_scale[0]["func"](d[vars.var_x]) + d.dx / 2 + vars.padding / 2;
+                return  vars.x_scale[0]["func"](d[vars.var_x]) + d.dx / 2;
               },
               y: function(d, i, vars) {
                 return vars.y_scale[0]["func"](d[vars.var_y]);
               },
-              text: (d) => {
-                var text = '<span style="color: ' +  d.color + '">' + d['parent_name_en'] + '</span>';
-                   text += '<br>' + varDependent + ': ' + d[varDependent];
-                   text += '<br>Share: ' + d[varDependent];
-                return text; ///d['name'] + ' (' + d['continent'] + ') coordinates (x: ' + vars.x_scale[0]["func"](d[vars.var_x]) + ', ' + vars.y_scale[0]["func"](d[vars.var_y]) + ')';
+              text: function(d) {
+
+/*                  {
+                    number: (d, data) => {
+                      if('share' === data.key){
+                        return numeral(d).divide(100).format('0.0%');
+                      } else if('employment' === data.key) {
+                        return numeral(d).format('0.0a');
+                      } else if('num_vacancies' === data.key) {
+                        return numeral(d).format('0,0');
+                      } else if('export_value' === data.key) {
+                        return '$ ' + numeral(d).format('0.0a') + ' USD';
+                      } else if('import_value' === data.key) {
+                        return '$ ' + numeral(d).format('0.0a') + ' USD';
+                      } else {
+                        return numeral(d).format('$ 0.0a');
+                      }
+                    }
+                  }
+*/
+
+                var tooltip_text = '<span style="color: ' +  d.color + '">' + d['parent_name_en'] + '</span>';
+                   tooltip_text += '<br>' + varDependent + ': ' + d[varDependent];
+                   tooltip_text += '<br>Share: ' + d[varDependent];
+                return tooltip_text;
               },
               translate: [0, -10],
-              width: 200
+              width: 200,
+              height: 100,
             }]
           }]
         });
