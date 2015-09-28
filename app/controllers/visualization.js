@@ -113,11 +113,12 @@ export default Ember.Controller.extend({
     }
     return this.get('i18n').t(`${i18nString}.${this.get('variable')}`, { thisLevel: this.get('thisLevel') });
   }),
-  recircCopy: computed('model','variable','i18n.locale', 'entityType', function() {
+  recircCopy: computed('model','i18n.locale', 'entityType', function() {
     //locale file under graph_builder.recirc.header
-    let i18nString = `graph_builder.recirc.header`;
-    let entityType = this.get('i18n').t(`general.${this.get('entityType')}`);
-    return this.get('i18n').t(`${i18nString}`, { entity: entityType });
+    return this.get('i18n').t(`graph_builder.recirc.header.${this.get('entityType')}`);
+  }),
+  searchPlaceholderCopy: computed('source','i18n.locale', function() {
+    return this.get('i18n').t(`graph_builder.search.placeholder.${this.get('source')}`);
   }),
   builderModHeader: computed('model','variable','i18n.locale', function() {
     //locale file under graph_builder.builder_mod_header.<entity>.<source>.<variable>
