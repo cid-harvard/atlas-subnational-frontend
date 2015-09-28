@@ -20,9 +20,10 @@ export default Ember.Component.extend({
     return this.get('data.length') === this.get('immutableData.length');
   }),
   treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'vis', function() {
+    let varDependent = this.get('varDependent');
     return vistk.viz()
         .params({
-          dev: false,
+          dev: true,
           type: 'treemap',
           container: this.get('id'),
           height: this.get('height') + (this.paddingWidth * 2),
@@ -47,15 +48,13 @@ export default Ember.Component.extend({
               y: 0,
               width: function(d) { return d.dx; },
               height: function(d) { return d.dy; },
-              fill: (d) => { return d.color;
-                /*
-                if(this.get('noFiltered')) { return d.color || '#fff'; }
-                if(_.contains(this.get('selectedData'), d.code)) {
-                  return '#eefcce';
-                } else {
-                  return d.color || '#fff';
-                }
-                */
+              fill: (d) => {
+              if(this.get('noFiltered')) { return d.color || '#fff'; }
+              if(_.contains(this.get('selectedData'), d.code)) {
+                return '#eefcce';
+              } else {
+                return d.color || '#fff';
+              }
               }
             }, {
               var_mark: '__highlighted',
@@ -64,15 +63,18 @@ export default Ember.Component.extend({
                 return 'tooltip';
               },
               x: function(d, i, vars) {
-                return  vars.x_scale[0]["func"](d[vars.var_x]) + d.dx / 2;
+                return  vars.x_scale[0]["func"](d[vars.var_x]) + d.dx / 2 + vars.padding / 2;
               },
               y: function(d, i, vars) {
                 return vars.y_scale[0]["func"](d[vars.var_y]);
               },
               text: (d) => {
-                return d['name_short_en'] + '<br>Employement: ' + d['employment'];///d['name'] + ' (' + d['continent'] + ') coordinates (x: ' + vars.x_scale[0]["func"](d[vars.var_x]) + ', ' + vars.y_scale[0]["func"](d[vars.var_y]) + ')';
+                var text = '<span style="color: ' +  d.color + '">' + d['parent_name_en'] + '</span>';
+                   text += '<br>' + varDependent + ': ' + d[varDependent];
+                   text += '<br>Share: ' + d[varDependent];
+                return text; ///d['name'] + ' (' + d['continent'] + ') coordinates (x: ' + vars.x_scale[0]["func"](d[vars.var_x]) + ', ' + vars.y_scale[0]["func"](d[vars.var_y]) + ')';
               },
-              translate: [20, -10],
+              translate: [0, -10],
               width: 200
             }]
           }]
@@ -94,7 +96,10 @@ export default Ember.Component.extend({
         if(!this.element){ return false; } //do not redraw if not there
         this.set('width', this.$().parent().width());
         this.set('height', this.$().parent().height() || 500 );
-       if(this.get('treemap')) { d3.select(this.get('id')).call(this.get('treemap')); }
+        if(this.get('treemap')) {
+          d3.select(this.get('id')).select('svg').remove();
+          d3.select(this.get('id')).call(this.get('treemap'));
+        }
       });
     }
   }),
@@ -107,6 +112,9 @@ export default Ember.Component.extend({
   update: observer('data.[]', 'varDependent', 'i18n.locale', function() {
     if(!this.element){ return false; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
+      d3.select(this.get('id')).select('svg').remove();
+      this.set('width', this.$().parent().width());
+      this.set('height', this.$().parent().height() || 500 );
       if(this.get('treemap')) { d3.select(this.get('id')).call(this.get('treemap')); }
     });
   })
