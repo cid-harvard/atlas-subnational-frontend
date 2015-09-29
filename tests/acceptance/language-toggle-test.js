@@ -8,7 +8,6 @@ var application;
 module('Acceptance | language toggle', {
   beforeEach: function() {
     application = startApp();
-    application.$.cookie('locale', 'es');
   },
 
   afterEach: function() {
@@ -18,14 +17,14 @@ module('Acceptance | language toggle', {
 
 test('language-toggle', function(assert) {
   visit('/');
-
   andThen(function() {
-    assert.equal(_.trim(find('p.toggle__label--is--active').text()), 'es');
+    assert.equal(_.trim(find('p.toggle__label--is--active').text()), 'en');
   });
 
   click('input[data-language-toggle]');
 
   andThen(function() {
-    assert.equal(_.trim(find('p.toggle__label--is--active').text()), 'en');
+    assert.equal(_.trim(find('p.toggle__label--is--active').text()), 'es');
   });
+
 });

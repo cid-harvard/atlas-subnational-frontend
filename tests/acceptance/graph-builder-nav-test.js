@@ -7,7 +7,6 @@ var application;
 module('Acceptance | graph builder nav', {
   beforeEach: function() {
     application = startApp();
-    application.$.cookie('locale', 'en');
   },
 
   afterEach: function() {
