@@ -21,10 +21,10 @@ export default Ember.Component.extend({
   }),
   treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'vis', function() {
     let varDependent = this.get('varDependent');
-    let varText = `name_short_${this.get('i18n').locale}` || 'code';
+    let varTextItem = `name_short_${this.get('i18n').locale}` || 'code';
+    let varText = `parent_name_${this.get('i18n').locale}` || 'code';
     return vistk.viz()
         .params({
-          dev: true,
           type: 'treemap',
           container: this.get('id'),
           height: this.get('height') + (this.paddingWidth * 2),
@@ -36,6 +36,7 @@ export default Ember.Component.extend({
           padding: 4,
           var_color: 'color',
           var_text: varText,
+          var_text_item: varTextItem,
           var_sort: this.get('varDependent'),
           items: [{
             marks: [{
@@ -103,14 +104,15 @@ export default Ember.Component.extend({
                   }
                 }
 
-                var tooltip_text = '<span style="color: ' +  d.color + '">' + d['parent_name_en'] + '</span>';
+                var tooltip_text = '<span style="color: ' +  d.color + '">' + d[varTextItem] + '</span>';
+
                 data.forEach(function(d) {
                    tooltip_text += '<br>' + d.key + ': ' + format(d.key, d.value);
                  });
 
                 return tooltip_text;
               },
-              translate: [0, -10],
+              translate: [0, 0],
               width: 200,
               height: 100,
             }]
