@@ -24,7 +24,7 @@ export default Ember.Component.extend({
       .y({ "value": 'complexity', label: this.get('i18n').t('graph_builder.table.complexity').string })
       .format({ number: function(d) { return numeral(d).format('0.00a');}})
       .text({value: (d) => {
-        return Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code;
+        return Ember.get(d, `name_short_${this.get('i18n').display}`) || d.code;
        }})
       .size({value: this.get('varSize'), scale: { min: 1, max: 5 }})
       .timeline(false)

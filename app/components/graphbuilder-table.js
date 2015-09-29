@@ -256,11 +256,11 @@ export default EmberTableComponent.extend({
         let number = row.get(column.key);
         return this.formatNumber(number, column.key, this.get('i18n'));
       } else if(column.key === 'name'){
-        return row.get(`name_short_${this.get('i18n').locale}`);
+        return row.get(`name_short_${this.get('i18n').display}`);
       } else if(column.key === 'parent'){
         let color = row.get('color');
         let testSpan = Ember.String.htmlSafe('<i class="ember-table-color-marker" style=background-color:' + color + '></i>');
-        return testSpan + row.get(`parent_name_${this.get('i18n').locale}`);
+        return testSpan + row.get(`parent_name_${this.get('i18n').display}`);
       } else if(column.key === 'code'){
         return row.get('code');
       } else {
@@ -309,9 +309,9 @@ export default EmberTableComponent.extend({
       this.set('content', []);
       let data;
       if(key === 'name') {
-        key = `name_short_${this.get('i18n').locale}`;
+        key = `name_short_${this.get('i18n').display}`;
       } else if (key === 'parent') {
-        key = `parent_name_${this.get('i18n').locale}`;
+        key = `parent_name_${this.get('i18n').display}`;
       }
       var sortFunction = function(d) {
         if(_.isString(d[key])) { return d[key].toLowerCase(); }
