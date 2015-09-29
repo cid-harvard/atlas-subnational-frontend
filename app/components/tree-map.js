@@ -77,14 +77,14 @@ export default Ember.Component.extend({
               y: function(d, i, vars) {
                 return vars.y_scale[0]["func"](d[vars.var_y]);
               },
-              text: function(d) {
+              text: function(d, i, vars) {
 
                 var data = [{
                   'key': varDependent,
                   'value': d[varDependent]
                 }, {
                   'key': 'share',
-                  'value': d[varDependent]
+                  'value': 100 * d[varDependent] / vars.new_data[0][varDependent]
                 }];
 
                 function format(key, value) {
