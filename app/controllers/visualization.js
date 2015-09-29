@@ -99,7 +99,7 @@ export default Ember.Controller.extend({
 
     if(level.string === 'Colombia') {
       thisLevel = 'Colombia';
-    } else if(this.get('i18n.locale') === 'es') {
+    } else if(this.get('i18n.display') === 'es') {
       thisLevel = level.string === 'ciudad' ? `esta ${level}` :  `este ${level}`;
     }
 
@@ -349,8 +349,8 @@ export default Ember.Controller.extend({
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
     return _.filter(data, (d) => {
-      let longName = get(d,`name_${this.get('i18n').locale}`);
-      let shortName = get(d,`name_short_${this.get('i18n').locale}`);
+      let longName = get(d,`name_${this.get('i18n').display}`);
+      let shortName = get(d,`name_short_${this.get('i18n').display}`);
       let code = get(d, 'code');
       return _.deburr(`${shortName} ${longName} ${code}`).match(regexp);
     });

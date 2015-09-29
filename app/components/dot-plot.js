@@ -5,7 +5,7 @@ const { computed, observer } = Ember;
 export default Ember.Component.extend({
   i18n: Ember.inject.service(), //TODO: this should work, but doesn't, ODD -ql
   tagName: 'div',
-  locale: computed.alias('i18n.locale'),
+  display: computed.alias('i18n.display'),
   classNames: ['dotplot'],
   attributeBindings: ['width','height'],
   id: computed('elementId', function() {
@@ -61,8 +61,8 @@ export default Ember.Component.extend({
               } else if(type === 'percentage') {
                 format = function(d) { return numeral(d).format('0.00%'); };
               }
-              let locale = this.get('locale');
-              let name = Ember.get(d, 'name_'+locale);
+              let display = this.get('display');
+              let name = Ember.get(d, 'name_'+display);
               return name + ' (' + format(+d[varX]) + ')';
             },
             exit: function() {}

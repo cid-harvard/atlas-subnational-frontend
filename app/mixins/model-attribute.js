@@ -18,7 +18,7 @@ export default Ember.Mixin.create({
   parent_id: attr('string'),
 
   locale: computed('i18n.locale', function() {
-    return this.get('i18n.locale');
+    return this.get('i18n.display');
   }),
   otherLocale: computed('i18n.locale', 'i18n.otherLocale', 'i18n.defaultLocale', function() {
     if(this.get('i18n.locale') === this.get('i18n.otherLocale')) {
