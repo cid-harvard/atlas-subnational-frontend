@@ -40,7 +40,14 @@ export default Ember.Component.extend({
           stroke_width: function(d) { return d['export_rca'] > 1 ? '1.5px': '0.5px'; }
         }, {
           var_mark: '__highlighted',
-          type: d3.scale.ordinal().domain([true, false]).range(["text", "none"])
+          type: d3.scale.ordinal().domain([true, false]).range(["text", "none"]),
+          x: function(d, i, vars) {
+            return  vars.x_scale[0]["func"](d[vars.var_x]);
+          },
+          y: function(d, i, vars) {
+            return vars.y_scale[0]["func"](d[vars.var_y]);
+          },
+          translate: function(d, i, vars) { return [0, -vars.radius]}
         }]
       }],
       selection: this.get('selection'),
