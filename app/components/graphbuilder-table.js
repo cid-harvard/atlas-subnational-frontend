@@ -174,6 +174,17 @@ export default EmberTableComponent.extend({
     { key: 'distance' },
     { key: 'cog' }
    ],
+  citiesMap: [
+    { key: 'code' },
+    { key: 'name', copy: 'location' },
+    { key: 'year' },
+    { key: 'export_value' },
+    { key: 'import_value' },
+    { key: 'export_num_plants' },
+    { key: 'export_rca' },
+    { key: 'distance' },
+    { key: 'cog' }
+   ],
   industriesMap: [
     { key: 'code' },
     { key: 'name', copy: 'industry' },
