@@ -4,6 +4,7 @@ const {computed, observer, get:get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
+  classNames: ['buildermod__viz'],
   margin: { top: 20, right: 10, bottom: 30, left: 70 },
   height: 140,
   firstSlice: 48,

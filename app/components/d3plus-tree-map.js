@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
   attributeBindings: ['width','height'],
-  classNames: ['d3plus_tree-map'],
+  classNames: ['buildermod__viz--white','buildermod__viz','d3plus_tree-map'],
   varIndependent: ['group', 'code'],
   paddingWidth: 5,
   id: computed('elementId', function() {
