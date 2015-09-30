@@ -6,6 +6,7 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
   varIndependent: 'code',
+  classNames: ['buildermod__viz--white','buildermod__viz'],
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
