@@ -19,105 +19,106 @@ export default Ember.Component.extend({
   noFiltered: computed('data.[]', 'immutableData.[]', function() {
     return this.get('data.length') === this.get('immutableData.length');
   }),
-  treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'vis', function() {
+  treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'i18n.locale', function() {
     let varDependent = this.get('varDependent');
     let varTextItem = `name_short_${this.get('i18n').locale}` || 'code';
     let varText = `parent_name_${this.get('i18n').locale}` || 'code';
     return vistk.viz()
-        .params({
-          type: 'treemap',
-          container: this.get('id'),
-          height: this.get('height') + (this.paddingWidth * 2),
-          width: this.get('width') + (this.paddingWidth * 4),
-          data: this.get('immutableData'),
-          var_id: this.get('varIndependent'),
-          var_size: this.get('varDependent'),
-          var_group: 'group',
-          padding: 4,
-          var_color: 'color',
-          var_text: varText,
-          var_text_item: varTextItem,
-          var_sort: this.get('varDependent'),
-          items: [{
-            marks: [{
-              type: "divtext",
-              filter: function(d) { return d.depth == 1 && d.dx > 30 && d.dy > 30; },
-              translate: [5, 0]
-            }, {
-              type: "rect",
-              filter: function(d, i) { return d.depth == 2; },
-              x: 0,
-              y: 0,
-              width: function(d) { return d.dx; },
-              height: function(d) { return d.dy; },
-              fill: (d) => {
-                if(this.get('noFiltered')) { return d.color || '#fff'; }
-                if(_.contains(this.get('selectedData'), d.code)) {
-                  return d.color || '#fff';
+      .params({
+        type: 'treemap',
+        container: this.get('id'),
+        height: this.get('height') + (this.paddingWidth * 2),
+        width: this.get('width') + (this.paddingWidth * 4),
+        data: this.get('immutableData'),
+        var_id: this.get('varIndependent'),
+        var_size: this.get('varDependent'),
+        var_group: 'group',
+        padding: 4,
+        var_color: 'color',
+        var_text: varText,
+        var_text_item: varTextItem,
+        var_sort: this.get('varDependent'),
+        items: [{
+          marks: [{
+            type: "divtext",
+            filter: function(d) { return d.depth == 1 && d.dx > 30 && d.dy > 30; },
+            class: function() { return 'tree-map--title'; },
+            translate: [5, 0]
+          }, {
+            type: "rect",
+            filter: function(d, i) { return d.depth == 2; },
+            x: 0,
+            y: 0,
+            width: function(d) { return d.dx; },
+            height: function(d) { return d.dy; },
+            fill: (d) => {
+              if(this.get('noFiltered')) { return d.color || '#fff'; }
+              if(_.contains(this.get('selectedData'), d.code)) {
+                return d.color || '#fff';
+              } else {
+                return 'none';
+              }
+            },
+            stroke: (d) => {
+              if(this.get('noFiltered')) { return '#fff'; }
+              if(!_.contains(this.get('selectedData'), d.code)) {
+                return d.color || '#fff';
+              } else {
+                return 'none';
+              }
+            },
+          }, {
+            var_mark: '__highlighted',
+            type: d3.scale.ordinal().domain([false, true]).range(['none', 'div']),
+            class: function() {
+              return 'tooltip';
+            },
+            x: function(d, i, vars) {
+              return  vars.x_scale[0]["func"](d[vars.var_x]) + d.dx / 2;
+            },
+            y: function(d, i, vars) {
+              return vars.y_scale[0]["func"](d[vars.var_y]);
+            },
+            text: function(d, i, vars) {
+
+              var data = [{
+                'key': varDependent,
+                'value': d[varDependent]
+              }, {
+                'key': 'share',
+                'value': 100 * d[varDependent] / vars.new_data[0][varDependent]
+              }];
+
+              function format(key, value) {
+                if('share' === key){
+                  return numeral(value).divide(100).format('0.0%');
+                } else if('employment' === key) {
+                  return numeral(value).format('0.0a');
+                } else if('num_vacancies' === key) {
+                  return numeral(value).format('0,0');
+                } else if('export_value' === key) {
+                  return '$ ' + numeral(value).format('0.0a') + ' USD';
+                } else if('import_value' === key) {
+                  return '$ ' + numeral(value).format('0.0a') + ' USD';
                 } else {
-                  return 'none';
+                  return numeral(value).format('$ 0.0a');
                 }
-              },
-              stroke: (d) => {
-                if(this.get('noFiltered')) { return '#fff'; }
-                if(!_.contains(this.get('selectedData'), d.code)) {
-                  return d.color || '#fff';
-                } else {
-                  return 'none';
-                }
-              },
-            }, {
-              var_mark: '__highlighted',
-              type: d3.scale.ordinal().domain([false, true]).range(['none', 'div']),
-              class: function() {
-                return 'tooltip';
-              },
-              x: function(d, i, vars) {
-                return  vars.x_scale[0]["func"](d[vars.var_x]) + d.dx / 2;
-              },
-              y: function(d, i, vars) {
-                return vars.y_scale[0]["func"](d[vars.var_y]);
-              },
-              text: function(d, i, vars) {
+              }
 
-                var data = [{
-                  'key': varDependent,
-                  'value': d[varDependent]
-                }, {
-                  'key': 'share',
-                  'value': 100 * d[varDependent] / vars.new_data[0][varDependent]
-                }];
+              var tooltip_text = '<span style="color: ' +  d.color + '">' + d[varTextItem] + '</span>';
 
-                function format(key, value) {
-                  if('share' === key){
-                    return numeral(value).divide(100).format('0.0%');
-                  } else if('employment' === key) {
-                    return numeral(value).format('0.0a');
-                  } else if('num_vacancies' === key) {
-                    return numeral(value).format('0,0');
-                  } else if('export_value' === key) {
-                    return '$ ' + numeral(value).format('0.0a') + ' USD';
-                  } else if('import_value' === key) {
-                    return '$ ' + numeral(value).format('0.0a') + ' USD';
-                  } else {
-                    return numeral(value).format('$ 0.0a');
-                  }
-                }
+              data.forEach(function(d) {
+                 tooltip_text += '<br>' + d.key + ': ' + format(d.key, d.value);
+               });
 
-                var tooltip_text = '<span style="color: ' +  d.color + '">' + d[varTextItem] + '</span>';
-
-                data.forEach(function(d) {
-                   tooltip_text += '<br>' + d.key + ': ' + format(d.key, d.value);
-                 });
-
-                return tooltip_text;
-              },
-              translate: [0, 0],
-              width: 200,
-              height: 100,
-            }]
+              return tooltip_text;
+            },
+            translate: [0, 0],
+            width: 200,
+            height: 100,
           }]
-        });
+        }]
+      });
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
@@ -151,10 +152,13 @@ export default Ember.Component.extend({
   update: observer('data.[]', 'varDependent', 'i18n.locale', function() {
     if(!this.element){ return false; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
-      d3.select(this.get('id')).select('svg').remove();
       this.set('width', this.$().parent().width());
       this.set('height', this.$().parent().height() || 500 );
-      if(this.get('treemap')) { d3.select(this.get('id')).call(this.get('treemap')); }
+
+      if(this.get('treemap')) {
+        d3.select(this.get('id')).select('svg').remove();
+        d3.select(this.get('id')).call(this.get('treemap'));
+      }
     });
   })
 });
