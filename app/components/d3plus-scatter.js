@@ -21,8 +21,12 @@ export default Ember.Component.extend({
       .type('scatter')
       .color((d) => { return d.color ? d.color : '#ccc1b9';})
       .id(this.get('varIndependent'))
-      .x({ "value": 'distance', "label": this.get('i18n').t('graph_builder.table.distance').string })
-      .y({ "value": 'complexity', label: this.get('i18n').t('graph_builder.table.complexity').string })
+      .x({ "value": 'distance',
+           "label": { "value": this.get('i18n').t('graph_builder.table.distance').string, "padding": 10}
+      })
+      .y({ "value": 'complexity',
+           "label": { "value": this.get('i18n').t('graph_builder.table.complexity').string, "padding": 25}
+      })
       .format({ number: function(d) { return numeral(d).format('0.00a');}})
       .text({value: (d) => {
         return Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code;
