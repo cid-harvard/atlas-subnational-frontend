@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import numeral from 'numeral';
-const {computed, observer} = Ember;
+import ENV from '../config/environment';
+const {computed, observer, get:get} = Ember;
+const {apiURL} = ENV;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
@@ -14,7 +16,7 @@ export default Ember.Component.extend({
     let rca = this.get('rca');
     return _.filter(this.get('data'), function(d) { return d[rca] < 1;});
   }),
-  scatter: computed('rcaData', 'dataType', function() {
+  scatter: computed('rcaData', 'dataType','eciValue', function() {
     return d3plus.viz()
       .container(this.get('id'))
       .data({value: this.get('rcaData')})
@@ -25,7 +27,8 @@ export default Ember.Component.extend({
            "label": { "value": this.get('i18n').t('graph_builder.table.distance').string, "padding": 10}
       })
       .y({ "value": 'complexity',
-           "label": { "value": this.get('i18n').t('graph_builder.table.complexity').string, "padding": 25}
+           "label": { "value": this.get('i18n').t('graph_builder.table.complexity').string, "padding": 25},
+           "lines": { "value": this.get('eciValue'), "width": 5 }
       })
       .format({ number: function(d) { return numeral(d).format('0.00a');}})
       .text({value: (d) => {
@@ -47,11 +50,19 @@ export default Ember.Component.extend({
     if(this.get('dataType') === 'industries') { return 'rca'; }
   }),
   didInsertElement: function() {
-    Ember.run.scheduleOnce('afterRender', this , function() {
-      this.set('width', this.$().parent().width());
-      this.set('height', this.$().parent().height());
-      this.get('scatter').draw();
-    });
+    $.getJSON(`${apiURL}/data/location?level=department`).then((response) => {
+      let id = this.get('entityId');
+      let data = get(response, 'data')
+      let datum = _.first(_.filter(data, {'year': 2013, 'department_id': parseInt(id) }))
+      Ember.run.scheduleOnce('afterRender', this , function() {
+        this.set('width', this.$().parent().width());
+        this.set('height', this.$().parent().height());
+        if(this.get('dataType') === 'products') {
+          this.set('eciValue', get(datum, 'eci'));
+        }
+        this.get('scatter').draw();
+      });
+    })
   },
   willDestroyElement: function() {
     this.set('scatter',  null);
