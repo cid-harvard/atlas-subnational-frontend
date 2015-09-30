@@ -8,4 +8,9 @@
 .tree-map {
   position: relative;
   stroke-width: 0.5px;
+
+  &--title{
+    font-size: 25px;
+    padding: 4px;
+  }
 }
