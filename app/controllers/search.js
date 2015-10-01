@@ -15,6 +15,11 @@ export default Ember.Controller.extend({
       let longName = get(d,`name_${this.get('i18n').locale}`);
       let shortName = get(d,`name_short_${this.get('i18n').locale}`);
       let code = get(d, 'code');
+
+      //Custom code to remove Bogota muni,  this is bad and should be removed
+      if(d.get('name') === "Bogotá, D.C." && d.get('level') === 'municipality'){
+        return false;
+      }
       return _.deburr(`${shortName} ${longName} ${code}`).match(regexp);
     });
   }),
