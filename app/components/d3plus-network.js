@@ -1,6 +1,7 @@
 import productSpace from '../fixtures/product_space';
 import industrySpace from '../fixtures/industry_space';
 import Ember from 'ember';
+import numeral from 'numeral';
 
 const {computed, observer} = Ember;
 
