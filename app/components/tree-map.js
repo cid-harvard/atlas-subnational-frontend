@@ -8,10 +8,16 @@ export default Ember.Component.extend({
   tagName: 'div',
   attributeBindings: ['width','height'],
   classNames: ['tree-map'],
-  varIndependent: 'code',
+  varIndependent: ['code', 'group'],
   paddingWidth: 5,
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
+  }),
+  varId: computed('varIndependent', function() {
+    return _.first(this.get('varIndependent'));
+  }),
+  varGroup: computed('varIndependent', function() {
+    return _.last(this.get('varIndependent'));
   }),
   selectedData: computed('data.[]', function() {
     return _.pluck(this.get('data'), 'code');
@@ -22,7 +28,7 @@ export default Ember.Component.extend({
   treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'i18n.locale', function() {
     let varDependent = this.get('varDependent');
     let varTextItem = `name_short_${this.get('i18n').locale}` || 'code';
-    let varText = `parent_name_${this.get('i18n').locale}` || 'code';
+    let varText = `parent_name_${this.get('i18n').locale}` || varTextItem;
     return vistk.viz()
       .params({
         type: 'treemap',
@@ -30,9 +36,9 @@ export default Ember.Component.extend({
         height: this.get('height') + (this.paddingWidth * 2),
         width: this.get('width') + (this.paddingWidth * 4),
         data: this.get('immutableData'),
-        var_id: this.get('varIndependent'),
+        var_id: this.get('varId'),
         var_size: this.get('varDependent'),
-        var_group: 'group',
+        var_group: this.get('varGroup'),
         padding: 4,
         var_color: 'color',
         var_text: varText,

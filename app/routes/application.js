@@ -56,6 +56,8 @@ export default Ember.Route.extend({
       var productSectionMap = _.indexBy(productParentMetadata, 'id');
       var industrySectionMap = _.indexBy(industryParentMetadata, 'id');
 
+      var occupationMap = _.indexBy(occupationsMetadata, 'id');
+
       _.forEach(productsMetadata, function(d) {
         let sectionId = productsHierarchy[d.id];
         let section = productSectionMap[sectionId];
@@ -65,6 +67,13 @@ export default Ember.Route.extend({
         d.parent_name_en = section.name_en;
         d.parent_name_es = section.name_es;
         d.group = sectionId;
+      });
+
+      _.forEach(occupationsMetadata, function(d) {
+        let parent = d.parent_id ? occupationMap[d.parent_id] : d;
+        d.group = get(d,'code').split('-')[0];
+        d.parent_name_en = get(parent, 'name_en');
+        d.parent_name_es = get(parent, 'name_es');
       });
 
       _.forEach(industriesMetadata, function(d) {
