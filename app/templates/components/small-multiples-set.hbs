@@ -4,7 +4,7 @@
     classNames='buildermod__viz'
     immutableData=totalSet
     data=totalSet
-    dataType=source
+    dataType=dataType
     varDependent=varDependent
     startDate=startDate
     dateExtent=dateExtent
@@ -13,12 +13,27 @@
   }}
 {{/unless}}
 
-<h3 class="section__head">{{breadcrumb}}</h3>
+{{#if showParent}}
+  <h3 class="section__head">{{parentBreadcrumb}}</h3>
+  {{component 'multiples-graph'
+    classNames='buildermod__viz'
+    immutableData=parentSet
+    data=parentSet
+    dataType=dataType
+    varDependent=varDependent
+    startDate=startDate
+    dateExtent=dateExtent
+    endDate=endDate
+    markerGroup='parent'
+  }}
+{{/if}}
+
+<h3 class="section__head">{{childBreadcrumb}}</h3>
 {{component 'multiples-graph'
   classNames='buildermod__viz'
-  immutableData=immutableData
+  immutableData=data
   data=data
-  dataType=source
+  dataType=dataType
   varDependent=varDependent
   startDate=startDate
   dateExtent=dateExtent
