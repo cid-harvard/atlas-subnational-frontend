@@ -19,36 +19,36 @@
           <input class="search__submit btn btn--standalone btn--search" type="submit" value="{{ t 'pageheader.search_link' }}" {{action 'query' query}}>
         </form>
       </div>
+      <div class="index__viewmod">
+        <section class="index__section index__view__wrap">
+          <img src="assets/img/index/profiles_1.jpg" alt="" class="index__view__img">
+          <div class="index__view__copy">
+            <h3 class="section__head">{{ t 'index.profiles_head' }}</h3>
+            <p class="section__p">{{ t 'index.profiles_subhead' }}</p>
+            {{#link-to 'location.show' 1
+              data-home-page-location=''
+              class='btn btn--standalone btn--stream'
+            }}
+              {{ t 'index.profiles_cta' }}
+            {{/link-to}}
+          </div>
+        </section>
+        <section class="index__section index__view__wrap">
+          <img src="assets/img/index/graph_builder_1.jpg" alt="" class="index__view__img">
+          <div class="index__view__copy">
+            <h3 class="section__head">{{ t 'index.builder_head' }}</h3>
+            <p class="section__p">{{ t 'index.builder_subhead' }}</p>
+            {{#link-to
+              'visualization' 'product-87' 'locations' 'multiples' (query-params endDate=2013 startDate=2008 variable='export_value')
+              data-home-page-product=''
+              class="btn btn--standalone btn--stream"
+            }}
+              {{ t 'index.builder_cta' }}
+            {{/link-to}}
+          </div>
+        </section>
+      </div>
     </header>
-    <div class="index__viewmod">
-      <section class="index__section index__view__wrap">
-        <img src="assets/img/index/profiles_2.jpg" alt="" class="index__view__img">
-        <div class="index__view__copy">
-          <h3 class="section__head">{{ t 'index.profiles_head' }}</h3>
-          <p class="section__p">{{ t 'index.profiles_subhead' }}</p>
-          {{#link-to 'location.show' 1
-            data-home-page-location=''
-            class='btn btn--standalone btn--stream'
-          }}
-            {{ t 'index.profiles_cta' }}
-          {{/link-to}}
-        </div>
-      </section>
-      <section class="index__section index__view__wrap">
-        <img src="assets/img/index/graph_builder_2.jpg" alt="" class="index__view__img">
-        <div class="index__view__copy">
-          <h3 class="section__head">{{ t 'index.builder_head' }}</h3>
-          <p class="section__p">{{ t 'index.builder_subhead' }}</p>
-          {{#link-to
-            'visualization' 'product-87' 'locations' 'multiples' (query-params endDate=2013 startDate=2008 variable='export_value')
-            data-home-page-product=''
-            class="btn btn--standalone btn--stream"
-          }}
-            {{ t 'index.builder_cta' }}
-          {{/link-to}}
-        </div>
-      </section>
-    </div>
     <div class="index__complexity__mod">
       <section class="index__section index__complexity__wrap">
         <div class="section__complexity__graph">
