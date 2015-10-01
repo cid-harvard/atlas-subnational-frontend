@@ -9,8 +9,12 @@
   position: relative;
   stroke-width: 0.5px;
 
+
   &--title{
     font-size: 25px;
     padding: 4px;
+    text-overflow: clip !important;
+    font-family: $sans;
+    font-weight: 300;
   }
 }
