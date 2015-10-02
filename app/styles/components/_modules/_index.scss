@@ -13,7 +13,8 @@
 }
 
 .index__header__wrap {
-  background: $colorNavy800 url('/assets/img/index/hero_pattern.jpg');
+  background: $colorNavy800 url('/assets/img/index/hero_pattern-large.jpg');
+  background: -webkit-image-set( url('/assets/img/index/hero_pattern_med.jpg') 1x, url('/assets/img/index/hero_pattern_large.jpg') 2x );
   background-size: 40rem;
   padding: $baseSpace*3 $baseSpace*3 $baseSpace*6;
   margin-bottom: $baseSpace * 3;
@@ -41,16 +42,13 @@
 .index__viewmod {
   @include clearfix;
   z-index: $zIndex-1;
-  // background: $colorBrown200;
   padding: $baseSpace * 3;
-  // margin-bottom: $baseSpace * 6;
 }
 
 .index__view__wrap {
   display: flex;
   flex-direction: row;
   &:first-of-type {
-    // margin-top: $baseSpace * -5;
     margin-bottom: $baseSpace * 2;
   }
   &:nth-of-type(2) {
@@ -62,11 +60,13 @@
 .index__view__img {
   max-width: 20rem;
   max-height: 20rem;
+  box-shadow: 1px 1px 5px $colorBlack;
 }
 
 .index__view__copy {
   padding: $baseSpace * 2;
   background: $colorBrown300;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 // Complexity figure
