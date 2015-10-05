@@ -8,6 +8,7 @@ const {computed, observer} = Ember;
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
+  classNames: ['buildermod__viz--white','buildermod__viz'],
   attributeBindings: ['width','height'],
   varIndependent: ['group', 'code'],
   id: computed('elementId', function() {
