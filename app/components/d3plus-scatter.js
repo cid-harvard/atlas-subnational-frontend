@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import numeral from 'numeral';
 import ENV from '../config/environment';
-const {computed, observer, get:get} = Ember;
+const {computed, observer, $, get:get} = Ember;
 const {apiURL} = ENV;
 
 export default Ember.Component.extend({
@@ -52,8 +52,8 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     $.getJSON(`${apiURL}/data/location?level=department`).then((response) => {
       let id = this.get('entityId');
-      let data = get(response, 'data')
-      let datum = _.first(_.filter(data, {'year': 2013, 'department_id': parseInt(id) }))
+      let data = get(response, 'data');
+      let datum = _.first(_.filter(data, {'year': 2013, 'department_id': parseInt(id) }));
       Ember.run.scheduleOnce('afterRender', this , function() {
         this.set('width', this.$().parent().width());
         this.set('height', this.$().parent().height());
@@ -62,7 +62,7 @@ export default Ember.Component.extend({
         }
         this.get('scatter').draw();
       });
-    })
+    });
   },
   willDestroyElement: function() {
     this.set('scatter',  null);
