@@ -24,6 +24,7 @@ export default Ember.Controller.extend({
     this.set('i18n.locale', this.get('locale'));
     this.set('i18n.display', this.get('i18n.locale').split('-')[0]);
     this.set('isDefaultLocale', this.get('i18n.locale') === this.get('i18n.defaultLocale'));
+    numeral.language(this.get('i18n.locale'));
   },
   defaultLanguage: computed('i18n.default', function() {
     return this.get('i18n.defaultLocale').substring(0,2);
