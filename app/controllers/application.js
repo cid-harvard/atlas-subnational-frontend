@@ -1,31 +1,10 @@
 import Ember from 'ember';
-import numeral from 'numeral';
 
 const {observer, computed} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   queryParams: ['locale'],
-  init: function(){
-    //refactor this later please...QL
-    this._super.apply(this, arguments);
-    var localeParam = this.get('locale');
-
-    // check if param is valid
-    //  if not default to defauleLocale
-    if(localeParam === this.get('i18n.otherLocale')){
-      this.set('locale', this.get('i18n.otherLocale'));
-    } else if(localeParam === 'no-copy'){
-      this.set('i18n.locale', 'no-copy');
-    } else {
-      this.set('locale', this.get('i18n.defaultLocale'));
-    }
-
-    this.set('i18n.locale', this.get('locale'));
-    this.set('i18n.display', this.get('i18n.locale').split('-')[0]);
-    this.set('isDefaultLocale', this.get('i18n.locale') === this.get('i18n.defaultLocale'));
-    numeral.language(this.get('i18n.locale'));
-  },
   defaultLanguage: computed('i18n.default', function() {
     return this.get('i18n.defaultLocale').substring(0,2);
   }),
@@ -33,24 +12,13 @@ export default Ember.Controller.extend({
     return this.get('i18n.otherLocale').substring(0,2);
   }),
   setLanguageToggle: observer('isDefaultLocale',function() {
-    if(this.get('i18n.locale') === this.get('i18n.defaultLocale')) {
-      this.set('i18n.locale', this.get('i18n.otherLocale'));
-      this.set('i18n.display', this.get('i18n.locale').split('-')[0]);
-      numeral.language(this.get('i18n.otherLocale'));
-    } else {
+    if(this.get('isDefaultLocale')) {
       this.set('i18n.locale', this.get('i18n.defaultLocale'));
-      this.set('i18n.display', this.get('i18n.locale').split('-')[0]);
-      numeral.language(this.get('i18n.defaultLocale'));
+    } else {
+      this.set('i18n.locale', this.get('i18n.otherLocale'));
     }
-  }),
-  updateLocale: observer('i18n.locale', function() {
+
     this.set('locale', this.get('i18n.locale'));
-  }),
-  updateNoCopy: observer('locale', function() {
-    if(this.get('locale') === 'no-copy'){
-      this.set('i18n.locale', 'no-copy');
-      this.set('locale', this.get('i18n.locale'));
-    }
   }),
   productsMetadata: computed('model.products', function() {
     return this.get('model.products');

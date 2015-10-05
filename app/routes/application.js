@@ -2,10 +2,13 @@ import Ember from 'ember';
 import ENV from '../config/environment';
 import ProductSectionColor from '../fixtures/product_section_colors';
 import IndustrySectionColor from '../fixtures/industry_section_colors';
-const {RSVP} = Ember;
+import numeral from 'numeral';
+
+const {RSVP, get:get, set:set} = Ember;
 const {apiURL} = ENV;
 
 export default Ember.Route.extend({
+  i18n: Ember.inject.service(),
   queryParams: {
     locale: { refreshModel: false }
   },
@@ -80,6 +83,27 @@ export default Ember.Route.extend({
         industryParents: _.indexBy(industryParentMetadata, 'id')
       };
     });
+  },
+  setupController(controller, model) {
+    this._super(controller, model);
+    var localeParam = get(controller, 'locale');
+
+    if(localeParam === controller.get('i18n.otherLocale')){
+      controller.set('locale', get(this, 'i18n.otherLocale'));
+      set(controller, 'isDefaultLocale', false);
+    } else if(localeParam === 'no-copy'){
+      controller.set('i18n.locale', 'no-copy');
+    } else {
+      controller.set('locale', get(this, 'i18n.defaultLocale'));
+      set(controller, 'isDefaultLocale', true);
+    }
+
+    if(this.get('locale') === 'no-copy') {
+      numeral.language(get(this, 'i18n.locale'));
+    }
+
+    set(this, 'i18n.locale', get(controller, 'locale'));
+    set(this, 'i18n.display', get(controller, 'locale').split('-')[0]);
   },
   actions: {
     willTransition: function(transition) {

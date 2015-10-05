@@ -27,7 +27,13 @@ export function initialize(instance) {
 
   i18n.set('defaultLocale', defaultLocale);
   i18n.set('otherLocale', otherLocale);
-  i18n.set('locale', defaultLocale);
+
+  i18n.addObserver('locale', function() {
+    if(this.get('locale') != 'no-copy') {
+      numeral.language(this.get('locale'));
+      this.set('display', this.get('locale').split('-')[0]);
+    }
+  });
 }
 
 export default {
