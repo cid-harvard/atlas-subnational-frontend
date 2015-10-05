@@ -28,7 +28,7 @@ module.exports = function(environment) {
   if (environment === 'development') {
     ENV.apiURL = process.env.API_URL,
     ENV.contentSecurityPolicy = {
-      'connect-src': "'self' 'localhost:4200' *",
+      'connect-src': "'self' *",
       'style-src': "'self' 'unsafe-inline' *",
       'img-src': "'self' http://placehold.it/40x40 *"
     }

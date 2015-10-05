@@ -53,8 +53,8 @@ export default Ember.Component.extend({
     $.getJSON(`${apiURL}/data/location?level=department`).then((response) => {
       let id = this.get('entityId');
       let data = get(response, 'data');
-      let datum = _.first(_.filter(data, {'year': 2013, 'department_id': parseInt(id) }));
-      Ember.run.scheduleOnce('afterRender', this , function() {
+      return _.first(_.filter(data, {'year': 2013, 'department_id': parseInt(id) }));
+      }).then((datum) => {
         this.set('width', this.$().parent().width());
         this.set('height', this.$().parent().height());
         if(this.get('dataType') === 'products') {
@@ -62,7 +62,6 @@ export default Ember.Component.extend({
         }
         this.get('scatter').draw();
       });
-    });
   },
   willDestroyElement: function() {
     this.set('scatter',  null);
