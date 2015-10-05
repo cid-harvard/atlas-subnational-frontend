@@ -1,26 +1,28 @@
 import Ember from 'ember';
 import numeral from 'numeral';
 
-const {observer, computed, getWithDefault} = Ember;
+const {observer, computed} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
-  //use entity and entity_id to build the nav links
-  entity: 'location',
-  entity_id: '3',
-  //The language toggle is a checkbox
-  //currently the way it is,
-  //TRUE => 'es-' and FALSE => 'en
+  queryParams: ['locale'],
   init: function(){
     //refactor this later please...QL
     this._super.apply(this, arguments);
-    this.set('i18n.locale', getWithDefault(Ember.$.cookie(), 'locale', 'es'));
+    var localeParam = this.get('locale');
 
-    numeral.language(this.get('i18n.locale'));
-    this.set('i18n.defaultLocale', 'es');
-    this.set('i18n.otherLocale', 'en');
+    // check if param is valid
+    //  if not default to defauleLocale
+    if(localeParam === this.get('i18n.otherLocale')){
+      this.set('locale', this.get('i18n.otherLocale'));
+    } else if(localeParam === 'no-copy'){
+      this.set('i18n.locale', 'no-copy');
+    } else {
+      this.set('locale', this.get('i18n.defaultLocale'));
+    }
 
-    this.set('i18n.localeOpposite', { en: 'es', es: 'en' } );
+    this.set('i18n.locale', this.get('locale'));
+    this.set('i18n.display', this.get('i18n.locale').split('-')[0]);
     this.set('isDefaultLocale', this.get('i18n.locale') === this.get('i18n.defaultLocale'));
   },
   defaultLanguage: computed('i18n.default', function() {
@@ -32,14 +34,22 @@ export default Ember.Controller.extend({
   setLanguageToggle: observer('isDefaultLocale',function() {
     if(this.get('i18n.locale') === this.get('i18n.defaultLocale')) {
       this.set('i18n.locale', this.get('i18n.otherLocale'));
+      this.set('i18n.display', this.get('i18n.locale').split('-')[0]);
       numeral.language(this.get('i18n.otherLocale'));
     } else {
       this.set('i18n.locale', this.get('i18n.defaultLocale'));
+      this.set('i18n.display', this.get('i18n.locale').split('-')[0]);
       numeral.language(this.get('i18n.defaultLocale'));
     }
   }),
-  setCookie: observer('i18n.locale', function() {
-    Ember.$.cookie('locale',this.get('i18n.locale'));
+  updateLocale: observer('i18n.locale', function() {
+    this.set('locale', this.get('i18n.locale'));
+  }),
+  updateNoCopy: observer('locale', function() {
+    if(this.get('locale') === 'no-copy'){
+      this.set('i18n.locale', 'no-copy');
+      this.set('locale', this.get('i18n.locale'));
+    }
   }),
   productsMetadata: computed('model.products', function() {
     return this.get('model.products');

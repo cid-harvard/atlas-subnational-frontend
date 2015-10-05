@@ -16,7 +16,6 @@
 npm-debug.log
 testem.log
 
-.env.*
 .env
 
 

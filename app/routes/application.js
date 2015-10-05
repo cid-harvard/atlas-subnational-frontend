@@ -6,8 +6,10 @@ const {RSVP} = Ember;
 const {apiURL} = ENV;
 
 export default Ember.Route.extend({
+  queryParams: {
+    locale: { refreshModel: false }
+  },
   model: function() {
-
     var products4digit = Ember.$.getJSON(apiURL+'/metadata/products?level=4digit');
     var locationsMetadata = Ember.$.getJSON(apiURL+'/metadata/locations/');
     var productsHierarchy = Ember.$.getJSON(apiURL+'/metadata/products/hierarchy?from_level=4digit&to_level=section');

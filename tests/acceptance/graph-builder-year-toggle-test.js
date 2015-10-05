@@ -7,7 +7,6 @@ var application;
 module('Acceptance | graph builder year toggle', {
   beforeEach: function() {
     application = startApp();
-    application.$.cookie('locale', 'en');
   },
 
   afterEach: function() {
