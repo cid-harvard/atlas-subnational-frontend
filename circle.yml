@@ -1,0 +1,6 @@
+dependencies:
+  post:
+    - gem install sass
+    - npm install -g bower@1.4.1
+    - npm install -g ember@0.2.7
+    - bower install
