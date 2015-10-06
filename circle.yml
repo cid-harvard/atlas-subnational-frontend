@@ -1,9 +1,12 @@
+general:
+  artifacts:
+    - dist/
 dependencies:
   post:
     - gem install sass
     - npm install -g bower@1.4.1
     - npm install -g ember-cli@0.2.7
     - bower install
-general:
-  artifacts:
-    - dist/
+test:
+  post:
+    - ember build
