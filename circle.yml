@@ -2,14 +2,10 @@ general:
   artifacts:
     - dist/
 dependencies:
-  cache_directories:
-    - ~/nvm/`nvm current`/bin/bower
-    - ~/nvm/`nvm current`/lib/node_modules/bower/
-    - ~/nvm/`nvm current`/bin/ember
-    - ~/nvm/`nvm current`/lib/node_modules/ember-cli/
   post:
     - gem install sass
-    - if ! which ember bower; then npm install -g bower@1.4.1 ember-cli@0.2.7; else echo "Found existing ember / bower in CircleCI cache"; fi
+    - if ! which ember; then npm install -g ember-cli@0.2.7; else echo "Found existing ember-cli in CircleCI cache"; fi
+    - if ! which bower; then npm install -g bower@1.4.1; else echo "Found existing bower in CircleCI cache"; fi
     - bower install
 test:
   post:
