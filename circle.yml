@@ -10,3 +10,4 @@ dependencies:
 test:
   post:
     - ember build
+    - aws s3 sync ./dist/* s3://ci-deploys.cid-labs.com/
