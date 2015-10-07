@@ -1,0 +1,13 @@
+general:
+  artifacts:
+    - dist/
+dependencies:
+  post:
+    - gem install sass
+    - if ! which ember; then npm install -g ember-cli@0.2.7; else echo "Found existing ember-cli in CircleCI cache"; fi
+    - if ! which bower; then npm install -g bower@1.4.1; else echo "Found existing bower in CircleCI cache"; fi
+    - bower install
+test:
+  post:
+    - ember build
+    - aws s3 sync ./dist/ s3://ci-deploys.cid-labs.com/
