@@ -58,6 +58,9 @@ export default Ember.Route.extend({
 
       var occupationMap = _.indexBy(occupationsMetadata, 'id');
 
+      _.forEach(locationsMetadata, function(d){
+        d.group = d.parent_id;
+      })
       _.forEach(productsMetadata, function(d) {
         let sectionId = productsHierarchy[d.id];
         let section = productSectionMap[sectionId];
