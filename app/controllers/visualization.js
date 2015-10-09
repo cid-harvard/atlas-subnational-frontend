@@ -30,20 +30,11 @@ export default Ember.Controller.extend({
     }
     return false;
   }),
-  isPrescriptive: computed('entity.level', function() {
-    if(this.get('entity.level') === 'municipality') { return false; }
-    if(this.get('entity.level') === 'class') { return false; }
-    return true;
-  }),
   isOneYear: computed('startDate', 'endDate', function() {
     return this.get('startDate') == this.get('endDate');
   }),
   isGeo: computed('visualization', function() {
     if(this.get('visualization') === 'geo') { return true; }
-    return false;
-  }),
-  isCountry: computed('model', function() {
-    if(this.get('entity.level') === 'country') { return true; }
     return false;
   }),
   drawerIsUnnecessary: computed('visualization','source', function() { //TODO: Depricate this out
@@ -93,7 +84,15 @@ export default Ember.Controller.extend({
       return `${this.get('model.entity.name')} (${this.get('entity.code')})`;
     }
   }),
-  thisLevel: computed('entity', 'i18n.locale', function() {
+  i18nString: computed('entityType', 'entity', 'variable', 'i18n.locale', function() {
+    let i18nString = `${this.get('entityType')}.${this.get('source')}`;
+    let visualization = this.get('visualization');
+    if(visualization === 'scatter' || visualization === 'similarity') {
+      return `${i18nString}.${visualization}`;
+    }
+    return `${i18nString}.${this.get('variable')}`;
+  }),
+  thisLevel: computed('entity.level', 'i18n.locale', function() {
     let level = this.get('i18n').t(`location.model.${this.get('entity.level')}`);
     let thisLevel = `this ${level}`;
 
@@ -105,13 +104,18 @@ export default Ember.Controller.extend({
 
     return thisLevel;
   }),
-  pageTitle: computed('entityType', 'entity', 'variable', 'i18n.locale', 'thisLevel', function() {
-    let i18nString = `graph_builder.page_title.${this.get('entityType')}.${this.get('source')}`;
-    let visualization = this.get('visualization');
-    if(visualization === 'scatter' || visualization === 'similarity') {
-      return this.get('i18n').t(`${i18nString}.${visualization}`, { thisLevel: this.get('thisLevel') });
-    }
-    return this.get('i18n').t(`${i18nString}.${this.get('variable')}`, { thisLevel: this.get('thisLevel') });
+  pageTitle: computed('i18nString', 'thisLevel', function() {
+    let i18nString = `graph_builder.page_title.${this.get('i18nString')}`;
+    return this.get('i18n').t(i18nString, { thisLevel: this.get('thisLevel') });
+  }),
+  visualizationExplanation: computed('i18nString', function() {
+    let i18nString = `graph_builder.explanation.${this.get('i18nString')}`;
+    return this.get('i18n').t(i18nString);
+  }),
+  builderModHeader: computed('model.name','i18nString', function() {
+    //locale file under graph_builder.builder_mod_header.<entity>.<source>.<variable>
+    let i18nString = `graph_builder.builder_mod_header.${this.get('i18nString')}`;
+    return this.get('i18n').t(i18nString, { name: this.get('model.entity.name') });
   }),
   recircCopy: computed('model','i18n.locale', 'entityType', function() {
     //locale file under graph_builder.recirc.header
@@ -119,15 +123,6 @@ export default Ember.Controller.extend({
   }),
   searchPlaceholderCopy: computed('source','i18n.locale', function() {
     return this.get('i18n').t(`graph_builder.search.placeholder.${this.get('source')}`);
-  }),
-  builderModHeader: computed('model','variable','i18n.locale', function() {
-    //locale file under graph_builder.builder_mod_header.<entity>.<source>.<variable>
-    let i18nString = `graph_builder.builder_mod_header.${this.get('model.entity_type')}.${this.get('source')}`;
-    let visualization = this.get('visualization');
-    if( visualization === 'scatter' || visualization === 'similarity' ) {
-      return this.get('i18n').t(`${i18nString}.${visualization}`, { name: this.get('model.entity.name') });
-    }
-    return this.get('i18n').t(`${i18nString}.${this.get('variable')}`, { name: this.get('model.entity.name') });
   }),
   headerValue: computed('model', 'visualization','filteredData', 'variable', 'i18n.locale', function() {
     let allowedVariables = ['export_value', 'import_value', 'wages', 'employment'];
@@ -291,13 +286,7 @@ export default Ember.Controller.extend({
   }),
   singularEntity: computed('model.entity_type', 'i18n.locale', function() {
     let entityType = this.get('model.entity_type');
-    if(entityType === 'product') {
-      return this.get('i18n').t('general.product');
-    } else if(entityType === 'location') {
-      return this.get('i18n').t('general.location');
-    } else if(entityType === 'industry') {
-      return this.get('i18n').t('general.industry');
-    }
+    return this.get('i18n').t(`general.${entityType}`);
   }),
   immutableData: computed('model.data.[]','endDate', 'startDate' , function() {
     return this.filterToSelectedYears(this.get('model.data'), this.get('startDate'), this.get('endDate'));
@@ -319,9 +308,6 @@ export default Ember.Controller.extend({
     } else if( source === 'industries') {
       return 'rca';
     }
-  }),
-  builderNavType: computed('model.entity_type', function() {
-    return `partials/builder-questions-${this.get('model.entity_type')}`;
   }),
   visualizationComponent: computed('visualization', function(){
     let visualization = this.get('visualization');
@@ -394,11 +380,6 @@ export default Ember.Controller.extend({
       this.set('drawerSettingsIsOpen', false); // Turn off other drawers
       this.set('drawerQuestionsIsOpen', false); // Turn off other drawers
       this.toggleProperty('drawerChangeGraphIsOpen'); // toggle on 'Change Graph'
-    },
-    toggleDrawerQuestions: function() {
-      this.set('drawerSettingsIsOpen', false); // Turn off other drawers
-      this.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
-      this.toggleProperty('drawerQuestionsIsOpen'); // toggle on 'Change Graph'
     },
     zoomOut: function() {
       if(this.get('zoom') === 1) { this.decrementProperty('zoom'); }
