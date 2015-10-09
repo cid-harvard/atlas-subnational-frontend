@@ -27,6 +27,7 @@ export function initialize(instance) {
 
   i18n.set('defaultLocale', defaultLocale);
   i18n.set('otherLocale', otherLocale);
+  i18n.set('locales', [otherLocale, defaultLocale]);
 
   i18n.addObserver('locale', function() {
     if(this.get('locale') != 'no-copy') {

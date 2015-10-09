@@ -12,6 +12,12 @@ export default Ember.Route.extend({
   queryParams: {
     locale: { refreshModel: false }
   },
+  beforeModel: function(transition) {
+    let locale = get(transition, 'queryParams.locale');
+    if(! _.contains(this.get('i18n.locales'), locale)) {
+      set(transition, 'queryParams.locale', this.get('i18n.defaultLocale'));
+    }
+  },
   model: function() {
     var products4digit = Ember.$.getJSON(apiURL+'/metadata/products?level=4digit');
     var locationsMetadata = Ember.$.getJSON(apiURL+'/metadata/locations/');
