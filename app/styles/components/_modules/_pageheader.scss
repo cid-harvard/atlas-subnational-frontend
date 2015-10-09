@@ -9,22 +9,11 @@
 }
 
 .pageheader__wrap {
-  padding: $baseSpace*2.5 $baseSpace*3 0;
+  padding: $baseSpace $baseSpace*3;
   position: relative;
 }
 
-@media (min-width: 1200px) {
-  .pageheader__wrap {
-    padding-bottom: 1rem;
-  }
-}
-
-
 // Branding
-
-.branding {
-  margin-bottom: $baseSpace * 2;
-}
 
 .branding__logo {
   width: 14rem;
@@ -88,6 +77,7 @@
 .togglemod--languages {
   display: inline-block;
   vertical-align: -6px;
+  padding: $baseSpace;
 }
 
 .toggle--languages {
