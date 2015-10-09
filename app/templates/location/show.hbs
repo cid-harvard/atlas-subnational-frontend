@@ -1,14 +1,9 @@
-<main class="stream builder">
-  <article class="stream__article stream__article--indent--left">
-    {{ render "view-switch" controller='application' }}
-    <header class="stream__header stream__header--builder">
-      <h2 class="stream__head" data-location-name>{{model.name}}</h2>
-    </header>
-    {{#if isCountry }}
-      {{partial 'location/country-location'}}
-    {{else}}
-      {{partial 'location/regional-location'}}
-    {{/if}}
-  </article>
-</main>
+<header class="stream__header stream__header--builder">
+  <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+</header>
+{{#if isCountry }}
+  {{partial 'location/country-location'}}
+{{else}}
+  {{partial 'location/regional-location'}}
+{{/if}}
 

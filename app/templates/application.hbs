@@ -1,2 +1,15 @@
 {{partial 'partials/pageheader'}}
-{{outlet}}
+
+{{outlet 'homepage'}}
+
+{{outlet 'search'}}
+
+{{#if showStreamer }}
+  <main class="stream builder">
+    <article class="stream__article stream__article--indent--left">
+      {{ render 'side-nav' controller='application'}}
+      {{outlet}}
+    </article>
+  </main>
+{{/if}}
+
