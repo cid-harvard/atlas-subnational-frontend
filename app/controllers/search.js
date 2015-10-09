@@ -12,8 +12,8 @@ export default Ember.Controller.extend({
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
     return this.get('model').filter((d) => {
-      let longName = get(d,`name_${this.get('i18n').locale}`);
-      let shortName = get(d,`name_short_${this.get('i18n').locale}`);
+      let longName = get(d, 'name_long');
+      let shortName = get(d,'name_short');
       let code = get(d, 'code');
 
       //Custom code to remove Bogota muni,  this is bad and should be removed

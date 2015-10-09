@@ -6,6 +6,8 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
+    defaultLocale: process.env.DEFAULT_LOCALE,
+    otherLocale: process.env.OTHER_LOCALE,
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -13,8 +15,8 @@ module.exports = function(environment) {
       }
     },
     i18n: {
-      defaultLocale: 'es',
-      otherLocale: 'en'
+      defaultLocale: process.env.DEFAULT_LOCALE,
+      otherLocale: process.env.OTHER_LOCALE
     },
     APP: {
       env: environment
@@ -24,27 +26,21 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    ENV.apiURL = "http://atlas-colombia-beta.cid-labs.com/api";
+    ENV.apiURL = process.env.API_URL,
     ENV.contentSecurityPolicy = {
-      'connect-src': "'self' 'localhost:4200' *",
+      'connect-src': "'self' *",
       'style-src': "'self' 'unsafe-inline' *",
       'img-src': "'self' http://placehold.it/40x40 *"
     }
   }
-
-  if (environment === 'edge') {
-    ENV.apiURL = "http://ec2-54-174-138-240.compute-1.amazonaws.com/api";
-    // need to fix for production mode
-    ENV.contentSecurityPolicy = {
-      'connect-src': "'self' 'localhost:4200' *",
-      'style-src': "'self' 'unsafe-inline' *",
-      'img-src': "'self' http://placehold.it/40x40 *",
-      'script-src': "'self' 'localhost:4200' 'unsafe-eval'",
-    }
-  }
-
   if (environment === 'test') {
     ENV.apiURL = "http://atlas-colombia-beta.cid-labs.com/api";
+    ENV.defaultLocale = 'en-col';
+    ENV.otherLocale = 'es-col';
+    ENV.i18n = {
+      defaultLocale: 'en-col',
+      otherLocale: 'es-col'
+    }
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'none';
@@ -53,65 +49,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
     ENV.APP.rootElement = '#ember-testing';
   }
-
   if (environment === 'production') {
-    ENV.apiURL = "api/";
-    ENV.baseURL = '/';
-    ENV.locationType = 'hash',
-    ENV.contentSecurityPolicy = {
-      'style-src': "'self' 'unsafe-inline' *",
-      'connect-src': "'self' http://54.6.95.239 *",
-      'img-src': "'self' http://placehold.it/40x40 *",
-      'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
-    };
-    ENV.googleAnalytics = {
-      webPropertyId: process.env.GA
-    };
-  }
-
-  if (environment === 'colombia_june_2015') {
-    ENV.apiURL = "api/";
-    ENV.baseURL = '/';
-    ENV.locationType = 'hash',
-    ENV.contentSecurityPolicy = {
-      'style-src': "'self' 'unsafe-inline' *",
-      'connect-src': "'self' http://54.6.95.239 *",
-      'img-src': "'self' http://placehold.it/40x40 *",
-      'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
-    };
-    ENV.googleAnalytics = {
-      webPropertyId: process.env.GA
-    };
-  }
-
-  if (environment === 'atlas_colombia_master') {
-    ENV.apiURL = "api/";
-    ENV.baseURL = '/';
-    ENV.locationType = 'hash',
-    ENV.contentSecurityPolicy = {
-      'style-src': "'self' 'unsafe-inline' *",
-      'connect-src': "'self' http://54.6.95.239 *",
-      'img-src': "'self' http://placehold.it/40x40 *",
-      'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
-    };
-  }
-
-  if (environment === 'colombia_june_2015') {
-    ENV.apiURL = "api/";
-    ENV.baseURL = '/';
-    ENV.locationType = 'hash',
-    ENV.contentSecurityPolicy = {
-      'style-src': "'self' 'unsafe-inline' *",
-      'connect-src': "'self' http://54.6.95.239 *",
-      'img-src': "'self' http://placehold.it/40x40 *",
-      'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
-    };
-    ENV.googleAnalytics = {
-      webPropertyId: process.env.GA
-    };
-  }
-
-  if (environment === 'atlas_colombia_master') {
     ENV.apiURL = "api/";
     ENV.baseURL = '/';
     ENV.locationType = 'hash',

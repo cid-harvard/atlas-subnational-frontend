@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
   attributeBindings: ['width','height'],
-  classNames: ['d3plus_tree-map'],
+  classNames: ['buildermod__viz--white','buildermod__viz','d3plus_tree-map'],
   varIndependent: ['group', 'code'],
   paddingWidth: 5,
   id: computed('elementId', function() {
@@ -54,7 +54,7 @@ export default Ember.Component.extend({
       })
       .zoom(false)
       .text({ value: (d) => {
-        return  Ember.get(d, `name_short_${this.get('i18n').locale}`) || d.code; }
+        return  Ember.get(d, `name_short_${this.get('i18n').display}`) || d.code; }
       })
       .timeline(false)
       .height(this.get('height') + (this.paddingWidth * 2))

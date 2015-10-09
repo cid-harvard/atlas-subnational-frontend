@@ -8,6 +8,7 @@ const {computed, observer} = Ember;
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
+  classNames: ['buildermod__viz--white','buildermod__viz'],
   attributeBindings: ['width','height'],
   varIndependent: ['group', 'code'],
   id: computed('elementId', function() {
@@ -69,7 +70,7 @@ export default Ember.Component.extend({
       nodes: this.get('nodes'),
       links: this.get('edges'),
       data: this.get('networkData'),
-      var_text: `name_short_${this.get('i18n').locale}`, //TODO: update with langauge
+      var_text: `name_short_${this.get('i18n').display}`, //TODO: update with langauge
       var_x: 'x',
       var_y: 'y',
       radius: 3.5,
@@ -111,7 +112,7 @@ export default Ember.Component.extend({
             let rcaLabel = this.get('i18n').t('graph_builder.table.rca');
             let rcaString = `${rcaLabel}: ${numeral(rcaValue).format('0.00a')}`;
 
-            return d[`name_short_${this.get('i18n').locale}`] + '</br>' + rcaString;
+            return d[`name_short_${this.get('i18n').display}`] + '</br>' + rcaString;
           },
           exit: function() {}
         }]
