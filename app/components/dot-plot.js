@@ -59,6 +59,8 @@ export default Ember.Component.extend({
             y: function(d, i, vars) {
               return vars.y_scale[0]["func"](d[vars.var_y]);
             },
+            width: 150,
+            height: "",
             translate: [0, -10],
             text: (d)  => {
               let format = function(d) { return numeral(d).format('0.00a'); };
