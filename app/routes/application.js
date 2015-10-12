@@ -4,6 +4,7 @@ import ProductSectionColor from '../fixtures/product_section_colors';
 import IndustrySectionColor from '../fixtures/industry_section_colors';
 import numeral from 'numeral';
 
+import OccupationSectionColor from '../fixtures/occupation_section_colors';
 const {RSVP, get:get, set:set} = Ember;
 const {apiURL} = ENV;
 
