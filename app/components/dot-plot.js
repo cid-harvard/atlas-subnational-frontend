@@ -59,9 +59,6 @@ export default Ember.Component.extend({
             y: function(d, i, vars) {
               return vars.y_scale[0]["func"](d[vars.var_y]);
             },
-            width: 150,
-            height: "auto",
-            translate: [0, -10],
             text: (d)  => {
               let format = function(d) { return numeral(d).format('0.00a'); };
               let type = this.get('type');
@@ -74,7 +71,9 @@ export default Ember.Component.extend({
               let name = Ember.get(d, 'name_'+display);
               return name + ' (' + format(+d[varX]) + ')';
             },
-            exit: function() {}
+            translate: [0, -10],
+            width: 150,
+            height: 'auto'
           }]
         }],
         selection: [currentSelection]

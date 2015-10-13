@@ -121,7 +121,7 @@ export default Ember.Component.extend({
             },
             translate: [0, 0],
             width: 200,
-            height: "auto",
+            height: 'auto',
           }]
         }]
       });
