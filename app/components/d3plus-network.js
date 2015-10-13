@@ -107,6 +107,15 @@ export default Ember.Component.extend({
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
           class: function() { return 'tooltip'; },
+          x: function(d, i, vars) {
+            return  vars.x_scale[0]["func"](d[vars.var_x]);
+          },
+          y: function(d, i, vars) {
+            return vars.y_scale[0]["func"](d[vars.var_y]);
+          },
+          width: 150,
+          translate: [0, -10],
+          class: function() { return 'tooltip'; },
           text: (d) => {
             let rcaValue = d[this.get('varRCA')];
             let rcaLabel = this.get('i18n').t('graph_builder.table.rca');
