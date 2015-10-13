@@ -114,6 +114,7 @@ export default Ember.Component.extend({
             return vars.y_scale[0]["func"](d[vars.var_y]);
           },
           width: 150,
+          height: "auto",
           translate: [0, -10],
           class: function() { return 'tooltip'; },
           text: (d) => {
