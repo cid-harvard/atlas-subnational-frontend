@@ -4,24 +4,28 @@
 *
 **/
 
+.items__mark__circle {
+  stroke: $colorGray;
+  fill: #f7f7f7;
+  stroke-width: 1px;
+}
+
 .node--is--highlighted {
   stroke: $colorBlack;
   stroke-width: 1px;
 }
 
-.items__mark__circle.highlighted.node--is--highlighted,
-.items__mark__circle.highlighted__adjacent.node--is--highlighted {
-  stroke: $colorRed;
-}
-
 .connect__line {
-  stroke: $colorGrayLight;
-  stroke-opacity: 1;
+  stroke: $colorGray;
+  opacity: .5;
+  stroke-opacity: .5;
 }
 
 .connect__line.highlighted {
-  stroke: $colorRed500;
-  stroke-width: 2px;
+  stroke: $colorRed;
+  stroke-width: 4px;
+  opacity: 1;
+  stroke-opacity: 1;
 }
 
 .items__mark__circle {
@@ -30,6 +34,11 @@
 
 .items__mark__circle.highlighted,
 .items__mark__circle.highlighted__adjacent {
-  stroke-width: 1px;
-  stroke: $colorRed500;
+  stroke-width: 3px;
+  stroke: $colorBlack;
+}
+
+.items__mark__circle.highlighted.node--is--highlighted,
+.items__mark__circle.highlighted__adjacent.node--is--highlighted {
+  stroke: $colorBlack;
 }
