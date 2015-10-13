@@ -68,4 +68,4 @@ export default {
  1394: {'color': '#FDCDAC',
   'name_en': 'Military Specific Occupations',
   'name_es': 'Ocupaciones Específicas Militares'}
-}
+};

@@ -47,7 +47,7 @@ export default Ember.Component.extend({
           y: function(d, i, vars) {
             return vars.y_scale[0]["func"](d[vars.var_y]);
           },
-          translate: function(d, i, vars) { return [0, -vars.radius]}
+          translate: function(d, i, vars) { return [0, -vars.radius]; }
         }]
       }],
       selection: this.get('selection'),

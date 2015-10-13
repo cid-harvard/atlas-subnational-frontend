@@ -106,7 +106,6 @@ export default Ember.Component.extend({
         }, {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
-          class: function() { return 'tooltip'; },
           x: function(d, i, vars) {
             return  vars.x_scale[0]["func"](d[vars.var_x]);
           },

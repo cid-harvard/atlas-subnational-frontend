@@ -46,13 +46,13 @@ export default Ember.Component.extend({
         var_sort: this.get('varDependent'),
         items: [{
           marks: [{
-            type: "divtext",
+            type: 'divtext',
             filter: function(d) { return d.depth == 1 && d.dx > 30 && d.dy > 30; },
             class: function() { return 'tree-map--title'; },
             translate: [5, 0]
           }, {
-            type: "rect",
-            filter: function(d, i) { return d.depth == 2; },
+            type: 'rect',
+            filter: function(d) { return d.depth == 2; },
             x: 0,
             y: 0,
             width: function(d) { return d.dx; },

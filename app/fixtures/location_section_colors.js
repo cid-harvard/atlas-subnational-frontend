@@ -40,4 +40,4 @@ export default {
  31: {'color': '#B3E2CD', 'name_en': 'Guaviare', 'name_es': 'Guaviare'},
  32: {'color': '#B3E2CD', 'name_en': 'Vaupés', 'name_es': 'Vaupés'},
  33: {'color': '#B3E2CD', 'name_en': 'Vichada', 'name_es': 'Vichada'}
-}
+};

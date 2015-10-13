@@ -64,7 +64,8 @@ export default Ember.Route.extend({
 
         d.group = d.id;
         d.color = color;
-      })
+      });
+
       _.forEach(productsMetadata, function(d) {
         let sectionId = productsHierarchy[d.id];
         let section = productSectionMap[sectionId];
