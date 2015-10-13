@@ -2,9 +2,9 @@ import Ember from 'ember';
 import ENV from '../config/environment';
 import ProductSectionColor from '../fixtures/product_section_colors';
 import IndustrySectionColor from '../fixtures/industry_section_colors';
+
 import numeral from 'numeral';
 
-import OccupationSectionColor from '../fixtures/occupation_section_colors';
 const {RSVP, get:get, set:set} = Ember;
 const {apiURL} = ENV;
 
@@ -59,8 +59,11 @@ export default Ember.Route.extend({
 
       var occupationMap = _.indexBy(occupationsMetadata, 'id');
 
-      _.forEach(locationsMetadata, function(d){
-        d.group = d.parent_id;
+      _.forEach(locationsMetadata, function(d) {
+        let color = '#d7cbf2';
+
+        d.group = d.id;
+        d.color = color;
       })
       _.forEach(productsMetadata, function(d) {
         let sectionId = productsHierarchy[d.id];
@@ -75,9 +78,12 @@ export default Ember.Route.extend({
 
       _.forEach(occupationsMetadata, function(d) {
         let parent = d.parent_id ? occupationMap[d.parent_id] : d;
+        let color = '#ccafaf';
+
         d.group = get(d,'code').split('-')[0];
         d.parent_name_en = get(parent, 'name_en');
         d.parent_name_es = get(parent, 'name_es');
+        d.color = color;
       });
 
       _.forEach(industriesMetadata, function(d) {
