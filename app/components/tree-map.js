@@ -27,8 +27,8 @@ export default Ember.Component.extend({
   }),
   treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'i18n.locale', function() {
     let varDependent = this.get('varDependent');
-    let varTextItem = `name_short_${this.get('i18n').locale}` || 'code';
-    let varText = `parent_name_${this.get('i18n').locale}` || varTextItem;
+    let varTextItem = `name_short_${this.get('i18n').display}` || 'code';
+    let varText = `parent_name_${this.get('i18n').display}` || varTextItem;
     return vistk.viz()
       .params({
         type: 'treemap',
