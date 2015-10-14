@@ -92,7 +92,7 @@ export default Ember.Component.extend({
                 'value': d[varDependent]
               }, {
                 'key': 'share',
-                'value': 100 * d[varDependent] / vars.new_data[0][varDependent]
+                'value': 100 * d[varDependent] / vars.new_data[0][varDependent] || 0
               }];
 
               function format(key, value) {
