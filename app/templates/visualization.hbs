@@ -12,16 +12,16 @@
             {{t 'graph_builder.settings.label'}}
           </button>
         {{/unless}}
-        {{#link-to 'graph_builder.index' entity_and_id}}
-          <button class="btn btn--standalone btn--buildermod buildermod__tool" data-change-question='' >
+          <button class="btn btn--standalone btn--buildermod buildermod__tool" data-change-question='' {{action 'toggleDrawerChangeGraph'}}>
             {{fa-icon "plus" classNames="tool__btn__icon"}}
             {{t 'graph_builder.change_graph.label'}}
           </button>
+        {{#link-to 'graph_builder.index' entity_and_id}}
+          <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--questions"  data-change-graph=''>
+            {{fa-icon "plus" classNames="tool__btn__icon"}}
+            {{t 'graph_builder.questions.label'}}
+          </button>
         {{/link-to}}
-        <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--questions"  data-change-graph='' {{action 'toggleDrawerChangeGraph'}}>
-          {{fa-icon "plus" classNames="tool__btn__icon"}}
-          {{t 'graph_builder.questions.label'}}
-        </button>
       </div>
     </header>
     <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--fixedheight"}}>
