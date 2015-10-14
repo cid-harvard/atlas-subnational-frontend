@@ -9,6 +9,9 @@ export default Ember.Mixin.create({
 
   code: attr('string'),
 
+  description_en: attr('string'),
+  description_es: attr('string'),
+
   name_en: attr('string'),
   name_es: attr('string'),
 
