@@ -12,6 +12,13 @@ export default Ember.Controller.extend({
       return `${this.get('model.name')} (${this.get('model.code')})`;
     }
   }),
+  hasProfile: computed('entity', 'model.level', function() {
+    let entity = this.get('entity');
+    let level = this.get('model.level');
+    if(entity === 'product') { return false; }
+    if(entity === 'industry' && level === 'class') { return false; }
+    return true;
+  }),
   isPrescriptive: computed('model.level', function() {
     if(this.get('model.level') === 'municipality') { return false; }
     if(this.get('model.level') === 'class') { return false; }
@@ -38,6 +45,9 @@ export default Ember.Controller.extend({
     }
 
     return thisLevel;
+  }),
+  profileLink: computed('entity', function() {
+    return `${this.get('entity')}.show`;
   }),
   isGraphBuilderRoute: computed.alias('controllers.application.isGraphBuilderRoute')
 });

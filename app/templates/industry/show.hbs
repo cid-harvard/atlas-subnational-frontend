@@ -1,5 +1,26 @@
 <header class="stream__header stream__header--builder">
   <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+  {{#link-to
+    'industry.show' model.id
+    tagName='li'
+    data-search-profile=''
+    activeClass="breadcrumb__active"
+    class="breadcrumb"
+    current-when='industry.show'
+  }}
+    {{ t 'pageheader.profile_link' }}
+  {{/link-to}}
+
+  {{#link-to
+    'graph_builder.index' graphbuilderLink
+    tagName='li'
+    data-search-graph-builder=''
+    activeClass="breadcrumb__active"
+    class="breadcrumb"
+    current-when='graph_builder'
+  }}
+    {{ t 'pageheader.graph_builder_link' }}
+  {{/link-to}}
 </header>
 <section class="stream__section">
   <header class="section__header">

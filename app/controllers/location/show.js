@@ -41,7 +41,9 @@ export default Ember.Controller.extend({
   lastIndustryData: computed.filter('industriesData', function(datum) {
     return parseInt(get(datum, 'year')) === 2013;
   }),
-
+  graphbuilderLink: computed('model.id', function() {
+    return `location-${this.get('model.id')}`;
+  }),
   validTimeseries: computed.alias('model.timeseries'),
   activeStep: 1,
   stepStories: computed(function() {

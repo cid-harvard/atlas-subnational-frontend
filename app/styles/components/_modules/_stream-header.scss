@@ -32,8 +32,18 @@
 }
 
 .breadcrumb {
+  color: $colorGray;
   display: inline-block;
   margin-right: $baseSpace / 2;
+
+  &:active, &:focus, &:hover {
+    color: $colorGrayDark;
+  }
+
+  &__active {
+    color: $colorBlack;
+  }
+
   &:after {
     content: '/';
     margin-left: $baseSpace / 2;
@@ -42,7 +52,7 @@
   &:last-of-type {
     margin-right: 0;
     &:after {
-      content: '';
+      content: none;
     }
   }
 }
