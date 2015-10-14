@@ -38,6 +38,12 @@
   stroke: $colorBlack;
 }
 
+.items__mark__circle.selected,
+.items__mark__circle.selected__adjacent {
+  stroke-width: 3px;
+  stroke: $colorBlack;
+}
+
 .items__mark__circle.highlighted.node--is--highlighted,
 .items__mark__circle.highlighted__adjacent.node--is--highlighted {
   stroke: $colorBlack;
