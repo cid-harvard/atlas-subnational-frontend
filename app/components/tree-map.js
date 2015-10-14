@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
   attributeBindings: ['width','height'],
-  classNames: ['tree-map'],
+  classNames: ['buildermod__viz','tree-map'],
   varIndependent: ['code', 'group'],
   paddingWidth: 5,
   id: computed('elementId', function() {
@@ -41,13 +41,13 @@ export default Ember.Component.extend({
       .params({
         type: 'treemap',
         container: this.get('id'),
-        height: this.get('height') + (this.paddingWidth * 2),
-        width: this.get('width') + (this.paddingWidth * 4),
+        height: this.get('height') + (this.get('paddingWidth') * 2),
+        width: this.get('width') + (this.get('paddingWidth') * 4),
         data: this.get('immutableData'),
         var_id: this.get('varId'),
         var_size: this.get('varDependent'),
         var_group: this.get('varGroup'),
-        padding: 4,
+        padding: this.get('paddingWidth'),
         var_color: 'color',
         var_text: varText,
         var_text_item: varTextItem,
@@ -135,14 +135,12 @@ export default Ember.Component.extend({
       });
   }),
   didInsertElement: function() {
-    Ember.run.scheduleOnce('afterRender', this , function() {
-      this.set('parent', this.get('parentView'));
-      if(this.get('parent.isVisible')) {
-        this.set('width', this.$().parent().width());
-        this.set('height', this.$().parent().height() || 500 );
-        d3.select(this.get('id')).call(this.get('treemap'));
-      }
-    });
+    this.set('parent', this.get('parentView'));
+    if(this.get('parent.isVisible')) {
+      this.set('width', this.$().parent().width());
+      this.set('height', this.$().parent().height() || 500 );
+      d3.select(this.get('id')).call(this.get('treemap'));
+    }
   },
   profileTabUpdate: observer('parent.isVisible', function() {
     if(this.get('isInTab')) {
