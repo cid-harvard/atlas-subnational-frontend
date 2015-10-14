@@ -25,10 +25,18 @@ export default Ember.Component.extend({
   noFiltered: computed('data.[]', 'immutableData.[]', function() {
     return this.get('data.length') === this.get('immutableData.length');
   }),
-  treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'i18n.locale', function() {
+  varText: computed('data.[]', 'i18n.locale', function() {
+    let datum = _.first(this.get('data'));
+    let varText = `parent_name_${this.get('i18n').display}`;
+    if(_.get(datum, varText)) {
+      return varText;
+    }
+    return `name_short_${this.get('i18n').display}`;
+  }),
+  treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'i18n.locale', 'varText', function() {
     let varDependent = this.get('varDependent');
-    let varTextItem = `name_short_${this.get('i18n').display}` || 'code';
-    let varText = `parent_name_${this.get('i18n').display}` || varTextItem;
+    let varTextItem = `name_short_${this.get('i18n').display}`;
+    let varText = this.get('varText');
     return vistk.viz()
       .params({
         type: 'treemap',
