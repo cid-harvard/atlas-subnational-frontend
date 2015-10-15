@@ -21,26 +21,29 @@
   stroke-opacity: .5;
 }
 
-.connect__line.highlighted {
-  stroke: $colorRed;
-  stroke-width: 4px;
-  opacity: 1;
+.connect__line.selected {
+  stroke-width: 3px;
   stroke-opacity: 1;
+  stroke: red;
+}
+
+.connect__line.highlighted__adjacent {
+  stroke-width: 2px;
+  stroke-opacity: 1;
+  stroke: black;
 }
 
 .items__mark__circle {
   fill: $colorBrown500;
 }
 
-.items__mark__circle.highlighted,
-.items__mark__circle.highlighted__adjacent {
+.items__mark__circle.highlighted {
   stroke-width: 3px;
   stroke: $colorBlack;
 }
 
-.items__mark__circle.selected,
-.items__mark__circle.selected__adjacent {
-  stroke-width: 3px;
+.items__mark__circle.selected {
+  stroke-width: 4px;
   stroke: $colorBlack;
 }
 
