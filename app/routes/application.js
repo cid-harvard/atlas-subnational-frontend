@@ -136,9 +136,9 @@ export default Ember.Route.extend({
     },
     query: function(query) {
       if(query) {
-        this.transitionTo('search', { queryParams: { query: query }});
+        this.transitionTo('search', { queryParams: { query: query, filter: null }});
       } else {
-        this.transitionTo('search', { queryParams: { query: null }});
+        this.transitionTo('search', { queryParams: { query: null, filter: null }});
       }
     }
   }
