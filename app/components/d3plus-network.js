@@ -73,7 +73,7 @@ export default Ember.Component.extend({
       var_text: `name_short_${this.get('i18n').display}`, //TODO: update with langauge
       var_x: 'x',
       var_y: 'y',
-      radius: 3.5,
+      radius: 5,
       var_color: 'color',
       color: (d) => { return d; },
       y_invert: true,
