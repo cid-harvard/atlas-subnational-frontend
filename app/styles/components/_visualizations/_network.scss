@@ -37,12 +37,12 @@
   fill: $colorBrown500;
 }
 
-.items__mark__circle.highlighted {
+.items__mark__circle.highlighted, .items__mark__circle.highlighted__adjacent  {
   stroke-width: 3px;
   stroke: $colorBlack;
 }
 
-.items__mark__circle.selected {
+.items__mark__circle.selected, .items__mark__circle.selected__adjacent {
   stroke-width: 4px;
   stroke: $colorBlack;
 }
