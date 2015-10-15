@@ -38,10 +38,6 @@
   }
 }
 
-.buildermod__tool--is--unnecessary {
-  display: none;
-}
-
 .tool__btn__icon:before {
   margin-right: $baseSpace/5;
 }
@@ -59,12 +55,11 @@
   height: $buildermodHeight;
   overflow-y: scroll;
   background: $colorBrown300;
-  margin-bottom: $baseSpace*2;
   position: relative;
   padding: $baseSpace*5 $baseSpace*1.5 $baseSpace*1.5;
 }
 
-.buildermod__vizwrap--is--fixedheight {
+.buildermod__vizwrap--fixedheight {
   overflow-y: visible;
 }
 

@@ -1,10 +1,10 @@
-<div class="buildermod__drawer buildermod__drawer--questions">
+<div class="buildermod__questions buildermod__drawer--questions">
   <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.location'}}</h4>
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
       <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
-        <span {{action "closeDrawer"}}>
+        <span>
           {{#link-to 'visualization' entity_and_id 'locations' 'multiples' (query-params variable='export_value') class="builder__questions__question"}}
             {{t 'graph_builder.page_title.product.locations.export_value'}}
           {{/link-to}}
@@ -14,7 +14,7 @@
     <li class="builder__questions__item">
       <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
-        <span {{action "closeDrawer"}}>
+        <span>
           {{#link-to 'visualization' entity_and_id 'locations' 'multiples' (query-params variable='import_value') class="builder__questions__question"}}
             {{t 'graph_builder.page_title.product.locations.import_value'}}
           {{/link-to}}
@@ -24,7 +24,7 @@
     <li class="builder__questions__item">
       <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
-        <span {{action "closeDrawer"}}>
+        <span>
           {{#link-to 'visualization' entity_and_id 'cities' 'multiples' (query-params variable='export_value') class="builder__questions__question"}}
             {{t 'graph_builder.page_title.product.cities.export_value'}}
           {{/link-to}}
@@ -34,7 +34,7 @@
     <li class="builder__questions__item">
       <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
-        <span {{action "closeDrawer"}}>
+        <span>
           {{#link-to 'visualization' entity_and_id 'cities' 'multiples' (query-params variable='import_value') class="builder__questions__question"}}
             {{t 'graph_builder.page_title.product.cities.import_value'}}
           {{/link-to}}

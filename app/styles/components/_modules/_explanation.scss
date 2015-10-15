@@ -1,0 +1,35 @@
+/**
+*
+* Explanation
+*
+*
+**/
+.explanation {
+  margin: $baseSpace;
+  font-family: $sans;
+}
+
+.explanation__title {
+  font-size: $fontTiny;
+}
+
+.explanation__p {
+  font-size: $fontXTiny;
+  margin-bottom: $baseSpace/4;
+}
+
+.explanation__btn {
+  font-size: $fontTiny;
+  background: $colorBrown500;
+  display:block;
+  width:10%;
+  margin:0 auto;
+}
+
+.explanation__copy--hide {
+  @include bg-gradient-t2b($colorBlack, $colorBrown200);
+  max-height: 2*$baseSpace;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+

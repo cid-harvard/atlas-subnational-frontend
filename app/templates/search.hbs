@@ -1,3 +1,63 @@
-<main class="results">
-  {{partial 'partials/results'}}
-</main>
+{{#if query }}
+  <h2 class="results__head">{{resultsLength}} {{t 'search.header'}}</h2>
+{{else}}
+  <h2 class="results__head">{{t placeHolderText}}</h2>
+{{/if}}
+
+<form class="search__wrap">
+  <div class="search__field__wrap">
+    {{input
+      class="search"
+      placeholder=( t placeHolderText )
+      value=search
+      enter='query'
+      required='required'
+      data-search-input=''
+    }}
+    <button class="search__reset fa fa-close" type="reset"></button>
+  </div>
+  <input class="search__submit btn btn--standalone btn--search"
+    data-search
+    type="submit"
+    value="{{ t 'pageheader.search_link' }}"
+    {{action 'query' search}} >
+</form>
+
+{{#if locationResults.length}}
+  <h3 class="section__head results__subhead">{{t 'search.results_locations'}}</h3>
+  <ul class="results__list">
+    {{#each result in locationResults}}
+      {{search-result
+        result=result
+        tagName="li"
+        class="results__item"
+      }}
+    {{/each}}
+  </ul>
+{{/if}}
+{{#if productResults.length}}
+  <h3 class="section__head results__subhead">{{t 'search.results_products'}}</h3>
+  <ul class="results__list">
+    {{#each result in productResults}}
+      {{search-result
+        result=result
+        tagName="li"
+        class="results__item"
+      }}
+    {{/each}}
+  </ul>
+{{/if}}
+{{#if industryResults.length}}
+  <h3 class="section__head results__subhead">{{t 'search.results_industries'}}</h3>
+  <ul class="results__list">
+    {{#each result in industryResults}}
+      {{search-result
+        result=result
+        tagName="li"
+        class="results__item"
+      }}
+    {{/each}}
+  </ul>
+{{/if}}
+<p class='results__copy results__copy--postscript'>{{t 'search.didnt_find'}}</p>
+

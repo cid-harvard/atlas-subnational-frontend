@@ -29,27 +29,10 @@ export default Ember.Controller.extend({
   industriesMetadata: computed('model.industries', function() {
     return this.get('model.industries');
   }),
-  hasProfile: computed('entity', 'entity_level', function() {
-    let entity = this.get('entity');
-    let level = this.get('entity_level');
-    if(entity === 'product') { return false; }
-    if(entity === 'industry' && level === 'class') { return false; }
-    return true;
-  }),
-  profileLink: computed('entity', function(){
-    if(this.get('entity') === 'location') { return 'location.show'; }
-    if(this.get('entity') === 'product') { return 'product.show'; }
-    if(this.get('entity') === 'industry') { return 'industry.show'; }
-  }),
-  entityId: computed('entity_id', function() {
-    return this.get('entity_id');
-  }),
-  entity_and_id: computed('entity', 'entity_id', function() {
-    return `${this.get('entity')}-${this.get('entity_id')}`;
-  }),
-  source: computed('entity', function() {
-    if(this.get('entity') === 'location') { return 'products'; }
-    if(this.get('entity') === 'product') { return 'locations'; }
-    if(this.get('entity') === 'industry') { return 'departments'; }
+  isGraphBuilderRoute: computed.equal('currentRouteName','graph_builder.index'),
+  isHomePageRoute: computed.equal('currentRouteName','index'),
+  isSearchRoute: computed.equal('currentRouteName','search'),
+  showStreamer: computed('isHomePageRoute', function(){
+    return !this.get('isHomePageRoute');
   })
 });

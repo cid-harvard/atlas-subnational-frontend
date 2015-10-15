@@ -1,26 +1,24 @@
 /**
 *
-* View Switcher (profile to graph builder and back again)
+* Side-Nav
 *
 **/
 
-.switcher {
+.side-nav {
   width: $sidebarWidth;
   text-align: right;
   position: absolute;
   left: 0;
 }
 
-.switcher__item {
-  border-bottom: 1px solid $colorBlack;
+.side-nav__item {
   padding: $fontSmall 0 $fontSmall $baseSpace*1.5;
   &:last-of-type {
-    border: none;
-    padding-bottom: 0;
+    border-bottom: 1px solid $colorBlack;
   }
 }
 
-.switcher__item__link {
+.side-nav__item__link {
   transition: color $animationTime $animationEasing;
   color: $colorGray;
   font-size: $fontSmall;
@@ -32,6 +30,6 @@
   }
 }
 
-.switcher__item--is--active {
+.side-nav__item--active {
   color: $colorBlack;
 }

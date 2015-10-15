@@ -1,107 +1,96 @@
-<main class="stream builder">
-  <article class="stream__article stream__article--indent--left">
-    {{ render 'view-switch' controller='application'}}
-    <header class="stream__header stream__header--builder">
-      <h2 class="stream__head">{{name}}</h2>
-    </header>
-    <header class="section__header builder__header">
-      <h3 class="section__head">{{pageTitle}}</h3>
-    </header>
-    <section class="stream__section">
-      <div {{bind-attr class=":section__buildermod drawerSettingsIsOpen:buildermod--is--open--settings drawerChangeGraphIsOpen:buildermod--is--open--changegraph drawerQuestionsIsOpen:buildermod--is--open--questions"}}>
-        <header class="buildermod__header">
-          <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
-          <div class="buildermod__tools">
-            <button {{bind-attr class="drawerIsUnnecessary:buildermod__tool--is--unnecessary :btn :btn--standalone :btn--buildermod :buildermod__tool :buildermod__tool--settings"}} {{action 'toggleDrawerSettings'}} data-settings-open=''>
-              {{fa-icon "plus" classNames="tool__btn__icon"}}
-              {{t 'graph_builder.settings.label'}}
-            </button>
-            <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--changegraph" {{action 'toggleDrawerChangeGraph'}}>
-              {{fa-icon "plus" classNames="tool__btn__icon"}}
-              {{t 'graph_builder.change_graph.label'}}
-            </button>
-            <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--questions"  data-change-question='' {{action 'toggleDrawerQuestions'}}>
-              {{fa-icon "plus" classNames="tool__btn__icon"}}
-              {{t 'graph_builder.questions.label'}}
-            </button>
-          </div>
-        </header>
-        <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--is--fixedheight"}}>
-          {{#unless isGeo }}
-            {{partial "partials/buildermod-search"}}
-          {{/unless}}
-          {{component 'graphbuilder-settings'
-            startDate=startDate
-            endDate=endDate
-            dateExtent=dateExtent
-            dateRange=dateRange
-            isOpen=drawerSettingsIsOpen
-            years=years
-          }}
-          {{partial "partials/buildermod-drawer-change-graph"}}
-          {{component 'graphbuilder-questions'
-            isOpen=drawerQuestionsIsOpen
-            name=name
-            entity=entity
-            entity_id=entity_id
-            entity_and_id=entity_and_id
-            builderNavType=builderNavType
-            isPrescriptive=isPrescriptive
-            isCountry=isCountry
-            thisLevel=thisLevel
-          }}
-          {{component visualizationComponent
-            immutableData=immutableData
-            data=filteredData
-            dataType=source
-            varDependent=varDependent
-            startDate=startDate
-            dateExtent=dateExtent
-            endDate=endDate
-            metadata=metadata
-            isFiltered=isFiltered
-            entityType=entityType
-            variable=variable
-            search=search
-            entityId=entityId
-            }}
-        </div>
-        <div class="ember__table__wrap">
-          {{component 'graphbuilder-table'
-            data=filteredData
-            source=source
-            isSingleYear=isSingleYear
-            search=search
-          }}
-          {{component 'table-download'
-            name=builderModHeader
-            data=immutableData
-            search=search
-          }}
-        </div>
-        <small class="table__footer">
-          {{ t 'graph_builder.table.read_more' }}
-          {{#link-to 'about.glossary' class='link--stream link--stream--inline--tiny table__footer__link--glossary'}}
-            {{t 'general.glossary'}}.
-          {{/link-to}}
-        </small>
-      </div>
-    </section>
-    <section class="stream__section recirc builder__recirc">
-      <div class="recirc__bground" style="background-image: url({{recircUrl}})"></div>
-      <div class="recirc__wrap">
-        <h3 class="section__head recirc__head">
-          {{recircCopy}}
-        </h3>
-        {{#link-to
-          profileLink entityId
-          class="btn btn--standalone btn--stream"
-          data-recirc-profile-link=''
-        }}
-          {{ t 'pageheader.profile_link' entity=singularEntity }}
+<header class="section__header builder__header">
+  <h3 class="section__head">{{pageTitle}}</h3>
+</header>
+<section class="stream__section">
+  <div {{bind-attr class=":section__buildermod drawerSettingsIsOpen:buildermod__settings--open drawerChangeGraphIsOpen:buildermod__changegraph--open" }}>
+    <header class="buildermod__header">
+      <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
+      <div class="buildermod__tools">
+        {{#unless drawerIsUnnecessary}}
+          <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--settings" {{action 'toggleDrawerSettings'}} data-settings-open=''>
+            {{fa-icon "plus" classNames="tool__btn__icon"}}
+            {{t 'graph_builder.settings.label'}}
+          </button>
+        {{/unless}}
+          <button class="btn btn--standalone btn--buildermod buildermod__tool" data-change-question='' {{action 'toggleDrawerChangeGraph'}}>
+            {{fa-icon "plus" classNames="tool__btn__icon"}}
+            {{t 'graph_builder.change_graph.label'}}
+          </button>
+        {{#link-to 'graph_builder.index' entity_and_id}}
+          <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--questions"  data-change-graph=''>
+            {{fa-icon "plus" classNames="tool__btn__icon"}}
+            {{t 'graph_builder.questions.label'}}
+          </button>
         {{/link-to}}
       </div>
-    </section>
-  </article>
-</main>
+    </header>
+    <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--fixedheight"}}>
+      {{#unless isGeo }}
+        {{partial "partials/buildermod-search"}}
+      {{/unless}}
+      {{component 'graphbuilder-settings'
+        startDate=startDate
+        endDate=endDate
+        dateExtent=dateExtent
+        dateRange=dateRange
+        isOpen=drawerSettingsIsOpen
+        years=years
+      }}
+      {{partial "partials/buildermod-drawer-change-graph"}}
+      {{component visualizationComponent
+        classNames='buildermod__viz'
+        immutableData=immutableData
+        data=filteredData
+        dataType=source
+        varDependent=varDependent
+        startDate=startDate
+        dateExtent=dateExtent
+        endDate=endDate
+        metadata=metadata
+        isFiltered=isFiltered
+        entityType=entityType
+        entityId=entityId
+        variable=variable
+        search=search
+        }}
+    </div>
+    {{component 'visualization-explanation'
+      text=visualizationExplanation
+    }}
+    <div class="ember__table__wrap">
+      {{component 'graphbuilder-table'
+        data=filteredData
+        source=source
+        isSingleYear=isSingleYear
+        search=search
+      }}
+      {{component 'table-download'
+        name=builderModHeader
+        data=immutableData
+        search=search
+      }}
+    </div>
+    <small class="table__footer">
+      {{ t 'graph_builder.table.read_more' }}
+      {{#link-to 'about.glossary' class='link--stream link--stream--inline--tiny table__footer__link--glossary'}}
+        {{t 'general.glossary'}}.
+      {{/link-to}}
+    </small>
+  </div>
+</section>
+<section class="stream__section recirc builder__recirc">
+  <div class="recirc__bground" style="background-image: url({{recircUrl}})"></div>
+  <div class="recirc__wrap">
+    <h3 class="section__head recirc__head">
+      {{recircCopy}}
+    </h3>
+    {{#link-to
+      profileLink entityId
+      class="btn btn--standalone btn--stream"
+      data-recirc-profile-link=''
+    }}
+      {{ t 'pageheader.profile_link' entity=singularEntity }}
+    {{/link-to}}
+  </div>
+</section>
 
