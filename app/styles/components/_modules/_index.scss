@@ -13,8 +13,6 @@
 }
 
 .index__header__wrap {
-  background: $colorNavy800 url('/assets/img/index/hero_pattern-large.jpg');
-  background: -webkit-image-set( url('/assets/img/index/hero_pattern_med.jpg') 1x, url('/assets/img/index/hero_pattern_large.jpg') 2x );
   background-size: 40rem;
   padding: $baseSpace*3 $baseSpace*3 $baseSpace*6;
   margin-bottom: $baseSpace * 3;
