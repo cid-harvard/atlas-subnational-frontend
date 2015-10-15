@@ -97,8 +97,6 @@ export default Ember.Component.extend({
             if(d[this.get('varDependent')] && d[this.get('varRCA')] > 1){
               return d.color;
             }
-
-            return "#DFDFDF";
           },
           class: (d) => {
             if(d[this.get('varRCA')] > 1) {
