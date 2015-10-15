@@ -53,6 +53,12 @@ export default Ember.Component.extend({
             var_mark: '__highlighted',
             type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
             class: function() { return 'tooltip'; },
+            x: function(d, i, vars) {
+              return  vars.x_scale[0]["func"](d[vars.var_x]);
+            },
+            y: function(d, i, vars) {
+              return vars.y_scale[0]["func"](d[vars.var_y]);
+            },
             text: (d)  => {
               let format = function(d) { return numeral(d).format('0.00a'); };
               let type = this.get('type');
@@ -65,7 +71,9 @@ export default Ember.Component.extend({
               let name = Ember.get(d, 'name_'+display);
               return name + ' (' + format(+d[varX]) + ')';
             },
-            exit: function() {}
+            translate: [0, -10],
+            width: 150,
+            height: 'auto'
           }]
         }],
         selection: [currentSelection]

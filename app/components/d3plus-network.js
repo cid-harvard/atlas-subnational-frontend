@@ -106,6 +106,12 @@ export default Ember.Component.extend({
         }, {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
+          x: function(d, i, vars) {
+            return  vars.x_scale[0]["func"](d[vars.var_x]);
+          },
+          y: function(d, i, vars) {
+            return vars.y_scale[0]["func"](d[vars.var_y]);
+          },
           class: function() { return 'tooltip'; },
           text: (d) => {
             let rcaValue = d[this.get('varRCA')];
@@ -114,7 +120,9 @@ export default Ember.Component.extend({
 
             return d[`name_short_${this.get('i18n').display}`] + '</br>' + rcaString;
           },
-          exit: function() {}
+          width: 150,
+          height: 'auto',
+          translate: [0, -10]
         }]
       }]
     });

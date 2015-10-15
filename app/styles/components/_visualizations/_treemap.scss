@@ -1,0 +1,30 @@
+/**
+*
+* Treemap
+*
+**/
+
+// Nested here instead of giving ever el a class in the js
+.vizmod--treemod {
+  width: 100%;
+}
+
+.tree-map {
+  position: relative;
+  stroke-width: 0.5px;
+
+  text {
+    font-family: $serif !important;
+    fill: $colorGrayDark !important;
+    font-weight: 300 !important;
+  }
+
+
+  &--title{
+    font-size: 25px;
+    padding: 4px;
+    text-overflow: clip !important;
+    font-family: $sans;
+    font-weight: 300;
+  }
+}
