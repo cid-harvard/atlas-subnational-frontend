@@ -3,6 +3,7 @@ const {computed} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
+  classNames: ['buildermod__viz'],
   result: computed('data.[]', function(){
     return _.first(this.get('data'));
   }),

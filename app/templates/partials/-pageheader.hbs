@@ -4,15 +4,11 @@
       {{#link-to "index"}}
         <img src="/assets/img/branding/datlas-white.svg" alt="Datlas" class="branding__logo">
       {{/link-to}}
-      <p class="branding__slogan" data-slogan>{{ t 'index.header_head' }}</p>
+      {{#unless isHomePageRoute }}
+        <p class="branding__slogan" data-slogan>{{ t 'index.header_head' }}</p>
+      {{/unless}}
     </div>
     <nav class="pageheader__nav">
-      {{#link-to "about.project-description" current-when="about" class="pageheader__link" activeClass="pageheader__link--is--active"}}
-        {{ t 'pageheader.about' }}
-      {{/link-to}}
-      {{#link-to "downloads" current-when="downloads" class="pageheader__link" activeClass="pageheader__btn--is--active"}}
-        {{ t 'pageheader.download' }}
-      {{/link-to}}
       <div class="togglemod togglemod--languages">
         <p {{bind-attr class=":toggle__label__text isDefaultLocale::toggle__label--is--active"}}>
           {{otherLanguage}}
@@ -29,24 +25,6 @@
           {{defaultLanguage}}
         </p>
       </div>
-      <form class="search__wrap pageheader__search__wrap">
-        <div class="search__field__wrap pageheader__search__field__wrap">
-          {{input
-            class="search"
-            placeholder=( t 'pageheader.search_placeholder' )
-            value=query
-            enter='query'
-            required='required'
-            data-search-input=''
-          }}
-          <button class="search__reset fa fa-close" type="reset"></button>
-        </div>
-        <input class="search__submit btn btn--standalone btn--search"
-          data-search
-          type="submit"
-          value="{{ t 'pageheader.search_link' }}"
-          {{action 'query' query}} >
-      </form>
     </nav>
   </div>
 </header>

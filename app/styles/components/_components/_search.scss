@@ -7,11 +7,12 @@
 .search__wrap {
   display: flex;
   align-items: stretch;
+  padding-bottom: 2*$baseSpace;
 }
 
 .search__field__wrap {
   position: relative;
-  flex: 1;
+  width: 70%;
 }
 
 .search {

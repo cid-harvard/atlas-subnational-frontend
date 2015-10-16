@@ -42,8 +42,10 @@
 
 // TODO: Remove this class for launch
 // We shouldn't be showing any questions we don't have graphs for
-.builder__questions__item--is--disabled {
+
+.builder__questions__item--disabled {
   pointer-events: none;
+  color: $colorGrayLightest;
 }
 
 .builder__questions__item__icon {
@@ -71,4 +73,15 @@
 
 .builder__icon--placeholder:before {
   width: auto;
+}
+
+.buildermod__drawer--questions {
+  display: block;
+}
+.buildermod__tool--questions {
+  border-left-color: $colorBrown300;
+}
+
+.buildermod__questions {
+  padding: $baseSpace * 1.5;
 }

@@ -10,8 +10,8 @@
 }
 
 .results__head {
-  font-size: $fontHuge;
-  color: $colorWhite;
+  font-size: $fontXLarge;
+  color: $colorBlack;
   margin-bottom: $baseSpace*2;
   line-height: 100%;
   font-family: $sansAlt;
@@ -19,7 +19,7 @@
 }
 
 .results__subhead {
-  color: $colorWhite;
+  color: $colorBlack;
   @include offset-text;
 }
 
@@ -51,13 +51,13 @@
 }
 
 .results__breadcrumb {
-  color: $colorGray;
+  color: $colorBlack;
   font-size: $fontSmall;
   @include offset-text;
 }
 
 .results__name {
-  color: $colorGrayLightest;
+  color: $colorBlack;
   font-weight: 700;
   @include offset-text;
 }
@@ -72,7 +72,7 @@
 
 .results__copy--postscript {
   margin: $baseSpace 0 0;
-  color: $colorGrayLight;
+  color: $colorGray;
   @include offset-text;
 }
 

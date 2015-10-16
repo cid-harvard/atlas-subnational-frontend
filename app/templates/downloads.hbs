@@ -1,116 +1,112 @@
-<main class="stream downloads">
-  <article class="stream__article stream__article--indent--left">
-    <header class="stream__header">
-      <h2 class="stream__head">{{ t 'downloads.head' }}</h2>
-    </header>
-    <section class="stream__section">
-      <h3 class="section__head">{{ t 'downloads.trade_head' }}</h3>
-      <p class="section__p">{{ t 'downloads.trade_copy' }}</p>
-      <table class="table">
-        <tr class="table__row">
-          <th class="table__header downloads__table__header"></th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_national' }}</th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_departments' }}</th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_met' }}</th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_muni' }}</th>
-        </tr>
-        <tr class="table__row table__row--body">
-          <td class="table__cell">{{ t 'downloads.trade_row_1' }}</td>
-          <td class="table__cell">
-            <a href="{{downloadURL}}/products_country.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
-          </td>
-          <td class="table__cell">
-            <a href="{{downloadURL}}/products_department.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
-          </td>
-          <td class="table__cell">
-            <a href="{{downloadURL}}/products_msa.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
-          </td>
-          <td class="table__cell">
-            <a href="{{downloadURL}}/products_municipality.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
-          </td>
-        </tr>
-      </table>
-    </section>
+<header class="stream__header">
+  <h2 class="stream__head">{{ t 'downloads.head' }}</h2>
+</header>
+<section class="stream__section">
+  <h3 class="section__head">{{ t 'downloads.trade_head' }}</h3>
+  <p class="section__p">{{ t 'downloads.trade_copy' }}</p>
+  <table class="table">
+    <tr class="table__row">
+      <th class="table__header downloads__table__header"></th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_national' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_departments' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_met' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_muni' }}</th>
+    </tr>
+    <tr class="table__row table__row--body">
+      <td class="table__cell">{{ t 'downloads.trade_row_1' }}</td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/products_country.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/products_department.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/products_msa.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/products_municipality.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+    </tr>
+  </table>
+</section>
 
-    <section class="stream__section">
-      <h3 class="section__head">{{ t 'downloads.industry_head' }}</h3>
-      <p class="section__p">{{ t 'downloads.industry_copy' }}</p>
-      <table class="table">
-        <tr class="table__row">
-          <th class="table__header downloads__table__header"></th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_national' }}</th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_departments' }}</th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_met' }}</th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_muni' }}</th>
-        </tr>
-        <tr class="table__row table__row--body">
-          <td class="table__cell">{{ t 'downloads.industry_row_1' }}</td>
-          <td class="table__cell">
-            <a href="{{downloadURL}}/industries_country.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
-          </td>
-          <td class="table__cell">
-            <a href="{{downloadURL}}/industries_department.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
-          </td>
-          <td class="table__cell">
-            <a href="{{downloadURL}}/industries_msa.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
-          </td>
-          <td class="table__cell">
-            <a href="{{downloadURL}}/industries_municipality.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
-          </td>
-        </tr>
-      </table>
-    </section>
+<section class="stream__section">
+  <h3 class="section__head">{{ t 'downloads.industry_head' }}</h3>
+  <p class="section__p">{{ t 'downloads.industry_copy' }}</p>
+  <table class="table">
+    <tr class="table__row">
+      <th class="table__header downloads__table__header"></th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_national' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_departments' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_met' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_muni' }}</th>
+    </tr>
+    <tr class="table__row table__row--body">
+      <td class="table__cell">{{ t 'downloads.industry_row_1' }}</td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/industries_country.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/industries_department.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/industries_msa.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/industries_municipality.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+    </tr>
+  </table>
+</section>
 
-    <section class="stream__section">
-      <h3 class="section__head">{{ t 'downloads.occupations_head' }}</h3>
-      <p class="section__p">{{ t 'downloads.occupations_copy' }}</p>
-      <table class="table">
-        <tr class="table__row">
-          <th class="table__header downloads__table__header"></th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_national' }}</th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_departments' }}</th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_met' }}</th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_muni' }}</th>
-        </tr>
-        <tr class="table__row table__row--body">
-          <td class="table__cell">{{ t 'downloads.occupations_row_1' }}</td>
-          <td class="table__cell">
-            <a href="{{downloadURL}}/occupations.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
-          </td>
-          <td class="table__cell">{{ t 'downloads.cta_na' }}</td>
-          <td class="table__cell">{{ t 'downloads.cta_na' }}</td>
-          <td class="table__cell">{{ t 'downloads.cta_na' }}</td>
-        </tr>
-      </table>
-    </section>
+<section class="stream__section">
+  <h3 class="section__head">{{ t 'downloads.occupations_head' }}</h3>
+  <p class="section__p">{{ t 'downloads.occupations_copy' }}</p>
+  <table class="table">
+    <tr class="table__row">
+      <th class="table__header downloads__table__header"></th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_national' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_departments' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_met' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_muni' }}</th>
+    </tr>
+    <tr class="table__row table__row--body">
+      <td class="table__cell">{{ t 'downloads.occupations_row_1' }}</td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/occupations.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">{{ t 'downloads.cta_na' }}</td>
+      <td class="table__cell">{{ t 'downloads.cta_na' }}</td>
+      <td class="table__cell">{{ t 'downloads.cta_na' }}</td>
+    </tr>
+  </table>
+</section>
 
-    <section class="stream__section">
-      <h3 class="section__head">{{ t 'downloads.other_head' }}</h3>
-      <p class="section__p">{{ t 'downloads.other_copy' }}</p>
-      <table class="table">
-        <tr class="table__row">
-          <th class="table__header downloads__table__header"></th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_national' }}</th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_departments' }}</th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_met' }}</th>
-          <th class="table__header downloads__table__header">{{ t 'downloads.thead_muni' }}</th>
-        </tr>
-        <tr class="table__row table__row--body">
-          <td class="table__cell">{{ t 'downloads.other_row_1' }}</td>
-          <td class="table__cell">
-            <a href="{{downloadURL}}/demographic_colombia.xlsx" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
-          </td>
-          <td class="table__cell">
-            <a href="{{downloadURL}}/demographic_department.xlsx" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
-          </td>
-          <td class="table__cell">
-            <a href="{{downloadURL}}/demographic_municipality.xls" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
-          </td>
-          <td class="table__cell">
-            <a href="{{downloadURL}}/demographic_msa.xlsx" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
-          </td>
-        </tr>
-      </table>
-    </section>
-  </article>
-</main>
+<section class="stream__section">
+  <h3 class="section__head">{{ t 'downloads.other_head' }}</h3>
+  <p class="section__p">{{ t 'downloads.other_copy' }}</p>
+  <table class="table">
+    <tr class="table__row">
+      <th class="table__header downloads__table__header"></th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_national' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_departments' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_met' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_muni' }}</th>
+    </tr>
+    <tr class="table__row table__row--body">
+      <td class="table__cell">{{ t 'downloads.other_row_1' }}</td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/demographic_colombia.xlsx" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/demographic_department.xlsx" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/demographic_municipality.xls" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/demographic_msa.xlsx" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+    </tr>
+  </table>
+</section>

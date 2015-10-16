@@ -19,8 +19,7 @@
 }
 
 .stream__head {
-  font-size: $fontHuge;
-  margin-bottom: $baseSpace * 3;
+  font-size: $fontXXLarge;
   letter-spacing: -2px;
   font-family: $sansAlt;
   line-height: 100%;
@@ -33,8 +32,18 @@
 }
 
 .breadcrumb {
+  color: $colorGray;
   display: inline-block;
   margin-right: $baseSpace / 2;
+
+  &:active, &:focus, &:hover {
+    color: $colorGrayDark;
+  }
+
+  &__active {
+    color: $colorBlack;
+  }
+
   &:after {
     content: '/';
     margin-left: $baseSpace / 2;
@@ -43,7 +52,7 @@
   &:last-of-type {
     margin-right: 0;
     &:after {
-      content: '';
+      content: none;
     }
   }
 }

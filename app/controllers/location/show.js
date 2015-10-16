@@ -41,7 +41,9 @@ export default Ember.Controller.extend({
   lastIndustryData: computed.filter('industriesData', function(datum) {
     return parseInt(get(datum, 'year')) === 2013;
   }),
-  //validTimeseries is array of data points where all key(expect diversity cause fucking values are null),value pairs are not null
+  graphbuilderLink: computed('model.id', function() {
+    return `location-${this.get('model.id')}`;
+  }),
   validTimeseries: computed.alias('model.timeseries'),
   activeStep: 1,
   stepStories: computed(function() {
