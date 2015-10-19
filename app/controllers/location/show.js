@@ -44,6 +44,9 @@ export default Ember.Controller.extend({
   graphbuilderLink: computed('model.id', function() {
     return `location-${this.get('model.id')}`;
   }),
+  description: computed('model.name', 'i18n.locale', function() {
+    return this.get(`model.description_${this.get('i18n.display')}`);
+  }),
   validTimeseries: computed.alias('model.timeseries'),
   activeStep: 1,
   stepStories: computed(function() {
