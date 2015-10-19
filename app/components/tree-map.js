@@ -93,7 +93,7 @@ export default Ember.Component.extend({
             y: function(d, i, vars) {
               return vars.y_scale[0]["func"](d[vars.var_y]);
             },
-            text: function(d, i, vars) {
+            text: (d, i, vars)  => {
 
               var data = [{
                 'key': varDependent,
@@ -121,8 +121,11 @@ export default Ember.Component.extend({
 
               var tooltip_text = '<span style="color: ' +  d.color + '">' + d[varTextItem] + '</span>';
 
-              data.forEach(function(d) {
-                 tooltip_text += '<br>' + d.key + ': ' + format(d.key, d.value);
+              data.forEach((d) => {
+                 tooltip_text += '<br>' +
+                   this.get('i18n').t(`graph_builder.table.${d.key}`)
+                   + ': '
+                   + format(d.key, d.value);
                });
 
               return tooltip_text;
