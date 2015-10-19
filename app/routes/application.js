@@ -68,12 +68,11 @@ export default Ember.Route.extend({
 
       _.forEach(productsMetadata, function(d) {
         let sectionId = productsHierarchy[d.id];
-        let section = productSectionMap[sectionId];
-        let color = _.isUndefined(sectionId) ? '#fff' : ProductSectionColor[sectionId].color;
+        let color = _.isUndefined(sectionId) ? '#fff' : _.get(ProductSectionColor, `${sectionId}.color`);
 
         d.color = color;
-        d.parent_name_en = section.name_en;
-        d.parent_name_es = section.name_es;
+        d.parent_name_en = _.get(productSectionMap, `${sectionId}.name_en`);
+        d.parent_name_es = _.get(productSectionMap, `${sectionId}.name_es`);
         d.group = sectionId;
       });
 
@@ -89,12 +88,11 @@ export default Ember.Route.extend({
 
       _.forEach(industriesMetadata, function(d) {
         let sectionId = industriesHierarchy[d.id];
-        let section = industrySectionMap[sectionId];
-        let color = _.isUndefined(sectionId) ? '#fff' : IndustrySectionColor[sectionId].color ;
+        let color = _.isUndefined(sectionId) ? '#fff' : _.get(IndustrySectionColor, `${sectionId}.color`);
 
         d.group = sectionId;
-        d.parent_name_en = section.name_en;
-        d.parent_name_es = section.name_es;
+        d.parent_name_en = _.get(industrySectionMap, `${sectionId}.name_en`);
+        d.parent_name_es = _.get(industrySectionMap, `${sectionId}.name_es`);
         d.color = color;
       });
 
