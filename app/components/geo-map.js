@@ -6,8 +6,8 @@ const { computed, observer } = Ember;
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   classNames: ['geo__wrap'],
-  southWest: L.latLng(-14.817, -100.547),
-  northEast: L.latLng(21.371, -42.231),
+  southWest: L.latLng(10.817, -140.547),
+  northEast: L.latLng(36.371, -22.231),
   bounds: computed('southWest', 'northEast', function() {
     return L.latLngBounds(this.get('southWest'), this.get('northEast'));
   }),
@@ -17,7 +17,7 @@ export default Ember.Component.extend({
 
     let map = new L.mapbox.map(this.get('elementId'), 'gwezerek.22ab4aa8,gwezerek.da867b0d', {
       accessToken: this.accessToken,
-      center: [4.6,-74.0833333],
+      center: [19,-99],
       zoom: 5,
       maxBounds: this.get('bounds'),
       maxZoom: 19,
