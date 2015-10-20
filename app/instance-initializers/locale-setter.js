@@ -33,6 +33,7 @@ export function initialize(instance) {
     if(this.get('locale') != 'no-copy') {
       numeral.language(this.get('locale'));
       this.set('display', this.get('locale').split('-')[0]);
+      this.set('country', this.get('locale').split('-')[1]);
     }
   });
 }

@@ -93,7 +93,7 @@ export default Ember.Component.extend({
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.addLabelsPane();
       let layer = omnivore
-        .topojson('assets/geodata/col.topojson', null, L.geoJson(null, this.get('customLayerParams')))
+        .topojson(`assets/geodata/${this.get('i18n').country}.topojson`, null, L.geoJson(null, this.get('customLayerParams')))
         .on('layeradd', (e) => {
           let marker = _.get(e, 'layer');
           let location = _.get(e, 'layer.feature.properties');
@@ -126,7 +126,7 @@ export default Ember.Component.extend({
       map.removeLayer(this.get('layer'));
 
       let layer = omnivore
-        .topojson('assets/geodata/col.topojson', null, L.geoJson(null, this.get('customLayerParams')))
+        .topojson(`assets/geodata/${this.get('i18n').country}.topojson`, null, L.geoJson(null, this.get('customLayerParams')))
         .on('layeradd', (e) => {
           let marker = _.get(e, 'layer');
           let location = _.get(e, 'layer.feature.properties');
