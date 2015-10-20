@@ -59,6 +59,7 @@ app.import('bower_components/mapbox.js/images/icons-000000@2x.png', { destDir: '
 
 // Admin boundaries for geomap
 app.import('vendor/geodata/col.topojson',  { destDir: 'assets/geodata' });
+app.import('vendor/geodata/mex.topojson',  { destDir: 'assets/geodata' });
 
 //Import leaflet-omnivore
 app.import('vendor/leaflet-omnivore.min.js');
