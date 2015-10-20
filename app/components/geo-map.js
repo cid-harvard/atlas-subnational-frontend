@@ -13,7 +13,7 @@ export default Ember.Component.extend({
   }),
   accessToken: 'pk.eyJ1IjoiZ3dlemVyZWsiLCJhIjoicXJkMjV6WSJ9.Iw_1c5zREHqNSfdtkjlqbA',
   baseMap: computed('elementId', 'bounds', function() {
-    if(!this.get('elementId')) { return false }
+    if(!this.get('elementId')) { return false; }
 
     let map = new L.mapbox.map(this.get('elementId'), 'gwezerek.22ab4aa8,gwezerek.da867b0d', {
       accessToken: this.accessToken,
@@ -121,7 +121,7 @@ export default Ember.Component.extend({
   update: observer('data.[]', 'varDependent', 'i18n.locale', function() {
     Ember.run.later(this , function() {
       let map =  this.get('baseMap');
-      if(!map) { return }
+      if(!map) { return; }
 
       map.removeLayer(this.get('layer'));
 
