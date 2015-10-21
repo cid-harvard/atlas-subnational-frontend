@@ -138,17 +138,21 @@ export default Ember.Component.extend({
       });
   }),
   didInsertElement: function() {
-    this.set('parent', this.get('parentView'));
-    if(this.get('parent.isVisible')) {
-      this.set('width', this.$().parent().width());
-      this.set('height', this.$().parent().height() || 500 );
-      d3.select(this.get('id')).call(this.get('treemap'));
-    }
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      if(this.get('isInTab')) {
+        this.set('parent', this.get('parentView'));
+      }
+
+      if(this.get('parent.isVisible')) {
+        this.set('width', this.$().parent().width());
+        this.set('height', this.$().parent().height() || 500 );
+        d3.select(this.get('id')).call(this.get('treemap'));
+      }
+    });
   },
   profileTabUpdate: observer('parent.isVisible', function() {
-    if(this.get('isInTab')) {
+    if(this.get('isInTab') && this.get('parent.isVisible')) {
       Ember.run.scheduleOnce('afterRender', this , function() {
-        if(!this.element){ return false; } //do not redraw if not there
         this.set('width', this.$().parent().width());
         this.set('height', this.$().parent().height() || 500 );
         if(this.get('treemap')) {
