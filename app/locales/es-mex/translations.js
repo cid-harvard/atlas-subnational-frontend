@@ -48,6 +48,8 @@ export default {
   "downloads.cta_download": "Descargar",
   "downloads.cta_na": "No disponible",
   "downloads.head": "Descargar los datos",
+  "downloads.calculation_docs_head":"",
+  "downloads.calculation_docs_link":"",
   "downloads.industry_copy": "Los registros de contribuciones al Instituto Mexicano de Seguridad Social (IMSS) constituyen la fuente principal de datos por sector productivo. \u00c9stos contienen informaci\u00f3n de empleo formal, salarios y n\u00famero de empresas por municipio y sector. Los datos por sector productivo son classificados utilizando la versi\u00f3n mexicana del Sistema de Clasificaci\u00f3n de Industrias de Am\u00e9rica del Norte (SCIAN) en su versi\u00f3n de 2007.",
   "downloads.industry_head": "Datos de sectores productivos (IMSS)",
   "downloads.industry_row_1": "Empleo, salarios, firmas y indicadores de complejidad productiva (2008-2013)",

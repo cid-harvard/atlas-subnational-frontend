@@ -48,6 +48,8 @@ export default {
   "downloads.cta_download": "Download",
   "downloads.cta_na": "Not available",
   "downloads.head": "Download the data",
+  "downloads.calculation_docs_head":"",
+  "downloads.calculation_docs_link":"",
   "downloads.industry_copy": "Contribution registries to the Mexican Institute of Social Security (IMSS) constitute the main source of industry data. It contains information on formal employment, wages and number of firms by municipality and industry. Industry data is classified using Mexico's version of the North American Industry Classification System (NAICS) in its 2007 revision.",
   "downloads.industry_head": "Industry data (IMSS)",
   "downloads.industry_row_1": "Employment, wages, firms and complexity (2008\u20132013)",

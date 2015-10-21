@@ -48,6 +48,8 @@ export default {
   "downloads.cta_download": "Descargar",
   "downloads.cta_na": "No disponible",
   "downloads.head": "Descargar los datos",
+  "downloads.calculation_docs_head":"M\u00e9todos de c\u00e1lculo",
+  "downloads.calculation_docs_link":"M\u00e9todos de c\u00e1lculo de los indicadores de complejidad",
   "downloads.industry_copy": "La Planilla Integrada de Aportes Laborales, PILA, del Ministerio de Salud, es la fuente principal de los datos por sector. Contiene informaci\u00f3n de empleo formal, salarios y n\u00famero de empresas por municipio y sector. La clasificaci\u00f3n sectorial de Colombia es una versi\u00f3n modificada de la Clasificaci\u00f3n Sectorial Internacional Uniforme de todas las Actividades Econ\u00f3micas (CIIU).",
   "downloads.industry_head": "Datos de sectores productivos (PILA)",
   "downloads.industry_row_1": "Empleo, salarios, n\u00famero de empresas e indicadores de complejidad productiva (2008-2013)",

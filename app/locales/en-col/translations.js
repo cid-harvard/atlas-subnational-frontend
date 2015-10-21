@@ -48,6 +48,8 @@ export default {
   "downloads.cta_download": "Download",
   "downloads.cta_na": "Not available",
   "downloads.head": "Download the data",
+  "downloads.calculation_docs_head":"Complexity calculation methodology",
+  "downloads.calculation_docs_link":"How to calculate complexity variables",
   "downloads.industry_copy": "PILA (the Integrated Report of Social Security Contributions), managed by the Ministry of Health) is the main source of industry data. It contains information on formal employment, wages and number of firms by municipality and industry. Colombia\u2019s industry classification is a modified version of the International Standard Industrial Classification of All Economic Activities (ISIC).",
   "downloads.industry_head": "Industry data (PILA)",
   "downloads.industry_row_1": "Employment, wages, number of firms and complexity indicators (2008\u20132013)",
