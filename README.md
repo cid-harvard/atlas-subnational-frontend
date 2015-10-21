@@ -19,12 +19,10 @@ You will need the following things properly installed on your computer.
 * change into the new directory
 * `npm install`
 * `bower install`
-* clone the Vis-toolkit repository.  `CD` into to the vis-toolkit directory and, run `bower link`
-* In application directory, run `bower link vis-toolkit`
 
 ## Running / Development
 
-* `ember server`
+* `ember server` or `ember s` (these are the same)
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
 ## Running on API [Depricated]
@@ -46,6 +44,10 @@ Make use of the many generators for code, try `ember help generate` for more det
 * `ember test`
 * `ember test --server`
 
+## Subfolder
+
+In the `config/enviroment.js` file adjust the `baseURL` variable in the `var ENV` object for the enviroment e.g. `enviroment === 'production'`
+
 ### Building
 
 * `ember build` (development)
@@ -54,9 +56,21 @@ Make use of the many generators for code, try `ember help generate` for more det
 * To build the app, have the correct `.env` file in the root dir see '.env.example'
 * run `ember build -e <enviroment>` e.g. `ember build -e atlas_colombia_master`
 * By default the built app is in the `dist/` folder
+* Locales follow `country-lang` syntax.  e.g. `usa-en`, `usa-es` or `mex-en`, `mex-es`
+* [ember cli i18n](https://github.com/jamesarosen/ember-i18n) is used for the internalization.
 
 * Required `ENV` vars
   * GA (for Google Analytics)
+  * DEFAULT_LOCALE
+  * OTHER_LOCALE
+  * API_URL
+  * DOWNLOAD_URL(root name for file downloads)
+
+## Heroku deploy
+
+* use [ember-cli-buildpack] (https://github.com/QuinnLee/heroku-buildpack-ember-cli)
+* set `ENV` vars
+* push to instance
 
 ## Further Reading / Useful Links
 
