@@ -115,7 +115,7 @@ export default Ember.Component.extend({
                 } else if('import_value' === key) {
                   return '$ ' + numeral(value).format('0.0a') + ' USD';
                 } else {
-                  return numeral(value).format('$ 0.0a');
+                  return numeral(value).format('0.0a');
                 }
               }
 

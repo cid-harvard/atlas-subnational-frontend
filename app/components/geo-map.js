@@ -61,11 +61,11 @@ export default Ember.Component.extend({
     } else if('num_vacancies' === variable) {
       return numeral(value).format('0,0');
     } else if('export_value' === variable) {
-      return '$ ' + numeral(value).format('0,0') + ' USD';
+      return '$ ' + numeral(value).format('0,0');
     } else if('import_value' === variable) {
-      return '$ ' + numeral(value).format('0,0') + ' USD';
+      return '$ ' + numeral(value).format('0,0');
     } else {
-      return numeral(value).format('$ 0.0a');
+      return numeral(value).format('0.0a');
     }
   }),
   maxValue: computed('data.[]', 'varDependent', function () {
