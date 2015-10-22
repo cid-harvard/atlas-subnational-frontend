@@ -21,6 +21,7 @@ export default Ember.Component.extend({
     .params({
       dev: true,
       type: 'scatterplot',
+      margin: {top: 10, right: 10, bottom: 30, left: 30},
       height: this.get('height'),
       width: this.get('width'),
       container: this.get('id'),
@@ -30,7 +31,8 @@ export default Ember.Component.extend({
       var_color: 'continent',
       var_x: 'distance',
       var_y: 'complexity',
-      var_r: this.get('varSize'),
+      radius_min: 2,
+      radius_max: 10,
       var_text: this.get('varIndependent'),
       time: {
         var_time: "year",
@@ -41,6 +43,7 @@ export default Ember.Component.extend({
         attr: "name",
         marks: [{
           type: "circle",
+          var_r: this.get('varSize'),
           fill: (d) => { return d.color ? d.color : '#ccc1b9'; }
         }]
       }]
