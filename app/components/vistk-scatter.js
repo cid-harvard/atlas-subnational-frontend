@@ -31,7 +31,7 @@ export default Ember.Component.extend({
       var_color: 'continent',
       var_x: 'distance',
       var_y: 'complexity',
-      radius_min: 2,
+      radius_min: 1,
       radius_max: 10,
       var_text: this.get('varIndependent'),
       time: {
@@ -45,7 +45,58 @@ export default Ember.Component.extend({
           type: "circle",
           var_r: this.get('varSize'),
           fill: (d) => { return d.color ? d.color : '#ccc1b9'; }
-        }]
+        }, {
+            var_mark: '__highlighted',
+            type: d3.scale.ordinal().domain([false, true]).range(['none', 'div']),
+            class: function() {
+              return 'tooltip';
+            },
+            x: function(d, i, vars) {
+              return  vars.x_scale[0]["func"](d[vars.var_x]) + vars.margin.left;
+            },
+            y: function(d, i, vars) {
+              return vars.y_scale[0]["func"](d[vars.var_y]);
+            },
+            text: (d, i, vars)  => {
+
+              var data = [{
+                'key': 'rca',
+                'value': d['rca']
+              }];
+
+              function format(key, value) {
+                if('share' === key){
+                  return numeral(value).divide(100).format('0.0%');
+                } else if('employment' === key) {
+                  return numeral(value).format('0.0a');
+                } else if('num_vacancies' === key) {
+                  return numeral(value).format('0,0');
+                } else if('export_value' === key) {
+                  return '$ ' + numeral(value).format('0.0a') + ' USD';
+                } else if('import_value' === key) {
+                  return '$ ' + numeral(value).format('0.0a') + ' USD';
+                } else {
+                  return numeral(value).format('$ 0.0a');
+                }
+              }
+
+              var textItem = Ember.get(d, `name_short_${this.get('i18n').display}`) || d.code;
+
+              var tooltip_text = '<span style="color: ' +  d.color + '">' + textItem + '</span>';
+
+              data.forEach((d) => {
+                 tooltip_text += '<br>' +
+                   this.get('i18n').t(`graph_builder.table.${d.key}`)
+                   + ': '
+                   + format(d.key, d.value);
+               });
+
+              return tooltip_text;
+            },
+            translate: [0, 0],
+            width: 200,
+            height: 'auto',
+          }]
       }]
     });
   }),
