@@ -4,12 +4,19 @@
 *
 **/
 
-// Fuggin d3plus id styling let's get this shit outta here ASAP
+.scatterplot{
+  .axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
 
-#d3plus_graph_background {
-  display: none;
-}
+  .grid .tick {
+    stroke: lightgrey;
+    opacity: 0.7;
+  }
 
-.d3plus_data_tick {
-  display: none;
+  .grid path {
+    stroke-width: 0;
+  }
 }
