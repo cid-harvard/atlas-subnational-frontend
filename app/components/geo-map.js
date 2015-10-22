@@ -79,7 +79,8 @@ export default Ember.Component.extend({
         let valueMap = this.get('valueMap');
         return  {
           className: valueMap.get(_.get(feature, 'properties.cid_id')).class,
-          fillOpacity: 1
+          fillOpacity: 0.8,
+          opacity: 1
         };
       }
     };
