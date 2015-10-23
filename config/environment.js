@@ -51,7 +51,7 @@ module.exports = function(environment) {
   }
   if (environment === 'production') {
     ENV.apiURL = "api/";
-    ENV.baseURL = '/';
+    ENV.baseURL = process.env.ROOT_URL || '/';
     ENV.locationType = 'hash',
     ENV.contentSecurityPolicy = {
       'style-src': "'self' 'unsafe-inline' *",
