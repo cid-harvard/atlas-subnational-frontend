@@ -102,12 +102,26 @@ export default Ember.Component.extend({
             if(d[this.get('varRCA')] > 1) {
               return 'node--is--highlighted';
             }
-          }
+          }, evt: [{
+            type: 'selection',
+            func: function(d, i, vars) {
+              var l = vars.new_data.filter(function(d) {
+                return d.__highlighted__adjacent || d.__selected;
+              }).map(function(d) {
+                return d.id;
+              });
+
+              vars.refresh = true;
+              vars.zoom = l;
+
+              d3.select(vars.container).call(vars.this_chart);
+            }
+          }]
         }, {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
           x: function(d, i, vars) {
-            return  vars.x_scale[0]["func"](d[vars.var_x]);
+            return vars.x_scale[0]["func"](d[vars.var_x]);
           },
           y: function(d, i, vars) {
             return vars.y_scale[0]["func"](d[vars.var_y]);
