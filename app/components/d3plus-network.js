@@ -8,6 +8,7 @@ const {computed, observer} = Ember;
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
+  classNames: ['buildermod__viz--white','buildermod__viz'],
   attributeBindings: ['width','height'],
   varIndependent: ['group', 'code'],
   id: computed('elementId', function() {
@@ -69,10 +70,10 @@ export default Ember.Component.extend({
       nodes: this.get('nodes'),
       links: this.get('edges'),
       data: this.get('networkData'),
-      var_text: `name_short_${this.get('i18n').locale}`, //TODO: update with langauge
+      var_text: `name_short_${this.get('i18n').display}`, //TODO: update with langauge
       var_x: 'x',
       var_y: 'y',
-      radius: 3.5,
+      radius: 5,
       var_color: 'color',
       color: (d) => { return d; },
       y_invert: true,
@@ -101,19 +102,53 @@ export default Ember.Component.extend({
             if(d[this.get('varRCA')] > 1) {
               return 'node--is--highlighted';
             }
-          }
+          }, evt: [{
+            type: 'selection',
+            func: function(d, i, vars) {
+              var l = vars.new_data.filter(function(d) {
+                return d.__highlighted__adjacent || d.__selected;
+              }).map(function(d) {
+                return d.id;
+              });
+
+              vars.refresh = true;
+              vars.zoom = l;
+
+              // Remove tooltips
+              d3.select(vars.container).selectAll(".items__mark__text").remove();
+              d3.select(vars.container).selectAll(".items__mark__div").remove();
+
+              d3.select(vars.container).call(vars.this_chart);
+            }
+          }]
         }, {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
+          x: function(d, i, vars) {
+            var offset = 0;
+            if(vars.scale > 1) {
+               offset = vars.width/2;
+            }
+            return (vars.x_scale[0]["func"](d[vars.var_x]) - vars.translate_x) * vars.scale + offset;
+          },
+          y: function(d, i, vars) {
+            var offset = 0;
+            if(vars.scale > 1) {
+              offset = vars.height/2;
+            }
+            return (vars.y_scale[0]["func"](d[vars.var_y]) - vars.translate_y) * vars.scale + offset;
+          },
           class: function() { return 'tooltip'; },
           text: (d) => {
             let rcaValue = d[this.get('varRCA')];
             let rcaLabel = this.get('i18n').t('graph_builder.table.rca');
             let rcaString = `${rcaLabel}: ${numeral(rcaValue).format('0.00a')}`;
 
-            return d[`name_short_${this.get('i18n').locale}`] + '</br>' + rcaString;
+            return d[`name_short_${this.get('i18n').display}`] + '</br>' + rcaString;
           },
-          exit: function() {}
+          width: 150,
+          height: 'auto',
+          translate: [0, -10]
         }]
       }]
     });

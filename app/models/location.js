@@ -46,7 +46,10 @@ export default DS.Model.extend(ModelAttribute, {
     var lastGdp = get(this.get('lastDataPoint'), 'gdp_real');
     let difference = lastGdp / firstGdp;
     let power =  1/(this.get('timeseries.length') -1);
-    return numeral(Math.pow(difference, power) -1).format('0.0%');
+    if(difference && power) {
+      return numeral(Math.pow(difference, power) -1).format('0.0%');
+     }
+    return false;
   }),
   //following drives graphbuilder
   graphbuilderProducts: computed('id', function() {

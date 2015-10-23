@@ -30,8 +30,10 @@ button::-moz-focus-inner {
 .btn--stream {
   background: $colorBrown500;
   color: $colorGrayDark;
+  box-shadow: inset 0 -5px $colorBrown700;
   &:hover, &:active, &:focus {
     background: $colorBrown400;
+    box-shadow: inset 0 -5px $colorBrown500;
   }
 }
 
@@ -46,8 +48,10 @@ button::-moz-focus-inner {
 .btn--search {
   background: $colorNavy600;
   color: $colorWhite;
+  box-shadow: inset 0 -5px $colorNavy800;
   &:hover {
     background: $colorNavy400;
+    box-shadow: inset 0 -5px $colorNavy600;
   }
 }
 

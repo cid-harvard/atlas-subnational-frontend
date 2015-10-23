@@ -13,16 +13,12 @@
 }
 
 .index__header__wrap {
-  background: $colorNavy800 url('/assets/img/index/hero_pattern-large.jpg');
-  background: -webkit-image-set( url('/assets/img/index/hero_pattern_med.jpg') 1x, url('/assets/img/index/hero_pattern_large.jpg') 2x );
   background-size: 40rem;
-  padding: $baseSpace*3 $baseSpace*3 $baseSpace*6;
-  margin-bottom: $baseSpace * 3;
+  padding: $baseSpace;
 }
 
 .index__header {
   max-width: 100rem;
-  padding: $baseSpace * 3;
   background: $colorBrown200;
   margin: 0 auto;
 }
@@ -33,8 +29,6 @@
 }
 
 .index__search__wrap {
-  width: 50rem;
-  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
 }
 
 // Views
@@ -42,7 +36,8 @@
 .index__viewmod {
   @include clearfix;
   z-index: $zIndex-1;
-  padding: $baseSpace * 3;
+  padding: 0 $baseSpace * 3 $baseSpace * 3 $baseSpace * 3;
+  margin-bottom: $baseSpace * 3;
 }
 
 .index__view__wrap {

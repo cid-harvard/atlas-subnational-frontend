@@ -1,0 +1,31 @@
+<header class="stream__header stream__header--builder">
+  <h2 class="stream__head">{{name}}</h2>
+  <ul>
+    {{#if hasProfile }}
+      {{#link-to
+        profileLink model.id
+        tagName='li'
+        data-search-profile=''
+        activeClass="breadcrumb__active"
+        class="breadcrumb"
+      }}
+        {{ t 'pageheader.profile_link' }}
+      {{/link-to}}
+    {{/if}}
+
+    {{#link-to
+      'graph_builder.index' entity_and_id
+      tagName='li'
+      data-search-graph-builder=''
+      activeClass="breadcrumb__active"
+      class="breadcrumb"
+    }}
+      {{ t 'pageheader.graph_builder_link' }}
+    {{/link-to}}
+  </ul>
+</header>
+{{outlet}}
+{{#if isGraphBuilderRoute }}
+  {{partial builderNavType}}
+{{/if}}
+

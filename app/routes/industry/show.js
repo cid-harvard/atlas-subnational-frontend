@@ -71,6 +71,10 @@ export default Ember.Route.extend({
       //get products data for the department
       let departments = _.reduce(departmentsData, (memo, d) => {
         let department  = locationsMetadata[d.department_id];
+        department.parent_name_en = department.name_short_en;
+        department.parent_name_es = department.name_short_es;
+
+        department.group = department.code;
         memo.push(_.merge(d, department));
         return memo;
       },[]);

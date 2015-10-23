@@ -24,6 +24,9 @@ export default Ember.Controller.extend({
   recentDepartmentsData: computed('departmentsData', function() {
     return _.filter(this.get('departmentsData'), { year: 2013 });
   }),
+  graphbuilderLink: computed('model.id', function() {
+    return `industry-${this.get('model.id')}`;
+  }),
   occupationsData: computed.alias('model.occupationsData')
 });
 

@@ -4,7 +4,7 @@
 *
 **/
 
-.buildermod--is--open--settings {
+.buildermod__settings--open{
   .buildermod__drawer--settings {
     display: block;
   }
@@ -27,31 +27,11 @@
   }
 }
 
-.buildermod--is--open--changegraph {
+.buildermod__changegraph--open {
   .buildermod__drawer--changegraph {
     display: block;
   }
   .buildermod__tool--changegraph {
-    background: $colorBrown300;
-    border-left-color: $colorBrown300;
-    .tool__btn__icon:before {
-      content: $fa-var-remove;
-    }
-  }
-  .buildermod__vizwrap {
-    border-width: 0;
-    overflow-y: auto;
-  }
-  .buildermod__viz {
-    display: none;
-  }
-}
-
-.buildermod--is--open--questions {
-  .buildermod__drawer--questions {
-    display: block;
-  }
-  .buildermod__tool--questions {
     background: $colorBrown300;
     border-left-color: $colorBrown300;
     .tool__btn__icon:before {

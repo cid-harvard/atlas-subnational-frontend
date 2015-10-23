@@ -66,7 +66,13 @@ export default Ember.Route.extend({
         if(d.year === year) {
           let location = locationsMetadata[d.department_id];
           let tradeData = departmentsTradeDataIndex[d.department_id];
-          let extra = { name: location.name_en, group: d.department_id };
+          let extra = {
+            name: location.name_en,
+            group: d.code,
+            parent_name_en: location.name_en,
+            parent_name_es: location.name_es,
+          };
+
           let datum = _.merge(d, location, tradeData, extra );
           departments.push(datum);
         }

@@ -4,32 +4,50 @@
 *
 **/
 
+.items__mark__circle {
+  stroke: $colorGray;
+  fill: #f7f7f7;
+  stroke-width: 1px;
+}
+
 .node--is--highlighted {
   stroke: $colorBlack;
   stroke-width: 1px;
 }
 
-.items__mark__circle.highlighted.node--is--highlighted,
-.items__mark__circle.highlighted__adjacent.node--is--highlighted {
-  stroke: $colorRed;
-}
-
 .connect__line {
-  stroke: $colorGrayLight;
-  stroke-opacity: 1;
+  stroke: $colorGray;
+  opacity: .5;
+  stroke-opacity: .5;
 }
 
-.connect__line.highlighted {
-  stroke: $colorRed500;
+.connect__line.selected {
+  stroke-width: 3px;
+  stroke-opacity: 1;
+  stroke: red;
+}
+
+.connect__line.highlighted__adjacent {
   stroke-width: 2px;
+  stroke-opacity: 1;
+  stroke: black;
 }
 
 .items__mark__circle {
   fill: $colorBrown500;
 }
 
-.items__mark__circle.highlighted,
-.items__mark__circle.highlighted__adjacent {
-  stroke-width: 1px;
-  stroke: $colorRed500;
+.items__mark__circle.highlighted, .items__mark__circle.highlighted__adjacent  {
+  stroke-width: 3px;
+  stroke: $colorBlack;
+}
+
+.items__mark__circle.selected, .items__mark__circle.selected__adjacent {
+  stroke-width: 4px;
+  stroke: $colorBlack;
+}
+
+.items__mark__circle.highlighted.node--is--highlighted,
+.items__mark__circle.highlighted__adjacent.node--is--highlighted {
+  stroke: $colorBlack;
 }

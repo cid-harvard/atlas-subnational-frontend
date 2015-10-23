@@ -19,13 +19,13 @@ test('Location export to import', function(assert) {
   click('a[data-search-graph-builder]:first');
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/multiples?endDate=2013&startDate=2008&variable=export_value');
+    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/multiples?endDate=2013&locale=en-col&startDate=2008&variable=export_value');
   });
 
   click('button[data-change-question]');
   click('a[data-location-product="imports"]');
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/treemap?endDate=2013&startDate=2013&variable=import_value');
+    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/treemap?endDate=2013&locale=en-col&startDate=2013&variable=import_value');
   });
 });

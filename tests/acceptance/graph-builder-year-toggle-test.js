@@ -7,7 +7,6 @@ var application;
 module('Acceptance | graph builder year toggle', {
   beforeEach: function() {
     application = startApp();
-    application.$.cookie('locale', 'en');
   },
 
   afterEach: function() {
@@ -16,13 +15,13 @@ module('Acceptance | graph builder year toggle', {
 });
 
 test('change-years', function(assert) {
-  visit('/graph_builder/location-1/source/products/visualization/treemap?endDate=2013&startDate=2007&variable=export_value');
+  visit('/graph_builder/location-1/source/products/visualization/treemap?endDate=2013&locale=en-col&startDate=2007&variable=export_value');
 
   click('button[data-settings-open]');
   click('button[data-settings-close]');
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/treemap?endDate=2013&startDate=2007&variable=export_value');
+    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/treemap?endDate=2013&locale=en-col&startDate=2007&variable=export_value');
   });
 
   click('button[data-settings-open]');
@@ -32,7 +31,7 @@ test('change-years', function(assert) {
   click('button[data-settings-close]');
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/treemap?endDate=2013&startDate=2008&variable=export_value');
+    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/treemap?endDate=2013&locale=en-col&startDate=2008&variable=export_value');
   });
 
   click('button[data-settings-open]');
@@ -42,7 +41,7 @@ test('change-years', function(assert) {
   click('button[data-settings-close]');
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/treemap?endDate=2012&startDate=2008&variable=export_value');
+    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/treemap?endDate=2012&locale=en-col&startDate=2008&variable=export_value');
   });
 
   click('button[data-settings-open]');
@@ -53,7 +52,7 @@ test('change-years', function(assert) {
   click('button[data-settings-close]');
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/treemap?endDate=2010&startDate=2009&variable=export_value');
+    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/treemap?endDate=2010&locale=en-col&startDate=2009&variable=export_value');
   });
 
   click('button[data-settings-open]');
@@ -64,6 +63,6 @@ test('change-years', function(assert) {
   click('button[data-settings-close]');
 
   andThen(function() {
-    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/treemap?endDate=2012&startDate=2008&variable=export_value');
+    assert.equal(currentURL(), '/graph_builder/location-1/source/products/visualization/treemap?endDate=2012&locale=en-col&startDate=2008&variable=export_value');
   });
 });
