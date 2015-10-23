@@ -114,6 +114,10 @@ export default Ember.Component.extend({
               vars.refresh = true;
               vars.zoom = l;
 
+              // Remove tooltips
+              d3.select(vars.container).selectAll(".items__mark__text").remove();
+              d3.select(vars.container).selectAll(".items__mark__div").remove();
+
               d3.select(vars.container).call(vars.this_chart);
             }
           }]
@@ -121,10 +125,18 @@ export default Ember.Component.extend({
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
           x: function(d, i, vars) {
-            return vars.x_scale[0]["func"](d[vars.var_x]);
+            var offset = 0;
+            if(vars.scale > 1) {
+               offset = vars.width/2;
+            }
+            return (vars.x_scale[0]["func"](d[vars.var_x]) - vars.translate_x) * vars.scale + offset;
           },
           y: function(d, i, vars) {
-            return vars.y_scale[0]["func"](d[vars.var_y]);
+            var offset = 0;
+            if(vars.scale > 1) {
+              offset = vars.height/2;
+            }
+            return (vars.y_scale[0]["func"](d[vars.var_y]) - vars.translate_y) * vars.scale + offset;
           },
           class: function() { return 'tooltip'; },
           text: (d) => {
