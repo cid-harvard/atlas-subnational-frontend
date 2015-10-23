@@ -146,106 +146,47 @@ export default Ember.Controller.extend({
     let vis = this.get('model.visualization');
     let source = this.get('model.source');
 
-    if(_.contains(['geo', 'treemap', 'multiples'], vis)){
-      // TODO Refactor these settings and abstract them to some external map
+    if(source === 'locations' && _.contains(['geo', 'treemap', 'multiples'], vis)){
       return [
-        {
-          type: 'multiples',
-          description: 'graph_builder.change_graph.multiples_description',
-          available: true
-        }, {
-          type: 'treemap',
-          description: 'graph_builder.change_graph.treemap_description',
-          available: true
-        }, {
-          type: 'geo',
-          description: 'graph_builder.change_graph.geo_description',
-          available: true
-        }, {
-          type: 'scatter',
-          description: 'graph_builder.change_graph.scatter_description',
-          available: false
-        }, {
-          type: 'similarity',
-          description: 'graph_builder.change_graph.similarity_description',
-          available: false
-        }
+        { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
+        { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+        { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: true },
+        { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+        { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
       ];
     } else if (source === 'occupations' && _.contains(['treemap'], vis)){
       return [
-        {
-          type: 'multiples',
-          description: 'graph_builder.change_graph.multiples_description',
-          available: false
-        }, {
-          type: 'treemap',
-          description: 'graph_builder.change_graph.treemap_description',
-          available: true
-        }, {
-          type: 'geo',
-          description: 'graph_builder.change_graph.geo_description',
-          available: false
-        }, {
-          type: 'scatter',
-          description: 'graph_builder.change_graph.scatter_description',
-          available: false
-        }, {
-          type: 'similarity',
-          description: 'graph_builder.change_graph.similarity_description',
-          available: false
-        }
+        { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
+        { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+        { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+        { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+        { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
       ];
-    }else if (vis === 'scatter'){
+    } else if (vis === 'scatter'){
       return [
-        {
-          type: 'multiples',
-          description: 'graph_builder.change_graph.multiples_description',
-          available: false
-        }, {
-          type: 'treemap',
-          description: 'graph_builder.change_graph.treemap_description',
-          available: false
-        }, {
-          type: 'geo',
-          description: 'graph_builder.change_graph.geo_description',
-          available: false
-        }, {
-          type: 'scatter',
-          description: 'graph_builder.change_graph.scatter_description',
-          available: true
-        }, {
-          type: 'similarity',
-          description: 'graph_builder.change_graph.similarity_description',
-          available: false
-        }
+        { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
+        { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: false },
+        { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+        { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: true },
+        { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
       ];
     } else if (vis === 'similarity'){
       return [
-        {
-          type: 'multiples',
-          description: 'graph_builder.change_graph.multiples_description',
-          available: false
-        }, {
-          type: 'treemap',
-          description: 'graph_builder.change_graph.treemap_description',
-          available: false
-        }, {
-          type: 'geo',
-          description: 'graph_builder.change_graph.geo_description',
-          available: false
-        }, {
-          type: 'scatter',
-          description: 'graph_builder.change_graph.scatter_description',
-          available: false
-        }, {
-          type: 'similarity',
-          description: 'graph_builder.change_graph.similarity_description',
-          available: true
-        }
+        { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
+        { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: false },
+        { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+        { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+        { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: true }
+      ];
+    } else {
+      return [
+        { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
+        { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+        { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+        { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+        { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
       ];
     }
-
-    return [vis];
   }),
   varDependent: computed('variable', 'source', function() {
     // if variable exists, it is varDependent
@@ -348,7 +289,7 @@ export default Ember.Controller.extend({
         endDate = 2013;
       }
 
-      if(this.get('visualization') === visualization) { return true; } //do nothing if currently on the same visualization
+      if(this.get('visualization') === visualization) { return; } //do nothing if currently on the same visualization
       this.transitionToRoute('visualization', graph_builder_id, model.source, visualization, {
         queryParams: { variable: this.get('variable'), startDate: startDate, endDate: endDate, search: this.get('search') }
       });
