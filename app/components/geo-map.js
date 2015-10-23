@@ -34,7 +34,7 @@ export default Ember.Component.extend({
 
     let quantize = d3.scale.quantize()
       .domain([0, this.get('maxValue')])
-      .range(d3.range(3).map(function(i) { return 'q' + i + '-3'; }));
+      .range(d3.range(5).map(function(i) { return 'q' + i + '-5'; }));
 
     let nestByDepartmentId = d3.nest()
       .key(function(d) { return Ember.get(d,'department_id'); })
@@ -79,7 +79,7 @@ export default Ember.Component.extend({
         let valueMap = this.get('valueMap');
         return  {
           className: valueMap.get(_.get(feature, 'properties.cid_id')).class,
-          fillOpacity: 0.8,
+          fillOpacity: 1,
           opacity: 1
         };
       }
