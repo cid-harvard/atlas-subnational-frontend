@@ -1,0 +1,24 @@
+general:
+  artifacts:
+    - dist/
+machine:
+  environment:
+    BUILD_SUFFIX: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/$CIRCLE_BRANCH/$CIRCLE_BUILD_NUM/
+    ROOT_URL: /$BUILD_SUFFIX
+dependencies:
+  post:
+    - gem install sass
+    - if ! which ember; then npm install -g ember-cli@0.2.7; else echo "Found existing ember-cli in CircleCI cache"; fi
+    - if ! which bower; then npm install -g bower@1.4.1; else echo "Found existing bower in CircleCI cache"; fi
+    - bower install
+test:
+  override:
+    - echo "Dummy test" && exit 0
+deployment:
+  staging:
+    branch: /.*/
+    commands:
+      - cp .env.deploy .env
+      - ember build --environment=production
+      - aws s3 sync ./dist/ "s3://ci-deploys.cid-labs.com/$BUILD_SUFFIX"
+      - echo "Check out deploy at http://ci-deploys.cid-labs.com/$BUILD_SUFFIX"

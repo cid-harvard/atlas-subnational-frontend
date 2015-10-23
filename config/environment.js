@@ -50,7 +50,7 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
   if (environment === 'production') {
-    ENV.apiURL = "api/";
+    ENV.apiURL = process.env.API_URL,
     ENV.baseURL = process.env.ROOT_URL || '/';
     ENV.locationType = 'hash',
     ENV.contentSecurityPolicy = {
