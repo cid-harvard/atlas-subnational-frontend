@@ -30,8 +30,7 @@
   .geo__department {
     fill: #000;
     stroke: $colorBrown500;
-    stroke-dasharray: 5, 5;
-    stroke-width: 1px;
+    stroke-width: 2px;
   }
 
   // If the value of the data is exactly 0
@@ -40,14 +39,20 @@
   }
 
   // The scale if the value is positive
-  .q0-3 {
-    fill: $colorRedScale300;
+  .q0-5 {
+    fill: $colorGreenQ0-5;
   }
-  .q1-3 {
-    fill: $colorRedScale600;
+  .q1-5 {
+    fill: $colorGreenQ1-5;
   }
-  .q2-3 {
-    fill: $colorRedScale1000;
+  .q2-5 {
+    fill: $colorGreenQ2-5;
+  }
+  .q3-5 {
+    fill: $colorGreenQ3-5;
+  }
+  .q4-5 {
+    fill: $colorGreenQ4-5;
   }
 }
 

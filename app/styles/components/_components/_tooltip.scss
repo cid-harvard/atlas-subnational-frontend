@@ -4,6 +4,12 @@
 *
 **/
 
+.leaflet-popup-content {
+  background: $colorWhite;
+  font-size: $fontTiny;
+  font-family: $sans;
+}
+
 .tooltip {
   background: $colorWhite;
   height: 110%;

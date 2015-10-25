@@ -58,7 +58,11 @@ app.import('bower_components/mapbox.js/mapbox.css');
 app.import('bower_components/mapbox.js/images/icons-000000@2x.png', { destDir: 'assets/img/geo' });
 
 // Admin boundaries for geomap
-app.import('vendor/geodata/colombia_osm_adm4.geojson',  { destDir: 'assets/geodata' });
+app.import('vendor/geodata/col.topojson',  { destDir: 'assets/geodata' });
+app.import('vendor/geodata/mex.topojson',  { destDir: 'assets/geodata' });
+
+//Import leaflet-omnivore
+app.import('vendor/leaflet-omnivore.min.js');
 
 // Font Awesome
 // The npm package readme mentions refactoring this as a Broccoli tree, so consider that a TODO

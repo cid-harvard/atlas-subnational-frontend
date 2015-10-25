@@ -28,11 +28,14 @@ export function initialize(instance) {
   i18n.set('defaultLocale', defaultLocale);
   i18n.set('otherLocale', otherLocale);
   i18n.set('locales', [otherLocale, defaultLocale]);
+  i18n.set('display', i18n.get('locale').split('-')[0]);
+  i18n.set('country', i18n.get('locale').split('-')[1]);
 
   i18n.addObserver('locale', function() {
     if(this.get('locale') != 'no-copy') {
       numeral.language(this.get('locale'));
       this.set('display', this.get('locale').split('-')[0]);
+      this.set('country', this.get('locale').split('-')[1]);
     }
   });
 }

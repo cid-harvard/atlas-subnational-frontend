@@ -115,17 +115,14 @@ export default Ember.Component.extend({
                 } else if('import_value' === key) {
                   return '$ ' + numeral(value).format('0.0a') + ' USD';
                 } else {
-                  return numeral(value).format('$ 0.0a');
+                  return numeral(value).format('0.0a');
                 }
               }
 
               var tooltip_text = '<span style="color: ' +  d.color + '">' + d[varTextItem] + '</span>';
 
               data.forEach((d) => {
-                 tooltip_text += '<br>' +
-                   this.get('i18n').t(`graph_builder.table.${d.key}`)
-                   + ': '
-                   + format(d.key, d.value);
+                 tooltip_text += '<br>' + this.get('i18n').t(`graph_builder.table.${d.key}`) + ': ' + format(d.key, d.value);
                });
 
               return tooltip_text;

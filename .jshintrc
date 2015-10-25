@@ -11,7 +11,8 @@
     "noUiSlider",
     "L",
     "Papa",
-    "saveAs"
+    "saveAs",
+    "omnivore"
   ],
   "browser": true,
   "boss": true,
