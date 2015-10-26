@@ -4,6 +4,10 @@ const {observer, computed, get:get} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
+
+  firstYear: computed.alias('i18n.firstYear'),
+  lastYear: computed.alias('i18n.lastYear'),
+
   locationFirst: computed('i18n', function() {
     return get(this, 'i18n').t('index.location_q1.id').string;
   }),

@@ -8,7 +8,6 @@ const {attr} = DS;
 const {computed, $, get:get } = Ember;
 
 export default DS.Model.extend(ModelAttribute, {
-  i18n: Ember.inject.service(),
   classIndustries: attr(),
   industriesData: attr(),
   departmentsData: attr(),
@@ -51,22 +50,22 @@ export default DS.Model.extend(ModelAttribute, {
     let datum = _.where(this.get('employmentGrowthDotPlot'),
       { industry_id: parseInt(this.get('id'))}
     );
-    var display = numeral(datum[0].employment_growth).format('0.0%');
-    return display;
+    let number = _.get(datum[0],'employment_growth') || 0;
+    return numeral(number).format('0.0%');
   }),
   lastEmployment: computed('lastDataPoint','i18n.locale', function() {
     return numeral(this.get('lastDataPoint').employment).format('0.00a');
   }),
   lastAvgWage: computed('lastDataPoint','i18n.locale', function() {
-    return numeral(this.get('lastDataPoint').avg_wage).format('$ 0.00a');
+    return numeral(this.get('lastDataPoint.avg_wage')).format('$ 0.00a');
   }),
   graphbuilderDepartments: computed('id', function() {
     var defaultParams = {
-      treemap: { variable: 'employment', startDate: 2013, endDate: 2013 },
-      multiples: { variable: 'employment', startDate: 2008, endDate: 2013 },
-      geo: { variable: 'employment', startDate: 2013, endDate: 2013 },
-      scatter: { variable: null,  startDate: 2013, endDate: 2013 },
-      similarty: { variable: null,  startDate: 2013, endDate: 2013 }
+      treemap: { variable: 'employment', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      multiples: { variable: 'employment', startDate: this.get('firstYear'), endDate: this.get('lastYear') },
+      geo: { variable: 'employment', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      scatter: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      similarty: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') }
     };
     var baseUrl = `${apiURL}/data/industry/${this.get('id')}/participants`;
     var departmentUrl = baseUrl + '?level=department';
@@ -87,10 +86,10 @@ export default DS.Model.extend(ModelAttribute, {
   }),
   graphbuilderMunicipalities: computed('id', function() {
     var defaultParams = {
-      treemap: { variable: 'employment', startDate: 2013, endDate: 2013 },
-      multiples: { variable: 'employment', startDate: 2008, endDate: 2013 },
-      scatter: { variable: null,  startDate: 2013, endDate: 2013 },
-      similarty: { variable: null,  startDate: 2013, endDate: 2013 }
+      treemap: { variable: 'employment', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      multiples: { variable: 'employment', startDate: this.get('firstYear'), endDate: this.get('lastYear') },
+      scatter: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      similarty: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') }
     };
     var baseUrl = `${apiURL}/data/industry/${this.get('id')}/participants`;
     var municipalityiUrl = baseUrl + '?level=municipality';
@@ -111,7 +110,7 @@ export default DS.Model.extend(ModelAttribute, {
   }),
   graphbuilderOccupations: computed('id', function() {
     var defaultParams = {
-      treemap: { variable: 'num_vacancies', startDate: 2013, endDate: 2013 },
+      treemap: { variable: 'num_vacancies', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
     };
     var baseUrl = `${apiURL}/data/industry/${this.get('id')}/occupations/?level=minor_group`;
 
@@ -122,7 +121,7 @@ export default DS.Model.extend(ModelAttribute, {
 
         data = _.map(data, (d) => {
           let occupation = occupationsMetadata[d.occupation_id];
-          d.year = 2013;
+          d.year = this.get('lastYear');
           d.group = occupation.code.split('-')[0];
           return _.merge(d, occupation);
         });

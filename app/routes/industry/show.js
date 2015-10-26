@@ -4,6 +4,9 @@ const {apiURL} = ENV;
 const {RSVP, getWithDefault, $} = Ember;
 
 export default Ember.Route.extend({
+  i18n: Ember.inject.service(),
+  firstYear: computed.alias('i18n.firstYear'),
+  lastYear: computed.alias('i18n.lastYear'),
   employmentGrowthCalc: function(data) {
     let first = _.first(data);
     let last = _.last(data);
@@ -84,9 +87,9 @@ export default Ember.Route.extend({
         return  _.merge(d, industryDivisions[d.industry_id]);
       });
 
-      let occupations = _.map(occupationsData, function(d) {
+      let occupations = _.map(occupationsData, (d) => {
         let occupation = occupationsMetadata[d.occupation_id];
-        d.year = 2013;
+        d.year = this.get('lastYear');
         d.group = occupation.code.split('-')[0];
         return _.merge(d, occupation);
       });

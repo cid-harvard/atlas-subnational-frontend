@@ -1,6 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  i18n: Ember.inject.service(),
+  firstYear: computed.alias('i18n.firstYear'),
+  lastYear: computed.alias('i18n.lastYear'),
+
   queryParams: {
     variable: { refreshModel: true }, // The dimension of the source that the user cares about
                                       // (export_value, import_value, wages, employment, rca)
@@ -43,8 +47,8 @@ export default Ember.Route.extend({
       controller.setProperties({
         variable: null,
         rca: null,
-        startDate: 2007,
-        endDate: 2013
+        startDate: this.get('firstYear'),
+        endDate: this.get('lastYear')
       });
     }
   }

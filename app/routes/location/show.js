@@ -6,12 +6,14 @@ const {RSVP, getWithDefault} = Ember;
 export default Ember.Route.extend({
 // `this.store.find` makes an api call for `params.location_id` and returns a promise
 // in the `then` function call, another API call is made to get the topExports data
+  i18n: Ember.inject.service(),
+
   model: function(params) {
     return this.store.find('location', params.location_id);
   },
   afterModel: function(model, transition) {
     // extract year out later
-    var year = getWithDefault(transition, 'queryParams.year', 2013);
+    var year = getWithDefault(transition, 'queryParams.year', this.get('lastYear'));
 
     var products = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/products?level=4digit`);
     var industries = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/industries?level=class`);
@@ -36,7 +38,7 @@ export default Ember.Route.extend({
 
       //get products data for the department
       let products = _.reduce(productsData, (memo, d) => {
-        if(d.year != 2013) { return memo; }
+        if(d.year != this.get('lastYear')) { return memo; }
         let product = productsMetadata[d.product_id];
         let productData = productsDataIndex[d.product_id];
         memo.push(_.merge(d, product, productData));

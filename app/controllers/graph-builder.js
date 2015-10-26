@@ -4,6 +4,9 @@ const {computed} = Ember;
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   needs: ['application'],
+  firstYear: computed.alias('i18n.firstYear'),
+  lastYear: computed.alias('i18n.lastYear'),
+
   entityId: computed.alias('entity_id'),
   name: computed('entity', 'model.name', 'i18n.locale', function() {
     if(this.get('entity') === 'location') {

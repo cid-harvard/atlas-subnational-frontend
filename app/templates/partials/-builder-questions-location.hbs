@@ -6,7 +6,7 @@
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'visualization' entity_and_id 'industries' 'treemap'
-            (query-params variable='employment' endDate='2013' startDate='2013' search='null')
+            (query-params variable='employment' endDate=lastYear startDate=lastYear search='null')
             data-location-industry="employment"
             class="builder__questions__question"}}
             {{t 'graph_builder.page_title.location.industries.employment' thisLevel=thisLevel}}
@@ -19,7 +19,7 @@
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'visualization' entity_and_id 'industries' 'treemap'
-            (query-params variable='wages' endDate='2013' startDate='2013' search='null')
+            (query-params variable='wages' endDate=lastYear startDate=lastYear search='null')
             data-location-industry="wages"
             class="builder__questions__question"}}
             {{t 'graph_builder.page_title.location.industries.wages' thisLevel=thisLevel}}
@@ -34,7 +34,7 @@
           <div class="builder__questions__item__textwrap">
             <span>
               {{#link-to 'visualization' entity_and_id 'industries' 'scatter'
-                (query-params variable='null' endDate='2013' startDate='2013' search='null')
+                (query-params variable='null' endDate=lastYear startDate=lastYear search='null')
                 data-location-industry="scatter"
                 class="builder__questions__question"}}
                 {{t 'graph_builder.page_title.location.industries.scatter' thisLevel=thisLevel}}
@@ -48,7 +48,7 @@
         <div class="builder__questions__item__textwrap">
           <span>
             {{#link-to 'visualization' entity_and_id 'industries' 'similarity'
-              (query-params variable='rca'endDate='2013' startDate='2013' search='null')
+              (query-params variable='rca'endDate=lastYear startDate=lastYear search='null')
               data-location-industry="similarity"
               class="builder__questions__question"}}
               {{t 'graph_builder.page_title.location.industries.similarity' thisLevel=thisLevel}}
@@ -65,7 +65,7 @@
       <div class="builder__questions__item__textwrap">
         <span data-location-product="exports">
           {{#link-to 'visualization' entity_and_id 'products' 'treemap'
-            (query-params variable='export_value' search='null' startDate=2013  endDate=2013)
+            (query-params variable='export_value' search='null' startDate=lastYear  endDate=lastYear)
             class="builder__questions__question"}}
             {{t 'graph_builder.page_title.location.products.export_value' thisLevel=thisLevel}}
           {{/link-to}}
@@ -77,7 +77,7 @@
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'visualization' entity_and_id 'products' 'treemap'
-            (query-params variable='import_value' search='null' startDate=2013  endDate=2013)
+            (query-params variable='import_value' search='null' startDate=lastYear  endDate=lastYear)
             data-location-product="imports"
             class="builder__questions__question"}}
             {{t 'graph_builder.page_title.location.products.import_value' thisLevel=thisLevel}}
@@ -91,7 +91,7 @@
         <div class="builder__questions__item__textwrap">
           <span>
             {{#link-to 'visualization' entity_and_id 'products' 'scatter'
-              (query-params variable='null' endDate='2013' startDate='2013' search='null')
+              (query-params variable='null' endDate=lastYear startDate=lastYear search='null')
               data-location-product="scatter"
               class="builder__questions__question"}}
               {{t 'graph_builder.page_title.location.products.scatter' thisLevel=thisLevel}}
@@ -104,7 +104,7 @@
         <div class="builder__questions__item__textwrap">
           <span>
             {{#link-to 'visualization' entity_and_id 'products' 'similarity'
-              (query-params variable='null' endDate='2013' startDate='2013' search='null')
+              (query-params variable='null' endDate=lastYear startDate=lastYear search='null')
               data-location-product="similarity"
               class="builder__questions__question"}}
               {{t 'graph_builder.page_title.location.products.similarity' thisLevel=thisLevel}}

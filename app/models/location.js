@@ -54,10 +54,10 @@ export default DS.Model.extend(ModelAttribute, {
   //following drives graphbuilder
   graphbuilderProducts: computed('id', function() {
     var defaultParams = {
-      treemap: { variable: 'export_value', startDate: 2013, endDate: 2013 },
-      multiples: { variable: 'export_value', startDate: 2008, endDate: 2013 },
-      scatter: { variable: null,  startDate: 2013, endDate: 2013 },
-      similarity: { variable: null,  startDate: 2013, endDate: 2013 }
+      treemap: { variable: 'export_value', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      multiples: { variable: 'export_value', startDate: this.get('firstYear'), endDate: this.get('lastYear') },
+      scatter: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      similarity: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') }
     };
     let products  = $.getJSON(`${apiURL}/data/location/${this.get('id')}/products?level=4digit`);
     let productComplexity = $.getJSON(`${apiURL}/data/product?level=4digit`);
@@ -83,10 +83,10 @@ export default DS.Model.extend(ModelAttribute, {
   }),
   graphbuilderIndustries: computed('id', function() {
     var defaultParams = {
-      treemap: { variable: 'wages', startDate: 2013, endDate: 2013 },
-      multiples: { variable: 'wages', startDate: 2008, endDate: 2013 },
-      scatter: { variable: null,  startDate: 2013, endDate: 2013 },
-      similarity: { variable: 'rca',  startDate: 2013, endDate: 2013 }
+      treemap: { variable: 'wages', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      multiples: { variable: 'wages', startDate: this.get('firstYear'), endDate: this.get('lastYear') },
+      scatter: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      similarity: { variable: 'rca',  startDate: this.get('lastYear'), endDate: this.get('lastYear') }
     };
     let industry = $.getJSON(`${apiURL}/data/location/${this.get('id')}/industries?level=class`);
     let industryComplexity = $.getJSON(`${apiURL}/data/industry?level=class`);

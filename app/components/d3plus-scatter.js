@@ -53,7 +53,7 @@ export default Ember.Component.extend({
     $.getJSON(`${apiURL}/data/location?level=department`).then((response) => {
       let id = this.get('entityId');
       let data = get(response, 'data');
-      return _.first(_.filter(data, {'year': 2013, 'department_id': parseInt(id) }));
+      return _.first(_.filter(data, {'year': this.get('lastYear'), 'department_id': parseInt(id) }));
       }).then((datum) => {
         this.set('width', this.$().parent().width());
         this.set('height', this.$().parent().height());
