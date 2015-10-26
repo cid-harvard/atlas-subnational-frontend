@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const {observer, computed, get:get} = Ember;
+const {computed, get:get} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),

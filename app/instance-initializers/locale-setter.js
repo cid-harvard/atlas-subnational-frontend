@@ -31,10 +31,17 @@ export function initialize(instance) {
   i18n.set('display', i18n.get('locale').split('-')[0]);
   i18n.set('country', i18n.get('locale').split('-')[1]);
 
+  const center = i18n.t('geomap.center')
+    .string.split(",")
+    .map(function(d) { return parseFloat(d); });
+
   const lastYear = parseInt(i18n.t('last_year').string);
   const firstYear = parseInt(i18n.t('first_year').string);
+
+  i18n.set('mapCenter', center);
   i18n.set('lastYear', lastYear);
   i18n.set('firstYear', firstYear);
+
   i18n.addObserver('locale', function() {
     if(this.get('locale') != 'no-copy') {
       numeral.language(this.get('locale'));

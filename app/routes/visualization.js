@@ -1,4 +1,5 @@
 import Ember from 'ember';
+const {computed} = Ember;
 
 export default Ember.Route.extend({
   i18n: Ember.inject.service(),

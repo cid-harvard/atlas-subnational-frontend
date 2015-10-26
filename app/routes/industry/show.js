@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import ENV from '../../config/environment';
 const {apiURL} = ENV;
-const {RSVP, getWithDefault, $} = Ember;
+const {computed, RSVP, getWithDefault, $} = Ember;
 
 export default Ember.Route.extend({
   i18n: Ember.inject.service(),
