@@ -30,7 +30,7 @@
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
-                    'visualization' 'location-3' 'industries' 'treemap' (query-params endDate=2013 startDate=2013 variable='employment')
+                    'visualization' locationFirst 'industries' 'treemap' (query-params endDate=2013 startDate=2013 variable='employment')
                     data-home-page-location-question='1'
                     class="link--stream index__questions__link"
                   }}
@@ -39,7 +39,7 @@
                 </li>
                 <li class="index__questions__item">
                   {{#link-to
-                    'visualization' 'location-1' 'products' 'scatter' (query-params endDate=2013 startDate=2013)
+                    'visualization' locationSecond 'products' 'scatter' (query-params endDate=2013 startDate=2013)
                     data-home-page-location-question='2'
                     class="link--stream index__questions__link"
                   }}
@@ -57,7 +57,7 @@
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
-                    'visualization' 'industry-488' 'departments' 'multiples' (query-params endDate=2013 startDate=2008 variable='employment')
+                    'visualization' industryFirst 'departments' 'multiples' (query-params endDate=2013 startDate=2008 variable='employment')
                     data-home-page-product-question='1'
                     class="link--stream index__questions__link"
                   }}
@@ -66,7 +66,7 @@
                 </li>
                 <li class="index__questions__item">
                   {{#link-to
-                    'visualization' 'industry-461' 'occupations' 'treemap' (query-params endDate=2013 startDate=2013 variable='num_vacancies')
+                    'visualization' industrySecond 'occupations' 'treemap' (query-params endDate=2013 startDate=2013 variable='num_vacancies')
                     data-home-page-product-question='2'
                     class="link--stream index__questions__link"
                   }}
@@ -82,7 +82,7 @@
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
-                    'visualization' 'product-74' 'locations' 'multiples' (query-params endDate=2013 startDate=2008 variable='export_value')
+                    'visualization' productFirst 'locations' 'multiples' (query-params endDate=2013 startDate=2008 variable='export_value')
                     data-home-page-industry-question='1'
                     class="link--stream index__questions__link"
                   }}
@@ -91,7 +91,7 @@
                 </li>
                 <li class="index__questions__item">
                   {{#link-to
-                    'visualization' 'product-1143' 'locations' 'multiples' (query-params endDate=2013 startDate=2008 variable='import_value')
+                    'visualization' productSecond 'locations' 'multiples' (query-params endDate=2013 startDate=2008 variable='import_value')
                     data-home-page-industry-question='2'
                     class="link--stream index__questions__link"
                   }}
@@ -160,7 +160,7 @@
         <div class="index__view__copy">
           <h3 class="section__head">{{ t 'index.profiles_head' }}</h3>
           <p class="section__p">{{ t 'index.profiles_subhead' }}</p>
-          {{#link-to 'location.show' 1
+          {{#link-to 'location.show' profile
             data-home-page-location=''
             class='btn btn--standalone btn--stream'
           }}
@@ -174,7 +174,7 @@
           <h3 class="section__head">{{ t 'index.builder_head' }}</h3>
           <p class="section__p">{{ t 'index.builder_subhead' }}</p>
           {{#link-to
-            'visualization' 'product-87' 'locations' 'multiples' (query-params endDate=2013 startDate=2008 variable='export_value')
+            'visualization' graphbuilder 'locations' 'multiples' (query-params endDate=2013 startDate=2008 variable='export_value')
             data-home-page-product=''
             class="btn btn--standalone btn--stream"
           }}
