@@ -1,12 +1,14 @@
 import Ember from 'ember';
 import ENV from '../../config/environment';
 const {apiURL} = ENV;
-const {RSVP, getWithDefault} = Ember;
+const {RSVP, computed, getWithDefault} = Ember;
 
 export default Ember.Route.extend({
 // `this.store.find` makes an api call for `params.location_id` and returns a promise
 // in the `then` function call, another API call is made to get the topExports data
   i18n: Ember.inject.service(),
+  firstYear: computed.alias('i18n.firstYear'),
+  lastYear: computed.alias('i18n.lastYear'),
 
   model: function(params) {
     return this.store.find('location', params.location_id);
@@ -61,11 +63,11 @@ export default Ember.Route.extend({
       }
 
       //dot plot and time series data
-      _.reduce(departmentsData, function(memo, d) {
+      _.reduce(departmentsData, (memo, d) => {
         if(d.department_id == department_id) {
           departmentTimeseries.push(d);
         }
-        if(d.year === year) {
+        if(d.year === this.get('lastYear')) {
           let location = locationsMetadata[d.department_id];
           let tradeData = departmentsTradeDataIndex[d.department_id];
           let extra = {
