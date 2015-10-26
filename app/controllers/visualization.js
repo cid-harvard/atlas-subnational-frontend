@@ -151,7 +151,7 @@ export default Ember.Controller.extend({
     let vis = this.get('model.visualization');
     let source = this.get('model.source');
 
-    if(source === 'locations' && _.contains(['geo', 'treemap', 'multiples'], vis)){
+    if(_.contains(['locations', 'departments'], source) && _.contains(['geo', 'treemap', 'multiples'], vis)){
       return [
         { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
         { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
