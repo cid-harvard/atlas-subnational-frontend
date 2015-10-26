@@ -62,7 +62,7 @@
       </tr>
       <tr class="table__row table__row--body">
         <td class="table__cell table__cell--summaries">
-          {{t 'industry.show.avg_wages' year=year}}
+          {{t 'industry.show.avg_wages' year=lastYear}}
         </td>
         <td class="table__cell table__cell--summaries">
           {{model.lastAvgWage}}
@@ -87,7 +87,7 @@
           <a class="tab__link"> {{t 'industry.show.avg_wages' year='2008 - 2013'}} </a>
         {{/ivy-tab}}
         {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
-          <a class="tab__link"> {{t 'industry.show.employment' year=year}} </a>
+          <a class="tab__link"> {{t 'industry.show.employment' year=lastYear}} </a>
         {{/ivy-tab}}
       {{/ivy-tab-list}}
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
