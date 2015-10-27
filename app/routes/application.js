@@ -62,8 +62,6 @@ export default Ember.Route.extend({
       var productSectionMap = _.indexBy(productParentMetadata, 'id');
       var industrySectionMap = _.indexBy(industryParentMetadata, 'id');
 
-      var occupationMap = _.indexBy(occupationsMetadata, 'id');
-
       _.forEach(locationsMetadata, function(d) {
         let color = '#d7cbf2';
 
