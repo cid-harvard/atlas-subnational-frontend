@@ -17,6 +17,10 @@ export default Ember.Controller.extend({
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
   drawerQuestionsIsOpen: false,
+
+  firstYear: computed.alias('i18n.firstYear'),
+  lastYear: computed.alias('i18n.lastYear'),
+
   metadata: computed.alias('model.metaData'),
   source: computed.alias('model.source'),
   entityId: computed.alias('model.entity.id'),
@@ -66,7 +70,8 @@ export default Ember.Controller.extend({
     if(this.get('model.data').length) {
       return d3.extent(this.get('model.data'), function(d) { return d.year; });
     }
-    return  [2008, 2013];
+
+    return  [this.get('firstYear'), this.get('lastYear')];
   }),
   dateRange: computed('dateExtent', function() {
     return d3.range(this.get('dateExtent')[0], this.get('dateExtent')[1] + 1);
@@ -146,7 +151,7 @@ export default Ember.Controller.extend({
     let vis = this.get('model.visualization');
     let source = this.get('model.source');
 
-    if(source === 'locations' && _.contains(['geo', 'treemap', 'multiples'], vis)){
+    if(_.contains(['locations', 'departments'], source) && _.contains(['geo', 'treemap', 'multiples'], vis)){
       return [
         { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
         { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
@@ -281,12 +286,12 @@ export default Ember.Controller.extend({
       this.set('drawerChangeGraphIsOpen', false); // Close graph change drawer
       this.set('searchText', this.get('search'));
 
-      var startDate = 2013;
-      var endDate = 2013;
+      var startDate = this.get('lastYear');
+      var endDate = this.get('lastYear');
 
       if(visualization === 'multiples') {
-        startDate = 2008;
-        endDate = 2013;
+        startDate = this.get('firstYear');
+        endDate = this.get('lastYear');
       }
 
       if(this.get('visualization') === visualization) { return; } //do nothing if currently on the same visualization

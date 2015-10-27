@@ -1,18 +1,21 @@
 import Ember from 'ember';
 import ENV from '../../config/environment';
 const {apiURL} = ENV;
-const {RSVP, getWithDefault} = Ember;
+const {RSVP, computed, getWithDefault} = Ember;
 
 export default Ember.Route.extend({
 // `this.store.find` makes an api call for `params.location_id` and returns a promise
 // in the `then` function call, another API call is made to get the topExports data
+  i18n: Ember.inject.service(),
+  firstYear: computed.alias('i18n.firstYear'),
+  lastYear: computed.alias('i18n.lastYear'),
+  censusYear: computed.alias('i18n.censusYear'),
+
   model: function(params) {
     return this.store.find('location', params.location_id);
   },
-  afterModel: function(model, transition) {
+  afterModel: function(model) {
     // extract year out later
-    var year = getWithDefault(transition, 'queryParams.year', 2013);
-
     var products = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/products?level=4digit`);
     var industries = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/industries?level=class`);
 
@@ -24,7 +27,7 @@ export default Ember.Route.extend({
       var productsData = getWithDefault(array[0], 'value.data', []);
       var departmentsData = getWithDefault(array[1], 'value.data', []);
       var industriesData = getWithDefault(array[2], 'value.data', []);
-      var departmentsTradeData = _.filter(getWithDefault(array[3], 'value.data', []), { 'year': year });
+      var departmentsTradeData = _.filter(getWithDefault(array[3], 'value.data', []), { 'year': this.get('lastYear')});
 
       var productsDataIndex = _.indexBy(productsData, 'product_id');
       var industriesDataIndex = _.indexBy(industriesData, 'industry_data');
@@ -36,7 +39,7 @@ export default Ember.Route.extend({
 
       //get products data for the department
       let products = _.reduce(productsData, (memo, d) => {
-        if(d.year != 2013) { return memo; }
+        if(d.year != this.get('lastYear')) { return memo; }
         let product = productsMetadata[d.product_id];
         let productData = productsDataIndex[d.product_id];
         memo.push(_.merge(d, product, productData));
@@ -59,11 +62,11 @@ export default Ember.Route.extend({
       }
 
       //dot plot and time series data
-      _.reduce(departmentsData, function(memo, d) {
+      _.reduce(departmentsData, (memo, d) => {
         if(d.department_id == department_id) {
           departmentTimeseries.push(d);
         }
-        if(d.year === year) {
+        if(d.year === this.get('censusYear')) {
           let location = locationsMetadata[d.department_id];
           let tradeData = departmentsTradeDataIndex[d.department_id];
           let extra = {

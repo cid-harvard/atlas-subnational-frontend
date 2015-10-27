@@ -61,6 +61,15 @@ app.import('bower_components/mapbox.js/images/icons-000000@2x.png', { destDir: '
 app.import('vendor/geodata/col.topojson',  { destDir: 'assets/geodata' });
 app.import('vendor/geodata/mex.topojson',  { destDir: 'assets/geodata' });
 
+app.import('vendor/networks/product_space.json', { destDir: 'assets/networks' });
+app.import('vendor/networks/col-industry_space.json', { destDir: 'assets/networks' });
+app.import('vendor/networks/mex-industry_space.json', { destDir: 'assets/networks' });
+
+app.import('vendor/color_mappings/product_section_colors.json', { destDir: 'assets/color_mappings' });
+
+app.import('vendor/color_mappings/col-industry_section_colors.json', { destDir: 'assets/color_mappings' });
+app.import('vendor/color_mappings/mex-industry_section_colors.json', { destDir: 'assets/color_mappings' });
+
 //Import leaflet-omnivore
 app.import('vendor/leaflet-omnivore.min.js');
 

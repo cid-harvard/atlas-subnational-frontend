@@ -1,9 +1,7 @@
-import productSpace from '../fixtures/product_space';
-import industrySpace from '../fixtures/industry_space';
 import Ember from 'ember';
 import numeral from 'numeral';
 
-const {computed, observer} = Ember;
+const {computed, observer, $} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
@@ -33,12 +31,12 @@ export default Ember.Component.extend({
     let type = this.get('dataType');
     return this.get(`metadata.${type}`);
   }),
-  graph: computed('dataType', function() {
+  networkURL: computed('dataType', function() {
     let type = this.get('dataType');
     if(type === 'industries') {
-      return industrySpace;
+      return `assets/networks/${this.get('i18n.country')}-industry_space.json`;
     } else if (type === 'products') {
-      return productSpace;
+      return 'assets/networks/product_space.json';
     }
   }),
   varRCA: computed('dataType', function() {
@@ -102,15 +100,41 @@ export default Ember.Component.extend({
             if(d[this.get('varRCA')] > 1) {
               return 'node--is--highlighted';
             }
-          }
+          }, evt: [{
+            type: 'selection',
+            func: function(d, i, vars) {
+              var l = vars.new_data.filter(function(d) {
+                return d.__highlighted__adjacent || d.__selected;
+              }).map(function(d) {
+                return d.id;
+              });
+
+              vars.refresh = true;
+              vars.zoom = l;
+
+              // Remove tooltips
+              d3.select(vars.container).selectAll(".items__mark__text").remove();
+              d3.select(vars.container).selectAll(".items__mark__div").remove();
+
+              d3.select(vars.container).call(vars.this_chart);
+            }
+          }]
         }, {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['div', 'none']),
           x: function(d, i, vars) {
-            return  vars.x_scale[0]["func"](d[vars.var_x]);
+            var offset = 0;
+            if(vars.scale > 1) {
+               offset = vars.width/2;
+            }
+            return (vars.x_scale[0]["func"](d[vars.var_x]) - vars.translate_x) * vars.scale + offset;
           },
           y: function(d, i, vars) {
-            return vars.y_scale[0]["func"](d[vars.var_y]);
+            var offset = 0;
+            if(vars.scale > 1) {
+              offset = vars.height/2;
+            }
+            return (vars.y_scale[0]["func"](d[vars.var_y]) - vars.translate_y) * vars.scale + offset;
           },
           class: function() { return 'tooltip'; },
           text: (d) => {
@@ -128,19 +152,14 @@ export default Ember.Component.extend({
     });
   }),
   didInsertElement: function() {
-    if(this.get('delay')) {
-      Ember.run.later(this , function() {
-        if(!this.get('width')){ this.set('width', this.$().parent().width()); }
-        if(!this.get('height')){ this.set('height', this.$().parent().height()); }
-        d3.select(this.get('id')).call(this.get('network'));
-      }, this.get('delay'));
-    } else {
+    $.getJSON(this.get('networkURL')).then((graph) => {
+      this.set('graph', graph);
       Ember.run.scheduleOnce('afterRender', this , function() {
         if(!this.get('width')){ this.set('width', this.$().parent().width()); }
         if(!this.get('height')){ this.set('height', this.$().parent().height()); }
         d3.select(this.get('id')).call(this.get('network'));
       });
-    }
+    });
   },
   willDestroyElement: function() {
     this.set('network',  null);

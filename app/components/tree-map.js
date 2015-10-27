@@ -5,6 +5,7 @@ const {computed, observer} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
+  delay: 50,
   tagName: 'div',
   attributeBindings: ['width','height'],
   classNames: ['buildermod__viz','tree-map'],
@@ -135,17 +136,24 @@ export default Ember.Component.extend({
       });
   }),
   didInsertElement: function() {
-    this.set('parent', this.get('parentView'));
-    if(this.get('parent.isVisible')) {
-      this.set('width', this.$().parent().width());
-      this.set('height', this.$().parent().height() || 500 );
-      d3.select(this.get('id')).call(this.get('treemap'));
-    }
+    Ember.run.scheduleOnce('afterRender',this , function() {
+      if(this.get('isInTab')) {
+        this.set('parent', this.get('parentView'));
+      }
+
+      let isProfilePanel = this.get('isInTab') && this.get('parent.isVisible');
+      let graphBuilder = ! this.get('isInTab');
+
+      if(isProfilePanel || graphBuilder) {
+        this.set('width', this.$().parent().width());
+        this.set('height', this.$().parent().height() || 500 );
+        d3.select(this.get('id')).call(this.get('treemap'));
+      }
+    });
   },
   profileTabUpdate: observer('parent.isVisible', function() {
-    if(this.get('isInTab')) {
+    if(this.get('isInTab') && this.get('parent.isVisible')) {
       Ember.run.scheduleOnce('afterRender', this , function() {
-        if(!this.element){ return false; } //do not redraw if not there
         this.set('width', this.$().parent().width());
         this.set('height', this.$().parent().height() || 500 );
         if(this.get('treemap')) {
@@ -163,14 +171,12 @@ export default Ember.Component.extend({
   },
   update: observer('data.[]', 'varDependent', 'i18n.locale', function() {
     if(!this.element){ return false; } //do not redraw if not there
-    Ember.run.scheduleOnce('afterRender', this , function() {
-      this.set('width', this.$().parent().width());
-      this.set('height', this.$().parent().height() || 500 );
+    this.set('width', this.$().parent().width());
+    this.set('height', this.$().parent().height() || 500 );
 
-      if(this.get('treemap')) {
-        d3.select(this.get('id')).select('svg').remove();
-        d3.select(this.get('id')).call(this.get('treemap'));
-      }
-    });
+    if(this.get('treemap')) {
+      d3.select(this.get('id')).select('svg').remove();
+      d3.select(this.get('id')).call(this.get('treemap'));
+    }
   })
 });

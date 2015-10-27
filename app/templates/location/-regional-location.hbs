@@ -101,12 +101,12 @@
       {{#ivy-tab-list classNames='tabmod__tabs'}}
         {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
           <a class="tab__link">
-            {{t 'location.show.employment' lastYear=year}}
+            {{t 'location.show.employment' lastYear=lastYear}}
           </a>
         {{/ivy-tab}}
         {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
           <a class="tab__link">
-            {{t 'location.show.total_wages' lastYear=year}}
+            {{t 'location.show.total_wages' lastYear=lastYear}}
           </a>
         {{/ivy-tab}}
       {{/ivy-tab-list}}
@@ -120,6 +120,7 @@
               elementId='employment-tree-map'
               dataType='industries'
               varDependent='employment'
+              delay=200
             }}
           </div>
         </div>
@@ -134,6 +135,7 @@
               elementId='wages-tree-map'
               dataType='industries'
               varDependent='wages'
+              delay=700
             }}
           </div>
         </div>
@@ -152,12 +154,12 @@
       {{#ivy-tab-list classNames='tabmod__tabs'}}
         {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
           <a class="tab__link">
-            {{t 'location.show.exports' year=year}}
+            {{t 'location.show.exports' year=lastYear }}
           </a>
         {{/ivy-tab}}
         {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
           <a class="tab__link">
-            {{t 'location.show.imports' year=year}}
+            {{t 'location.show.imports' year=lastYear }}
           </a>
         {{/ivy-tab}}
       {{/ivy-tab-list}}
@@ -171,6 +173,7 @@
               immutableData=productsData
               elementId='export-tree-map'
               varDependent='export_value'
+              delay=500
             }}
           </div>
         </div>
@@ -184,6 +187,7 @@
               immutableData=productsData
               elementId='import-tree-map'
               varDependent='import_value'
+              delay=1000
             }}
           </div>
         </div>

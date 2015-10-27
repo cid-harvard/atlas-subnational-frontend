@@ -22,7 +22,7 @@ export default DS.Model.extend(ModelAttribute, {
     return _.first(this.get('timeseries')) || {};
   }),
   lastDataPoint: computed('timeseries', function() {
-    return _.last(this.get('timeseries')) || {};
+    return _.select(this.get('timeseries'), { year: this.get('censusYear')})[0] || {};
   }),
   yearRange: computed('timeseries', function() {
     var firstYear = get(this.get('firstDataPoint'), 'year');
@@ -34,11 +34,11 @@ export default DS.Model.extend(ModelAttribute, {
     return numeral(pop).format('0.00a');
    }),
   lastGdp: computed('timeseries','locale', function() {
-    let gdp = get(this.get('lastDataPoint'), 'gdp_real');
+    let gdp = get(this.get('lastDataPoint'), 'gdp_real') || get(this.get('lastDataPoint'), 'gdp_nominal');
     return numeral(gdp).format('$ 0.00a');
    }),
   lastGdpPerCapita: computed('timeseries','locale', function() {
-    let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_real');
+    let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_real') ||  get(this.get('lastDataPoint'), 'gdp_pc_nominal');
     return numeral(gdpPC).format('$ 0.00a');
    }),
   gdpGrowth:computed('timeseries','locale', function() {
@@ -54,10 +54,10 @@ export default DS.Model.extend(ModelAttribute, {
   //following drives graphbuilder
   graphbuilderProducts: computed('id', function() {
     var defaultParams = {
-      treemap: { variable: 'export_value', startDate: 2013, endDate: 2013 },
-      multiples: { variable: 'export_value', startDate: 2008, endDate: 2013 },
-      scatter: { variable: null,  startDate: 2013, endDate: 2013 },
-      similarity: { variable: null,  startDate: 2013, endDate: 2013 }
+      treemap: { variable: 'export_value', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      multiples: { variable: 'export_value', startDate: this.get('firstYear'), endDate: this.get('lastYear') },
+      scatter: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      similarity: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') }
     };
     let products  = $.getJSON(`${apiURL}/data/location/${this.get('id')}/products?level=4digit`);
     let productComplexity = $.getJSON(`${apiURL}/data/product?level=4digit`);
@@ -83,10 +83,10 @@ export default DS.Model.extend(ModelAttribute, {
   }),
   graphbuilderIndustries: computed('id', function() {
     var defaultParams = {
-      treemap: { variable: 'wages', startDate: 2013, endDate: 2013 },
-      multiples: { variable: 'wages', startDate: 2008, endDate: 2013 },
-      scatter: { variable: null,  startDate: 2013, endDate: 2013 },
-      similarity: { variable: 'rca',  startDate: 2013, endDate: 2013 }
+      treemap: { variable: 'wages', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      multiples: { variable: 'wages', startDate: this.get('firstYear'), endDate: this.get('lastYear') },
+      scatter: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      similarity: { variable: 'rca',  startDate: this.get('lastYear'), endDate: this.get('lastYear') }
     };
     let industry = $.getJSON(`${apiURL}/data/location/${this.get('id')}/industries?level=class`);
     let industryComplexity = $.getJSON(`${apiURL}/data/industry?level=class`);
