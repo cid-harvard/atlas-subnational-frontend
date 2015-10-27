@@ -10,9 +10,11 @@
     <h3 class="section__head">{{t 'location.show.overview'}}</h3>
     </header>
     <ul class="list--section list--section--bullets">
-      <li class="list__item--section--bullets">
-        {{t 'location.show.bullet.gdp_grow_rate' gdpGrowth=model.gdpGrowth yearRange=model.yearRange}}
-      </li>
+      {{#if model.gdpGrowth }}
+        <li class="list__item--section--bullets">
+          {{t 'location.show.bullet.gdp_grow_rate' gdpGrowth=model.gdpGrowth yearRange=model.yearRange}}
+        </li>
+      {{/if}}
       <li class="list__item--section--bullets">
         {{t 'location.show.bullet.gdp_pc' name=model.name lastGdpPerCapita=model.lastGdpPerCapita}}
       </li>
