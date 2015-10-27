@@ -7,6 +7,7 @@ export default Ember.Controller.extend({
 
   firstYear: computed.alias('i18n.firstYear'),
   lastYear: computed.alias('i18n.lastYear'),
+  occupationsData: computed.alias('model.occupationsData'),
 
   treemapIndependentVars: ['department_id','department_id'],
   employmentGrowthDotPlot: computed.alias('model.employmentGrowthDotPlot'),
@@ -30,6 +31,12 @@ export default Ember.Controller.extend({
   graphbuilderLink: computed('model.id', function() {
     return `industry-${this.get('model.id')}`;
   }),
-  occupationsData: computed.alias('model.occupationsData')
+  hasAverageWage: computed('averageWageDotPlot', function() {
+    return _.some(this.get('averageWageDotPlot'), 'avg_wage');
+  }),
+  hasChildrenIndustries: computed('model.classIndustries', function() {
+    return this.get('model.classIndustries').length;
+  })
+
 });
 
