@@ -22,7 +22,7 @@ export default DS.Model.extend(ModelAttribute, {
     return _.first(this.get('timeseries')) || {};
   }),
   lastDataPoint: computed('timeseries', function() {
-    return _.last(this.get('timeseries')) || {};
+    return _.select(this.get('timeseries'), { year: this.get('censusYear')})[0] || {};
   }),
   yearRange: computed('timeseries', function() {
     var firstYear = get(this.get('firstDataPoint'), 'year');
@@ -34,11 +34,11 @@ export default DS.Model.extend(ModelAttribute, {
     return numeral(pop).format('0.00a');
    }),
   lastGdp: computed('timeseries','locale', function() {
-    let gdp = get(this.get('lastDataPoint'), 'gdp_real');
+    let gdp = get(this.get('lastDataPoint'), 'gdp_real') || get(this.get('lastDataPoint'), 'gdp_nominal');
     return numeral(gdp).format('$ 0.00a');
    }),
   lastGdpPerCapita: computed('timeseries','locale', function() {
-    let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_real');
+    let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_real') ||  get(this.get('lastDataPoint'), 'gdp_pc_nominal');
     return numeral(gdpPC).format('$ 0.00a');
    }),
   gdpGrowth:computed('timeseries','locale', function() {
