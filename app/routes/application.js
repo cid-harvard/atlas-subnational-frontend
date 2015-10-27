@@ -86,8 +86,8 @@ export default Ember.Route.extend({
         let color = '#ccafaf';
 
         d.group = get(d,'code').split('-')[0];
-        d.parent_name_en = get(parent, 'name_en');
-        d.parent_name_es = get(parent, 'name_es');
+        d.parent_name_en = get(d, 'name_en');
+        d.parent_name_es = get(d, 'name_es');
         d.color = color;
       });
 
