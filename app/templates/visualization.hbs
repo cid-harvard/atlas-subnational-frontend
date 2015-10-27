@@ -58,15 +58,15 @@
       text=visualizationExplanation
     }}
     <div class="ember__table__wrap">
+      {{component 'table-download'
+        name=builderModHeader
+        data=immutableData
+        search=search
+      }}
       {{component 'graphbuilder-table'
         data=filteredData
         source=source
         isSingleYear=isSingleYear
-        search=search
-      }}
-      {{component 'table-download'
-        name=builderModHeader
-        data=immutableData
         search=search
       }}
     </div>
