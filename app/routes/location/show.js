@@ -9,14 +9,13 @@ export default Ember.Route.extend({
   i18n: Ember.inject.service(),
   firstYear: computed.alias('i18n.firstYear'),
   lastYear: computed.alias('i18n.lastYear'),
+  censusYear: computed.alias('i18n.censusYear'),
 
   model: function(params) {
     return this.store.find('location', params.location_id);
   },
-  afterModel: function(model, transition) {
+  afterModel: function(model) {
     // extract year out later
-    var year = getWithDefault(transition, 'queryParams.year', this.get('lastYear'));
-
     var products = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/products?level=4digit`);
     var industries = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/industries?level=class`);
 
@@ -28,7 +27,7 @@ export default Ember.Route.extend({
       var productsData = getWithDefault(array[0], 'value.data', []);
       var departmentsData = getWithDefault(array[1], 'value.data', []);
       var industriesData = getWithDefault(array[2], 'value.data', []);
-      var departmentsTradeData = _.filter(getWithDefault(array[3], 'value.data', []), { 'year': year });
+      var departmentsTradeData = _.filter(getWithDefault(array[3], 'value.data', []), { 'year': this.get('lastYear')});
 
       var productsDataIndex = _.indexBy(productsData, 'product_id');
       var industriesDataIndex = _.indexBy(industriesData, 'industry_data');
@@ -67,7 +66,7 @@ export default Ember.Route.extend({
         if(d.department_id == department_id) {
           departmentTimeseries.push(d);
         }
-        if(d.year === this.get('lastYear')) {
+        if(d.year === this.get('censusYear')) {
           let location = locationsMetadata[d.department_id];
           let tradeData = departmentsTradeDataIndex[d.department_id];
           let extra = {
