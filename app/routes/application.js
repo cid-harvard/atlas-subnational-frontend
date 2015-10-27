@@ -82,7 +82,6 @@ export default Ember.Route.extend({
       });
 
       _.forEach(occupationsMetadata, function(d) {
-        let parent = _.get(occupationMap, d.parent_id) || d;
         let color = '#ccafaf';
 
         d.group = get(d,'code').split('-')[0];
