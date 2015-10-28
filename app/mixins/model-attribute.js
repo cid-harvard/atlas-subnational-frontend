@@ -22,6 +22,10 @@ export default Ember.Mixin.create({
 
   locale: computed.alias('i18n.locale'),
 
+  firstYear: computed.alias('i18n.firstYear'),
+  lastYear: computed.alias('i18n.lastYear'),
+  censusYear: computed.alias('i18n.censusYear'),
+
   _level: computed('locale', 'level', function() {
     return this.get('i18n')
       .t(`location.model.${this.get('level')}`);

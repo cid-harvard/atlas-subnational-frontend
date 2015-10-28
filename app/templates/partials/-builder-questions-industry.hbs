@@ -5,7 +5,7 @@
       <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
         <span>
-          {{#link-to 'visualization' entity_and_id 'departments' 'multiples' (query-params startDate=2008 endDate=2013 variable='employment') class="builder__questions__question"}}
+          {{#link-to 'visualization' entity_and_id 'departments' 'multiples' (query-params startDate=firstYear endDate=lastYear variable='employment') class="builder__questions__question"}}
             {{t 'graph_builder.page_title.industry.departments.employment'}}
           {{/link-to}}
         </span>
@@ -15,7 +15,7 @@
       <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
         <span>
-          {{#link-to 'visualization' entity_and_id 'departments' 'multiples' (query-params startDate=2008 endDate=2013 variable='wages') class="builder__questions__question"}}
+          {{#link-to 'visualization' entity_and_id 'departments' 'multiples' (query-params startDate=firstYear endDate=lastYear variable='wages') class="builder__questions__question"}}
             {{t 'graph_builder.page_title.industry.departments.wages'}}
           {{/link-to}}
         </span>
@@ -29,7 +29,7 @@
         <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
         <div class="builder__questions__item__textwrap">
           <span>
-            {{#link-to 'visualization' entity_and_id 'occupations' 'treemap' (query-params variable='num_vacancies' startDate=2013 endDate=2013) class="builder__questions__question"}}
+            {{#link-to 'visualization' entity_and_id 'occupations' 'treemap' (query-params variable='num_vacancies' startDate=lastYear endDate=lastYear) class="builder__questions__question"}}
               {{t 'graph_builder.page_title.industry.occupations.num_vacancies'}}
             {{/link-to}}
           </span>

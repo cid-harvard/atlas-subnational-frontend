@@ -1,4 +1,4 @@
-export default {
+
  0: {'color': '#B3E2CD',
   'name_en': 'Management Occupations',
   'name_es': 'Ocupaciones de gestión'},
@@ -68,4 +68,4 @@ export default {
  1394: {'color': '#FDCDAC',
   'name_en': 'Military Specific Occupations',
   'name_es': 'Ocupaciones Específicas Militares'}
-};
+}

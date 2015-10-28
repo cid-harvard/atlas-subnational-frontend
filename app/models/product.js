@@ -8,11 +8,11 @@ const {computed, $} = Ember;
 export default DS.Model.extend(ModelAttribute, {
   graphbuilderLocations: computed('id', function() {
     var defaultParams = {
-      treemap: { variable: 'export_value', startDate: 2013, endDate: 2013 },
-      multiples: { variable: 'export_value', startDate: 2008, endDate: 2013 },
-      geo: { variable: 'export_value', startDate: 2013, endDate: 2013 },
-      scatter: { variable: null,  startDate: 2012, endDate: 2013 },
-      similarty: { variable: null,  startDate: 2012, endDate: 2013 }
+      treemap: { variable: 'export_value', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      multiples: { variable: 'export_value', startDate: this.get('firstYear'), endDate: this.get('lastYear') },
+      geo: { variable: 'export_value', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      scatter: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      similarty: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') }
     };
     return $.getJSON(`${apiURL}/data/product/${this.get('id')}/exporters?level=department`)
       .then((response) => {
@@ -31,11 +31,11 @@ export default DS.Model.extend(ModelAttribute, {
    }),
   graphbuilderCities: computed('id', function() {
     var defaultParams = {
-      treemap: { variable: 'export_value', startDate: 2013, endDate: 2013 },
-      multiples: { variable: 'export_value', startDate: 2008, endDate: 2013 },
-      geo: { variable: 'export_value', startDate: 2013, endDate: 2013 },
-      scatter: { variable: null,  startDate: 2012, endDate: 2013 },
-      similarty: { variable: null,  startDate: 2012, endDate: 2013 }
+      treemap: { variable: 'export_value', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      multiples: { variable: 'export_value', startDate: this.get('firstYear'), endDate: this.get('lastYear') },
+      geo: { variable: 'export_value', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      scatter: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      similarty: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') }
     };
     return $.getJSON(`${apiURL}/data/product/${this.get('id')}/exporters?level=msa`)
       .then((response) => {

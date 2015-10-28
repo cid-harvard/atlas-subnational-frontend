@@ -5,10 +5,13 @@ const {computed, get:get} = Ember;
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   queryParams: ['year'],
+
+  firstYear: computed.alias('i18n.firstYear'),
+  lastYear: computed.alias('i18n.lastYear'),
+
   departmentsData: computed.oneWay('model.departments'),
   productsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
-  year: 2013,
   isCountry: computed('model.level', function() {
     return this.get('model.level') === 'country';
   }),
@@ -39,7 +42,7 @@ export default Ember.Controller.extend({
     return '$' + numeral(total).format('0.0a') + ' USD';
   }),
   lastIndustryData: computed.filter('industriesData', function(datum) {
-    return parseInt(get(datum, 'year')) === 2013;
+    return parseInt(get(datum, 'year')) === this.get('lastYear');
   }),
   graphbuilderLink: computed('model.id', function() {
     return `location-${this.get('model.id')}`;

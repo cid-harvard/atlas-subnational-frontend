@@ -1,11 +1,9 @@
 import Ember from 'ember';
 import ENV from '../config/environment';
-import ProductSectionColor from '../fixtures/product_section_colors';
-import IndustrySectionColor from '../fixtures/industry_section_colors';
 
 import numeral from 'numeral';
 
-const {RSVP, get:get, set:set} = Ember;
+const {RSVP, $, get:get, set:set} = Ember;
 const {apiURL} = ENV;
 
 export default Ember.Route.extend({
@@ -18,16 +16,19 @@ export default Ember.Route.extend({
     if(! _.contains(this.get('i18n.locales'), locale)) {
       set(transition, 'queryParams.locale', this.get('i18n.defaultLocale'));
     }
+
   },
   model: function() {
-    var products4digit = Ember.$.getJSON(apiURL+'/metadata/products?level=4digit');
-    var locationsMetadata = Ember.$.getJSON(apiURL+'/metadata/locations/');
-    var productsHierarchy = Ember.$.getJSON(apiURL+'/metadata/products/hierarchy?from_level=4digit&to_level=section');
-    var industriesClass = Ember.$.getJSON(apiURL+'/metadata/industries?level=class');
-    var industriesHierarchy = Ember.$.getJSON(apiURL+'/metadata/industries/hierarchy?from_level=4digit&to_level=section');
-    var productParentMetadata = Ember.$.getJSON(apiURL+'/metadata/products/?level=section');
-    var industryParentMetadata = Ember.$.getJSON(apiURL+'/metadata/industries/?level=section');
-    var occupationsMetadata = Ember.$.getJSON(apiURL+'/metadata/occupations/');
+    var products4digit = $.getJSON(apiURL+'/metadata/products?level=4digit');
+    var locationsMetadata = $.getJSON(apiURL+'/metadata/locations/');
+    var productsHierarchy = $.getJSON(apiURL+'/metadata/products/hierarchy?from_level=4digit&to_level=section');
+    var industriesClass = $.getJSON(apiURL+'/metadata/industries?level=class');
+    var industriesHierarchy = $.getJSON(apiURL+'/metadata/industries/hierarchy?from_level=4digit&to_level=section');
+    var productParentMetadata = $.getJSON(apiURL+'/metadata/products/?level=section');
+    var industryParentMetadata = $.getJSON(apiURL+'/metadata/industries/?level=section');
+    var occupationsMetadata = $.getJSON(apiURL+'/metadata/occupations/');
+    var productSectionColor = $.getJSON('assets/color_mappings/product_section_colors.json');
+    var industrySectionColor = $.getJSON(`assets/color_mappings/${this.get('i18n.country')}-industry_section_colors.json`);
 
     var promises = [
       products4digit,
@@ -38,6 +39,8 @@ export default Ember.Route.extend({
       productParentMetadata,
       industryParentMetadata,
       occupationsMetadata,
+      productSectionColor,
+      industrySectionColor
     ];
 
     return RSVP.allSettled(promises).then(function(array) {
@@ -49,6 +52,8 @@ export default Ember.Route.extend({
       let productParentMetadata = array[5].value.data;
       let industryParentMetadata = array[6].value.data;
       let occupationsMetadata = array[7].value.data;
+      let productSectionColor = array[8].value;
+      let industrySectionColor = array[9].value;
 
       // Finds the entity with the `1st digit` that matches
       // sets `group` to the `1st digit code`
@@ -68,7 +73,7 @@ export default Ember.Route.extend({
 
       _.forEach(productsMetadata, function(d) {
         let sectionId = productsHierarchy[d.id];
-        let color = _.isUndefined(sectionId) ? '#fff' : _.get(ProductSectionColor, `${sectionId}.color`);
+        let color = _.isUndefined(sectionId) ? '#fff' : _.get(productSectionColor, `${sectionId}.color`);
 
         d.color = color;
         d.parent_name_en = _.get(productSectionMap, `${sectionId}.name_en`);
@@ -77,7 +82,7 @@ export default Ember.Route.extend({
       });
 
       _.forEach(occupationsMetadata, function(d) {
-        let parent = d.parent_id ? occupationMap[d.parent_id] : d;
+        let parent = _.get(occupationMap, d.parent_id) || d;
         let color = '#ccafaf';
 
         d.group = get(d,'code').split('-')[0];
@@ -88,7 +93,7 @@ export default Ember.Route.extend({
 
       _.forEach(industriesMetadata, function(d) {
         let sectionId = industriesHierarchy[d.id];
-        let color = _.isUndefined(sectionId) ? '#fff' : _.get(IndustrySectionColor, `${sectionId}.color`);
+        let color = _.isUndefined(sectionId) ? '#fff' : _.get(industrySectionColor, `${sectionId}.color`);
 
         d.group = sectionId;
         d.parent_name_en = _.get(industrySectionMap, `${sectionId}.name_en`);

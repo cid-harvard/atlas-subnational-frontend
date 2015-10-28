@@ -9,6 +9,8 @@ export default Ember.Component.extend({
   tagName: 'div',
   varIndependent: 'code',
   classNames: ['buildermod__viz--white','buildermod__viz'],
+  firstYear: computed.alias('i18n.firstYear'),
+  lastYear: computed.alias('i18n.lastYear'),
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
@@ -53,8 +55,8 @@ export default Ember.Component.extend({
     $.getJSON(`${apiURL}/data/location?level=department`).then((response) => {
       let id = this.get('entityId');
       let data = get(response, 'data');
-      return _.first(_.filter(data, {'year': 2013, 'department_id': parseInt(id) }));
-      }).then((datum) => {
+      return _.first(_.filter(data, {'year': this.get('lastYear'), 'department_id': parseInt(id) }));
+    }).then((datum) => {
         this.set('width', this.$().parent().width());
         this.set('height', this.$().parent().height());
         if(this.get('dataType') === 'products') {
