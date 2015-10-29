@@ -5,30 +5,50 @@
 **/
 
 .index {
-  background: $colorBrown200;
-}
-
-.index__section {
-  max-width: 100rem;
+  background: $odGrayLight;
 }
 
 .index__header__wrap {
-  background-size: 40rem;
-  padding: $baseSpace;
+  background: $colorWhite url('/assets/img/acem/bg.png');
+  background-size: 100%;
+   .search {
+	  transition: background $animationTime $animationEasing;
+	  background: #444;
+	  font-size: $fontSmall;
+	  font-weight: 300;
+	  padding: $baseSpace/2 $baseSpace;
+	  flex: 1 1 auto;
+	  width: 100%;
+	  height: 100%;
+	  font-family: $sans;
+	  &:active, &:focus {
+	    outline: 0;
+	    color: $colorWhite;
+	    &::-webkit-input-placeholder {
+	      color: $colorGray;
+	    }
+	  }
+	  &::-webkit-input-placeholder {
+	    transition: color $animationTime $animationEasing;
+	    color: $colorGrayLight;
+	    font-size: $fontSmall;
+	  }
+	}
 }
-
 .index__header {
-  max-width: 100rem;
-  background: $colorBrown200;
+  width: 100%;
+  padding: $baseSpace * 2;
   margin: 0 auto;
 }
 
 .stream__head.index__head {
   margin-bottom: $baseSpace;
-  max-width: 100rem;
+  color: $colorWhite;
 }
 
 .index__search__wrap {
+  width: 50rem;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
 }
 
 // Views
@@ -36,32 +56,34 @@
 .index__viewmod {
   @include clearfix;
   z-index: $zIndex-1;
-  padding: 0 $baseSpace * 3 $baseSpace * 3 $baseSpace * 3;
-  margin-bottom: $baseSpace * 3;
 }
-
+.index__viewmod .section__head, .index__viewmod .section__p {
+	color: $colorWhite;
+}
 .index__view__wrap {
-  display: flex;
-  flex-direction: row;
-  &:first-of-type {
-    margin-bottom: $baseSpace * 2;
-  }
-  &:nth-of-type(2) {
-    float: right;
-    margin-bottom: $baseSpace * -5;
-  }
+  width: 50%;
+  background: $colorBrown300;
+  padding: $baseSpace;
+  float: left;
+  text-align: center;
+  color: #fff;
+}
+.index__view__wrap:nth-child(1) {
+	background: rgb(71,71,71);
+}
+.index__view__wrap:nth-child(2) {
+	background: rgb(98,98,98);
 }
 
 .index__view__img {
-  max-width: 20rem;
-  max-height: 20rem;
+  max-width: 16rem;
+  max-height: 16rem;
   box-shadow: 1px 1px 5px $colorBlack;
+  
 }
 
 .index__view__copy {
-  padding: $baseSpace * 2;
-  background: $colorBrown300;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  padding: $baseSpace;
 }
 
 // Complexity figure
@@ -75,13 +97,18 @@
   margin: 0 auto;
   display: flex;
 }
-
+.section__complexity .section__head {
+	color: $odGreen;
+}
 .section__complexity__graph {
   position: relative;
+  display: none;
 }
 
 .section__complexity__copy {
-  margin: $baseSpace 0 $baseSpace $baseSpace*6;
+  background: $colorWhite;
+  padding: $baseSpace;
+  margin: $baseSpace * 2 $baseSpace;
 
 }
 
@@ -148,7 +175,6 @@
 
 .index__figure__bignum{
   font-size: $fontHuge;
-  font-family: $sansAlt;
   letter-spacing: -2px;
   line-height: 100%;
 }
@@ -164,17 +190,22 @@
 
 // Research featured in media grid
 .index__featuredin__wrap {
-  margin: 0 $baseSpace*3;
   background: $colorBrown300;
   padding: $baseSpace * 2;
 }
-
+.index__featuredin__wrap h3 {
+	font-size: $fontSmall;
+	margin-bottom: 0.5rem;
+	font-weight: 300;
+}
 .index__featuredin__list {
   display: flex;
   align-items: center;
 }
 
 .index__featuredin__item {
+  font-size: $fontTiny;
+  font-weight: 700;
   text-align: center;
   padding: 0 $baseSpace/2;
   flex: 1;
@@ -188,6 +219,7 @@
 
 .index__featuredin__img {
   width: 100%;
+  max-width: 140px;
 }
 
 // Crystal ball questions
@@ -197,9 +229,19 @@
   margin-bottom: $baseSpace * 3;
 }
 
+.index__questions__mod p.section__p, .index__viewmod p.section__p {
+	text-align: center;
+	max-width: none;
+}
+
+.index__questions__mod h3.section__head {
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
 .index__questions__wrap {
-  max-width: 100rem;
   margin: 0 auto;
+  max-width: 100rem;
 }
 
 .index__topics__list {
@@ -227,7 +269,7 @@
 
 .index__topics__item {
   padding: $baseSpace;
-  background: $colorBrown300;
+  background: $colorWhite;
 }
 
 .index__questions__item {

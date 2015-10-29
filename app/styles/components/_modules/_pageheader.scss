@@ -5,11 +5,11 @@
 **/
 
 .header--pageheader {
-  background: $colorRed;
+  background: $odGreen;
 }
 
 .pageheader__wrap {
-  padding: $baseSpace $baseSpace*3;
+  padding: $baseSpace $baseSpace*2;
   position: relative;
 }
 
@@ -30,37 +30,41 @@
   }
 }
 
+.pageheader__caption {
+	font-size: $fontSmall;
+	a {
+		color: #fff;
+		font-weight: 300;
+	}
+}
 
 // Nav
 
 .pageheader__nav {
   font-size: $fontSmall;
-}
-
-@media (min-width: 1200px) {
-  .pageheader__nav {
-    position: absolute;
-    bottom: 0;
-    right: $baseSpace * 3;
-    margin-bottom: 0;
-    .pageheader__search__wrap {
-      margin-left: auto;
-    }
-  }
+  float: right;
 }
 
 .pageheader__search__wrap {
   width: 50rem;
+  padding-bottom: 0;
+  .btn--search {
+	  background: #666;
+	  color: $colorWhite;
+	  &:hover, &:active, &:focus {
+	    background: $odGrayLight;
+		color: $odGreen;
+	  }
+	}
 }
 
 .pageheader__link {
   transition: $animationTime color $animationEasing;
-  color: $colorWhite;
+  color: rgb(32,120,95);
   margin: 0 $baseSpace $baseSpace/2 0;
-  font-weight: 500;
+  font-weight: 700;
   display: inline-block;
   @include offset-text;
-  font-family: $sans;
   &:hover {
     color: $colorWhite;
   }
@@ -68,7 +72,6 @@
 
 .pageheader__link--is--active {
   color: $colorWhite;
-  font-weight: 500;
 }
 
 
@@ -136,7 +139,6 @@
   display: inline;
   font-weight: 500;
   vertical-align: 6px;
-  font-family: $sans;
   @include offset-text;
 }
 

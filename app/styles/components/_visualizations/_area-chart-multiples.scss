@@ -84,7 +84,7 @@
 }
 
 .background {
-  fill: $colorBrown300;
+  fill: $odGrayLight;
   pointer-events: all;
 }
 
@@ -110,7 +110,7 @@
 
 .axis--y {
   line {
-    stroke: $colorBrown500;
+    stroke: $odGrayMedDark;
     fill: none;
     shape-rendering: crispEdges;
     pointer-events: none;
@@ -118,7 +118,7 @@
 }
 
 .marker {
-  fill: #ee4036;
+  fill: #444;
 }
 
 .caption, .year, .marker {

@@ -9,10 +9,7 @@ a {
 }
 
 .link--stream {
-  color: $colorGrayDark;
-  font-family: $sans;
-  font-weight: 300;
-  font-size: $fontBase-decrement; // A bit smaller to make x-heights match Plantin's
+  color: $odGreen;
   &:hover, &:focus, &:active {
     color: $colorBlack;
   }

@@ -8,6 +8,13 @@
 .table--summaries {
   margin-bottom: $baseSpace;
   width: 100%;
+  .table__header {
+	  border-right: 1px solid #666;
+      border-bottom: 1px solid #666;
+  }
+  .table__header:last-of-type {
+	  border-right-width: 0;
+  }
 }
 
 .table__header--summaries--dotplot {
@@ -22,7 +29,7 @@
   content: '';
   width: 8px;
   height: 8px;
-  background-color: $colorRed;
+  background-color: $odGreen;
   display: inline-block;
   margin-right: 1px;
   transform: rotate(45deg);
@@ -30,4 +37,6 @@
 
 .table__cell--summaries {
   height: 70px; // A reminder that height acts as min-height for table cells
+  border-right: 1px solid #666;
+  border-bottom: 1px solid #666;
 }

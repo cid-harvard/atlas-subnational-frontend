@@ -19,16 +19,17 @@
 }
 
 .stream__head {
-  font-size: $fontXXLarge;
+  font-size: $fontLarge;
   letter-spacing: -2px;
-  font-family: $sansAlt;
   line-height: 100%;
   -moz-osx-font-smoothing: grayscale;
+  color: #222;
 }
 
 .stream__subhead {
   margin-bottom: $baseSpace;
   font-weight: 500;
+  color: $colorWhite;
 }
 
 .breadcrumb {

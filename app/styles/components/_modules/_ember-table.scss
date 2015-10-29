@@ -10,13 +10,13 @@
 }
 
 .ember-table-tables-container {
-  background: $colorBrown300;
+  background: $odGrayLight;
   border: none;
   margin-bottom: $baseSpace / 2;
 }
 
 .ember-table-header-row, .ember-table-header-container .ember-table-table-fixed-wrapper {
-  background: $colorBrown500;
+  background: $odGrayMed;
 }
 
 .ember-table-header-cell {
@@ -55,14 +55,14 @@
 }
 
 .ember-table-cell {
-  border-right: 1px solid $colorBrown400;
+  border-right: 1px solid $colorWhite;
   &:last-of-type {
     border-right: none;
   }
 }
 
 .ember-table-table-row {
-  border-bottom: 1px solid $colorBrown400;
+  border-bottom: 1px solid $colorWhite;
 }
 
 .ember-table-hover div {

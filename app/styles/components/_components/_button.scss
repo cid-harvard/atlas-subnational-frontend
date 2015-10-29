@@ -14,6 +14,7 @@ button::-moz-focus-inner {
   padding: $baseSpace/2 $baseSpace;
   font-size: $fontSmall;
   cursor: pointer;
+  font-weight: 700;
   &:active, &:focus {
     outline: 0;
   }
@@ -21,38 +22,31 @@ button::-moz-focus-inner {
 
 .btn--standalone {
   transition: color $animationTime $animationEasing, background $animationTime $animationEasing;
-  font-weight: 500;
-  font-family: $sans;
   display: inline-block;
   @include offset-text;
 }
 
-.btn--stream {
-  background: $colorBrown500;
-  color: $colorGrayDark;
-  box-shadow: inset 0 -5px $colorBrown700;
+.btn--stream, .btn--search, .btn--buildermod {
+  background: $odGreen;
+  color: $colorWhite;
   &:hover, &:active, &:focus {
-    background: $colorBrown400;
-    box-shadow: inset 0 -5px $colorBrown500;
+    background: $colorWhite;
+    color: $odGreen;
   }
 }
 
 .btn--buildermod {
-  background: $colorBrown500;
-  color: $colorGray;
+  background: $odGrayMed;
+  color: #222;
   &:hover, &:active, &:focus {
-    background: $colorBrown400;
+    background: $odGreen;
+    color: $colorWhite;
   }
 }
 
+
 .btn--search {
-  background: $colorNavy600;
-  color: $colorWhite;
-  box-shadow: inset 0 -5px $colorNavy800;
-  &:hover {
-    background: $colorNavy400;
-    box-shadow: inset 0 -5px $colorNavy600;
-  }
+  text-transform: uppercase;
 }
 
 .btn--cta {
