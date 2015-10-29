@@ -109,38 +109,30 @@
   </div>
   <div class="col-xs-12 col-sm-8">
     <nav class="pageheader__nav">
-    {{#link-to "about.project-description" current-when="about" class="pageheader__link" activeClass="pageheader__link--is--active"}}
-    {{ t 'pageheader.about' }}
-    {{/link-to}}
-    {{#link-to "downloads" current-when="downloads" class="pageheader__link" activeClass="pageheader__btn--is--active"}}
-    {{ t 'pageheader.download' }}
-    {{/link-to}}
-
+      {{#link-to "about.project-description" current-when="about" class="pageheader__link" activeClass="pageheader__link--is--active"}}
+        {{ t 'pageheader.about' }}
+      {{/link-to}}
+      {{#link-to "downloads" current-when="downloads" class="pageheader__link" activeClass="pageheader__btn--is--active"}}
+        {{ t 'pageheader.download' }}
+      {{/link-to}}
+       <div class="togglemod togglemod--languages">
+        <p {{bind-attr class=":toggle__label__text isDefaultLocale::toggle__label--is--active"}}>
+          {{otherLanguage}}
+        </p>
+        {{input
+          type='checkbox'
+          id='toggle--languages'
+          class='toggle toggle--languages'
+          checked=isDefaultLocale
+          data-language-toggle=''
+          }}
+        <label class="toggle__label" for="toggle--languages"></label>
+        <p {{bind-attr class=":toggle__label__text isDefaultLocale:toggle__label--is--active"}}>
+          {{defaultLanguage}}
+        </p>
+      </div>
     </nav>
   </div>
   <div style="clear:both;"></div>
-  {{#unless homepage }}
-  <div class="col-xs-12">
-    <form class="search__wrap pageheader__search__wrap" style="float:right;">
-      <div class="search__field__wrap pageheader__search__field__wrap">
-        {{input
-        class="search"
-        placeholder=( t 'pageheader.search_placeholder' )
-        value=query
-        enter='query'
-        required='required'
-        data-search-input=''
-        }}
-        <button class="search__reset fa fa-close" type="reset"></button>
-      </div>
-      <input class="search__submit btn btn--standalone btn--search"
-      data-search
-      type="submit"
-      value="{{ t 'pageheader.search_link' }}"
-      {{action 'query' query}} >
-    </form>
-  </div>
-  <div style="clear:both;"></div>
-  {{/unless}}
 </div>
 </header>
