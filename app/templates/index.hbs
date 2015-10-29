@@ -1,205 +1,176 @@
 <main class="stream index">
-<article class="stream__article">
-<header class="index__header__wrap">
-<div class="stream__header index__header">
-  <h1 class="stream__head index__head">{{ t 'index.header_head' }}</h1>
-  <h2 class="stream__subhead">{{ t 'index.header_subhead' }}</h2>
-  <form class="search__wrap">
-    <div class="search__field__wrap">
-      {{input
-      class="search"
-      placeholder=( t 'pageheader.search_placeholder' )
-      value=query
-      enter='query'
-      required='required'
-      }}
-      <button class="search__reset fa fa-close" type="reset"></button>
-    </div>
-    <input class="search__submit btn btn--standalone btn--search" type="submit" value="{{ t 'pageheader.search_link' }}" {{action 'query' query}}>
-  </form>
-  <img src="assets/img/acem/SHCP-logo.png" alt="SHCP" width=134 height=46 style="margin-top: 20px;" class="image__shcp">
-</div>
-</header>
-<div class="index__viewmod">
-  <section class="index__section index__view__wrap">
-  <img src="assets/img/index/profiles_1_large.jpg" srcset="assets/img/index/profiles_1_med.jpg, assets/img/index/profiles_1_large.jpg 2x" alt="Icon for the Profiles view" class="index__view__img">
-  <div class="index__view__copy">
-    <h3 class="section__head">{{ t 'index.profiles_head' }}</h3>
-    <p class="section__p">{{ t 'index.profiles_subhead' }}</p>
-    {{#link-to 'location.show' 206 data-home-page-location='' class='btn btn--standalone btn--stream' }}
-      {{ t 'index.profiles_cta' }}
-    {{/link-to}}
-  </div>
-  </section>
-  <section class="index__section index__view__wrap">
-  <img src="assets/img/index/graph_builder_1_large.jpg" srcset="assets/img/index/graph_builder_1_med.jpg, assets/img/index/graph_builder_1_large.jpg 2x" alt="Icon for the Graph Builder view" class="index__view__img">
-  <div class="index__view__copy">
-    <h3 class="section__head">{{ t 'index.builder_head' }}</h3>
-    <p class="section__p">{{ t 'index.builder_subhead' }}</p>
-    {{#link-to
-      'visualization' 'product-87' 'locations' 'multiples' (query-params endDate=2013 startDate=2008 variable='export_value')
-      data-home-page-product=''
-      class="btn btn--standalone btn--stream"
-    }}
-      {{ t 'index.builder_cta' }}
-    {{/link-to}}
-  </div>
-  </section>
-</div>
-<div class="index__complexity__mod">
-  <section class="index__section index__complexity__wrap">
-  <div class="section__complexity__graph">
-    <div class="section__complexity__bar section__complexity__bar--wef"></div>
-    <div class="section__complexity__bar section__complexity__bar--complexity"></div>
-  </div>
-  <div class="section__complexity__copy">
-    <h3 class="section__head">{{ t 'index.complexity_head' }}</h3>
-    <p class="section__p">{{ t 'index.complexity_subhead' }}</p>
-    <p class="section__p">{{ t 'index.complexity_caption' }}</p>
-    {{#link-to 'about.glossary'
-      data-home-page-product=''
-      class="btn btn--standalone btn--stream index__complexity__cta"
-    }}
-      {{ t 'index.complexity_cta' }}
-    {{/link-to}}
-  </div>
-  </section>
-</div>
-<div class="index__questions__mod">
-  <section class="stream__section index__section index__questions__wrap">
-  <h3 class="section__head">{{ t 'index.questions_head' }}</h3>
-  <p class="section__p">{{ t 'index.questions_subhead' }}</p>
-  <ul class="index__topics__list">
-    <li class="index__topics__item__wrap">
-    <div class="index__topics__item">
-      <h4 class="section__subhead">{{ t 'index.location_head' }}</h4>
-      <ul>
-        <li class="index__questions__item">
+  <article class="stream__article">
+    <header class="index__header__wrap">
+      <div class="stream__header index__header">
+        <h1 class="stream__head index__head">{{ t 'index.header_head' }}</h1>
+        <h2 class="stream__subhead">{{ t 'index.header_subhead' }}</h2>
+        <form class="search__wrap">
+          <div class="search__field__wrap">
+            {{input
+            class="search"
+            placeholder=( t 'pageheader.search_placeholder' )
+            value=query
+            enter='query'
+            required='required'
+            }}
+            <button class="search__reset fa fa-close" type="reset"></button>
+          </div>
+          <input class="search__submit btn btn--standalone btn--search" type="submit" value="{{ t 'pageheader.search_link' }}" {{action 'query' query}}>
+        </form>
+        <img src="assets/img/acem/SHCP-logo.png" alt="SHCP" width=134 height=46 style="margin-top: 20px;" class="image__shcp">
+      </div>
+    </header>
+    <div class="index__viewmod">
+      <section class="index__section index__view__wrap">
+      <img src="assets/img/index/profiles_1_large.jpg" srcset="assets/img/index/profiles_1_med.jpg, assets/img/index/profiles_1_large.jpg 2x" alt="Icon for the Profiles view" class="index__view__img">
+      <div class="index__view__copy">
+        <h3 class="section__head">{{ t 'index.profiles_head' }}</h3>
+        <p class="section__p">{{ t 'index.profiles_subhead' }}</p>
+        {{#link-to 'location.show' 206 data-home-page-location='' class='btn btn--standalone btn--stream' }}
+        {{ t 'index.profiles_cta' }}
+        {{/link-to}}
+      </div>
+      </section>
+      <section class="index__section index__view__wrap">
+      <img src="assets/img/index/graph_builder_1_large.jpg" srcset="assets/img/index/graph_builder_1_med.jpg, assets/img/index/graph_builder_1_large.jpg 2x" alt="Icon for the Graph Builder view" class="index__view__img">
+      <div class="index__view__copy">
+        <h3 class="section__head">{{ t 'index.builder_head' }}</h3>
+        <p class="section__p">{{ t 'index.builder_subhead' }}</p>
         {{#link-to
-          'visualization' locationFirst 'industries' 'treemap' (query-params endDate=lastYear startDate=lastYear variable='employment')
-          data-home-page-location-question='1'
-          class="link--stream index__questions__link"
+        'visualization' 'product-87' 'locations' 'multiples' (query-params endDate=2013 startDate=2008 variable='export_value')
+        data-home-page-product=''
+        class="btn btn--standalone btn--stream"
         }}
-          {{ t 'index.location_q1' }}
+        {{ t 'index.builder_cta' }}
         {{/link-to}}
+      </div>
+      </section>
+    </div>
+    <div class="index__complexity__mod">
+      <section class="index__section index__complexity__wrap">
+      <div class="section__complexity__graph">
+        <div class="section__complexity__bar section__complexity__bar--wef"></div>
+        <div class="section__complexity__bar section__complexity__bar--complexity"></div>
+      </div>
+      <div class="section__complexity__copy">
+        <h3 class="section__head">{{ t 'index.complexity_head' }}</h3>
+        <p class="section__p">{{ t 'index.complexity_subhead' }}</p>
+        <p class="section__p">{{ t 'index.complexity_caption' }}</p>
+        {{#link-to 'about.glossary'
+        data-home-page-product=''
+        class="btn btn--standalone btn--stream index__complexity__cta"
+        }}
+        {{ t 'index.complexity_cta' }}
+        {{/link-to}}
+      </div>
+      </section>
+    </div>
+    <div class="index__questions__mod">
+      <section class="stream__section index__section index__questions__wrap">
+      <h3 class="section__head">{{ t 'index.questions_head' }}</h3>
+      <p class="section__p">{{ t 'index.questions_subhead' }}</p>
+      <ul class="index__topics__list">
+        <li class="index__topics__item__wrap">
+        <div class="index__topics__item">
+          <h4 class="section__subhead">{{ t 'index.location_head' }}</h4>
+          <ul>
+            <li class="index__questions__item">
+            {{#link-to
+            'visualization' locationFirst 'industries' 'treemap' (query-params endDate=lastYear startDate=lastYear variable='employment')
+            data-home-page-location-question='1'
+            class="link--stream index__questions__link"
+            }}
+            {{ t 'index.location_q1' }}
+            {{/link-to}}
+            </li>
+            <li class="index__questions__item">
+            {{#link-to
+            'visualization' locationSecond 'products' 'scatter' (query-params endDate=lastYear startDate=lastYear)
+            data-home-page-location-question='2'
+            class="link--stream index__questions__link"
+            }}
+            {{ t 'index.location_q2' }}
+            {{/link-to}}
+            </li>
+          </ul>
+        </div>
+        <img src="assets/img/index/locations_2_large.jpg" srcset="assets/img/index/locations_2_med.jpg, assets/img/index/locations_2_large.jpg 2x" alt="" class="index__topics__image">
         </li>
-        <li class="index__questions__item">
-        {{#link-to
-          'visualization' locationSecond 'products' 'scatter' (query-params endDate=lastYear startDate=lastYear)
-          data-home-page-location-question='2'
-          class="link--stream index__questions__link"
-          }}
-        {{ t 'index.location_q2' }}
-        {{/link-to}}
+        <li class="index__topics__item__wrap">
+        <img src="assets/img/index/industries_2_large.jpg" srcset="assets/img/index/industries_2_med.jpg, assets/img/index/industries_2_large.jpg 2x" alt="" class="index__topics__image">
+        <div class="index__topics__item">
+          <h4 class="section__subhead">{{ t 'index.industry_head' }}</h4>
+          <ul>
+            <li class="index__questions__item">
+            {{#link-to
+            'visualization' industryFirst 'departments' 'multiples' (query-params endDate=lastYear startDate=firstYear variable='employment')
+            data-home-page-product-question='1'
+            class="link--stream index__questions__link"
+            }}
+            {{ t 'index.industry_q1' }}
+            {{/link-to}}
+            </li>
+            <li class="index__questions__item">
+            {{#link-to
+            'visualization' industrySecond 'occupations' 'treemap' (query-params endDate=lastYear startDate=firstYear variable='num_vacancies')
+            data-home-page-product-question='2'
+            class="link--stream index__questions__link"
+            }}
+            {{ t 'index.industry_q2' }}
+            {{/link-to}}
+            </li>
+          </ul>
+        </div>
+        </li>
+        <li class="index__topics__item__wrap">
+        <div class="index__topics__item">
+          <h4 class="section__subhead">{{ t 'index.product_head' }}</h4>
+          <ul>
+            <li class="index__questions__item">
+            {{#link-to
+            'visualization' productFirst 'locations' 'multiples' (query-params endDate=lastYear startDate=firstYear variable='export_value')
+            data-home-page-industry-question='1'
+            class="link--stream index__questions__link"
+            }}
+            {{ t 'index.product_q1' }}
+            {{/link-to}}
+            </li>
+            <li class="index__questions__item">
+            {{#link-to
+            'visualization' productSecond 'locations' 'multiples' (query-params endDate=lastYear startDate=firstYear variable='import_value')
+            data-home-page-industry-question='2'
+            class="link--stream index__questions__link"
+            }}
+            {{ t 'index.product_q2' }}
+            {{/link-to}}
+            </li>
+          </ul>
+        </div>
+        <img src="assets/img/index/products_2_large.jpg" srcset="assets/img/index/products_2_med.jpg, assets/img/index/products_2_large.jpg 2x" alt="" class="index__topics__image">
         </li>
       </ul>
+      </section>
     </div>
-    <img src="assets/img/index/locations_2_large.jpg" srcset="assets/img/index/locations_2_med.jpg, assets/img/index/locations_2_large.jpg 2x" alt="" class="index__topics__image">
-    </li>
-    <li class="index__topics__item__wrap">
-    <img src="assets/img/index/industries_2_large.jpg" srcset="assets/img/index/industries_2_med.jpg, assets/img/index/industries_2_large.jpg 2x" alt="" class="index__topics__image">
-    <div class="index__topics__item">
-      <h4 class="section__subhead">{{ t 'index.industry_head' }}</h4>
-      <ul>
-        <li class="index__questions__item">
-        {{#link-to
-          'visualization' industryFirst 'departments' 'multiples' (query-params endDate=lastYear startDate=firstYear variable='employment')
-          data-home-page-product-question='1'
-          class="link--stream index__questions__link"
-          }}
-          {{ t 'index.industry_q1' }}
-        {{/link-to}}
-        </li>
-        <li class="index__questions__item">
-        {{#link-to
-          'visualization' industrySecond 'occupations' 'treemap' (query-params endDate=lastYear startDate=firstYear variable='num_vacancies')
-          data-home-page-product-question='2'
-          class="link--stream index__questions__link"
-        }}
-          {{ t 'index.industry_q2' }}
-        {{/link-to}}
-        </li>
-      </ul>
-    </div>
-    </li>
-    <li class="index__topics__item__wrap">
-    <div class="index__topics__item">
-      <h4 class="section__subhead">{{ t 'index.product_head' }}</h4>
-      <ul>
-        <li class="index__questions__item">
-        {{#link-to
-          'visualization' productFirst 'locations' 'multiples' (query-params endDate=lastYear startDate=firstYear variable='export_value')
-          data-home-page-industry-question='1'
-          class="link--stream index__questions__link"
-        }}
-          {{ t 'index.product_q1' }}
-        {{/link-to}}
-        </li>
-        <li class="index__questions__item">
-        {{#link-to
-          'visualization' productSecond 'locations' 'multiples' (query-params endDate=lastYear startDate=firstYear variable='import_value')
-          data-home-page-industry-question='2'
-          class="link--stream index__questions__link"
-          }}
-          {{ t 'index.product_q2' }}
-        {{/link-to}}
-        </li>
-      </ul>
-    </div>
-    <img src="assets/img/index/products_2_large.jpg" srcset="assets/img/index/products_2_med.jpg, assets/img/index/products_2_large.jpg 2x" alt="" class="index__topics__image">
-    </li>
-  </ul>
-  </section>
-</div>
-<section class="stream__section index__featuredin__wrap">
-<h3 class="section__head section__head--spacey">Desarrollado por</h3>
-<ul class="index__featuredin__list" style='margin-bottom: 30px;'>
-  <li class="index__featuredin__item">
-  Lorem impsum dolor<br/>Lorem impsum dolor
-  </li>
-  <li class="index__featuredin__item">
-  <a href="http://www.hacienda.gob.mx/Paginas/default.aspx" target='_blank'>
-    <img src="assets/img/acem/SHCP-logogris.png" alt="SHCP" class="index__featuredin__img">
-  </a>
-  </li>
-  <li class="index__featuredin__item">
-  <a href="http://www.cide.edu/" target='_blank'>
-    <img src="assets/img/acem/cide.png" style='max-width: 60px;' alt="CIDE" class="index__featuredin__img">
-  </a>
-  </li>
-  <li class="index__featuredin__item">
-  </li>
-  <li class="index__featuredin__item">
-  </li>
-</ul>
-<h3 class="section__head section__head--spacey">{{ t 'index.research_head' }}</h3>
-<ul class="index__featuredin__list">
-  <li class="index__featuredin__item">
-  <a href="http://www.nytimes.com/interactive/2011/05/15/magazine/art-of-economic-complexity.html?_r=0" target='_blank'>
-    <img src="assets/img/index/nyt.png" alt="New York Times" class="index__featuredin__img">
-  </a>
-  </li>
-  <li class="index__featuredin__item">
-  <a href="http://www.economist.com/blogs/freeexchange/2011/10/building-blocks-economic-growth" target='_blank'>
-    <img src="assets/img/index/economist.png" alt="The Economist" class="index__featuredin__img">
-  </a>
-  </li>
-  <li class="index__featuredin__item">
-  <a href="http://blogs.wsj.com/economics/2011/10/26/complexity-predicts-nations-future-growth/" target='_blank'>
-    <img src="assets/img/index/wsj.png" alt="The Wall Street Journal" class="index__featuredin__img">
-  </a>
-  </li>
-  <li class="index__featuredin__item">
-  <a href="http://www.forbes.com/sites/timtreadgold/2015/05/20/indias-economic-revival-confirmed-by-new-harvard-university-study/" target='_blank'>
-    <img src="assets/img/index/forbes.png" alt="Forbes" class="index__featuredin__img">
-  </a>
-  </li>
-  <li class="index__featuredin__item">
-  <a href="http://www.ft.com/intl/cms/s/2/3fc2975c-4703-11e1-bc5f-00144feabdc0.html" target='_blank'>
-    <img src="assets/img/index/ft_2.png" alt="Financial Times" class="index__featuredin__img">
-  </a>
-  </li>
-</ul>
-</section>
-</article>
+    <section class="stream__section index__featuredin__wrap">
+    <h3 class="section__head section__head--spacey">Desarrollado por</h3>
+    <ul class="index__featuredin__list" style='margin-bottom: 30px;'>
+      <li class="index__featuredin__item">
+      <a href="http://growthlab.cid.harvard.edu/" target='_blank'>
+        Harvard Kennedy School <br>
+        Center for International Development
+      </a>
+      </li>
+      <li class="index__featuredin__item">
+      <a href="http://www.hacienda.gob.mx/Paginas/default.aspx" target='_blank'>
+        <img src="assets/img/acem/SHCP-logogris.png" alt="SHCP" class="index__featuredin__img">
+      </a>
+      </li>
+      <li class="index__featuredin__item">
+      <a href="http://www.cide.edu/" target='_blank'>
+        <img src="assets/img/acem/cide.png" style='max-width: 60px;' alt="CIDE" class="index__featuredin__img">
+      </a>
+      </li>
+    </ul>
+    </section>
+  </article>
 </main>
