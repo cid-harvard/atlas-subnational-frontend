@@ -34,6 +34,7 @@
 }
 
 .section__subhead {
+  min-height: 1.75 * $baseSpace;
   margin-bottom: $baseSpace;
   line-height: 120%;
 }
