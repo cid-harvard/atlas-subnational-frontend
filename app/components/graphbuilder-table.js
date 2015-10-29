@@ -222,6 +222,15 @@ export default EmberTableComponent.extend({
     if(this.get('isSingleYear')) {
       map = _.reject(map, {key: 'year'});
     }
+    _.forEach(map, (mapping) => {
+      if(mapping.key === 'name') { return; }
+
+      let allEmpty = _.every(this.get('content'), function(datum) {
+        return ! _.get(datum, mapping.key);
+      });
+
+      if(allEmpty){ map = _.reject(map, mapping); }
+    });
     return map;
   }),
   columns: computed('tableMap', function() {
