@@ -30,7 +30,7 @@ export default Ember.Component.extend({
     _.each(nest, (d) => {
       // terrible assumption, but assume that all value share the same name.
       d.name = get(d.values[0], `name_short_${this.get('i18n').display}`) || d.key;
-      d.color = get(d.values[0], 'color') || '#ccc1b9';
+      d.color = get(d.values[0], 'color') || '#00cc99';
     });
     return _.sortBy(nest, (d) => {
       return -_.sum(d.values, varDependent);
