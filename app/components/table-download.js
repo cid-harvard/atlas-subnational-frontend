@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   fileName: 'data.csv',
   didInsertElement: function() {
     let csv = Papa.unparse(this.get('data'));
-    csv = csv.replace('export_num_plants', 'number_of_transctions');
+    csv = csv.replace('export_num_plants', 'number_of_transactions');
     csv = csv.replace('num_vacancies', 'jobs');
     this.set('csv', csv);
 
@@ -14,7 +14,7 @@ export default Ember.Component.extend({
   },
   undateData: observer('data.[]', function() {
     let csv = Papa.unparse(this.get('data'));
-    csv = csv.replace('export_num_plants', 'number_of_transctions');
+    csv = csv.replace('export_num_plants', 'number_of_transactions');
     csv = csv.replace('num_vacancies', 'jobs');
     this.set('csv', csv);
 
