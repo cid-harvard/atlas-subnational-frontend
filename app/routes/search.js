@@ -42,6 +42,8 @@ export default Ember.Route.extend({
     return [];
   },
   deactivate: function() {
+    this._super.apply(this,arguments);
+    window.scrollTo(0,0);
     this.controller.set('search', null);
   },
   actions: {
