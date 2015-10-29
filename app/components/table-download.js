@@ -6,6 +6,7 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     let csv = Papa.unparse(this.get('data'));
     csv = csv.replace('export_num_plants', 'number_of_transctions');
+    csv = csv.replace('num_vacancies', 'jobs');
     this.set('csv', csv);
 
     var formBlob = new Blob([this.get('csv')], { type: 'text/csv' });
@@ -14,6 +15,7 @@ export default Ember.Component.extend({
   undateData: observer('data.[]', function() {
     let csv = Papa.unparse(this.get('data'));
     csv = csv.replace('export_num_plants', 'number_of_transctions');
+    csv = csv.replace('num_vacancies', 'jobs');
     this.set('csv', csv);
 
     var formBlob = new Blob([this.get('csv')], { type: 'text/csv' });
