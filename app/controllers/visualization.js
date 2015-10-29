@@ -60,6 +60,7 @@ export default Ember.Controller.extend({
     }
     return false;
   }),
+  isIndustry: computed.equal('entityType', 'industry'),
   years: computed('startDate', 'endDate', function() {
     let start = parseInt(this.get('startDate'), 10);
     let end = parseInt(this.get('endDate'), 10);

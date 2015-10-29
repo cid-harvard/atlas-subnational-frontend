@@ -57,19 +57,21 @@
     {{component 'visualization-explanation'
       text=visualizationExplanation
     }}
-    <div class="ember__table__wrap">
-      {{component 'graphbuilder-table'
-        data=filteredData
-        source=source
-        isSingleYear=isSingleYear
-        search=search
-      }}
-      {{component 'table-download'
-        name=builderModHeader
-        data=immutableData
-        search=search
-      }}
-    </div>
+    {{#unless isIndustry }}
+      <div class="ember__table__wrap">
+        {{component 'graphbuilder-table'
+          data=filteredData
+          source=source
+          isSingleYear=isSingleYear
+          search=search
+        }}
+        {{component 'table-download'
+          name=builderModHeader
+          data=immutableData
+          search=search
+        }}
+      </div>
+    {{/unless}}
     <small class="table__footer">
       {{ t 'graph_builder.table.read_more' }}
       {{#link-to 'about.glossary' class='link--stream link--stream--inline--tiny table__footer__link--glossary'}}
