@@ -102,7 +102,7 @@ export default Ember.Controller.extend({
     let level = this.get('i18n').t(`location.model.${this.get('entity.level')}`);
     let thisLevel = `this ${level}`;
 
-    if(this.get('model.level') === 'country') {
+    if(this.get('entity.level') === 'country') {
       thisLevel = level;
     } else if(this.get('i18n.display') === 'es') {
       thisLevel = level.string === 'ciudad' ? `esta ${level}` :  `este ${level}`;
