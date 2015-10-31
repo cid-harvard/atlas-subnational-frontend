@@ -95,7 +95,7 @@ export default EmberTableComponent.extend({
     }, {
       key: 'export_num_plants' ,
       type: 'int',
-      savedWidth: 120
+      savedWidth: 200
     }, {
       key: 'export_rca',
       type: 'int',
