@@ -23,4 +23,12 @@
   .axis__label {
     font-size: inherit;
   }
+
+  .mark__line_horizontal {
+    fill: none;
+    stroke: #000;
+    stroke-width: 1.5px;
+    stroke-dasharray: 5,5;
+    opacity: 1;
+  }
 }
