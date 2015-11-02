@@ -32,6 +32,8 @@ export default Ember.Component.extend({
       var_y: 'complexity',
       radius_min: 1,
       radius_max: 10,
+      x_format: function(d) { return numeral(d).format('0.00a'); },
+      y_format: function(d) { return numeral(d).format('0.00a'); },
       duration: 0,
       var_text: this.get('varIndependent'),
       x_text_custom: this.get('i18n').t('graph_builder.table.distance').string,
