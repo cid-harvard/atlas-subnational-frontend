@@ -132,11 +132,8 @@ export default Ember.Component.extend({
     if(!this.element){ return false; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
       if(this.get('scatter')) {
-      //this.get('scatter')
-      //  .x({ "value": 'distance', "label": this.get('i18n').t('graph_builder.table.distance').string })
-      //  .y({ "value": 'complexity', label: this.get('i18n').t('graph_builder.table.complexity').string })
-      //  .draw();
-      d3.select(this.get('id')).call(this.get('scatter'));
+        d3.select(this.get('id')).select('svg').remove();
+        d3.select(this.get('id')).call(this.get('scatter'));
       }
     });
   })
