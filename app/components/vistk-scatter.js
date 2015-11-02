@@ -17,6 +17,7 @@ export default Ember.Component.extend({
     return _.filter(this.get('data'), function(d) { return d[rca] < 1;});
   }),
   scatter: computed('rcaData', 'dataType','eciValue', function() {
+    let eci = this.get('eciValue');
     return vistk.viz()
     .params({
       type: 'scatterplot',
@@ -83,7 +84,13 @@ export default Ember.Component.extend({
           },
           translate: [0, 0],
           width: 200,
-          height: 'auto',
+          height: 'auto'
+        }, {
+          type: 'line_horizontal',
+          filter: function(d, i) { return i===0; },
+          offset_y: function(d, i, vars) {
+            return -(vars.y_scale[0]['func'](d[vars.var_y]) - vars.y_scale[0]['func'](eci));
+          }
         }]
       }]
     });
