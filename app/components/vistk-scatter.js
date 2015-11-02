@@ -63,22 +63,13 @@ export default Ember.Component.extend({
           text: (d, i, vars)  => {
             var data = [{
               'key': 'rca',
-              'value': d['rca']
+              'value': this.get('rca')
+            },{
+              'key': 'cog',
+              'value': d['cog']
             }];
             function format(key, value) {
-              if('share' === key){
-                return numeral(value).divide(100).format('0.0%');
-              } else if('employment' === key) {
-                return numeral(value).format('0.0a');
-              } else if('num_vacancies' === key) {
-                return numeral(value).format('0,0');
-              } else if('export_value' === key) {
-                return '$ ' + numeral(value).format('0.0a') + ' USD';
-              } else if('import_value' === key) {
-                return '$ ' + numeral(value).format('0.0a') + ' USD';
-              } else {
-                return numeral(value).format('$ 0.0a');
-              }
+              return numeral(value).format('$ 0.0a');
             }
             var textItem = Ember.get(d, `name_short_${this.get('i18n').display}`) || d.code;
             var tooltip_text = '<span style="color: ' +  d.color + '">' + textItem + '</span>';
