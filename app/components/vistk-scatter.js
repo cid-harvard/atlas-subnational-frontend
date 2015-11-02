@@ -19,7 +19,6 @@ export default Ember.Component.extend({
   scatter: computed('rcaData', 'dataType','eciValue', function() {
     return vistk.viz()
     .params({
-      dev: true,
       type: 'scatterplot',
       margin: {top: 10, right: 10, bottom: 30, left: 30},
       height: this.get('height'),
@@ -34,6 +33,8 @@ export default Ember.Component.extend({
       radius_min: 1,
       radius_max: 10,
       var_text: this.get('varIndependent'),
+      x_text_custom: this.get('i18n').t('graph_builder.table.distance').string,
+      y_text_custom: this.get('i18n').t('graph_builder.table.complexity').string,
       time: {
         var_time: "year",
         current_time: "2013",
