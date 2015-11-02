@@ -45,7 +45,7 @@ export default Ember.Component.extend({
       },
       items: [{
         marks: [{
-          type: "circle",
+          type: 'circle',
           var_r: this.get('varSize'),
           fill: (d) => { return d.color ? d.color : '#ccc1b9'; }
         }, {
@@ -55,12 +55,12 @@ export default Ember.Component.extend({
             return 'tooltip';
           },
           x: function(d, i, vars) {
-            return  vars.x_scale[0]["func"](d[vars.var_x]) + vars.margin.left;
+            return  vars.x_scale[0]['func'](d[vars.var_x]) + vars.margin.left;
           },
           y: function(d, i, vars) {
-            return vars.y_scale[0]["func"](d[vars.var_y]);
+            return vars.y_scale[0]['func'](d[vars.var_y]);
           },
-          text: (d, i, vars)  => {
+          text: (d)  => {
             var data = [{
               'key': 'rca',
               'value': this.get('rca')
@@ -75,9 +75,9 @@ export default Ember.Component.extend({
             var tooltip_text = '<span style="color: ' +  d.color + '">' + textItem + '</span>';
             data.forEach((d) => {
                tooltip_text += '<br>' +
-                 this.get('i18n').t(`graph_builder.table.${d.key}`)
-                 + ': '
-                 + format(d.key, d.value);
+                 this.get('i18n').t(`graph_builder.table.${d.key}`) +
+                 ': ' +
+                 format(d.key, d.value);
              });
             return tooltip_text;
           },
