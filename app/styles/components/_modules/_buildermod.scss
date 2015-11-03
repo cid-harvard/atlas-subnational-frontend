@@ -5,7 +5,7 @@
 **/
 
 .buildermod__header {
-  background: $colorBrown500;
+  background: $odGrayMed;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -14,12 +14,13 @@
 
 .buildermod__head {
   display: inline-block;
-  font-weight: 500;
+  font-weight: 300;
+  font-style: italic;
   padding: $baseSpace/2 $baseSpace;
   font-size: $fontSmall;
   align-self: center;
   &~.buildermod__tools .buildermod__tool:first-child {
-    border-left: 1px solid $colorBrown400;
+    border-left: 1px solid $colorWhite;
   }
 }
 
@@ -29,7 +30,7 @@
 }
 
 .buildermod__tool {
-  border-left: 1px solid $colorBrown400;
+  border-left: 1px solid $colorWhite;
   display: inline-block;
   padding: $baseSpace/2 $baseSpace;
   @include offset-text;
@@ -54,7 +55,7 @@
   min-height: $minBuildermodHeight;
   height: $buildermodHeight;
   overflow-y: scroll;
-  background: $colorBrown300;
+  background: $odGrayLight;
   position: relative;
   padding: $baseSpace*5 $baseSpace*1.5 $baseSpace*1.5;
 }

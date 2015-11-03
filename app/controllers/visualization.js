@@ -60,6 +60,7 @@ export default Ember.Controller.extend({
     }
     return false;
   }),
+  isIndustry: computed.equal('entityType', 'industry'),
   years: computed('startDate', 'endDate', function() {
     let start = parseInt(this.get('startDate'), 10);
     let end = parseInt(this.get('endDate'), 10);
@@ -101,7 +102,7 @@ export default Ember.Controller.extend({
     let level = this.get('i18n').t(`location.model.${this.get('entity.level')}`);
     let thisLevel = `this ${level}`;
 
-    if(this.get('model.level') === 'country') {
+    if(this.get('entity.level') === 'country') {
       thisLevel = level;
     } else if(this.get('i18n.display') === 'es') {
       thisLevel = level.string === 'ciudad' ? `esta ${level}` :  `este ${level}`;

@@ -41,6 +41,10 @@ export default Ember.Route.extend({
     controller.set('searchText', controller.get('search'));
     window.scrollTo(0, 0);
   },
+  activate: function() {
+    this._super.apply(this,arguments);
+    window.scrollTo(0,0);
+  },
   resetController: function (controller, isExiting) {
     controller.set('variable', null);
 

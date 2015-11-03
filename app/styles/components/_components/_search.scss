@@ -38,6 +38,15 @@
   }
 }
 
+main.builder .search {
+	background-color: $odGrayLight;
+	&:active, &:focus {
+	    &::-webkit-input-placeholder {
+		      color: $odGrayMedDark;
+		  }
+  	}
+}
+
 .search__reset {
   position: absolute;
   top: 0;

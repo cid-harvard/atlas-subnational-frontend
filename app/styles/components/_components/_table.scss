@@ -12,8 +12,8 @@
 .table__header,
 .table__cell {
   padding: $baseSpace/2 $baseSpace/2;
-  border-right: 1px solid $colorBrown600;
-  border-bottom: 1px solid $colorBrown600;
+  border-right: 1px solid $colorWhite;
+  border-bottom: 1px solid $colorWhite;
   text-align: left;
   font-weight: 300;
   font-size: $fontSmall;
@@ -29,7 +29,6 @@
 .table__header--is--descending {
   color: $colorBlack;
   &:after {
-    font-family: $icon;
     font-size: $fontTiny;
     content: $fa-var-caret-down;
   }
@@ -57,6 +56,5 @@
 .table__footer__link--glossary {
   text-transform: lowercase;
 }
-
 
 
