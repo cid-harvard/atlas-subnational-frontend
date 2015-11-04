@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   tagName: 'div',
   varIndependent: 'code',
   classNames: ['buildermod__viz--white','buildermod__viz','scatterplot'],
+  lastYear: computed.alias('i18n.lastYear'),
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
@@ -16,7 +17,7 @@ export default Ember.Component.extend({
     let rca = this.get('rca');
     return _.filter(this.get('data'), function(d) { return d[rca] < 1;});
   }),
-  scatter: computed('rcaData', 'dataType','eciValue', function() {
+  scatter: computed('rcaData', 'dataType','eciValue','i18n.locale', function() {
     let eci = this.get('eciValue');
     return vistk.viz()
     .params({
@@ -41,7 +42,7 @@ export default Ember.Component.extend({
       y_text_custom: this.get('i18n').t('graph_builder.table.complexity').string,
       time: {
         var_time: 'year',
-        current_time: '2013',
+        current_time: this.get('lastYear'),
         parse: function(d) { return d; }
       },
       items: [{
@@ -70,7 +71,7 @@ export default Ember.Component.extend({
               'value': d['cog']
             }];
             function format(key, value) {
-              return numeral(value).format('$ 0.0a');
+              return numeral(value).format('0.0');
             }
             var textItem = Ember.get(d, `name_short_${this.get('i18n').display}`) || d.code;
             var tooltip_text = '<span style="color: ' +  d.color + '">' + textItem + '</span>';
@@ -87,7 +88,7 @@ export default Ember.Component.extend({
           height: 'auto'
         }, {
           type: 'line_horizontal',
-          filter: function(d, i) { return i===0; },
+          filter: function(d, i) { return i === 0; },
           offset_y: function(d, i, vars) {
             return -(vars.y_scale[0]['func'](d[vars.var_y]) - vars.y_scale[0]['func'](eci));
           }
@@ -107,15 +108,15 @@ export default Ember.Component.extend({
     $.getJSON(`${apiURL}/data/location?level=department`).then((response) => {
       let id = this.get('entityId');
       let data = get(response, 'data');
-      return _.first(_.filter(data, {'year': 2013, 'department_id': parseInt(id) }));
-      }).then((datum) => {
-        this.set('width', this.$().parent().width());
-        this.set('height', this.$().parent().height());
-        if(this.get('dataType') === 'products') {
-          this.set('eciValue', get(datum, 'eci'));
-        }
-        //this.get('scatter').draw();
-        d3.select(this.get('id')).call(this.get('scatter'));
+      let datum = _.first(_.filter(data, {'year': this.get('lastYear'), 'department_id': parseInt(id) }));
+      this.set('width', this.$().parent().width());
+      this.set('height', this.$().parent().height());
+
+      if(this.get('dataType') === 'products' && datum) {
+        this.set('eciValue', get(datum, 'eci'));
+      }
+
+      d3.select(this.get('id')).call(this.get('scatter'));
       });
   },
   willDestroyElement: function() {
@@ -124,7 +125,7 @@ export default Ember.Component.extend({
     this.removeObserver('data.[]', this, this.update);
   },
   update: observer('data.[]', 'varRca', 'i18n.locale', 'dataType', function() {
-    if(!this.element){ return false; } //do not redraw if not there
+    if(!this.element){ return ; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
       if(this.get('scatter')) {
         d3.select(this.get('id')).select('svg').remove();
