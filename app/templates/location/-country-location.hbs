@@ -93,7 +93,7 @@
       {{/ivy-tab-list}}
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod buildermod__viz">
-          {{d3plus-network
+          {{component 'network'
             data=lastIndustryData
             immutableData=lastIndustryData
             elementId='industry-space'
@@ -206,7 +206,7 @@
 
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod buildermod__viz">
-          {{d3plus-network
+          {{component 'network'
             data=productsData
             immutableData=productsData
             elementId='product-space'
