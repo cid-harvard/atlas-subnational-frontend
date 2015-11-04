@@ -42,8 +42,8 @@ export default Ember.Component.extend({
       .params({
         type: 'treemap',
         container: this.get('id'),
-        height: this.get('height') + (this.get('paddingWidth') * 2),
-        width: this.get('width') + (this.get('paddingWidth') * 4),
+        height: this.get('height'),
+        width: this.get('width'),
         data: this.get('immutableData'),
         var_id: this.get('varId'),
         var_size: this.get('varDependent'),
