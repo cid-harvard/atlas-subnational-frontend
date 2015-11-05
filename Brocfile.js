@@ -86,27 +86,6 @@ app.import('bower_components/font-awesome/fonts/FontAwesome.otf', { destDir: 'fo
 app.import('bower_components/cidcons/css/cidcons-codes.css');
 app.import('bower_components/cidcons/font/cidcons.woff', { destDir: 'fonts' });
 
-// Platform
-app.import('vendor/fonts/platform/Platform-Bold-Web.eot', { destDir: 'fonts' });
-app.import('vendor/fonts/platform/Platform-Bold-Web.ttf', { destDir: 'fonts' });
-app.import('vendor/fonts/platform/Platform-Bold-Web.woff', { destDir: 'fonts' });
-
-// Circular
-app.import('vendor/fonts/circular/circular-light.woff2', { destDir: 'fonts' });
-app.import('vendor/fonts/circular/circular-light.woff', { destDir: 'fonts' });
-app.import('vendor/fonts/circular/circular-book.woff2', { destDir: 'fonts' });
-app.import('vendor/fonts/circular/circular-book.woff', { destDir: 'fonts' });
-app.import('vendor/fonts/circular/circular-medium.woff2', { destDir: 'fonts' });
-app.import('vendor/fonts/circular/circular-medium.woff', { destDir: 'fonts' });
-app.import('vendor/fonts/circular/circular-bold.woff2', { destDir: 'fonts' });
-app.import('vendor/fonts/circular/circular-bold.woff', { destDir: 'fonts' });
-
-// Platin
-app.import('vendor/fonts/plantin/PlantinMTStd-Italic.woff2', { destDir: 'fonts' });
-app.import('vendor/fonts/plantin/PlantinMTStd-Light.woff2', { destDir: 'fonts' });
-app.import('vendor/fonts/plantin/PlantinMTStd-Regular.woff2', { destDir: 'fonts' });
-app.import('vendor/fonts/plantin/PlantinMTStd-Semibold.woff2', { destDir: 'fonts' });
-
 // Use `app.import` to add additional libraries to the generated
 // output files.
 //
