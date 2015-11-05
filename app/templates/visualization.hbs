@@ -6,12 +6,10 @@
     <header class="buildermod__header">
       <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
       <div class="buildermod__tools">
-        {{#unless drawerIsUnnecessary}}
           <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--settings" {{action 'toggleDrawerSettings'}} data-settings-open=''>
             {{fa-icon icon= "plus" classNames="tool__btn__icon"}}
             {{t 'graph_builder.settings.label'}}
           </button>
-        {{/unless}}
           <button class="btn btn--standalone btn--buildermod buildermod__tool" data-change-question='' {{action 'toggleDrawerChangeGraph'}}>
             {{fa-icon icon= "plus" classNames="tool__btn__icon"}}
             {{t 'graph_builder.change_graph.label'}}
@@ -34,6 +32,9 @@
         dateExtent=dateExtent
         dateRange=dateRange
         isOpen=drawerSettingsIsOpen
+        isSingleYear=isSingleYear
+        isScatter=isScatter
+        rcaFilter=rcaFilter
         years=years
       }}
       {{partial "partials/buildermod-drawer-change-graph"}}

@@ -7,9 +7,9 @@ Ember.warn = function() {};
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
-  queryParams: ['variable', 'search', 'rca', 'startDate', 'endDate'],
+  queryParams: ['variable', 'search', 'startDate', 'endDate'],
   search: null,
-  rca: null,
+  rcaFilter: 'less',
   startDate: null,
   endDate: null,
   variable: null,
@@ -27,28 +27,21 @@ export default Ember.Controller.extend({
   entity: computed.alias('model.entity'),
   entityType: computed.alias('model.entity_type'),
   visualization: computed.alias('model.visualization'),
+
+  isGeo: computed.equal('visualization','geo'),
+  isScatter: computed.equal('visualization','scatter'),
   isFixedHeight: computed('model.visualization', function() {
     let vis = this.get('model.visualization');
-    if (_.contains(['geo', 'treemap', 'scatter', 'similarity'], vis)) {
-      return true;
-    }
-    return false;
+     return _.contains(['geo', 'treemap', 'scatter', 'similarity'], vis) ? true : false;
   }),
   isOneYear: computed('startDate', 'endDate', function() {
     return this.get('startDate') == this.get('endDate');
   }),
   isGeo: computed('visualization', function() {
-    if(this.get('visualization') === 'geo') { return true; }
-    return false;
+    return this.get('visualization') === 'geo' ? true : false;
   }),
-  drawerIsUnnecessary: computed('visualization','source', function() { //TODO: Depricate this out
-    let visualization = this.get('visualization');
-    let source = this.get('source');
-    if(visualization === 'similarity' || visualization === 'scatter'){
-      return true;
-    }
-    if(source === 'occupations') { return true; }
-    return false;
+  isScatter: computed('visualization', function() {
+    return this.get('visualization') === 'scatter' ? true : false;
   }),
   isFiltered: computed('search', function() {
     return Boolean(this.get('search'));
@@ -70,7 +63,6 @@ export default Ember.Controller.extend({
     if(this.get('model.data').length) {
       return d3.extent(this.get('model.data'), function(d) { return d.year; });
     }
-
     return  [this.get('firstYear'), this.get('lastYear')];
   }),
   dateRange: computed('dateExtent', function() {
@@ -81,6 +73,14 @@ export default Ember.Controller.extend({
   }),
   profileLink: computed('entityType', function() {
     return `${this.get('model.entity_type')}.show`;
+  }),
+  rca: computed('source', function() {
+    let source = this.get('source');
+    if(source === 'products') {
+      return 'export_rca';
+    } else if( source === 'industries') {
+      return 'rca';
+    }
   }),
   name: computed('entityType', 'model.entity.name', 'i18n.locale', function() {
     if(this.get('entityType') === 'location') {
@@ -197,7 +197,6 @@ export default Ember.Controller.extend({
     // if variable exists, it is varDependent
     if(this.get('variable')) { return this.get('variable'); }
     let source = this.get('source');
-
     if(source  === 'products') {
       return 'export_value';
     } else if(source  === 'locations') {
@@ -213,23 +212,21 @@ export default Ember.Controller.extend({
   immutableData: computed('model.data.[]','endDate', 'startDate' , function() {
     return this.filterToSelectedYears(this.get('model.data'), this.get('startDate'), this.get('endDate'));
   }),
-  filteredData: computed('immutableData.[]', 'search', 'startDate', 'endDate', 'filterRca', function() {
+  filteredData: computed('immutableData.[]', 'search', 'startDate', 'endDate', 'rcaFilter', function() {
     let data = this.get('immutableData');
     if(this.get('search')){ data = this.searchFilter(data); }
 
     if(this.get('visualization') === 'scatter'){
-      let rca = this.get('filterRca');
-      return _.filter(data, function(d) { return d[rca] < 1;});
+      let rca = this.get('rca');
+      let rcaFilter = this.get('rcaFilter');
+      if(rcaFilter === 'less') {
+        return _.filter(data, (d) => { return _.get(d,rca) <= 1;});
+      }
+      if (rcaFilter === 'greater') {
+        return _.filter(data, (d) => { return _.get(d,rca) > 1;});
+      }
     }
     return data;
-  }),
-  filterRca: computed('source', function() {
-    let source = this.get('source');
-    if(source === 'products') {
-      return 'export_rca';
-    } else if( source === 'industries') {
-      return 'rca';
-    }
   }),
   visualizationComponent: computed('visualization', function(){
     let visualization = this.get('visualization');
