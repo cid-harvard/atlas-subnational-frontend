@@ -37,12 +37,6 @@ export default Ember.Controller.extend({
   isOneYear: computed('startDate', 'endDate', function() {
     return this.get('startDate') == this.get('endDate');
   }),
-  isGeo: computed('visualization', function() {
-    return this.get('visualization') === 'geo' ? true : false;
-  }),
-  isScatter: computed('visualization', function() {
-    return this.get('visualization') === 'scatter' ? true : false;
-  }),
   isFiltered: computed('search', function() {
     return Boolean(this.get('search'));
   }),
