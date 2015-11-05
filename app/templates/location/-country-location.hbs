@@ -109,13 +109,13 @@
 </section>
 <section class="stream__section">
   <div class="ember__table__wrap">
+    {{component 'table-download'
+      data=lastIndustryData
+    }}
     {{component 'graphbuilder-table'
       data=lastIndustryData
       source='industries'
       isSingleYear='true'
-    }}
-    {{component 'table-download'
-      data=lastIndustryData
     }}
   </div>
 </section>
@@ -220,13 +220,13 @@
 </section>
 <section class="stream__section">
   <div class="ember__table__wrap">
+    {{component 'table-download'
+      data=productsData
+    }}
     {{component 'graphbuilder-table'
       data=productsData
       source='products'
       isSingleYear='true'
-    }}
-    {{component 'table-download'
-      data=productsData
     }}
   </div>
 </section>
