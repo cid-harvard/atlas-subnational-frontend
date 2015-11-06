@@ -29,7 +29,7 @@ export default Ember.Component.extend(TableMap, {
             value = _.get(datum, `parent_name_${this.get('i18n').display}`);
           }
 
-          let tableHeader = copy ? `graph_builder.table.${copy}`: `graph_builder.table.${key}`;
+          let tableHeader = copy ? `graph_builder.download.${copy}`: `graph_builder.download.${key}`;
 
           memo[this.get('i18n').t(tableHeader)] = value;
 
