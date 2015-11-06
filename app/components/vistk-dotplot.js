@@ -38,6 +38,8 @@ export default Ember.Component.extend({
             format = function(d) { return numeral(d).format('0.00a'); };
           } else if(type === 'percentage') {
             format = function(d) { return numeral(d).format('0.00%'); };
+          } else if(type == 'eci') {
+            format = function(d) { return numeral(d).format('0.0'); };
           }
           return format(d);
         },
