@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ModelAttribute from '../mixins/model-attribute';
 import ENV from '../config/environment';
 
 import numeral from 'numeral';
@@ -43,7 +44,7 @@ export default Ember.Route.extend({
       industrySectionColor
     ];
 
-    return RSVP.allSettled(promises).then(function(array) {
+    return RSVP.allSettled(promises).then((array) => {
       let productsMetadata = array[0].value.data;
       let locationsMetadata = array[1].value.data;
       let productsHierarchy = array[2].value.data;
@@ -62,14 +63,16 @@ export default Ember.Route.extend({
       var productSectionMap = _.indexBy(productParentMetadata, 'id');
       var industrySectionMap = _.indexBy(industryParentMetadata, 'id');
 
-      _.forEach(locationsMetadata, function(d) {
+      _.forEach(locationsMetadata, (d) => {
         let color = '#d7cbf2';
 
         d.group = d.id;
         d.color = color;
+        this.store.createRecord('location', d);
+        d = Ember.Object.createWithMixins(ModelAttribute,d);
       });
 
-      _.forEach(productsMetadata, function(d) {
+      _.forEach(productsMetadata, (d) => {
         let sectionId = productsHierarchy[d.id];
         let color = _.isUndefined(sectionId) ? '#fff' : _.get(productSectionColor, `${sectionId}.color`);
 
@@ -77,18 +80,21 @@ export default Ember.Route.extend({
         d.parent_name_en = _.get(productSectionMap, `${sectionId}.name_en`);
         d.parent_name_es = _.get(productSectionMap, `${sectionId}.name_es`);
         d.group = sectionId;
+        this.store.createRecord('product', d);
+        d = Ember.Object.createWithMixins(ModelAttribute,d);
       });
 
-      _.forEach(occupationsMetadata, function(d) {
+      _.forEach(occupationsMetadata, (d) => {
         let color = '#ccafaf';
 
         d.group = get(d,'code').split('-')[0];
         d.parent_name_en = get(d, 'name_en');
         d.parent_name_es = get(d, 'name_es');
         d.color = color;
+        d = Ember.Object.createWithMixins(ModelAttribute,d);
       });
 
-      _.forEach(industriesMetadata, function(d) {
+      _.forEach(industriesMetadata, (d) => {
         let sectionId = industriesHierarchy[d.id];
         let color = _.isUndefined(sectionId) ? '#fff' : _.get(industrySectionColor, `${sectionId}.color`);
 
@@ -96,6 +102,8 @@ export default Ember.Route.extend({
         d.parent_name_en = _.get(industrySectionMap, `${sectionId}.name_en`);
         d.parent_name_es = _.get(industrySectionMap, `${sectionId}.name_es`);
         d.color = color;
+        this.store.createRecord('industry', d);
+        d = Ember.Object.createWithMixins(ModelAttribute,d);
       });
 
       // Index metadata by entity id's
