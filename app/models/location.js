@@ -15,6 +15,21 @@ export default DS.Model.extend(ModelAttribute, {
   timeseries: attr(),
   metaData: attr(),
   yearSort: ['year'],
+  entity: 'location',
+
+  graphbuilderId: computed('entity', 'id', function() {
+    return `${this.get('entity')}-${this.get('id')}`;
+  }),
+
+  parents: computed('parent_id', function() {
+    let parent_id = parseInt(this.get('parent_id'));
+    if(_.isNaN(parent_id)) { return []; }
+    let entity = this.get('entity');
+    let parents = [];
+    let parent = this.store.find(entity, parent_id);
+    parents.push(parent);
+    return parents;
+  }),
 
   sortedTimeseries: computed.sort('timeseries','yearSort'),
 

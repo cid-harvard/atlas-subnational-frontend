@@ -1,0 +1,27 @@
+{{#if isLocation }}
+  <ul>
+    {{#each breadcrumbs as |crumb|}}
+      {{#if isGraphbuilder }}
+        {{#link-to
+          link crumb.graphbuilderId
+          tagName='li'
+          data-search-profile=''
+          activeClass="breadcrumb__active"
+          class="breadcrumb"
+        }}
+          {{crumb.name}}
+        {{/link-to}}
+      {{else}}
+        {{#link-to
+          link crumb.id
+          tagName='li'
+          data-search-profile=''
+          activeClass="breadcrumb__active"
+          class="breadcrumb"
+        }}
+          {{crumb.name}}
+        {{/link-to}}
+      {{/if}}
+    {{/each}}
+  </ul>
+{{/if}}
