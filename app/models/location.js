@@ -33,6 +33,10 @@ export default DS.Model.extend(ModelAttribute, {
     let pop = get(this.get('lastDataPoint'), 'population');
     return numeral(pop).format('0.00a');
    }),
+  lastEci: computed('timeseries','locale', function() {
+    let eci = get(this.get('lastDataPoint'), 'eci');
+    return numeral(eci).format('0.0');
+   }),
   lastGdp: computed('timeseries','locale', function() {
     let gdp = get(this.get('lastDataPoint'), 'gdp_real') || get(this.get('lastDataPoint'), 'gdp_nominal');
     return numeral(gdp).format('$ 0.00a');
