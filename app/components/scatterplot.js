@@ -89,7 +89,9 @@ export default Ember.Component.extend({
           height: 'auto'
         }, {
           type: 'line_horizontal',
-          filter: function(d, i) { return i === 0; },
+          filter: function(d, i) {
+           return typeof eci !== 'undefined' && i === 0;
+         },
           offset_y: function(d, i, vars) {
             return -(vars.y_scale[0]['func'](d[vars.var_y]) - vars.y_scale[0]['func'](eci));
           }
