@@ -49,7 +49,7 @@
           {{model.displayEmploymentGrowth}}
         </td>
         <td class="table__cell table__cell--summaries">
-          {{dot-plot
+          {{vistk-dotplot
             elementId='dotplot--employment-growth'
             data=employmentGrowthDotPlot
             varX='employment_growth'
@@ -69,7 +69,7 @@
             {{model.lastAvgWage}}
           </td>
           <td class="table__cell table__cell--summaries">
-            {{dot-plot
+            {{vistk-dotplot
               elementId='dotplot--avg-wage'
               data=averageWageDotPlot
               varX='avg_wage'
@@ -114,11 +114,11 @@
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod">
           <div class="vizmod--treemod">
-            {{tree-map
+            {{vistk-treemap
               isInTab='true'
               data=recentDepartmentsData
               immutableData=recentDepartmentsData
-              elementId='employment-tree-map'
+              elementId='employment-vistk-treemap'
               varDependent='employment'
             }}
           </div>
@@ -140,11 +140,11 @@
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod">
           <div class="vizmod--treemod">
-            {{tree-map
+            {{vistk-treemap
               isInTab='true'
               data=occupationsData
               immutableData=occupationsData
-              elementId='occupation-tree-map'
+              elementId='occupation-vistk-treemap'
               varDependent='num_vacancies'
             }}
           </div>

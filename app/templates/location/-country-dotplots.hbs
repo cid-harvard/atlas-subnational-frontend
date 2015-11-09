@@ -19,7 +19,7 @@
         {{t 'country.show.gdp_per_capita'}}
       </td>
       <td class="table__cell table__cell--summaries">
-        {{dot-plot
+        {{vistk-dotplot
           elementId='dotplot--gdp-pc'
           data=departmentsData
           varX='gdp_pc_nominal'
@@ -37,7 +37,7 @@
         {{t 'country.show.gdp'}}
       </td>
       <td class="table__cell table__cell--summaries">
-        {{dot-plot
+        {{vistk-dotplot
           elementId='dotplot--gdp'
           data=departmentsData
           varX='gdp_nominal'
@@ -54,7 +54,7 @@
         {{t 'country.show.population'}}
       </td>
       <td class="table__cell table__cell--summaries">
-        {{dot-plot
+        {{vistk-dotplot
           elementId='dotplot--population'
           data=departmentsData
           varX='population'
