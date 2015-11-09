@@ -45,7 +45,7 @@ export default Ember.Component.extend({
         let value = {
           name_short_es: 'Totales',
           name_short_en: 'Total',
-          code: 'None',
+          code: '',
           year: firstDatum.year
         };
 
