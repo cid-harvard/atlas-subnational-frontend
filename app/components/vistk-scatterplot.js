@@ -70,14 +70,15 @@ export default Ember.Component.extend({
             function format(key, value) {
               return numeral(value).format('0.0');
             }
-            var textItem = Ember.get(d, `name_short_${this.get('i18n').display}`) || d.code;
-            var tooltip_text = '<span style="color: ' +  d.color + '">' + textItem + '</span>';
+            var textItem = get(d, `name_short_${this.get('i18n').display}`) || d.code;
+            var tooltip_text = `<span style="color:${get(d, 'color')}">${textItem} - ${get(d, 'code')}</span>`;
+
             data.forEach((d) => {
-               tooltip_text += '<br>' +
-                 this.get('i18n').t(`graph_builder.table.${d.key}`) +
-                 ': ' +
-                 format(d.key, d.value);
-             });
+              if(d.key) {
+                tooltip_text += '<br>' + this.get('i18n').t(`graph_builder.table.${get(d,'key')}`) + ': ' + format(get(d,'key'), get(d,'key'));
+              }
+            });
+
             return tooltip_text;
           },
           translate: [0, 0],
