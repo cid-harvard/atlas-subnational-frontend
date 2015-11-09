@@ -5,7 +5,7 @@ const {computed} = Ember;
 export default Ember.Component.extend(TableMap, {
   i18n: Ember.inject.service(),
   fileName: computed('name', 'pageTitle', function() {
-    return _.deburr(`${this.get('name')}-${this.get('pageTitle')}`);
+    return _.deburr(`${this.get('name')} ${this.get('pageTitle')}`).replace(/[^a-z0-9]+/gi," ").trim();
   }),
   tableMap: computed('source', function() {
     let source = this.get('source');
