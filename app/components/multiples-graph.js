@@ -84,6 +84,7 @@ export default Ember.Component.extend({
   }),
   initCharts: function() {
     let data = this.firstSliceData(this.get('nestedData'));
+    let dataType = this.get('dataType');
 
     var container = d3.select("#"+this.get('elementId')).select('.multiples').selectAll('div')
       .data(data, (d,i) => { return [d.key, i, this.get('i18n').locale]; });
@@ -108,7 +109,13 @@ export default Ember.Component.extend({
     div.append('h3')
       .attr('class', 'chart__title')
       .on('click', expandTitle)
-      .text(function(d) { return `${get(d, 'name')}  ${get(d, 'code')}`; });
+      .text((d) => {
+        if(get(d, 'code') && dataType != 'locations') {
+          return `${get(d, 'name')} - ${get(d, 'code')}`;
+        } else {
+          return get(d, 'name');
+        }
+      });
 
     var svg = div.append('svg')
       .attr('class', 'chart__wrap')
