@@ -52,6 +52,34 @@ export default DS.Model.extend(ModelAttribute, {
     return false;
   }),
   //following drives graphbuilder
+  graphbuilderPartners: computed('id', function() {
+    var defaultParams = {
+      treemap: { variable: 'export_value', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      multiples: { variable: 'export_value', startDate: this.get('firstYear'), endDate: this.get('lastYear') },
+      scatter: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') },
+      similarity: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') }
+    };
+    let partners = $.getJSON(`${apiURL}/data/location/${this.get('id')}/partners/?level=country`);
+
+    return partners.then((response) => {
+      let {data} = response;
+      let partnersMetadata = this.get('metaData.partnerCountries');
+      data = _.map(data, (d) => {
+        let country = partnersMetadata[d.country_id];
+        let parent = partnersMetadata[country.parent_id];
+
+        d = _.merge(d, country);
+        d.group = country.parent_id;
+        d.parent_name_en = parent.name_en;
+        d.parent_name_es = parent.name_es;
+        d.name_short_en = d.name_en;
+        d.name_short_es = d.name_es;
+        return d;
+      });
+      return { entity: this, entity_type:'location', data: data, source: 'partners', defaultParams:defaultParams };
+    });
+
+  }),
   graphbuilderProducts: computed('id', function() {
     var defaultParams = {
       treemap: { variable: 'export_value', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
