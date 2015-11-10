@@ -153,8 +153,7 @@ export default Ember.Mixin.create({
   occupationsMap: [
     { key: 'code' },
     { key: 'name', copy: 'occupation' },
-    { key: 'average_wages' },
-    { key: 'num_vacancies' }
+    { key: 'average_wages' }
   ],
 });
 
