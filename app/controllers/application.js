@@ -17,7 +17,6 @@ export default Ember.Controller.extend({
     } else {
       this.set('i18n.locale', this.get('i18n.otherLocale'));
     }
-
     this.set('locale', this.get('i18n.locale'));
   }),
   productsMetadata: computed('model.products', function() {

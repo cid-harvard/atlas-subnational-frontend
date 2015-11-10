@@ -14,9 +14,11 @@ export default Ember.Route.extend({
   beforeModel: function(transition) {
     let locale = get(transition, 'queryParams.locale');
     if(! _.contains(this.get('i18n.locales'), locale)) {
-      set(transition, 'queryParams.locale', this.get('i18n.defaultLocale'));
+      set(this, 'i18n.locale', get(this,'i18n.defaultLocale'));
+      set(transition, 'queryParams.locale', get(this, 'i18n.defaultLocale'));
+    } else {
+      set(this, 'i18n.locale', locale);
     }
-
   },
   model: function() {
     var products4digit = $.getJSON(apiURL+'/metadata/products?level=4digit');
@@ -112,8 +114,7 @@ export default Ember.Route.extend({
   },
   setupController(controller, model) {
     this._super(controller, model);
-    var localeParam = get(controller, 'locale');
-
+    var localeParam = get(this, 'i18n.locale');
     if(localeParam === controller.get('i18n.otherLocale')){
       set(controller, 'locale', get(this, 'i18n.otherLocale'));
       set(controller, 'isDefaultLocale', false);
