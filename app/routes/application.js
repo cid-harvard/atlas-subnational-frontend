@@ -29,6 +29,7 @@ export default Ember.Route.extend({
     var occupationsMetadata = $.getJSON(apiURL+'/metadata/occupations/');
     var productSectionColor = $.getJSON('assets/color_mappings/product_section_colors.json');
     var industrySectionColor = $.getJSON(`assets/color_mappings/${this.get('i18n.country')}-industry_section_colors.json`);
+    var partnerCountries = $.getJSON(apiURL+'/metadata/countries/');
 
     var promises = [
       products4digit,
@@ -40,7 +41,8 @@ export default Ember.Route.extend({
       industryParentMetadata,
       occupationsMetadata,
       productSectionColor,
-      industrySectionColor
+      industrySectionColor,
+      partnerCountries
     ];
 
     return RSVP.allSettled(promises).then(function(array) {
@@ -54,6 +56,7 @@ export default Ember.Route.extend({
       let occupationsMetadata = array[7].value.data;
       let productSectionColor = array[8].value;
       let industrySectionColor = array[9].value;
+      let partnerCountries  = array[10].value.data;
 
       // Finds the entity with the `1st digit` that matches
       // sets `group` to the `1st digit code`
@@ -98,6 +101,11 @@ export default Ember.Route.extend({
         d.color = color;
       });
 
+      _.forEach(partnerCountries, function(d) {
+        let color = '#d7cbf2';
+        d.color = color;
+      });
+
       // Index metadata by entity id's
       // e.g. { 0: {id:0, name: 'Atlantico'.....}, ...}
       return {
@@ -106,7 +114,8 @@ export default Ember.Route.extend({
         industries: _.indexBy(industriesMetadata, 'id'),
         occupations: _.indexBy(occupationsMetadata, 'id'),
         productParents: _.indexBy(productParentMetadata, 'id'),
-        industryParents: _.indexBy(industryParentMetadata, 'id')
+        industryParents: _.indexBy(industryParentMetadata, 'id'),
+        partnerCountries: _.indexBy(partnerCountries, 'id')
       };
     });
   },
