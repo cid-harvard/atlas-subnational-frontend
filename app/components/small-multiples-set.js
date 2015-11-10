@@ -11,6 +11,7 @@ export default Ember.Component.extend({
     let dataType = this.get('dataType');
     if(dataType === 'industries') { return true; }
     if(dataType === 'products') { return true; }
+    if(dataType === 'partners') { return true; }
     return false;
   }),
   parentBreadcrumb: computed('result.level', 'i18n.locale', function() {
