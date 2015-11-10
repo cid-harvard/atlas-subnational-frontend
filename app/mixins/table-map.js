@@ -156,5 +156,13 @@ export default Ember.Mixin.create({
     { key: 'average_wages' },
     { key: 'num_vacancies' }
   ],
+  partnersMap: [
+    { key: 'code' },
+    { key: 'name', copy: 'country' },
+    { key: 'parent', copy: 'parent.country' },
+    { key: 'export_value' },
+    { key: 'import_value' },
+    { key: 'year' },
+  ]
 });
 
