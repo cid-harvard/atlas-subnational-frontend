@@ -43,7 +43,7 @@
             {{model.lastGdpPerCapita}}
           </td>
           <td class="table__cell table__cell--summaries">
-            {{dot-plot
+            {{vistk-dotplot
               elementId='dotplot--gdp-pc'
               data=departmentsData
               varX='gdp_pc_nominal'
@@ -61,7 +61,7 @@
             {{model.lastGdp}}
           </td>
           <td class="table__cell table__cell--summaries">
-            {{dot-plot
+            {{vistk-dotplot
               elementId='dotplot--gdp'
               data=departmentsData
               varX='gdp_nominal'
@@ -79,7 +79,7 @@
             {{model.lastPop}}
           </td>
           <td class="table__cell table__cell--summaries">
-            {{dot-plot
+            {{vistk-dotplot
               elementId='dotplot--population'
               data=departmentsData
               varX='population'
@@ -115,11 +115,11 @@
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod">
           <div class="vizmod--treemod">
-            {{tree-map
+            {{vistk-treemap
               data=lastIndustryData
               immutableData=lastIndustryData
               isInTab='true'
-              elementId='employment-tree-map'
+              elementId='employment-vistk-treemap'
               dataType='industries'
               varDependent='employment'
               delay=200
@@ -130,11 +130,11 @@
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod">
           <div class="vizmod--treemod">
-            {{tree-map
+            {{vistk-treemap
               isInTab='true'
               data=industriesData
               immutableData=industriesData
-              elementId='wages-tree-map'
+              elementId='wages-vistk-treemap'
               dataType='industries'
               varDependent='wages'
               delay=700
@@ -169,11 +169,11 @@
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod">
           <div class="vizmod--treemod">
-            {{tree-map
+            {{vistk-treemap
               isInTab='true'
               data=productsData
               immutableData=productsData
-              elementId='export-tree-map'
+              elementId='export-vistk-treemap'
               varDependent='export_value'
               delay=500
             }}
@@ -183,11 +183,11 @@
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod">
           <div class="vizmod--treemod">
-            {{tree-map
+            {{vistk-treemap
               isInTab='true'
               data=productsData
               immutableData=productsData
-              elementId='import-tree-map'
+              elementId='import-vistk-treemap'
               varDependent='import_value'
               delay=1000
             }}

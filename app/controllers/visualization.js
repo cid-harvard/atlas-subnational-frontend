@@ -233,14 +233,14 @@ export default Ember.Controller.extend({
   }),
   visualizationComponent: computed('visualization', function(){
     let visualization = this.get('visualization');
-    if( visualization === 'treemap') {
-      return 'tree-map';
+    if(visualization === 'treemap') {
+      return 'vistk-treemap';
     } else if(visualization === 'multiples') {
       return 'small-multiples-set';
     } else if(visualization === 'scatter') {
-      return 'd3plus-scatter';
+      return 'vistk-scatterplot';
     } else if(visualization === 'similarity') {
-      return 'd3plus-network';
+      return 'vistk-network';
     } else if (visualization === 'geo') {
       return 'geo-map';
     }

@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "d3": "~3.5.5",
-    "d3plus": "~1.7.3",
     "FileSaver.js": "~0.0.2",
     "papaparse": "~4.1.2",
     "vis-toolkit": "https://github.com/cid-harvard/vis-toolkit.git#master"
