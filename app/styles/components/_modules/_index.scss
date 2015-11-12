@@ -9,7 +9,7 @@
 }
 
 .index__header__wrap {
-  background: $colorWhite url('/assets/img/acem/bg.png');
+  background: $colorWhite url(/assets/img/acem/bg.png);
   background-size: 100%;
    .search {
 	  transition: background $animationTime $animationEasing;
