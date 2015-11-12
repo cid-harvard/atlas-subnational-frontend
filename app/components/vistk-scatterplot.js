@@ -15,11 +15,12 @@ export default Ember.Component.extend({
   }),
   rcaData: computed('data.[]', 'rca', function() {
     let rca = this.get('rca');
+    console.log(rca);
     return _.filter(this.get('data'), function(d) { return d[rca] < 1;});
   }),
   scatter: computed('rcaData', 'dataType','eciValue','i18n.locale', function() {
     let eci = this.get('eciValue');
-    let lang = this.get('i18n.locale') === 'en-col' ? 'en_EN': 'es_ES';
+    let lang = this.get('i18n.locale') === 'en-mex' ? 'en_EN': 'es_ES';
     return vistk.viz()
     .params({
       type: 'scatterplot',
@@ -77,7 +78,7 @@ export default Ember.Component.extend({
             var textItem = Ember.get(d, `name_short_${this.get('i18n').display}`) || d.code;
             var tooltip_text = '<span style="color: ' +  d.color + '">' + textItem + '</span>';
             data.forEach((d) => {
-               tooltip_text += '<br>' +
+               tooltip_text += '<br><br>' +
                  this.get('i18n').t(`graph_builder.table.${d.key}`) +
                  ': ' +
                  format(d.key, d.value);
