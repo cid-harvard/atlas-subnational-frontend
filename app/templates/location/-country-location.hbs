@@ -40,11 +40,11 @@
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod">
           <div class="vizmod--treemod">
-            {{tree-map
+            {{vistk-treemap
               data=lastIndustryData
               immutableData=lastIndustryData
               isInTab='true'
-              elementId='employment-tree-map'
+              elementId='employment-vistk-treemap'
               dataType='industries'
               varDependent='employment'
               delay=1500
@@ -55,11 +55,11 @@
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod">
           <div class="vizmod--treemod">
-            {{tree-map
+            {{vistk-treemap
               isInTab='true'
               data=lastIndustryData
               immutableData=lastIndustryData
-              elementId='wages-tree-map'
+              elementId='wages-vistk-treemap'
               dataType='industries'
               varDependent='wages'
               delay=1500
@@ -93,7 +93,7 @@
       {{/ivy-tab-list}}
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod buildermod__viz">
-          {{d3plus-network
+          {{vistk-network
             data=lastIndustryData
             immutableData=lastIndustryData
             elementId='industry-space'
@@ -111,6 +111,9 @@
   <div class="ember__table__wrap">
     {{component 'table-download'
       data=lastIndustryData
+      source='industries'
+      pageTitle='industries'
+      name='colombia'
     }}
     {{component 'graphbuilder-table'
       data=lastIndustryData
@@ -146,11 +149,11 @@
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod">
           <div class="vizmod--treemod">
-            {{tree-map
+            {{vistk-treemap
               isInTab='true'
               data=productsData
               immutableData=productsData
-              elementId='export-tree-map'
+              elementId='export-vistk-treemap'
               varDependent='export_value'
               metadata=model.metaData
               delay=2500
@@ -161,7 +164,7 @@
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod">
           <div class="vizmod--treemod">
-            {{tree-map
+            {{vistk-treemap
               isInTab='true'
               data=departmentsData
               immutableData=departmentsData
@@ -203,7 +206,7 @@
 
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod buildermod__viz">
-          {{d3plus-network
+          {{vistk-network
             data=productsData
             immutableData=productsData
             elementId='product-space'
@@ -222,6 +225,9 @@
   <div class="ember__table__wrap">
     {{component 'table-download'
       data=productsData
+      source='industries'
+      pageTitle='products'
+      name='colombia'
     }}
     {{component 'graphbuilder-table'
       data=productsData
