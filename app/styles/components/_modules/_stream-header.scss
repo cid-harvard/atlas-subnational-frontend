@@ -19,11 +19,12 @@
 }
 
 .stream__head {
-  font-size: $fontXXLarge;
-  letter-spacing: -2px;
-  font-family: $sansAlt;
+  font-size: $fontLarge;
+  font-family: $sans;
   line-height: 100%;
   -moz-osx-font-smoothing: grayscale;
+  margin-bottom: $baseSpace;
+  color: $colorGrayDark;
 }
 
 .stream__subhead {
@@ -33,20 +34,23 @@
 
 .breadcrumb {
   color: $colorGray;
+  font-size: $fontSmall;
+  font-family: $serif;
+  cursor: pointer;
   display: inline-block;
-  margin-right: $baseSpace / 2;
+  margin-right: $baseSpace / 3;
 
   &:active, &:focus, &:hover {
     color: $colorGrayDark;
   }
 
   &__active {
-    color: $colorBlack;
+    color: $colorGray;
   }
 
   &:after {
     content: '/';
-    margin-left: $baseSpace / 2;
+    margin-left: $baseSpace / 3;
     color: $colorGray;
   }
   &:last-of-type {
@@ -59,4 +63,79 @@
 
 .breadcrumb__link {
   color: $colorGray;
+}
+
+.stream___head__menu {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: $fontSmall;
+  color: $colorGray;
+  font-family: $sans;
+  margin-right: -$baseSpace;
+}
+
+.menu__section {
+  display: flex;
+  border-top: 1px solid $colorGray;
+  margin-right: $baseSpace;
+  align-content: flex-start;
+  justify-content: flex-start;
+  padding-top: .55rem;
+  margin-bottom: $baseSpace / 3;
+  flex-grow: 1;
+  width: 35%;
+  min-width: 24rem;
+
+  &.menu__section__thin {
+    width: auto;
+    flex-grow: 0;
+    min-width: 20rem;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    position: relative;
+    min-width: 9.5rem;
+    max-width: 24rem;
+  }
+
+  h5 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 9rem;
+    min-width: 9rem;
+    max-width: 9rem;
+    padding: .25rem;
+    margin-right: 1rem;
+    font-weight: normal;
+    color: $colorGray;
+    font-family: $serif;
+  }
+
+  li {
+    flex-grow: 0;
+    display: flex;
+    width: 10.5rem;
+    padding: .25rem;
+    cursor: pointer;
+    color: $colorGray;
+    &:hover {
+      color: $colorGrayDark;
+    }
+    &.active {
+      color: $colorBlack;
+      font-weight: 900;
+    }
+  }
+}
+
+.question__head {
+  font-size: $fontXLarge;
+  line-height: $fontXLarge;
+  margin-bottom: $baseSpace / 2;
+  font-family: $sansAlt;
 }

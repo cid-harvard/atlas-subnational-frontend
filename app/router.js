@@ -15,6 +15,7 @@ export default Router.map(function() {
   this.resource('about', function() {
     this.route('project-description', { path: 'project-description'});
     this.route('glossary', { path: 'glossary'});
+    this.route('header-menu', { path: 'header-menu'});
   });
 
   // Graph Builder
