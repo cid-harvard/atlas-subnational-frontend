@@ -5,7 +5,7 @@
 **/
 
 .builder {
-  background: $colorBrown200;
+  background: $colorWhite;
 }
 
 .builder__recirc {
@@ -13,3 +13,7 @@
   margin-bottom: $baseSpace * 3;
 }
 
+.builder__header h3 {
+	font-size: 20px;
+	font-weight: 300;
+}

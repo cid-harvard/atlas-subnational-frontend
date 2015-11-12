@@ -31,7 +31,8 @@ module.exports = function(environment) {
     ENV.contentSecurityPolicy = {
       'connect-src': "'self' *",
       'style-src': "'self' 'unsafe-inline' *",
-      'img-src': "'self' http://placehold.it/40x40 *"
+      'img-src': "'self' http://placehold.it/40x40 *",
+      'font-src': "https://fonts.gstatic.com 'self'"
     }
   }
   if (environment === 'test') {
@@ -58,7 +59,8 @@ module.exports = function(environment) {
       'style-src': "'self' 'unsafe-inline' *",
       'connect-src': "'self' http://54.6.95.239 *",
       'img-src': "'self' http://placehold.it/40x40 *",
-      'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
+      'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com",
+      'font-src': "https://fonts.gstatic.com 'self'"
     };
     ENV.googleAnalytics = {
       webPropertyId: process.env.GA

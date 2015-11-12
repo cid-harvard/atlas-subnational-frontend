@@ -4,13 +4,7 @@
 *
 **/
 
-.footer {
-	padding: $baseSpace * 2 $baseSpace * 3;
-  background: $colorNavy800;
-  text-align: center;
+.footer a:hover {
+	color: #fff;
 }
 
-.footer__text {
-  color: $colorWhite;
-  @include offset-text;
-}
