@@ -8,17 +8,17 @@
       <div class="buildermod__tools">
         {{#unless drawerIsUnnecessary}}
           <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--settings" {{action 'toggleDrawerSettings'}} data-settings-open=''>
-            {{fa-icon "plus" classNames="tool__btn__icon"}}
+            {{fa-icon icon= "plus" classNames="tool__btn__icon"}}
             {{t 'graph_builder.settings.label'}}
           </button>
         {{/unless}}
           <button class="btn btn--standalone btn--buildermod buildermod__tool" data-change-question='' {{action 'toggleDrawerChangeGraph'}}>
-            {{fa-icon "plus" classNames="tool__btn__icon"}}
+            {{fa-icon icon= "plus" classNames="tool__btn__icon"}}
             {{t 'graph_builder.change_graph.label'}}
           </button>
         {{#link-to 'graph_builder.index' entity_and_id}}
           <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--questions"  data-change-graph=''>
-            {{fa-icon "plus" classNames="tool__btn__icon"}}
+            {{fa-icon icon= "plus" classNames="tool__btn__icon"}}
             {{t 'graph_builder.questions.label'}}
           </button>
         {{/link-to}}
