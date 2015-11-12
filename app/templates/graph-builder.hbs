@@ -1,5 +1,7 @@
 <header class="stream__header stream__header--builder">
-  <h2 class="stream__head">{{name}}</h2>
+  <h2 class="stream__head">
+    {{name}}
+  </h2>
   <ul>
     {{#if hasProfile }}
       {{#link-to
@@ -26,6 +28,9 @@
 </header>
 {{outlet}}
 {{#if isGraphBuilderRoute }}
+  {{component 'bread-crumbs'
+    model=model
+    page='graphbuilder'
+  }}
   {{partial builderNavType}}
 {{/if}}
-

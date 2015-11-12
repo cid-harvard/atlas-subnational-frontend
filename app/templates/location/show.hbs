@@ -24,6 +24,10 @@
     {{/link-to}}
   </ul>
 </header>
+{{component 'bread-crumbs'
+  model=model
+  page='profile'
+}}
 {{#if isCountry }}
   {{partial 'location/country-location'}}
 {{else}}

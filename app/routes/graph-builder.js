@@ -12,7 +12,8 @@ export default Ember.Route.extend({
 
     return this.store.find(entity, entity_id).then((model) => {
       set(model, 'metaData', this.modelFor('application'));
-      set(model, 'graphbuilder_id', get('entity_and_id'));
+      set(model, 'entity', get(this, 'entity'));
+      set(model, 'graphbuilder_id', get(this, 'entity_and_id'));
       return model;
     });
   },
