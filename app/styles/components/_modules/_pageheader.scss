@@ -152,7 +152,7 @@
 .pageheader__menu {
   position: absolute;
   top: 0;
-  right: $baseSpace*4;
+  right: $baseSpace * 4;
   font-family: $sans;
   color: $colorWhite;
   font-size: $fontSmall;
@@ -168,6 +168,14 @@
     display: inline-block;
     margin-right: $baseSpace;
     padding: $baseSpace*.56 0;
+  }
+
+  @media (max-width: $small + 10) {
+    position: relative;
+    top: 0;
+    right: 0;
+    padding: $baseSpace/2 0;
+    li {padding: $baseSpace/5 0;}
   }
 
 }
