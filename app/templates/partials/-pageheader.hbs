@@ -1,63 +1,137 @@
-<header class="header--pageheader">
-  <div class="pageheader__wrap">
-    <div class="branding">
-      {{#link-to "index"}}
-        <img src="assets/img/branding/datlas-white.svg" alt="Datlas" class="branding__logo">
-      {{/link-to}}
-      {{#unless isHomePageRoute }}
-        {{!-- <p class="branding__slogan" data-slogan>{{ t 'index.header_head' }}</p> --}}
-      {{/unless}}
-    </div>
-    <div class="pageheader__menu">
-      <ul>
-        <li>
-          {{#link-to "about.project-description"
-            class="pageheader__menu__item"
-            activeClass="pageheader__menu__item--active"
-            data-side-search-link='about'
-          }}
-            {{ t 'pageheader.about' }}
-          {{/link-to}}
-        </li>
-        <li>
-          {{#link-to "about.glossary"
-            class="pageheader__menu__item"
-            activeClass="pageheader__menu__item--active"
-            data-side-search-link='glossary'
-          }}
-            {{ t 'general.glossary' }}
-          {{/link-to}}
-        </li>
-        <li>
-          {{#link-to "downloads"
-            current-when="downloads"
-            class="pageheader__menu__item"
-            activeClass="pageheader__menu__item--active"
-            data-side-search-link='data'
-          }}
-            {{ t 'pageheader.download' }}
-          {{/link-to}}
-        </li>
-      </ul>
-    </div>
-    <nav class="pageheader__nav">
-      <div class="togglemod togglemod--languages">
-        <p {{bind-attr class=":toggle__label__text isDefaultLocale::toggle__label--is--active"}}>
-          {{otherLanguage}}
-        </p>
-        {{input
-          type='checkbox'
-          id='toggle--languages'
-          class='toggle toggle--languages'
-          checked=isDefaultLocale
-          data-language-toggle=''
-          }}
-        <label class="toggle__label" for="toggle--languages"></label>
-        <p {{bind-attr class=":toggle__label__text isDefaultLocale:toggle__label--is--active"}}>
-          {{defaultLanguage}}
-        </p>
+{{#if isHomePageRoute }}
+  <header {{bind-attr class=":header--pageheader isHomePageRoute:header--pageheader--home"}}>
+    <div class="pageheader__wrap">
+      <div class="branding">
+        {{#link-to "index"}}
+          <img src="assets/img/branding/datlas-white.svg" alt="Datlas" class="branding__logo">
+        {{/link-to}}
+        {{#unless isHomePageRoute }}
+          <p class="branding__slogan" data-slogan>{{ t 'index.header_head' }}</p>
+        {{/unless}}
       </div>
-    </nav>
-  </div>
-</header>
+      <nav class="pageheader__nav">
+        <div class="togglemod togglemod--languages">
+          <p {{bind-attr class=":toggle__label__text isDefaultLocale::toggle__label--is--active"}}>
+            {{otherLanguage}}
+          </p>
+          {{input
+            type='checkbox'
+            id='toggle--languages'
+            class='toggle toggle--languages'
+            checked=isDefaultLocale
+            data-language-toggle=''
+            }}
+          <label class="toggle__label" for="toggle--languages"></label>
+          <p {{bind-attr class=":toggle__label__text isDefaultLocale:toggle__label--is--active"}}>
+            {{defaultLanguage}}
+          </p>
+        </div>
+      </nav>
+      <div class="pageheader__menu">
+        <ul>
+          <li>
+            {{#link-to "about.project-description"
+              class="pageheader__menu__item"
+              activeClass="pageheader__menu__item--active"
+              data-side-search-link='about'
+            }}
+              {{ t 'pageheader.about' }}
+            {{/link-to}}
+          </li>
+          <li>
+            {{#link-to "about.glossary"
+              class="pageheader__menu__item"
+              activeClass="pageheader__menu__item--active"
+              data-side-search-link='glossary'
+            }}
+              {{ t 'general.glossary' }}
+            {{/link-to}}
+          </li>
+          <li>
+            {{#link-to "downloads"
+              current-when="downloads"
+              class="pageheader__menu__item"
+              activeClass="pageheader__menu__item--active"
+              data-side-search-link='data'
+            }}
+              {{ t 'pageheader.download' }}
+            {{/link-to}}
+          </li>
+        </ul>
+      </div>
+
+      {{!-- special display of introductory text on index --}}
+      <div class="pageheader__homeintro">
+
+            <header class="index__header__wrap">
+              <div class="stream__header index__header">
+                <h1 class="stream__head index__head">{{ t 'index.header_head' }}</h1>
+                <h2 class="stream__subhead">{{ t 'index.header_subhead' }}</h2>
+              </div>
+            </header>
+
+      </div>
+    </div>
+  </header>
+{{else}}
+  <header {{bind-attr class=":header--pageheader isHomePageRoute:homepage"}}>
+    <div class="pageheader__wrap">
+      <div class="branding">
+        {{#link-to "index"}}
+          <img src="assets/img/branding/datlas-white.svg" alt="Datlas" class="branding__logo">
+        {{/link-to}}
+      </div>
+      <nav class="pageheader__nav">
+        <div class="togglemod togglemod--languages">
+          <p {{bind-attr class=":toggle__label__text isDefaultLocale::toggle__label--is--active"}}>
+            {{otherLanguage}}
+          </p>
+          {{input
+            type='checkbox'
+            id='toggle--languages'
+            class='toggle toggle--languages'
+            checked=isDefaultLocale
+            data-language-toggle=''
+            }}
+          <label class="toggle__label" for="toggle--languages"></label>
+          <p {{bind-attr class=":toggle__label__text isDefaultLocale:toggle__label--is--active"}}>
+            {{defaultLanguage}}
+          </p>
+        </div>
+      </nav>
+      <div class="pageheader__menu">
+        <ul>
+          <li>
+            {{#link-to "about.project-description"
+              class="pageheader__menu__item"
+              activeClass="pageheader__menu__item--active"
+              data-side-search-link='about'
+            }}
+              {{ t 'pageheader.about' }}
+            {{/link-to}}
+          </li>
+          <li>
+            {{#link-to "about.glossary"
+              class="pageheader__menu__item"
+              activeClass="pageheader__menu__item--active"
+              data-side-search-link='glossary'
+            }}
+              {{ t 'general.glossary' }}
+            {{/link-to}}
+          </li>
+          <li>
+            {{#link-to "downloads"
+              current-when="downloads"
+              class="pageheader__menu__item"
+              activeClass="pageheader__menu__item--active"
+              data-side-search-link='data'
+            }}
+              {{ t 'pageheader.download' }}
+            {{/link-to}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+{{/if}}
 

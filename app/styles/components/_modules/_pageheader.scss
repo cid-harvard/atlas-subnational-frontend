@@ -181,3 +181,29 @@
 
 }
 
+//special homepage pageheader
+
+.header--pageheader--home {
+  height: auto;
+  min-height: 400px;
+  background-image: url('/assets/img/hero_images/front-header-background.png');
+  background-size: cover;
+  background-position: center center;
+
+  .index__header {
+    color: white;
+    background: none;
+  }
+
+  h1 {
+    color: white;
+    letter-spacing: 0;
+    font-size: $fontXLarge;
+  }
+
+  h2 {
+    color: white;
+
+  }
+
+}
