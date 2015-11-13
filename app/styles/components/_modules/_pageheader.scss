@@ -23,6 +23,7 @@
 
 .branding__logo {
   width: 12rem;
+  margin-top: -5px;
 }
 
 .branding__slogan {
@@ -144,5 +145,30 @@
   vertical-align: 6px;
   font-family: $sans;
   @include offset-text;
+}
+
+// Menu
+
+.pageheader__menu {
+  position: absolute;
+  top: 0;
+  right: $baseSpace*4;
+  font-family: $sans;
+  color: $colorWhite;
+  font-size: $fontSmall;
+  font-weight: 300;
+  a { 
+    color: $colorWhite; 
+    &:hover {
+      opacity: .8; 
+    }
+  }
+
+  li {
+    display: inline-block;
+    margin-right: $baseSpace;
+    padding: $baseSpace*.56 0;
+  }
+
 }
 

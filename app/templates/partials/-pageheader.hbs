@@ -8,6 +8,38 @@
         {{!-- <p class="branding__slogan" data-slogan>{{ t 'index.header_head' }}</p> --}}
       {{/unless}}
     </div>
+    <div class="pageheader__menu">
+      <ul>
+        <li>
+          {{#link-to "about.project-description"
+            class="pageheader__menu__item"
+            activeClass="pageheader__menu__item--active"
+            data-side-search-link='about'
+          }}
+            {{ t 'pageheader.about' }}
+          {{/link-to}}
+        </li>
+        <li>
+          {{#link-to "about.glossary"
+            class="pageheader__menu__item"
+            activeClass="pageheader__menu__item--active"
+            data-side-search-link='glossary'
+          }}
+            {{ t 'general.glossary' }}
+          {{/link-to}}
+        </li>
+        <li>
+          {{#link-to "downloads"
+            current-when="downloads"
+            class="pageheader__menu__item"
+            activeClass="pageheader__menu__item--active"
+            data-side-search-link='data'
+          }}
+            {{ t 'pageheader.download' }}
+          {{/link-to}}
+        </li>
+      </ul>
+    </div>
     <nav class="pageheader__nav">
       <div class="togglemod togglemod--languages">
         <p {{bind-attr class=":toggle__label__text isDefaultLocale::toggle__label--is--active"}}>
