@@ -170,7 +170,7 @@
     padding: $baseSpace*.56 0;
   }
 
-  @media (max-width: $small + 10) {
+  @media screen and (max-width: 720px) {
     position: relative;
     top: 0;
     right: 0;
