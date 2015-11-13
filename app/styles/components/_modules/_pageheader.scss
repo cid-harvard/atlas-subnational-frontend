@@ -195,15 +195,20 @@
     background: none;
   }
 
-  h1 {
+  .index__header__wrap {
+    padding: $baseSpace*2 0 0 0;
+    max-width: $baseSpace*20;
+  }
+
+  h1.stream__head {
     color: white;
     letter-spacing: 0;
     font-size: $fontXLarge;
+    margin: 0;
   }
 
   h2 {
     color: white;
-
   }
 
 }

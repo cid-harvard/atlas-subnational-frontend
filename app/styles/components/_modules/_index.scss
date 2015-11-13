@@ -201,11 +201,15 @@
 .index__questions__wrap {
   max-width: 100rem;
   margin: 0 auto;
+
+  .section__head {
+    margin: $baseSpace 0;
+  }
 }
 
 .index__topics__list {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .index__topics__item__wrap {
