@@ -3,11 +3,23 @@
     <div class="index__questions__mod">
       <section class="stream__section index__section index__questions__wrap">
         <h3 class="section__head">{{ t 'index.questions_head' }}, {{ t 'index.questions_subhead' }}</h3>
-        
         <ul class="index__topics__list">
           <li class="index__topics__item__wrap">
             <div class="index__topics__item">
               <h4 class="section__subhead">{{ t 'index.location_head' }}</h4>
+              <div class="index__dropdown__wrap">
+                <form action="#">
+                  <fieldset>
+                    <select name="select-location" id="select-location">
+                      <option value="City1" selected="selected">City1</option>
+                      <option value="City2">City2</option>
+                      <option value="City3">City3</option>
+                      <option value="City4">City4</option>
+                    </select>
+                  </fieldset>
+                </form>
+                {{select-dropdown}}
+              </div>
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
@@ -27,14 +39,27 @@
                     {{ t 'index.location_q2' }}
                   {{/link-to}}
                 </li>
+                <li class="index__questions__item">
+                  See all questions
+                </li>
               </ul>
             </div>
-            <img src="assets/img/index/locations_2_large.jpg" srcset="assets/img/index/locations_2_med.jpg, assets/img/index/locations_2_large.jpg 2x" alt="" class="index__topics__image">
           </li>
           <li class="index__topics__item__wrap">
-            <img src="assets/img/index/industries_2_large.jpg" srcset="assets/img/index/industries_2_med.jpg, assets/img/index/industries_2_large.jpg 2x" alt="" class="index__topics__image">
             <div class="index__topics__item">
               <h4 class="section__subhead">{{ t 'index.industry_head' }}</h4>
+              <div class="index__dropdown__wrap">
+                <form action="#">
+                  <fieldset>
+                    <select name="select-industry" id="select-industry">
+                      <option value="City1" selected="selected">Industry1</option>
+                      <option value="City2">Industry2</option>
+                      <option value="City3">Industry3</option>
+                      <option value="City4">Industry4</option>
+                    </select>
+                  </fieldset>
+                </form>
+              </div>
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
@@ -54,12 +79,28 @@
                     {{ t 'index.industry_q2' }}
                   {{/link-to}}
                 </li>
+                <li class="index__questions__item">
+                  See all questions
+                </li>
               </ul>
+
             </div>
           </li>
           <li class="index__topics__item__wrap">
             <div class="index__topics__item">
               <h4 class="section__subhead">{{ t 'index.product_head' }}</h4>
+              <div class="index__dropdown__wrap">
+                <form action="#">
+                  <fieldset>
+                    <select name="select-product" id="select-product">
+                      <option value="City1" selected="selected">Product</option>
+                      <option value="City2">Product</option>
+                      <option value="City3">Product</option>
+                      <option value="City4">Product</option>
+                    </select>
+                  </fieldset>
+                </form>
+              </div>
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
@@ -79,9 +120,11 @@
                     {{ t 'index.product_q2' }}
                   {{/link-to}}
                 </li>
+                <li class="index__questions__item">
+                  See all questions
+                </li>
               </ul>
             </div>
-            <img src="assets/img/index/products_2_large.jpg" srcset="assets/img/index/products_2_med.jpg, assets/img/index/products_2_large.jpg 2x" alt="" class="index__topics__image">
           </li>
         </ul>
       </section>

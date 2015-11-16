@@ -34,8 +34,10 @@
 }
 
 .section__subhead {
-  margin-bottom: $baseSpace;
+  margin-bottom: $baseSpace/2;
   line-height: 120%;
+  min-height: 5rem;
+  vertical-align: bottom;
 }
 
 .section__p {
