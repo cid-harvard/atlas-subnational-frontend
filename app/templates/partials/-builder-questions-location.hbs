@@ -114,7 +114,7 @@
       </li>
     {{/if}}
   </ul>
-  {{#if isDepartment}}
+  {{#unless isMuncipality}}
     <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.location'}}</h4>
     <ul class="builder__questions__list">
       <li class="builder__questions__item">
@@ -125,11 +125,11 @@
               (query-params variable='export_value' search='null' startDate=lastYear  endDate=lastYear)
               data-location-partners="export"
               class="builder__questions__question"}}
-              {{t 'graph_builder.page_title.location.partners.export' thisLevel=thisLevel }}
+              {{t 'graph_builder.page_title.location.partners.export_value' thisLevel=thisLevel }}
             {{/link-to}}
           </span>
         </div>
       </li>
     </ul>
-  {{/if}}
+  {{/unless}}
 </div>
