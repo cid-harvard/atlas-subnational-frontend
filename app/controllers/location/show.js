@@ -14,6 +14,7 @@ export default Ember.Controller.extend({
   industriesData: computed.oneWay('model.industriesData'),
   isCountry: computed.equal('model.level', 'country'),
   isDepartment: computed.equal('model.level','department'),
+  isMsa: computed.equal('model.level','msa'),
 
   locationId: computed('model.id','model.level', function() {
     return this.get('model.id');
