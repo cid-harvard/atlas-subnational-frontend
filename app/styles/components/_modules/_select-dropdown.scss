@@ -4,7 +4,6 @@
 *
 **/
 
-
 // visible button
 
 .ui-selectmenu-button {
@@ -20,6 +19,7 @@
   font-size: $fontSmall;
   cursor: pointer;
   position: relative;
+  margin-bottom: $baseSpace/2;
 
   &.ui-state-hover {
     background: $colorBrown400;
