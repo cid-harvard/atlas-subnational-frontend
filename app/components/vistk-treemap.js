@@ -64,8 +64,8 @@ export default Ember.Component.extend({
             y: function(d, i, vars) {
               return vars.y_scale[0]["func"](d[vars.var_y]);
             },
-            width: function(d, i, vars) { return d.dx - 8; },
-            height: function(d, i, vars) { return d.dy - 8; },
+            width: function(d) { return d.dx - 8; },
+            height: function(d) { return d.dy - 8; },
             translate: [5, 0]
           }, {
             type: 'rect',
