@@ -8,25 +8,19 @@ export default Ember.Controller.extend({
 
   firstYear: computed.alias('i18n.firstYear'),
   lastYear: computed.alias('i18n.lastYear'),
-
+  validTimeseries: computed.alias('model.timeseries'),
   departmentsData: computed.oneWay('model.departments'),
   productsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
-  isCountry: computed('model.level', function() {
-    return this.get('model.level') === 'country';
-  }),
-  isDepartment: computed('model.level', function() {
-    return this.get('model.level') === 'department';
-  }),
+  isCountry: computed.equal('model.level', 'country'),
+  isDepartment: computed.equal('model.level','department'),
+  isMsa: computed.equal('model.level','msa'),
+
   locationId: computed('model.id','model.level', function() {
-    if(this.get('model.level') === 'department' || this.get('model.level') === 'country') {
-      return this.get('model.id');
-    } else {
-      return this.get('model.parent_id');
-    }
+    return this.get('model.id');
   }),
   imageCode: computed('model.level', 'model.code', function() {
-    if(this.get('model.level') === 'department' || this.get('model.level') === 'country') {
+    if(this.get('isDepartment')  || this.get('isCountry')) {
       return this.get('model.code');
     } else {
       return (this.get('model.code')).substring(0,2);
@@ -49,23 +43,6 @@ export default Ember.Controller.extend({
   }),
   description: computed('model.name', 'i18n.locale', function() {
     return this.get(`model.description_${this.get('i18n.display')}`);
-  }),
-  validTimeseries: computed.alias('model.timeseries'),
-  activeStep: 1,
-  stepStories: computed(function() {
-    return [ { index: 1 }, { index: 2 }, { index: 3 }, { index: 4 } ];
-  }),
-  actions: {
-    back: function() {
-      if(this.get('activeStep') > 1) {
-        this.decrementProperty('activeStep');
-      }
-    },
-    forward: function() {
-      if(this.get('activeStep') < this.get('stepStories').length) {
-        this.incrementProperty('activeStep');
-      }
-    }
- }
+  })
 });
 

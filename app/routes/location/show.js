@@ -15,13 +15,16 @@ export default Ember.Route.extend({
     return this.store.find('location', params.location_id);
   },
   afterModel: function(model) {
+    let level = model.get('level');
+    level = level === 'country' ? 'department' : level;
+
     // extract year out later
     var products = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/products?level=4digit`);
     var industries = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/industries?level=class`);
 
     // one of these should be removed in the future because the points should be merged in
-    var departments = Ember.$.getJSON(`${apiURL}/data/location?level=department`);
-    var departments_trade = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/subregions_trade/?level=department`);
+    var departments = Ember.$.getJSON(`${apiURL}/data/location?level=${level}`);
+    var departments_trade = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/subregions_trade/?level=${level}`);
 
     return RSVP.allSettled([products, departments, industries, departments_trade]).then((array) => {
       var productsData = getWithDefault(array[0], 'value.data', []);
@@ -55,20 +58,18 @@ export default Ember.Route.extend({
 
       var departments = [];
       var departmentTimeseries = [];
-      var department_id = model.id;
 
-      if(model.get('level') === 'municipality'){
-        department_id = model.get('parent_id');
-      }
-
-      //dot plot and time series data
       _.reduce(departmentsData, (memo, d) => {
-        if(d.department_id == department_id) {
+        let id = _.get(d, 'department_id') || _.get(d, 'location_id');
+        if(id == model.id) {
           departmentTimeseries.push(d);
         }
         if(d.year === this.get('censusYear')) {
-          let location = locationsMetadata[d.department_id];
-          let tradeData = departmentsTradeDataIndex[d.department_id];
+          let id = _.get(d, 'department_id') || _.get(d, 'location_id');
+
+          let location = _.get(locationsMetadata, id);
+          let tradeData = _.get(departmentsTradeDataIndex,id);
+
           let extra = {
             name: location.name_en,
             group: d.code,
