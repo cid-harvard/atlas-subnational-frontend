@@ -9,7 +9,6 @@ export default Ember.Route.extend({
   queryParams: {
     variable: { refreshModel: true }, // The dimension of the source that the user cares about
                                       // (export_value, import_value, wages, employment, rca)
-    rca: { refreshModel: false },
     startDate: { refreshModel: false },
     endDate: { refreshModel: false },
     search: { refreshModel: false }
@@ -47,7 +46,6 @@ export default Ember.Route.extend({
     if (isExiting) {
       controller.setProperties({
         variable: null,
-        rca: null,
         startDate: this.get('firstYear'),
         endDate: this.get('lastYear')
       });

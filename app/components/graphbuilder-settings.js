@@ -1,4 +1,5 @@
 import Ember from 'ember';
+const {computed} = Ember;
 
 export default Ember.Component.extend({
   attributeBindings: ['data-dateIndex'],
@@ -12,8 +13,24 @@ export default Ember.Component.extend({
       this.set('newEndDate', this.get('endDate'));
     }
   }),
+  isGreater: computed.equal('rcaFilter', 'greater'),
+  isLess: computed.equal('rcaFilter', 'less'),
+  isAll: computed.equal('rcaFilter', 'all'),
   actions: {
+    rcaGreater() {
+      this.set('rcaFilter', 'greater');
+      this.set('isOpen', false);
+    },
+    rcaLess() {
+      this.set('rcaFilter', 'less');
+      this.set('isOpen', false);
+    },
+    rcaAll() {
+      this.set('rcaFilter', 'all');
+      this.set('isOpen', false);
+    },
     closeSettingsDrawer() {
+      if(this.get('isSingleYear')) { this.set('isOpen', false); return; }
       let content = this.get('dateRange');
       let startDate = this.$('select[data-date-index="start"]')[0];
       let endDate = this.$('select[data-date-index="end"]')[0];

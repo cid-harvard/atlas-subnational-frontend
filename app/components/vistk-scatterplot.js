@@ -13,11 +13,7 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  rcaData: computed('data.[]', 'rca', function() {
-    let rca = this.get('rca');
-    return _.filter(this.get('data'), function(d) { return d[rca] < 1;});
-  }),
-  scatter: computed('rcaData', 'dataType','eciValue','i18n.locale', function() {
+  scatter: computed('data.[]', 'dataType','eciValue','i18n.locale', function() {
     let eci = this.get('eciValue');
     let lang = this.get('i18n.locale') === 'en-col' ? 'en_EN': 'es_ES';
     return vistk.viz()
@@ -27,14 +23,14 @@ export default Ember.Component.extend({
       height: this.get('height'),
       width: this.get('width'),
       container: this.get('id'),
-      data: this.get('rcaData'),
+      data: this.get('data'),
       var_id: this.get('varIndependent'),
       var_group: 'continent',
       var_color: 'continent',
       var_x: 'distance',
       var_y: 'complexity',
       var_r: this.get('varSize'),
-      radius_min: 1,
+      radius_min: 2,
       radius_max: 10,
       x_format: function(d) { return numeral(d).format('0.00a'); },
       y_format: function(d) { return numeral(d).format('0.00a'); },
