@@ -67,7 +67,8 @@ export default EmberTableComponent.extend(TableMap, {
       map = _.reject(map, {key: 'year'});
     }
     _.forEach(map, (mapping) => {
-      if(mapping.key === 'name') { return; }
+
+      if(mapping.key === 'name' || mapping.key == 'parent') { return; }
 
       let allEmpty = _.every(this.get('content'), function(datum) {
         return ! _.get(datum, mapping.key);

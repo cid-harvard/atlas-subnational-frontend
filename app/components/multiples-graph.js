@@ -31,6 +31,7 @@ export default Ember.Component.extend({
       // terrible assumption, but assume that all value share the same name.
       d.name = get(d.values[0], `name_short_${this.get('i18n').display}`) || d.key;
       d.color = get(d.values[0], 'color') || '#ccc1b9';
+      d.code = get(d.values[0], 'code');
     });
     return _.sortBy(nest, (d) => {
       return -_.sum(d.values, varDependent);
@@ -72,17 +73,18 @@ export default Ember.Component.extend({
     let varDependent = this.get('varDependent');
     return d3.svg.area()
       .x((d) => { return this.get('xScale')(d.year); })
-      .y((d) => { return this.get('yScale')(Ember.get(d, varDependent)); })
+      .y((d) => { return this.get('yScale')(get(d, varDependent)); })
       .y0(this.get('height'));
   }),
   line: computed('xScale', 'yScale',function() {
     let varDependent = this.get('varDependent');
     return d3.svg.line()
       .x((d) => { return this.get('xScale')(d.year); })
-      .y((d) => { return this.get('yScale')(Ember.get(d, varDependent)); });
+      .y((d) => { return this.get('yScale')(get(d, varDependent)); });
   }),
   initCharts: function() {
     let data = this.firstSliceData(this.get('nestedData'));
+    let dataType = this.get('dataType');
 
     var container = d3.select("#"+this.get('elementId')).select('.multiples').selectAll('div')
       .data(data, (d,i) => { return [d.key, i, this.get('i18n').locale]; });
@@ -107,7 +109,13 @@ export default Ember.Component.extend({
     div.append('h3')
       .attr('class', 'chart__title')
       .on('click', expandTitle)
-      .text(function(d) { return Ember.get(d, 'name'); }); // this is to get the name of the data
+      .text((d) => {
+        if(get(d, 'code') && dataType != 'locations') {
+          return `${get(d, 'name')} - ${get(d, 'code')}`;
+        } else {
+          return get(d, 'name');
+        }
+      });
 
     var svg = div.append('svg')
       .attr('class', 'chart__wrap')

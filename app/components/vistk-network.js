@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import numeral from 'numeral';
 
-const {computed, observer, $} = Ember;
+const {computed, observer, $, get:get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
@@ -136,8 +136,9 @@ export default Ember.Component.extend({
             let rcaValue = d[this.get('varRCA')];
             let rcaLabel = this.get('i18n').t('graph_builder.table.rca');
             let rcaString = `${rcaLabel}: ${numeral(rcaValue).format('0.00a')}`;
+            let name = d[`name_short_${this.get('i18n').display}`];
 
-            return d[`name_short_${this.get('i18n').display}`] + '</br>' + rcaString;
+            return `<span style="color:${get(d, 'color')}">${name}</span></br>${rcaString}`;
           },
           width: 150,
           height: 'auto',

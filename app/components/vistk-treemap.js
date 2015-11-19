@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import numeral from 'numeral';
 
-const {computed, observer} = Ember;
+const {computed, observer, get:get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
@@ -128,11 +128,11 @@ export default Ember.Component.extend({
                 }
               }
 
-              var tooltip_text = '<span style="color: ' +  d.color + '">' + d[varTextItem] + '</span>';
+              var tooltip_text = `<span style="color:${get(d, 'color')}">${get(d, varTextItem)} - ${get(d, 'code')}</span>`;
 
               data.forEach((d) => {
                  if(d.key) {
-                   tooltip_text += '<br>' + this.get('i18n').t(`graph_builder.table.${d.key}`) + ': ' + format(d.key, d.value);
+                   tooltip_text += '<br>' + this.get('i18n').t(`graph_builder.table.${get(d,'key')}`) + ': ' + format(get(d,'key'), get(d,'value'));
                  }
                });
 

@@ -5,11 +5,11 @@ export default Ember.Mixin.create({
     {
       key: 'average_wages',
       type: 'int',
-      savedWidth: 270
+      savedWidth: 290
     }, {
       key: 'avg_wage',
       type: 'int',
-      savedWidth: 270
+      savedWidth: 290
     }, {
       key: 'code',
       savedWidth: 100
@@ -36,7 +36,7 @@ export default Ember.Mixin.create({
     }, {
       key: 'export_num_plants' ,
       type: 'int',
-      savedWidth: 120
+      savedWidth: 200
     }, {
       key: 'export_rca',
       type: 'int',
@@ -52,7 +52,7 @@ export default Ember.Mixin.create({
     }, {
       key: 'monthly_wages',
       type: 'int',
-      savedWidth: 230
+      savedWidth: 290
     }, {
       key: 'name',
       copy: 'export',
@@ -60,7 +60,7 @@ export default Ember.Mixin.create({
     }, {
       key: 'num_establishments' ,
       type: 'int',
-      savedWidth: 120
+      savedWidth: 200
     }, {
       key: 'num_vacancies',
       type: 'int',
@@ -75,7 +75,7 @@ export default Ember.Mixin.create({
     }, {
       key: 'wages',
       type: 'int',
-      savedWidth: 380
+      savedWidth: 330
     }, {
       key: 'year' ,
       type: 'int',
@@ -153,8 +153,7 @@ export default Ember.Mixin.create({
   occupationsMap: [
     { key: 'code' },
     { key: 'name', copy: 'occupation' },
-    { key: 'average_wages' },
-    { key: 'num_vacancies' }
+    { key: 'average_wages' }
   ],
 });
 
