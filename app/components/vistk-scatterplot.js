@@ -90,6 +90,21 @@ export default Ember.Component.extend({
           offset_y: function(d, i, vars) {
             return -(vars.y_scale[0]['func'](d[vars.var_y]) - vars.y_scale[0]['func'](eci));
           }
+        }, {
+          type: 'text',
+          filter: function(d, i) {
+           return typeof eci !== 'undefined' && i === 0;
+          },
+          text: function(d, i) {
+           return "Average complexity:" + format(eci);
+          },
+          text_anchor: 'end',
+          offset_y: function(d, i, vars) {
+            return -(vars.y_scale[0]['func'](d[vars.var_y]) - vars.y_scale[0]['func'](eci)) - 10;
+          },
+          offset_x: function(d, i, vars) {
+            return vars.x_scale[0]['func'].range()[1] - vars.x_scale[0]['func'](d[vars.var_x]) + 10;
+          }
         }]
       }],
       lang: lang
