@@ -33,10 +33,10 @@ export default Ember.Controller.extend({
   level: computed('model.level', 'i18n.locale', function() {
     return this.get('i18n').t(`location.model.${this.get('model.level')}`);
   }),
-  isCountry: computed('model', function() {
-    if(this.get('model.level') === 'country') { return true; }
-    return false;
-  }),
+  isCountry: computed.equal('model.level', 'country'),
+  isDepartment: computed.equal('model.level', 'department'),
+  isMsa: computed.equal('model.level', 'msa'),
+  isMuncipality: computed.equal('model.level', 'municipality'),
   thisLevel: computed('model.level', 'i18n.locale', function() {
     let level = this.get('i18n').t(`location.model.${this.get('model.level')}`);
     let thisLevel = `this ${level}`;
