@@ -1,41 +1,61 @@
-<div class="buildermod__questions buildermod__drawer--questions">
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.location'}}</h4>
-  <ul class="builder__questions__list">
-    <li class="builder__questions__item">
-      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-      <div class="builder__questions__item__textwrap">
-        <span>
-          {{#link-to 'visualization' entity_and_id 'departments' 'multiples' (query-params startDate=firstYear endDate=lastYear variable='employment') class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.industry.departments.employment'}}
-          {{/link-to}}
-        </span>
-      </div>
-    </li>
-    <li class="builder__questions__item">
-      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-      <div class="builder__questions__item__textwrap">
-        <span>
-          {{#link-to 'visualization' entity_and_id 'departments' 'multiples' (query-params startDate=firstYear endDate=lastYear variable='wages') class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.industry.departments.wages'}}
-          {{/link-to}}
-        </span>
-      </div>
-    </li>
-  </ul>
-  {{#if isPrescriptive }}
-    <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.occupation'}}</h4>
-    <ul class="builder__questions__list">
-      <li class="builder__questions__item">
-        <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-        <div class="builder__questions__item__textwrap">
-          <span>
-            {{#link-to 'visualization' entity_and_id 'occupations' 'treemap' (query-params variable='num_vacancies' startDate=lastYear endDate=lastYear) class="builder__questions__question"}}
-              {{t 'graph_builder.page_title.industry.occupations.num_vacancies'}}
-            {{/link-to}}
-          </span>
-        </div>
-      </li>
+<div class="stream___head__menu">
+  <div class="menu-section menu-section__thin">
+    <h5 class='menu-section__group-name'>{{t 'header.overview'}}</h5>
+    <ul class="menu-section__group">
+      {{#link-to 'industry.show' model.id
+        tagName='li'
+        data-search-profile=''
+        activeClass="menu-section__link--active"
+        class="menu-section__link"}}
+        {{ t 'pageheader.profile_link' }}
+      {{/link-to}}
     </ul>
-  {{/if}}
+  </div>
+  <div class="menu-section">
+    <h5 class='menu-section__group-name'>{{t 'header.region'}}</h5>
+    <ul class="menu-section__group">
+      {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'employment'
+        (query-params startDate=firstYear endDate=lastYear)
+        activeClass="menu-section__link--active"
+        class="menu-section__link"}}
+        {{ t 'header.employment' }}
+      {{/link-to}}
+      {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'wages'
+        (query-params startDate=firstYear endDate=lastYear)
+        activeClass="menu-section__link--active"
+        class="menu-section__link"}}
+        {{t 'header.wage' }}
+      {{/link-to}}
+    </ul>
+  </div>
+  {{#unless isIndustryClass}}
+    <div class="menu-section">
+      <h5 class='menu-section__group-name'>{{t 'header.occupation'}}</h5>
+      <ul class="menu-section__group">
+        {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies'
+          (query-params startDate=lastYear endDate=lastYear)
+          activeClass="menu-section__link--active"
+          class="menu-section__link"}}
+        {{ t 'header.employment' }}
+        {{/link-to}}
+      </ul>
+    </div>
+    <div class="menu-section menu-section__thin">
+      <h5 class='menu-section__group-name'>{{t 'header.subregion'}}</h5>
+      <ul class="menu-section__group">
+      {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'employment'
+        (query-params startDate=firstYear endDate=lastYear)
+        activeClass="menu-section__link--active"
+        class="menu-section__link"}}
+        {{ t 'header.employment' }}
+      {{/link-to}}
+      {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'wages'
+        (query-params startDate=firstYear endDate=lastYear)
+        activeClass="menu-section__link--active"
+        class="menu-section__link"}}
+        {{t 'header.wage' }}
+      {{/link-to}}
+      </ul>
+    </div>
+  {{/unless}}
 </div>
-
