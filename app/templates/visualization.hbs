@@ -1,3 +1,4 @@
+{{component "stream-header" model=model.entity type=entityType }}
 <header class="section__header builder__header">
   <h3 class="section__head">{{pageTitle}}</h3>
 </header>
@@ -14,12 +15,6 @@
             {{fa-icon icon= "plus" classNames="tool__btn__icon"}}
             {{t 'graph_builder.change_graph.label'}}
           </button>
-        {{#link-to 'graph_builder.index' entity_and_id}}
-          <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--questions"  data-change-graph=''>
-            {{fa-icon icon= "plus" classNames="tool__btn__icon"}}
-            {{t 'graph_builder.questions.label'}}
-          </button>
-        {{/link-to}}
       </div>
     </header>
     <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--fixedheight"}}>
@@ -86,13 +81,6 @@
     <h3 class="section__head recirc__head">
       {{recircCopy}}
     </h3>
-    {{#link-to
-      profileLink entityId
-      class="btn btn--standalone btn--stream"
-      data-recirc-profile-link=''
-    }}
-      {{ t 'pageheader.profile_link' entity=singularEntity }}
-    {{/link-to}}
   </div>
 </section>
 
