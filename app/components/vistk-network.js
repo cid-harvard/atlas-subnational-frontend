@@ -82,12 +82,12 @@ export default Ember.Component.extend({
             }
             //if there is a search, color nodes with Truth-y
             //export_value (products)  or 'rca' (industries)
-            if(this.get('search') && d[this.get('varDependent')]) {
+            if(this.get('search')) {
               return d.color;
             }
             //if there is no search, color products export > 0 and rca > 1
             // industries if RCA > 1 ( varDependent for industries is also rca )
-            if(d[this.get('varDependent')] && d[this.get('varRCA')] > 1){
+            if(d[this.get('varRCA')] > 1){
               return d.color;
             }
           },
