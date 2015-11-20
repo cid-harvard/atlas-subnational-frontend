@@ -105,6 +105,8 @@ export default Ember.Route.extend({
 
       _.forEach(partnerCountries, function(d) {
         let color = '#d7cbf2';
+        d.name_short_en = d.name_en;
+        d.name_short_es = d.name_es;
         d.color = color;
       });
 

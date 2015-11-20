@@ -19,20 +19,18 @@ export default Router.map(function() {
   });
 
   // Graph Builder
-  this.resource('graph_builder', { path: 'graph_builder/:graph_builder_id' }, function() {
-    this.resource('source', { path: 'source/:source_type' }, function() {
-      this.resource('visualization', { path: 'visualization/:visualization_type'});
-    });
-  });
 
   // Profiles
   this.resource('product', { path: 'product'}, function() {
     this.route('show', { path: ':product_id'});
+    this.route('visualization', { path: ':product_id/source/:source_type/visualization/:visualization_type/:variable'});
   });
   this.resource('location', { path: 'location'}, function() {
-    this.route('show', { path: ':location_id'});
+    this.route('show', {path: ':location_id'});
+    this.route('visualization', { path: ':location_id/source/:source_type/visualization/:visualization_type/:variable'});
   });
   this.resource('industry', { path: 'industry'}, function() {
     this.route('show', { path: ':industry_id'});
+    this.route('visualization', { path: ':industry_id/source/:source_type/visualization/:visualization_type/:variable'});
   });
 });
