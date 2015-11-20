@@ -75,7 +75,7 @@
   margin-right: -$baseSpace;
 }
 
-.menu__section {
+.menu-section {
   display: flex;
   border-top: 1px solid $colorGray;
   margin-right: $baseSpace;
@@ -87,49 +87,49 @@
   width: 35%;
   min-width: 24rem;
 
-  &.menu__section__thin {
+  &__thin {
     width: auto;
     flex-grow: 0;
     min-width: 20rem;
   }
+}
 
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    position: relative;
-    min-width: 9.5rem;
-    max-width: 24rem;
+.menu-section__group-name {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 9rem;
+  min-width: 9rem;
+  max-width: 9rem;
+  padding: .25rem;
+  margin-right: 1rem;
+  font-weight: normal;
+  color: $colorGray;
+  font-family: $serif;
+}
+
+.menu-section__group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  position: relative;
+  min-width: 9.5rem;
+  max-width: 24rem;
+}
+
+.menu-section__link {
+  flex-grow: 0;
+  display: flex;
+  width: 10.5rem;
+  padding: .25rem;
+  cursor: pointer;
+  color: $colorGray;
+  &:hover {
+    color: $colorGrayDark;
   }
-
-  h5 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    width: 9rem;
-    min-width: 9rem;
-    max-width: 9rem;
-    padding: .25rem;
-    margin-right: 1rem;
-    font-weight: normal;
-    color: $colorGray;
-    font-family: $serif;
-  }
-
-  li {
-    flex-grow: 0;
-    display: flex;
-    width: 10.5rem;
-    padding: .25rem;
-    cursor: pointer;
-    color: $colorGray;
-    &:hover {
-      color: $colorGrayDark;
-    }
-    &.active {
-      color: $colorBlack;
-      font-weight: 900;
-    }
+  &--active {
+    color: $colorBlack;
+    font-weight: 900;
   }
 }
 
