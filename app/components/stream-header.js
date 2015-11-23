@@ -59,6 +59,7 @@ export default Ember.Component.extend({
   locationProductOpportunity: computed.and('sourceProducts', 'variableOpportunity'),
 
   locationPartnersExports: computed.and('sourcePartners', 'variableExports'),
+  locationPartnersImports: computed.and('sourcePartners', 'variableImports'),
 
   /*
    *Active Bindings for Product Questions
