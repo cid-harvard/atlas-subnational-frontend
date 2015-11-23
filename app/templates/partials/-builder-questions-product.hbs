@@ -15,14 +15,14 @@
     <h5 class='menu-section__group-name'>{{t 'header.region'}}</h5>
     <ul class="menu-section__group">
       {{#link-to 'product.visualization' model.id 'locations' 'geo' 'export_value'
-        (query-params startDate=firstYear endDate=lastYear search='null')
+        (query-params startDate=lastYear endDate=lastYear search='null')
         tagName='li'
         activeClass="menu-section__link--active"
         class="menu-section__link"}}
         {{t 'header.export'}}
       {{/link-to}}
       {{#link-to 'product.visualization' model.id 'locations' 'geo' 'import_value'
-        (query-params startDate=firstYear endDate=lastYear search='null')
+        (query-params startDate=lastYear endDate=lastYear search='null')
         tagName='li'
         activeClass="menu-section__link--active"
         class="menu-section__link"}}
