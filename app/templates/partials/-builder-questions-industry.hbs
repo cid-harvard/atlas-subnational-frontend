@@ -1,6 +1,6 @@
 <div class="stream___head__menu">
   <div class="menu-section menu-section__thin">
-    <h5 class='menu-section__group-name'>Overview</h5>
+    <h5 class='menu-section__group-name'>{{t 'header.overview'}}</h5>
     <ul class="menu-section__group">
       {{#link-to 'industry.show' model.id
         tagName='li'
@@ -12,7 +12,7 @@
     </ul>
   </div>
   <div class="menu-section">
-    <h5 class='menu-section__group-name'>Departments</h5>
+    <h5 class='menu-section__group-name'>{{t 'header.region'}}</h5>
     <ul class="menu-section__group">
       {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'employment'
         (query-params startDate=firstYear endDate=lastYear)
@@ -30,7 +30,7 @@
   </div>
   {{#unless isIndustryClass}}
     <div class="menu-section">
-      <h5 class='menu-section__group-name'>Occupations</h5>
+      <h5 class='menu-section__group-name'>{{t 'header.occupation'}}</h5>
       <ul class="menu-section__group">
         {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies'
           (query-params startDate=lastYear endDate=lastYear)
@@ -38,6 +38,23 @@
           class="menu-section__link"}}
         {{ t 'header.employment' }}
         {{/link-to}}
+      </ul>
+    </div>
+    <div class="menu-section menu-section__thin">
+      <h5 class='menu-section__group-name'>{{t 'header.subregion'}}</h5>
+      <ul class="menu-section__group">
+      {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'employment'
+        (query-params startDate=firstYear endDate=lastYear)
+        activeClass="menu-section__link--active"
+        class="menu-section__link"}}
+        {{ t 'header.employment' }}
+      {{/link-to}}
+      {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'wages'
+        (query-params startDate=firstYear endDate=lastYear)
+        activeClass="menu-section__link--active"
+        class="menu-section__link"}}
+        {{t 'header.wage' }}
+      {{/link-to}}
       </ul>
     </div>
   {{/unless}}
