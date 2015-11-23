@@ -12,6 +12,20 @@
   max-width: 100rem;
 }
 
+.stream__section.search {
+
+  background: $colorGrayDark;
+
+  h3, form {
+    max-width: 100rem;
+    margin: 0 auto;
+  }
+
+  h3 {
+    padding: $baseSpace 0;
+  }
+}
+
 .index__header__wrap {
   background-size: 40rem;
   padding: $baseSpace;

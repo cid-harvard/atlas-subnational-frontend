@@ -129,6 +129,22 @@
         </ul>
       </section>
     </div>
+    <section class="stream__section search">
+      <h3 class="section__head">Search</h3>
+      <form class="search__wrap">
+        <div class="search__field__wrap">
+          {{input
+            class="search"
+            placeholder=( t 'pageheader.search_placeholder' )
+            value=query
+            enter='query'
+            required='required'
+          }}
+          <button class="search__reset fa fa-close" type="reset"></button>
+        </div>
+        <input class="search__submit btn btn--standalone btn--search" type="submit" value="{{ t 'pageheader.search_link' }}" {{action 'query' query}}>
+      </form>
+    </section>
     <section class="stream__section recirc">
       <div class="recirc__bground" style="background-image: url(assets/img/hero_images/location/COL.jpg)"></div>
       <div class="recirc__wrap">
