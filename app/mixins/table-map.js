@@ -123,7 +123,10 @@ export default Ember.Mixin.create({
     { key: 'export_num_plants' },
     { key: 'export_rca' },
     { key: 'distance' },
-    { key: 'cog' }
+    { key: 'monthly_wages' },
+    { key: 'wages' },
+    { key: 'employment' },
+    { key: 'num_establishments' },
    ],
   industriesMap: [
     { key: 'code' },

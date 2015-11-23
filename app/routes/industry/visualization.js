@@ -29,6 +29,8 @@ export default Ember.Route.extend({
         return this.departmentDataMunging(hash);
       } else if (source_type === 'occupations') {
         return this.occupationsDataMunging(hash);
+      } else if (source_type == 'cities') {
+        return this.citiesDataMunging(hash);
       }
     });
   },
@@ -53,6 +55,13 @@ export default Ember.Route.extend({
     return {
       model: this.store.find('industry', id),
       occupations: $.getJSON(`${apiURL}/data/industry/${id}/occupations/?level=minor_group`)
+    };
+  }),
+  cities: computed('industry_id', function() {
+    let id = get(this, 'industry_id');
+    return {
+      model: this.store.find('industry', id),
+      cities: $.getJSON(`${apiURL}/data/industry/${id}/participants/?level=msa`)
     };
   }),
   departmentDataMunging(hash) {
@@ -88,6 +97,26 @@ export default Ember.Route.extend({
       d.name_short_es = occupation.name_short_es;
       d.color = occupation.color;
       d.code = occupation.code;
+      return d;
+    });
+
+    return Ember.Object.create({
+      entity: model,
+      data: data,
+    });
+  },
+  citiesDataMunging(hash) {
+    let {model, cities} = hash;
+    let locationsMetadata = this.modelFor('application').locations;
+
+    let data = _.map(cities.data, (d) => {
+      let industry = locationsMetadata[d.msa_id];
+      d.avg_wage =  d.wages/d.employment;
+      d.name_short_en = industry.name_short_en;
+      d.name_short_es = industry.name_short_es;
+      d.color = industry.color;
+      d.code = industry.code;
+      d.group = industry.group;
       return d;
     });
 
