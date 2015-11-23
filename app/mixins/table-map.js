@@ -103,17 +103,6 @@ export default Ember.Mixin.create({
     { key: 'distance' },
     { key: 'cog' }
    ],
-  locationsMap: [
-    { key: 'code' },
-    { key: 'name', copy: 'location' },
-    { key: 'year' },
-    { key: 'export_value' },
-    { key: 'import_value' },
-    { key: 'export_num_plants' },
-    { key: 'export_rca' },
-    { key: 'distance' },
-    { key: 'cog' }
-   ],
   citiesMap: [
     { key: 'code' },
     { key: 'name', copy: 'location' },
@@ -151,6 +140,10 @@ export default Ember.Mixin.create({
     { key: 'employment' },
     { key: 'rca' },
     { key: 'distance' },
+    { key: 'export_value' },
+    { key: 'import_value' },
+    { key: 'export_num_plants' },
+    { key: 'export_rca' },
     { key: 'cog' }
    ],
   occupationsMap: [
