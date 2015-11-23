@@ -2,9 +2,6 @@ import Ember from 'ember';
 import numeral from 'numeral';
 const {computed, observer, get:get } = Ember;
 
-Ember.depricate = function() {};
-Ember.warn = function() {};
-
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   queryParams: ['search', 'startDate', 'endDate'],
