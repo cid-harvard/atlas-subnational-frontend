@@ -16,13 +16,13 @@
     <ul class="menu-section__group">
       {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'employment'
         (query-params startDate=firstYear endDate=lastYear)
-        activeClass="menu-section__link--active"
+        classNameBindings="industryDepartmentEmployment:menu-section__link--active"
         class="menu-section__link"}}
         {{ t 'header.employment' }}
       {{/link-to}}
       {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'wages'
         (query-params startDate=firstYear endDate=lastYear)
-        activeClass="menu-section__link--active"
+        classNameBindings="industryDepartmentWage:menu-section__link--active"
         class="menu-section__link"}}
         {{t 'header.wage' }}
       {{/link-to}}
@@ -34,7 +34,7 @@
       <ul class="menu-section__group">
         {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies'
           (query-params startDate=lastYear endDate=lastYear)
-          activeClass="menu-section__link--active"
+          classNameBindings="industryOccupationsVacancies:menu-section__link--active"
           class="menu-section__link"}}
         {{ t 'header.employment' }}
         {{/link-to}}
@@ -45,13 +45,13 @@
       <ul class="menu-section__group">
       {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'employment'
         (query-params startDate=firstYear endDate=lastYear)
-        activeClass="menu-section__link--active"
+        classNameBindings="industryCitiesEmployment:menu-section__link--active"
         class="menu-section__link"}}
         {{ t 'header.employment' }}
       {{/link-to}}
       {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'wages'
         (query-params startDate=firstYear endDate=lastYear)
-        activeClass="menu-section__link--active"
+        classNameBindings="industryCitiesWage:menu-section__link--active"
         class="menu-section__link"}}
         {{t 'header.wage' }}
       {{/link-to}}

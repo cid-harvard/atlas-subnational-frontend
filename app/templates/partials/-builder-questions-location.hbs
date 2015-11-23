@@ -16,10 +16,11 @@
     <ul class="menu-section__group">
       {{#unless isMunicipality}}
         {{#unless isCountry }}
-          {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca' (query-params endDate=lastYear startDate=lastYear)
+          {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca'
+            (query-params endDate=lastYear startDate=lastYear)
             data-location-industry="similarity"
             tagName='li'
-            activeClass="menu-section__link--active"
+            classNameBindings="locationIndustryRCA:menu-section__link--active"
             class="menu-section__link"}}
             {{ t 'header.industry_space' }}
           {{/link-to}}
@@ -28,22 +29,22 @@
       {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear search='null')
         tagName='li'
         data-location-industry="employment"
-        activeClass="menu-section__link--active"
+        classNameBindings="locationIndustryEmployment:menu-section__link--active"
         class="menu-section__link"}}
         {{ t 'header.employment' }}
       {{/link-to}}
       {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'wages'(query-params endDate=lastYear startDate=lastYear search='null')
         data-location-industry="wages"
         tagName='li'
-        activeClass="menu-section__link--active"
+        classNameBindings="locationIndustryWages:menu-section__link--active"
         class="menu-section__link"}}
         {{t 'header.wage' }}
       {{/link-to}}
       {{#unless isMunicipality}}
-        {{#link-to 'location.visualization' model.id 'industries' 'scatter' 'rca'(query-params endDate=lastYear startDate=lastYear search='null')
+        {{#link-to 'location.visualization' model.id 'industries' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
           data-location-industry="scatter"
           tagName='li'
-          activeClass="menu-section__link--active"
+          classNameBindings="locationIndustryOpportunity:menu-section__link--active"
           class="menu-section__link"}}
           {{ t 'header.industry_potential'}}
         {{/link-to}}
@@ -57,7 +58,7 @@
         {{#link-to 'location.visualization' model.id 'products' 'similarity' 'rca' (query-params endDate=lastYear startdate=lastYear search='null')
           data-location-product="similarity"
           tagName='li'
-          activeClass="menu-section__link--active"
+          classNameBindings="locationProductRCA:menu-section__link--active"
           class="menu-section__link"}}
           {{ t 'header.product_space' }}
         {{/link-to}}
@@ -65,22 +66,22 @@
       {{#link-to 'location.visualization' model.id 'products' 'treemap' 'import_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
         data-location-product="imports"
         tagName='li'
-        activeClass="menu-section__link--active"
+        classNameBindings="locationProductImports:menu-section__link--active"
         class="menu-section__link"}}
         {{t 'header.import'}}
       {{/link-to}}
       {{#unless isMunicipality}}
-        {{#link-to 'location.visualization' model.id 'products' 'scatter' 'rca' (query-params endDate=lastYear startDate=lastYear search='null')
+        {{#link-to 'location.visualization' model.id 'products' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
           data-location-product="scatter"
           tagName='li'
-          activeClass="menu-section__link--active"
+          classNameBindings="locationProductOpportunity:menu-section__link--active"
           class="menu-section__link"}}
           {{ t 'header.product_potential' }}
         {{/link-to}}
       {{/unless}}
       {{#link-to 'location.visualization' model.id  'products' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
         tagName='li'
-        activeClass="menu-section__link--active"
+        classNameBindings="locationProductExports:menu-section__link--active"
         class="menu-section__link"}}
         {{t 'header.export'}}
       {{/link-to}}
@@ -93,7 +94,7 @@
         {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
           data-location-partners="export"
           tagName='li'
-          activeClass="menu-section__link--active"
+          classNameBindings="locationPartnersExports:menu-section__link--active"
           class="menu-section__link"}}
           {{t 'header.export'}}
         {{/link-to}}

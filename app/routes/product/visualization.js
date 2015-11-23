@@ -27,8 +27,8 @@ export default Ember.Route.extend({
     set(this, 'variable', variable);
 
     return RSVP.hash(this.get(source_type)).then((hash) => {
-      if(source_type === 'locations') {
-        return this.locationDataMunging(hash);
+      if(source_type === 'departments') {
+        return this.departmentsDataMunging(hash);
       } else if (source_type === 'cities') {
         return this.citiesDataMunging(hash);
       }
@@ -43,7 +43,7 @@ export default Ember.Route.extend({
       entity_type:'product',
     });
   },
-  locations: computed('product_id', function() {
+  departments: computed('product_id', function() {
     let id = get(this, 'product_id');
     return {
       model: this.store.find('product', id),
@@ -57,7 +57,7 @@ export default Ember.Route.extend({
       cities: $.getJSON(`${apiURL}/data/product/${id}/exporters?level=msa`)
     };
   }),
-  locationDataMunging(hash) {
+  departmentsDataMunging(hash) {
     let {model,locations} = hash;
     let locationsMetadata  = this.modelFor('application').locations;
 
