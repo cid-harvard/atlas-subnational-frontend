@@ -73,7 +73,7 @@ export default Ember.Component.extend({
 
             data.forEach((d) => {
               if(d.key) {
-                tooltip_text += '<br>' + this.get('i18n').t(`graph_builder.table.${get(d,'key')}`) + ': ' + format(get(d,'key'));
+                tooltip_text += '<br>' + this.get('i18n').t(`graph_builder.table.${get(d,'key')}`) + ': ' + format(get(d,'value'));
               }
             });
 
