@@ -3,9 +3,12 @@ const {computed, get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
+
+  type: null,
+  source: null,
+  variable: null,
+
   level: computed.alias('model.level'),
-  source: computed.alias('model.source'),
-  variable: computed.alias('model.variable'),
 
   isLocation: computed.equal('type', 'location'),
   isProduct: computed.equal('type', 'product'),
@@ -54,8 +57,8 @@ export default Ember.Component.extend({
   locationIndustryOpportunity: computed.and('sourceIndustries', 'variableOpportunity'),
 
   locationProductRCA: computed.and('sourceProducts', 'variableRCA'),
-  locationProductImports: computed.and('sourceProducts', 'variableExports'),
-  locationProductExports: computed.and('sourceProducts', 'variableImports'),
+  locationProductExports: computed.and('sourceProducts', 'variableExports'),
+  locationProductImports: computed.and('sourceProducts', 'variableImports'),
   locationProductOpportunity: computed.and('sourceProducts', 'variableOpportunity'),
 
   locationPartnersExports: computed.and('sourcePartners', 'variableExports'),
@@ -71,7 +74,7 @@ export default Ember.Component.extend({
   productDepartmentsImports: computed.and('sourceDepartments', 'variableImports'),
 
   breadcrumbs: computed('model.parent', function() {
-    let metaData = get(this, 'model.metaData.locations');
+    let metaData = get(this, 'metaData.locations');
     let parentId = get(this, 'model.parent_id');
     let crumbs = []
     while(!_.isNull(parentId)){
