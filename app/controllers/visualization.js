@@ -2,17 +2,13 @@ import Ember from 'ember';
 import numeral from 'numeral';
 const {computed, observer, get:get } = Ember;
 
-Ember.depricate = function() {};
-Ember.warn = function() {};
-
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
-  queryParams: ['variable', 'search', 'startDate', 'endDate'],
+  queryParams: ['search', 'startDate', 'endDate'],
   search: null,
   rcaFilter: 'less',
   startDate: null,
   endDate: null,
-  variable: null,
   searchText: null,
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
@@ -27,6 +23,8 @@ export default Ember.Controller.extend({
   entity: computed.alias('model.entity'),
   entityType: computed.alias('model.entity_type'),
   visualization: computed.alias('model.visualization'),
+
+  variable: computed.alias('model.variable'),
 
   isGeo: computed.equal('visualization','geo'),
   isScatter: computed.equal('visualization','scatter'),
@@ -273,7 +271,6 @@ export default Ember.Controller.extend({
     },
     toggleVisualization: function(visualization) {
       let model = this.get('model');
-      let graph_builder_id = `${model.entity_type}-${model.entity.id}`;
       this.set('drawerChangeGraphIsOpen', false); // Close graph change drawer
       this.set('searchText', this.get('search'));
 
@@ -286,8 +283,8 @@ export default Ember.Controller.extend({
       }
 
       if(this.get('visualization') === visualization) { return; } //do nothing if currently on the same visualization
-      this.transitionToRoute('visualization', graph_builder_id, model.source, visualization, {
-        queryParams: { variable: this.get('variable'), startDate: startDate, endDate: endDate, search: this.get('search') }
+      this.transitionToRoute(`${model.entity_type}.visualization`, model.entity.id, model.source, visualization, this.get('variable'), {
+        queryParams: {startDate: startDate, endDate: endDate, search: this.get('search') }
       });
     },
     changeQuestion: function() {

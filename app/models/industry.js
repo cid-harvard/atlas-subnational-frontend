@@ -1,18 +1,16 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-import ENV from '../config/environment';
 import ModelAttribute from '../mixins/model-attribute';
 import numeral from 'numeral';
-const {apiURL} = ENV;
 const {attr} = DS;
-const {computed, $, get:get } = Ember;
+const {computed, get:get } = Ember;
 
 export default DS.Model.extend(ModelAttribute, {
   classIndustries: attr(),
   industriesData: attr(),
   departmentsData: attr(),
   occupationsData: attr(),
-  employmentGrowthCalc: function(data) {
+  employmentGrowthCalc(data) {
     let first = _.first(data);
     let last = _.last(data);
     let difference = last.employment / first.employment;
@@ -58,75 +56,6 @@ export default DS.Model.extend(ModelAttribute, {
   }),
   lastAvgWage: computed('lastDataPoint','i18n.locale', function() {
     return numeral(this.get('lastDataPoint.avg_wage')).format('$ 0.00a');
-  }),
-  graphbuilderDepartments: computed('id', function() {
-    var defaultParams = {
-      treemap: { variable: 'employment', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
-      multiples: { variable: 'employment', startDate: this.get('firstYear'), endDate: this.get('lastYear') },
-      geo: { variable: 'employment', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
-      scatter: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') },
-      similarty: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') }
-    };
-    var baseUrl = `${apiURL}/data/industry/${this.get('id')}/participants`;
-    var departmentUrl = baseUrl + '?level=department';
-
-    return $.getJSON(departmentUrl)
-      .then((response) => {
-        let locationsMetadata = this.get('metaData.locations');
-        let data = response.data;
-
-        data = _.map(data, (d) => {
-          let department = locationsMetadata[d.department_id];
-          return _.merge(d, department);
-        });
-        return { entity: this, entity_type:'industry', data: data, source: 'departments', defaultParams:defaultParams };
-      }, (error) => {
-        return { error: error, entity: this, entity_type:'industry', data: [], source: 'departments', defaultParams:defaultParams};
-      });
-  }),
-  graphbuilderMunicipalities: computed('id', function() {
-    var defaultParams = {
-      treemap: { variable: 'employment', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
-      multiples: { variable: 'employment', startDate: this.get('firstYear'), endDate: this.get('lastYear') },
-      scatter: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') },
-      similarty: { variable: null,  startDate: this.get('lastYear'), endDate: this.get('lastYear') }
-    };
-    var baseUrl = `${apiURL}/data/industry/${this.get('id')}/participants`;
-    var municipalityiUrl = baseUrl + '?level=municipality';
-
-    return $.getJSON(municipalityiUrl)
-      .then((response) => {
-        let locationsMetadata = this.get('metaData.locations');
-        let data = response.data;
-
-        data = _.map(data, (d) => {
-          let municipality = locationsMetadata[d.municipality_id];
-          let department = locationsMetadata[municipality.parent_id];
-          d.group = department.code;
-          return _.merge(d, municipality);
-        });
-        return { entity: this, entity_type:'industry', data: data, source: 'participants', defaultParams:defaultParams };
-      });
-  }),
-  graphbuilderOccupations: computed('id', function() {
-    var defaultParams = {
-      treemap: { variable: 'num_vacancies', startDate: this.get('lastYear'), endDate: this.get('lastYear') },
-    };
-    var baseUrl = `${apiURL}/data/industry/${this.get('id')}/occupations/?level=minor_group`;
-
-    return $.getJSON(baseUrl)
-      .then((response) => {
-        let data = response.data;
-        let occupationsMetadata = this.get('metaData.occupations');
-
-        data = _.map(data, (d) => {
-          let occupation = occupationsMetadata[d.occupation_id];
-          d.year = this.get('lastYear');
-          d.group = occupation.code.split('-')[0];
-          return _.merge(d, occupation);
-        });
-        return { entity: this, entity_type:'industry', data: data, source: 'occupations', defaultParams:defaultParams };
-      });
   })
 });
 
