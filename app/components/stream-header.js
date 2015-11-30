@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {computed} = Ember;
+const {computed, get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
@@ -70,4 +70,15 @@ export default Ember.Component.extend({
   productDepartmentsExports: computed.and('sourceDepartments', 'variableExports'),
   productDepartmentsImports: computed.and('sourceDepartments', 'variableImports'),
 
+  breadcrumbs: computed('model.parent', function() {
+    let metaData = get(this, 'model.metaData.locations');
+    let parentId = get(this, 'model.parent_id');
+    let crumbs = []
+    while(!_.isNull(parentId)){
+      let parent = metaData[parentId];
+      crumbs.unshift(parent)
+      parentId = get(parent, 'parent_id');
+    }
+    return crumbs
+  })
 });

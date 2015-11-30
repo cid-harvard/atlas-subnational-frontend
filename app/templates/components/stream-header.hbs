@@ -1,4 +1,13 @@
 <header class="stream__header stream__header--builder">
+  {{#if isLocation}}
+    <ul>
+      {{#each crumb in breadcrumbs}}
+        {{#link-to 'location.show' crumb.id  tagName='li' class='breadcrumb'}}
+          {{crumb.name_es}}
+        {{/link-to}}
+      {{/each}}
+    </ul>
+  {{/if}}
   <h2 class="stream__head" data-location-name>{{model.name}}</h2>
   {{#if isLocation}}
     {{ partial 'partials/builder-questions-location'}}
@@ -10,3 +19,4 @@
     {{ partial 'partials/builder-questions-industry'}}
   {{/if}}
 </header>
+
