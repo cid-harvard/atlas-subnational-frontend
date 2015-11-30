@@ -96,7 +96,6 @@ export default Ember.Component.extend({
            return typeof eci !== 'undefined' && i === 0;
           },
           text: function(d, i) {
-            alert('text')
             var label = lang === 'en_EN' ? 'Average complexity': 'Complejidad media';
             return label + ': ' + format(eci);
           },
@@ -105,7 +104,7 @@ export default Ember.Component.extend({
             return -(vars.y_scale[0]['func'](d[vars.var_y]) - vars.y_scale[0]['func'](eci)) - 10;
           },
           offset_x: function(d, i, vars) {
-            return vars.x_scale[0]['func'].range()[1] - vars.x_scale[0]['func'](d[vars.var_x]) + 10;
+            return vars.x_scale[0]['func'].range()[1] - vars.x_scale[0]['func'](d[vars.var_x]);
           }
         }]
       }],
