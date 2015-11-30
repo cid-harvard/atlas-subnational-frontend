@@ -96,7 +96,9 @@ export default Ember.Component.extend({
            return typeof eci !== 'undefined' && i === 0;
           },
           text: function(d, i) {
-           return "Average complexity:" + format(eci);
+            alert('text')
+            var label = lang === 'en_EN' ? 'Average complexity': 'Complejidad media';
+            return label + ': ' + format(eci);
           },
           text_anchor: 'end',
           offset_y: function(d, i, vars) {
