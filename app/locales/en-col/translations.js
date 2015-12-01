@@ -306,7 +306,7 @@ export default {
   "index.industry_head": "Learn about an industry",
   "index.industry_q1": "Where in Colombia does the insurance industry employ the most people?",
   "index.industry_q1.id": "488",
-  "index.industry_q2": "What occupations does the chemical industry employ?",
+  "index.industry_q2": "What occupations are demanded by the chemical industry?",
   "index.industry_q2.id": "461",
   "index.location_head": "Learn about a location",
   "index.location_q1": "What industries in Bogot\u00e1 employ the most people?",
