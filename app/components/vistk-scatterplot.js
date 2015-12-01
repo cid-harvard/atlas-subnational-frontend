@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   scatter: computed('data.[]', 'dataType','eciValue','i18n.locale', function() {
     let eci = this.get('eciValue');
     let lang = this.get('i18n.locale') === 'en-col' ? 'en_EN': 'es_ES';
-    let format = function(value) { return numeral(value).format('0.0'); };
+    let format = function(value) { return numeral(value).format('0.00'); };
     return vistk.viz()
     .params({
       type: 'scatterplot',
@@ -33,8 +33,8 @@ export default Ember.Component.extend({
       var_r: this.get('varSize'),
       radius_min: 2,
       radius_max: 10,
-      x_format: function(d) { return numeral(d).format('0.00a'); },
-      y_format: function(d) { return numeral(d).format('0.00a'); },
+      x_format: format,
+      y_format: format,
       duration: 0,
       var_text: this.get('varIndependent'),
       x_text_custom: this.get('i18n').t('graph_builder.table.distance').string,
