@@ -23,3 +23,19 @@ li > p {
   padding-top: 0;
 }
 
+@mixin displayBlock() {
+	display: block;
+}
+
+.fontXTiny { font-size: $fontXTiny; @include displayBlock() }
+.fontTiny { font-size: $fontTiny; @include displayBlock() }
+.fontSmall { font-size: $fontSmall; @include displayBlock() }
+.fontBase { font-size: $fontBase; @include displayBlock() }
+.fontLarge { font-size: $fontLarge; @include displayBlock() }
+.fontXLarge { font-size: $fontXLarge; @include displayBlock() }
+.fontXXLarge { font-size: $fontXXLarge; @include displayBlock() }
+.fontHuge { font-size: $fontHuge; @include displayBlock() }
+
+.fontSans { font-family: $sans; }
+.fontSerif { font-family: $serif; }
+.fontSansAlt { font-family: $sansAlt; }
