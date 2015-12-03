@@ -45,10 +45,16 @@ export function initialize(instance) {
   i18n.set('censusYear', censusYear);
 
   i18n.addObserver('locale', function() {
-    if(this.get('locale') != 'no-copy') {
-      numeral.language(this.get('locale'));
-      this.set('display', this.get('locale').split('-')[0]);
-      this.set('country', this.get('locale').split('-')[1]);
+    let locale = this.get('locale');
+    let defaultLocale = this.get('defaultLocale');
+    if(this.get('locale') === 'no-copy') {
+      this.set('display', defaultLocale.split('-')[0]);
+      this.set('country', defaultLocale.split('-')[1]);
+      numeral.language(defaultLocale);
+    } else {
+      this.set('display', locale.split('-')[0]);
+      this.set('country', locale.split('-')[1]);
+      numeral.language(locale);
     }
   });
 }

@@ -26,7 +26,6 @@ export default Ember.Component.extend({
   isPrescriptiveLocation: computed.or('isDepartment', 'isCountry', 'isMsa'),
 
   sourceDepartments: computed.equal('source', 'departments'),
-  sourceDepartments: computed.equal('source', 'departments'),
   sourceOccupations: computed.equal('source', 'occupations'),
   sourceCities: computed.equal('source', 'cities'),
   sourceIndustries: computed.equal('source', 'industries'),
@@ -76,12 +75,12 @@ export default Ember.Component.extend({
   breadcrumbs: computed('model.parent', function() {
     let metaData = get(this, 'metaData.locations');
     let parentId = get(this, 'model.parent_id');
-    let crumbs = []
+    let crumbs = [];
     while(!_.isNull(parentId)){
       let parent = metaData[parentId];
-      crumbs.unshift(parent)
+      crumbs.unshift(parent);
       parentId = get(parent, 'parent_id');
-    }
-    return crumbs
+    };
+    return crumbs;
   })
 });
