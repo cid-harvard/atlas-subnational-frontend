@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import ENV from '../config/environment';
 
-import numeral from 'numeral';
-
 const {RSVP, $, get:get, set:set} = Ember;
 const {apiURL} = ENV;
 
