@@ -45,6 +45,18 @@ export default Ember.Controller.extend({
   }),
   description: computed('model.name', 'i18n.locale', function() {
     return this.get(`model.description_${this.get('i18n.display')}`);
-  })
+  }),
+  thisLevel: computed('model.level', 'i18n.locale', function() {
+    let level = this.get('i18n').t(`location.model.${this.get('model.level')}`);
+    let thisLevel = `this ${level}`;
+
+    if(this.get('model.level') === 'country') {
+      thisLevel = level;
+    } else if(this.get('i18n.display') === 'es') {
+      thisLevel = level.string === 'ciudad' ? `esta ${level}` :  `este ${level}`;
+    }
+
+    return thisLevel;
+  }),
 });
 
