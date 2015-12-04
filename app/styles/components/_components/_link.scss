@@ -12,7 +12,7 @@ a {
   color: $colorGrayDark;
   font-family: $sans;
   font-weight: 600;
-  font-size: $fontBase-decrement; // A bit smaller to make x-heights match Plantin's
+  font-size: $fontBase-decrement; // A bit smaller to make x-heights match
   &:hover, &:focus, &:active {
     color: $colorBlack;
   }
