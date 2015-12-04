@@ -141,7 +141,7 @@
   color: $colorWhite;
   font-size: $fontSmall;
   display: inline;
-  font-weight: 500;
+  font-weight: 600;
   vertical-align: 6px;
   font-family: $sans;
   @include offset-text;
@@ -156,7 +156,8 @@
   font-family: $sans;
   color: $colorWhite;
   font-size: $fontSmall;
-  font-weight: 300;
+  font-weight: 600;
+  @include offset-text;
   a { 
     color: $colorWhite; 
     &:hover {
