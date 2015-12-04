@@ -33,8 +33,8 @@ li > p {
 .fontXXLarge { font-size: $fontXXLarge; }
 .fontHuge { font-size: $fontHuge; }
 
-.fontSans { font-family: $sans; }
-.fontSerif { font-family: $serif; }
-.fontSansAlt { font-family: $sansAlt; }
-.fontSansSC { font-family: $sansSC; text-transform: lowercase; }
-.fontSerifSC { font-family: $serifSC; text-transform: lowercase; }
+.fontSans { font-family: $sans; font-style: normal !important; font-weight: 400;  }
+.fontSerif { font-family: $serif; font-style: normal !important; }
+.fontSansAlt { font-family: $sansAlt; font-style: normal !important; }
+.fontSansSC { font-family: $sansSC; text-transform: lowercase; font-style: normal !important; }
+.fontSerifSC { font-family: $serifSC; text-transform: lowercase; font-style: normal !important; }
