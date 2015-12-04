@@ -23,19 +23,18 @@ li > p {
   padding-top: 0;
 }
 
-@mixin displayBlock() {
-	display: block;
-}
-
-.fontXTiny { font-size: $fontXTiny; @include displayBlock() }
-.fontTiny { font-size: $fontTiny; @include displayBlock() }
-.fontSmall { font-size: $fontSmall; @include displayBlock() }
-.fontBase { font-size: $fontBase; @include displayBlock() }
-.fontLarge { font-size: $fontLarge; @include displayBlock() }
-.fontXLarge { font-size: $fontXLarge; @include displayBlock() }
-.fontXXLarge { font-size: $fontXXLarge; @include displayBlock() }
-.fontHuge { font-size: $fontHuge; @include displayBlock() }
+//utilities for font stylesheet
+.fontXTiny { font-size: $fontXTiny; }
+.fontTiny { font-size: $fontTiny; }
+.fontSmall { font-size: $fontSmall; }
+.fontBase { font-size: $fontBase; }
+.fontLarge { font-size: $fontLarge; }
+.fontXLarge { font-size: $fontXLarge; }
+.fontXXLarge { font-size: $fontXXLarge; }
+.fontHuge { font-size: $fontHuge; }
 
 .fontSans { font-family: $sans; }
 .fontSerif { font-family: $serif; }
 .fontSansAlt { font-family: $sansAlt; }
+.fontSansSC { font-family: $sansSC; text-transform: lowercase; }
+.fontSerifSC { font-family: $serifSC; text-transform: lowercase; }

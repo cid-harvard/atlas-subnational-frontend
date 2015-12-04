@@ -32,6 +32,15 @@
   font-weight: 500;
 }
 
+.stream__label {
+  font-family: $sansSC;
+  font-weight: normal;
+  font-size: $fontSmall;
+  color: $colorRed;
+  margin-top: $baseSpace;
+  text-transform: lowercase;
+}
+
 .breadcrumb {
   color: $colorGray;
   font-size: $fontSmall;

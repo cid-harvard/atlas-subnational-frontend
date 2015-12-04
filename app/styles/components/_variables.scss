@@ -7,7 +7,9 @@
 /* ==========  Type Palette  ========== */
 $icon: 'FontAwesome';
 $sans: 'Alegreya Sans', Arial, sans-serif;
+$sansSC: 'Alegreya Sans SC', Arial, sans-serif;
 $serif: 'Alegreya', 'Times New Roman', Georgia, serif;
+$serifSC: 'Alegreya SC', Georgia, serif;
 $sansAlt: 'Alegreya Sans', Arial, sans-serif;
 
 
@@ -127,7 +129,7 @@ $fontBase: 2rem !default;
 $fontLarge: 2.6rem !default;
 $fontXLarge: 4.2rem !default;
 $fontXXLarge: 6.8rem !default;
-$fontHuge: 11rem !default;
+$fontHuge: 9rem !default;
 
 
 // Decremented font sizes for making x-heights match across typefaces
