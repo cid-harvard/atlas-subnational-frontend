@@ -54,9 +54,22 @@
     </ul>
   </div>
   <div class="menu-section">
-    <h5 class='menu-section__group-name'>{{t 'header.product'}}</h5>
+    <h5 class='menu-section__group-name'>{{t 'header.export'}}</h5>
     <ul class="menu-section__group">
+      {{#link-to 'location.visualization' model.id  'products' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
+        tagName='li'
+        classNameBindings="locationProductExports:menu-section__link--active"
+        class="menu-section__link"}}
+        {{t 'header.product'}}
+      {{/link-to}}
       {{#unless isMunicipality }}
+        {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
+          data-location-partners="export"
+          tagName='li'
+          classNameBindings="locationPartnersExports:menu-section__link--active"
+          class="menu-section__link"}}
+          {{t 'header.destination'}}
+        {{/link-to}}
         {{#link-to 'location.visualization' model.id 'products' 'similarity' 'rca' (query-params endDate=lastYear startdate=lastYear search='null')
           data-location-product="similarity"
           tagName='li'
@@ -64,15 +77,6 @@
           class="menu-section__link"}}
           {{ t 'header.product_space' }}
         {{/link-to}}
-      {{/unless}}
-      {{#link-to 'location.visualization' model.id 'products' 'treemap' 'import_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
-        data-location-product="imports"
-        tagName='li'
-        classNameBindings="locationProductImports:menu-section__link--active"
-        class="menu-section__link"}}
-        {{t 'header.import'}}
-      {{/link-to}}
-      {{#unless isMunicipality}}
         {{#link-to 'location.visualization' model.id 'products' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
           data-location-product="scatter"
           tagName='li'
@@ -81,35 +85,29 @@
           {{ t 'header.product_potential' }}
         {{/link-to}}
       {{/unless}}
-      {{#link-to 'location.visualization' model.id  'products' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
-        tagName='li'
-        classNameBindings="locationProductExports:menu-section__link--active"
-        class="menu-section__link"}}
-        {{t 'header.export'}}
-      {{/link-to}}
     </ul>
   </div>
-  {{#unless isMunicipality}}
-    <div class="menu-section menu-section__thin">
-      <h5 class='menu-section__group-name'>{{t 'header.partner'}}</h5>
-      <ul class="menu-section__group">
-        {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
-          data-location-partners="export"
-          tagName='li'
-          classNameBindings="locationPartnersExports:menu-section__link--active"
-          class="menu-section__link"}}
-          {{t 'header.export'}}
-        {{/link-to}}
-      </ul>
+  <div class="menu-section">
+    <h5 class='menu-section__group-name'>{{t 'header.import'}}</h5>
+    <ul class="menu-section__group">
+      {{#link-to 'location.visualization' model.id 'products' 'treemap' 'import_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
+        data-location-product="imports"
+        tagName='li'
+        classNameBindings="locationProductImports:menu-section__link--active"
+        class="menu-section__link"}}
+        {{t 'header.product'}}
+      {{/link-to}}
+    </ul>
+    {{#unless isMunicipality}}
       <ul class="menu-section__group">
         {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'import_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
           data-location-partners="export"
           tagName='li'
           classNameBindings="locationPartnersImports:menu-section__link--active"
           class="menu-section__link"}}
-          {{t 'header.import'}}
+          {{t 'header.origin'}}
         {{/link-to}}
       </ul>
-    </div>
-  {{/unless}}
-</div>
+    {{/unless}}
+  </div>
+</div
