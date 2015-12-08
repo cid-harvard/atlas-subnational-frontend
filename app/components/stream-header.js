@@ -80,7 +80,7 @@ export default Ember.Component.extend({
       let parent = metaData[parentId];
       crumbs.unshift(parent);
       parentId = get(parent, 'parent_id');
-    };
+    }
     return crumbs;
   })
 });

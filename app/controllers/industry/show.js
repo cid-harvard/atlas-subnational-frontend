@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
   firstYear: computed.alias('i18n.firstYear'),
   lastYear: computed.alias('i18n.lastYear'),
   occupationsData: computed.alias('model.occupationsData'),
+  isIndustryClass: computed.equal('model.level', 'class'),
 
   treemapIndependentVars: ['department_id','department_id'],
   employmentGrowthDotPlot: computed.alias('model.employmentGrowthDotPlot'),
@@ -37,6 +38,5 @@ export default Ember.Controller.extend({
   hasChildrenIndustries: computed('model.classIndustries', function() {
     return this.get('model.classIndustries').length;
   })
-
 });
 

@@ -1,0 +1,62 @@
+<div class="buildermod__questions buildermod__drawer--questions">
+  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.department'}}</h4>
+  <ul class="builder__questions__list">
+    <li class="builder__questions__item">
+    <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
+    <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+    <i class="icon-cidcon_geo builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span>
+          {{#link-to 'product.visualization' model.id 'departments' 'geo' 'export_value' (query-params startDate=lastYear endDate=lastYear search='null')
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.product.departments.export_value'}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item">
+    <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
+    <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+    <i class="icon-cidcon_geo builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span>
+          {{#link-to 'product.visualization' model.id 'departments' 'geo' 'import_value' (query-params startDate=lastYear endDate=lastYear search='null')
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.product.departments.import_value'}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+  </ul>
+  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.city'}}</h4>
+  <ul class="builder__questions__list">
+    <li class="builder__questions__item">
+    <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
+    <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+    <div class="builder__questions__item__textwrap">
+      <span>
+        {{#link-to 'product.visualization' model.id  'cities' 'multiples' 'export_value' (query-params startDate=firstYear endDate=lastYear search='null')
+          class="builder__questions__question"
+        }}
+          {{t 'graph_builder.page_title.product.cities.export_value'}}
+        {{/link-to}}
+      </span>
+    </div>
+    </li>
+    <li class="builder__questions__item">
+    <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
+    <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span>
+          {{#link-to 'product.visualization' model.id 'cities' 'multiples' 'import_value' (query-params startDate=firstYear endDate=lastYear search='null')
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.product.cities.import_value'}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>
