@@ -7,19 +7,7 @@
           <li class="index__topics__item__wrap">
             <div class="index__topics__item">
               <h4 class="section__subhead">{{ t 'index.location_head' }}</h4>
-              <div class="index__dropdown__wrap">
-                <form action="#">
-                  <fieldset>
-                    <select name="select-location" id="select-location">
-                      <option value="City1" selected="selected">City1</option>
-                      <option value="City2">City2</option>
-                      <option value="City3">City3</option>
-                      <option value="City4">City4</option>
-                    </select>
-                  </fieldset>
-                </form>
-                {{select-dropdown}}
-              </div>
+              {{select-dropdown collection=cities type='location'}}
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
@@ -48,18 +36,7 @@
           <li class="index__topics__item__wrap">
             <div class="index__topics__item">
               <h4 class="section__subhead">{{ t 'index.industry_head' }}</h4>
-              <div class="index__dropdown__wrap">
-                <form action="#">
-                  <fieldset>
-                    <select name="select-industry" id="select-industry">
-                      <option value="City1" selected="selected">Industry1</option>
-                      <option value="City2">Industry2</option>
-                      <option value="City3">Industry3</option>
-                      <option value="City4">Industry4</option>
-                    </select>
-                  </fieldset>
-                </form>
-              </div>
+                {{select-dropdown collection=industries type='industry'}}
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
@@ -89,18 +66,7 @@
           <li class="index__topics__item__wrap">
             <div class="index__topics__item">
               <h4 class="section__subhead">{{ t 'index.product_head' }}</h4>
-              <div class="index__dropdown__wrap">
-                <form action="#">
-                  <fieldset>
-                    <select name="select-product" id="select-product">
-                      <option value="City1" selected="selected">Product</option>
-                      <option value="City2">Product</option>
-                      <option value="City3">Product</option>
-                      <option value="City4">Product</option>
-                    </select>
-                  </fieldset>
-                </form>
-              </div>
+                {{select-dropdown collection=products type='product'}}
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
