@@ -1,0 +1,11 @@
+<div class="index__dropdown__wrap">
+  <fieldset>
+    <select name={{type}}>
+      {{#each item in collection }}
+        <option value={{item.id}}>
+          {{item.name}}
+        </option>
+      {{/each}}
+    </select>
+  </fieldset>
+</div>
