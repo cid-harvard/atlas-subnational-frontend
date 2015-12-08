@@ -130,6 +130,19 @@
           </span>
         </div>
       </li>
+      <li class="builder__questions__item">
+        <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
+        <div class="builder__questions__item__textwrap">
+          <span class="builder__questions__question">
+            {{#link-to 'visualization' entity_and_id 'partners' 'treemap'
+              (query-params variable='import_value' search='null' startDate=lastYear  endDate=lastYear)
+              data-location-partners="export"
+              class="builder__questions__question"}}
+              {{t 'graph_builder.page_title.location.partners.import_value' thisLevel=thisLevel }}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
     </ul>
   {{/unless}}
 </div>
