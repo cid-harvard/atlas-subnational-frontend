@@ -66,7 +66,7 @@ export default DS.Model.extend(ModelAttribute, {
       let partnersMetadata = this.get('metaData.partnerCountries');
       data = _.map(data, (d) => {
         let country = partnersMetadata[d.country_id];
-        let parent = partnersMetadata[country.parent_id];
+        let parent = partnersMetadata[country.parent_id] || country;
 
         d = _.merge(d, country);
         d.group = country.parent_id;
