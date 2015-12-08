@@ -69,7 +69,7 @@ export default Ember.Component.extend({
             translate: [5, 0]
           }, {
             type: 'rect',
-            filter: function(d) { return d.depth == 2; },
+            filter: function(d, i, vars) { return d.depth == 2 && d[vars.var_size] > 0; },
             x: 0,
             y: 0,
             width: function(d) { return d.dx; },

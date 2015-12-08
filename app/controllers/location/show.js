@@ -12,9 +12,11 @@ export default Ember.Controller.extend({
   departmentsData: computed.oneWay('model.departments'),
   productsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
+
   isCountry: computed.equal('model.level', 'country'),
   isDepartment: computed.equal('model.level','department'),
   isMsa: computed.equal('model.level','msa'),
+  isMuncipality: computed.equal('model.level','municipality'),
 
   locationId: computed('model.id','model.level', function() {
     return this.get('model.id');
@@ -43,6 +45,18 @@ export default Ember.Controller.extend({
   }),
   description: computed('model.name', 'i18n.locale', function() {
     return this.get(`model.description_${this.get('i18n.display')}`);
-  })
+  }),
+  thisLevel: computed('model.level', 'i18n.locale', function() {
+    let level = this.get('i18n').t(`location.model.${this.get('model.level')}`);
+    let thisLevel = `this ${level}`;
+
+    if(this.get('model.level') === 'country') {
+      thisLevel = level;
+    } else if(this.get('i18n.display') === 'es') {
+      thisLevel = level.string === 'ciudad' ? `esta ${level}` :  `este ${level}`;
+    }
+
+    return thisLevel;
+  }),
 });
 

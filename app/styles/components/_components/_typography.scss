@@ -23,3 +23,18 @@ li > p {
   padding-top: 0;
 }
 
+//utilities for font stylesheet
+.fontXTiny { font-size: $fontXTiny; }
+.fontTiny { font-size: $fontTiny; }
+.fontSmall { font-size: $fontSmall; }
+.fontBase { font-size: $fontBase; }
+.fontLarge { font-size: $fontLarge; }
+.fontXLarge { font-size: $fontXLarge; }
+.fontXXLarge { font-size: $fontXXLarge; }
+.fontHuge { font-size: $fontHuge; }
+
+.fontSans { font-family: $sans; font-style: normal !important; font-weight: 400;  }
+.fontSerif { font-family: $serif; font-style: normal !important; }
+.fontSansAlt { font-family: $sansAlt; font-style: normal !important; }
+.fontSansSC { font-family: $sansSC; text-transform: lowercase; font-style: normal !important; }
+.fontSerifSC { font-family: $serifSC; text-transform: lowercase; font-style: normal !important; }

@@ -30,7 +30,7 @@
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
-                    'visualization' locationFirst 'industries' 'treemap' (query-params endDate=lastYear startDate=lastYear variable='employment')
+                    'location.visualization' locationFirst 'industries' 'treemap' 'employment'(query-params endDate=lastYear startDate=lastYear)
                     data-home-page-location-question='1'
                     class="link--stream index__questions__link"
                   }}
@@ -39,7 +39,7 @@
                 </li>
                 <li class="index__questions__item">
                   {{#link-to
-                    'visualization' locationSecond 'products' 'scatter' (query-params endDate=lastYear startDate=lastYear)
+                    'location.visualization' locationSecond 'products' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear)
                     data-home-page-location-question='2'
                     class="link--stream index__questions__link"
                   }}
@@ -57,7 +57,7 @@
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
-                    'visualization' industryFirst 'departments' 'multiples' (query-params endDate=lastYear startDate=firstYear variable='employment')
+                    'industry.visualization' industryFirst 'departments' 'multiples' 'employment'(query-params endDate=lastYear startDate=firstYear )
                     data-home-page-product-question='1'
                     class="link--stream index__questions__link"
                   }}
@@ -66,7 +66,7 @@
                 </li>
                 <li class="index__questions__item">
                   {{#link-to
-                    'visualization' industrySecond 'occupations' 'treemap' (query-params endDate=lastYear startDate=firstYear variable='num_vacancies')
+                    'industry.visualization' industrySecond 'occupations' 'treemap' 'num_vacancies'(query-params endDate=lastYear startDate=firstYear )
                     data-home-page-product-question='2'
                     class="link--stream index__questions__link"
                   }}
@@ -82,7 +82,7 @@
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
-                    'visualization' productFirst 'locations' 'multiples' (query-params endDate=lastYear startDate=firstYear variable='export_value')
+                    'product.visualization' productFirst 'departments' 'geo' 'export_value' (query-params endDate=lastYear startDate=lastYear )
                     data-home-page-industry-question='1'
                     class="link--stream index__questions__link"
                   }}
@@ -91,7 +91,7 @@
                 </li>
                 <li class="index__questions__item">
                   {{#link-to
-                    'visualization' productSecond 'locations' 'multiples' (query-params endDate=lastYear startDate=firstYear variable='import_value')
+                    'product.visualization' productSecond 'departments' 'multiples' 'import_value'(query-params endDate=lastYear startDate=firstYear )
                     data-home-page-industry-question='2'
                     class="link--stream index__questions__link"
                   }}
@@ -174,7 +174,7 @@
           <h3 class="section__head">{{ t 'index.builder_head' }}</h3>
           <p class="section__p">{{ t 'index.builder_subhead' }}</p>
           {{#link-to
-            'visualization' graphbuilder 'locations' 'multiples' (query-params endDate=lastYear startDate=firstYear variable='export_value')
+            'location.visualization' graphbuilder 'locations' 'multiples' 'export_value'(query-params endDate=lastYear startDate=firstYear)
             data-home-page-product=''
             class="btn btn--standalone btn--stream"
           }}

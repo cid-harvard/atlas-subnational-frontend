@@ -262,7 +262,9 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     Ember.run.later(this, function() {
       this.set('parent', this.get('parentView'));
-      this.initCharts();
+      if(this.get('parent.isVisible')) {
+        this.initCharts();
+      }
     }, 100);
   },
   willDestroyElement: function() {
@@ -276,7 +278,9 @@ export default Ember.Component.extend({
       Ember.run.scheduleOnce('afterRender', this , function() {
         this.set('hasMore', true);
         this.set('firstSlice', 12);
-        this.initCharts();
+        if(this.get('parent.isVisible')) {
+          this.initCharts();
+        }
       });
     }
   }),

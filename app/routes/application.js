@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import ENV from '../config/environment';
 
-import numeral from 'numeral';
-
 const {RSVP, $, get:get, set:set} = Ember;
 const {apiURL} = ENV;
 
@@ -13,7 +11,9 @@ export default Ember.Route.extend({
   },
   beforeModel: function(transition) {
     let locale = get(transition, 'queryParams.locale');
-    if(! _.contains(this.get('i18n.locales'), locale)) {
+    if(locale === 'no-copy') {
+      set(this, 'i18n.locale', 'no-copy');
+    } else if(! _.contains(this.get('i18n.locales'), locale)) {
       set(this, 'i18n.locale', get(this,'i18n.defaultLocale'));
       set(transition, 'queryParams.locale', get(this, 'i18n.defaultLocale'));
     } else {
@@ -105,6 +105,8 @@ export default Ember.Route.extend({
 
       _.forEach(partnerCountries, function(d) {
         let color = '#d7cbf2';
+        d.name_short_en = d.name_en;
+        d.name_short_es = d.name_es;
         d.color = color;
       });
 
@@ -124,19 +126,13 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     this._super(controller, model);
     var localeParam = get(this, 'i18n.locale');
-    if(localeParam === controller.get('i18n.otherLocale')){
-      set(controller, 'locale', get(this, 'i18n.otherLocale'));
-      set(controller, 'isDefaultLocale', false);
-    } else if(localeParam === 'no-copy'){
-      set(this, 'i18n.locale', 'no-copy');
-    } else {
-      set(controller, 'locale', get(this, 'i18n.defaultLocale'));
+    if(localeParam === controller.get('i18n.defaultLocale')){
       set(controller, 'isDefaultLocale', true);
+    } else if (localeParam === 'no-copy') {
+      set(controller, 'isDefaultLocale', true);
+    } else {
+      set(controller, 'isDefaultLocale', false);
     }
-
-    set(this, 'i18n.locale', get(controller, 'locale'));
-    set(this, 'i18n.display', get(controller, 'locale').split('-')[0]);
-    numeral.language(localeParam);
   },
   actions: {
     willTransition: function(transition) {

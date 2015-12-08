@@ -6,7 +6,7 @@
 
 .side-nav {
   width: $sidebarWidth;
-  text-align: right;
+  text-align: left;
   position: absolute;
   left: 0;
 }
@@ -14,22 +14,22 @@
 .side-nav__item {
   padding: $fontSmall 0 $fontSmall $baseSpace*1.5;
   &:last-of-type {
-    border-bottom: 1px solid $colorBlack;
+    border-bottom: 1px solid $colorBrown800;
   }
 }
 
 .side-nav__item__link {
   transition: color $animationTime $animationEasing;
-  color: $colorGray;
+  color: $colorBrown600;
   font-size: $fontSmall;
   display: block;
   font-family: $sans;
   font-weight: 300;
   &:hover {
-    color: $colorGrayDark;
+    color: $colorBrown900;
   }
 }
 
 .side-nav__item--active {
-  color: $colorBlack;
+  color: $colorGrayDark;
 }

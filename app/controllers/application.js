@@ -12,11 +12,14 @@ export default Ember.Controller.extend({
     return this.get('i18n.otherLocale').substring(0,2);
   }),
   setLanguageToggle: observer('isDefaultLocale',function() {
+
     if(this.get('isDefaultLocale')) {
+      if(this.get('i18n.locale') === 'no-copy') { return; }
       this.set('i18n.locale', this.get('i18n.defaultLocale'));
     } else {
       this.set('i18n.locale', this.get('i18n.otherLocale'));
     }
+
     this.set('locale', this.get('i18n.locale'));
   }),
   productsMetadata: computed('model.products', function() {

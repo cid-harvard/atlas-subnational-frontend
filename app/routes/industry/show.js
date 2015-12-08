@@ -22,17 +22,6 @@ export default Ember.Route.extend({
       classMetadata: classMetadata
     }).then((hash) => {
       let model = hash['model'];
-      if(model.get('level') === 'class') {
-        this.transitionTo('visualization',
-          `industry-${params.industry_id}`,
-          'departments',
-          'multiples',
-          {queryParams: {'variable': 'employment'}}
-          );
-      }
-      return hash;
-    }).then((hash) => {
-      let model = hash['model'];
       let data = _.groupBy(hash['classMetadata'].data, 'industry_id');
 
       var groupIds = _.pluck(_.filter(industriesMetadata, 'parent_id', parseInt(model.id)), 'id');
