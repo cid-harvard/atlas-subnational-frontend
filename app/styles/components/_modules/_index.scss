@@ -9,11 +9,14 @@
 }
 
 .index__section {
-  max-width: 100rem;
+  padding: 0 $baseSpace * 3;
+}
+
+.stream__section.index__section {
+  margin-bottom: 0;
 }
 
 .stream__section.search {
-
   background: $colorGrayDark;
 
   h3, form {
@@ -161,7 +164,7 @@
   }
 }
 
-.index__figure__bignum{
+.index__figure__bignum {
   font-size: $fontHuge;
   font-family: $sansAlt;
   letter-spacing: -2px;
@@ -175,6 +178,11 @@
 
 .index__complexity__cta {
   margin-bottom: $baseSpace * 2;
+}
+
+.index__complexity__cta--pageheader {
+  display: inline-block;
+  margin-bottom: 0;
 }
 
 // Research featured in media grid
@@ -208,12 +216,10 @@
 // Crystal ball questions
 
 .index__questions__mod {
-  padding: 0 $baseSpace * 3;
   margin-bottom: $baseSpace * 3;
 }
 
 .index__questions__wrap {
-  max-width: 100rem;
   margin: 0 auto;
 
   .section__head {
@@ -302,4 +308,46 @@
   left: 0;
   padding: $baseSpace*3 $baseSpace*3 $baseSpace*3 15%;
   background: $colorBrown300;
+}
+
+// section for onboarding info
+.index__section.onboarding {
+  background: $colorBrown300;
+  padding-top: $baseSpace;
+}
+
+.index__section.complexity {
+  padding-top: $baseSpace;
+}
+
+.index__section.onboarding p {
+  padding-bottom: $baseSpace;
+}
+
+.onboarding--glyphs {
+  display: block;
+  color: $colorRed;
+}
+
+.onboarding--glyphs li {
+  display: inline-block;
+  height: 10rem;
+  margin-right: $baseSpace/5;
+  text-align: center;
+}
+
+.onboarding--glyphs h6 {
+  font-family: $sansSC;
+  text-transform: lowercase;
+  font-weight: 400;
+  font-size: $fontSmall;
+}
+
+.onboarding--glyphs--icon {
+  &:before {
+    transition: color $animationTime $animationEasing;
+    margin: 0 auto;
+    font-size: $fontXXLarge;
+    display: block;
+  }
 }

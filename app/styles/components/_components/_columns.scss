@@ -1,0 +1,46 @@
+/**
+*
+* Columns (out of 12)
+*
+**/
+
+.column__container {
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: -$baseSpace;
+}
+
+.column__6 {
+	flex-grow: 1;
+	width: 47%;
+	margin-right: $baseSpace;
+	padding: $baseSpace;
+}
+
+.column__4 {
+	flex-grow: 1;
+	width: 30%;
+	margin-right: $baseSpace;
+	padding: $baseSpace;
+}
+
+.column__3 {
+	flex-grow: 1;
+	width: 23%;
+	margin-right: $baseSpace;
+	padding: $baseSpace;
+}
+
+.column__8 {
+	flex-grow: 1;
+	width: 64%;
+	margin-right: $baseSpace;
+	padding: $baseSpace;
+}
+
+.column__9 {
+	flex-grow: 1;
+	width: 71%;
+	margin-right: $baseSpace;
+	padding: $baseSpace;
+}

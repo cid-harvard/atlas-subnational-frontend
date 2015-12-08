@@ -6,6 +6,7 @@
 
 .stream__section {
   margin-bottom: $baseSpace * 3;
+
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -43,5 +44,10 @@
 .section__p {
   max-width: 65rem;
   margin-bottom: $baseSpace;
+}
+
+.stream__section__wrap {
+  max-width: $xlarge;
+  margin: 0 auto;
 }
 

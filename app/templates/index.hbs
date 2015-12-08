@@ -1,7 +1,7 @@
 <main class="stream index">
   <article class="stream__article">
-    <div class="index__questions__mod">
-      <section class="stream__section index__section index__questions__wrap">
+    <section class="stream__section index__section index__questions__wrap">
+      <div class="stream__section__wrap">
         <h3 class="section__head">{{ t 'index.questions_head' }}, {{ t 'index.questions_subhead' }}</h3>
         <ul class="index__topics__list">
           <li class="index__topics__item__wrap">
@@ -60,7 +60,6 @@
                   See all questions
                 </li>
               </ul>
-
             </div>
           </li>
           <li class="index__topics__item__wrap">
@@ -93,27 +92,68 @@
             </div>
           </li>
         </ul>
-      </section>
-    </div>
-    <section class="stream__section search">
-      <h3 class="section__head">Search</h3>
-      <form class="search__wrap">
-        <div class="search__field__wrap">
-          {{input
-            class="search"
-            placeholder=( t 'pageheader.search_placeholder' )
-            value=query
-            enter='query'
-            required='required'
-          }}
-          <button class="search__reset fa fa-close" type="reset"></button>
-        </div>
-        <input class="search__submit btn btn--standalone btn--search" type="submit" value="{{ t 'pageheader.search_link' }}" {{action 'query' query}}>
-      </form>
+      </div>
     </section>
-    <section class="stream__section recirc">
-      <div class="recirc__bground" style="background-image: url(assets/img/hero_images/location/COL.jpg)"></div>
-      <div class="recirc__wrap">
+    <section class="stream__section index__section onboarding">
+      <div class="stream__section__wrap">
+        <div class="column__container">
+          <div class="column__6">
+            <h3 class="section__head">Charting the present</h3>
+            <ul class="onboarding--glyphs">
+              <li>
+                <i class="icon-cidcon_treemap onboarding--glyphs--icon"></i>
+                <h6>Treemap</h6>
+              </li>
+              <li>
+                <i class="icon-cidcon_multiples onboarding--glyphs--icon"></i>
+                <h6>Area Chart</h6>
+              </li>
+              <li>
+                <i class="icon-cidcon_geo onboarding--glyphs--icon"></i>
+                <h6>Map</h6>
+              </li>
+            </ul>
+            <p>Use our treemaps, charts, and maps to break down your department, city or municipality's exports and employment.</p>
+          </div>
+          <div class="column__6">
+            <h3 class="section__head">Mapping the future</h3>
+            <ul class="onboarding--glyphs">
+              <li>
+                <i class="icon-cidcon_scatter onboarding--glyphs--icon"></i>
+                <h6>Scatterplot</h6>
+              </li>
+              <li>
+                <i class="icon-cidcon_similarity onboarding--glyphs--icon"></i>
+                <h6>Network</h6>
+              </li>
+            </ul>
+            <p>Scatterplots and network diagrams help find the untapped markets best suited to your location.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="stream__section index__section complexity">
+      <div class="stream__section__wrap">
+        <div class="column__container">
+          <div class="column__3">
+            <h3 class="section__head">The complexity advantage</h3>
+          </div>
+          <div class="column__9">
+            <p class="section__p">Countries that export complex products, which require a lot of knowledge, grow faster than those that export simpler products. Using the methods of measuring and visualizing economic complexity developed by us, Datlas helps to explore the production and export possibilities of every city and department in Colombia.</p>
+
+            {{#link-to 'about.glossary'
+              data-home-page-product=''
+              class="btn btn--standalone btn--stream index__complexity__cta"
+            }}
+              {{ t 'index.complexity_cta' }}
+            {{/link-to}}
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="stream__section index__section recirc">
+      <div class="recirc__wrap stream__section__wrap">
         <h3 class="section__head recirc__head">
           {{t 'index.colombia_profile'}}
         </h3>

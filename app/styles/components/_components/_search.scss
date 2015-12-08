@@ -7,12 +7,16 @@
 .search__wrap {
   display: flex;
   align-items: stretch;
-  padding-bottom: 2*$baseSpace;
+  display: inline-block;
+  width: auto;
+  margin-right: $baseSpace;
 }
 
 .search__field__wrap {
   position: relative;
-  width: 100%;
+  width: 30rem;
+  display: inline-block;
+  margin-right:-4px;
 }
 
 .search {

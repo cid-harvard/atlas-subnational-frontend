@@ -8,6 +8,11 @@
   position: relative;
 }
 
+.index__section.recirc {
+  background-color: $colorBrown300;
+  padding: $baseSpace*2;
+}
+
 .recirc__bground {
   background-color: $colorBrown500;
   position: absolute;
@@ -20,7 +25,6 @@
 }
 
 .recirc__wrap {
-  padding: $baseSpace * 3;
   position: relative;
 }
 
