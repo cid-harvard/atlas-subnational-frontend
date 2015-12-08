@@ -5,11 +5,13 @@
 **/
 
 /* ==========  Type Palette  ========== */
-$icon: 'FontAwesome';
-$sans: 'Circular', arial, sans-serif;
-$serif: 'Plantin', 'Times New Roman', Times, Georgia, serif;
-$sansAlt: 'Platform Web', 'Arial Black', arial, sans-serif;
 
+$icon: 'FontAwesome';
+$sans: 'Source Sans Pro', sans-serif;  // 'Alegreya Sans', Arial, sans-serif;
+$sansAlt: $sans;
+$sansSC: 'Alegreya Sans SC', Arial, sans-serif;
+$serif: 'Alegreya', 'Times New Roman', Georgia, serif;  // 'Bitter', serif; // 'Source Serif Pro', Georgia, serif;
+$serifSC: 'Alegreya SC', Georgia, serif;
 
 /* ==========  Color Palettes  ========== */
 
@@ -127,14 +129,14 @@ $fontBase: 2rem !default;
 $fontLarge: 2.6rem !default;
 $fontXLarge: 4.2rem !default;
 $fontXXLarge: 6.8rem !default;
-$fontHuge: 11rem !default;
+$fontHuge: 9rem !default;
 
 
 // Decremented font sizes for making x-heights match across typefaces
 $fontXTiny-decrement: 0.95rem !default;
 $fontTiny-decrement: 1.25rem !default;
 $fontSmall-decrement: 1.5rem  !default;
-$fontBase-decrement: 1.9rem !default;
+$fontBase-decrement: 1.85rem !default;
 $fontLarge-decrement: 2.5rem !default;
 $fontXLarge-decrement: 4.1rem !default;
 $fontXXLarge-decrement: 6.7rem !default;

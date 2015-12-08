@@ -5,16 +5,17 @@
 *
 **/
 .explanation {
-  margin: $baseSpace;
+  margin: $baseSpace 0;
   font-family: $sans;
 }
 
 .explanation__title {
-  font-size: $fontTiny;
+  font-size: $fontLarge;
 }
 
 .explanation__p {
-  font-size: $fontXTiny;
+  font-size: $fontBase;
+  font-family: $serif;
   margin-bottom: $baseSpace/4;
 }
 

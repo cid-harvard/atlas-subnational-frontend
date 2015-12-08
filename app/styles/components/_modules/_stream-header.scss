@@ -19,17 +19,29 @@
 }
 
 .stream__head {
-  font-size: $fontLarge;
+  font-size: $fontXLarge;
   font-family: $sans;
   line-height: 100%;
   -moz-osx-font-smoothing: grayscale;
   margin-bottom: $baseSpace;
-  color: $colorGrayDark;
+}
+
+.stream__header--builder .stream__head {
+  font-size: $fontLarge;
 }
 
 .stream__subhead {
   margin-bottom: $baseSpace;
   font-weight: 500;
+}
+
+.stream__label {
+  font-family: $sansSC;
+  font-weight: normal;
+  font-size: $fontSmall;
+  color: $colorRed;
+  margin-top: $baseSpace;
+  text-transform: lowercase;
 }
 
 .breadcrumb {

@@ -23,6 +23,7 @@
   background: inherit;
   text-align: left;
   font-family: $sans;
+  font-weight: 400;
 }
 
 .ember-table-header-container {
@@ -44,7 +45,6 @@
 }
 
 .ember-table-header-cell .ember-table-content-container .ember-table-content {
-  font-weight: 300;
   padding: $baseSpace/2 $baseSpace/2;
   position: initial;
   white-space: nowrap;
