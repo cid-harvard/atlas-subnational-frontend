@@ -186,12 +186,12 @@
 .header--pageheader--home {
   height: auto;
   min-height: 400px;
-  background-image: url('/assets/img/hero_images/front-header-background2.png');
+  background-image: url('/assets/img/hero_images/front-header-network.png');
   background-size: cover;
   background-position: center center;
 
   .index__header {
-    color: white;
+    color: $colorRed;
     background: none;
   }
 
