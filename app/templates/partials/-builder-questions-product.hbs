@@ -28,9 +28,13 @@
         class="menu-section__link"}}
         {{t 'header.subregion'}}
       {{/link-to}}
-      <li class="menu-section__link menu-section__link--disabled" >
+      {{#link-to 'product.visualization' model.id 'partners' 'treemap' 'export_value'
+        (query-params startDate=lastYear endDate=lastYear search='null')
+        tagName='li'
+        classNameBindings="productPartnersExports:menu-section__link--active"
+        class="menu-section__link"}}
         {{t 'header.destination'}}
-      </li>
+      {{/link-to}}
     </ul>
   </div>
   <div class="menu-section">
@@ -50,9 +54,13 @@
         class="menu-section__link"}}
         {{t 'header.subregion'}}
       {{/link-to}}
-      <li class="menu-section__link menu-section__link--disabled" >
+      {{#link-to 'product.visualization' model.id 'partners' 'treemap' 'import_value'
+        (query-params startDate=lastYear endDate=lastYear search='null')
+        tagName='li'
+        classNameBindings="productPartnersImports:menu-section__link--active"
+        class="menu-section__link"}}
         {{t 'header.origin'}}
-      </li>
+      {{/link-to}}
     </ul>
   </div>
 </div>

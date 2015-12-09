@@ -1,10 +1,10 @@
 <div class="buildermod__questions buildermod__drawer--questions">
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.department'}}</h4>
+  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.employment'}}</h4>
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
-    <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-    <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
-    <i class="icon-cidcon_geo builder__questions__item__icon"></i>
+      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
+      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      <i class="icon-cidcon_geo builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'employment' (query-params startDate=firstYear endDate=lastYear)
@@ -16,9 +16,25 @@
       </div>
     </li>
     <li class="builder__questions__item">
-    <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-    <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
-    <i class="icon-cidcon_geo builder__questions__item__icon"></i>
+      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
+      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span>
+        {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'employment' (query-params startDate=firstYear endDate=lastYear)
+          class="builder__questions__question"
+        }}
+          {{t 'graph_builder.page_title.industry.cities.employment'}}
+        {{/link-to}}
+        </span>
+      </div>
+    </li>
+  </ul>
+  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.wage'}}</h4>
+  <ul class="builder__questions__list">
+    <li class="builder__questions__item">
+      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
+      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      <i class="icon-cidcon_geo builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'wages' (query-params startDate=firstYear endDate=lastYear)
@@ -29,12 +45,25 @@
         </span>
       </div>
     </li>
+    <li class="builder__questions__item">
+      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
+      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      <div class="builder__questions__item__textwrap">
+        <span>
+        {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'wages' (query-params startDate=firstYear endDate=lastYear)
+            class="builder__questions__question"
+          }}
+          {{t 'graph_builder.page_title.industry.cities.wages'}}
+        {{/link-to}}
+        </span>
+      </div>
+    </li>
   </ul>
   {{#unless isIndustryClass}}
   <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.occupation'}}</h4>
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
-    <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies' (query-params startDate=lastYear endDate=lastYear)
@@ -47,33 +76,4 @@
     </li>
   </ul>
   {{/unless}}
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.city'}}</h4>
-  <ul class="builder__questions__list">
-    <li class="builder__questions__item">
-    <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-    <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
-      <div class="builder__questions__item__textwrap">
-        <span>
-        {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'employment' (query-params startDate=firstYear endDate=lastYear)
-          class="builder__questions__question"
-        }}
-          {{t 'graph_builder.page_title.industry.cities.employment'}}
-        {{/link-to}}
-        </span>
-      </div>
-    </li>
-    <li class="builder__questions__item">
-    <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-    <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
-      <div class="builder__questions__item__textwrap">
-        <span>
-        {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'wages' (query-params startDate=firstYear endDate=lastYear)
-            class="builder__questions__question"
-          }}
-          {{t 'graph_builder.page_title.industry.cities.wages'}}
-        {{/link-to}}
-        </span>
-      </div>
-    </li>
-  </ul>
 </div>

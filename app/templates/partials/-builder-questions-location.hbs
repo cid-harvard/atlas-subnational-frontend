@@ -14,18 +14,6 @@
   <div class="menu-section">
     <h5 class='menu-section__group-name'>{{t 'header.industry'}}</h5>
     <ul class="menu-section__group">
-      {{#unless isMunicipality}}
-        {{#unless isCountry }}
-          {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca'
-            (query-params endDate=lastYear startDate=lastYear)
-            data-location-industry="similarity"
-            tagName='li'
-            classNameBindings="locationIndustryRCA:menu-section__link--active"
-            class="menu-section__link"}}
-            {{ t 'header.industry_space' }}
-          {{/link-to}}
-        {{/unless}}
-      {{/unless}}
       {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear search='null')
         tagName='li'
         data-location-industry="employment"
@@ -42,6 +30,14 @@
       {{/link-to}}
       {{#unless isMunicipality}}
         {{#unless isCountry }}
+          {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca'
+            (query-params endDate=lastYear startDate=lastYear)
+            data-location-industry="similarity"
+            tagName='li'
+            classNameBindings="locationIndustryRCA:menu-section__link--active"
+            class="menu-section__link"}}
+            {{ t 'header.industry_space' }}
+          {{/link-to}}
           {{#link-to 'location.visualization' model.id 'industries' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
             data-location-industry="scatter"
             tagName='li'
