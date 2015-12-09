@@ -228,14 +228,14 @@
 }
 
 .index__topics__list {
-  
   display: -webkit-flex;
   display: -moz-flex;
   display: flex;
-
   align-items: flex-start;
   flex-wrap: wrap;
   margin-right: -$baseSpace;
+  overflow: hidden;
+  margin-bottom: $baseSpace;
 }
 
 .index__topics__item__wrap {
@@ -243,6 +243,7 @@
   height: 100%;
   min-width: 25rem;
   flex-grow: 1;
+  margin-top: -$baseSpace;
 }
 
 .index__topics__image {
@@ -251,9 +252,23 @@
 
 .index__topics__item {
   padding: $baseSpace;
-  background: $colorBrown300;
   margin-right: $baseSpace;
   margin-bottom: $baseSpace;
+  position: relative;
+  border-top: $baseSpace solid $colorBrown200;
+  h4, .ember-view, ul {
+    position: relative;
+  }
+}
+
+.index__topics__vspacer {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200rem;
+  background: $colorBrown300;
 }
 
 .index__questions__item {
@@ -273,7 +288,6 @@
 .index__questions__item__wrap {
   padding-left: 3rem;
   width: 100%;
-
   &.more {
 
     a {
