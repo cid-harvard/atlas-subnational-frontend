@@ -158,13 +158,18 @@
   &--active {
     color: $colorRed;
     font-weight: 900;
-    &:hover { 
-      color: $colorRed; 
-      font-weight: 900; 
+    &:hover {
+      color: $colorRed;
+      font-weight: 900;
       &:before { color: $colorRed; }
     }
     &:before { color: $colorRed; }
   }
+}
+
+.menu-section__link--disabled {
+  pointer-events: none;
+  cursor: default;
 }
 
 .question__head {
