@@ -16,6 +16,7 @@
     <ul class="menu-section__group">
       {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'employment'
         (query-params startDate=firstYear endDate=lastYear)
+        tagName='li'
         classNameBindings="industryDepartmentEmployment:menu-section__link--active"
         class="menu-section__link"}}
         {{ t 'header.region' }}
@@ -23,6 +24,7 @@
       {{#unless isIndustryClass}}
         {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'employment'
           (query-params startDate=firstYear endDate=lastYear)
+          tagName='li'
           classNameBindings="industryCitiesEmployment:menu-section__link--active"
           class="menu-section__link"}}
           {{ t 'header.subregion' }}
@@ -35,6 +37,7 @@
     <ul class="menu-section__group">
       {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'wages'
         (query-params startDate=firstYear endDate=lastYear)
+        tagName='li'
         classNameBindings="industryDepartmentWage:menu-section__link--active"
         class="menu-section__link"}}
         {{t 'header.region' }}
@@ -42,6 +45,7 @@
       {{#unless isIndustryClass}}
         {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'wages'
           (query-params startDate=firstYear endDate=lastYear)
+          tagName='li'
           classNameBindings="industryCitiesWage:menu-section__link--active"
           class="menu-section__link"}}
           {{t 'header.subregion' }}
@@ -55,6 +59,7 @@
       <ul class="menu-section__group">
         {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies'
           (query-params startDate=lastYear endDate=lastYear)
+          tagName='li'
           classNameBindings="industryOccupationsVacancies:menu-section__link--active"
           class="menu-section__link"}}
         {{ t 'header.occupation.available_jobs' }}
