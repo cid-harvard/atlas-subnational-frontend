@@ -322,16 +322,21 @@
 
 .index__section.onboarding p {
   padding-bottom: $baseSpace;
+  font-family: $sans;
+  font-size: $fontSmall;
 }
 
 .onboarding--glyphs {
   display: block;
   color: $colorRed;
+  margin-top: $baseSpace;
+  margin-bottom: $baseSpace/2;
 }
 
 .onboarding--glyphs li {
   display: inline-block;
-  height: 10rem;
+  vertical-align: top;
+  width: 10rem;
   margin-right: $baseSpace/5;
   text-align: center;
 }
@@ -339,8 +344,12 @@
 .onboarding--glyphs h6 {
   font-family: $sansSC;
   text-transform: lowercase;
-  font-weight: 400;
+  font-weight: 600;
   font-size: $fontSmall;
+  width: 10rem;
+  height: 4rem;
+  line-height: 1em;
+  margin-top: .5rem;
 }
 
 .onboarding--glyphs--icon {

@@ -28,7 +28,13 @@
                   {{/link-to}}
                 </li>
                 <li class="index__questions__item">
-                  See all questions
+                  {{#link-to
+                    'location.visualization' locationFirst 'products' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear)
+                    data-home-page-location-question='2'
+                    class="link--stream index__questions__link"
+                  }}
+                    {{ t 'index.location_viewall' }}
+                  {{/link-to}}
                 </li>
               </ul>
             </div>
@@ -57,7 +63,13 @@
                   {{/link-to}}
                 </li>
                 <li class="index__questions__item">
-                  See all questions
+                  {{#link-to
+                    'industry.visualization' industryFirst 'departments' 'multiples' 'employment'(query-params endDate=lastYear startDate=firstYear )
+                    data-home-page-product-question='1'
+                    class="link--stream index__questions__link"
+                  }}
+                    {{ t 'index.location_viewall' }}
+                  {{/link-to}}
                 </li>
               </ul>
             </div>
@@ -86,7 +98,13 @@
                   {{/link-to}}
                 </li>
                 <li class="index__questions__item">
-                  See all questions
+                  {{#link-to
+                    'product.visualization' productFirst 'departments' 'geo' 'export_value' (query-params endDate=lastYear startDate=lastYear )
+                    data-home-page-industry-question='1'
+                    class="link--stream index__questions__link"
+                  }}
+                    {{ t 'index.location_viewall' }}
+                  {{/link-to}}
                 </li>
               </ul>
             </div>
@@ -98,36 +116,40 @@
       <div class="stream__section__wrap">
         <div class="column__container">
           <div class="column__6">
-            <h3 class="section__head">Charting the present</h3>
+            <h3 class="section__head">
+              {{ t 'index.present_head' }}
+            </h3>
             <ul class="onboarding--glyphs">
               <li>
                 <i class="icon-cidcon_treemap onboarding--glyphs--icon"></i>
-                <h6>Treemap</h6>
+                <h6>{{ t 'general.treemap' }}</h6>
               </li>
               <li>
                 <i class="icon-cidcon_multiples onboarding--glyphs--icon"></i>
-                <h6>Area Chart</h6>
+                <h6>{{ t 'general.multiples' }}</h6>
               </li>
               <li>
                 <i class="icon-cidcon_geo onboarding--glyphs--icon"></i>
-                <h6>Map</h6>
+                <h6>{{ t 'general.geo' }}</h6>
               </li>
             </ul>
-            <p>Use our treemaps, charts, and maps to break down your department, city or municipality's exports and employment.</p>
+            <p>{{ t 'index.present_subhead' }}</p>
           </div>
           <div class="column__6">
-            <h3 class="section__head">Mapping the future</h3>
+            <h3 class="section__head">
+              {{ t 'index.future_head' }}
+            </h3>
             <ul class="onboarding--glyphs">
               <li>
                 <i class="icon-cidcon_scatter onboarding--glyphs--icon"></i>
-                <h6>Scatterplot</h6>
+                <h6>{{ t 'general.scatter' }}</h6>
               </li>
               <li>
                 <i class="icon-cidcon_similarity onboarding--glyphs--icon"></i>
-                <h6>Network</h6>
+                <h6>{{ t 'general.similarity' }}</h6>
               </li>
             </ul>
-            <p>Scatterplots and network diagrams help find the untapped markets best suited to your location.</p>
+            <p>{{ t 'index.future_subhead' }}</p>
           </div>
         </div>
       </div>
@@ -136,18 +158,20 @@
       <div class="stream__section__wrap">
         <div class="column__container">
           <div class="column__3">
-            <h3 class="section__head">The complexity advantage</h3>
+            <h3 class="section__head">
+              {{ t 'index.complexity_head' }}
+            </h3>
           </div>
           <div class="column__9">
-            <p class="section__p">Countries that export complex products, which require a lot of knowledge, grow faster than those that export simpler products. Using the methods of measuring and visualizing economic complexity developed by us, Datlas helps to explore the production and export possibilities of every city and department in Colombia.</p>
-
+            <p class="section__p">
+              {{ t 'index.complexity_subhead' }}
+            </p>
             {{#link-to 'about.glossary'
               data-home-page-product=''
               class="btn btn--standalone btn--stream index__complexity__cta"
             }}
               {{ t 'index.complexity_cta' }}
             {{/link-to}}
-
           </div>
         </div>
       </div>
