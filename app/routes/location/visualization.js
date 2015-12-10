@@ -31,7 +31,7 @@ export default Ember.Route.extend({
       } else if (source_type === 'products') {
         return this.productsDataMunging(hash);
       } else if (source_type === 'partners') {
-        return this.partnerDataMunging(hash);
+        return this.partnersDataMunging(hash);
       }
     });
   },
@@ -67,7 +67,7 @@ export default Ember.Route.extend({
       partners: $.getJSON(`${apiURL}/data/location/${id}/partners/?level=country`)
     };
   }),
-  partnerDataMunging(hash) {
+  partnersDataMunging(hash) {
     let {model, partners} = hash;
     let partnersMetadata = this.modelFor('application').partnerCountries;
     let data = _.map(partners.data, (d) => {

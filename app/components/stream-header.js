@@ -71,6 +71,8 @@ export default Ember.Component.extend({
 
   productDepartmentsExports: computed.and('sourceDepartments', 'variableExports'),
   productDepartmentsImports: computed.and('sourceDepartments', 'variableImports'),
+  productPartnersExports: computed.and('sourcePartners', 'variableExports'),
+  productPartnersImports: computed.and('sourcePartners', 'variableImports'),
 
   breadcrumbs: computed('model.parent', function() {
     let metaData = get(this, 'metaData.locations');

@@ -31,6 +31,8 @@ export default Ember.Route.extend({
         return this.departmentsDataMunging(hash);
       } else if (source_type === 'cities') {
         return this.citiesDataMunging(hash);
+      } else if (source_type === 'partners') {
+        return this.partnersDataMunging(hash);
       }
     });
   },
@@ -48,6 +50,13 @@ export default Ember.Route.extend({
     return {
       model: this.store.find('product', id),
       locations: $.getJSON(`${apiURL}/data/product/${id}/exporters?level=department`)
+    };
+  }),
+  partners: computed('product_id', function() {
+    let id = get(this, 'product_id');
+    return {
+      model: this.store.find('product', id),
+      partners: $.getJSON(`${apiURL}/data/product/${id}/partners?level=country`)
     };
   }),
   cities: computed('product_id', function() {
@@ -88,6 +97,24 @@ export default Ember.Route.extend({
       d.code = city.code;
       d.group = city.group;
       return d;
+    });
+
+    return Ember.Object.create({
+      entity: model,
+      data: data,
+    });
+  },
+  partnersDataMunging(hash) {
+    let {model,partners} = hash;
+    let partnersMetadata = this.modelFor('application').partnerCountries;
+
+    let data = _.map(partners.data, (d) => {
+      let country = partnersMetadata[d.country_id];
+      let parent = partnersMetadata[country.parent_id];
+      d.parent_name_en = parent.name_en;
+      d.parent_name_es = parent.name_es;
+      d.group = parent.id;
+      return _.merge(country,d);
     });
 
     return Ember.Object.create({

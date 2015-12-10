@@ -52,7 +52,7 @@
       {{/unless}}
     {{/unless}}
   </ul>
-<h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.product'}}</h4>
+  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.export'}}</h4>
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
       <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
@@ -67,29 +67,18 @@
       </div>
     </li>
     <li class="builder__questions__item">
-      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
       <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
+      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
-        <span>
-          {{#link-to 'location.visualization' model.id 'products' 'treemap' 'import_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
+        <span class="builder__questions__question">
+          {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
             class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.products.import_value' thisLevel=thisLevel}}
+            {{t 'graph_builder.page_title.location.partners.export_value' thisLevel=thisLevel }}
           {{/link-to}}
         </span>
       </div>
     </li>
     {{#unless isMunicipality}}
-      <li class="builder__questions__item">
-        <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
-        <div class="builder__questions__item__textwrap">
-          <span>
-            {{#link-to 'location.visualization' model.id 'products' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
-              class="builder__questions__question"}}
-              {{t 'graph_builder.page_title.location.products.scatter' thisLevel=thisLevel}}
-            {{/link-to}}
-          </span>
-        </div>
-      </li>
       <li class="builder__questions__item">
         <i class="icon-cidcon_similarity builder__questions__item__icon"></i>
         <div class="builder__questions__item__textwrap">
@@ -101,19 +90,30 @@
           </span>
         </div>
       </li>
+      <li class="builder__questions__item">
+        <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
+        <div class="builder__questions__item__textwrap">
+          <span>
+            {{#link-to 'location.visualization' model.id 'products' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
+              class="builder__questions__question"}}
+              {{t 'graph_builder.page_title.location.products.scatter' thisLevel=thisLevel}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
   {{/unless}}
   </ul>
   {{#unless isMuncipality}}
-    <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.partner'}}</h4>
+    <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.import'}}</h4>
     <ul class="builder__questions__list">
       <li class="builder__questions__item">
-        <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
         <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+        <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
         <div class="builder__questions__item__textwrap">
-          <span class="builder__questions__question">
-            {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
+          <span>
+            {{#link-to 'location.visualization' model.id 'products' 'treemap' 'import_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
               class="builder__questions__question"}}
-              {{t 'graph_builder.page_title.location.partners.export_value' thisLevel=thisLevel }}
+              {{t 'graph_builder.page_title.location.products.import_value' thisLevel=thisLevel}}
             {{/link-to}}
           </span>
         </div>

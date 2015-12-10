@@ -18,6 +18,10 @@
   text-align: left;
 }
 
+.stream__header--builder .stream__head {
+  margin-bottom: 1rem;
+}
+
 .stream__head {
   font-size: $fontXLarge;
   font-family: $sans;
@@ -85,64 +89,87 @@
   color: $colorGray;
   font-family: $sans;
   margin-right: -$baseSpace;
+  max-width: 100%;
 }
 
+//Top navigation on interior pages
+
 .menu-section {
-  display: flex;
-  border-top: 1px solid $colorGray;
   margin-right: $baseSpace;
   align-content: flex-start;
   justify-content: flex-start;
   padding-top: .55rem;
   margin-bottom: $baseSpace / 3;
   flex-grow: 1;
-  width: 35%;
-  min-width: 24rem;
-
-  &__thin {
-    width: auto;
-    flex-grow: 0;
-    min-width: 20rem;
-  }
+  width: 20%;
+  min-width: 22rem;
 }
 
 .menu-section__group-name {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  width: 9rem;
-  min-width: 9rem;
-  max-width: 9rem;
   padding: .25rem;
+  display: block;
   margin-right: 1rem;
+  margin-bottom: .25rem;
   font-weight: normal;
   color: $colorGray;
   font-family: $serif;
+  width: 100%;
+  border-bottom: 1px solid $colorGray;
+
+  &:before {
+    content: "\f111";
+    position: relative;
+    font-family: $icon;
+    font-size: 8px;
+    width: 10px;
+    top: -3px;
+    color: transparent;
+    margin-right: 4px;
+  }
+
 }
 
 .menu-section__group {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
   position: relative;
-  min-width: 9.5rem;
-  max-width: 24rem;
+  display: block;
+  width: 100%;
 }
 
 .menu-section__link {
-  flex-grow: 0;
-  display: flex;
-  width: 10.5rem;
   padding: .25rem;
   cursor: pointer;
   color: $colorGray;
+
+  &:before {
+    content: "\f111";
+    position: relative;
+    font-family: $icon;
+    font-size: 8px;
+    top: -3px;
+    color: transparent;
+    width: 10px;
+  }
+
   &:hover {
     color: $colorGrayDark;
+    &:before { color: $colorGrayLighter; }
   }
+
   &--active {
-    color: $colorBlack;
+    color: $colorRed;
     font-weight: 900;
+    &:hover {
+      color: $colorRed;
+      font-weight: 900;
+      &:before { color: $colorRed; }
+    }
+    &:before { color: $colorRed; }
   }
+}
+
+.menu-section__link--disabled {
+  pointer-events: none;
+  cursor: default;
 }
 
 .question__head {
