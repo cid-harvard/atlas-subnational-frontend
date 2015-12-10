@@ -186,7 +186,7 @@
 .header--pageheader--home {
   height: auto;
   min-height: 400px;
-  background-image: url('/assets/img/hero_images/front-header-network.png');
+  background-image: url('/assets/img/hero_images/front-header-treemap.png');
   background-size: cover;
   background-position: center center;
 
@@ -205,12 +205,36 @@
     letter-spacing: 0;
     font-size: $fontXLarge;
     margin: $fontXLarge/3 0 $fontXLarge/3 0;
+    text-shadow: 0 0 10px rgba($colorBlack, .4);
   }
 
   h2 {
     color: $colorRed;
     font-family: $sans;
     font-weight: 700;
+    text-shadow: 0 0 10px rgba($colorBlack, .7);
   }
+}
 
+.pageheader__home__cap { 
+  display: none; 
+  height: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $colorRed;
+}
+
+.header--pageheader--home .pageheader__home__cap { display: block; }
+.stream__section .pageheader__home__cap {
+  display: block;
+  max-width: $xlarge;
+  margin-bottom: $baseSpace;
+}  
+
+//special style for the search box 
+
+.pageheader__homeintro .search__wrap {
+  margin-bottom: $baseSpace;
 }

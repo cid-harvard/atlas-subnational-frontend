@@ -30,7 +30,7 @@ button::-moz-focus-inner {
 .btn--stream {
   background: $colorRed;
   color: white;
-  box-shadow: inset 0 -5px $colorRed900;
+  box-shadow: inset 0 -5px $colorRedDark;
   &:hover, &:active, &:focus {
     background: $colorRed800;
     // box-shadow: inset 0 -5px $colorBrown500;
@@ -52,7 +52,7 @@ button::-moz-focus-inner {
 .btn--search {
   background: $colorRed;
   color: $colorWhite;
-  box-shadow: inset 0 -5px $colorRed900;
+  box-shadow: inset 0 -5px $colorRedDark;
   &:hover {
     background: $colorRed800;
   }
