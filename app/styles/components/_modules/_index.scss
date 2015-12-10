@@ -5,7 +5,7 @@
 **/
 
 .index {
-  background: $colorBrown200;
+  // background: $colorBrown200;
 }
 
 .index__section {
@@ -268,7 +268,7 @@
   left: 0;
   width: 100%;
   height: 200rem;
-  background: $colorBrown300;
+  background: $colorGrayLightest;
 }
 
 .index__questions__item {
@@ -316,17 +316,9 @@
   margin-bottom: $baseSpace/2;
 }
 
-.index__recirc {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  padding: $baseSpace*3 $baseSpace*3 $baseSpace*3 15%;
-  background: $colorBrown300;
-}
-
 // section for onboarding info
 .index__section.onboarding {
-  background: $colorBrown300;
+  background: $colorGrayLightest;
   padding-top: $baseSpace;
 }
 

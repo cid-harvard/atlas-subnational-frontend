@@ -191,7 +191,7 @@
   background-position: center center;
 
   .index__header {
-    color: $colorRed;
+    color: white;
     background: none;
   }
 
@@ -201,14 +201,16 @@
   }
 
   h1.stream__head {
-    color: white;
+    color: $colorRed;
     letter-spacing: 0;
     font-size: $fontXLarge;
     margin: $fontXLarge/3 0 $fontXLarge/3 0;
   }
 
   h2 {
-    color: white;
+    color: $colorRed;
+    font-family: $sans;
+    font-weight: 700;
   }
 
 }
