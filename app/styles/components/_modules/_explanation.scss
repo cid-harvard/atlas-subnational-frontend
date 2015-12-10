@@ -23,13 +23,13 @@
   font-size: $fontTiny;
   background: $colorBrown500;
   display:block;
-  width:10%;
+  width:15%;
   margin:0 auto;
 }
 
 .explanation__copy--hide {
   @include bg-gradient-t2b($colorBlack, $colorBrown200);
-  max-height: 2*$baseSpace;
+  max-height: 4*$baseSpace;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
