@@ -11,22 +11,28 @@
   left: 0;
 }
 
+.side-nav__list {
+  &:last-of-type {
+    display: none;
+  }
+}
+
 .side-nav__item {
   padding: $fontSmall 0 $fontSmall $baseSpace*1.5;
   &:last-of-type {
-    border-bottom: 1px solid $colorBrown800;
+    // border-bottom: 1px solid $colorGrayLight;
   }
 }
 
 .side-nav__item__link {
   transition: color $animationTime $animationEasing;
-  color: $colorBrown600;
+  color: $colorGrayLighter;
   font-size: $fontSmall;
   display: block;
   font-family: $sans;
   font-weight: 300;
   &:hover {
-    color: $colorBrown900;
+    color: $colorGrayLight;
   }
 }
 
