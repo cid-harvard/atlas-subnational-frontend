@@ -222,7 +222,9 @@
   &:after { background-color: $colorRed; }
 }
 
-.pageheader__bground {
+.pageheader__bground { display: none; }
+.header--pageheader--home .pageheader__bground {
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
