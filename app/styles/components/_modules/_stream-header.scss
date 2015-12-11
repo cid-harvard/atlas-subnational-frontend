@@ -49,9 +49,11 @@
 }
 
 .breadcrumb {
-  color: $colorGray;
+  color: $colorGrayLight;
   font-size: $fontSmall;
-  font-family: $serif;
+  font-family: $sansSC;
+  text-transform: lowercase;
+  font-weight: 400;
   cursor: pointer;
   display: inline-block;
   margin-right: $baseSpace / 3;
@@ -126,27 +128,15 @@
 }
 
 .menu-section__group-name {
-  padding: .25rem;
   display: block;
   margin-right: 1rem;
   margin-bottom: .25rem;
   font-weight: normal;
-  color: $colorRed;
+  color: $colorGrayLight;
   font-family: $sansSC;
   text-transform: lowercase;
   width: 100%;
-  border-bottom: 1px solid $colorRed;
-
-  &:before {
-    content: "\f111";
-    position: relative;
-    font-family: $icon;
-    font-size: 8px;
-    width: 10px;
-    top: -3px;
-    color: transparent;
-    margin-right: 4px;
-  }
+  border-bottom: 1px solid $colorGrayLight;
 }
 
 .menu-section__group {
@@ -177,10 +167,10 @@
 
   &--active {
     color: $colorRed;
-    font-weight: 900;
+    font-weight: 700;
+    @include offset-text;
     &:hover {
       color: $colorRed;
-      font-weight: 900;
       &:before { color: $colorRed; }
     }
     &:before { color: $colorRed; }
@@ -192,9 +182,10 @@
   cursor: default;
 }
 
-.question__head {
+.section__head.question__head {
   font-size: $fontXLarge;
   line-height: $fontXLarge;
   margin-bottom: $baseSpace / 2;
   font-family: $sansAlt;
+  color: $colorRed;
 }

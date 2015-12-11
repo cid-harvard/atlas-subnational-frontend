@@ -30,7 +30,7 @@
                 </li>
                 <li class="index__questions__item">
                   {{#link-to
-                    'location.visualization' locationFirst 'products' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear)
+                    'location.show' locationFirst
                     data-home-page-location-question='2'
                     class="link--stream index__questions__link"
                   }}
@@ -66,7 +66,7 @@
                 </li>
                 <li class="index__questions__item">
                   {{#link-to
-                    'industry.visualization' industryFirst 'departments' 'multiples' 'employment'(query-params endDate=lastYear startDate=firstYear )
+                    'industry.show' industryFirst
                     data-home-page-product-question='1'
                     class="link--stream index__questions__link"
                   }}
@@ -102,7 +102,7 @@
                 </li>
                 <li class="index__questions__item">
                   {{#link-to
-                    'product.visualization' productFirst 'departments' 'geo' 'export_value' (query-params endDate=lastYear startDate=lastYear )
+                    'product.show' productFirst
                     data-home-page-industry-question='1'
                     class="link--stream index__questions__link"
                   }}
