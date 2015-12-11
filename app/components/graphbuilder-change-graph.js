@@ -1,27 +1,21 @@
 import Ember from 'ember';
-const {computed} = Ember;
+const {computed, get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
-  classNames: ['changegraph__radiowrap'],
-  tag: 'div',
-  inputId:  computed('type', function() {
-    return `changegraph__radio--${this.get('type')}`;
-  }),
+  tagName: 'i',
+  classNames: ['changegraph__icon'],
+  classNameBindings: ['iconClass', 'isChecked'],
   iconClass: computed('type', function() {
-    return `icon-cidcon_${this.get('type')} changegraph__icon`;
-  }),
-  text: computed('type', 'i18n.locale', function() {
-    return this.get('i18n')
-      .t(`general.${this.get('type')}`);
+    return `icon-cidcon_${get(this, 'type')}`;
   }),
   isChecked: computed('type', 'visualization', function() {
-    return this.get('type') === this.get('visualization');
+    if(get(this, 'type') === get(this, 'visualization')) {
+      return 'changegraph__icon--checked';
+    }
   }),
-  actions: {
-    toggleVisualization: function(visualization) {
-      this.sendAction('toggleVisualization', visualization);
-    },
+  click: function() {
+    this.sendAction('toggleVisualization',  get(this, 'type'));
   }
 });
 

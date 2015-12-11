@@ -15,29 +15,6 @@
       content: $fa-var-remove;
     }
   }
-  .buildermod__tool--changegraph {
-    border-left-color: $colorBrown300;
-  }
-  .buildermod__vizwrap {
-    border-width: 0;
-    overflow-y: auto;
-  }
-  .buildermod__viz {
-    display: none;
-  }
-}
-
-.buildermod__changegraph--open {
-  .buildermod__drawer--changegraph {
-    display: block;
-  }
-  .buildermod__tool--changegraph {
-    background: $colorBrown300;
-    border-left-color: $colorBrown300;
-    .tool__btn__icon:before {
-      content: $fa-var-remove;
-    }
-  }
   .buildermod__vizwrap {
     border-width: 0;
     overflow-y: auto;
@@ -79,11 +56,9 @@
   float: right;
 }
 
-
-
 // Change Graph drawer
 
-.changegraph__radioswrap {
+.change-visualization__container {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
@@ -91,42 +66,15 @@
   justify-content: center;
 }
 
-.changegraph__radiowrap {
-  width: 33.3333%;
-  width: calc(100% / 3);
-  &:nth-of-type(3n+1) {
-    padding: 0 $baseSpace*0.75 $baseSpace 0;
-  }
-  &:nth-of-type(3n+2) {
-    padding: 0 $baseSpace*0.5 $baseSpace $baseSpace*0.25;
-  }
-  &:nth-of-type(3n) {
-    padding: 0 0 $baseSpace $baseSpace*0.75;
-  }
-  &:nth-child(n+3) {
-    padding-bottom: 0;
-  }
-}
-
-.changegraph__radio {
-  position: absolute;
-  top: -9999px;
-  left: -9999px;
-}
-
-.changegraph__radio__target {
-  min-height: $baseSpace*9;
-  width: 100%;
-  pointer-events: none;
-  text-align: center;
-  line-height: 120%;
-  background: $colorBrown200;
-  color: $colorGrayLight;
-  display: flex;
+.changegraph__icon {
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
   align-items: center;
-}
-
-.changegraph__radio--is--possible {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
   background: $colorBrown500;
   color: $colorGray;
   pointer-events: all;
@@ -137,46 +85,10 @@
   }
 }
 
-.changegraph__radio__target--checked {
+.changegraph__icon--checked {
   color: $colorBlack;
   &:hover {
     background: $colorBrown500;
-  }
-}
-
-.changegraph__copy__wrap {
-  display: block;
-  margin: 0 auto;
-}
-
-.changegraph__subhead--is--available .changegraph__graph__description{
-  &:nth-of-type(1) {
-    display: block;
-  }
-  &:nth-of-type(2) {
-    display: none;
-  }
-}
-
-.changegraph__icon {
-  display: block;
-  font-size: $fontXLarge;
-  margin: 0 auto $baseSpace/2;
-}
-
-.changegraph__graph__head {
-  margin-bottom: $baseSpace/4;
-  display: block;
-}
-
-.changegraph__graph__description {
-  font-family: $serif;
-  font-size: $fontSmall;
-  &:nth-of-type(1) {
-    display: none;
-  }
-  &:nth-of-type(2) {
-    display: block;
   }
 }
 

@@ -1,12 +1,1 @@
-<input {{bind-attr id=inputId}} class="changegraph__radio" {{action 'toggleVisualization' type}} type="radio" data-change-graph={{type}}>
-<label {{bind-attr class=":btn :btn--standalone :btn--stream :changegraph__radio__target isAvailable:changegraph__radio--is--possible isChecked:changegraph__radio__target--checked" for=inputId}}>
-  <span class="changegraph__copy__wrap">
-    <i class={{iconClass}}></i>
-    <span class="changegraph__graph__head">{{text}}</span>
-    <div {{bind-attr class="isAvailable:changegraph__subhead--is--available"}}>
-      <span class="changegraph__graph__description">{{t description }}</span>
-      <span class="changegraph__graph__description">{{t 'graph_builder.change_graph.unavailable'}}</span>
-    </div>
-  </span>
-</label>
 
