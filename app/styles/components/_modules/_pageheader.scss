@@ -193,7 +193,7 @@
   }
 
   .index__header__wrap {
-    padding: $baseSpace*2 0 0 0;
+    padding: $baseSpace*1.5 0 0 0;
     max-width: $baseSpace*20;
   }
 
@@ -252,7 +252,12 @@
 }  
 
 //special style for the search box 
-
 .pageheader__homeintro .search__wrap {
   margin-bottom: $baseSpace;
 }
+
+.pageheader__homeintro .index__complexity__cta {
+  margin-bottom: $baseSpace;
+}
+
+

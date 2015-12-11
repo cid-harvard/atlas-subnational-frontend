@@ -265,7 +265,6 @@
 .index__topics__item {
   padding: $baseSpace;
   margin-right: $baseSpace;
-  margin-bottom: $baseSpace;
   position: relative;
   border-top: $baseSpace solid $colorWhite;
   h4, .ember-view, ul {
@@ -330,6 +329,21 @@
 .index__questions__link {
   font-size: $fontSmall;
   display: block;
+  
+  &.index__questions__link--viewall {
+    font-style: italic;
+    font-weight: 400;
+    margin-top: $baseSpace;
+    color: $colorGray;
+    &:after {
+      content: "\f101";
+      font-family: $icon;
+      display: inline-block;
+      position: relative;
+      top: 0px;
+      font-size: .8em;
+    }
+  }
 }
 
 .index__dropdown__wrap {
