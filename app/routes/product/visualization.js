@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ENV from '../../config/environment';
 
 const {apiURL} = ENV;
-const {RSVP, computed, $, set, get:get} = Ember;
+const {RSVP, computed, $, set, get, copy} = Ember;
 
 export default Ember.Route.extend({
   i18n: Ember.inject.service(),
@@ -77,7 +77,7 @@ export default Ember.Route.extend({
       d.color = location.color;
       d.code = location.code;
       d.group = location.group;
-      return d;
+      return copy(d);
     });
 
     return Ember.Object.create({
@@ -96,7 +96,7 @@ export default Ember.Route.extend({
       d.color = city.color;
       d.code = city.code;
       d.group = city.group;
-      return d;
+      return copy(d);
     });
 
     return Ember.Object.create({
@@ -114,7 +114,7 @@ export default Ember.Route.extend({
       d.parent_name_en = parent.name_en;
       d.parent_name_es = parent.name_es;
       d.group = parent.id;
-      return _.merge(country,d);
+      return _.merge(copy(d), country);
     });
 
     return Ember.Object.create({

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ENV from '../../config/environment';
 
 const {apiURL} = ENV;
-const {RSVP, computed, $, set, get:get} = Ember;
+const {RSVP, computed, $, set, get, copy} = Ember;
 
 export default Ember.Route.extend({
   i18n: Ember.inject.service(),
@@ -76,7 +76,7 @@ export default Ember.Route.extend({
       d.parent_name_en = parent.name_en;
       d.parent_name_es = parent.name_es;
       d.group = parent.id;
-      return _.merge(d, country);
+      return _.merge(copy(d), country);
     });
 
     return Ember.Object.create({
@@ -95,7 +95,7 @@ export default Ember.Route.extend({
       let industry = industriesMetadata[d.industry_id];
       let complexity = complexityMap[ `${d.year}_${d.industry_id}`];
       d.complexity = complexity.complexity;
-      return _.merge(d, industry, { avg_wage: d.wages/d.employment});
+      return _.merge(copy(d), industry, { avg_wage: d.wages/d.employment});
     });
 
     return Ember.Object.create({
@@ -114,7 +114,7 @@ export default Ember.Route.extend({
       let product = productsMetadata[d.product_id];
       let complexity = complexityMap[ `${d.year}_${d.product_id}`];
       d.complexity = complexity.pci;
-      return _.merge(d, product, { avg_wage: d.wages/d.employment});
+      return _.merge(copy(d), product, { avg_wage: d.wages/d.employment});
     });
 
     return Ember.Object.create({
