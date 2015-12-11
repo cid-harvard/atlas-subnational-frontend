@@ -251,13 +251,24 @@
   margin-bottom: $baseSpace;
 }  
 
-//special style for the search box 
+//special style for the home search box 
 .pageheader__homeintro .search__wrap {
   margin-bottom: $baseSpace;
+  width: auto;
+  margin-right: $baseSpace;
 }
 
 .pageheader__homeintro .index__complexity__cta {
   margin-bottom: $baseSpace;
+}
+
+.header--pageheader--home .search__field__wrap {
+  width: 40rem;
+  margin-right:-4px;
+}
+
+.header--pageheader--home .search {
+  background: $colorWhite;
 }
 
 

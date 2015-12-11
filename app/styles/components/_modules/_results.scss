@@ -11,8 +11,9 @@
 
 .results__head {
   font-size: $fontXLarge;
-  color: $colorBlack;
+  color: $colorRed;
   margin-bottom: $baseSpace*2;
+  margin-top: $baseSpace;
   line-height: 100%;
   font-family: $sansAlt;
   @include offset-text;
@@ -22,6 +23,7 @@
   color: $colorBlack;
   font-size: $fontLarge;
   @include offset-text;
+  margin-top: $baseSpace;
 }
 
 .results__list {
@@ -72,8 +74,13 @@
 }
 
 .results__copy--postscript {
-  margin: $baseSpace 0 0;
+  margin: $baseSpace*2 0;
+  text-align: left;
   color: $colorGray;
   @include offset-text;
+  padding: $baseSpace/2 0;
+  border-top: 1px solid $colorGrayLight;
+  width: 25%;
+
 }
 

@@ -5,30 +5,36 @@
 **/
 
 .search__wrap {
-  display: flex;
-  align-items: stretch;
   display: inline-block;
-  width: auto;
-  margin-right: $baseSpace;
+  width: 100%;
+  position: relative;
+
+  .btn--search, .btn--buildermod {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10rem;
+  }
+
 }
 
 .search__field__wrap {
   position: relative;
-  width: 30rem;
   display: inline-block;
-  margin-right:-4px;
+  width: 100%;
+  padding-right: 10rem;
 }
 
 .search {
   transition: background $animationTime $animationEasing;
-  background: $colorWhite;
+  background: $colorGrayLightest;
   font-size: $fontSmall;
   font-weight: 300;
   padding: $baseSpace/2 $baseSpace;
-  flex: 1 1 auto;
   width: 100%;
   height: 100%;
   font-family: $sans;
+
   &:active, &:focus {
     outline: 0;
     &::-webkit-input-placeholder {

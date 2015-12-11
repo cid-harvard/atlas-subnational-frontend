@@ -20,6 +20,7 @@
 
 .stream__header--builder .stream__head {
   margin-bottom: 1rem;
+  margin-top: 0;
 }
 
 .stream__head {
@@ -28,6 +29,8 @@
   line-height: 100%;
   -moz-osx-font-smoothing: grayscale;
   margin-bottom: $baseSpace;
+  color: $colorRed;
+  margin-top: $baseSpace/2;
 }
 
 .stream__header--builder .stream__head {
