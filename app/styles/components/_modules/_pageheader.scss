@@ -182,7 +182,6 @@
 }
 
 //special homepage pageheader
-
 .header--pageheader--home {
   height: auto;
   min-height: 400px;
@@ -211,6 +210,25 @@
     font-family: $sans;
     font-weight: 700;
     text-shadow: 0 0 10px rgba($colorBlack, .7);
+  }
+}
+
+//special colors for pageheader__home
+.header--pageheader--home .pageheader__menu a {
+  color: $colorRed;
+}
+
+.header--pageheader--home .pageheader__nav .toggle__label__text {
+  color: $colorRed;
+}
+
+.header--pageheader--home .pageheader__nav .toggle__label {
+  background-color: $colorRed;
+  &:before {
+    background-color: white;
+  }
+  &:after {
+    background-color: $colorRed;
   }
 }
 
