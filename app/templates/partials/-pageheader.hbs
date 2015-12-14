@@ -61,35 +61,38 @@
     {{#if isHomePageRoute }}
       {{!-- special display of introductory text on index --}}
       <div class="pageheader__homeintro">
+        <header class="index__header__wrap">
+          <div class="stream__header index__header">
+            <h1 class="stream__head index__head">{{ t 'index.header_h1' }}</h1>
+            <h2 class="stream__subhead">{{ t 'index.header_subhead' }}</h2>
+          </div>
+        </header>
 
-            <header class="index__header__wrap">
-              <div class="stream__header index__header">
-                <h1 class="stream__head index__head">{{ t 'index.header_h1' }}</h1>
-                <h2 class="stream__subhead">{{ t 'index.header_subhead' }}</h2>
-              </div>
-            </header>
-
-            <form class="search__wrap">
-              <div class="search__field__wrap">
-                {{input
-                  class="search"
-                  placeholder=( t 'pageheader.search_placeholder' )
-                  value=query
-                  enter='query'
-                  required='required'
-                }}
-                <button class="search__reset fa fa-close" type="reset"></button>
-              </div>
-              <input class="search__submit btn btn--standalone btn--search" type="submit" value="{{ t 'pageheader.search_link' }}" {{action 'query' query}}>
-            </form>
-
-            {{#link-to 'about.glossary'
-              data-home-page-product=''
-              class="btn btn--standalone btn--stream index__complexity__cta index__complexity__cta--pageheader"
+        <form class="search__wrap">
+          <div class="search__field__wrap">
+            {{input
+              class="search"
+              placeholder=( t 'pageheader.search_placeholder' )
+              value=query
+              enter='query'
+              target=controllers.search
+              required='required'
             }}
-              {{ t 'index.complexity_cta' }}
-            {{/link-to}}
+            <button class="search__reset fa fa-close" type="reset"></button>
+          </div>
+          <input class="search__submit btn btn--standalone btn--search"
+            type="submit"
+            value="{{ t 'pageheader.search_link' }}"
+            {{action 'query' query target=controllers.search}}
+          >
+        </form>
 
+        {{#link-to 'about.glossary'
+          data-home-page-product=''
+          class="btn btn--standalone btn--stream index__complexity__cta index__complexity__cta--pageheader"
+        }}
+          {{ t 'index.complexity_cta' }}
+        {{/link-to}}
       </div>
     {{/if}}
 
