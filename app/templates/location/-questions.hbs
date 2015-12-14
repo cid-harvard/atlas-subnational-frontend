@@ -78,7 +78,7 @@
         </span>
       </div>
     </li>
-    {{#unless isMunicipality}}
+    {{#unless isMuncipality}}
       <li class="builder__questions__item">
         <i class="icon-cidcon_similarity builder__questions__item__icon"></i>
         <div class="builder__questions__item__textwrap">
@@ -103,7 +103,6 @@
       </li>
   {{/unless}}
   </ul>
-  {{#unless isMuncipality}}
     <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.import'}}</h4>
     <ul class="builder__questions__list">
       <li class="builder__questions__item">
@@ -131,5 +130,4 @@
         </div>
       </li>
     </ul>
-  {{/unless}}
 </div>
