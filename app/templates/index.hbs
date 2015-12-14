@@ -8,7 +8,7 @@
             <div class="index__topics__item">
               <div class="index__topics__vspacer"></div>
               <h4 class="section__subhead">{{ t 'index.location_head' }}</h4>
-              {{select-dropdown collection=cities type='location'}}
+              {{select-dropdown collection=sortedCities type='location'}}
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
@@ -44,7 +44,7 @@
             <div class="index__topics__item">
               <div class="index__topics__vspacer"></div>
               <h4 class="section__subhead">{{ t 'index.industry_head' }}</h4>
-                {{select-dropdown collection=industries type='industry'}}
+                {{select-dropdown collection=sortedIndustries type='industry'}}
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
@@ -80,7 +80,7 @@
             <div class="index__topics__item">
               <div class="index__topics__vspacer"></div>
               <h4 class="section__subhead">{{ t 'index.product_head' }}</h4>
-                {{select-dropdown collection=products type='product'}}
+                {{select-dropdown collection=sortedProducts type='product'}}
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
