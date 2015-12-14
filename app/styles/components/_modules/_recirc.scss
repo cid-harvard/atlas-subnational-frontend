@@ -8,6 +8,11 @@
   position: relative;
 }
 
+.index__section.recirc {
+  background-color: $colorGrayLightest;
+  padding: $baseSpace*2;
+}
+
 .recirc__bground {
   background-color: $colorBrown500;
   position: absolute;
@@ -17,14 +22,18 @@
   left: 0;
   background-size: cover;
   opacity: 0.35;
+  background-position: 0px -70px;
 }
 
 .recirc__wrap {
-  padding: $baseSpace * 3;
   position: relative;
 }
 
 .recirc__head {
   margin: 0 0 $baseSpace 0;
   @include offset-text;
+}
+
+.stream.index .recirc__wrap {
+  margin-left: $baseSpace*2;
 }

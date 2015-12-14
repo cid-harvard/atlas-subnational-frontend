@@ -12,7 +12,7 @@
 .pageheader__wrap {
   padding: $baseSpace/2 0;
   position: relative;
-  max-width: 100rem;
+  max-width: $xlarge;
   margin: auto;
 }
 
@@ -138,18 +138,19 @@
 }
 
 .toggle__label__text {
+  @include offset-text;
   color: $colorWhite;
   font-size: $fontSmall;
   display: inline;
   font-weight: 600;
   vertical-align: 6px;
   font-family: $sans;
-  @include offset-text;
 }
 
 // Menu
 
 .pageheader__menu {
+  @include offset-text;
   position: absolute;
   top: 0;
   right: $baseSpace * 4;
@@ -157,11 +158,10 @@
   color: $colorWhite;
   font-size: $fontSmall;
   font-weight: 600;
-  @include offset-text;
-  a { 
-    color: $colorWhite; 
+  a {
+    color: $colorWhite;
     &:hover {
-      opacity: .8; 
+      opacity: .8;
     }
   }
 
@@ -180,4 +180,99 @@
   }
 
 }
+
+//special homepage pageheader
+.header--pageheader--home {
+  height: auto;
+  min-height: 400px;
+  position: relative;
+
+  .index__header {
+    color: white;
+    background: none;
+  }
+
+  .index__header__wrap {
+    padding: $baseSpace*1.5 0 0 0;
+    max-width: $baseSpace*20;
+  }
+
+  .stream__head {
+    color: $colorRed;
+    letter-spacing: 0;
+    font-size: $fontXLarge;
+    margin: $fontXLarge/3 0 $fontXLarge/3 0;
+    text-shadow: 0 0 10px rgba($colorBlack, .4);
+  }
+
+  .stream__subhead {
+    color: $colorRed;
+    font-family: $sans;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba($colorBlack, .7);
+  }
+}
+
+//special colors for pageheader__home
+.header--pageheader--home .pageheader__menu a { color: $colorRed; }
+.header--pageheader--home .pageheader__nav .toggle__label__text { color: $colorRed; }
+.header--pageheader--home .pageheader__nav .toggle__label {
+  background-color: $colorRed;
+  &:before { background-color: white; }
+  &:after { background-color: $colorRed; }
+}
+
+.pageheader__bground {
+ background-image: url('/assets/img/hero_images/front-header-treemap.png');
+ display: none;
+}
+.header--pageheader--home .pageheader__bground {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+
+.pageheader__home__cap {
+  display: none;
+  height: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $colorRed;
+}
+
+.header--pageheader--home .pageheader__home__cap { display: block; }
+
+.stream__section .pageheader__home__cap {
+  display: block;
+  max-width: $xlarge;
+  margin-bottom: $baseSpace;
+}
+
+//special style for the home search box
+.pageheader__homeintro .search__wrap {
+  margin-bottom: $baseSpace;
+  width: auto;
+  margin-right: $baseSpace;
+}
+
+.pageheader__homeintro .index__complexity__cta {
+  margin-bottom: $baseSpace;
+}
+
+.header--pageheader--home .search__field__wrap {
+  width: 40rem;
+  margin-right:-4px;
+}
+
+.header--pageheader--home .search {
+  background: $colorWhite;
+}
+
 

@@ -4,16 +4,24 @@
 *
 **/
 
+.buildermod__questions {
+  position: relative;
+  background: $colorGrayLightest;
+  padding: $baseSpace;
+  margin: $baseSpace/2 0 $baseSpace 0;
+}
+
 .builder__questions__header {
-  font-size: $fontBase;
-  font-weight: 500;
-  margin-bottom: $baseSpace;
-  color: $colorGrayDark;
+  font-size: $fontSmall;
+  font-weight: 600;
+  margin-bottom: $baseSpace/4;
+  color: $colorGray;
+  font-family: $sans;
   line-height: 100%;
 }
 
 .builder__questions__list {
-  margin-bottom: $baseSpace*2;
+  margin-bottom: $baseSpace/2;
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -23,7 +31,8 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  margin-bottom: $baseSpace/2;
+  position: relative;
+  margin-bottom: $baseSpace/4;
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -40,6 +49,10 @@
   }
 }
 
+.builder__questions__item__textwrap {
+  margin-left: 10rem;
+}
+
 // TODO: Remove this class for launch
 // We shouldn't be showing any questions we don't have graphs for
 
@@ -49,13 +62,22 @@
 }
 
 .builder__questions__item__icon {
-  margin-right: $baseSpace/2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-right: 2px;
+  margin-top: 3px;
   &:before {
     transition: color $animationTime $animationEasing;
     color: $colorGray;
     margin: 0 auto;
     font-size: $fontLarge;
   }
+
+  &.icon-cidcon_geo { }
+  &.icon-cidcon_multiples { left: 30px;}
+  &.icon-cidcon_treemap, &.icon-cidcon_scatter, &.icon-cidcon_similarity { left: 60px;}
+  
 }
 
 .builder__questions__label {
@@ -64,9 +86,9 @@
 }
 
 .builder__questions__question {
-  font-weight: 100;
+  font-weight: 400;
   color: $colorGray;
-  font-size: $fontBase;
+  font-size: $fontSmall;
   display: inline-block;
   font-family: $sans;
 }
@@ -80,8 +102,4 @@
 }
 .buildermod__tool--questions {
   border-left-color: $colorBrown300;
-}
-
-.buildermod__questions {
-  padding: $baseSpace * 1.5;
 }

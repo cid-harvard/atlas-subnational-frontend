@@ -6,6 +6,8 @@
 
 .stream__section {
   margin-bottom: $baseSpace * 3;
+  position: relative;
+
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -34,12 +36,19 @@
 }
 
 .section__subhead {
-  margin-bottom: $baseSpace;
+  margin-bottom: $baseSpace/2;
   line-height: 120%;
+  vertical-align: bottom;
 }
 
 .section__p {
   max-width: 65rem;
   margin-bottom: $baseSpace;
+}
+
+.stream__section__wrap {
+  max-width: $xlarge;
+  margin: 0 auto;
+  position: relative;
 }
 

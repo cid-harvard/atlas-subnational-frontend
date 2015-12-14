@@ -8,6 +8,16 @@
       {{/each}}
     </ul>
   {{/if}}
+  {{#if isProduct }}
+    <ul>
+      <li class="breadcrumb">{{t 'general.product' }}</li>
+    </ul>
+  {{/if}}
+  {{#if isIndustry}}
+    <ul>
+      <li class="breadcrumb">{{t 'general.industry' }}</li>
+    </ul>
+  {{/if}}
   <h2 class="stream__head" data-location-name>{{model.name}}</h2>
   {{#if isLocation}}
     {{ partial 'partials/builder-questions-location'}}

@@ -1,32 +1,14 @@
 <main class="stream index">
   <article class="stream__article">
-    <header class="index__header__wrap">
-      <div class="stream__header index__header">
-        <h1 class="stream__head index__head">{{ t 'index.header_head' }}</h1>
-        <h2 class="stream__subhead">{{ t 'index.header_subhead' }}</h2>
-        <form class="search__wrap">
-          <div class="search__field__wrap">
-            {{input
-              class="search"
-              placeholder=( t 'pageheader.search_placeholder' )
-              value=query
-              enter='query'
-              required='required'
-            }}
-            <button class="search__reset fa fa-close" type="reset"></button>
-          </div>
-          <input class="search__submit btn btn--standalone btn--search" type="submit" value="{{ t 'pageheader.search_link' }}" {{action 'query' query}}>
-        </form>
-      </div>
-    </header>
-    <div class="index__questions__mod">
-      <section class="stream__section index__section index__questions__wrap">
+    <section class="stream__section index__section index__questions__wrap">
+      <div class="stream__section__wrap">
         <h3 class="section__head">{{ t 'index.questions_head' }}</h3>
-        <p class="section__p">{{ t 'index.questions_subhead' }}</p>
         <ul class="index__topics__list">
           <li class="index__topics__item__wrap">
             <div class="index__topics__item">
+              <div class="index__topics__vspacer"></div>
               <h4 class="section__subhead">{{ t 'index.location_head' }}</h4>
+              {{select-dropdown collection=sortedCities type='location'}}
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
@@ -46,14 +28,23 @@
                     {{ t 'index.location_q2' }}
                   {{/link-to}}
                 </li>
+                <li class="index__questions__item">
+                  {{#link-to
+                    'location.show' locationFirst
+                    data-home-page-location-question='2'
+                    class="link--stream index__questions__link index__questions__link--viewall"
+                  }}
+                    {{ t 'index.location_viewall' }}
+                  {{/link-to}}
+                </li>
               </ul>
             </div>
-            <img src="assets/img/index/locations_2_large.jpg" srcset="assets/img/index/locations_2_med.jpg, assets/img/index/locations_2_large.jpg 2x" alt="" class="index__topics__image">
           </li>
           <li class="index__topics__item__wrap">
-            <img src="assets/img/index/industries_2_large.jpg" srcset="assets/img/index/industries_2_med.jpg, assets/img/index/industries_2_large.jpg 2x" alt="" class="index__topics__image">
             <div class="index__topics__item">
+              <div class="index__topics__vspacer"></div>
               <h4 class="section__subhead">{{ t 'index.industry_head' }}</h4>
+                {{select-dropdown collection=sortedIndustries type='industry'}}
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
@@ -73,12 +64,23 @@
                     {{ t 'index.industry_q2' }}
                   {{/link-to}}
                 </li>
+                <li class="index__questions__item">
+                  {{#link-to
+                    'industry.show' industryFirst
+                    data-home-page-product-question='1'
+                    class="link--stream index__questions__link index__questions__link--viewall"
+                  }}
+                    {{ t 'index.location_viewall' }}
+                  {{/link-to}}
+                </li>
               </ul>
             </div>
           </li>
           <li class="index__topics__item__wrap">
             <div class="index__topics__item">
+              <div class="index__topics__vspacer"></div>
               <h4 class="section__subhead">{{ t 'index.product_head' }}</h4>
+                {{select-dropdown collection=sortedProducts type='product'}}
               <ul>
                 <li class="index__questions__item">
                   {{#link-to
@@ -98,94 +100,89 @@
                     {{ t 'index.product_q2' }}
                   {{/link-to}}
                 </li>
+                <li class="index__questions__item">
+                  {{#link-to
+                    'product.show' productFirst
+                    data-home-page-industry-question='1'
+                    class="link--stream index__questions__link index__questions__link--viewall"
+                  }}
+                    {{ t 'index.location_viewall' }}
+                  {{/link-to}}
+                </li>
               </ul>
             </div>
-            <img src="assets/img/index/products_2_large.jpg" srcset="assets/img/index/products_2_med.jpg, assets/img/index/products_2_large.jpg 2x" alt="" class="index__topics__image">
           </li>
         </ul>
-      </section>
-    </div>
-    <div class="index__complexity__mod">
-      <section class="index__section index__complexity__wrap">
-        <div class="section__complexity__graph">
-          <div class="section__complexity__bar section__complexity__bar--wef"></div>
-          <div class="section__complexity__bar section__complexity__bar--complexity"></div>
-        </div>
-        <div class="section__complexity__copy">
-          <h3 class="section__head">{{ t 'index.complexity_head' }}</h3>
-          <p class="section__p">{{ t 'index.complexity_subhead' }}</p>
-          <p class="section__p">{{ t 'index.complexity_caption' }}</p>
-          {{#link-to 'about.glossary'
-            data-home-page-product=''
-            class="btn btn--standalone btn--stream index__complexity__cta"
-          }}
-            {{ t 'index.complexity_cta' }}
-          {{/link-to}}
-        </div>
-      </section>
-    </div>
-    <section class="stream__section index__featuredin__wrap">
-      <h3 class="section__head section__head--spacey">{{ t 'index.research_head' }}</h3>
-      <ul class="index__featuredin__list">
-        <li class="index__featuredin__item">
-          <a href="http://www.nytimes.com/interactive/2011/05/15/magazine/art-of-economic-complexity.html?_r=0" target='_blank'>
-            <img src="assets/img/index/nyt.png" alt="New York Times" class="index__featuredin__img">
-          </a>
-        </li>
-        <li class="index__featuredin__item">
-          <a href="http://www.economist.com/blogs/freeexchange/2011/10/building-blocks-economic-growth" target='_blank'>
-            <img src="assets/img/index/economist.png" alt="The Economist" class="index__featuredin__img">
-          </a>
-        </li>
-        <li class="index__featuredin__item">
-          <a href="http://blogs.wsj.com/economics/2011/10/26/complexity-predicts-nations-future-growth/" target='_blank'>
-            <img src="assets/img/index/wsj.png" alt="The Wall Street Journal" class="index__featuredin__img">
-          </a>
-        </li>
-        <li class="index__featuredin__item">
-          <a href="http://www.forbes.com/sites/timtreadgold/2015/05/20/indias-economic-revival-confirmed-by-new-harvard-university-study/" target='_blank'>
-            <img src="assets/img/index/forbes.png" alt="Forbes" class="index__featuredin__img">
-          </a>
-        </li>
-        <li class="index__featuredin__item">
-          <a href="http://www.ft.com/intl/cms/s/2/3fc2975c-4703-11e1-bc5f-00144feabdc0.html" target='_blank'>
-            <img src="assets/img/index/ft_2.png" alt="Financial Times" class="index__featuredin__img">
-          </a>
-        </li>
-      </ul>
+      </div>
     </section>
-    <div class="index__viewmod">
-      <section class="index__section index__view__wrap">
-        <img src="assets/img/index/profiles_1_large.jpg" srcset="assets/img/index/profiles_1_med.jpg, assets/img/index/profiles_1_large.jpg 2x" alt="Icon for the Profiles view" class="index__view__img">
-        <div class="index__view__copy">
-          <h3 class="section__head">{{ t 'index.profiles_head' }}</h3>
-          <p class="section__p">{{ t 'index.profiles_subhead' }}</p>
-          {{#link-to 'location.show' profile
-            data-home-page-location=''
-            class='btn btn--standalone btn--stream'
-          }}
-            {{ t 'index.profiles_cta' }}
-          {{/link-to}}
+    <section class="stream__section index__section onboarding">
+      <div class="stream__section__wrap">
+        <div class="column__container">
+          <div class="column__6">
+            <h3 class="section__head">
+              {{ t 'index.present_head' }}
+            </h3>
+            <ul class="onboarding--glyphs">
+              <li>
+                <i class="icon-cidcon_treemap onboarding--glyphs--icon"></i>
+                <h6>{{ t 'general.treemap' }}</h6>
+              </li>
+              <li>
+                <i class="icon-cidcon_multiples onboarding--glyphs--icon"></i>
+                <h6>{{ t 'general.multiples' }}</h6>
+              </li>
+              <li>
+                <i class="icon-cidcon_geo onboarding--glyphs--icon"></i>
+                <h6>{{ t 'general.geo' }}</h6>
+              </li>
+            </ul>
+            <p>{{ t 'index.present_subhead' }}</p>
+          </div>
+          <div class="column__6">
+            <h3 class="section__head">
+              {{ t 'index.future_head' }}
+            </h3>
+            <ul class="onboarding--glyphs">
+              <li>
+                <i class="icon-cidcon_scatter onboarding--glyphs--icon"></i>
+                <h6>{{ t 'general.scatter' }}</h6>
+              </li>
+              <li>
+                <i class="icon-cidcon_similarity onboarding--glyphs--icon"></i>
+                <h6>{{ t 'general.similarity' }}</h6>
+              </li>
+            </ul>
+            <p>{{ t 'index.future_subhead' }}</p>
+          </div>
         </div>
-      </section>
-      <section class="index__section index__view__wrap">
-        <img src="assets/img/index/graph_builder_1_large.jpg" srcset="assets/img/index/graph_builder_1_med.jpg, assets/img/index/graph_builder_1_large.jpg 2x" alt="Icon for the Graph Builder view" class="index__view__img">
-        <div class="index__view__copy">
-          <h3 class="section__head">{{ t 'index.builder_head' }}</h3>
-          <p class="section__p">{{ t 'index.builder_subhead' }}</p>
-          {{#link-to
-            'location.visualization' graphbuilder 'locations' 'multiples' 'export_value'(query-params endDate=lastYear startDate=firstYear)
-            data-home-page-product=''
-            class="btn btn--standalone btn--stream"
-          }}
-            {{ t 'index.builder_cta' }}
-          {{/link-to}}
+      </div>
+    </section>
+    <section class="stream__section index__section complexity">
+      <div class="stream__section__wrap">
+      <div class="pageheader__home__cap"></div>
+        <div class="column__container">
+          <div class="column__3">
+            <h3 class="section__head">
+              {{ t 'index.complexity_head' }}
+            </h3>
+          </div>
+          <div class="column__9">
+            <p class="section__p">
+              {{ t 'index.complexity_subhead' }}
+            </p>
+            {{#link-to 'about.glossary'
+              data-home-page-product=''
+              class="btn btn--standalone btn--stream index__complexity__cta"
+            }}
+              {{ t 'index.complexity_cta' }}
+            {{/link-to}}
+          </div>
         </div>
-      </section>
-    </div>
-    <section class="stream__section recirc">
-      <div class="recirc__bground" style="background-image: url(assets/img/hero_images/location/COL.jpg)"></div>
-      <div class="recirc__wrap">
+      </div>
+    </section>
+    <section class="stream__section index__section recirc">
+      <div class="recirc__bground" style="background-image: url('assets/img/hero_images/location/COL.jpg')"></div>
+      <div class="recirc__wrap stream__section__wrap">
         <h3 class="section__head recirc__head">
           {{t 'index.colombia_profile'}}
         </h3>

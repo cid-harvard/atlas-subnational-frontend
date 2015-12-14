@@ -20,6 +20,7 @@
 
 .stream__header--builder .stream__head {
   margin-bottom: 1rem;
+  margin-top: 0;
 }
 
 .stream__head {
@@ -28,6 +29,8 @@
   line-height: 100%;
   -moz-osx-font-smoothing: grayscale;
   margin-bottom: $baseSpace;
+  color: $colorRed;
+  margin-top: $baseSpace/2;
 }
 
 .stream__header--builder .stream__head {
@@ -49,9 +52,11 @@
 }
 
 .breadcrumb {
-  color: $colorGray;
+  color: $colorGrayLight;
   font-size: $fontSmall;
-  font-family: $serif;
+  font-family: $sansSC;
+  text-transform: lowercase;
+  font-weight: 400;
   cursor: pointer;
   display: inline-block;
   margin-right: $baseSpace / 3;
@@ -81,52 +86,60 @@
   color: $colorGray;
 }
 
+.clear { 
+  clear: both; 
+  border: 1px solid black;
+  display: block;
+  height: 1px;
+  width: 25px;
+}
+
 .stream___head__menu {
+  display: -webkit-flex;
+  display: -moz-flex;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+   -webkit-flex-wrap: wrap;
+  flex-direction: row;
+   -webkit-flex-direction: row;
+  align-items: flex-start;
   font-size: $fontSmall;
   color: $colorGray;
   font-family: $sans;
   margin-right: -$baseSpace;
   max-width: 100%;
+  width: 100%;
+  height: auto;
 }
 
 //Top navigation on interior pages
-
 .menu-section {
-  margin-right: $baseSpace;
-  align-content: flex-start;
-  justify-content: flex-start;
   padding-top: .55rem;
+  padding-right: $baseSpace;
   margin-bottom: $baseSpace / 3;
-  flex-grow: 1;
-  width: 20%;
-  min-width: 22rem;
+  min-width: 20rem;
+  flex: 1 1 20%;
+  -webkit-flex: 1 1 20%;
+  @media screen and (max-width: 960px) {
+    flex: 1 1 50%;
+    -webkit-flex: 1 1 50%;
+  }
+  @media screen and (max-width: 720px) {
+    flex: 1 1 100%;
+    -webkit-flex: 1 1 100%;
+  }
 }
 
 .menu-section__group-name {
-  padding: .25rem;
   display: block;
   margin-right: 1rem;
   margin-bottom: .25rem;
   font-weight: normal;
-  color: $colorGray;
-  font-family: $serif;
+  color: $colorGrayLight;
+  font-family: $sansSC;
+  text-transform: lowercase;
   width: 100%;
-  border-bottom: 1px solid $colorGray;
-
-  &:before {
-    content: "\f111";
-    position: relative;
-    font-family: $icon;
-    font-size: 8px;
-    width: 10px;
-    top: -3px;
-    color: transparent;
-    margin-right: 4px;
-  }
-
+  border-bottom: 1px solid $colorGrayLight;
 }
 
 .menu-section__group {
@@ -157,10 +170,10 @@
 
   &--active {
     color: $colorRed;
-    font-weight: 900;
+    font-weight: 700;
+    @include offset-text;
     &:hover {
       color: $colorRed;
-      font-weight: 900;
       &:before { color: $colorRed; }
     }
     &:before { color: $colorRed; }
@@ -172,9 +185,10 @@
   cursor: default;
 }
 
-.question__head {
+.section__head.question__head {
   font-size: $fontXLarge;
   line-height: $fontXLarge;
   margin-bottom: $baseSpace / 2;
   font-family: $sansAlt;
+  color: $colorRed;
 }

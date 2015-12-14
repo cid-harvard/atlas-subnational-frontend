@@ -5,11 +5,13 @@
 **/
 
 .builder {
-  background: $colorBrown200;
+  background: white;
 }
 
 .builder__recirc {
   width: 100%;
   margin-bottom: $baseSpace * 3;
+  //KBH temporarily hiding this so I can style it better
+  display: none;
 }
 
