@@ -58,14 +58,14 @@
         class="menu-section__link"}}
         {{t 'header.product'}}
       {{/link-to}}
+      {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
+        data-location-partners="export"
+        tagName='li'
+        classNameBindings="locationPartnersExports:menu-section__link--active"
+        class="menu-section__link"}}
+        {{t 'header.destination'}}
+      {{/link-to}}
       {{#unless isMunicipality }}
-        {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
-          data-location-partners="export"
-          tagName='li'
-          classNameBindings="locationPartnersExports:menu-section__link--active"
-          class="menu-section__link"}}
-          {{t 'header.destination'}}
-        {{/link-to}}
         {{#link-to 'location.visualization' model.id 'products' 'similarity' 'rca' (query-params endDate=lastYear startdate=lastYear search='null')
           data-location-product="similarity"
           tagName='li'
@@ -94,7 +94,6 @@
         {{t 'header.product'}}
       {{/link-to}}
     </ul>
-    {{#unless isMunicipality}}
       <ul class="menu-section__group">
         {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'import_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
           data-location-partners="export"
@@ -104,6 +103,5 @@
           {{t 'header.origin'}}
         {{/link-to}}
       </ul>
-    {{/unless}}
   </div>
 </div

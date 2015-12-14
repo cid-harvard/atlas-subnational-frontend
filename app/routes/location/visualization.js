@@ -112,8 +112,8 @@ export default Ember.Route.extend({
 
     let data = _.map(products.data, (d) => {
       let product = productsMetadata[d.product_id];
-      let complexity = complexityMap[ `${d.year}_${d.product_id}`];
-      d.complexity = complexity.pci;
+      let complexity = get(complexityMap, `${d.year}_${d.product_id}.pci`);
+      d.complexity = complexity;
       return _.merge(copy(d), product, { avg_wage: d.wages/d.employment});
     });
 
