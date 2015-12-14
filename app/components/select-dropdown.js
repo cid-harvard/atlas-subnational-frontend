@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {computed, observer, set, get} = Ember;
+const {computed, get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
@@ -27,6 +27,6 @@ export default Ember.Component.extend({
       Ember.run.next(this, function() {
         this.$('select').selectmenu('refresh', true);
       });
-    })
+    });
   }
 });

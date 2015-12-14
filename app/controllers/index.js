@@ -1,20 +1,20 @@
 import Ember from 'ember';
-const {computed, observer, get} = Ember;
+const {computed, get} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
 
   firstYear: computed.alias('i18n.firstYear'),
   lastYear: computed.alias('i18n.lastYear'),
-  products: computed.filter('model.products', (product, index, array) => {
+  products: computed.filter('model.products', (product) => {
     let id = [1143, 87];
     return _.contains(id, parseInt(get(product, 'id')));
   }),
-  cities: computed.filter('model.cities', (city, index, array) => {
+  cities: computed.filter('model.cities', (city) => {
     let id = [41,87, 34, 40];
     return _.contains(id, parseInt(get(city, 'id')));
   }),
-  industries: computed.filter('model.industries', (industry, index, array) => {
+  industries: computed.filter('model.industries', (industry) => {
     let id = [461, 488];
     return _.contains(id, parseInt(get(industry, 'id')));
   }),
