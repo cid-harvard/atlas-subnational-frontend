@@ -3,7 +3,7 @@ const {computed, set, get:get, on} = Ember;
 
 export default Ember.Component.extend({
   isTextLarge: computed('text', function() {
-    return get(this, 'text.string').length > 300;
+    return get(this, 'text.string.length')> 300;
   }),
   buttonText: computed('showAll', function() {
     if(get(this, 'showAll')) { return 'graph_builder.explanation.hide'; }
