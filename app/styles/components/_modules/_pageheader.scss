@@ -138,18 +138,19 @@
 }
 
 .toggle__label__text {
+  @include offset-text;
   color: $colorWhite;
   font-size: $fontSmall;
   display: inline;
   font-weight: 600;
   vertical-align: 6px;
   font-family: $sans;
-  @include offset-text;
 }
 
 // Menu
 
 .pageheader__menu {
+  @include offset-text;
   position: absolute;
   top: 0;
   right: $baseSpace * 4;
@@ -157,11 +158,10 @@
   color: $colorWhite;
   font-size: $fontSmall;
   font-weight: 600;
-  @include offset-text;
-  a { 
-    color: $colorWhite; 
+  a {
+    color: $colorWhite;
     &:hover {
-      opacity: .8; 
+      opacity: .8;
     }
   }
 
@@ -197,7 +197,7 @@
     max-width: $baseSpace*20;
   }
 
-  h1.stream__head {
+  .stream__head {
     color: $colorRed;
     letter-spacing: 0;
     font-size: $fontXLarge;
@@ -205,7 +205,7 @@
     text-shadow: 0 0 10px rgba($colorBlack, .4);
   }
 
-  h2 {
+  .stream__subhead {
     color: $colorRed;
     font-family: $sans;
     font-weight: 700;
@@ -222,7 +222,10 @@
   &:after { background-color: $colorRed; }
 }
 
-.pageheader__bground { display: none; }
+.pageheader__bground {
+ background-image: url('/assets/img/hero_images/front-header-treemap.png');
+ display: none;
+}
 .header--pageheader--home .pageheader__bground {
   display: block;
   position: absolute;
@@ -234,8 +237,8 @@
   background-position: center center;
 }
 
-.pageheader__home__cap { 
-  display: none; 
+.pageheader__home__cap {
+  display: none;
   height: 5px;
   position: absolute;
   top: 0;
@@ -245,13 +248,14 @@
 }
 
 .header--pageheader--home .pageheader__home__cap { display: block; }
+
 .stream__section .pageheader__home__cap {
   display: block;
   max-width: $xlarge;
   margin-bottom: $baseSpace;
-}  
+}
 
-//special style for the home search box 
+//special style for the home search box
 .pageheader__homeintro .search__wrap {
   margin-bottom: $baseSpace;
   width: auto;
