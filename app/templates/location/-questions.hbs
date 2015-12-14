@@ -25,30 +25,30 @@
         </span>
       </div>
     </li>
-    {{#unless isMuncipality}}
-      {{#unless isCountry}}
-        <li class="builder__questions__item">
-        <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
-          <div class="builder__questions__item__textwrap">
-            <span>
-            {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca' (query-params endDate=lastYear startDate=lastYear)
-              class="builder__questions__question"}}
-              {{t 'graph_builder.page_title.location.industries.similarity' thisLevel=thisLevel}}
-              {{/link-to}}
-            </span>
-          </div>
-        </li>
-      <li class="builder__questions__item">
-      <i class="icon-cidcon_similarity builder__questions__item__icon"></i>
+    <li class="builder__questions__item">
+    <i class="icon-cidcon_scatter builder__questions__item__icon"></i>
       <div class="builder__questions__item__textwrap">
         <span>
-          {{#link-to 'location.visualization' model.id 'industries' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
-            class="builder__questions__question"}}
-            {{t 'graph_builder.page_title.location.industries.scatter' thisLevel=thisLevel}}
+        {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca' (query-params endDate=lastYear startDate=lastYear)
+          class="builder__questions__question"}}
+          {{t 'graph_builder.page_title.location.industries.similarity' thisLevel=thisLevel}}
           {{/link-to}}
         </span>
       </div>
-      </li>
+    </li>
+    {{#unless isMuncipality}}
+      {{#unless isCountry}}
+        <li class="builder__questions__item">
+        <i class="icon-cidcon_similarity builder__questions__item__icon"></i>
+        <div class="builder__questions__item__textwrap">
+          <span>
+            {{#link-to 'location.visualization' model.id 'industries' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
+              class="builder__questions__question"}}
+              {{t 'graph_builder.page_title.location.industries.scatter' thisLevel=thisLevel}}
+            {{/link-to}}
+          </span>
+        </div>
+        </li>
       {{/unless}}
     {{/unless}}
   </ul>
