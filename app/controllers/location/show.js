@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
   lastYear: computed.alias('i18n.lastYear'),
   validTimeseries: computed.alias('model.timeseries'),
   departmentsData: computed.oneWay('model.departments'),
+  occupationData: computed.oneWay('model.occupations'),
   productsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
 
