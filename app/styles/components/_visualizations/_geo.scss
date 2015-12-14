@@ -9,7 +9,7 @@
   height: $minBuildermodHeight;
   padding: 0;
   margin: $baseSpace*-5 $baseSpace*-1.5 $baseSpace*-1.5;
-  border: 1px solid $colorBrown500;
+  border: 1px solid $colorGrayLight;
 
   svg {
     position: relative;
@@ -29,7 +29,7 @@
 
   .geo__department {
     fill: #000;
-    stroke: $colorBrown500;
+    stroke: $colorGrayLight;
     stroke-width: 2px;
   }
 

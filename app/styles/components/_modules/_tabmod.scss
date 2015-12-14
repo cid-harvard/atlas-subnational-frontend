@@ -13,7 +13,7 @@
 
 .tabmod__card {
   padding: $baseSpace * 2;
-  border: 1px solid $colorBrown500;
+  border: 1px solid $colorGrayLight;
   display: none;
 }
 
@@ -23,8 +23,8 @@
 }
 
 .tabmod__tab--is--active {
-  border: 1px solid $colorBrown500;
-  background: $colorBrown200;
+  border: 1px solid $colorGrayLight;
+  background: $colorWhite;
   border-bottom-width: 0;
   margin-bottom: -0.2rem;
   padding-bottom: 1.4rem;

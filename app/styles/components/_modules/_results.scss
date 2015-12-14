@@ -32,7 +32,7 @@
 
 @media (min-width: 1200px) {
   .results__list {
-    max-width: 75%;
+    // max-width: 75%;
   }
 }
 
@@ -51,6 +51,7 @@
 .results__text {
   margin-right: auto;
   padding-right: $baseSpace;
+  max-width: 70rem;
 }
 
 .results__breadcrumb {
@@ -68,6 +69,7 @@
 .results__btn {
   margin: 0 $baseSpace 0 0;
   flex: 0 0 auto;
+  width: auto;
   &:last-of-type {
     margin-right: 0;
   }
