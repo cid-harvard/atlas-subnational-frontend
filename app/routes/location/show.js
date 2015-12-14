@@ -56,6 +56,9 @@ export default Ember.Route.extend({
       //get industry data for department
       let industries = _.map(industriesData, (d) => {
         let industry = industriesMetadata[d.industry_id];
+        if(model.id === '0') {
+          d.rca = 1;
+        }
         let industryData = industriesDataIndex[d.industry_id];
         return _.merge(d, industry, industryData);
       });
