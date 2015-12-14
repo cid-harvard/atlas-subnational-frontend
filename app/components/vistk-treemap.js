@@ -34,7 +34,7 @@ export default Ember.Component.extend({
     }
     return `name_short_${this.get('i18n').display}`;
   }),
-  treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'i18n.locale', 'varText', function() {
+  treemap: computed('data.[]', 'width', 'height', 'varDependent', 'dataType', 'i18n.display', 'varText', function() {
     let varDependent = this.get('varDependent');
     let varTextItem = `name_short_${this.get('i18n').display}`;
     let varText = this.get('varText');
@@ -179,7 +179,8 @@ export default Ember.Component.extend({
     this.removeObserver('data.[]', this, this.update);
     this.removeObserver('parent.isVisible', this, this.profileTabUpdate);
   },
-  update: observer('data.[]', 'varDependent', 'i18n.locale', function() {
+  update: observer('data.[]', 'varDependent', 'i18n.display', function() {
+    console.log('aaaa' + this.get('varDependent'))
     if(!this.element){ return false; } //do not redraw if not there
     this.set('width', this.$().parent().width());
     this.set('height', this.$().parent().height() || 500 );
