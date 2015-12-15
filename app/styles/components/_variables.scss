@@ -29,16 +29,16 @@ $colorGreen: rgb( 238, 252, 206 );
 $colorRedDark: #B31B12;
 
 // Scales
-$colorBrown: rgb( 153, 131, 115 );
-$colorBrown900: rgb( 163, 143, 129 );
-$colorBrown800: rgb( 173, 156, 143 );
-$colorBrown700: rgb( 184, 168, 157 );
-$colorBrown600: rgb( 194, 181, 171 );
-$colorBrown500: rgb( 204, 193, 185 );
-$colorBrown400: rgb( 214, 205, 199 );
-$colorBrown300: rgb( 224, 218, 213 );
-$colorBrown200: rgb( 235, 230, 227 );
-$colorBrown100: rgb( 245, 243, 241 );
+$colorBrown: 	rgb(54, 54, 54);		//replacing rgb( 153, 131, 115 );
+$colorBrown900: $colorGrayDark; 		//replacing rgb( 163, 143, 129 );
+$colorBrown800: $colorGray; 			//replacing rgb( 173, 156, 143 );
+$colorBrown700: rgb( 169, 169, 169); 	//replacing rgb( 184, 168, 157 );
+$colorBrown600: $colorGrayLight; 		//replacing rgb( 194, 181, 171 );
+$colorBrown500: rgb( 210, 210, 210 ); 	//replacing rgb( 204, 193, 185 );
+$colorBrown400: $colorGrayLighter; 		//replacing rgb( 214, 205, 199 );
+$colorBrown300: rgb( 229, 229, 229 ); 	//replacing rgb( 224, 218, 213 );
+$colorBrown200: $colorGrayLightest; 	//replacing rgb( 235, 230, 227 );
+$colorBrown100: rgb( 245, 245, 245 ); 	//replacing rgb( 245, 243, 241 );
 
 // UI Red
 $colorRed900: #ef534a;

@@ -5,7 +5,7 @@
 **/
 
 .buildermod__header {
-  background: $colorBrown500;
+  background: $colorGrayLight;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -19,7 +19,7 @@
   font-size: $fontSmall;
   align-self: center;
   &~.buildermod__tools .buildermod__tool:first-child {
-    border-left: 1px solid $colorBrown400;
+    border-left: 1px solid $colorGrayLighter;
   }
 }
 
@@ -29,7 +29,7 @@
 }
 
 .buildermod__tool {
-  border-left: 1px solid $colorBrown400;
+  border-left: 1px solid $colorGrayLighter;
   display: inline-block;
   padding: $baseSpace/2 $baseSpace;
   @include offset-text;
@@ -54,7 +54,7 @@
   min-height: $minBuildermodHeight;
   height: $buildermodHeight;
   overflow-y: scroll;
-  background: $colorBrown300;
+  background: $colorGrayLightest;
   position: relative;
   padding: $baseSpace*5 $baseSpace*1.5 $baseSpace*1.5;
 }
@@ -75,4 +75,8 @@
   position: absolute;
   width: calc(100% - 7.8rem); // TODO Switch from calc
   z-index: $zIndex-1;
+}
+
+.buildermod__highlight__wrap .search {
+  background: white;
 }

@@ -42,10 +42,10 @@ button::-moz-focus-inner {
 }
 
 .btn--buildermod {
-  background: $colorBrown500;
+  background: $colorGrayLight;
   color: $colorGray;
   &:hover, &:active, &:focus {
-    background: $colorBrown400;
+    background: $colorGrayLighter;
   }
 }
 
