@@ -17,10 +17,12 @@
             {{fa-icon icon= "plus" classNames="tool__btn__icon"}}
             {{t 'graph_builder.settings.label'}}
           </button>
-          <button class="btn btn--standalone btn--buildermod buildermod__tool" data-change-question='' {{action 'toggleDrawerChangeGraph'}}>
-            {{fa-icon icon= "plus" classNames="tool__btn__icon"}}
-            {{t 'graph_builder.change_graph.label'}}
-          </button>
+          <div class="btn btn--standalone btn--buildermod buildermod__tool--change_graph">
+            <div class="buildermod__tool--change-graph--label">
+              {{t 'graph_builder.change_graph.label'}}
+            </div>
+            {{partial "partials/buildermod-drawer-change-graph"}}
+          </div>
       </div>
     </header>
     <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--fixedheight"}}>
@@ -38,7 +40,6 @@
         rcaFilter=rcaFilter
         years=years
       }}
-      {{partial "partials/buildermod-drawer-change-graph"}}
       {{component visualizationComponent
         classNames='buildermod__viz'
         immutableData=immutableData
