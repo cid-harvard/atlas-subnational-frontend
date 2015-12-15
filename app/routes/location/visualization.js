@@ -94,6 +94,9 @@ export default Ember.Route.extend({
     let data = _.map(industries.data, (d) => {
       let industry = industriesMetadata[d.industry_id];
       let complexity = complexityMap[ `${d.year}_${d.industry_id}`];
+      if(model.id === '0') {
+        d.rca = 1;
+      }
       d.complexity = complexity.complexity;
       return _.merge(copy(d), industry, { avg_wage: d.wages/d.employment});
     });

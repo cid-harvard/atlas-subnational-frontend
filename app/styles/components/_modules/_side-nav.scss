@@ -11,12 +11,6 @@
   left: 0;
 }
 
-.side-nav__list {
-  &:last-of-type {
-    display: none;
-  }
-}
-
 .side-nav__item {
   padding: $fontSmall 0 $fontSmall $baseSpace*1.5;
   &:last-of-type {

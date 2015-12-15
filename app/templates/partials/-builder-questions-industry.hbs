@@ -21,15 +21,13 @@
         class="menu-section__link"}}
         {{ t 'header.region' }}
       {{/link-to}}
-      {{#unless isIndustryClass}}
-        {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'employment'
-          (query-params startDate=firstYear endDate=lastYear)
-          tagName='li'
-          classNameBindings="industryCitiesEmployment:menu-section__link--active"
-          class="menu-section__link"}}
-          {{ t 'header.subregion' }}
-        {{/link-to}}
-      {{/unless}}
+      {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'employment'
+        (query-params startDate=firstYear endDate=lastYear)
+        tagName='li'
+        classNameBindings="industryCitiesEmployment:menu-section__link--active"
+        class="menu-section__link"}}
+        {{ t 'header.subregion' }}
+      {{/link-to}}
     </ul>
   </div>
   <div class="menu-section">
@@ -42,15 +40,13 @@
         class="menu-section__link"}}
         {{t 'header.region' }}
       {{/link-to}}
-      {{#unless isIndustryClass}}
-        {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'wages'
-          (query-params startDate=firstYear endDate=lastYear)
-          tagName='li'
-          classNameBindings="industryCitiesWage:menu-section__link--active"
-          class="menu-section__link"}}
-          {{t 'header.subregion' }}
-        {{/link-to}}
-      {{/unless}}
+      {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'wages'
+        (query-params startDate=firstYear endDate=lastYear)
+        tagName='li'
+        classNameBindings="industryCitiesWage:menu-section__link--active"
+        class="menu-section__link"}}
+        {{t 'header.subregion' }}
+      {{/link-to}}
     </ul>
   </div>
   {{#unless isIndustryClass}}

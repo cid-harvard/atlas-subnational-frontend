@@ -72,6 +72,36 @@
   </div>
 </section>
 <section class="stream__section">
+  <div class="tabmod">
+    {{#ivy-tabs}}
+      {{#ivy-tab-list classNames='tabmod__tabs'}}
+        {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+          <a class="tab__link">
+            {{t 'country.show.occupation.num_vac' }}
+          </a>
+        {{/ivy-tab}}
+      {{/ivy-tab-list}}
+
+      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+        <div class="vizmod">
+          <div class="vizmod--treemod">
+            {{vistk-treemap
+              isInTab='true'
+              data=occupationData
+              immutableData=occupationData
+              elementId='occupation-num_vacancies-map'
+              varDependent='num_vacancies'
+              metadata=model.metaData
+              delay=3000
+            }}
+          </div>
+        </div>
+      {{/ivy-tab-panel}}
+    {{/ivy-tabs}}
+  </div>
+</section>
+
+<section class="stream__section">
   <header class="section__header">
     <h3 class="section__head">
         {{t 'country.show.industry_complex'}}

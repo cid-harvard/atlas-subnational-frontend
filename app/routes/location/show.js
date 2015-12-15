@@ -26,11 +26,14 @@ export default Ember.Route.extend({
     var departments = Ember.$.getJSON(`${apiURL}/data/location?level=${level}`);
     var departments_trade = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/subregions_trade/?level=${level}`);
 
-    return RSVP.allSettled([products, departments, industries, departments_trade]).then((array) => {
+    var occupations = Ember.$.getJSON(`${apiURL}/data/occupation/?level=minor_group`);
+
+    return RSVP.allSettled([products, departments, industries, departments_trade, occupations]).then((array) => {
       var productsData = getWithDefault(array[0], 'value.data', []);
       var departmentsData = getWithDefault(array[1], 'value.data', []);
       var industriesData = getWithDefault(array[2], 'value.data', []);
       var departmentsTradeData = _.filter(getWithDefault(array[3], 'value.data', []), { 'year': this.get('lastYear')});
+      var occupationsData = getWithDefault(array[4], 'value.data', []);
 
       var productsDataIndex = _.indexBy(productsData, 'product_id');
       var industriesDataIndex = _.indexBy(industriesData, 'industry_data');
@@ -39,6 +42,7 @@ export default Ember.Route.extend({
       let productsMetadata = this.modelFor('application').products;
       let locationsMetadata = this.modelFor('application').locations;
       let industriesMetadata = this.modelFor('application').industries;
+      let occupationsMetadata = this.modelFor('application').occupations;
 
       //get products data for the department
       let products = _.reduce(productsData, (memo, d) => {
@@ -52,8 +56,16 @@ export default Ember.Route.extend({
       //get industry data for department
       let industries = _.map(industriesData, (d) => {
         let industry = industriesMetadata[d.industry_id];
+        if(model.id === '0') {
+          d.rca = 1;
+        }
         let industryData = industriesDataIndex[d.industry_id];
         return _.merge(d, industry, industryData);
+      });
+
+      let occupations = _.map(occupationsData, (d) => {
+        let occupation = occupationsMetadata[d.occupation_id]
+        return _.merge(d, occupation);
       });
 
       var departments = [];
@@ -86,6 +98,7 @@ export default Ember.Route.extend({
       model.set('productsData', products);
       model.set('industriesData', industries);
       model.set('departments', departments);
+      model.set('occupations', occupations);
       model.set('timeseries', departmentTimeseries);
       model.set('metaData', this.modelFor('application'));
       if(model.id == '0') { model.set('metaData', this.modelFor('application')); }
