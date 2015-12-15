@@ -1,6 +1,6 @@
-<form class="buildermod__drawer buildermod__drawer--changegraph">
-  <div class="changegraph__radioswrap">
-    {{#each graph in otherPossibleGraphs}}
+<div class="change-visualization__container">
+  {{#each graph in otherPossibleGraphs}}
+    {{#if graph.available}}
       {{component 'graphbuilder-change-graph'
         toggleVisualization='toggleVisualization'
         type=graph.type
@@ -8,7 +8,7 @@
         visualization=visualization
         description=graph.description
       }}
-    {{/each}}
-  </div>
-</form>
+    {{/if}}
+  {{/each}}
+</div>
 
