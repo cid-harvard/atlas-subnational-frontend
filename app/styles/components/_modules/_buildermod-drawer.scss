@@ -93,20 +93,18 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-  background: $colorBrown500;
   color: $colorGray;
   pointer-events: all;
   cursor: pointer;
   &:hover {
-    background: $colorBrown500;
     color: $colorBlack;
   }
 }
 
 .changegraph__icon--checked {
-  color: $colorBlack;
+  color: $colorGrayDark;
+  -webkit-text-stroke: 1px $colorGrayDark;
   &:hover {
-    background: $colorBrown500;
   }
 }
 
