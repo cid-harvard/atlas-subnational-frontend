@@ -269,6 +269,11 @@
 .header--pageheader--home .search__field__wrap {
   width: 40rem;
   margin-right:-4px;
+
+  @media screen and (max-width: 650px) {
+    width: auto;
+
+  }
 }
 
 .header--pageheader--home .search {
