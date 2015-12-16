@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import numeral from 'numeral';
 import ENV from '../config/environment';
-const {computed, observer, $, get:get} = Ember;
+const {computed, observer, $, get} = Ember;
 const {apiURL} = ENV;
 
 export default Ember.Component.extend({
@@ -63,17 +63,17 @@ export default Ember.Component.extend({
           text: (d)  => {
             var data = [{
               'key': 'rca',
-              'value': this.get('rca')
+              'value': get(d,this.get('rca'))
             },{
               'key': 'cog',
-              'value': d['cog']
+              'value':get(d,'cog')
             }];
             var textItem = get(d, `name_short_${this.get('i18n').display}`) || d.code;
             var tooltip_text = `<span style="color:${get(d, 'color')}">${textItem} - ${get(d, 'code')}</span>`;
 
-            data.forEach((d) => {
-              if(d.key) {
-                tooltip_text += '<br>' + this.get('i18n').t(`graph_builder.table.${get(d,'key')}`) + ': ' + format(get(d,'value'));
+            data.forEach((datum) => {
+              if(datum.key) {
+                tooltip_text += '<br>' + this.get('i18n').t(`graph_builder.table.${get(datum,'key')}`) + ': ' + format(get(datum,'value'));
               }
             });
 
