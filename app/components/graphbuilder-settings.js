@@ -2,21 +2,39 @@ import Ember from 'ember';
 const {computed} = Ember;
 
 export default Ember.Component.extend({
+  i18n: Ember.inject.service(),
   attributeBindings: ['data-dateIndex'],
-  didInsertElement() {
-    this.set('newStartDate', this.get('startDate'));
-    this.set('newEndDate', this.get('endDate'));
-  },
-  updateDates: Ember.observer('isOpen', function(){
-    if(this.get('isOpen') === false) {
-      this.set('newStartDate', this.get('startDate'));
-      this.set('newEndDate', this.get('endDate'));
-    }
-  }),
   isGreater: computed.equal('rcaFilter', 'greater'),
   isLess: computed.equal('rcaFilter', 'less'),
   isAll: computed.equal('rcaFilter', 'all'),
+  year: computed('startDate', function() {
+    return parseInt(this.get('startDate'));
+  }),
+  lastYear: computed('i18n.lastYear', function() {
+    return parseInt(this.get('i18n.lastYear'));
+  }),
+  firstYear: computed('i18n.firstYear', function() {
+    return parseInt(this.get('i18n.firstYear'));
+  }),
+  disableIncreaseYear: computed('year', 'lastYear', function() {
+    return this.get('year') >= parseInt(this.get('lastYear'));
+  }),
+  disableDecreaseYear: computed('year', function() {
+    return this.get('year') <= parseInt(this.get('firstYear'));
+  }),
   actions: {
+    increaseYear() {
+      if(this.get('disableIncreaseYear')) { return false; }
+      console.log(this.get('lastYear'));
+      this.incrementProperty('startDate');
+      this.incrementProperty('endDate');
+    },
+    decreaseYear() {
+      if(this.get('disableDecreaseYear')) { return false; }
+      console.log(this.get('lastYear'));
+      this.decrementProperty('startDate');
+      this.decrementProperty('endDate');
+    },
     rcaGreater() {
       this.set('rcaFilter', 'greater');
       this.set('isOpen', false);
@@ -29,26 +47,6 @@ export default Ember.Component.extend({
       this.set('rcaFilter', 'all');
       this.set('isOpen', false);
     },
-    closeSettingsDrawer() {
-      if(this.get('isSingleYear')) { this.set('isOpen', false); return; }
-      let content = this.get('dateRange');
-      let startDate = this.$('select[data-date-index="start"]')[0];
-      let endDate = this.$('select[data-date-index="end"]')[0];
-      let selectedEndDateIndex = endDate.selectedIndex;
-      let selectedStartDateIndex = startDate.selectedIndex;
-
-      var newEndDate = parseInt(content[selectedEndDateIndex]);
-      var newStartDate = parseInt(content[selectedStartDateIndex]);
-
-      if(newStartDate > newEndDate){
-        this.set('endDate', newStartDate);
-        this.set('startDate', newEndDate);
-      } else {
-        this.set('startDate', newStartDate);
-        this.set('endDate', newEndDate);
-      }
-      this.set('isOpen', false);
-    }
   }
 });
 

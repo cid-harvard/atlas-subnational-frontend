@@ -13,33 +13,22 @@
     <header class="buildermod__header">
       <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
       <div class="buildermod__tools">
-        <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--settings" {{action 'toggleDrawerSettings'}} data-settings-open=''>
-          {{fa-icon icon= "plus" classNames="tool__btn__icon"}}
-          {{t 'graph_builder.settings.label'}}
-        </button>
-        <div class="btn btn--standalone btn--buildermod buildermod__tool--change_graph">
-          <div class="buildermod__tool--change-graph--label">
-            {{t 'graph_builder.change_graph.label'}}
+          <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--settings" {{action 'toggleDrawerSettings'}} data-settings-open=''>
+            {{fa-icon icon= "plus" classNames="tool__btn__icon"}}
+            {{t 'graph_builder.settings.label'}}
+          </button>
+          <div class="btn btn--standalone btn--buildermod buildermod__tool--change_graph">
+            <div class="buildermod__tool--change-graph--label">
+              {{t 'graph_builder.change_graph.label'}}
+            </div>
+            {{partial "partials/buildermod-drawer-change-graph"}}
           </div>
-          {{partial "partials/buildermod-drawer-change-graph"}}
-        </div>
       </div>
     </header>
     <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--fixedheight isGeo:buildermod__vizwrap--geo"}}>
       {{#unless isGeo }}
         {{partial "partials/buildermod-search"}}
       {{/unless}}
-      {{component 'graphbuilder-settings'
-        startDate=startDate
-        endDate=endDate
-        dateExtent=dateExtent
-        dateRange=dateRange
-        isOpen=drawerSettingsIsOpen
-        isSingleYear=isSingleYear
-        isScatter=isScatter
-        rcaFilter=rcaFilter
-        years=years
-      }}
       {{component visualizationComponent
         classNames='buildermod__viz'
         immutableData=immutableData
@@ -65,6 +54,13 @@
     {{component 'visualization-explanation'
       text=visualizationExplanation
     }}
+    {{component 'graphbuilder-settings'
+      startDate=startDate
+      endDate=endDate
+      canYearToggle=canYearToggle
+      isScatter=isScatter
+      rcaFilter=rcaFilter
+    }}
     <div class="ember__table__wrap">
       {{component 'table-download'
         name=builderModHeader
@@ -75,7 +71,6 @@
       {{component 'graphbuilder-table'
         data=filteredData
         source=source
-        isSingleYear=isSingleYear
         search=search
       }}
     </div>
