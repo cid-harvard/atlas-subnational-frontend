@@ -47,12 +47,12 @@ export default Ember.Controller.extend({
       return this.get('model.metaData.productSpace');
     }
   }),
-  isSingleYear: computed('visualization', function() {
+  canYearToggle: computed('visualization', function() {
     let visualization = this.get('visualization');
-    if(visualization === 'similarity' || visualization === 'scatter'){
-      return true;
+    if(visualization === 'multiples' || visualization === 'scatter'){
+      return false;
     }
-    return false;
+    return true;
   }),
   years: computed('startDate', 'endDate', function() {
     let start = parseInt(this.get('startDate'), 10);

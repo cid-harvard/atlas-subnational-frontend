@@ -1,44 +1,40 @@
-<form class="buildermod__drawer buildermod__drawer--settings">
-  {{#unless isSingleYear }}
+<form class="">
+  {{#if canYearToggle}}
     <fieldset class="settings__input__wrap">
-      <label for="settings__input--time" class="settings__input">{{t 'graph_builder.settings.change_time'}}</label>
-      <select class="settings__input--select" data-date-index="start">
-        {{#each dateRange key="@index" as |item|}}
-          <option value="{{item}}" selected={{is-equal item newStartDate}}>
-            {{item}}
-          </option>
-        {{/each}}
-      </select>
-      <span class="settings__input__text">{{t 'graph_builder.settings.to'}}</span>
-      <select class="settings__input--select" data-date-index="end">
-        {{#each dateRange key="@index" as |item|}}
-          <option value="{{item}}" selected={{is-equal item newEndDate}}>
-            {{item}}
-          </option>
-        {{/each}}
-      </select>
+      <label class="settings__input">
+        {{t 'graph_builder.settings.year'}}
+      </label>
+      <button
+        {{bindAttr class=":btn :btn--standalone :btn--stream" disabled="disableDecreaseYear"}}
+        {{action "decreaseYear"}}>
+        {{t 'graph_builder.settings.year.previous'}}
+      </button>
+      <span>
+        {{year}}
+      </span>
+      <button
+        {{bindAttr class=":btn :btn--standalone :btn--stream" disabled="disableIncreaseYear"}}
+        {{action "increaseYear"}}>
+        {{t 'graph_builder.settings.year.next'}}
+      </button>
     </fieldset>
-  {{/unless}}
+  {{/if}}
 
   {{#if isScatter }}
     <fieldset class="settings__input__wrap">
       <label class="settings__input">
         {{t 'graph_builder.settings.rca'}}
       </label>
-      <button {{bind-attr class=":btn :btn--standalone :btn--stream isGreater:btn--stream--active"}}{{action 'rcaGreater'}}>
+      <button {{bindAttr class=":btn :btn--standalone :btn--stream isGreater:btn--stream--active"}}{{action 'rcaGreater'}}>
         {{t 'graph_builder.settings.rca.greater'}}
       </button>
-      <button {{bind-attr class=":btn :btn--standalone :btn--stream isLess:btn--stream--active"}}{{action 'rcaLess'}}>
+      <button {{bindAttr class=":btn :btn--standalone :btn--stream isLess:btn--stream--active"}}{{action 'rcaLess'}}>
         {{t 'graph_builder.settings.rca.less'}}
       </button>
-      <button {{bind-attr class=":btn :btn--standalone :btn--stream isAll:btn--stream--active"}}{{action 'rcaAll'}}>
+      <button {{bindAttr class=":btn :btn--standalone :btn--stream isAll:btn--stream--active"}}{{action 'rcaAll'}}>
         {{t 'graph_builder.settings.rca.all'}}
       </button>
     </fieldset>
   {{/if}}
-
-  <button class="settings__btn--close btn btn--standalone btn--stream" {{action 'closeSettingsDrawer'}} data-settings-close>
-    {{t 'graph_builder.settings.close_settings'}}
-  </button>
 </form>
 
