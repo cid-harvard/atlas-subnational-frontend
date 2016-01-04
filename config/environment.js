@@ -36,12 +36,12 @@ module.exports = function(environment) {
     }
   }
   if (environment === 'test') {
-    ENV.apiURL = "http://atlas-colombia-beta.cid-labs.com/api";
-    ENV.defaultLocale = 'en-col';
-    ENV.otherLocale = 'es-col';
+    ENV.apiURL = process.env.API_URL,
+    ENV.defaultLocale = process.env.OTHER_LOCALE;
+    ENV.otherLocale = process.env.DEFAULT_LOCALE;
     ENV.i18n = {
-      defaultLocale: 'en-col',
-      otherLocale: 'es-col'
+      defaultLocale: process.env.OTHER_LOCALE,
+      otherLocale: process.env.DEFAULT_LOCALE
     }
     // Testem prefers this...
     ENV.baseURL = '/';
