@@ -20,11 +20,12 @@
 }
 
 .explanation__btn {
-  font-size: $fontTiny;
+  font-size: $fontSmall;
   background: $colorBrown500;
   display:block;
-  width:15%;
+  width: auto;
   margin:0 auto;
+  box-shadow: inset 0 -5px $colorGray;
 }
 
 .explanation__copy--hide {

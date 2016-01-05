@@ -14,7 +14,7 @@
   font-style: normal;
 }
 
-[class^="icon-cidcon_"]:before, [class*=" icon-cidcon_-"]:before {
+[class^="icon-cidcon_"]::before, [class*=" icon-cidcon_"]::before {
   font-family: 'cidcons';
   font-style: normal;
   font-weight: normal;

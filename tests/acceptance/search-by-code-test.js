@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { module, test } from 'qunit';
 import startApp from 'atlas-colombia/tests/helpers/start-app';
+import tHelper from "ember-i18n/legacy-helper";
 
 var application;
 

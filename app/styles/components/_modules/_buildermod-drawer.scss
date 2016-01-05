@@ -15,29 +15,6 @@
       content: $fa-var-remove;
     }
   }
-  .buildermod__tool--changegraph {
-    border-left-color: $colorBrown300;
-  }
-  .buildermod__vizwrap {
-    border-width: 0;
-    overflow-y: auto;
-  }
-  .buildermod__viz {
-    display: none;
-  }
-}
-
-.buildermod__changegraph--open {
-  .buildermod__drawer--changegraph {
-    display: block;
-  }
-  .buildermod__tool--changegraph {
-    background: $colorBrown300;
-    border-left-color: $colorBrown300;
-    .tool__btn__icon:before {
-      content: $fa-var-remove;
-    }
-  }
   .buildermod__vizwrap {
     border-width: 0;
     overflow-y: auto;
@@ -59,7 +36,6 @@
   display: none;
 }
 
-
 // Settings drawer
 
 .settings__input__wrap {
@@ -79,104 +55,57 @@
   float: right;
 }
 
-
-
 // Change Graph drawer
-
-.changegraph__radioswrap {
+.buildermod__tool--change_graph {
+  width: auto;
   display: flex;
   flex-wrap: wrap;
-  align-items: stretch;
+  align-items: center;
   align-content: stretch;
   justify-content: center;
+  border-left: 1px solid #dddddd;
 }
 
-.changegraph__radiowrap {
-  width: 33.3333%;
-  width: calc(100% / 3);
-  &:nth-of-type(3n+1) {
-    padding: 0 $baseSpace*0.75 $baseSpace 0;
-  }
-  &:nth-of-type(3n+2) {
-    padding: 0 $baseSpace*0.5 $baseSpace $baseSpace*0.25;
-  }
-  &:nth-of-type(3n) {
-    padding: 0 0 $baseSpace $baseSpace*0.75;
-  }
-  &:nth-child(n+3) {
-    padding-bottom: 0;
-  }
+.buildermod__tool--change-graph--label {
+  flex: 1 1 auto;
+  vertical-align: middle;
+  line-height: 1em;
+  margin-right: 1rem;
 }
 
-.changegraph__radio {
-  position: absolute;
-  top: -9999px;
-  left: -9999px;
-}
-
-.changegraph__radio__target {
-  min-height: $baseSpace*9;
-  width: 100%;
-  pointer-events: none;
-  text-align: center;
-  line-height: 120%;
-  background: $colorBrown200;
-  color: $colorGrayLight;
-  display: flex;
-  align-items: center;
-}
-
-.changegraph__radio--is--possible {
-  background: $colorBrown500;
-  color: $colorGray;
-  pointer-events: all;
-  cursor: pointer;
-  &:hover {
-    background: $colorBrown500;
-    color: $colorBlack;
-  }
-}
-
-.changegraph__radio__target--checked {
-  color: $colorBlack;
-  &:hover {
-    background: $colorBrown500;
-  }
-}
-
-.changegraph__copy__wrap {
-  display: block;
-  margin: 0 auto;
-}
-
-.changegraph__subhead--is--available .changegraph__graph__description{
-  &:nth-of-type(1) {
-    display: block;
-  }
-  &:nth-of-type(2) {
-    display: none;
+.change-visualization__container {
+  flex: 1 1 auto;
+  width: auto;
+  i {
+    display: inline-block;
+    width: auto;
+    font-size: 35px;
+    line-height: 30px;
+    &:before { margin: 0; padding: 0; }
   }
 }
 
 .changegraph__icon {
-  display: block;
-  font-size: $fontXLarge;
-  margin: 0 auto $baseSpace/2;
-}
-
-.changegraph__graph__head {
-  margin-bottom: $baseSpace/4;
-  display: block;
-}
-
-.changegraph__graph__description {
-  font-family: $serif;
-  font-size: $fontSmall;
-  &:nth-of-type(1) {
-    display: none;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: $colorGray;
+  pointer-events: all;
+  cursor: pointer;
+  &:hover {
+    color: $colorBlack;
   }
-  &:nth-of-type(2) {
-    display: block;
+}
+
+.changegraph__icon--checked {
+  color: $colorGrayDark;
+  -webkit-text-stroke: 1px $colorGrayDark;
+  &:hover {
   }
 }
 

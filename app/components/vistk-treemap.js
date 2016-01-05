@@ -180,7 +180,6 @@ export default Ember.Component.extend({
     this.removeObserver('parent.isVisible', this, this.profileTabUpdate);
   },
   update: observer('data.[]', 'varDependent', 'i18n.display', function() {
-    console.log('aaaa' + this.get('varDependent'))
     if(!this.element){ return false; } //do not redraw if not there
     this.set('width', this.$().parent().width());
     this.set('height', this.$().parent().height() || 500 );

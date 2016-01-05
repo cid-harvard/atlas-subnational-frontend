@@ -8,6 +8,7 @@ var application;
 module('Acceptance | language toggle', {
   beforeEach: function() {
     application = startApp();
+    visit('/');
   },
 
   afterEach: function() {
@@ -16,7 +17,6 @@ module('Acceptance | language toggle', {
 });
 
 test('language-toggle', function(assert) {
-  visit('/');
   andThen(function() {
     assert.equal(_.trim(find('p.toggle__label--is--active').text()), 'en');
   });
