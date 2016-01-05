@@ -64,7 +64,7 @@ export default Ember.Route.extend({
       });
 
       let occupations = _.map(occupationsData, (d) => {
-        let occupation = occupationsMetadata[d.occupation_id]
+        let occupation = occupationsMetadata[d.occupation_id];
         return _.merge(d, occupation);
       });
 
