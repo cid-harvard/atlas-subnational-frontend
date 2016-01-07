@@ -104,31 +104,33 @@
     {{/ivy-tabs}}
   </div>
 </section>
-<section class="stream__section">
-  <header class="section__header">
-    <h3 class="section__head">{{t 'industry.show.occupation'}}</h3>
-  </header>
-    {{#ivy-tabs}}
-      {{#ivy-tab-list classNames='tabmod__tabs'}}
-        {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-          <a class="tab__link"> {{t 'industry.show.occupation_demand' year=2014}} </a>
-        {{/ivy-tab}}
-      {{/ivy-tab-list}}
-      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod">
-          <div class="vizmod--treemod">
-            {{vistk-treemap
-              isInTab='true'
-              data=occupationsData
-              immutableData=occupationsData
-              elementId='occupation-vistk-treemap'
-              varDependent='num_vacancies'
-            }}
+{{#unless isIndustryClass}}
+  <section class="stream__section">
+    <header class="section__header">
+      <h3 class="section__head">{{t 'industry.show.occupation'}}</h3>
+    </header>
+      {{#ivy-tabs}}
+        {{#ivy-tab-list classNames='tabmod__tabs'}}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+            <a class="tab__link"> {{t 'industry.show.occupation_demand' year=2014}} </a>
+          {{/ivy-tab}}
+        {{/ivy-tab-list}}
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod">
+            <div class="vizmod--treemod">
+              {{vistk-treemap
+                isInTab='true'
+                data=occupationsData
+                immutableData=occupationsData
+                elementId='occupation-vistk-treemap'
+                varDependent='num_vacancies'
+              }}
+            </div>
           </div>
-        </div>
-      {{/ivy-tab-panel}}
-    {{/ivy-tabs}}
-</section>
+        {{/ivy-tab-panel}}
+      {{/ivy-tabs}}
+  </section>
+{{/unless}}
 {{#if hasChildrenIndustries}}
   <section class="stream__section">
     <header class="section__header">
