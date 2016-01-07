@@ -28,15 +28,15 @@
         class="menu-section__link"}}
         {{t 'header.wage' }}
       {{/link-to}}
-      {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca'
-        (query-params endDate=lastYear startDate=lastYear)
-        data-location-industry="similarity"
-        tagName='li'
-        classNameBindings="locationIndustryRCA:menu-section__link--active"
-        class="menu-section__link"}}
-        {{ t 'header.industry_space' }}
-      {{/link-to}}
       {{#unless isMunicipality}}
+        {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca'
+          (query-params endDate=lastYear startDate=lastYear)
+          data-location-industry="similarity"
+          tagName='li'
+          classNameBindings="locationIndustryRCA:menu-section__link--active"
+          class="menu-section__link"}}
+          {{ t 'header.industry_space' }}
+        {{/link-to}}
         {{#unless isCountry }}
           {{#link-to 'location.visualization' model.id 'industries' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
             data-location-industry="scatter"
