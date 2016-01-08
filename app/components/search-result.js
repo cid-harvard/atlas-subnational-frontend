@@ -1,36 +1,39 @@
 import Ember from 'ember';
-const {computed} = Ember;
+const {computed, get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   breadcrumb: computed('result.level', 'entity', 'i18n.locale', function() {
-    if(this.get('result.level')) {
-      let level = this.get('i18n').t(`search.level.${this.get('result.level')}`);
+    if(get(this, 'result.level')) {
+      let level = get(this, 'i18n').t(`search.level.${get(this, 'result.level')}`);
 
-      if(this.get('entity') === 'location') {
+      if(get(this, 'entity') === 'location') {
         return `${level}`;
       } else {
         return `${level}: ${this.get('result.code')}`;
       }
     }
   }),
-  name: computed('result.name', 'result.short_name', function() {
-    return this.get('result.short_name') || this.get('result.name');
+  name: computed('result.name', 'result.short_name', 'result.level', function() {
+    let name = get(this, 'result.short_name') || get(this, 'result.name');
+    return name;
+  }),
+  locationBreadcrumbs: computed('result.parent', function() {
+    let metaData = get(this, 'metaData.locations');
+    let parentId = get(this, 'result.parent_id');
+    let crumbs = [];
+    while(!_.isNull(parentId)){
+      let parent = metaData[parentId];
+      crumbs.unshift(parent);
+      parentId = get(parent, 'parent_id');
+    }
+    return crumbs;
   }),
   entity: computed('result', function() {
-    return this.get('result.constructor.modelName');
+    return get(this, 'result.constructor.modelName');
   }),
   profileLink: computed('entity', function() {
     return `${this.get('entity')}.show`;
-  }),
-  source: computed('entity', function() { //FIXME: yeah fix this later
-    if(this.get('entity') === 'location') {
-      return 'products';
-    } else if(this.get('entity') === 'product') {
-      return 'locations';
-    } else if(this.get('entity') === 'industry') {
-      return 'departments';
-    }
   })
 });
 
