@@ -66,6 +66,10 @@ export default Ember.Controller.extend({
   profileLink: computed('entityType', function() {
     return `${this.get('model.entity_type')}.show`;
   }),
+  legend: computed('source', function() {
+    let legend = this.get(`metadata.legend.${this.get('source')}`);
+    return _.values(legend);
+  }),
   rca: computed('source', function() {
     let source = this.get('source');
     if(source === 'products') {
