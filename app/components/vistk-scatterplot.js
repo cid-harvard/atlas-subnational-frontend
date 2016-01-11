@@ -15,7 +15,6 @@ export default Ember.Component.extend({
   }),
   rcaData: computed('data.[]', 'rca', function() {
     let rca = this.get('rca');
-    console.log(rca);
     return _.filter(this.get('data'), function(d) { return d[rca] < 1;});
   }),
   scatter: computed('rcaData', 'dataType','eciValue','i18n.locale', function() {
@@ -67,13 +66,13 @@ export default Ember.Component.extend({
           text: (d)  => {
             var data = [{
               'key': 'rca',
-              'value': this.get('rca')
+              'value': d[this.get('rca')]
             },{
               'key': 'cog',
               'value': d['cog']
             }];
             function format(key, value) {
-              return numeral(value).format('0.0');
+              return numeral(value).format('0.00');
             }
             var textItem = Ember.get(d, `name_short_${this.get('i18n').display}`) || d.code;
             var tooltip_text = '<span style="color: ' +  d.color + '">' + textItem + '</span>';
