@@ -49,6 +49,7 @@ export default Ember.Route.extend({
         if(d.year != this.get('lastYear')) { return memo; }
         let product = productsMetadata[d.product_id];
         let productData = productsDataIndex[d.product_id];
+        product.complexity = _.result(_.find(product.pci_data, { year: d.year }), 'pci');
         memo.push(_.merge(d, product, productData));
         return memo;
       }, []);
@@ -56,10 +57,9 @@ export default Ember.Route.extend({
       //get industry data for department
       let industries = _.map(industriesData, (d) => {
         let industry = industriesMetadata[d.industry_id];
-        if(model.id === '0') {
-          d.rca = 1;
-        }
+        if(model.id === '0') { d.rca = 1; }
         let industryData = industriesDataIndex[d.industry_id];
+        industry.complexity = _.result(_.find(industry.pci_data, { year: d.year}), 'complexity');
         return _.merge(d, industry, industryData);
       });
 
