@@ -63,9 +63,7 @@ export default EmberTableComponent.extend(TableMap, {
   tableMap: computed('source', function() {
     let source = this.get('source');
     let map = this.get(`${source}Map`);
-    if(this.get('isSingleYear')) {
-      map = _.reject(map, {key: 'year'});
-    }
+
     _.forEach(map, (mapping) => {
 
       if(mapping.key === 'name' || mapping.key == 'parent') { return; }
