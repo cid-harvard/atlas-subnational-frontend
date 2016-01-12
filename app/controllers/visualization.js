@@ -70,7 +70,7 @@ export default Ember.Controller.extend({
     let legend = this.get(`metadata.legend.${this.get('source')}`);
     return _.values(legend);
   }),
-  showLegend: computed('model.visualization', function() {
+  needsLegend: computed('model.visualization', function() {
     let vis = this.get('model.visualization');
      return _.contains(['scatter', 'similarity'], vis) ? true : false;
   }),

@@ -6,7 +6,7 @@
   metaData=model.metaData
 }}
 <header class="section__header builder__header">
-  <h3 class="section__head question__head">{{pageTitle}} {{visualization}}</h3>
+  <h3 class="section__head question__head">{{pageTitle}}</h3>
 </header>
 <section class="stream__section">
   <div {{bind-attr class=":section__buildermod drawerSettingsIsOpen:buildermod__settings--open drawerChangeGraphIsOpen:buildermod__changegraph--open" }}>
@@ -56,7 +56,7 @@
         variable=variable
         search=search
       }}
-      {{#if showLegend }}
+      {{#if needsLegend }}
       {{component 'visualization-legend'
         legend=legend
       }}
