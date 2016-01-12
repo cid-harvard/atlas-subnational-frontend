@@ -88,8 +88,8 @@
   display: block;
   font-size: $fontTiny;
   font-family: $sans;
-  width: 100%;
-  margin: .5rem 0 0 0;
+  width: auto;
+  margin-top: 1rem;
   -webkit-column-count: 3; /* Chrome, Safari, Opera */
   -moz-column-count: 3; /* Firefox */
   column-count: 3;
@@ -103,6 +103,10 @@
     -moz-column-count: 1; /* Firefox */
     column-count: 1;
   }
+}
+
+.visualization__scatter .buildermod__legend {
+  margin-left: 6rem;
 }
 
 .buildermod__legend__item {
