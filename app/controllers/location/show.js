@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
   isCountry: computed.equal('model.level', 'country'),
   isDepartment: computed.equal('model.level','department'),
   isMsa: computed.equal('model.level','msa'),
-  isMuncipality: computed.equal('model.level','municipality'),
+  isMunicipality: computed.equal('model.level','municipality'),
 
   locationId: computed('model.id','model.level', function() {
     return this.get('model.id');
