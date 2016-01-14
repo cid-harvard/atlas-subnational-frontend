@@ -80,6 +80,14 @@ export default Ember.Mixin.create({
       key: 'year' ,
       type: 'int',
       savedWidth: 80
+    }, {
+      key: 'ranking' ,
+      type: 'int',
+      savedWidth: 80
+    }, {
+      key: 'eci' ,
+      type: 'int',
+      savedWidth: 80
     }
   ],
   industryClassesMap: [
@@ -91,6 +99,18 @@ export default Ember.Mixin.create({
     { key: 'employment_growth' },
     { key: 'num_establishments' }
   ],
+  productsMap: [
+    { key: 'code' },
+    { key: 'name', copy: 'export' },
+    { key: 'parent' },
+    { key: 'year' },
+    { key: 'export_value' },
+    { key: 'import_value' },
+    { key: 'export_rca' },
+    { key: 'complexity' },
+    { key: 'distance' },
+    { key: 'cog' }
+   ],
   productsMap: [
     { key: 'code' },
     { key: 'name', copy: 'export' },
@@ -158,6 +178,12 @@ export default Ember.Mixin.create({
     { key: 'export_value' },
     { key: 'import_value' },
     { key: 'year' },
-  ]
+  ],
+  rankingsMap: [
+    { key: 'code' },
+    { key: 'name' },
+    { key: 'year' },
+    { key: 'eci' }
+   ],
 });
 

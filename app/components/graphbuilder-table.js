@@ -121,7 +121,7 @@ export default EmberTableComponent.extend(TableMap, {
     };
   },
   formatNumber: (number, key, i18n) => {
-    var decimalVars = ['export_rca','rca','complexity', 'distance', 'cog', 'population'];
+    var decimalVars = ['export_rca', 'eci', 'rca','complexity', 'distance', 'cog', 'population'];
     var wageVarsInThousands = ['wages', 'avg_wages', 'avg_wage', 'average_wages'];
 
     if(_.include(wageVarsInThousands, key)){
