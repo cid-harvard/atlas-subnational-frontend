@@ -1,15 +1,24 @@
-RANKINGS HERE
+<header class="stream__header">
+  <h2 class="stream__head">{{ t 'pageheader.rankings' }}</h2>
+</header>
 
-DEPATMETNS
-{{component 'graphbuilder-table'
-  data=model.department
-  source='rankings'
-  sortby='eci'
-}}
+<section class="stream__section">
+	
+	<h3 class="section__head">Departments</h3>
+	{{component 'graphbuilder-table'
+	  data=model.department
+	  source='rankings'
+	  sortby='eci'
+	}}
 
-MSA
-{{component 'graphbuilder-table'
-  data=model.msa
-  source='rankings'
-  sortby='eci'
-}}
+</section>
+<section class="stream__section">
+
+	<h3 class="section__head">MSA</h3>
+	{{component 'graphbuilder-table'
+	  data=model.msa
+	  source='rankings'
+	  sortby='eci'
+	}}
+
+</section>
