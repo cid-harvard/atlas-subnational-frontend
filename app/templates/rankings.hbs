@@ -1,24 +1,27 @@
 <header class="stream__header">
-  <h2 class="stream__head">{{ t 'pageheader.rankings' }}</h2>
+  <h2 class="stream__head">{{ t 'rankings.pagetitle' }}</h2>
 </header>
 
 <section class="stream__section">
-	
-	<h3 class="section__head">Departments</h3>
+	<p class="section__p">
+		{{ t 'rankings.intro.p' }}
+	</p>
+</section>
+
+<section class="stream__section">
+	<h3 class="section__head">{{ t 'rankings.section.departments' }}</h3>
 	{{component 'graphbuilder-table'
 	  data=model.department
 	  source='rankings'
 	  sortby='eci'
 	}}
-
 </section>
-<section class="stream__section">
 
-	<h3 class="section__head">MSA</h3>
+<section class="stream__section">
+	<h3 class="section__head">{{ t 'rankings.section.cities' }}</h3>
 	{{component 'graphbuilder-table'
 	  data=model.msa
 	  source='rankings'
 	  sortby='eci'
 	}}
-
 </section>
