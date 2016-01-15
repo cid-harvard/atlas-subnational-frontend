@@ -71,7 +71,7 @@ export default Ember.Route.extend({
       var departments = [];
       var departmentTimeseries = [];
 
-      _.reduce(departmentsData, (memo, d) => {
+      _.each(departmentsData, (d) => {
         let id = _.get(d, 'department_id') || _.get(d, 'location_id');
         if(id == model.id) {
           departmentTimeseries.push(d);
@@ -92,7 +92,30 @@ export default Ember.Route.extend({
           let datum = _.merge(d, location, tradeData, extra );
           departments.push(datum);
         }
-        return memo;
+      });
+
+      var eciRank = 1;
+      var populationRank = 1;
+      var gdpRank = 1;
+      var gdpPerCapitaRank = 1;
+
+      let datum = _.chain(departmentTimeseries)
+        .select({ year: this.get('censusYear')})
+        .first()
+        .value();
+
+      _.each(departments, (d) => {
+        if(d.eci > datum.eci ) { eciRank ++; }
+        if(d.gdp_real > datum.gdp_real) { gdpRank ++; }
+        if(d.population > datum.population ) { populationRank ++; }
+        if(d.gdp_pc_real> datum.gdp_pc_real ) { gdpPerCapitaRank++; }
+      });
+
+      model.setProperties({
+        eciRank: eciRank,
+        gdpRank: gdpRank,
+        gdpPerCapitaRank: gdpPerCapitaRank,
+        populationRank: populationRank
       });
 
       model.set('productsData', products);
@@ -101,6 +124,7 @@ export default Ember.Route.extend({
       model.set('occupations', occupations);
       model.set('timeseries', departmentTimeseries);
       model.set('metaData', this.modelFor('application'));
+
       if(model.id == '0') { model.set('metaData', this.modelFor('application')); }
       return model;
     });

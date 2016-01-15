@@ -139,7 +139,7 @@ export default EmberTableComponent.extend(TableMap, {
     var moneyVars = [
       'gdp_pc_real',
       'gdp_real',
-    ]
+    ];
     var largeNumbers = [
       'export_value',
       'import_value',

@@ -49,18 +49,6 @@ export default Ember.Mixin.create({
     { key: 'distance' },
     { key: 'cog' }
    ],
-  productsMap: [
-    { key: 'code' },
-    { key: 'name', copy: 'export' },
-    { key: 'parent' },
-    { key: 'year' },
-    { key: 'export_value' },
-    { key: 'import_value' },
-    { key: 'export_rca' },
-    { key: 'complexity' },
-    { key: 'distance' },
-    { key: 'cog' }
-   ],
   citiesMap: [
     { key: 'code' },
     { key: 'name', copy: 'location' },
