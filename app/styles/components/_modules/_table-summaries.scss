@@ -55,6 +55,10 @@
   margin-top: -15px;
   width: 50px;
   text-align: center;
+  &.title {
+    width: 75px;
+    text-align: right;
+  }
 }
 
 .table__cell--rank .value {
@@ -67,6 +71,7 @@
   font-size: $fontSmall;
   font-weight: 400;
   text-align: center;
+  text-transform: lowercase;
 
   &:hover {
     background-color: $colorGrayLight;
