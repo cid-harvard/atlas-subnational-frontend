@@ -16,8 +16,8 @@ export default Ember.Route.extend({
       msa: Ember.$.getJSON(`${apiURL}/data/location?level=msa`)
     };
     return RSVP.hash(data).then((model) => {
-      let departmentRanking = get(model, 'department.data')
-      let msaRanking = get(model, 'msa.data')
+      let departmentRanking = get(model, 'department.data');
+      let msaRanking = get(model, 'msa.data');
       let latestYear = get(this, 'lastYear');
       let locationsMetadata = this.modelFor('application').locations;
 
@@ -43,7 +43,7 @@ export default Ember.Route.extend({
         .reverse()
         .value();
 
-     return { msa: msaRanking, department: departmentRanking };
+     return { msas: msaRanking, departments: departmentRanking };
     });
   }
 });

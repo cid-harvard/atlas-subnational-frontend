@@ -20,7 +20,12 @@
       <tr class="table__row table__row--header">
         <th class="table__header"></th>
         <th class="table__header table__header--summaries--value">
-          {{t 'location.show.value'}} <div class="table__cell--rank title"><div class="value title">rank</div></div>
+          {{t 'location.show.value'}}
+          <div class="table__cell--rank title">
+            <div class="value title">
+              {{t 'rankings.table-title'}}
+            </div>
+          </div>
         </th>
         <th class="table__header table__header--summaries--dotplot">
           {{t 'location.show.all_departments'}}
@@ -33,13 +38,15 @@
           {{t 'location.show.gdp_pc'}}
         </td>
         <td class="table__cell table__header--summaries--value">
-          {{model.lastGdpPerCapita}} <div class="table__cell--rank"><a href="/rankings/"><div class="value">#156</div></a></div>
+          {{model.lastGdpPerCapita}}
+          {{table-rank rank=model.gdpPerCapitaRank}}
+
         </td>
         <td class="table__cell table__cell--summaries">
           {{vistk-dotplot
             elementId='dotplot--gdp-pc'
             data=departmentsData
-            varX='gdp_pc_nominal'
+            varX='gdp_pc_real'
             varText='name'
             varId='department_id'
             currentSelection=locationId
@@ -52,12 +59,13 @@
         </td>
         <td class="table__cell table__header--summaries--value">
           {{model.lastGdp}}
+          {{table-rank rank=model.gdpRank}}
         </td>
         <td class="table__cell table__cell--summaries">
           {{vistk-dotplot
             elementId='dotplot--gdp'
             data=departmentsData
-            varX='gdp_nominal'
+            varX='gdp_real'
             varText='name'
             varId='department_id'
             currentSelection=locationId
@@ -69,7 +77,8 @@
           {{t 'location.show.population'}}
         </td>
         <td class="table__cell table__header--summaries--value">
-          {{model.lastPop}} <div class="table__cell--rank"><a href="/rankings/"><div class="value top">#1</div></a></div>
+          {{model.lastPop}}
+          {{table-rank rank=model.populationRank}}
         </td>
         <td class="table__cell table__cell--summaries">
           {{vistk-dotplot
@@ -88,7 +97,8 @@
           {{t 'location.show.eci'}}
         </td>
         <td class="table__cell table__header--summaries--value">
-          {{model.lastEci}} <div class="table__cell--rank"><a href="/rankings/"><div class="value top">#2</div></a></div>
+          {{model.lastEci}}
+          {{table-rank rank=model.eciRank}}
         </td>
         <td class="table__cell table__cell--summaries">
           {{vistk-dotplot

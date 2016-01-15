@@ -1,5 +1,5 @@
 <header class="stream__header">
-  <h2 class="stream__head">{{ t 'rankings.pagetitle' }}</h2>
+  <h2 class="stream__head">{{ pageTitle }}</h2>
 </header>
 
 <section class="stream__section">
@@ -10,8 +10,14 @@
 
 <section class="stream__section">
 	<h3 class="section__head">{{ t 'rankings.section.departments' }}</h3>
+  {{component 'table-download'
+    name=sectionDepartments
+    data=model.departments
+    source='rankings'
+    pageTitle=pageTitle
+  }}
 	{{component 'graphbuilder-table'
-	  data=model.department
+	  data=model.departments
 	  source='rankings'
 	  sortby='eci'
 	}}
@@ -19,8 +25,14 @@
 
 <section class="stream__section">
 	<h3 class="section__head">{{ t 'rankings.section.cities' }}</h3>
+  {{component 'table-download'
+    name=sectionCities
+    data=model.msas
+    source='rankings'
+    pageTitle=pageTitle
+  }}
 	{{component 'graphbuilder-table'
-	  data=model.msa
+	  data=model.msas
 	  source='rankings'
 	  sortby='eci'
 	}}
