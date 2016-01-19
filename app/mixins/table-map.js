@@ -23,7 +23,7 @@ export default Ember.Mixin.create({
     { key: 'wages', type: 'int', savedWidth: 330 },
     { key: 'year' , type: 'int', savedWidth: 80 },
     { key: 'ranking' , type: 'int', savedWidth: 80 },
-    { key: 'eci' , type: 'int', savedWidth: 110 },
+    { key: 'eci' , type: 'int', savedWidth: 210 },
     { key: 'gdp_pc_real' , type: 'int', savedWidth: 200 },
     { key: 'gdp_real' , type: 'int', savedWidth: 190 },
     { key: 'population' , type: 'int', savedWidth: 180 }
