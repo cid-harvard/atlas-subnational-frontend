@@ -45,5 +45,9 @@ export default Ember.Route.extend({
 
      return { msas: msaRanking, departments: departmentRanking };
     });
-  }
+  },
+  setupController(controller, model) {
+    this._super(controller, model);
+    window.scrollTo(0, 0);
+  },
 });
