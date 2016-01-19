@@ -2,85 +2,31 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
   columnSettingsMap: [
-    {
-      key: 'average_wages',
-      type: 'int',
-      savedWidth: 290
-    }, {
-      key: 'avg_wage',
-      type: 'int',
-      savedWidth: 290
-    }, {
-      key: 'code',
-      savedWidth: 100
-    }, {
-      key: 'cog' ,
-      type: 'int',
-      savedWidth: 200
-    }, {
-      key: 'complexity' ,
-      type: 'int',
-      savedWidth: 180
-    }, {
-      key: 'distance' ,
-      type: 'int',
-      savedWidth: 110
-    }, {
-      key: 'employment',
-      type: 'int',
-      savedWidth: 130
-    }, {
-      key: 'employment_growth',
-      type: 'int',
-      savedWidth: 280
-    }, {
-      key: 'export_num_plants' ,
-      type: 'int',
-      savedWidth: 200
-    }, {
-      key: 'export_rca',
-      type: 'int',
-      savedWidth: 280
-    }, {
-      key: 'export_value',
-      type: 'int',
-      savedWidth: 180
-    }, {
-      key: 'import_value',
-      type: 'int',
-      savedWidth: 180
-    }, {
-      key: 'monthly_wages',
-      type: 'int',
-      savedWidth: 290
-    }, {
-      key: 'name',
-      copy: 'export',
-      savedWidth: 200
-    }, {
-      key: 'num_establishments' ,
-      type: 'int',
-      savedWidth: 200
-    }, {
-      key: 'num_vacancies',
-      type: 'int',
-      savedWidth: 100
-    }, {
-      key: 'parent',
-      savedWidth: 270
-    }, {
-      key: 'rca',
-      type: 'int',
-      savedWidth: 280
-    }, {
-      key: 'wages',
-      type: 'int',
-      savedWidth: 330
-    }, {
-      key: 'year' ,
-      type: 'int',
-      savedWidth: 80
-    }
+    { key: 'average_wages', type: 'int', savedWidth: 290 },
+    { key: 'avg_wage', type: 'int', savedWidth: 290 },
+    { key: 'code', savedWidth: 100 },
+    { key: 'cog' , type: 'int', savedWidth: 200 },
+    { key: 'complexity' , type: 'int', savedWidth: 180 },
+    { key: 'distance' , type: 'int', savedWidth: 110 },
+    { key: 'employment', type: 'int', savedWidth: 130 },
+    { key: 'employment_growth', type: 'int', savedWidth: 280 },
+    { key: 'export_num_plants' , type: 'int', savedWidth: 200 },
+    { key: 'export_rca', type: 'int', savedWidth: 280 },
+    { key: 'export_value', type: 'int', savedWidth: 180 },
+    { key: 'import_value', type: 'int', savedWidth: 180 },
+    { key: 'monthly_wages', type: 'int', savedWidth: 290 },
+    { key: 'name', copy: 'export', savedWidth: 200 },
+    { key: 'num_establishments' , type: 'int', savedWidth: 200 },
+    { key: 'num_vacancies', type: 'int', savedWidth: 100 },
+    { key: 'parent', savedWidth: 270 },
+    { key: 'rca', type: 'int', savedWidth: 280 },
+    { key: 'wages', type: 'int', savedWidth: 330 },
+    { key: 'year' , type: 'int', savedWidth: 80 },
+    { key: 'ranking' , type: 'int', savedWidth: 80 },
+    { key: 'eci' , type: 'int', savedWidth: 210 },
+    { key: 'gdp_pc_real' , type: 'int', savedWidth: 200 },
+    { key: 'gdp_real' , type: 'int', savedWidth: 190 },
+    { key: 'population' , type: 'int', savedWidth: 180 }
   ],
   industryClassesMap: [
     { key: 'code' },
@@ -158,6 +104,14 @@ export default Ember.Mixin.create({
     { key: 'export_value' },
     { key: 'import_value' },
     { key: 'year' },
-  ]
+  ],
+  rankingsMap: [
+    { key: 'name' },
+    { key: 'year' },
+    { key: 'eci' },
+    { key: 'gdp_pc_real' },
+    { key: 'gdp_real' },
+    { key: 'population' }
+   ],
 });
 

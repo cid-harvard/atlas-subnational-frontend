@@ -34,4 +34,5 @@ export default Router.map(function() {
     this.route('show', { path: ':industry_id'});
     this.route('visualization', { path: ':industry_id/source/:source_type/visualization/:visualization_type/:variable'});
   });
+  this.route('rankings');
 });

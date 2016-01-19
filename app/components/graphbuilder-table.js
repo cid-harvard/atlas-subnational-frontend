@@ -121,8 +121,30 @@ export default EmberTableComponent.extend(TableMap, {
     };
   },
   formatNumber: (number, key, i18n) => {
-    var decimalVars = ['export_rca','rca','complexity', 'distance', 'cog', 'population'];
-    var wageVarsInThousands = ['wages', 'avg_wages', 'avg_wage', 'average_wages'];
+    var decimalVars = [
+      'export_rca',
+      'eci',
+      'rca',
+      'complexity',
+      'distance',
+      'cog',
+      'population',
+    ];
+    var wageVarsInThousands = [
+      'wages',
+      'avg_wages',
+      'avg_wage',
+      'average_wages',
+    ];
+    var moneyVars = [
+      'gdp_pc_real',
+      'gdp_real',
+    ];
+    var largeNumbers = [
+      'export_value',
+      'import_value',
+      'monthly_wages',
+    ];
 
     if(_.include(wageVarsInThousands, key)){
       return numeral(number).divide(1000).format('0,0');
@@ -137,8 +159,10 @@ export default EmberTableComponent.extend(TableMap, {
       return numeral(number).format('0,0');
     } else if(key === 'employment_growth'){
       return numeral(number).format('0.00%');
-    } else if(key === 'export_value' || key === 'import_value' || key === 'monthly_wages') {
+    } else if(_.include(largeNumbers, key)) {
       return numeral(number).format('0,0');
+    } else if(_.include(moneyVars, key)) {
+      return numeral(number).format('$0.00a');
     } else {
       return number;
     }

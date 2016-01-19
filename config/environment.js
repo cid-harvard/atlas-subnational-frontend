@@ -32,7 +32,7 @@ module.exports = function(environment) {
       'connect-src': "'self' *",
       'style-src': "'self' 'unsafe-inline' *",
       'font-src': "'self' https://fonts.gstatic.com/",
-      'img-src': "'self' http://placehold.it/40x40 *"
+      'img-src': "'self' http://placehold.it/40x40 * data:"
     }
   }
   if (environment === 'test') {
@@ -58,7 +58,7 @@ module.exports = function(environment) {
     ENV.contentSecurityPolicy = {
       'style-src': "'self' 'unsafe-inline' *",
       'connect-src': "'self' http://54.6.95.239 *",
-      'img-src': "'self' http://placehold.it/40x40 *",
+      'img-src': "'self' http://placehold.it/40x40 * data:",
       'font-src': "'self' https://fonts.gstatic.com/",
       'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
     };
