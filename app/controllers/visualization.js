@@ -72,7 +72,7 @@ export default Ember.Controller.extend({
   }),
   needsLegend: computed('model.visualization', function() {
     let vis = this.get('model.visualization');
-     return _.contains(['scatter', 'similarity'], vis) ? true : false;
+    return _.contains(['scatter', 'similarity'], vis) ? true : false;
   }),
   rca: computed('source', function() {
     let source = this.get('source');
