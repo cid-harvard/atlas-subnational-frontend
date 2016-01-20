@@ -104,12 +104,14 @@ export default Ember.Route.extend({
         .first()
         .value();
 
-      _.each(departments, (d) => {
-        if(d.eci > datum.eci ) { eciRank ++; }
-        if(d.gdp_real > datum.gdp_real) { gdpRank ++; }
-        if(d.population > datum.population ) { populationRank ++; }
-        if(d.gdp_pc_real> datum.gdp_pc_real ) { gdpPerCapitaRank++; }
-      });
+      if(datum) {
+        _.each(departments, (d) => {
+          if(d.eci > datum.eci ) { eciRank ++; }
+          if(d.gdp_real > datum.gdp_real) { gdpRank ++; }
+          if(d.population > datum.population ) { populationRank ++; }
+          if(d.gdp_pc_real> datum.gdp_pc_real ) { gdpPerCapitaRank++; }
+        });
+      }
 
       model.setProperties({
         eciRank: eciRank,
