@@ -6,20 +6,36 @@
 	<p class="section__p">
 		{{ t 'rankings.intro.p' }}
 	</p>
+
+	<div class='explanation'>
+	  <h4 class='explanation__title'>{{t 'rankings.explanation.title'}}</h4>
+
+	  <div {{bind-attr class=':explanation__copy showAll:explanation__copy--show:explanation__copy--hide'}}>
+	    <p class='explanation__p'>{{t 'rankings.explanation.body'}}</p>
+	  </div>
+
+	  {{#if isTextLarge}}
+	    <button {{action 'toggleText'}} class='btn btn--standalone explanation__btn'>
+	      {{t buttonText}}
+	    </button>
+	  {{/if}}
+	</div>
+
 </section>
 
 <section class="stream__section">
 	<h3 class="section__head">{{ t 'rankings.section.departments' }}</h3>
-  {{component 'table-download'
-    name=sectionDepartments
-    data=model.departments
-    source='rankings'
-    pageTitle=pageTitle
-  }}
+	{{component 'table-download'
+		name=sectionDepartments
+		classNames='cta__wrap--compact'
+		data=model.departments
+		source='rankings'
+		pageTitle=pageTitle
+	}}
 	{{component 'graphbuilder-table'
-	  data=model.departments
-	  source='rankings'
-	  sortby='eci'
+		data=model.departments
+		source='rankings'
+		sortby='eci'
 	}}
 </section>
 
@@ -28,6 +44,7 @@
     <h3 class="section__head">{{ t 'rankings.section.cities' }}</h3>
     {{component 'table-download'
       name=sectionCities
+      classNames='cta__wrap--compact'
       data=model.msas
       source='rankings'
       pageTitle=pageTitle
