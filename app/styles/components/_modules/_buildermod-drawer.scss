@@ -39,9 +39,7 @@
 // Settings drawer
 
 .settings__input__wrap {
-  margin-bottom: $baseSpace;
   &:last-of-type {
-    padding-bottom: $baseSpace * 2;
     border-bottom: 1px solid $colorBrown500;
   }
 }

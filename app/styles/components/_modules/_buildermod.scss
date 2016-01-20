@@ -75,7 +75,7 @@
 
 .buildermod__highlight__wrap {
   margin: 0 0 1rem 0;
-  width: 100%;
+  width: 50%;
   z-index: $zIndex-1;
 }
 
@@ -83,6 +83,19 @@
   background: white;
 }
 
+/*
+** Settings bar
+*/
+.buildermod__settings__wrap {
+  display: block;
+}
+
+.buildermod__settings {
+  border: 1px solid red;
+  width: 50%;
+  margin: 0;
+  padding: 0;
+}
 
 /*
 * Legend underneath visualizations

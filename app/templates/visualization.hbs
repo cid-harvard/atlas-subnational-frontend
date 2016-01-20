@@ -26,9 +26,6 @@
       </div>
     </header>
     <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--fixedheight isGeo:buildermod__vizwrap--geo"}}>
-      {{#unless isGeo }}
-        {{partial "partials/buildermod-search"}}
-      {{/unless}}
       {{component visualizationComponent
         classNames='buildermod__viz'
         immutableData=immutableData
@@ -46,20 +43,28 @@
         search=search
         graph=graph
       }}
+
+      <div class="buildermod__settings__wrap">
+        {{component 'graphbuilder-settings'
+          classNames='buildermod__settings'
+          startDate=startDate
+          endDate=endDate
+          canYearToggle=canYearToggle
+          isScatter=isScatter
+          rcaFilter=rcaFilter
+        }}
+        {{#unless isGeo }}
+          {{partial "partials/buildermod-search"}}
+        {{/unless}}
+      </div>  
+
       {{#if needsLegend }}
         {{component 'visualization-legend' legend=legend }}
       {{/if}}
-    </div>
 
+    </div>
     {{component 'visualization-explanation'
       text=visualizationExplanation
-    }}
-    {{component 'graphbuilder-settings'
-      startDate=startDate
-      endDate=endDate
-      canYearToggle=canYearToggle
-      isScatter=isScatter
-      rcaFilter=rcaFilter
     }}
     <div class="ember__table__wrap">
       {{component 'table-download'
