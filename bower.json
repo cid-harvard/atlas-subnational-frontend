@@ -15,7 +15,7 @@
     "lodash": "~3.7.0",
     "pretender": "~0.6.0",
     "font-awesome": "~4.4.0",
-    "cidcons": "cid-harvard/cidcons#0.3.1",
+    "cidcons": "cid-harvard/cidcons#0.3.2",
     "numeral": "~1.5.3",
     "d3-plugins": "*",
     "mapbox.js": "~2.2.1",
