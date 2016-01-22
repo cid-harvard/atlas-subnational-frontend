@@ -7,11 +7,25 @@
 		{{ t 'rankings.intro.p' }}
 	</p>
 
-	<div class='explanation explanation__faq'>
-	  <h4 class='explanation__title'>{{t 'rankings.explanation.title'}} (About the rankings)</h4>
+	<div class='explanation'>
+	  <h4 class='explanation__title'>About the rankings {{t 'rankings.explanation.title'}}</h4>
 
 	  <div {{bind-attr class=':explanation__copy showAll:explanation__copy--show:explanation__copy--hide'}}>
 	    <p class='explanation__p'>{{t 'rankings.explanation.body'}} (aka, why is there an N/A for my department? How are these calculated?)</p>
+	  </div>
+
+	  {{#if isTextLarge}}
+	    <button {{action 'toggleText'}} class='btn btn--standalone explanation__btn'>
+	      {{t buttonText}}
+	    </button>
+	  {{/if}}
+	</div>
+
+	<div class='explanation explanation__faq'>
+	  <h4 class='explanation__title'>How are these rankings calculated? {{t 'rankings.explanation.title'}}</h4>
+
+	  <div>
+	    <p class='explanation__p'>{{t 'rankings.explanation.body'}}</p>
 	  </div>
 
 	  {{#if isTextLarge}}

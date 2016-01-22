@@ -11,6 +11,8 @@
 
 .explanation__title {
   font-size: $fontLarge;
+  line-height: 1.2em;
+  margin-bottom: .5em;
 }
 
 .explanation__p {
@@ -26,5 +28,39 @@
   width: auto;
   margin:0 auto;
   box-shadow: inset 0 -5px $colorGray;
+}
+
+.explanation__copy--hide {
+  @include bg-gradient-t2b($colorBlack, $colorBrown200);
+  max-height: 4*$baseSpace;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.explanation__faq {
+  background: $colorGrayLightest;
+  padding: 2rem;
+
+  .explanation__title {
+    font-size: $fontBase;
+    font-weight: 600;
+    padding-left: 2.5rem;
+
+    &:before {
+      content: '\f05a';
+      font-family: $icon;
+      font-size: $fontBase;
+      margin-right: .75rem;
+      color: $colorRed;
+      position: absolute;
+      left: 2rem;
+    }
+  }
+  .explanation__p {
+    padding-left: 2.5rem;
+    font-family: $sans;
+    font-size: $fontSmall;
+  }
+
 }
 
