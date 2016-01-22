@@ -9,6 +9,7 @@ module.exports = function(environment) {
     defaultLocale: process.env.DEFAULT_LOCALE,
     otherLocale: process.env.OTHER_LOCALE,
     downloadURL: process.env.DOWNLOAD_URL,
+    mapURL: process.env.MAP_URL,
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
