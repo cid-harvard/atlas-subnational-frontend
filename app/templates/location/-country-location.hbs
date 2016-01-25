@@ -100,6 +100,20 @@
     {{/ivy-tabs}}
   </div>
 </section>
+<section class="stream__section">
+  <div class="ember__table__wrap">
+    {{component 'table-download'
+      data=occupationData
+      source='occupations'
+      pageTitle='products'
+      name='colombia'
+    }}
+    {{component 'graphbuilder-table'
+      data=occupationData
+      source='occupations'
+    }}
+  </div>
+</section>
 
 <section class="stream__section">
   <header class="section__header">
@@ -129,7 +143,6 @@
             immutableData=lastIndustryData
             elementId='industry-space'
             dataType='industries'
-            showAllColors='true'
             height=600
             delay=2000
           }}
