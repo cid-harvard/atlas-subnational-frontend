@@ -31,14 +31,6 @@ export default Ember.Component.extend({
     let type = this.get('dataType');
     return this.get(`metadata.${type}`);
   }),
-  networkURL: computed('dataType', function() {
-    let type = this.get('dataType');
-    if(type === 'industries') {
-      return `assets/networks/${this.get('i18n.country')}-industry_space.json`;
-    } else if (type === 'products') {
-      return 'assets/networks/product_space.json';
-    }
-  }),
   varRCA: computed('dataType', function() {
     let type = this.get('dataType');
     if(type === 'industries') {
@@ -139,13 +131,10 @@ export default Ember.Component.extend({
     });
   }),
   didInsertElement: function() {
-    $.getJSON(this.get('networkURL')).then((graph) => {
-      this.set('graph', graph);
-      Ember.run.scheduleOnce('afterRender', this , function() {
-        if(!this.get('width')){ this.set('width', this.$().parent().width()); }
-        if(!this.get('height')){ this.set('height', this.$().parent().height()); }
-        d3.select(this.get('id')).call(this.get('network'));
-      });
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      if(!this.get('width')){ this.set('width', this.$().parent().width()); }
+      if(!this.get('height')){ this.set('height', this.$().parent().height()); }
+      d3.select(this.get('id')).call(this.get('network'));
     });
   },
   willDestroyElement: function() {
