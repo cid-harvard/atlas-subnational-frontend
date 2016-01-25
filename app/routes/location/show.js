@@ -127,7 +127,6 @@ export default Ember.Route.extend({
       model.set('timeseries', departmentTimeseries);
       model.set('metaData', this.modelFor('application'));
 
-      if(model.id == '0') { model.set('metaData', this.modelFor('application')); }
       return model;
     });
   },

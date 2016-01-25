@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import numeral from 'numeral';
 
-const {computed, observer, $, get:get} = Ember;
+const {computed, observer, get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),

@@ -33,6 +33,8 @@ export default Ember.Route.extend({
     var partnerCountries = $.getJSON(apiURL+'/metadata/countries/');
     var productPCI = $.getJSON(apiURL+'/data/product/?level=4digit');
     var industryPCI = $.getJSON(apiURL+'/data/industry/?level=class');
+    var industrySpace = $.getJSON(`assets/networks/${this.get('i18n.country')}-industry_space.json`);
+    var productSpace = $.getJSON('assets/networks/product_space.json');
 
     var promises = [
       products4digit,
@@ -47,7 +49,9 @@ export default Ember.Route.extend({
       industrySectionColor,
       partnerCountries,
       productPCI,
-      industryPCI
+      industryPCI,
+      productSpace,
+      industrySpace
     ];
 
     return RSVP.allSettled(promises).then(function(array) {
@@ -64,6 +68,8 @@ export default Ember.Route.extend({
       let partnerCountries  = array[10].value.data;
       let productPCI = array[11].value.data;
       let industryPCI = array[12].value.data;
+      let productSpace = array[13].value;
+      let industrySpace = array[14].value;
 
       // Finds the entity with the `1st digit` that matches
       // sets `group` to the `1st digit code`
@@ -138,7 +144,9 @@ export default Ember.Route.extend({
         productParents: _.indexBy(productParentMetadata, 'id'),
         industryParents: _.indexBy(industryParentMetadata, 'id'),
         partnerCountries: _.indexBy(partnerCountries, 'id'),
-        legend: legend
+        legend: legend,
+        productSpace: productSpace,
+        industrySpace: industrySpace
       };
     });
   },

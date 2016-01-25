@@ -19,6 +19,9 @@ export default Ember.Controller.extend({
   isMsa: computed.equal('model.level','msa'),
   isMunicipality: computed.equal('model.level','municipality'),
 
+  productSpace: computed.alias('model.metaData.productSpace'),
+  industrySpace: computed.alias('model.metaData.industrySpace'),
+
   locationId: computed('model.id','model.level', function() {
     return this.get('model.id');
   }),
