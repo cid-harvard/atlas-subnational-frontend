@@ -52,25 +52,25 @@ export default Ember.Component.extend({
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(["line_horizontal", "none"]),
           offset_right: function(d, i, vars) {
-              return -vars.x_scale[0]["func"](d[vars.var_x])+30;
+              return vars.x_scale[0]["func"].range()[1] - vars.x_scale[0]["func"](d[vars.var_x]) + vars.r_scale(d[vars.var_r]);
           }
         }, {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(["line_vertical", "none"]),
           offset_top: function(d, i, vars) {
-              return -vars.y_scale[0]["func"](d[vars.var_y]);
+              return vars.r_scale(d[vars.var_r]);
           }
         }, {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(["rect", "none"]),
           translate: function(d, i, vars) {
-            return [-vars.x_scale[0]["func"](d[vars.var_x]) - 5, -10];
+            return [-vars.x_scale[0]["func"](d[vars.var_x]) - 20, -10];
           },
-          height: 20,
+          height: 25,
           width: 50,
           stroke: 'black',
           stroke_width: '1.5px',
-          fill: function() { return 'white'}
+          fill: function() { return 'white'; }
         }, {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(["text", "none"]),
@@ -79,19 +79,19 @@ export default Ember.Component.extend({
           },
           text_anchor: 'end',
           text: function(d, i, vars) {
-            return format(d[vars.var_x]);
+            return format(d[vars.var_y]);
           }
         }, {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(["rect", "none"]),
           translate: function(d, i, vars) {
-            return [-15, -vars.y_scale[0]["func"](d[vars.var_y]) + vars.height - vars.margin.bottom - vars.margin.top];
+            return [-25, -vars.y_scale[0]["func"](d[vars.var_y]) + vars.height - vars.margin.bottom - vars.margin.top];
           },
-          height: 20,
+          height: 25,
           width: 50,
           stroke: 'black',
           stroke_width: '1.5px',
-          fill: function() { return 'white'}
+          fill: function() { return 'white'; }
         }, {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(["text", "none"]),
