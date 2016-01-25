@@ -50,6 +50,60 @@ export default Ember.Component.extend({
           fill: (d) => { return d.color ? d.color : '#ccc1b9'; }
         }, {
           var_mark: '__highlighted',
+          type: d3.scale.ordinal().domain([true, false]).range(["line_horizontal", "none"]),
+          offset_right: function(d, i, vars) {
+              return -vars.x_scale[0]["func"](d[vars.var_x])+30;
+          }
+        }, {
+          var_mark: '__highlighted',
+          type: d3.scale.ordinal().domain([true, false]).range(["line_vertical", "none"]),
+          offset_top: function(d, i, vars) {
+              return -vars.y_scale[0]["func"](d[vars.var_y]);
+          }
+        }, {
+          var_mark: '__highlighted',
+          type: d3.scale.ordinal().domain([true, false]).range(["rect", "none"]),
+          translate: function(d, i, vars) {
+            return [-vars.x_scale[0]["func"](d[vars.var_x]) - 5, -10];
+          },
+          height: 20,
+          width: 50,
+          stroke: 'black',
+          stroke_width: '1.5px',
+          fill: function() { return 'white'}
+        }, {
+          var_mark: '__highlighted',
+          type: d3.scale.ordinal().domain([true, false]).range(["text", "none"]),
+          translate: function(d, i, vars) {
+            return [-vars.x_scale[0]["func"](d[vars.var_x]) + 25, 0];
+          },
+          text_anchor: 'end',
+          text: function(d, i, vars) {
+            return format(d[vars.var_x]);
+          }
+        }, {
+          var_mark: '__highlighted',
+          type: d3.scale.ordinal().domain([true, false]).range(["rect", "none"]),
+          translate: function(d, i, vars) {
+            return [-15, -vars.y_scale[0]["func"](d[vars.var_y]) + vars.height - vars.margin.bottom - vars.margin.top];
+          },
+          height: 20,
+          width: 50,
+          stroke: 'black',
+          stroke_width: '1.5px',
+          fill: function() { return 'white'}
+        }, {
+          var_mark: '__highlighted',
+          type: d3.scale.ordinal().domain([true, false]).range(["text", "none"]),
+          translate: function(d, i, vars) {
+            return [0, -vars.y_scale[0]["func"](d[vars.var_y]) + vars.height - vars.margin.bottom - vars.margin.top + 10];
+          },
+          text_anchor: 'middle',
+          text: function(d, i, vars) {
+            return format(d[vars.var_x]);
+          }
+        }, {
+          var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([false, true]).range(['none', 'div']),
           class: function() {
             return 'tooltip';
