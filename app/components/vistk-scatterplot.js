@@ -50,21 +50,21 @@ export default Ember.Component.extend({
           fill: (d) => { return d.color ? d.color : '#ccc1b9'; }
         }, {
           var_mark: '__highlighted',
-          type: d3.scale.ordinal().domain([true, false]).range(["line_horizontal", "none"]),
+          type: d3.scale.ordinal().domain([true, false]).range(['line_horizontal', 'none']),
           offset_right: function(d, i, vars) {
-              return vars.x_scale[0]["func"].range()[1] - vars.x_scale[0]["func"](d[vars.var_x]) + vars.r_scale(d[vars.var_r]);
+              return vars.x_scale[0]['func'].range()[1] - vars.x_scale[0]['func'](d[vars.var_x]) + vars.r_scale(d[vars.var_r]);
           }
         }, {
           var_mark: '__highlighted',
-          type: d3.scale.ordinal().domain([true, false]).range(["line_vertical", "none"]),
+          type: d3.scale.ordinal().domain([true, false]).range(['line_vertical', 'none']),
           offset_top: function(d, i, vars) {
               return vars.r_scale(d[vars.var_r]);
           }
         }, {
           var_mark: '__highlighted',
-          type: d3.scale.ordinal().domain([true, false]).range(["rect", "none"]),
+          type: d3.scale.ordinal().domain([true, false]).range(['rect', 'none']),
           translate: function(d, i, vars) {
-            return [-vars.x_scale[0]["func"](d[vars.var_x]) - 20, -10];
+            return [-vars.x_scale[0]['func'](d[vars.var_x]) - 20, -10];
           },
           height: 25,
           width: 50,
@@ -73,9 +73,9 @@ export default Ember.Component.extend({
           fill: function() { return 'white'; }
         }, {
           var_mark: '__highlighted',
-          type: d3.scale.ordinal().domain([true, false]).range(["text", "none"]),
+          type: d3.scale.ordinal().domain([true, false]).range(['text', 'none']),
           translate: function(d, i, vars) {
-            return [-vars.x_scale[0]["func"](d[vars.var_x]) + 25, 0];
+            return [-vars.x_scale[0]['func'](d[vars.var_x]) + 25, 0];
           },
           text_anchor: 'end',
           text: function(d, i, vars) {
@@ -83,9 +83,9 @@ export default Ember.Component.extend({
           }
         }, {
           var_mark: '__highlighted',
-          type: d3.scale.ordinal().domain([true, false]).range(["rect", "none"]),
+          type: d3.scale.ordinal().domain([true, false]).range(['rect', 'none']),
           translate: function(d, i, vars) {
-            return [-25, -vars.y_scale[0]["func"](d[vars.var_y]) + vars.height - vars.margin.bottom - vars.margin.top];
+            return [-25, -vars.y_scale[0]['func'](d[vars.var_y]) + vars.height - vars.margin.bottom - vars.margin.top];
           },
           height: 25,
           width: 50,
@@ -94,9 +94,9 @@ export default Ember.Component.extend({
           fill: function() { return 'white'; }
         }, {
           var_mark: '__highlighted',
-          type: d3.scale.ordinal().domain([true, false]).range(["text", "none"]),
+          type: d3.scale.ordinal().domain([true, false]).range(['text', 'none']),
           translate: function(d, i, vars) {
-            return [0, -vars.y_scale[0]["func"](d[vars.var_y]) + vars.height - vars.margin.bottom - vars.margin.top + 10];
+            return [0, -vars.y_scale[0]['func'](d[vars.var_y]) + vars.height - vars.margin.bottom - vars.margin.top + 10];
           },
           text_anchor: 'middle',
           text: function(d, i, vars) {
