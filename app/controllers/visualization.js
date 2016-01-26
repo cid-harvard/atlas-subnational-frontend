@@ -106,21 +106,9 @@ export default Ember.Controller.extend({
     }
     return `${i18nString}.${this.get('variable')}`;
   }),
-  thisLevel: computed('entity.level', 'i18n.locale', function() {
-    let level = this.get('i18n').t(`location.model.${this.get('entity.level')}`);
-    let thisLevel = `this ${level}`;
-
-    if(this.get('entity.level') === 'country') {
-      thisLevel = level;
-    } else if(this.get('i18n.display') === 'es') {
-      thisLevel = level.string === 'ciudad' ? `esta ${level}` :  `este ${level}`;
-    }
-
-    return thisLevel;
-  }),
-  pageTitle: computed('i18nString', 'thisLevel', function() {
-    let i18nString = `graph_builder.page_title.${this.get('i18nString')}`;
-    return this.get('i18n').t(i18nString, { thisLevel: this.get('thisLevel') });
+  pageTitle: computed('i18nString','entity.level', function() {
+    let i18nString = `graph_builder.page_title.${this.get('i18nString')}.${this.get('entity.level')}`;
+    return this.get('i18n').t(i18nString);
   }),
   visualizationExplanation: computed('i18nString', function() {
     let i18nString = `graph_builder.explanation.${this.get('i18nString')}`;
