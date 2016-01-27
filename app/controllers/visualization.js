@@ -107,7 +107,10 @@ export default Ember.Controller.extend({
     return `${i18nString}.${this.get('variable')}`;
   }),
   pageTitle: computed('i18nString','entity.level', function() {
-    let i18nString = `graph_builder.page_title.${this.get('i18nString')}.${this.get('entity.level')}`;
+    let i18nString = `graph_builder.page_title.${this.get('i18nString')}`;
+    if(this.get('entityType') === 'location') {
+      i18nString += `.${this.get('entity.level')}`;
+    }
     return this.get('i18n').t(i18nString);
   }),
   visualizationExplanation: computed('i18nString', function() {
