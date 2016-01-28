@@ -138,7 +138,6 @@ export default EmberTableComponent.extend(TableMap, {
       'wages',
       'avg_wages',
       'avg_wage',
-      'average_wages',
     ];
     var moneyVars = [
       'gdp_pc_real',
@@ -148,6 +147,7 @@ export default EmberTableComponent.extend(TableMap, {
       'export_value',
       'import_value',
       'monthly_wages',
+      'average_wages'
     ];
 
     if(_.include(wageVarsInThousands, key)){
