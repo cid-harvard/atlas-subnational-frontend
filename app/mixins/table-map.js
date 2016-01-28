@@ -26,6 +26,7 @@ export default Ember.Mixin.create({
     { key: 'eci' , type: 'int', savedWidth: 210 },
     { key: 'gdp_pc_real' , type: 'int', savedWidth: 200 },
     { key: 'gdp_real' , type: 'int', savedWidth: 190 },
+    { key: 'share' , type: 'int', savedWidth: 190 },
     { key: 'population' , type: 'int', savedWidth: 180 }
   ],
   industryClassesMap: [
@@ -95,7 +96,8 @@ export default Ember.Mixin.create({
   occupationsMap: [
     { key: 'code' },
     { key: 'name', copy: 'occupation' },
-    { key: 'average_wages' }
+    { key: 'average_wages' },
+    { key: 'share' }
   ],
   partnersMap: [
     { key: 'code' },

@@ -128,7 +128,11 @@ export default EmberTableComponent.extend(TableMap, {
       'complexity',
       'distance',
       'cog',
-      'population',
+      'population'
+    ];
+    var percentVars = [
+      'share',
+      'employment_growth'
     ];
     var wageVarsInThousands = [
       'wages',
@@ -157,7 +161,7 @@ export default EmberTableComponent.extend(TableMap, {
         return i18n.t('graph_builder.table.less_than_5');
       }
       return numeral(number).format('0,0');
-    } else if(key === 'employment_growth'){
+    } else if(_.include(percentVars, key)){
       return numeral(number).format('0.00%');
     } else if(_.include(largeNumbers, key)) {
       return numeral(number).format('0,0');
