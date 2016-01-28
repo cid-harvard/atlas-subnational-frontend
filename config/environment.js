@@ -27,17 +27,17 @@ module.exports = function(environment) {
     }
   };
 
-  if (environment === 'development') {
-    ENV.apiURL = process.env.API_URL,
-    ENV.contentSecurityPolicy = {
-      'connect-src': "'self' *",
-      'style-src': "'self' 'unsafe-inline' *",
-      'font-src': "'self' https://fonts.gstatic.com/",
-      'img-src': "'self' http://placehold.it/40x40 * data:"
-    }
-  }
+  ENV.apiURL = process.env.API_URL,
+
+  ENV.contentSecurityPolicy = {
+    'style-src': "'self' 'unsafe-inline' *",
+    'connect-src': "'self' http://54.6.95.239 *",
+    'img-src': "'self' http://placehold.it/40x40 * data:",
+    'font-src': "'self' https://fonts.gstatic.com/",
+    'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
+  };
+
   if (environment === 'test') {
-    ENV.apiURL = process.env.API_URL,
     ENV.defaultLocale = process.env.OTHER_LOCALE;
     ENV.otherLocale = process.env.DEFAULT_LOCALE;
     ENV.i18n = {
@@ -53,16 +53,8 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
   if (environment === 'production') {
-    ENV.apiURL = process.env.API_URL,
     ENV.baseURL = process.env.ROOT_URL || '/';
     ENV.locationType = 'hash',
-    ENV.contentSecurityPolicy = {
-      'style-src': "'self' 'unsafe-inline' *",
-      'connect-src': "'self' http://54.6.95.239 *",
-      'img-src': "'self' http://placehold.it/40x40 * data:",
-      'font-src': "'self' https://fonts.gstatic.com/",
-      'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
-    };
     ENV.googleAnalytics = {
       webPropertyId: process.env.GA
     };
