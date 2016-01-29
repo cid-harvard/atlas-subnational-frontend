@@ -28,6 +28,7 @@ export default Ember.Controller.extend({
 
   isGeo: computed.equal('visualization','geo'),
   isScatter: computed.equal('visualization','scatter'),
+
   isFixedHeight: computed('model.visualization', function() {
     let vis = this.get('model.visualization');
      return _.contains(['geo', 'treemap', 'scatter', 'similarity'], vis) ? true : false;
@@ -37,6 +38,14 @@ export default Ember.Controller.extend({
   }),
   isFiltered: computed('search', function() {
     return Boolean(this.get('search'));
+  }),
+  graph: computed('model.metaData', 'source', function() {
+    let source = this.get('source');
+    if(source === 'industries') {
+      return this.get('model.metaData.industrySpace');
+    } else if (source === 'products') {
+      return this.get('model.metaData.productSpace');
+    }
   }),
   isSingleYear: computed('visualization', function() {
     let visualization = this.get('visualization');

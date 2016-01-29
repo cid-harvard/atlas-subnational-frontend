@@ -63,9 +63,15 @@ export default Ember.Route.extend({
         return _.merge(d, industry, industryData);
       });
 
+      let occupationVacanciesSum = 0;
       let occupations = _.map(occupationsData, (d) => {
+        occupationVacanciesSum += d.num_vacancies;
         let occupation = occupationsMetadata[d.occupation_id];
         return _.merge(d, occupation);
+      });
+
+      occupations.forEach((d) => {
+        d.share = d.num_vacancies/occupationVacanciesSum;
       });
 
       var departments = [];
@@ -127,7 +133,6 @@ export default Ember.Route.extend({
       model.set('timeseries', departmentTimeseries);
       model.set('metaData', this.modelFor('application'));
 
-      if(model.id == '0') { model.set('metaData', this.modelFor('application')); }
       return model;
     });
   },
