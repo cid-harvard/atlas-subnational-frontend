@@ -7,6 +7,9 @@ export default Ember.Controller.extend({
 
   firstYear: computed.alias('i18n.firstYear'),
   lastYear: computed.alias('i18n.lastYear'),
+  yearRange: computed('firstYear', 'lastYear', function() {
+    return `${this.get('firstYear')} - ${this.get('lastYear')}`;
+  }),
   occupationsData: computed.alias('model.occupationsData'),
   isIndustryClass: computed.equal('model.level', 'class'),
 
