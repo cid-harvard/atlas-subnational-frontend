@@ -291,25 +291,6 @@ export default Ember.Controller.extend({
       this.transitionToRoute(`${model.entity_type}.visualization`, model.entity.id, model.source, visualization, this.get('variable'), {
         queryParams: {startDate: startDate, endDate: endDate, search: this.get('search') }
       });
-    },
-    changeQuestion: function() {
-      this.set('drawerQuestionsIsOpen', false); // Close question change drawer
-    },
-    toggleDrawerSettings: function() {
-      this.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
-      this.set('drawerQuestionsIsOpen', false); // Turn off other drawers
-      this.toggleProperty('drawerSettingsIsOpen'); // toggle on 'Settings'
-    },
-    toggleDrawerChangeGraph: function() {
-      this.set('drawerSettingsIsOpen', false); // Turn off other drawers
-      this.set('drawerQuestionsIsOpen', false); // Turn off other drawers
-      this.toggleProperty('drawerChangeGraphIsOpen'); // toggle on 'Change Graph'
-    },
-    zoomOut: function() {
-      if(this.get('zoom') === 1) { this.decrementProperty('zoom'); }
-    },
-    zoomIn: function() {
-      if(this.get('zoom') === 0) { this.incrementProperty('zoom'); }
     }
   }
 });

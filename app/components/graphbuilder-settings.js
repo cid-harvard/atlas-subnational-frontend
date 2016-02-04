@@ -25,13 +25,11 @@ export default Ember.Component.extend({
   actions: {
     increaseYear() {
       if(this.get('disableIncreaseYear')) { return false; }
-      console.log(this.get('lastYear'));
       this.incrementProperty('startDate');
       this.incrementProperty('endDate');
     },
     decreaseYear() {
       if(this.get('disableDecreaseYear')) { return false; }
-      console.log(this.get('lastYear'));
       this.decrementProperty('startDate');
       this.decrementProperty('endDate');
     },

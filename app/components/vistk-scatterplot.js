@@ -15,11 +15,66 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  scatter: computed('data.[]', 'dataType','eciValue','i18n.locale', function() {
+  varSize: computed('dataType', function() {
+    if(this.get('dataType') === 'products') { return 'cog'; }
+    if(this.get('dataType') === 'industries') { return 'cog'; }
+  }),
+  rca: computed('dataType', function() {
+    if(this.get('dataType') === 'products') { return 'export_rca'; }
+    if(this.get('dataType') === 'industries') { return 'rca'; }
+  }),
+  didInsertElement: function() {
+    $.getJSON(`${apiURL}/data/location?level=department`).then((response) => {
+      let id = this.get('entityId');
+      let data = get(response, 'data');
+      let datum = _.first(_.filter(data, {'year': this.get('lastYear'), 'department_id': parseInt(id) }));
+      this.set('width', this.$().parent().width());
+
+      if(this.get('dataType') === 'products' && datum) {
+        this.set('eciValue', get(datum, 'eci'));
+      }
+
+      this.createVisTK();
+      d3.select(this.get('id')).call(this.get('scatter'));
+    });
+  },
+  willDestroyElement: function() {
+    this.set('scatter',  null);
+    this.removeObserver('i18n.locale', this, this.update);
+    this.removeObserver('data.[]', this, this.update);
+  },
+  update: observer('data.@each', 'i18n.locale', 'dataType', function() {
+    if(!this.element){ return false; } //do not redraw if not there
+    Ember.run.later(this, function() {
+      if(this.get('scatter')) {
+        let vis = this.get('scatter');
+        let lang = this.get('i18n.locale') === 'en-col' ? 'en_EN': 'es_ES';
+        vis.params({
+          height: this.get('height'),
+          width: this.get('width'),
+          container: this.get('id'),
+          data: this.get('data'),
+          var_id: this.get('varIndependent'),
+          var_group: 'continent',
+          var_color: 'continent',
+          var_x: 'distance',
+          var_y: 'complexity',
+          var_r: this.get('varSize'),
+          x_text_custom: this.get('i18n').t('graph_builder.table.distance').string, // currently not working
+          y_text_custom: this.get('i18n').t('graph_builder.table.complexity').string,
+          var_text: this.get('varIndependent')
+        });
+        vis.params().init = true
+
+        d3.select(this.get('id')).call(vis);
+      }
+    });
+  }),
+  createVisTK: function() {
     let eci = this.get('eciValue');
     let lang = this.get('i18n.locale') === 'en-col' ? 'en_EN': 'es_ES';
-    let format = function(value) { return numeral(value).format('0.00'); };
-    return vistk.viz()
+    let format = function(value) { return numeral(value).format('0.000'); };
+    let scatter = vistk.viz()
     .params({
       type: 'scatterplot',
       margin: {top: 10, right: 20, bottom: 30, left: 30},
@@ -41,11 +96,6 @@ export default Ember.Component.extend({
       var_text: this.get('varIndependent'),
       x_text_custom: this.get('i18n').t('graph_builder.table.distance').string,
       y_text_custom: this.get('i18n').t('graph_builder.table.complexity').string,
-      time: {
-        var_time: 'year',
-        current_time: this.get('lastYear'),
-        parse: function(d) { return d; }
-      },
       items: [{
         marks: [{
           type: 'circle',
@@ -166,42 +216,8 @@ export default Ember.Component.extend({
       }],
       lang: lang
     });
-  }),
-  varSize: computed('dataType', function() {
-    if(this.get('dataType') === 'products') { return 'cog'; }
-    if(this.get('dataType') === 'industries') { return 'cog'; }
-  }),
-  rca: computed('dataType', function() {
-    if(this.get('dataType') === 'products') { return 'export_rca'; }
-    if(this.get('dataType') === 'industries') { return 'rca'; }
-  }),
-  didInsertElement: function() {
-    $.getJSON(`${apiURL}/data/location?level=department`).then((response) => {
-      let id = this.get('entityId');
-      let data = get(response, 'data');
-      let datum = _.first(_.filter(data, {'year': this.get('lastYear'), 'department_id': parseInt(id) }));
-      this.set('width', this.$().parent().width());
 
-      if(this.get('dataType') === 'products' && datum) {
-        this.set('eciValue', get(datum, 'eci'));
-      }
-
-      d3.select(this.get('id')).call(this.get('scatter'));
-      });
-  },
-  willDestroyElement: function() {
-    this.set('scatter',  null);
-    this.removeObserver('i18n.locale', this, this.update);
-    this.removeObserver('data.[]', this, this.update);
-  },
-  update: observer('data.[]', 'varRca', 'i18n.locale', 'dataType', function() {
-    if(!this.element){ return ; } //do not redraw if not there
-    Ember.run.scheduleOnce('afterRender', this , function() {
-      if(this.get('scatter')) {
-        d3.select(this.get('id')).select('svg').remove();
-        d3.select(this.get('id')).call(this.get('scatter'));
-      }
-    });
-  })
+    this.set('scatter', scatter);
+  }
 });
 
