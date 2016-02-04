@@ -49,10 +49,7 @@ export default Ember.Controller.extend({
   }),
   canYearToggle: computed('visualization', function() {
     let visualization = this.get('visualization');
-    if(visualization === 'multiples' || visualization === 'scatter'){
-      return false;
-    }
-    return true;
+    return visualization != 'multiples';
   }),
   years: computed('startDate', 'endDate', function() {
     let start = parseInt(this.get('startDate'), 10);

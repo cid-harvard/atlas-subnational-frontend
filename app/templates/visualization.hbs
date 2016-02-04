@@ -9,14 +9,10 @@
   <h3 class="section__head question__head">{{pageTitle}}</h3>
 </header>
 <section class="stream__section visualization__{{visualization}}">
-  <div {{bind-attr class=":section__buildermod drawerSettingsIsOpen:buildermod__settings--open drawerChangeGraphIsOpen:buildermod__changegraph--open" }}>
+  <div {{bind-attr class=":section__buildermod drawerChangeGraphIsOpen:buildermod__changegraph--open" }}>
     <header class="buildermod__header">
       <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
       <div class="buildermod__tools">
-          <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--settings" {{action 'toggleDrawerSettings'}} data-settings-open=''>
-            {{fa-icon icon= "plus" classNames="tool__btn__icon"}}
-            {{t 'graph_builder.settings.label'}}
-          </button>
           <div class="btn btn--standalone btn--buildermod buildermod__tool--change_graph">
             <div class="buildermod__tool--change-graph--label">
               {{t 'graph_builder.change_graph.label'}}
@@ -44,6 +40,10 @@
         graph=graph
       }}
 
+      {{#if needsLegend }}
+        {{component 'visualization-legend' legend=legend }}
+      {{/if}}
+
       <div class="buildermod__settings__wrap">
         {{component 'graphbuilder-settings'
           classNames='buildermod__settings'
@@ -56,12 +56,7 @@
         {{#unless isGeo }}
           {{partial "partials/buildermod-search"}}
         {{/unless}}
-      </div>  
-
-      {{#if needsLegend }}
-        {{component 'visualization-legend' legend=legend }}
-      {{/if}}
-
+      </div>
     </div>
     {{component 'visualization-explanation'
       text=visualizationExplanation
