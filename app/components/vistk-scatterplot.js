@@ -7,7 +7,9 @@ const {apiURL} = ENV;
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
+  height: 500,
   varIndependent: 'code',
+  attributeBindings: ['width','height'],
   classNames: ['buildermod__viz--white','buildermod__viz','scatterplot'],
   lastYear: computed.alias('i18n.lastYear'),
   id: computed('elementId', function() {
@@ -179,7 +181,6 @@ export default Ember.Component.extend({
       let data = get(response, 'data');
       let datum = _.first(_.filter(data, {'year': this.get('lastYear'), 'department_id': parseInt(id) }));
       this.set('width', this.$().parent().width());
-      this.set('height', this.$().parent().height());
 
       if(this.get('dataType') === 'products' && datum) {
         this.set('eciValue', get(datum, 'eci'));
