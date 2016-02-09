@@ -4,6 +4,7 @@ const {computed} = Ember;
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   attributeBindings: ['data-dateIndex'],
+  tagName: 'form',
   isGreater: computed.equal('rcaFilter', 'greater'),
   isLess: computed.equal('rcaFilter', 'less'),
   isAll: computed.equal('rcaFilter', 'all'),
@@ -25,13 +26,11 @@ export default Ember.Component.extend({
   actions: {
     increaseYear() {
       if(this.get('disableIncreaseYear')) { return false; }
-      console.log(this.get('lastYear'));
       this.incrementProperty('startDate');
       this.incrementProperty('endDate');
     },
     decreaseYear() {
       if(this.get('disableDecreaseYear')) { return false; }
-      console.log(this.get('lastYear'));
       this.decrementProperty('startDate');
       this.decrementProperty('endDate');
     },

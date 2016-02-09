@@ -57,7 +57,6 @@ export default EmberTableComponent.extend(TableMap, {
   rowHeight: 50,
   minHeaderHeight: 50,
   height: 420,
-  enableContentSelection: true,
   attributeBindings: ['height'],
   selectionMode: 'mutiple',
   tableMap: computed('source', function() {
