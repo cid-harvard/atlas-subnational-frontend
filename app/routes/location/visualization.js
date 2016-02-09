@@ -79,7 +79,7 @@ export default Ember.Route.extend({
 
     return Ember.Object.create({
       entity: model,
-      data: data,
+      data: Ember.A(data)
     });
   },
   industryDataMunging(hash) {
@@ -95,7 +95,7 @@ export default Ember.Route.extend({
 
     return Ember.Object.create({
       entity: model,
-      data: data,
+      data: Ember.A(data)
     });
   },
   productsDataMunging(hash) {
@@ -110,7 +110,7 @@ export default Ember.Route.extend({
 
     return Ember.Object.create({
       entity: model,
-      data: data,
+      data: Ember.A(data)
     });
   },
   setupController(controller, model) {
