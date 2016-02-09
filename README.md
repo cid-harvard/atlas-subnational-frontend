@@ -50,11 +50,19 @@ In the `config/enviroment.js` file adjust the `baseURL` variable in the `var ENV
 
 ### Building
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+Current ENV files
+*  colombia
+*  mexico
+
+To use a country
+* run `ember build -e <enviroment>` e.g. `ember build -e colombia`
+
+
+* `ember build` (development) defaults to `.env`
+* `ember build --environment production` (production) defaults to `.env`
 
 * To build the app, have the correct `.env` file in the root dir see '.env.example'
-* run `ember build -e <enviroment>` e.g. `ember build -e atlas_colombia_master`
+* run `ember build -e <enviroment>` e.g. `ember build -e colombia`
 * By default the built app is in the `dist/` folder
 * Locales follow `country-lang` syntax.  e.g. `usa-en`, `usa-es` or `mex-en`, `mex-es`
 * [ember cli i18n](https://github.com/jamesarosen/ember-i18n) is used for the internalization.

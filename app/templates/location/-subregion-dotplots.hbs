@@ -2,11 +2,16 @@
   <table class="table--summaries">
     <thead>
       <tr class="table__row table__row--header">
-        <th class="table__header"></th>
+        <th class="table__header table__header--summaries--labels"></th>
         <th class="table__header table__header--summaries--value">
           {{t 'location.show.value'}}
+          <div class="table__cell--rank title">
+            <div class="value title">
+              {{t 'rankings.table-title'}}
+            </div>
+          </div>
         </th>
-        <th class="table__header table__header--summaries--value">
+        <th class="table__header table__header--summaries--dotplot">
           {{t 'location.show.all_regions'}}
         </th>
       </tr>
@@ -18,6 +23,7 @@
         </td>
         <td class="table__cell table__cell--summaries">
           {{model.lastEci}}
+          {{table-rank rank=model.eciRank}}
         </td>
         <td class="table__cell table__cell--summaries">
           {{vistk-dotplot

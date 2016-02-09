@@ -9,18 +9,18 @@
   position: relative;
 
   .items__mark__diamond {
-    fill: gray;
-    opacity: .1;
+    fill: $colorGray;
+    opacity: .3;
   }
 
   .items__mark__diamond.preselected {
-    stroke: #EBE6E3;
-    fill: red;
+    stroke: $colorRed;
+    fill: $colorRed;
     opacity: 1;
   }
 
   .items__mark__diamond.highlighted {
-    stroke: black;
+    stroke: $colorGray;
     opacity: 1;
    }
 
@@ -34,7 +34,7 @@
   }
 
   .axis > .domain {
-    stroke: #000;
+    stroke: $colorGray;
     stroke-dasharray: 1,1;
     stroke-width: .5px;
   }

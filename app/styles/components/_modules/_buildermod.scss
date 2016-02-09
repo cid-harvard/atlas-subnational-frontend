@@ -52,31 +52,113 @@
 
 .buildermod__vizwrap {
   min-height: $minBuildermodHeight;
-  height: $buildermodHeight;
   overflow-y: scroll;
   background: $colorGrayLightest;
   position: relative;
-  padding: $baseSpace*5 $baseSpace*1.5 $baseSpace*1.5;
+  padding: $baseSpace*1.5;
 }
 
 .buildermod__vizwrap--fixedheight {
   overflow-y: visible;
 }
 
+.buildermod__vizwrap--geo {
+  padding: 0;
+}
+
 .buildermod__viz {
   position: relative;
+  min-height: 500px;
   &--white {
     background: $colorWhite;
   }
 }
 
 .buildermod__highlight__wrap {
-  margin: $baseSpace*-3.5 0 0;
-  position: absolute;
-  width: calc(100% - 7.8rem); // TODO Switch from calc
+  margin: 0 0 1rem 0;
+  width: 100%;
   z-index: $zIndex-1;
 }
 
 .buildermod__highlight__wrap .search {
   background: white;
+}
+
+/*
+** Settings bar
+*/
+.buildermod__settings__wrap {
+  display: block;
+}
+
+.buildermod__settings {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+}
+
+// Labels
+.settings__input__wrap {
+  padding: $baseSpace * .5;
+}
+
+.settings__input {
+  font-size: $fontLarge;
+  color: $colorBlack;
+}
+
+.settings__input-year {
+  padding: 20px;
+}
+
+.settings__input__text {
+  color: $colorBlack;
+}
+
+// Select menu
+.settings__input--select {
+  background: $colorWhite;
+}
+
+/*
+* Legend underneath visualizations
+*/
+.buildermod__legend {
+  vertical-align: top;
+  display: block;
+  font-size: $fontTiny;
+  font-family: $sans;
+  width: auto;
+  margin-top: 1rem;
+  -webkit-column-count: 3; /* Chrome, Safari, Opera */
+  -moz-column-count: 3; /* Firefox */
+  column-count: 3;
+  @media screen and (max-width: 900px) {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+  }
+  @media screen and (max-width: 700px) {
+    -webkit-column-count: 1; /* Chrome, Safari, Opera */
+    -moz-column-count: 1; /* Firefox */
+    column-count: 1;
+  }
+}
+
+.visualization__scatter .buildermod__legend {
+  margin-left: 6rem;
+}
+
+.buildermod__legend__item {
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+
+  .fa {
+    position: relative;
+    font-size: $fontXTiny;
+    top: -1px;
+  }
 }

@@ -41,6 +41,10 @@ export default Ember.Route.extend({
     }
     return [];
   },
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    controller.set('metaData', this.modelFor('application'));
+  },
   deactivate: function() {
     this.controller.set('search', null);
   },

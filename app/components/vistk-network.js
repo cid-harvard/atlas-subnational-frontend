@@ -1,11 +1,12 @@
 import Ember from 'ember';
 import numeral from 'numeral';
 
-const {computed, observer, $, get:get} = Ember;
+const {computed, observer, get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
+  height: 500,
   classNames: ['buildermod__viz--white','buildermod__viz'],
   attributeBindings: ['width','height'],
   varIndependent: ['group', 'code'],
@@ -30,14 +31,6 @@ export default Ember.Component.extend({
   dataMetadata: computed('dataType','metadata', function() {
     let type = this.get('dataType');
     return this.get(`metadata.${type}`);
-  }),
-  networkURL: computed('dataType', function() {
-    let type = this.get('dataType');
-    if(type === 'industries') {
-      return `assets/networks/${this.get('i18n.country')}-industry_space.json`;
-    } else if (type === 'products') {
-      return 'assets/networks/product_space.json';
-    }
   }),
   varRCA: computed('dataType', function() {
     let type = this.get('dataType');
@@ -76,15 +69,6 @@ export default Ember.Component.extend({
         marks: [{
           type: 'circle',
           fill: (d) => {
-            //show colors if all colors is enabled
-            if(this.get('showAllColors')) {
-              return d.color;
-            }
-            //if there is a search, color nodes with Truth-y
-            //export_value (products)  or 'rca' (industries)
-            if(this.get('search')) {
-              return d.color;
-            }
             //if there is no search, color products export > 0 and rca > 1
             // industries if RCA > 1 ( varDependent for industries is also rca )
             if(d[this.get('varRCA')] >= 1){
@@ -148,13 +132,9 @@ export default Ember.Component.extend({
     });
   }),
   didInsertElement: function() {
-    $.getJSON(this.get('networkURL')).then((graph) => {
-      this.set('graph', graph);
-      Ember.run.scheduleOnce('afterRender', this , function() {
-        if(!this.get('width')){ this.set('width', this.$().parent().width()); }
-        if(!this.get('height')){ this.set('height', this.$().parent().height()); }
-        d3.select(this.get('id')).call(this.get('network'));
-      });
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      if(!this.get('width')){ this.set('width', this.$().parent().width()); }
+      d3.select(this.get('id')).call(this.get('network'));
     });
   },
   willDestroyElement: function() {

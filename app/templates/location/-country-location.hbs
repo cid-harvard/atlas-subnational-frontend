@@ -100,6 +100,20 @@
     {{/ivy-tabs}}
   </div>
 </section>
+<section class="stream__section">
+  <div class="ember__table__wrap">
+    {{component 'table-download'
+      data=occupationData
+      source='occupations'
+      pageTitle='products'
+      name='colombia'
+    }}
+    {{component 'graphbuilder-table'
+      data=occupationData
+      source='occupations'
+    }}
+  </div>
+</section>
 
 <section class="stream__section">
   <header class="section__header">
@@ -129,7 +143,7 @@
             immutableData=lastIndustryData
             elementId='industry-space'
             dataType='industries'
-            showAllColors='true'
+            graph=industrySpace
             height=600
             delay=2000
           }}
@@ -149,7 +163,6 @@
     {{component 'graphbuilder-table'
       data=lastIndustryData
       source='industries'
-      isSingleYear='true'
     }}
   </div>
 </section>
@@ -244,6 +257,7 @@
             dataType='products'
             metadata=model.metaData
             varDependent='export_value'
+            graph=productSpace
             height=600
             delay=3500
           }}
@@ -263,7 +277,6 @@
     {{component 'graphbuilder-table'
       data=productsData
       source='products'
-      isSingleYear='true'
     }}
   </div>
 </section>

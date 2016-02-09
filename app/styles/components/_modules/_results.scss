@@ -58,6 +58,21 @@
   color: $colorBlack;
   font-size: $fontSmall;
   @include offset-text;
+
+  font-weight: 400;
+  display: inline-block;
+  margin-right: $baseSpace / 3;
+  &:after {
+    content: '/';
+    margin-left: $baseSpace / 3;
+    color: $colorGray;
+  }
+  &:last-of-type {
+    margin-right: 0;
+    &:after {
+      content: none;
+    }
+  }
 }
 
 .results__name {
