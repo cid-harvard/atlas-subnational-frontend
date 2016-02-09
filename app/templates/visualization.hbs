@@ -13,15 +13,19 @@
     <header class="buildermod__header">
       <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
       <div class="buildermod__tools">
-          <div class="btn btn--standalone btn--buildermod buildermod__tool--change_graph">
-            <div class="buildermod__tool--change-graph--label">
-              {{t 'graph_builder.change_graph.label'}}
-            </div>
-            {{partial "partials/buildermod-drawer-change-graph"}}
+        <div class="btn btn--standalone btn--buildermod buildermod__tool--change_graph">
+          <div class="buildermod__tool--change-graph--label">
+            {{t 'graph_builder.change_graph.label'}}
           </div>
+          {{partial "partials/buildermod-drawer-change-graph"}}
+        </div>
       </div>
     </header>
     <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--fixedheight isGeo:buildermod__vizwrap--geo"}}>
+      {{#unless isGeo }}
+        {{partial "partials/buildermod-search"}}
+      {{/unless}}
+
       {{component visualizationComponent
         classNames='buildermod__viz'
         immutableData=immutableData
@@ -53,9 +57,6 @@
           isScatter=isScatter
           rcaFilter=rcaFilter
         }}
-        {{#unless isGeo }}
-          {{partial "partials/buildermod-search"}}
-        {{/unless}}
       </div>
     </div>
     {{component 'visualization-explanation'
