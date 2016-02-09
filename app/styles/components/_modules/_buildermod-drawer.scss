@@ -38,17 +38,6 @@
 
 // Settings drawer
 
-.settings__input__wrap {
-  &:last-of-type {
-    border-bottom: 1px solid $colorBrown500;
-  }
-}
-
-.settings__input {
-  margin-bottom: $baseSpace * 2;
-  line-height: 100%;
-}
-
 .settings__btn--close {
   float: right;
 }
