@@ -156,6 +156,7 @@ export default Ember.Component.extend({
       let graphBuilder = ! this.get('isInTab');
 
       if(isProfilePanel || graphBuilder) {
+        this.set('height', this.$().parent().height() || 500 );
         this.set('width', this.$().parent().width());
         d3.select(this.get('id')).call(this.get('treemap'));
       }
@@ -165,6 +166,7 @@ export default Ember.Component.extend({
     if(this.get('isInTab') && this.get('parent.isVisible')) {
       Ember.run.scheduleOnce('afterRender', this , function() {
         this.set('width', this.$().parent().width());
+        this.set('height', this.$().parent().height() || 500 );
         if(this.get('treemap')) {
           d3.select(this.get('id')).select('svg').remove();
           d3.select(this.get('id')).call(this.get('treemap'));
@@ -181,6 +183,7 @@ export default Ember.Component.extend({
   update: observer('data.[]', 'varDependent', 'i18n.display', function() {
     if(!this.element){ return false; } //do not redraw if not there
     this.set('width', this.$().parent().width());
+    this.set('height', this.$().parent().height() || 500 );
 
     if(this.get('treemap')) {
       d3.select(this.get('id')).select('svg').remove();
