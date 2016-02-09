@@ -134,7 +134,7 @@
 {{#if hasChildrenIndustries}}
   <section class="stream__section">
     <header class="section__header">
-      <h3 class="section__head">{{t 'industry.show.industry_composition'}}</h3>
+      <h3 class="section__head">{{t 'industry.show.industry_composition' year=lastYear}}</h3>
     </header>
     {{component 'graphbuilder-table'
       data=model.classIndustries
