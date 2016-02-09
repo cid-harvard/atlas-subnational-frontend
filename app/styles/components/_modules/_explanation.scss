@@ -14,9 +14,9 @@
 }
 
 .explanation__p {
-  font-size: $fontBase;
+  font-size: $fontTiny;
   font-family: $serif;
-  margin-bottom: $baseSpace/4;
+  margin: $baseSpace/4;
 }
 
 .explanation__btn {
@@ -26,12 +26,5 @@
   width: auto;
   margin:0 auto;
   box-shadow: inset 0 -5px $colorGray;
-}
-
-.explanation__copy--hide {
-  @include bg-gradient-t2b($colorBlack, $colorBrown200);
-  max-height: 4*$baseSpace;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
