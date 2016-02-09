@@ -2,9 +2,18 @@
   <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.employment'}}</h4>
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
-      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
-      <i class="icon-cidcon_geo builder__questions__item__icon"></i>
+      {{#link-to 'industry.visualization' model.id 'departments' 'treemap' 'employment' (query-params startDate=lastYear endDate=lastYear)
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'employment' (query-params startDate=firstYear endDate=lastYear)
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'industry.visualization' model.id 'departments' 'geo' 'employment' (query-params startDate=lastYear endDate=lastYear)
+        class="icon-cidcon_geo builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'employment' (query-params startDate=firstYear endDate=lastYear)
@@ -16,8 +25,14 @@
       </div>
     </li>
     <li class="builder__questions__item">
-      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      {{#link-to 'industry.visualization' model.id 'cities' 'treemap' 'employment' (query-params startDate=lastYear endDate=lastYear)
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'employment' (query-params startDate=firstYear endDate=lastYear)
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
         {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'employment' (query-params startDate=firstYear endDate=lastYear)
@@ -32,9 +47,18 @@
   <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.wage'}}</h4>
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
-      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
-      <i class="icon-cidcon_geo builder__questions__item__icon"></i>
+      {{#link-to 'industry.visualization' model.id 'departments' 'treemap' 'wages' (query-params startDate=lastYear endDate=lastYear)
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'wages' (query-params startDate=firstYear endDate=lastYear)
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'industry.visualization' model.id 'departments' 'geo' 'wages' (query-params startDate=lastYear endDate=lastYear)
+        class="icon-cidcon_geo builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'wages' (query-params startDate=firstYear endDate=lastYear)
@@ -46,8 +70,14 @@
       </div>
     </li>
     <li class="builder__questions__item">
-      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      {{#link-to 'industry.visualization' model.id 'cities' 'treemap' 'wages' (query-params startDate=lastYear endDate=lastYear)
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'wages' (query-params startDate=firstYear endDate=lastYear)
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
         {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'wages' (query-params startDate=firstYear endDate=lastYear)
@@ -63,7 +93,10 @@
   <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.occupation'}}</h4>
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
-      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies' (query-params startDate=lastYear endDate=lastYear)
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies' (query-params startDate=lastYear endDate=lastYear)

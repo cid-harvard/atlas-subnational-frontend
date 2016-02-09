@@ -2,9 +2,18 @@
   <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.export'}}</h4>
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
-      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
-      <i class="icon-cidcon_geo builder__questions__item__icon"></i>
+      {{#link-to 'product.visualization' model.id 'departments' 'treemap' 'export_value' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'product.visualization' model.id 'departments' 'multiples' 'export_value' (query-params startDate=firstYear endDate=lastYear search='null')
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'product.visualization' model.id 'departments' 'geo' 'export_value' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_geo builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'product.visualization' model.id 'departments' 'geo' 'export_value' (query-params startDate=lastYear endDate=lastYear search='null')
@@ -16,8 +25,14 @@
       </div>
     </li>
     <li class="builder__questions__item">
-      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      {{#link-to 'product.visualization' model.id  'cities' 'multiples' 'export_value' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'product.visualization' model.id  'cities' 'multiples' 'export_value' (query-params startDate=firstYear endDate=lastYear search='null')
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'product.visualization' model.id  'cities' 'multiples' 'export_value' (query-params startDate=firstYear endDate=lastYear search='null')
@@ -29,8 +44,14 @@
       </div>
     </li>
     <li class="builder__questions__item">
-      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      {{#link-to 'product.visualization' model.id  'partners' 'multiples' 'export_value' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'product.visualization' model.id  'partners' 'multiples' 'export_value' (query-params startDate=firstYear endDate=lastYear search='null')
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'product.visualization' model.id 'partners' 'treemap' 'export_value' (query-params startDate=lastYear endDate=lastYear search='null')
@@ -45,9 +66,18 @@
   <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.import'}}</h4>
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
-      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
-      <i class="icon-cidcon_geo builder__questions__item__icon"></i>
+      {{#link-to 'product.visualization' model.id 'departments' 'treemap' 'import_value' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'product.visualization' model.id 'departments' 'multiples' 'import_value' (query-params startDate=firstYear endDate=lastYear search='null')
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'product.visualization' model.id 'departments' 'geo' 'import_value' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_geo builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'product.visualization' model.id 'departments' 'geo' 'import_value' (query-params startDate=lastYear endDate=lastYear search='null')
@@ -59,8 +89,14 @@
       </div>
     </li>
     <li class="builder__questions__item">
-      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      {{#link-to 'product.visualization' model.id  'cities' 'multiples' 'import_value' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'product.visualization' model.id  'cities' 'multiples' 'import_value' (query-params startDate=firstYear endDate=lastYear search='null')
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'product.visualization' model.id 'cities' 'multiples' 'import_value' (query-params startDate=firstYear endDate=lastYear search='null')
@@ -72,8 +108,14 @@
       </div>
     </li>
     <li class="builder__questions__item">
-      <i class="icon-cidcon_multiples builder__questions__item__icon"></i>
-      <i class="icon-cidcon_treemap builder__questions__item__icon"></i>
+      {{#link-to 'product.visualization' model.id  'partners' 'multiples' 'import_value' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'product.visualization' model.id  'partners' 'multiples' 'import_value' (query-params startDate=firstYear endDate=lastYear search='null')
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
           {{#link-to 'product.visualization' model.id 'partners' 'treemap' 'import_value' (query-params startDate=lastYear endDate=lastYear search='null')

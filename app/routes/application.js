@@ -23,7 +23,7 @@ export default Ember.Route.extend({
     var products4digit = $.getJSON(apiURL+'/metadata/products?level=4digit');
     var locationsMetadata = $.getJSON(apiURL+'/metadata/locations/');
     var productsHierarchy = $.getJSON(apiURL+'/metadata/products/hierarchy?from_level=4digit&to_level=section');
-    var industriesClass = $.getJSON(apiURL+'/metadata/industries?level=class');
+    var industries = $.getJSON(apiURL+'/metadata/industries');
     var industriesHierarchy = $.getJSON(apiURL+'/metadata/industries/hierarchy?from_level=4digit&to_level=section');
     var productParentMetadata = $.getJSON(apiURL+'/metadata/products/?level=section');
     var industryParentMetadata = $.getJSON(apiURL+'/metadata/industries/?level=section');
@@ -40,7 +40,7 @@ export default Ember.Route.extend({
       products4digit,
       locationsMetadata,
       productsHierarchy,
-      industriesClass,
+      industries,
       industriesHierarchy,
       productParentMetadata,
       industryParentMetadata,
@@ -118,7 +118,12 @@ export default Ember.Route.extend({
         let color = _.isUndefined(sectionId) ? '#fff' :get(industrySectionColor, `${sectionId}.color`);
 
         d.pci_data = get(industryPCI, `${d.id}`);
-        set(industrySectionMap, `${sectionId}.color`, color);
+        /*
+         *division industries arent used here.
+         */
+        if(sectionId) {
+          set(industrySectionMap, `${sectionId}.color`, color);
+        }
 
         d.group = get(industrySectionMap, `${sectionId}.code`);
         d.parent_name_en = get(industrySectionMap, `${sectionId}.name_en`);
