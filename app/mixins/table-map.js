@@ -22,7 +22,7 @@ export default Ember.Mixin.create({
     { key: 'num_vacancies', type: 'int', savedWidth: 100 },
     { key: 'parent', savedWidth: 270 },
     { key: 'rca', type: 'int', savedWidth: 280 },
-    { key: 'wages', type: 'int', savedWidth: 330 },
+    { key: 'wages', type: 'int', savedWidth: 350 },
     { key: 'year' , type: 'int', savedWidth: 80 },
     { key: 'ranking' , type: 'int', savedWidth: 80 },
     { key: 'eci' , type: 'int', savedWidth: 210 },
