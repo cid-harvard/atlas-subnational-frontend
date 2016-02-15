@@ -21,10 +21,10 @@ test('visiting /search', function(assert) {
     assert.equal(currentURL(), '/search');
   });
 
-  fillIn('input[data-search-input]', 'Atlantico');
+  fillIn('input[data-search-input]', 'Chiapas');
   click('input[data-search]');
   andThen(function() {
-    assert.equal(find('p[data-search-result-name]:first').text(), 'Atlántico');
+    assert.equal(find('p[data-search-result-name]:first').text(), 'Chiapas');
   });
 
   fillIn('input[data-search-input]', 'gold clad metals');
