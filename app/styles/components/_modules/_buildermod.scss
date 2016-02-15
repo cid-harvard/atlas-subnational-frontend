@@ -68,6 +68,7 @@
 
 .buildermod__viz {
   position: relative;
+  min-height: 500px;
   &--white {
     background: $colorWhite;
   }
@@ -83,6 +84,43 @@
   background: white;
 }
 
+/*
+** Settings bar
+*/
+.buildermod__settings__wrap {
+  display: block;
+}
+
+.buildermod__settings {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+}
+
+// Labels
+.settings__input__wrap {
+  padding: $baseSpace * .5;
+}
+
+.settings__input {
+  font-size: $fontLarge;
+  color: $colorBlack;
+}
+
+.settings__input-year {
+  padding: 20px;
+}
+
+.settings__input__text {
+  color: $colorBlack;
+}
+
+// Select menu
+.settings__input--select {
+  background: $colorWhite;
+}
 
 /*
 * Legend underneath visualizations

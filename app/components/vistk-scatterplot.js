@@ -7,13 +7,15 @@ const {apiURL} = ENV;
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
+  height: 500,
   varIndependent: 'code',
+  attributeBindings: ['width','height'],
   classNames: ['buildermod__viz--white','buildermod__viz','scatterplot'],
   lastYear: computed.alias('i18n.lastYear'),
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
-  scatter: computed('data.[]', 'dataType','eciValue','i18n.locale', function() {
+  scatter: computed('data.@each', 'dataType','eciValue','i18n.locale', function() {
     let eci = this.get('eciValue');
     let lang = this.get('i18n.locale') === 'en-col' ? 'en_EN': 'es_ES';
     let format = function(value) { return numeral(value).format('0.00'); };
@@ -26,8 +28,6 @@ export default Ember.Component.extend({
       container: this.get('id'),
       data: this.get('data'),
       var_id: this.get('varIndependent'),
-      var_group: 'continent',
-      var_color: 'continent',
       var_x: 'distance',
       var_y: 'complexity',
       var_r: this.get('varSize'),
@@ -39,11 +39,6 @@ export default Ember.Component.extend({
       var_text: this.get('varIndependent'),
       x_text_custom: this.get('i18n').t('graph_builder.table.distance').string,
       y_text_custom: this.get('i18n').t('graph_builder.table.complexity').string,
-      time: {
-        var_time: 'year',
-        current_time: this.get('lastYear'),
-        parse: function(d) { return d; }
-      },
       items: [{
         marks: [{
           type: 'circle',
@@ -179,25 +174,24 @@ export default Ember.Component.extend({
       let data = get(response, 'data');
       let datum = _.first(_.filter(data, {'year': this.get('lastYear'), 'department_id': parseInt(id) }));
       this.set('width', this.$().parent().width());
-      this.set('height', this.$().parent().height());
 
       if(this.get('dataType') === 'products' && datum) {
         this.set('eciValue', get(datum, 'eci'));
       }
 
       d3.select(this.get('id')).call(this.get('scatter'));
-      });
+    });
   },
   willDestroyElement: function() {
     this.set('scatter',  null);
     this.removeObserver('i18n.locale', this, this.update);
     this.removeObserver('data.[]', this, this.update);
   },
-  update: observer('data.[]', 'varRca', 'i18n.locale', 'dataType', function() {
+  update: observer('data.@each', 'varRca', 'i18n.locale', 'dataType', function() {
     if(!this.element){ return ; } //do not redraw if not there
-    Ember.run.scheduleOnce('afterRender', this , function() {
+    d3.select(this.get('id')).select('svg').remove();
+    Ember.run.later(this , function() {
       if(this.get('scatter')) {
-        d3.select(this.get('id')).select('svg').remove();
         d3.select(this.get('id')).call(this.get('scatter'));
       }
     });
