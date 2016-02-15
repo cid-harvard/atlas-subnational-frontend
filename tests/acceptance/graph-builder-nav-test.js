@@ -14,44 +14,45 @@ module('Acceptance | graph builder nav', {
   }
 });
 
-test('search for Alantico and go to GB and Profile', function(assert) {
+test('search for Chiapas and go to GB and Profile', function(assert) {
   visit('/search');
 
   //search for atlantico and click on GB page
-  fillIn('input[data-search-input]', 'Atlántico');
+  fillIn('input[data-search-input]', 'Chiapas');
+
   click('input[data-search]');
   click('a[data-search-profile]');
 
   andThen(function() {
-    assert.equal(currentURL(), '/location/2?locale=en-col');
-    assert.equal(find('h2[data-location-name]').text(), 'Atlántico');
+    assert.equal(currentURL(), '/location/87?locale=en-mex');
+    assert.equal(find('h2[data-location-name]').text(), 'Chiapas');
   });
 
   click('li[data-location-industry="wages"]');
 
   andThen(function() {
-    assert.equal(currentURL(), '/location/2/source/industries/visualization/treemap/wages?endDate=2014&locale=en-col&startDate=2014');
+    assert.equal(currentURL(), '/location/87/source/industries/visualization/treemap/wages?endDate=2014&locale=en-mex&startDate=2014');
   });
 
   click("i.icon-cidcon_multiples");
 
   andThen(function() {
-    assert.equal(currentURL(), '/location/2/source/industries/visualization/multiples/wages?endDate=2014&locale=en-col&startDate=2008');
+    assert.equal(currentURL(), '/location/87/source/industries/visualization/multiples/wages?endDate=2014&locale=en-mex&startDate=2004');
   });
 
   //Switch to import source
   click("li[data-location-product='imports']");
 
   andThen(function() {
-    assert.equal(currentURL(), '/location/2/source/products/visualization/treemap/import_value?endDate=2014&locale=en-col&startDate=2014');
+    assert.equal(currentURL(), '/location/87/source/products/visualization/treemap/import_value?endDate=2014&locale=en-mex&startDate=2014');
   });
 
   //return to profile
   click('li[data-search-profile]');
 
   andThen(function() {
-    assert.equal(currentURL(), '/location/2?locale=en-col');
-    assert.equal(find('h2[data-location-name]').text(), 'Atlántico');
+    assert.equal(currentURL(), '/location/87?locale=en-mex');
+    assert.equal(find('h2[data-location-name]').text(), 'Chiapas');
   });
 });
 
