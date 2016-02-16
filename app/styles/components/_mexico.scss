@@ -33,6 +33,20 @@ $odGrayMedDark: #BABABA;
     background: $colorWhite;
     color: $odGreen;
   }
+  &--active {
+    background:$odGrayMedDark;
+    &:hover {
+      color: $colorWhite;
+      background:$odGrayMedDark;
+    }
+  }
+  &--disable {
+    background:$odGrayMedDark;
+    &:hover {
+      color: $colorWhite;
+      background:$odGrayMedDark;
+    }
+  }
 }
 
 .btn--buildermod {
@@ -78,15 +92,15 @@ main.builder .search {
 }
 
 .stream__head.index__head {
-  color: $odGreen;
+  color: #fff;
 }
 
 .header--pageheader--home .stream__subhead {
-  color: $odGreen;
+  color: #fff;
 }
 
 .header--pageheader--home .pageheader__menu a{
-  color: $odGreen;
+  color: #fff;
 }
 
 .onboarding--glyphs {
@@ -94,12 +108,12 @@ main.builder .search {
 }
 
 .header--pageheader--home .pageheader__nav .toggle__label__text {
-  color: $odGreen;
+  color: #fff;
 }
 .header--pageheader--home .pageheader__nav .toggle__label {
-  background-color: $odGreen;
+  background-color: $odGrayMedDark;
   &:after {
-    background-color: $odGreen;
+    background-color: $odGrayMedDark;
   }
 }
 .pageheader__home__cap {
@@ -138,7 +152,7 @@ main.builder .search {
 }
 
 .header--pageheader--home .pageheader__wrap .branding a {
-  color: $odGreen;
+  color: #fff;
 }
 
 .branding a {
