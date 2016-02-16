@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
 
+  hasOccupationsData: computed.notEmpty('occupationsData'),
   validTimeseries: computed.alias('model.timeseries'),
   departmentsData: computed.oneWay('model.departments'),
   occupationData: computed.oneWay('model.occupations'),
