@@ -17,7 +17,7 @@ export default Ember.Mixin.create({
     { key: 'export_value', type: 'int', savedWidth: 180 },
     { key: 'import_value', type: 'int', savedWidth: 180 },
     { key: 'monthly_wages', type: 'int', savedWidth: 290 },
-    { key: 'name', copy: 'export', savedWidth: 200 },
+    { key: 'name', copy: 'export', savedWidth: 300 },
     { key: 'num_establishments' , type: 'int', savedWidth: 200 },
     { key: 'num_vacancies', type: 'int', savedWidth: 100 },
     { key: 'parent', savedWidth: 270 },
