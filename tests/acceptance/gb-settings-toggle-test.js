@@ -15,10 +15,10 @@ module('Acceptance | gb settings toggle', {
 });
 
 test('visiting /gb-settings-toggle', function(assert) {
-  visit('location/5/source/industries/visualization/similarity/rca?endDate=2013&startDate=2013');
+  visit('location/5/source/industries/visualization/similarity/rca?endDate=2014&startDate=2014');
 
   andThen(function() {
-    assert.equal(_.trim(find('span[data-year-display]').text()), '2013');
+    assert.equal(_.trim(find('span[data-year-display]').text()), '2014');
     assert.equal((find('button[data-next-year]').is(':disabled')), true);
     assert.equal((find('button[data-prev-year]').is(':disabled')), false);
   });
@@ -26,7 +26,7 @@ test('visiting /gb-settings-toggle', function(assert) {
   click('button[data-prev-year]');
 
   andThen(function() {
-    assert.equal(_.trim(find('span[data-year-display]').text()), '2012');
+    assert.equal(_.trim(find('span[data-year-display]').text()), '2013');
     assert.equal((find('button[data-next-year]').is(':disabled')), false);
     assert.equal((find('button[data-prev-year]').is(':disabled')), false);
   });
