@@ -33,6 +33,9 @@ export default Ember.Component.extend({
       var_r: this.get('varSize'),
       radius_min: 2,
       radius_max: 10,
+      x_domain: this.get('x_domain'),
+      y_domain: this.get('y_domain'),
+      r_domain: this.get('r_domain'),
       x_format: format,
       y_format: format,
       duration: 0,
@@ -178,6 +181,10 @@ export default Ember.Component.extend({
       if(this.get('dataType') === 'products' && datum) {
         this.set('eciValue', get(datum, 'eci'));
       }
+
+      this.set('x_domain', vistk.utils.extent(this.get('immutableData'), 'distance'));
+      this.set('y_domain', vistk.utils.extent(this.get('immutableData'), 'complexity'));
+      this.set('r_domain', vistk.utils.extent(this.get('immutableData'), this.get('varSize')));
 
       d3.select(this.get('id')).call(this.get('scatter'));
     });
