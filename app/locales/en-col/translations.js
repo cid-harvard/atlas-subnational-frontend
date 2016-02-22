@@ -398,7 +398,7 @@ export default {
   "location.show.all_departments": "Compared to the other departments",
   "location.show.all_regions": "Compared to the other locations",
   "location.show.bullet.gdp_grow_rate": "The GDP growth rate in the period {{yearRange}} was {{gdpGrowth}}, compared to 5.3% for Colombia",
-  "location.show.bullet.gdp_pc": "{{name}} has a GDP per capita of {{lastGdpPerCapita}}, compared to Col$15.1 million for Colombia in {{year}}.",
+  "location.show.bullet.gdp_pc": "{{name}} has a GDP per capita of {{lastGdpPerCapita}}, compared to Col$15.1 million for Colombia in 2014.",
   "location.show.bullet.last_pop": "The population is {{lastPop}}, compared to 46.3 million in Colombia as a whole in 2014.",
   "location.show.eci": "Export complexity",
   "location.show.employment": "Employment ({{lastYear}})",

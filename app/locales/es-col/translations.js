@@ -398,7 +398,7 @@ export default {
   "location.show.all_departments": "Comparaci\u00f3n con otros departamentos",
   "location.show.all_regions": "En comparaci\u00f3n con los otros lugares",
   "location.show.bullet.gdp_grow_rate": "La tasa de crecimiento del PIB en el per\u00edodo {{yearRange}} fue {{gdpGrowth}}, comparada con 5,3% para toda Colombia.",
-  "location.show.bullet.gdp_pc": "El PIB per capita de {{name}} es {{lastGdpPerCapita}}, comparado con Col$15,1 millones para toda Colombia en {{year}}",
+  "location.show.bullet.gdp_pc": "El PIB per capita de {{name}} es {{lastGdpPerCapita}}, comparado con Col$15,1 millones para toda Colombia en 2014",
   "location.show.bullet.last_pop": "La poblaci\u00f3n es {{lastPop}} de personas, frente a 46,3 millones de personas en todo el pa\u00eds en 2014.",
   "location.show.eci": "Complejidad Exportadora",
   "location.show.employment": "Empleo total ({{lastYear}})",
