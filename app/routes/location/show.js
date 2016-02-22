@@ -55,13 +55,15 @@ export default Ember.Route.extend({
       }, []);
 
       //get industry data for department
-      let industries = _.map(industriesData, (d) => {
+      let industries = _.reduce(industriesData, (memo, d) => {
+        if(d.year != this.get('lastYear')) { return memo; }
         let industry = industriesMetadata[d.industry_id];
         if(model.id === '0') { d.rca = 1; }
         let industryData = industriesDataIndex[d.industry_id];
         industry.complexity = _.result(_.find(industry.pci_data, { year: d.year}), 'complexity');
-        return _.merge(d, industry, industryData);
-      });
+        memo.push(_.merge(d, industry, industryData));
+        return memo;
+      }, []);
 
       let occupationVacanciesSum = 0;
       let occupations = _.map(occupationsData, (d) => {
