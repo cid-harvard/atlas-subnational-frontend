@@ -185,6 +185,7 @@ export default Ember.Component.extend({
 
     if(this.get('treemap')) {
       d3.select(this.get('id')).select('svg').remove();
+      this.$().empty();
       d3.select(this.get('id')).call(this.get('treemap'));
     }
   })
