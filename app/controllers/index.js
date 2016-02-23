@@ -3,87 +3,58 @@ const {computed, get} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
+  featureToggle: Ember.inject.service(),
 
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
-  productIds: computed(function() {
-    return get(this, 'i18n')
-      .t('index.dropdown.products')
-      .string
-      .split(',');
-  }),
-  locationIds: computed(function() {
-    return get(this, 'i18n')
-      .t('index.dropdown.locations')
-      .string
-      .split(',');
-  }),
-  industryIds: computed(function() {
-    return get(this, 'i18n')
-      .t('index.dropdown.industries')
-      .string
-      .split(',');
-  }),
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
+  productIds: computed.alias('featureToggle.index_products'),
+  locationIds: computed.alias('featureToggle.index_locations'),
+  industryIds: computed.alias('featureToggle.index_industries'),
+
   products: computed.filter('model.products', function (product) {
     let id = get(this, 'productIds');
-    return _.contains(id, get(product, 'id'));
+    return _.contains(`${id}`, get(product, 'id'));
   }),
   sortedProducts: computed('productIds', 'products', function() {
     let id = get(this, 'productIds');
     let products = get(this, 'products');
 
     return _.map(id, function(d) {
-      return _.find(products, { id: d });
+      return _.find(products, { id: `${d}` });
     });
   }),
   cities: computed.filter('model.cities', function (city) {
     let id = get(this, 'locationIds');
-    return _.contains(id, get(city, 'id'));
+    return _.contains(`${id}`, get(city, 'id'));
   }),
   sortedCities: computed('locationIds', 'cities', function() {
     let id = get(this, 'locationIds');
     let cities = get(this, 'cities');
 
     return _.map(id, function(d) {
-      return _.find(cities, { id: d });
+      return _.find(cities, { id: `${d}` });
     });
   }),
   industries: computed.filter('model.industries', function (industry) {
     let id = get(this, 'industryIds');
-    return _.contains(id, get(industry, 'id'));
+    return _.contains(`${id}`, get(industry, 'id'));
   }),
   sortedIndustries: computed('industryIds', 'industries', function() {
     let id = get(this, 'industryIds');
     let industries = get(this, 'industries');
 
     return _.map(id, function(d) {
-      return _.find(industries, { id: d });
+      return _.find(industries, { id: `${d}` });
     });
   }),
-  locationFirst: computed('i18n', function() {
-    return get(this, 'i18n').t('index.location_q1.id').string;
-  }),
-  locationSecond: computed('i18n', function() {
-    return get(this, 'i18n').t('index.location_q2.id').string;
-  }),
-  industryFirst: computed('i18n', function() {
-    return get(this, 'i18n').t('index.industry_q1.id').string;
-  }),
-  industrySecond: computed('i18n', function() {
-    return get(this, 'i18n').t('index.industry_q2.id').string;
-  }),
-  productFirst: computed('i18n', function() {
-    return get(this, 'i18n').t('index.product_q1.id').string;
-  }),
-  productSecond: computed('i18n', function() {
-    return get(this, 'i18n').t('index.product_q2.id').string;
-  }),
-  profile: computed('i18n', function() {
-    return get(this, 'i18n').t('index.profile.id').string;
-  }),
-  graphbuilder: computed('i18n', function() {
-    return get(this, 'i18n').t('index.graphbuilder.id').string;
-  }),
+  locationFirst: computed.alias('featureToggle.index_location_q1_id'),
+  locationSecond: computed.alias('featureToggle.index_location_q2_id'),
+  industryFirst: computed.alias('featureToggle.index_industry_q1_id'),
+  industrySecond: computed.alias('featureToggle.index_industry_q2_id'),
+  productFirst: computed.alias('featureToggle.index_product_q1_id'),
+  productSecond: computed.alias('featureToggle.index_product_q2_id'),
+  profile: computed.alias('featureToggle.index_profile_id'),
+  graphbuilder: computed.alias('featureToggle.index_graphbuilder_id'),
   actions: {
     transitionLocation(id) {
       this.transitionToRoute('location.show', id);

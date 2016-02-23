@@ -5,6 +5,7 @@ const {computed} = Ember;
 
 export default Ember.Mixin.create({
   i18n: Ember.inject.service(),
+  featureToggle: Ember.inject.service(),
   level: attr(),
 
   code: attr('string'),
@@ -22,9 +23,9 @@ export default Ember.Mixin.create({
 
   locale: computed.alias('i18n.locale'),
 
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
-  censusYear: computed.alias('i18n.censusYear'),
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
+  censusYear: computed.alias('featureToggle.census_year'),
 
   _level: computed('locale', 'level', function() {
     return this.get('i18n')

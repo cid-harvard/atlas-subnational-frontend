@@ -5,6 +5,7 @@ const { computed, observer } = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
+  featureToggle: Ember.inject.service(),
   classNames: ['geo__wrap'],
   accessToken: 'pk.eyJ1IjoiZ3dlemVyZWsiLCJhIjoicXJkMjV6WSJ9.Iw_1c5zREHqNSfdtkjlqbA',
   baseMap: computed('elementId', function() {
@@ -12,7 +13,7 @@ export default Ember.Component.extend({
 
     let map = new L.mapbox.map(this.get('elementId'), 'gwezerek.22ab4aa8,gwezerek.da867b0d', {
       accessToken: this.accessToken,
-      center: this.get('i18n.mapCenter'),
+      center: this.get('featureToggle.geo_center'),
       zoom: 5,
       maxZoom: 19,
       minZoom: 5,
@@ -68,7 +69,7 @@ export default Ember.Component.extend({
   }),
   customLayerParams: computed('data.[]', function() {
     return {
-      type: 'foo',
+      type: 'layer--',
       style: (feature) => {
         let valueMap = this.get('valueMap');
         return  {

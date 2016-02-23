@@ -2,7 +2,7 @@ import Ember from 'ember';
 const {computed, get} = Ember;
 
 export default Ember.Component.extend({
-  i18n: Ember.inject.service(),
+  featureToggle: Ember.inject.service(),
 
   type: null,
   source: null,
@@ -14,8 +14,8 @@ export default Ember.Component.extend({
   isProduct: computed.equal('type', 'product'),
   isIndustry: computed.equal('type', 'industry'),
 
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
 
   isCountry: computed.equal('level', 'country'),
   isDepartment: computed.equal('level','department'),
