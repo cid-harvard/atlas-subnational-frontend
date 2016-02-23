@@ -4,10 +4,12 @@ const {computed, get:get} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
+  featureToggle: Ember.inject.service(),
   queryParams: ['year'],
 
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
+
   validTimeseries: computed.alias('model.timeseries'),
   departmentsData: computed.oneWay('model.departments'),
   occupationData: computed.oneWay('model.occupations'),

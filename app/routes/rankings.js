@@ -5,9 +5,11 @@ const {RSVP, get, computed} = Ember;
 
 export default Ember.Route.extend({
   i18n: Ember.inject.service(),
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
-  censusYear: computed.alias('i18n.censusYear'),
+  featureToggle: Ember.inject.service(),
+
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
+  censusYear: computed.alias('featureToggle.census_year'),
 
   model() {
 
