@@ -57,15 +57,12 @@ export default EmberTableComponent.extend(TableMap, {
   rowHeight: 50,
   minHeaderHeight: 50,
   height: 420,
-  enableContentSelection: true,
   attributeBindings: ['height'],
   selectionMode: 'mutiple',
   tableMap: computed('source', function() {
     let source = this.get('source');
     let map = this.get(`${source}Map`);
-    if(this.get('isSingleYear')) {
-      map = _.reject(map, {key: 'year'});
-    }
+
     _.forEach(map, (mapping) => {
 
       if(mapping.key === 'name' || mapping.key == 'parent') { return; }
@@ -123,8 +120,34 @@ export default EmberTableComponent.extend(TableMap, {
     };
   },
   formatNumber: (number, key, i18n) => {
-    var decimalVars = ['export_rca','rca','complexity', 'distance', 'cog', 'population'];
-    var wageVarsInThousands = ['wages', 'avg_wages', 'avg_wage', 'average_wages'];
+    var decimalVars = [
+      'export_rca',
+      'eci',
+      'rca',
+      'complexity',
+      'distance',
+      'cog',
+      'population'
+    ];
+    var percentVars = [
+      'share',
+      'employment_growth'
+    ];
+    var wageVarsInThousands = [
+      'wages',
+      'avg_wages',
+      'avg_wage',
+    ];
+    var moneyVars = [
+      'gdp_pc_real',
+      'gdp_real',
+    ];
+    var largeNumbers = [
+      'export_value',
+      'import_value',
+      'monthly_wages',
+      'average_wages'
+    ];
 
     if(_.include(wageVarsInThousands, key)){
       return numeral(number).divide(1000).format('0,0');
@@ -137,10 +160,12 @@ export default EmberTableComponent.extend(TableMap, {
         return i18n.t('graph_builder.table.less_than_5');
       }
       return numeral(number).format('0,0');
-    } else if(key === 'employment_growth'){
+    } else if(_.include(percentVars, key)){
       return numeral(number).format('0.00%');
-    } else if(key === 'export_value' || key === 'import_value' || key === 'monthly_wages') {
+    } else if(_.include(largeNumbers, key)) {
       return numeral(number).format('0,0');
+    } else if(_.include(moneyVars, key)) {
+      return numeral(number).format('$0.00a');
     } else {
       return number;
     }

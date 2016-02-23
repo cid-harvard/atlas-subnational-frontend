@@ -1,7 +1,7 @@
 {{#unless isFiltered }}
 <h3 class="section__head">{{setTitle}}</h3>
   {{component 'multiples-graph'
-    classNames='buildermod__viz'
+    classNames='buildermod__viz--multiples'
     immutableData=totalSet
     data=totalSet
     dataType=dataType
@@ -16,7 +16,7 @@
 {{#if showParent}}
   <h3 class="section__head">{{parentBreadcrumb}}</h3>
   {{component 'multiples-graph'
-    classNames='buildermod__viz'
+    classNames='buildermod__viz--multiples'
     immutableData=parentSet
     data=parentSet
     dataType=dataType
@@ -30,7 +30,7 @@
 
 <h3 class="section__head">{{childBreadcrumb}}</h3>
 {{component 'multiples-graph'
-  classNames='buildermod__viz'
+  classNames='buildermod__viz--multiples'
   immutableData=data
   data=data
   dataType=dataType

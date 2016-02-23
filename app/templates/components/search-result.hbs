@@ -1,5 +1,18 @@
 <div class="results__text">
-  <p class="results__breadcrumb">{{breadcrumb}}</p>
+  {{#if isLocation }}
+    <ul>
+      {{#each crumb in locationBreadcrumbs}}
+        <li class="results__breadcrumb">
+          {{crumb.name_es}}
+        </li>
+      {{/each}}
+      <li class="results__breadcrumb">{{breadcrumb}}</li>
+    </ul>
+  {{else}}
+    <ul>
+      <li class="results__breadcrumb">{{breadcrumb}}</li>
+    </ul>
+  {{/if}}
   <p class="results__name" data-search-result-name>{{name}}</p>
 </div>
 {{#link-to

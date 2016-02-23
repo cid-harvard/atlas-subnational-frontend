@@ -7,9 +7,11 @@ export default Ember.Route.extend({
 // `this.store.find` makes an api call for `params.location_id` and returns a promise
 // in the `then` function call, another API call is made to get the topExports data
   i18n: Ember.inject.service(),
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
-  censusYear: computed.alias('i18n.censusYear'),
+  featureToggle: Ember.inject.service(),
+
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
+  censusYear: computed.alias('featureToggle.census_year'),
 
   model: function(params) {
     return this.store.find('location', params.location_id);
@@ -49,29 +51,37 @@ export default Ember.Route.extend({
         if(d.year != this.get('lastYear')) { return memo; }
         let product = productsMetadata[d.product_id];
         let productData = productsDataIndex[d.product_id];
+        product.complexity = _.result(_.find(product.pci_data, { year: d.year }), 'pci');
         memo.push(_.merge(d, product, productData));
         return memo;
       }, []);
 
       //get industry data for department
-      let industries = _.map(industriesData, (d) => {
+      let industries = _.reduce(industriesData, (memo, d) => {
+        if(d.year != this.get('lastYear')) { return memo; }
         let industry = industriesMetadata[d.industry_id];
-        if(model.id === '0') {
-          d.rca = 1;
-        }
+        if(model.id === '0') { d.rca = 1; }
         let industryData = industriesDataIndex[d.industry_id];
-        return _.merge(d, industry, industryData);
-      });
+        industry.complexity = _.result(_.find(industry.pci_data, { year: d.year}), 'complexity');
+        memo.push(_.merge(d, industry, industryData));
+        return memo;
+      }, []);
 
+      let occupationVacanciesSum = 0;
       let occupations = _.map(occupationsData, (d) => {
+        occupationVacanciesSum += d.num_vacancies;
         let occupation = occupationsMetadata[d.occupation_id];
         return _.merge(d, occupation);
+      });
+
+      occupations.forEach((d) => {
+        d.share = d.num_vacancies/occupationVacanciesSum;
       });
 
       var departments = [];
       var departmentTimeseries = [];
 
-      _.reduce(departmentsData, (memo, d) => {
+      _.each(departmentsData, (d) => {
         let id = _.get(d, 'department_id') || _.get(d, 'location_id');
         if(id == model.id) {
           departmentTimeseries.push(d);
@@ -92,7 +102,32 @@ export default Ember.Route.extend({
           let datum = _.merge(d, location, tradeData, extra );
           departments.push(datum);
         }
-        return memo;
+      });
+
+      var eciRank = 1;
+      var populationRank = 1;
+      var gdpRank = 1;
+      var gdpPerCapitaRank = 1;
+
+      let datum = _.chain(departmentTimeseries)
+        .select({ year: this.get('censusYear')})
+        .first()
+        .value();
+
+      if(datum) {
+        _.each(departments, (d) => {
+          if(d.eci > datum.eci ) { eciRank ++; }
+          if(d.gdp_real > datum.gdp_real) { gdpRank ++; }
+          if(d.population > datum.population ) { populationRank ++; }
+          if(d.gdp_pc_real> datum.gdp_pc_real ) { gdpPerCapitaRank++; }
+        });
+      }
+
+      model.setProperties({
+        eciRank: eciRank,
+        gdpRank: gdpRank,
+        gdpPerCapitaRank: gdpPerCapitaRank,
+        populationRank: populationRank
       });
 
       model.set('productsData', products);
@@ -101,7 +136,7 @@ export default Ember.Route.extend({
       model.set('occupations', occupations);
       model.set('timeseries', departmentTimeseries);
       model.set('metaData', this.modelFor('application'));
-      if(model.id == '0') { model.set('metaData', this.modelFor('application')); }
+
       return model;
     });
   },

@@ -30,20 +30,20 @@ test('search for Alantico and go to GB and Profile', function(assert) {
   click('li[data-location-industry="wages"]');
 
   andThen(function() {
-    assert.equal(currentURL(), '/location/2/source/industries/visualization/treemap/wages?endDate=2013&locale=en-col&startDate=2013');
+    assert.equal(currentURL(), '/location/2/source/industries/visualization/treemap/wages?endDate=2014&locale=en-col&startDate=2014');
   });
 
   click("i.icon-cidcon_multiples");
 
   andThen(function() {
-    assert.equal(currentURL(), '/location/2/source/industries/visualization/multiples/wages?endDate=2013&locale=en-col&startDate=2008');
+    assert.equal(currentURL(), '/location/2/source/industries/visualization/multiples/wages?endDate=2014&locale=en-col&startDate=2008');
   });
 
   //Switch to import source
   click("li[data-location-product='imports']");
 
   andThen(function() {
-    assert.equal(currentURL(), '/location/2/source/products/visualization/treemap/import_value?endDate=2013&locale=en-col&startDate=2013');
+    assert.equal(currentURL(), '/location/2/source/products/visualization/treemap/import_value?endDate=2014&locale=en-col&startDate=2014');
   });
 
   //return to profile
@@ -54,3 +54,4 @@ test('search for Alantico and go to GB and Profile', function(assert) {
     assert.equal(find('h2[data-location-name]').text(), 'Atlántico');
   });
 });
+

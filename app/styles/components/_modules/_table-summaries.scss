@@ -10,12 +10,27 @@
   width: 100%;
 }
 
+.table__header {
+  position: relative;
+}
+
+.table__header--summaries--labels {
+  width: 30%;
+}
+
+.table__header--summaries--value {
+  width: 20%;
+  white-space: nowrap;
+  padding-right: 58px;
+  position: relative;
+}
+
 .table__header--summaries--dotplot {
-  width: 500px;
+  width: 50%;
 }
 
 .table__header--summaries--spark {
-  width: 30%;
+  width: 40%;
 }
 
 .table__header--summaries--value:before {
@@ -30,4 +45,49 @@
 
 .table__cell--summaries {
   height: 70px; // A reminder that height acts as min-height for table cells
+  position: relative;
 }
+
+.table__cell--rank {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  margin-top: -15px;
+  width: 50px;
+  text-align: center;
+  &.title {
+    width: 75px;
+    text-align: right;
+  }
+}
+
+.table__cell--rank .value {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 1px;
+  background-color: $colorGrayLighter;
+  color: $colorWhite;
+  font-family: $sansSC;
+  font-size: $fontSmall;
+  font-weight: 400;
+  text-align: center;
+  text-transform: lowercase;
+
+  &:hover {
+    background-color: $colorGrayLight;
+  }
+
+  &.top {
+    background-color: $colorRed;
+    &:hover {
+      background-color: $colorRedDark;
+    }
+  }
+
+  &.title {
+    background: transparent;
+    color: $colorGrayLight;
+  }
+}
+
+

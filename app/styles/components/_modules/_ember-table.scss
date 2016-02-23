@@ -17,6 +17,7 @@
 
 .ember-table-header-row, .ember-table-header-container .ember-table-table-fixed-wrapper {
   background: $colorGrayLight;
+  cursor: default;
 }
 
 .ember-table-header-cell {
@@ -33,6 +34,20 @@
 
 .ember-table-content {
   font-size: $fontSmall;
+  cursor: default;
+}
+.ember-table-content-custom {
+  font-size: $fontSmall;
+  cursor: default;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 100%;
+  border-right: 0;
+  padding: 1.3rem 1.3rem;
+  box-sizing: border-box;
+  line-height: 29px;
+  display: block;
 }
 
 .ember-table-color-marker {
@@ -55,6 +70,7 @@
 }
 
 .ember-table-cell {
+  cursor: default;
   border-right: 1px solid $colorWhite;
   &:last-of-type {
     border-right: none;
@@ -63,8 +79,12 @@
 
 .ember-table-table-row {
   border-bottom: 1px solid $colorWhite;
+  cursor: default;
 }
 
+.ember-table-hover {
+  cursor: default;
+}
 .ember-table-hover div {
   background: $colorGrayLight;
 }

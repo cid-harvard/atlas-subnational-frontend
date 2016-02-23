@@ -6,8 +6,10 @@ const {RSVP, computed, $, set, get, copy} = Ember;
 
 export default Ember.Route.extend({
   i18n: Ember.inject.service(),
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
+  featureToggle: Ember.inject.service(),
+
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
   queryParams: {
     startDate: { refreshModel: true },
     endDate: { refreshModel: true },
@@ -88,8 +90,10 @@ export default Ember.Route.extend({
     let {model, occupations} = hash;
     let occupationsMetadata = this.modelFor('application').occupations;
 
+    let occupationVacanciesSum = 0;
     let data = _.map(occupations.data, (d) => {
       let occupation = occupationsMetadata[d.occupation_id];
+      occupationVacanciesSum += d.num_vacancies;
       d.year = this.get('lastYear');
       d.group = occupation.code.split('-')[0];
       d.avg_wage = d.wages/d.employment;
@@ -98,6 +102,10 @@ export default Ember.Route.extend({
       d.color = occupation.color;
       d.code = occupation.code;
       return copy(d);
+    });
+
+    data.forEach((d) => {
+      d.share = d.num_vacancies/occupationVacanciesSum;
     });
 
     return Ember.Object.create({

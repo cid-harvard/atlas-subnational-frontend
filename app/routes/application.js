@@ -1,11 +1,10 @@
 import Ember from 'ember';
 import ENV from '../config/environment';
 
-const {RSVP, $, get:get, set:set} = Ember;
+const {RSVP, $, get, set} = Ember;
 const {apiURL} = ENV;
 
 export default Ember.Route.extend({
-  i18n: Ember.inject.service(),
   queryParams: {
     locale: { refreshModel: false }
   },
@@ -24,7 +23,7 @@ export default Ember.Route.extend({
     var products4digit = $.getJSON(apiURL+'/metadata/products?level=4digit');
     var locationsMetadata = $.getJSON(apiURL+'/metadata/locations/');
     var productsHierarchy = $.getJSON(apiURL+'/metadata/products/hierarchy?from_level=4digit&to_level=section');
-    var industriesClass = $.getJSON(apiURL+'/metadata/industries?level=class');
+    var industries = $.getJSON(apiURL+'/metadata/industries');
     var industriesHierarchy = $.getJSON(apiURL+'/metadata/industries/hierarchy?from_level=4digit&to_level=section');
     var productParentMetadata = $.getJSON(apiURL+'/metadata/products/?level=section');
     var industryParentMetadata = $.getJSON(apiURL+'/metadata/industries/?level=section');
@@ -32,19 +31,27 @@ export default Ember.Route.extend({
     var productSectionColor = $.getJSON('assets/color_mappings/product_section_colors.json');
     var industrySectionColor = $.getJSON(`assets/color_mappings/${this.get('i18n.country')}-industry_section_colors.json`);
     var partnerCountries = $.getJSON(apiURL+'/metadata/countries/');
+    var productPCI = $.getJSON(apiURL+'/data/product/?level=4digit');
+    var industryPCI = $.getJSON(apiURL+'/data/industry/?level=class');
+    var industrySpace = $.getJSON(`assets/networks/${this.get('i18n.country')}-industry_space.json`);
+    var productSpace = $.getJSON('assets/networks/product_space.json');
 
     var promises = [
       products4digit,
       locationsMetadata,
       productsHierarchy,
-      industriesClass,
+      industries,
       industriesHierarchy,
       productParentMetadata,
       industryParentMetadata,
       occupationsMetadata,
       productSectionColor,
       industrySectionColor,
-      partnerCountries
+      partnerCountries,
+      productPCI,
+      industryPCI,
+      productSpace,
+      industrySpace
     ];
 
     return RSVP.allSettled(promises).then(function(array) {
@@ -59,32 +66,45 @@ export default Ember.Route.extend({
       let productSectionColor = array[8].value;
       let industrySectionColor = array[9].value;
       let partnerCountries  = array[10].value.data;
+      let productPCI = array[11].value.data;
+      let industryPCI = array[12].value.data;
+      let productSpace = array[13].value;
+      let industrySpace = array[14].value;
 
       // Finds the entity with the `1st digit` that matches
       // sets `group` to the `1st digit code`
       // `group_name` to the name of the entity
 
       var productSectionMap = _.indexBy(productParentMetadata, 'id');
+
       var industrySectionMap = _.indexBy(industryParentMetadata, 'id');
 
-      _.forEach(locationsMetadata, function(d) {
+      productPCI = _.groupBy(productPCI, 'product_id');
+      industryPCI= _.groupBy(industryPCI, 'industry_id');
+
+      _.forEach(locationsMetadata, (d) => {
         let color = '#d7cbf2';
 
         d.group = d.id;
         d.color = color;
       });
 
-      _.forEach(productsMetadata, function(d) {
+      _.forEach(productsMetadata, (d) => {
         let sectionId = productsHierarchy[d.id];
-        let color = _.isUndefined(sectionId) ? '#fff' : _.get(productSectionColor, `${sectionId}.color`);
+        let color = _.isUndefined(sectionId) ? '#fff' : get(productSectionColor, `${sectionId}.color`);
 
         d.color = color;
-        d.parent_name_en = _.get(productSectionMap, `${sectionId}.name_en`);
-        d.parent_name_es = _.get(productSectionMap, `${sectionId}.name_es`);
-        d.group = _.get(productSectionMap, `${sectionId}.code`);
+
+        set(productSectionMap, `${sectionId}.color`, color);
+
+        d.pci_data = get(productPCI, `${d.id}`);
+        d.parent_name_en = get(productSectionMap, `${sectionId}.name_en`);
+        d.parent_name_es = get(productSectionMap, `${sectionId}.name_es`);
+        d.group = get(productSectionMap, `${sectionId}.code`);
+
       });
 
-      _.forEach(occupationsMetadata, function(d) {
+      _.forEach(occupationsMetadata, (d) => {
         let color = '#ccafaf';
 
         d.group = get(d,'code').split('-')[0];
@@ -93,17 +113,25 @@ export default Ember.Route.extend({
         d.color = color;
       });
 
-      _.forEach(industriesMetadata, function(d) {
+      _.forEach(industriesMetadata, (d) => {
         let sectionId = industriesHierarchy[d.id];
-        let color = _.isUndefined(sectionId) ? '#fff' : _.get(industrySectionColor, `${sectionId}.color`);
+        let color = _.isUndefined(sectionId) ? '#fff' :get(industrySectionColor, `${sectionId}.color`);
 
-        d.group = _.get(industrySectionMap, `${sectionId}.code`);
-        d.parent_name_en = _.get(industrySectionMap, `${sectionId}.name_en`);
-        d.parent_name_es = _.get(industrySectionMap, `${sectionId}.name_es`);
+        d.pci_data = get(industryPCI, `${d.id}`);
+        /*
+         *division industries arent used here.
+         */
+        if(sectionId) {
+          set(industrySectionMap, `${sectionId}.color`, color);
+        }
+
+        d.group = get(industrySectionMap, `${sectionId}.code`);
+        d.parent_name_en = get(industrySectionMap, `${sectionId}.name_en`);
+        d.parent_name_es = get(industrySectionMap, `${sectionId}.name_es`);
         d.color = color;
       });
 
-      _.forEach(partnerCountries, function(d) {
+      _.forEach(partnerCountries, (d) => {
         let color = '#d7cbf2';
         d.name_short_en = d.name_en;
         d.name_short_es = d.name_es;
@@ -112,6 +140,7 @@ export default Ember.Route.extend({
 
       // Index metadata by entity id's
       // e.g. { 0: {id:0, name: 'Atlantico'.....}, ...}
+      let legend = { products: productSectionMap, industries: industrySectionMap };
       return {
         products: _.indexBy(productsMetadata, 'id'),
         locations: _.indexBy(locationsMetadata, 'id'),
@@ -119,7 +148,10 @@ export default Ember.Route.extend({
         occupations: _.indexBy(occupationsMetadata, 'id'),
         productParents: _.indexBy(productParentMetadata, 'id'),
         industryParents: _.indexBy(industryParentMetadata, 'id'),
-        partnerCountries: _.indexBy(partnerCountries, 'id')
+        partnerCountries: _.indexBy(partnerCountries, 'id'),
+        legend: legend,
+        productSpace: productSpace,
+        industrySpace: industrySpace
       };
     });
   },
@@ -135,12 +167,12 @@ export default Ember.Route.extend({
     }
   },
   actions: {
-    willTransition: function(transition) {
+    willTransition(transition) {
       if(transition.targetName != 'search') {
         this.controller.set('query', null);
       }
     },
-    query: function(query) {
+    query(query) {
       if(query) {
         this.transitionTo('search', { queryParams: { query: query, filter: null }});
       } else {

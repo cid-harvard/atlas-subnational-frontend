@@ -28,16 +28,27 @@ button::-moz-focus-inner {
 }
 
 .btn--stream {
-  background: $colorRed;
+  background: $colorBrown900;
+  box-shadow: inset 0 -5px $colorBrown800;
   color: white;
-  box-shadow: inset 0 -5px $colorRedDark;
-  &:hover, &:active, &:focus {
-    background: $colorRedDark;
-    // box-shadow: inset 0 -5px $colorBrown500;
+  &:hover {
+    background: $colorBrown800;
   }
   &--active {
     background: $colorBrown700;
+    cursor: default;
     box-shadow: inset 0 -5px $colorBrown600;
+    &:hover {
+      background:$colorBrown600;
+    }
+  }
+  &--disable {
+    background: $colorBrown700;
+    cursor: default;
+    box-shadow: inset 0 -5px $colorBrown600;
+    &:hover {
+      background: $colorBrown600;
+    }
   }
 }
 

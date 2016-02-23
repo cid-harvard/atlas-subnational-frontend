@@ -31,19 +31,6 @@ export function initialize(instance) {
   i18n.set('display', i18n.get('locale').split('-')[0]);
   i18n.set('country', i18n.get('locale').split('-')[1]);
 
-  const center = i18n.t('geomap.center')
-    .string.split(",")
-    .map(function(d) { return parseFloat(d); });
-
-  const lastYear = parseInt(i18n.t('last_year').string);
-  const firstYear = parseInt(i18n.t('first_year').string);
-  const censusYear = parseInt(i18n.t('census_year').string);
-
-  i18n.set('mapCenter', center);
-  i18n.set('lastYear', lastYear);
-  i18n.set('firstYear', firstYear);
-  i18n.set('censusYear', censusYear);
-
   i18n.addObserver('locale', function() {
     let locale = this.get('locale');
     let defaultLocale = this.get('defaultLocale');

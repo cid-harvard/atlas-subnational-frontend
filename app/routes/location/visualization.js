@@ -5,9 +5,10 @@ const {apiURL} = ENV;
 const {RSVP, computed, $, set, get, copy} = Ember;
 
 export default Ember.Route.extend({
-  i18n: Ember.inject.service(),
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
+  featureToggle: Ember.inject.service(),
+
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
 
   queryParams: {
     startDate: { refreshModel: false },
@@ -48,16 +49,14 @@ export default Ember.Route.extend({
     let id = get(this, 'location_id');
     return {
       model: this.store.find('location', id),
-      industries:  $.getJSON(`${apiURL}/data/location/${id}/industries?level=class`),
-      industriesComplexity: $.getJSON(`${apiURL}/data/industry?level=class`)
+      industries:  $.getJSON(`${apiURL}/data/location/${id}/industries?level=class`)
     };
   }),
   products: computed('location_id', function() {
     let id = get(this, 'location_id');
     return {
       model: this.store.find('location', id),
-      products: $.getJSON(`${apiURL}/data/location/${id}/products?level=4digit`),
-      productsComplexity: $.getJSON(`${apiURL}/data/product?level=4digit`)
+      products: $.getJSON(`${apiURL}/data/location/${id}/products?level=4digit`)
     };
   }),
   partners: computed('location_id', function() {
@@ -81,48 +80,38 @@ export default Ember.Route.extend({
 
     return Ember.Object.create({
       entity: model,
-      data: data,
+      data: Ember.A(data)
     });
   },
   industryDataMunging(hash) {
-    let {model, industries, industriesComplexity} = hash;
+    let { model, industries } = hash;
     let industriesMetadata = this.modelFor('application').industries;
-    let complexityMap = _.indexBy(industriesComplexity.data, function(d){
-      return d.year + '_'+ d.industry_id;
-    });
 
     let data = _.map(industries.data, (d) => {
       let industry = industriesMetadata[d.industry_id];
-      let complexity = complexityMap[ `${d.year}_${d.industry_id}`];
-      if(model.id === '0') {
-        d.rca = 1;
-      }
-      d.complexity = complexity.complexity;
+      if(model.id === '0') { d.rca = 1; }
+      industry.complexity = _.result(_.find(industry.pci_data, { year: d.year}), 'complexity');
       return _.merge(copy(d), industry, { avg_wage: d.wages/d.employment});
     });
 
     return Ember.Object.create({
       entity: model,
-      data: data,
+      data: Ember.A(data)
     });
   },
   productsDataMunging(hash) {
-    let {model, products, productsComplexity} = hash;
+    let {model, products } = hash;
     let productsMetadata = this.modelFor('application').products;
-    let complexityMap = _.indexBy(productsComplexity.data, function(d){
-      return `${d.year}_${d.product_id}`;
-    });
 
     let data = _.map(products.data, (d) => {
       let product = productsMetadata[d.product_id];
-      let complexity = get(complexityMap, `${d.year}_${d.product_id}.pci`);
-      d.complexity = complexity;
+      d.complexity = _.result(_.find(product.pci_data, { year: d.year }), 'pci');
       return _.merge(copy(d), product, { avg_wage: d.wages/d.employment});
     });
 
     return Ember.Object.create({
       entity: model,
-      data: data,
+      data: Ember.A(data)
     });
   },
   setupController(controller, model) {

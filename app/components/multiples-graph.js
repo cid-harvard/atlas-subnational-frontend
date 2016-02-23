@@ -128,7 +128,13 @@ export default Ember.Component.extend({
     svg.append('rect')
       .attr('class', 'background')
       .attr('width', w)
-      .attr('height', h)
+      .attr('height', h);
+
+    svg.append('rect')
+      .attr('class', 'hover--svg')
+      .attr('width', w + margin.right)
+      .attr('height', h + margin.top + margin.bottom)
+      .attr('transform', 'translate(0,' + -margin.top + ')')
       .on('mouseover', mouseover)
       .on('mousemove', mousemove)
       .on('mouseout', mouseout);

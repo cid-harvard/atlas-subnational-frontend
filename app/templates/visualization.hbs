@@ -8,38 +8,24 @@
 <header class="section__header builder__header">
   <h3 class="section__head question__head">{{pageTitle}}</h3>
 </header>
-<section class="stream__section">
-  <div {{bind-attr class=":section__buildermod drawerSettingsIsOpen:buildermod__settings--open drawerChangeGraphIsOpen:buildermod__changegraph--open" }}>
+<section class="stream__section visualization__{{visualization}}">
+  <div {{bind-attr class=":section__buildermod drawerChangeGraphIsOpen:buildermod__changegraph--open" }}>
     <header class="buildermod__header">
       <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
       <div class="buildermod__tools">
-          <button class="btn btn--standalone btn--buildermod buildermod__tool buildermod__tool--settings" {{action 'toggleDrawerSettings'}} data-settings-open=''>
-            {{fa-icon icon= "plus" classNames="tool__btn__icon"}}
-            {{t 'graph_builder.settings.label'}}
-          </button>
-          <div class="btn btn--standalone btn--buildermod buildermod__tool--change_graph">
-            <div class="buildermod__tool--change-graph--label">
-              {{t 'graph_builder.change_graph.label'}}
-            </div>
-            {{partial "partials/buildermod-drawer-change-graph"}}
+        <div class="btn btn--standalone btn--buildermod buildermod__tool--change_graph">
+          <div class="buildermod__tool--change-graph--label">
+            {{t 'graph_builder.change_graph.label'}}
           </div>
+          {{partial "partials/buildermod-drawer-change-graph"}}
+        </div>
       </div>
     </header>
-    <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--fixedheight"}}>
+    <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--fixedheight isGeo:buildermod__vizwrap--geo"}}>
       {{#unless isGeo }}
         {{partial "partials/buildermod-search"}}
       {{/unless}}
-      {{component 'graphbuilder-settings'
-        startDate=startDate
-        endDate=endDate
-        dateExtent=dateExtent
-        dateRange=dateRange
-        isOpen=drawerSettingsIsOpen
-        isSingleYear=isSingleYear
-        isScatter=isScatter
-        rcaFilter=rcaFilter
-        years=years
-      }}
+
       {{component visualizationComponent
         classNames='buildermod__viz'
         immutableData=immutableData
@@ -55,7 +41,23 @@
         entityId=entityId
         variable=variable
         search=search
+        graph=graph
+      }}
+
+      {{#if needsLegend }}
+        {{component 'visualization-legend' legend=legend }}
+      {{/if}}
+
+      <div class="buildermod__settings__wrap">
+        {{component 'graphbuilder-settings'
+          classNames='buildermod__settings'
+          startDate=startDate
+          endDate=endDate
+          canYearToggle=canYearToggle
+          isScatter=isScatter
+          rcaFilter=rcaFilter
         }}
+      </div>
     </div>
     {{component 'visualization-explanation'
       text=visualizationExplanation
@@ -70,7 +72,6 @@
       {{component 'graphbuilder-table'
         data=filteredData
         source=source
-        isSingleYear=isSingleYear
         search=search
       }}
     </div>

@@ -18,14 +18,16 @@
       <li class="breadcrumb">{{t 'general.industry' }}</li>
     </ul>
   {{/if}}
-  <h2 class="stream__head" data-location-name>{{model.name}}</h2>
   {{#if isLocation}}
+    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
     {{ partial 'partials/builder-questions-location'}}
   {{/if}}
   {{#if isProduct}}
+    <h2 class="stream__head" data-location-name>{{model.name}} ({{model.code}})</h2>
     {{ partial 'partials/builder-questions-product'}}
   {{/if}}
   {{#if isIndustry}}
+    <h2 class="stream__head" data-location-name>{{model.name}} ({{model.code}})</h2>
     {{ partial 'partials/builder-questions-industry'}}
   {{/if}}
 </header>

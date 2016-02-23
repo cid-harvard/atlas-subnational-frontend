@@ -6,8 +6,10 @@ const {RSVP, computed, $, set, get, copy} = Ember;
 
 export default Ember.Route.extend({
   i18n: Ember.inject.service(),
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
+  featureToggle: Ember.inject.service(),
+
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
 
   queryParams: {
     rca: { refreshModel: false },

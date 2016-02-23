@@ -5,8 +5,10 @@ const {computed, RSVP, getWithDefault, $} = Ember;
 
 export default Ember.Route.extend({
   i18n: Ember.inject.service(),
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
+  featureToggle: Ember.inject.service(),
+
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
   employmentGrowthCalc: function(data) {
     let first = _.first(data);
     let last = _.last(data);
@@ -47,18 +49,18 @@ export default Ember.Route.extend({
   afterModel: function(model) {
 
     var departments = $.getJSON(`${apiURL}/data/industry/${model.id}/participants?level=department`);
-    var industries = $.getJSON(`${apiURL}/data/industry?level=division`);
+    var industries = $.getJSON(`${apiURL}/data/industry?level=${model.get('level')}`);
     var occupations = $.getJSON(`${apiURL}/data/industry/${model.id}/occupations/?level=minor_group`);
-    var industryDivisions  = Ember.$.getJSON(apiURL+'/metadata/industries?level=division');
 
-    return RSVP.allSettled([departments, industries, occupations, industryDivisions]).then((array) => {
+    return RSVP.allSettled([departments, industries, occupations]).then((array) => {
       var departmentsData = getWithDefault(array[0], 'value.data', []);
       var industriesData = getWithDefault(array[1], 'value.data', []);
       var occupationsData = getWithDefault(array[2], 'value.data', []);
 
       let locationsMetadata = this.modelFor('application').locations;
-      let industryDivisions = _.indexBy(getWithDefault(array[3], 'value.data', []), 'id');
+      let industriesMetadata = this.modelFor('application').industries;
       let occupationsMetadata = this.modelFor('application').occupations;
+
 
       //get products data for the department
       let departments = _.reduce(departmentsData, (memo, d) => {
@@ -73,7 +75,7 @@ export default Ember.Route.extend({
 
       let industries = _.map(industriesData, function(d) {
         d.avg_wage = d.monthy_wages;
-        return  _.merge(d, industryDivisions[d.industry_id]);
+        return  _.merge(d, industriesMetadata[d.industry_id]);
       });
 
       let occupations = _.map(occupationsData, (d) => {
