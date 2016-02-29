@@ -22,6 +22,11 @@ $odGrayMedDark: #BABABA;
   border-bottom: none;
 }
 
+
+.side-nav__item--active {
+  color: #000;
+}
+
 .btn {
   box-shadow: none;
 }
@@ -145,10 +150,6 @@ main.builder .search {
 .stream__article--indent--left {
   border-image: none;
   border-left: 2.6rem $odGreen solid;
-}
-
-.side-nav__item__link {
-  color: $odGrayMedDark;
 }
 
 .header--pageheader--home .pageheader__wrap .branding a {
