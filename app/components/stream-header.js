@@ -31,6 +31,7 @@ export default Ember.Component.extend({
   sourceIndustries: computed.equal('source', 'industries'),
   sourceProducts: computed.equal('source', 'products'),
   sourcePartners: computed.equal('source', 'partners'),
+  sourceProductCountry: computed.equal('source', 'product-country'),
 
   variableEmployment: computed.equal('variable', 'employment'),
   variableWages: computed.equal('variable', 'wages'),
@@ -63,6 +64,8 @@ export default Ember.Component.extend({
   locationPartnersExports: computed.and('sourcePartners', 'variableExports'),
   locationPartnersImports: computed.and('sourcePartners', 'variableImports'),
 
+  locationProductsByDestination: computed.and('sourceProductCountry', 'variableExports'),
+  locationProductsByOrigin: computed.and('sourceProductCountry', 'variableImports'),
   /*
    *Active Bindings for Product Questions
    */

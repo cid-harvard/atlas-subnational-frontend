@@ -5,7 +5,6 @@
 **/
 
 // visible button
-
 .ui-selectmenu-button {
   display: block;
   width: 100% !important;
@@ -43,10 +42,6 @@
 
 .ui-selectmenu-button[aria-expanded="true"] .ui-icon {}
 
-.ui-state-default .ui-icon {}
-
-.ui-selectmenu-text {}
-
 //expanded menu
 
 .ui-selectmenu-menu {
@@ -60,12 +55,14 @@
   margin-top: 5px;
   outline: none;
 }
-
-.ui-menu {}
+.ui-menu {
+  height: 700px;
+  overflow: auto;
+  overflow-x: hidden;
+}
 
 .ui-menu-item {
   font-size: $fontSmall;
-  max-width: 25rem;
   color: $colorGrayDark;
   background: $colorGrayLight;
   padding: $baseSpace/2 $baseSpace;
@@ -80,11 +77,7 @@
   }
 }
 
-.ui-menu-item {}
-
-.ui-menu-item.ui-state-focus {}
-
 .overflow {
-  height: 10rem;
+  height: 30rem;
 }
 
