@@ -20,6 +20,7 @@ export default Ember.Route.extend({
     }
   },
   model: function() {
+  // TODO: maybe use ember data instead of ajax calls to decorate JSON objects with model functionality?
     var products4digit = $.getJSON(apiURL+'/metadata/products?level=4digit');
     var locationsMetadata = $.getJSON(apiURL+'/metadata/locations/');
     var productsHierarchy = $.getJSON(apiURL+'/metadata/products/hierarchy?from_level=4digit&to_level=section');
@@ -28,11 +29,12 @@ export default Ember.Route.extend({
     var productParentMetadata = $.getJSON(apiURL+'/metadata/products/?level=section');
     var industryParentMetadata = $.getJSON(apiURL+'/metadata/industries/?level=section');
     var occupationsMetadata = $.getJSON(apiURL+'/metadata/occupations/');
-    var productSectionColor = $.getJSON('assets/color_mappings/product_section_colors.json');
-    var industrySectionColor = $.getJSON(`assets/color_mappings/${this.get('i18n.country')}-industry_section_colors.json`);
     var partnerCountries = $.getJSON(apiURL+'/metadata/countries/');
     var productPCI = $.getJSON(apiURL+'/data/product/?level=4digit');
     var industryPCI = $.getJSON(apiURL+'/data/industry/?level=class');
+
+    var productSectionColor = $.getJSON('assets/color_mappings/product_section_colors.json');
+    var industrySectionColor = $.getJSON(`assets/color_mappings/${this.get('i18n.country')}-industry_section_colors.json`);
     var industrySpace = $.getJSON(`assets/networks/${this.get('i18n.country')}-industry_space.json`);
     var productSpace = $.getJSON('assets/networks/product_space.json');
 
@@ -54,7 +56,7 @@ export default Ember.Route.extend({
       industrySpace
     ];
 
-    return RSVP.allSettled(promises).then(function(array) {
+    return RSVP.allSettled(promises).then((array) => {
       let productsMetadata = array[0].value.data;
       let locationsMetadata = array[1].value.data;
       let productsHierarchy = array[2].value.data;
@@ -101,7 +103,7 @@ export default Ember.Route.extend({
         d.parent_name_en = get(productSectionMap, `${sectionId}.name_en`);
         d.parent_name_es = get(productSectionMap, `${sectionId}.name_es`);
         d.group = get(productSectionMap, `${sectionId}.code`);
-
+        this.store.createRecord('product', d);
       });
 
       _.forEach(occupationsMetadata, (d) => {

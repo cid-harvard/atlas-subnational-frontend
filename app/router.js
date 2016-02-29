@@ -29,6 +29,7 @@ export default Router.map(function() {
   this.resource('location', { path: 'location'}, function() {
     this.route('show', {path: ':location_id'});
     this.route('visualization', { path: ':location_id/source/:source_type/visualization/:visualization_type/:variable'});
+    this.route('visualization-product', { path: ':location_id/product/:product_id/visualization/:visualization_type/:variable'});
   });
   this.resource('industry', { path: 'industry'}, function() {
     this.route('show', { path: ':industry_id'});

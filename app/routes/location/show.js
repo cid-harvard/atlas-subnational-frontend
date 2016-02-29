@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ENV from '../../config/environment';
+
 const {apiURL} = ENV;
 const {RSVP, computed, getWithDefault} = Ember;
 
@@ -18,6 +19,8 @@ export default Ember.Route.extend({
     let level = model.get('level');
     level = level === 'country' ? 'department' : level;
 
+    // TODO: maybe use ember data instead of ajax calls to decorate JSON objects with model functionality?
+    //
     // extract year out later
     var products = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/products?level=4digit`);
     var industries = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/industries?level=class`);
