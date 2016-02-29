@@ -102,7 +102,7 @@
 </nav>
 </header>
 
-<header {{bind-attr class=":header--pageheader isHomePageRoute:header--pageheader--home"}}>
+<header class="header--pageheader">
   <div class="pageheader__bground"></div>
   <div class="pageheader__home__cap"></div>
   <div class="pageheader__wrap">
@@ -176,37 +176,42 @@
         </li>
       </ul>
     </div>
-
-    {{#if isHomePageRoute }}
-      {{!-- special display of introductory text on index --}}
-      <div class="pageheader__homeintro">
-        <header class="index__header__wrap">
-          <div class="stream__header index__header">
-            <h1 class="stream__head index__head">{{ t 'index.header_h1' }}</h1>
-            <h2 class="stream__subhead">{{ t 'index.header_subhead' }}</h2>
-          </div>
-        </header>
-
-        <form class="search__wrap">
-          <div class="search__field__wrap">
-            {{input
-              class="search"
-              placeholder=( t 'pageheader.search_placeholder' )
-              value=query
-              enter='query'
-              target=controllers.search
-              required='required'
-            }}
-            <button class="search__reset fa fa-close" type="reset"></button>
-          </div>
-          <input class="search__submit btn btn--standalone btn--search"
-            type="submit"
-            value="{{ t 'pageheader.search_link' }}"
-            {{action 'query' query target=controllers.search}}
-          >
-        </form>
-      </div>
-    {{/if}}
   </div>
 </header>
 
+{{#if isHomePageRoute }}
+  <header {{bind-attr class=":header--pageheader isHomePageRoute:header--pageheader--home"}}>
+    <div class="pageheader__bground"></div>
+    <div class="pageheader__home__cap"></div>
+    <div class="pageheader__wrap">
+        {{!-- special display of introductory text on index --}}
+        <div class="pageheader__homeintro">
+          <header class="index__header__wrap">
+            <div class="stream__header index__header">
+              <h1 class="stream__head index__head">{{ t 'index.header_h1' }}</h1>
+              <h2 class="stream__subhead">{{ t 'index.header_subhead' }}</h2>
+            </div>
+          </header>
+
+          <form class="search__wrap">
+            <div class="search__field__wrap">
+              {{input
+                class="search"
+                placeholder=( t 'pageheader.search_placeholder' )
+                value=query
+                enter='query'
+                target=controllers.search
+                required='required'
+              }}
+              <button class="search__reset fa fa-close" type="reset"></button>
+            </div>
+            <input class="search__submit btn btn--standalone btn--search"
+              type="submit"
+              value="{{ t 'pageheader.search_link' }}"
+              {{action 'query' query target=controllers.search}}
+            >
+          </form>
+        </div>
+    </div>
+  </header>
+{{/if}}
