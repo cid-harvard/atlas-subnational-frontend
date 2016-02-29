@@ -2,10 +2,15 @@
   <fieldset>
     <select name={{type}}>
       {{#each item in collection }}
-        <option value={{item.id}}>
-          {{item.name}}
+        <option value={{item.id}} selected={{is-equal selected item.id}} >
+          {{#if addCode}}
+            {{item.name}}, {{item.code}}
+          {{else}}
+            {{item.name}}
+          {{/if}}
         </option>
       {{/each}}
     </select>
   </fieldset>
 </div>
+

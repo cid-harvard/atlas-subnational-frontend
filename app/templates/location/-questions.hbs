@@ -118,6 +118,28 @@
         </span>
       </div>
     </li>
+    {{#if isDepartment}}
+      <li class="builder__questions__item">
+        {{#link-to 'location.visualization-product' model.id 1224 'multiples' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
+          class="icon-cidcon_treemap builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        {{#link-to 'location.visualization-product' model.id 1224 'multiples' 'export_value' (query-params search='null' startDate=firstYear endDate=lastYear)
+          class="icon-cidcon_multiples builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        <div class="builder__questions__item__textwrap">
+          <span class="builder__questions__question">
+            {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
+              class="builder__questions__question"}}
+              {{t (is-concat 'graph_builder.page_title.location.destination_by_product.export_value.' model.level) }}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+    {{/if}}
     {{#unless isMunicipality}}
       <li class="builder__questions__item">
         {{#link-to 'location.visualization' model.id 'products' 'similarity' 'rca' (query-params endDate=lastYear startDate=lastYear search='null')
@@ -193,5 +215,27 @@
           </span>
         </div>
       </li>
+    {{#if isDepartment}}
+      <li class="builder__questions__item">
+        {{#link-to 'location.visualization-product' model.id 1224 'multiples' 'import_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
+          class="icon-cidcon_treemap builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        {{#link-to 'location.visualization-product' model.id 1224 'multiples' 'import_value' (query-params search='null' startDate=firstYear endDate=lastYear)
+          class="icon-cidcon_multiples builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        <div class="builder__questions__item__textwrap">
+          <span class="builder__questions__question">
+            {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'import_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
+              class="builder__questions__question"}}
+              {{t (is-concat 'graph_builder.page_title.location.destination_by_product.import_value.' model.level) }}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+    {{/if}}
     </ul>
 </div>
