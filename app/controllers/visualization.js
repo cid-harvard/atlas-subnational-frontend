@@ -4,6 +4,8 @@ const {computed, observer, get:get } = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
+  featureToggle: Ember.inject.service(),
+
   queryParams: ['search', 'startDate', 'endDate'],
   search: null,
   rcaFilter: 'less',
@@ -14,8 +16,8 @@ export default Ember.Controller.extend({
   drawerChangeGraphIsOpen: false,
   drawerQuestionsIsOpen: false,
 
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
 
   metadata: computed.alias('model.metaData'),
   source: computed.alias('model.source'),

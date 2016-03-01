@@ -2,11 +2,11 @@ import Ember from 'ember';
 const {computed} = Ember;
 
 export default Ember.Controller.extend({
-  i18n: Ember.inject.service(),
+  featureToggle: Ember.inject.service(),
   queryParams: ['year'],
 
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
   occupationsData: computed.alias('model.occupationsData'),
 });
 

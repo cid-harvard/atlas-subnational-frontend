@@ -2,7 +2,8 @@ import Ember from 'ember';
 const {computed} = Ember;
 
 export default Ember.Component.extend({
-  i18n: Ember.inject.service(),
+  featureToggle: Ember.inject.service(),
+
   attributeBindings: ['data-dateIndex'],
   tagName: 'form',
   isGreater: computed.equal('rcaFilter', 'greater'),
@@ -11,16 +12,16 @@ export default Ember.Component.extend({
   year: computed('startDate', function() {
     return parseInt(this.get('startDate'));
   }),
-  lastYear: computed('i18n.lastYear', function() {
-    return parseInt(this.get('i18n.lastYear'));
+  lastYear: computed('featureToggle.last_year', function() {
+    return parseInt(this.get('featureToggle.last_year'));
   }),
-  firstYear: computed('i18n.firstYear', function() {
-    return parseInt(this.get('i18n.firstYear'));
+  firstYear: computed('featureToggle.first_year', function() {
+    return parseInt(this.get('featureToggle.first_year'));
   }),
   disableIncreaseYear: computed('year', 'lastYear', function() {
     return this.get('year') >= parseInt(this.get('lastYear'));
   }),
-  disableDecreaseYear: computed('year', function() {
+  disableDecreaseYear: computed('year','firstYear', function() {
     return this.get('year') <= parseInt(this.get('firstYear'));
   }),
   actions: {

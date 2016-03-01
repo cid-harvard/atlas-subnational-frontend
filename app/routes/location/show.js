@@ -7,9 +7,11 @@ export default Ember.Route.extend({
 // `this.store.find` makes an api call for `params.location_id` and returns a promise
 // in the `then` function call, another API call is made to get the topExports data
   i18n: Ember.inject.service(),
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
-  censusYear: computed.alias('i18n.censusYear'),
+  featureToggle: Ember.inject.service(),
+
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
+  censusYear: computed.alias('featureToggle.census_year'),
 
   model: function(params) {
     return this.store.find('location', params.location_id);

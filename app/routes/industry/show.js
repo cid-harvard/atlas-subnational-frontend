@@ -5,8 +5,10 @@ const {computed, RSVP, getWithDefault, $} = Ember;
 
 export default Ember.Route.extend({
   i18n: Ember.inject.service(),
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
+  featureToggle: Ember.inject.service(),
+
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
   employmentGrowthCalc: function(data) {
     let first = _.first(data);
     let last = _.last(data);
