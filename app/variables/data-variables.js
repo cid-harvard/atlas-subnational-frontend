@@ -35,7 +35,7 @@ export default  {
   },
   peru: {
     "index_products": [1143,87],
-    "index_locations": [22, 24, 11, 2],
+    "index_locations": [148, 194, 218, 47],
     "index_industries": [],
     "index_location_q1_id": 12,
     "index_location_q2_id": 12,
