@@ -4,6 +4,7 @@ const {observer, computed} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
+  featureToggle: Ember.inject.service(),
   needs: ['search'],
   queryParams: ['locale'],
   defaultLanguage: computed('i18n.default', function() {
