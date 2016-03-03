@@ -156,10 +156,6 @@ main.builder .search {
   color: #fff;
 }
 
-.pageheader__wrap {
-  margin-left: 88px;
-}
-
 .branding a {
   color: #fff;
 }
@@ -177,6 +173,10 @@ main.builder .search {
 
 .index__featuredin__wrap {
   margin: 0;
+}
+
+.pageheader__wrap {
+  max-width: 105.4rem;
 }
 
 .cid-link {
