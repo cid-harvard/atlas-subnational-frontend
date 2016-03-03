@@ -16,6 +16,12 @@ export default Ember.Controller.extend({
   productsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
 
+  hasTimeseries: computed.notEmpty('model.timeseries'),
+  hasDepartmentsData: computed.notEmpty('model.departments'),
+  hasOccupationData: computed.notEmpty('model.occupations'),
+  hasProductsData: computed.notEmpty('model.productsData'),
+  hasIndustriesData: computed.notEmpty('model.industriesData'),
+
   isCountry: computed.equal('model.level', 'country'),
   isDepartment: computed.equal('model.level','department'),
   isMsa: computed.equal('model.level','msa'),

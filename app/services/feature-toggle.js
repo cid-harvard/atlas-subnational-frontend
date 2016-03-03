@@ -11,6 +11,8 @@ export default Ember.Service.extend({
   }),
   isColombia: computed.equal('country', 'col'),
   isMexico: computed.equal('country', 'mex'),
+  isPeru: computed.equal('country', 'peru'),
+  showIndustries: computed.or('isMexico', 'isColombia'),
   countryVariables: computed('country', function() {
     return get(Variables, get(this, 'country'));
   }),
