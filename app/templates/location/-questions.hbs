@@ -132,7 +132,7 @@
         {{/link-to}}
         <div class="builder__questions__item__textwrap">
           <span class="builder__questions__question">
-            {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
+            {{#link-to 'location.visualization-product' model.id 1224 'multiples' 'export_value' (query-params search='null' startDate=firstYear endDate=lastYear)
               class="builder__questions__question"}}
               {{t (is-concat 'graph_builder.page_title.location.destination_by_product.export_value.' model.level) }}
             {{/link-to}}
@@ -229,7 +229,7 @@
         {{/link-to}}
         <div class="builder__questions__item__textwrap">
           <span class="builder__questions__question">
-            {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'import_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
+            {{#link-to 'location.visualization-product' model.id 1224 'multiples' 'import_value' (query-params search='null' startDate=firstYear endDate=lastYear)
               class="builder__questions__question"}}
               {{t (is-concat 'graph_builder.page_title.location.destination_by_product.import_value.' model.level) }}
             {{/link-to}}
