@@ -460,4 +460,3 @@ export default {
   "table.export_data": "Export Data",
   "thousands_delimiter": ","
 };
-
