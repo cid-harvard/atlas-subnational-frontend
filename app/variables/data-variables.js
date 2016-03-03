@@ -34,5 +34,20 @@ export default  {
     "geo_center": [19,-99]
   },
   peru: {
+    "index_products": [1143,87],
+    "index_locations": [22, 24, 11, 2],
+    "index_industries": [],
+    "index_location_q1_id": 12,
+    "index_location_q2_id": 12,
+    "index_industry_q1_id": null,
+    "index_industry_q2_id": null,
+    "index_product_q1_id": 74,
+    "index_product_q2_id": 1143,
+    "index_profile_id": 0,
+    "index_graphbuilder_id": 87,
+    "last_year": 2014,
+    "first_year": 2004,
+    "census_year": 2010,
+    "geo_center": [0,0]
   }
 };
