@@ -11,44 +11,46 @@
     {{/link-to}}
     </ul>
   </div>
-  <div class="menu-section">
-    <h5 class='menu-section__group-name'>{{t 'header.industry'}}</h5>
-    <ul class="menu-section__group">
-      {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear search='null')
-        tagName='li'
-        data-location-industry="employment"
-        classNameBindings="locationIndustryEmployment:menu-section__link--active"
-        class="menu-section__link"}}
-        {{ t 'header.employment' }}
-      {{/link-to}}
-      {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'wages'(query-params endDate=lastYear startDate=lastYear search='null')
-        data-location-industry="wages"
-        tagName='li'
-        classNameBindings="locationIndustryWages:menu-section__link--active"
-        class="menu-section__link"}}
-        {{t 'header.wage' }}
-      {{/link-to}}
-      {{#unless isMunicipality}}
-        {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca'
-          (query-params endDate=lastYear startDate=lastYear)
-          data-location-industry="similarity"
+  {{#if featureToggle.showIndustries }}
+    <div class="menu-section">
+      <h5 class='menu-section__group-name'>{{t 'header.industry'}}</h5>
+      <ul class="menu-section__group">
+        {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear search='null')
           tagName='li'
-          classNameBindings="locationIndustryRCA:menu-section__link--active"
+          data-location-industry="employment"
+          classNameBindings="locationIndustryEmployment:menu-section__link--active"
           class="menu-section__link"}}
-          {{ t 'header.industry_space' }}
+          {{ t 'header.employment' }}
         {{/link-to}}
-        {{#unless isCountry }}
-          {{#link-to 'location.visualization' model.id 'industries' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
-            data-location-industry="scatter"
+        {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'wages'(query-params endDate=lastYear startDate=lastYear search='null')
+          data-location-industry="wages"
+          tagName='li'
+          classNameBindings="locationIndustryWages:menu-section__link--active"
+          class="menu-section__link"}}
+          {{t 'header.wage' }}
+        {{/link-to}}
+        {{#unless isMunicipality}}
+          {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca'
+            (query-params endDate=lastYear startDate=lastYear)
+            data-location-industry="similarity"
             tagName='li'
-            classNameBindings="locationIndustryOpportunity:menu-section__link--active"
+            classNameBindings="locationIndustryRCA:menu-section__link--active"
             class="menu-section__link"}}
-            {{ t 'header.industry_potential'}}
+            {{ t 'header.industry_space' }}
           {{/link-to}}
+          {{#unless isCountry }}
+            {{#link-to 'location.visualization' model.id 'industries' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
+              data-location-industry="scatter"
+              tagName='li'
+              classNameBindings="locationIndustryOpportunity:menu-section__link--active"
+              class="menu-section__link"}}
+              {{ t 'header.industry_potential'}}
+            {{/link-to}}
+          {{/unless}}
         {{/unless}}
-      {{/unless}}
-    </ul>
-  </div>
+      </ul>
+    </div>
+  {{/if}}
   <div class="menu-section">
     <h5 class='menu-section__group-name'>{{t 'header.export'}}</h5>
     <ul class="menu-section__group">

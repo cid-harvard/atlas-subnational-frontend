@@ -12,271 +12,279 @@
   {{partial 'location/country-dotplots'}}
 </section>
 
-<section class="stream__section">
-  <header class="section__header">
-    <h3 class="section__head">
-      {{t 'country.show.employment_wage_occupation'}}
-    </h3>
-  </header>
-  <p class="section__p">
-    {{t 'country.show.employment_wage_occupation.copy.p1'}}
-  </p>
-  <p class="section__p">
-    {{t 'country.show.employment_wage_occupation.copy.p2'}}
-  </p>
-  <div class="tabmod">
-    {{#ivy-tabs}}
-      {{#ivy-tab-list classNames='tabmod__tabs'}}
-        {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-          <a class="tab__link">
-            {{t 'location.show.employment' lastYear=lastYear}}
-          </a>
-        {{/ivy-tab}}
-        {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
-          <a class="tab__link">
-            {{t 'location.show.total_wages' lastYear=lastYear}}
-          </a>
-        {{/ivy-tab}}
-      {{/ivy-tab-list}}
-      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod">
-          <div class="vizmod--treemod">
-            {{vistk-treemap
+{{#if hasIndustriesData }}
+  <section class="stream__section">
+    <header class="section__header">
+      <h3 class="section__head">
+        {{t 'country.show.employment_wage_occupation'}}
+      </h3>
+    </header>
+    <p class="section__p">
+      {{t 'country.show.employment_wage_occupation.copy.p1'}}
+    </p>
+    <p class="section__p">
+      {{t 'country.show.employment_wage_occupation.copy.p2'}}
+    </p>
+    <div class="tabmod">
+      {{#ivy-tabs}}
+        {{#ivy-tab-list classNames='tabmod__tabs'}}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+            <a class="tab__link">
+              {{t 'location.show.employment' lastYear=lastYear}}
+            </a>
+          {{/ivy-tab}}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
+            <a class="tab__link">
+              {{t 'location.show.total_wages' lastYear=lastYear}}
+            </a>
+          {{/ivy-tab}}
+        {{/ivy-tab-list}}
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod">
+            <div class="vizmod--treemod">
+              {{vistk-treemap
+                data=lastIndustryData
+                immutableData=lastIndustryData
+                isInTab='true'
+                elementId='employment-vistk-treemap'
+                dataType='industries'
+                varDependent='employment'
+                delay=1500
+              }}
+            </div>
+          </div>
+        {{/ivy-tab-panel}}
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod">
+            <div class="vizmod--treemod">
+              {{vistk-treemap
+                isInTab='true'
+                data=lastIndustryData
+                immutableData=lastIndustryData
+                elementId='wages-vistk-treemap'
+                dataType='industries'
+                varDependent='wages'
+                delay=1500
+              }}
+            </div>
+          </div>
+        {{/ivy-tab-panel}}
+      {{/ivy-tabs}}
+    </div>
+  </section>
+{{/if}}
+{{#if hasOccupationData }}
+  <section class="stream__section">
+    <div class="tabmod">
+      {{#ivy-tabs}}
+        {{#ivy-tab-list classNames='tabmod__tabs'}}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+            <a class="tab__link">
+              {{t 'country.show.occupation.num_vac' }}
+            </a>
+          {{/ivy-tab}}
+        {{/ivy-tab-list}}
+
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod">
+            <div class="vizmod--treemod">
+              {{vistk-treemap
+                isInTab='true'
+                data=occupationData
+                immutableData=occupationData
+                elementId='occupation-num_vacancies-map'
+                varDependent='num_vacancies'
+                metadata=model.metaData
+                delay=3000
+              }}
+            </div>
+          </div>
+        {{/ivy-tab-panel}}
+      {{/ivy-tabs}}
+    </div>
+  </section>
+  <section class="stream__section">
+    <div class="ember__table__wrap">
+      {{component 'table-download'
+        data=occupationData
+        source='occupations'
+        pageTitle='products'
+        name='colombia'
+      }}
+      {{component 'graphbuilder-table'
+        data=occupationData
+        source='occupations'
+      }}
+    </div>
+  </section>
+{{/if}}
+
+{{#if hasIndustriesData}}
+  <section class="stream__section">
+    <header class="section__header">
+      <h3 class="section__head">
+          {{t 'country.show.industry_complex'}}
+      </h3>
+    </header>
+    <p class="section__p">
+      {{t 'country.show.industry_complex.copy.p1'}}
+    </p>
+    <p class="section__p">
+      {{t 'country.show.industry_complex.copy.p2'}}
+    </p>
+    <div class="tabmod">
+      {{#ivy-tabs}}
+        {{#ivy-tab-list classNames='tabmod__tabs'}}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+            <a class="tab__link">
+              {{t 'country.show.industry_space'}}
+            </a>
+          {{/ivy-tab}}
+        {{/ivy-tab-list}}
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod buildermod__viz">
+            {{vistk-network
               data=lastIndustryData
               immutableData=lastIndustryData
-              isInTab='true'
-              elementId='employment-vistk-treemap'
+              elementId='industry-space'
               dataType='industries'
-              varDependent='employment'
-              delay=1500
+              graph=industrySpace
+              height=600
+              delay=2000
             }}
           </div>
-        </div>
-      {{/ivy-tab-panel}}
-      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod">
-          <div class="vizmod--treemod">
-            {{vistk-treemap
-              isInTab='true'
-              data=lastIndustryData
-              immutableData=lastIndustryData
-              elementId='wages-vistk-treemap'
-              dataType='industries'
-              varDependent='wages'
-              delay=1500
-            }}
+        {{/ivy-tab-panel}}
+      {{/ivy-tabs}}
+    </div>
+  </section>
+  <section class="stream__section">
+    <div class="ember__table__wrap">
+      {{component 'table-download'
+        data=lastIndustryData
+        source='industries'
+        pageTitle='industries'
+        name='colombia'
+      }}
+      {{component 'graphbuilder-table'
+        data=lastIndustryData
+        source='industries'
+      }}
+    </div>
+  </section>
+{{/if}}
+{{#if hasProductsData }}
+  <section class="stream__section">
+    <header class="section__header">
+      <h3 class="section__head">
+        {{t 'country.show.exports'}}
+      </h3>
+    </header>
+    <p class="section__p">
+      {{t 'country.show.exports.copy.p1'}}
+    </p>
+    <div class="tabmod">
+      {{#ivy-tabs}}
+        {{#ivy-tab-list classNames='tabmod__tabs'}}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+            <a class="tab__link">
+              {{t 'country.show.exports_composition_by_products' year=lastYear}}
+            </a>
+          {{/ivy-tab}}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+            <a class="tab__link">
+              {{t 'country.show.exports_composition_by_department' year=lastYear}}
+            </a>
+          {{/ivy-tab}}
+        {{/ivy-tab-list}}
+
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod">
+            <div class="vizmod--treemod">
+              {{vistk-treemap
+                isInTab='true'
+                data=productsData
+                immutableData=productsData
+                elementId='export-vistk-treemap'
+                varDependent='export_value'
+                metadata=model.metaData
+                delay=2500
+              }}
+            </div>
           </div>
-        </div>
-      {{/ivy-tab-panel}}
-    {{/ivy-tabs}}
-  </div>
-</section>
-<section class="stream__section">
-  <div class="tabmod">
-    {{#ivy-tabs}}
-      {{#ivy-tab-list classNames='tabmod__tabs'}}
-        {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-          <a class="tab__link">
-            {{t 'country.show.occupation.num_vac' }}
-          </a>
-        {{/ivy-tab}}
-      {{/ivy-tab-list}}
-
-      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod">
-          <div class="vizmod--treemod">
-            {{vistk-treemap
-              isInTab='true'
-              data=occupationData
-              immutableData=occupationData
-              elementId='occupation-num_vacancies-map'
-              varDependent='num_vacancies'
-              metadata=model.metaData
-              delay=3000
-            }}
+        {{/ivy-tab-panel}}
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod">
+            <div class="vizmod--treemod">
+              {{vistk-treemap
+                isInTab='true'
+                data=departmentsData
+                immutableData=departmentsData
+                elementId='export-department-map'
+                varDependent='export_value'
+                metadata=model.metaData
+                delay=3000
+              }}
+            </div>
           </div>
-        </div>
-      {{/ivy-tab-panel}}
-    {{/ivy-tabs}}
-  </div>
-</section>
-<section class="stream__section">
-  <div class="ember__table__wrap">
-    {{component 'table-download'
-      data=occupationData
-      source='occupations'
-      pageTitle='products'
-      name='colombia'
-    }}
-    {{component 'graphbuilder-table'
-      data=occupationData
-      source='occupations'
-    }}
-  </div>
-</section>
+        {{/ivy-tab-panel}}
+      {{/ivy-tabs}}
+    </div>
+  </section>
+  <section class="stream__section">
+    <header class="section__header">
+      <h3 class="section__head">
+        {{t 'country.show.export_complexity_possibilities'}}
+      </h3>
+    </header>
+    <p class="section__p">
+      {{t 'country.show.export_complexity_possibilities.copy.p1'}}
+    </p>
+    <p class="section__p">
+      {{t 'country.show.export_complexity_possibilities.copy.p2'}}
+    </p>
+    <p class="section__p">
+      {{t 'country.show.export_complexity_possibilities.copy.p3'}}
+    </p>
+    <div class="tabmod">
+      {{#ivy-tabs}}
+        {{#ivy-tab-list classNames='tabmod__tabs'}}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+            <a class="tab__link">
+              {{t 'country.show.product_space'}}
+            </a>
+          {{/ivy-tab}}
+        {{/ivy-tab-list}}
 
-<section class="stream__section">
-  <header class="section__header">
-    <h3 class="section__head">
-        {{t 'country.show.industry_complex'}}
-    </h3>
-  </header>
-  <p class="section__p">
-    {{t 'country.show.industry_complex.copy.p1'}}
-  </p>
-  <p class="section__p">
-    {{t 'country.show.industry_complex.copy.p2'}}
-  </p>
-  <div class="tabmod">
-    {{#ivy-tabs}}
-      {{#ivy-tab-list classNames='tabmod__tabs'}}
-        {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-          <a class="tab__link">
-            {{t 'country.show.industry_space'}}
-          </a>
-        {{/ivy-tab}}
-      {{/ivy-tab-list}}
-      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod buildermod__viz">
-          {{vistk-network
-            data=lastIndustryData
-            immutableData=lastIndustryData
-            elementId='industry-space'
-            dataType='industries'
-            graph=industrySpace
-            height=600
-            delay=2000
-          }}
-        </div>
-      {{/ivy-tab-panel}}
-    {{/ivy-tabs}}
-  </div>
-</section>
-<section class="stream__section">
-  <div class="ember__table__wrap">
-    {{component 'table-download'
-      data=lastIndustryData
-      source='industries'
-      pageTitle='industries'
-      name='colombia'
-    }}
-    {{component 'graphbuilder-table'
-      data=lastIndustryData
-      source='industries'
-    }}
-  </div>
-</section>
-<section class="stream__section">
-  <header class="section__header">
-    <h3 class="section__head">
-      {{t 'country.show.exports'}}
-    </h3>
-  </header>
-  <p class="section__p">
-    {{t 'country.show.exports.copy.p1'}}
-  </p>
-  <div class="tabmod">
-    {{#ivy-tabs}}
-      {{#ivy-tab-list classNames='tabmod__tabs'}}
-        {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-          <a class="tab__link">
-            {{t 'country.show.exports_composition_by_products' year=lastYear}}
-          </a>
-        {{/ivy-tab}}
-        {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-          <a class="tab__link">
-            {{t 'country.show.exports_composition_by_department' year=lastYear}}
-          </a>
-        {{/ivy-tab}}
-      {{/ivy-tab-list}}
-
-      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod">
-          <div class="vizmod--treemod">
-            {{vistk-treemap
-              isInTab='true'
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod buildermod__viz">
+            {{vistk-network
               data=productsData
               immutableData=productsData
-              elementId='export-vistk-treemap'
-              varDependent='export_value'
+              elementId='product-space'
+              dataType='products'
               metadata=model.metaData
-              delay=2500
+              varDependent='export_value'
+              graph=productSpace
+              height=600
+              delay=3500
             }}
           </div>
-        </div>
-      {{/ivy-tab-panel}}
-      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod">
-          <div class="vizmod--treemod">
-            {{vistk-treemap
-              isInTab='true'
-              data=departmentsData
-              immutableData=departmentsData
-              elementId='export-department-map'
-              varDependent='export_value'
-              metadata=model.metaData
-              delay=3000
-            }}
-          </div>
-        </div>
-      {{/ivy-tab-panel}}
-    {{/ivy-tabs}}
-  </div>
-</section>
-<section class="stream__section">
-  <header class="section__header">
-    <h3 class="section__head">
-      {{t 'country.show.export_complexity_possibilities'}}
-    </h3>
-  </header>
-  <p class="section__p">
-    {{t 'country.show.export_complexity_possibilities.copy.p1'}}
-  </p>
-  <p class="section__p">
-    {{t 'country.show.export_complexity_possibilities.copy.p2'}}
-  </p>
-  <p class="section__p">
-    {{t 'country.show.export_complexity_possibilities.copy.p3'}}
-  </p>
-  <div class="tabmod">
-    {{#ivy-tabs}}
-      {{#ivy-tab-list classNames='tabmod__tabs'}}
-        {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-          <a class="tab__link">
-            {{t 'country.show.product_space'}}
-          </a>
-        {{/ivy-tab}}
-      {{/ivy-tab-list}}
-
-      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod buildermod__viz">
-          {{vistk-network
-            data=productsData
-            immutableData=productsData
-            elementId='product-space'
-            dataType='products'
-            metadata=model.metaData
-            varDependent='export_value'
-            graph=productSpace
-            height=600
-            delay=3500
-          }}
-        </div>
-      {{/ivy-tab-panel}}
-    {{/ivy-tabs}}
-  </div>
-</section>
-<section class="stream__section">
-  <div class="ember__table__wrap">
-    {{component 'table-download'
-      data=productsData
-      source='industries'
-      pageTitle='products'
-      name='colombia'
-    }}
-    {{component 'graphbuilder-table'
-      data=productsData
-      source='products'
-    }}
-  </div>
-</section>
+        {{/ivy-tab-panel}}
+      {{/ivy-tabs}}
+    </div>
+  </section>
+  <section class="stream__section">
+    <div class="ember__table__wrap">
+      {{component 'table-download'
+        data=productsData
+        source='industries'
+        pageTitle='products'
+        name='colombia'
+      }}
+      {{component 'graphbuilder-table'
+        data=productsData
+        source='products'
+      }}
+    </div>
+  </section>
+{{/if}}

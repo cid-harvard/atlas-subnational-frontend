@@ -10,17 +10,19 @@
         {{ t 'pageheader.search_link'}}
       {{/link-to}}
     </li>
-    <li class="side-nav__item">
-      {{#link-to 'search'
-        (query-params filter='industry')
-        class="side-nav__item__link"
-        activeClass="side-nav__item--active"
-        data-side-search-link='industries'
-      }}
-        {{fa-icon icon= "search"}}
-        {{ t 'search.results_industries' }}
-      {{/link-to}}
-    </li>
+    {{#if featureToggle.showIndustries }}
+      <li class="side-nav__item">
+        {{#link-to 'search'
+          (query-params filter='industry')
+          class="side-nav__item__link"
+          activeClass="side-nav__item--active"
+          data-side-search-link='industries'
+        }}
+          {{fa-icon icon= "search"}}
+          {{ t 'search.results_industries' }}
+        {{/link-to}}
+      </li>
+    {{/if}}
     <li class="side-nav__item">
       {{#link-to 'search'
         (query-params filter='product')

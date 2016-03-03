@@ -4,114 +4,120 @@
       <div class="stream__section__wrap">
         <h3 class="section__head">{{ t 'index.questions_head' }}</h3>
         <ul class="index__topics__list">
-          <li class="index__topics__item__wrap">
-            <div class="index__topics__item">
-              <div class="index__topics__vspacer"></div>
-              <h4 class="section__subhead">{{ t 'index.location_head' }}</h4>
-              {{select-dropdown collection=sortedCities type='location'}}
-              <ul>
-                <li class="index__questions__item">
-                  {{#link-to
-                    'location.visualization' locationFirst 'industries' 'treemap' 'employment'(query-params endDate=lastYear startDate=lastYear)
-                    data-home-page-location-question='1'
-                    class="link--stream index__questions__link"
-                  }}
-                    {{ t 'index.location_q1' }}
-                  {{/link-to}}
-                </li>
-                <li class="index__questions__item">
-                  {{#link-to
-                    'location.visualization' locationSecond 'products' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear)
-                    data-home-page-location-question='2'
-                    class="link--stream index__questions__link"
-                  }}
-                    {{ t 'index.location_q2' }}
-                  {{/link-to}}
-                </li>
-                <li class="index__questions__item">
-                  {{#link-to
-                    'location.show' locationFirst
-                    data-home-page-location-question='2'
-                    class="link--stream index__questions__link index__questions__link--viewall"
-                  }}
-                    {{ t 'index.location_viewall' }}
-                  {{/link-to}}
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="index__topics__item__wrap">
-            <div class="index__topics__item">
-              <div class="index__topics__vspacer"></div>
-              <h4 class="section__subhead">{{ t 'index.industry_head' }}</h4>
-                {{select-dropdown collection=sortedIndustries type='industry'}}
-              <ul>
-                <li class="index__questions__item">
-                  {{#link-to
-                    'industry.visualization' industryFirst 'departments' 'multiples' 'employment'(query-params endDate=lastYear startDate=firstYear )
-                    data-home-page-product-question='1'
-                    class="link--stream index__questions__link"
-                  }}
-                    {{ t 'index.industry_q1' }}
-                  {{/link-to}}
-                </li>
-                <li class="index__questions__item">
-                  {{#link-to
-                    'industry.visualization' industrySecond 'occupations' 'treemap' 'num_vacancies'(query-params endDate=lastYear startDate=firstYear )
-                    data-home-page-product-question='2'
-                    class="link--stream index__questions__link"
-                  }}
-                    {{ t 'index.industry_q2' }}
-                  {{/link-to}}
-                </li>
-                <li class="index__questions__item">
-                  {{#link-to
-                    'industry.show' industryFirst
-                    data-home-page-product-question='1'
-                    class="link--stream index__questions__link index__questions__link--viewall"
-                  }}
-                    {{ t 'index.location_viewall' }}
-                  {{/link-to}}
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="index__topics__item__wrap">
-            <div class="index__topics__item">
-              <div class="index__topics__vspacer"></div>
-              <h4 class="section__subhead">{{ t 'index.product_head' }}</h4>
-                {{select-dropdown collection=sortedProducts type='product'}}
-              <ul>
-                <li class="index__questions__item">
-                  {{#link-to
-                    'product.visualization' productFirst 'departments' 'geo' 'export_value' (query-params endDate=lastYear startDate=lastYear )
-                    data-home-page-industry-question='1'
-                    class="link--stream index__questions__link"
-                  }}
-                    {{ t 'index.product_q1' }}
-                  {{/link-to}}
-                </li>
-                <li class="index__questions__item">
-                  {{#link-to
-                    'product.visualization' productSecond 'departments' 'multiples' 'import_value'(query-params endDate=lastYear startDate=firstYear )
-                    data-home-page-industry-question='2'
-                    class="link--stream index__questions__link"
-                  }}
-                    {{ t 'index.product_q2' }}
-                  {{/link-to}}
-                </li>
-                <li class="index__questions__item">
-                  {{#link-to
-                    'product.show' productFirst
-                    data-home-page-industry-question='1'
-                    class="link--stream index__questions__link index__questions__link--viewall"
-                  }}
-                    {{ t 'index.location_viewall' }}
-                  {{/link-to}}
-                </li>
-              </ul>
-            </div>
-          </li>
+          {{#if showLocations }}
+            <li class="index__topics__item__wrap">
+              <div class="index__topics__item">
+                <div class="index__topics__vspacer"></div>
+                <h4 class="section__subhead">{{ t 'index.location_head' }}</h4>
+                {{select-dropdown collection=sortedCities type='location'}}
+                <ul>
+                  <li class="index__questions__item">
+                    {{#link-to
+                      'location.visualization' locationFirst 'industries' 'treemap' 'employment'(query-params endDate=lastYear startDate=lastYear)
+                      data-home-page-location-question='1'
+                      class="link--stream index__questions__link"
+                    }}
+                      {{ t 'index.location_q1' }}
+                    {{/link-to}}
+                  </li>
+                  <li class="index__questions__item">
+                    {{#link-to
+                      'location.visualization' locationSecond 'products' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear)
+                      data-home-page-location-question='2'
+                      class="link--stream index__questions__link"
+                    }}
+                      {{ t 'index.location_q2' }}
+                    {{/link-to}}
+                  </li>
+                  <li class="index__questions__item">
+                    {{#link-to
+                      'location.show' locationFirst
+                      data-home-page-location-question='2'
+                      class="link--stream index__questions__link index__questions__link--viewall"
+                    }}
+                      {{ t 'index.location_viewall' }}
+                    {{/link-to}}
+                  </li>
+                </ul>
+              </div>
+            </li>
+          {{/if}}
+          {{#if showIndustries }}
+            <li class="index__topics__item__wrap">
+              <div class="index__topics__item">
+                <div class="index__topics__vspacer"></div>
+                <h4 class="section__subhead">{{ t 'index.industry_head' }}</h4>
+                  {{select-dropdown collection=sortedIndustries type='industry'}}
+                <ul>
+                  <li class="index__questions__item">
+                    {{#link-to
+                      'industry.visualization' industryFirst 'departments' 'multiples' 'employment'(query-params endDate=lastYear startDate=firstYear )
+                      data-home-page-product-question='1'
+                      class="link--stream index__questions__link"
+                    }}
+                      {{ t 'index.industry_q1' }}
+                    {{/link-to}}
+                  </li>
+                  <li class="index__questions__item">
+                    {{#link-to
+                      'industry.visualization' industrySecond 'occupations' 'treemap' 'num_vacancies'(query-params endDate=lastYear startDate=firstYear )
+                      data-home-page-product-question='2'
+                      class="link--stream index__questions__link"
+                    }}
+                      {{ t 'index.industry_q2' }}
+                    {{/link-to}}
+                  </li>
+                  <li class="index__questions__item">
+                    {{#link-to
+                      'industry.show' industryFirst
+                      data-home-page-product-question='1'
+                      class="link--stream index__questions__link index__questions__link--viewall"
+                    }}
+                      {{ t 'index.location_viewall' }}
+                    {{/link-to}}
+                  </li>
+                </ul>
+              </div>
+            </li>
+          {{/if}}
+          {{#if showProducts }}
+            <li class="index__topics__item__wrap">
+              <div class="index__topics__item">
+                <div class="index__topics__vspacer"></div>
+                <h4 class="section__subhead">{{ t 'index.product_head' }}</h4>
+                  {{select-dropdown collection=sortedProducts type='product'}}
+                <ul>
+                  <li class="index__questions__item">
+                    {{#link-to
+                      'product.visualization' productFirst 'departments' 'geo' 'export_value' (query-params endDate=lastYear startDate=lastYear )
+                      data-home-page-industry-question='1'
+                      class="link--stream index__questions__link"
+                    }}
+                      {{ t 'index.product_q1' }}
+                    {{/link-to}}
+                  </li>
+                  <li class="index__questions__item">
+                    {{#link-to
+                      'product.visualization' productSecond 'departments' 'multiples' 'import_value'(query-params endDate=lastYear startDate=firstYear )
+                      data-home-page-industry-question='2'
+                      class="link--stream index__questions__link"
+                    }}
+                      {{ t 'index.product_q2' }}
+                    {{/link-to}}
+                  </li>
+                  <li class="index__questions__item">
+                    {{#link-to
+                      'product.show' productFirst
+                      data-home-page-industry-question='1'
+                      class="link--stream index__questions__link index__questions__link--viewall"
+                    }}
+                      {{ t 'index.location_viewall' }}
+                    {{/link-to}}
+                  </li>
+                </ul>
+              </div>
+            </li>
+          {{/if}}
         </ul>
       </div>
     </section>
