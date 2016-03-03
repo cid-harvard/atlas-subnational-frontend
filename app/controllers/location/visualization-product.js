@@ -4,6 +4,7 @@ const {computed, observer, get:get } = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
+  featureToggle: Ember.inject.service(),
   queryParams: ['search', 'startDate', 'endDate'],
   search: null,
   rcaFilter: 'less',
@@ -11,8 +12,8 @@ export default Ember.Controller.extend({
   endDate: null,
   searchText: null,
 
-  firstYear: computed.alias('i18n.firstYear'),
-  lastYear: computed.alias('i18n.lastYear'),
+  firstYear: computed.alias('featureToggle.first_year'),
+  lastYear: computed.alias('featureToggle.last_year'),
 
   metadata: computed.alias('model.metaData'),
   source: computed.alias('model.source'), //partners
@@ -180,10 +181,16 @@ export default Ember.Controller.extend({
     },
     transitionLocationProducts: function(productId) {
       let modelId = this.get('model.entity.id');
+      let visualization = this.get('visualization');
       var startDate = this.get('lastYear');
       var endDate = this.get('lastYear');
+
+      if(visualization === 'multiples') {
+        startDate = this.get('firstYear');
+      }
+
       this.set('searchText', this.get('search'));
-      this.transitionToRoute(`location.visualization-product`, modelId, productId, 'treemap', this.get('variable'), {
+      this.transitionToRoute(`location.visualization-product`, modelId, productId, visualization, this.get('variable'), {
         queryParams: {startDate: startDate, endDate: endDate, search: this.get('search') }
       });
     },
@@ -197,7 +204,6 @@ export default Ember.Controller.extend({
 
       if(visualization === 'multiples') {
         startDate = this.get('firstYear');
-        endDate = this.get('lastYear');
       }
 
       if(this.get('visualization') === visualization) { return; } //do nothing if currently on the same visualization
