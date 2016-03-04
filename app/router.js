@@ -7,6 +7,7 @@ var Router = Ember.Router.extend(googlePageview,{
 });
 
 export default Router.map(function() {
+  this.route('textsearch');
   this.route('search');
   this.route('downloads');
   this.route('colombia');

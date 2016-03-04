@@ -25,7 +25,9 @@ export default Ember.Component.extend({
     return this.get('result.short_name') || this.get('result.name');
   }),
   entity: computed('result', function() {
-    return this.get('result.constructor.modelName');
+      // Hack to make only product
+      return 'product';
+    //return this.get('result.constructor.modelName');
   }),
   profileLink: computed('entity', function() {
     return `${this.get('entity')}.show`;
@@ -43,4 +45,3 @@ export default Ember.Component.extend({
     }
   })
 });
-
