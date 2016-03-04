@@ -46,8 +46,8 @@ export default  {
     "index_profile_id": 0,
     "index_graphbuilder_id": 87,
     "last_year": 2014,
-    "first_year": 2004,
+    "first_year": 2007,
     "census_year": 2010,
-    "geo_center": [0,0]
+    "geo_center": [-12,-77]
   }
 };
