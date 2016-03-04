@@ -73,7 +73,7 @@ export default Ember.Component.extend({
       style: (feature) => {
         let valueMap = this.get('valueMap');
         return  {
-          className: valueMap.get(_.get(feature, 'properties.cid_id')).class,
+          className: _.get(valueMap.get(_.get(feature, 'properties.cid_id')), 'class') || 'geo__department q0',
           fillOpacity: 1,
           opacity: 1
         };
@@ -96,7 +96,7 @@ export default Ember.Component.extend({
 
           let textKey = this.get('i18n')
             .t(`graph_builder.table.${this.get('varDependent')}`);
-          let textValue = this.get('valueMap').get(location.cid_id).value;
+          let textValue = _.get(this.get('valueMap').get(location.cid_id), 'value');
           this.set('numberFormat', textValue);
           var toolTipText = `<span> ${location.name} </span> </br> ${textKey} : ${this.get('numberFormat')}`;
 
