@@ -59,3 +59,16 @@
 .vizmod__footer__p {
   color: $colorGray;
 }
+
+.buildermod--product-inputs {
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-justify-content: space-around; /* Safari */
+  justify-content: space-around;
+}
+.buildermod--product-select {
+  flex-basis: 40%;
+}
+.buildermod--product-filter {
+  flex-basis: 58%;
+}
