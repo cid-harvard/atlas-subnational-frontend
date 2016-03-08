@@ -425,6 +425,7 @@ export default {
   "location.show.total_wages": "Salarios totales pagados ({{lastYear}})",
   "location.show.value": "Valor",
   "pageheader.about": "\u00bfQui\u00e9nes somos?",
+  "pageheader.alternative_title": "Atlas de complejidad económica",
   "pageheader.brand_slogan": "Utilizando datos para mantener Peru competitivo",
   "pageheader.download": "Descargue los datos",
   "pageheader.graph_builder_link": "Graficador",

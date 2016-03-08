@@ -424,6 +424,7 @@ export default {
   "location.show.total_wages": "N\u00f3mina salarial ({{lastYear}})",
   "location.show.value": "Valor",
   "pageheader.about": "Acerca de Datlas",
+  "pageheader.alternative_title": "Atlas de complejidad económica",
   "pageheader.brand_slogan": "Colombia como usted nunca la ha visto",
   "pageheader.download": "Acerca de los datos",
   "pageheader.graph_builder_link": "Graficador",

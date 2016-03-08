@@ -425,6 +425,7 @@ export default {
   "location.show.total_wages": "Total wages ({{lastYear}})",
   "location.show.value": "Value",
   "pageheader.about": "About",
+  "pageheader.alternative_title": "Atlas of Economic Complexity",
   "pageheader.brand_slogan": "Using data to keep Peru competitive",
   "pageheader.download": "Download the data",
   "pageheader.graph_builder_link": "Graph Builder",
