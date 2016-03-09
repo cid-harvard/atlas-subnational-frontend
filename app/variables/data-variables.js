@@ -14,7 +14,11 @@ export default  {
     "last_year": 2014,
     "first_year": 2008,
     "census_year": 2014,
-    "geo_center": [4.6,-74.06]
+    "geo_center": [4.6,-74.06],
+    "subregions" : {
+      "country": "department",
+      "department": "municipality"
+    }
   },
   mex: {
     "index_products": [1143,87],
@@ -31,7 +35,11 @@ export default  {
     "last_year": 2014,
     "first_year": 2004,
     "census_year": 2010,
-    "geo_center": [19,-99]
+    "geo_center": [19,-99],
+    "subregions" : {
+      "country": "department",
+      "department": "municipality",
+    }
   },
   peru: {
     "index_products": [1143,87],
@@ -48,6 +56,10 @@ export default  {
     "last_year": 2014,
     "first_year": 2007,
     "census_year": 2010,
-    "geo_center": [-12,-77]
+    "geo_center": [-12,-77],
+    "subregions" : {
+      "country": "department",
+      "department": "msa",
+    }
   }
 };

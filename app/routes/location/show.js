@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ENV from '../../config/environment';
 
 const {apiURL} = ENV;
-const {RSVP, computed, getWithDefault} = Ember;
+const {RSVP, computed, getWithDefault, get} = Ember;
 
 export default Ember.Route.extend({
 // `this.store.find` makes an api call for `params.location_id` and returns a promise
@@ -21,28 +21,33 @@ export default Ember.Route.extend({
     let level = model.get('level');
     level = level === 'country' ? 'department' : level;
 
+    let subregion = get(this, `featureToggle.subregions.${model.get('level')}`);
+
     // TODO: maybe use ember data instead of ajax calls to decorate JSON objects with model functionality?
-    //
     // extract year out later
     var products = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/products?level=4digit`);
     var industries = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/industries?level=class`);
 
     // one of these should be removed in the future because the points should be merged in
-    var departments = Ember.$.getJSON(`${apiURL}/data/location?level=${level}`);
-    var departments_trade = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/subregions_trade/?level=${level}`);
+    var dotplot = Ember.$.getJSON(`${apiURL}/data/location?level=${level}`); //dotplots
+
+    var subregions_trade = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/subregions_trade/?level=${subregion}`);
 
     var occupations = Ember.$.getJSON(`${apiURL}/data/occupation/?level=minor_group`);
 
-    return RSVP.allSettled([products, departments, industries, departments_trade, occupations]).then((array) => {
+    return RSVP.allSettled([products, dotplot, industries, subregions_trade, occupations]).then((array) => {
       var productsData = getWithDefault(array[0], 'value.data', []);
-      var departmentsData = getWithDefault(array[1], 'value.data', []);
+
+      var dotplotData = getWithDefault(array[1], 'value.data', []);//dotplots
+
       var industriesData = getWithDefault(array[2], 'value.data', []);
-      var departmentsTradeData = _.filter(getWithDefault(array[3], 'value.data', []), { 'year': this.get('lastYear')});
+
+      var subregionsTradeData = _.filter(getWithDefault(array[3], 'value.data', []), { 'year': this.get('lastYear')});
+
       var occupationsData = getWithDefault(array[4], 'value.data', []);
 
       var productsDataIndex = _.indexBy(productsData, 'product_id');
       var industriesDataIndex = _.indexBy(industriesData, 'industry_data');
-      var departmentsTradeDataIndex = _.indexBy(departmentsTradeData, 'location_id');
 
       let productsMetadata = this.modelFor('application').products;
       let locationsMetadata = this.modelFor('application').locations;
@@ -81,19 +86,19 @@ export default Ember.Route.extend({
         d.share = d.num_vacancies/occupationVacanciesSum;
       });
 
-      var departments = [];
-      var departmentTimeseries = [];
+      //dotplots and dotplotTimeSeries power the dotplots, rankings and etc
+      var dotplot = [];
+      var dotplotTimeSeries= [];
 
-      _.each(departmentsData, (d) => {
+      _.each(dotplotData, (d) => {
         let id = _.get(d, 'department_id') || _.get(d, 'location_id');
         if(id == model.id) {
-          departmentTimeseries.push(d);
+          dotplotTimeSeries.push(d);
         }
         if(d.year === this.get('censusYear')) {
           let id = _.get(d, 'department_id') || _.get(d, 'location_id');
 
           let location = _.get(locationsMetadata, id);
-          let tradeData = _.get(departmentsTradeDataIndex,id);
 
           let extra = {
             name: location.name_en,
@@ -102,9 +107,25 @@ export default Ember.Route.extend({
             parent_name_es: location.name_es,
           };
 
-          let datum = _.merge(d, location, tradeData, extra );
-          departments.push(datum);
+          let datum = _.merge(d, location, extra );
+          dotplot.push(datum);
         }
+      });
+
+      let subregions = [];
+      _.each(subregionsTradeData, (d) => {
+        let id = _.get(d, 'department_id') || _.get(d, 'location_id');
+
+        let location = _.get(locationsMetadata, id);
+        let extra = {
+          name: location.name_en,
+          group: d.code,
+          parent_name_en: location.name_en,
+          parent_name_es: location.name_es,
+        };
+
+        let datum = _.merge(d, location, extra );
+        subregions.push(datum);
       });
 
       var eciRank = 1;
@@ -112,13 +133,13 @@ export default Ember.Route.extend({
       var gdpRank = 1;
       var gdpPerCapitaRank = 1;
 
-      let datum = _.chain(departmentTimeseries)
+      let datum = _.chain(dotplotTimeSeries)
         .select({ year: this.get('censusYear')})
         .first()
         .value();
 
       if(datum) {
-        _.each(departments, (d) => {
+        _.each(dotplot, (d) => {
           if(d.eci > datum.eci ) { eciRank ++; }
           if(d.gdp_real > datum.gdp_real) { gdpRank ++; }
           if(d.population > datum.population ) { populationRank ++; }
@@ -135,10 +156,11 @@ export default Ember.Route.extend({
 
       model.set('productsData', products);
       model.set('industriesData', industries);
-      model.set('departments', departments);
+      model.set('dotplotData', dotplot);
       model.set('occupations', occupations);
-      model.set('timeseries', departmentTimeseries);
+      model.set('timeseries', dotplotTimeSeries);
       model.set('metaData', this.modelFor('application'));
+      model.set('subregions', subregions);
 
       return model;
     });

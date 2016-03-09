@@ -118,4 +118,60 @@
     {{/ivy-tabs}}
   </div>
 </section>
+{{#if isDepartment }}
+  <section class="stream__section">
+    <header class="section__header">
+      <h3 class="section__head">
+        {{t 'location.show.subregion.title'}}
+      </h3>
+    </header>
+    <div class="tabmod">
+      {{#ivy-tabs}}
+        {{#ivy-tab-list classNames='tabmod__tabs'}}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+            <a class="tab__link">
+              {{t 'location.show.subregion.exports' year=lastYear}}
+            </a>
+          {{/ivy-tab}}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+            <a class="tab__link">
+              {{t 'location.show.subregion.imports' year=lastYear}}
+            </a>
+          {{/ivy-tab}}
+        {{/ivy-tab-list}}
+
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod">
+            <div class="vizmod--treemod">
+              {{vistk-treemap
+                isInTab='true'
+                data=model.subregions
+                immutableData=model.subregions
+                elementId='export-subregions-map'
+                varDependent='export_value'
+                metadata=model.metaData
+                delay=3000
+              }}
+            </div>
+          </div>
+        {{/ivy-tab-panel}}
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod">
+            <div class="vizmod--treemod">
+              {{vistk-treemap
+                isInTab='true'
+                data=model.subregions
+                immutableData=model.subregions
+                elementId='import-subregions-map'
+                varDependent='import_value'
+                metadata=model.metaData
+                delay=3000
+              }}
+            </div>
+          </div>
+        {{/ivy-tab-panel}}
+      {{/ivy-tabs}}
+    </div>
+  </section>
+{{/if}}
 
