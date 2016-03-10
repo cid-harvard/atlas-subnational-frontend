@@ -53,9 +53,14 @@ In the `config/enviroment.js` file adjust the `baseURL` variable in the `var ENV
 Current ENV files
 *  colombia
 *  mexico
+*  peru
 
 To use a country
 * run `ember build -e <enviroment>` e.g. `ember build -e colombia`
+
+OR
+
+* copy `.env.<country>` as `.env`
 
 
 * `ember build` (development) defaults to `.env`
