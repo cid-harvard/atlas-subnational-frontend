@@ -3,6 +3,7 @@ const {computed,  get: get} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
+  featureToggle: Ember.inject.service(),
   needs: 'application', // inject the application controller
   queryParams: ['query','filter'],
   entity: ['product', 'industry', 'location'],

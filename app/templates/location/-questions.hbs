@@ -1,81 +1,83 @@
 <div class="buildermod__questions buildermod__drawer--questions">
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.industry'}}</h4>
-  <ul class="builder__questions__list">
-    <li class="builder__questions__item">
-      {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear search='null')
-        class="icon-cidcon_treemap builder__questions__item__icon"
-        tagNmae='i'
-      }}
-      {{/link-to}}
-      {{#link-to 'location.visualization' model.id 'industries' 'multiples' 'employment' (query-params endDate=lastYear startDate=firstYear search='null')
-        class="icon-cidcon_multiples builder__questions__item__icon"
-        tagNmae='i'
-      }}
-      {{/link-to}}
-      <div class="builder__questions__item__textwrap">
-        <span>
-        {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear search='null')
-          class="builder__questions__question"}}
-          {{t (is-concat 'graph_builder.page_title.location.industries.employment.' model.level)}}
-        {{/link-to}}
-        </span>
-      </div>
-    </li>
-    <li class="builder__questions__item">
-      {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'wages' (query-params endDate=lastYear startDate=lastYear search='null')
-        class="icon-cidcon_treemap builder__questions__item__icon"
-        tagNmae='i'
-      }}
-      {{/link-to}}
-      {{#link-to 'location.visualization' model.id 'industries' 'multiples' 'wages' (query-params endDate=lastYear startDate=firstYear search='null')
-        class="icon-cidcon_multiples builder__questions__item__icon"
-        tagNmae='i'
-      }}
-      {{/link-to}}
-      <div class="builder__questions__item__textwrap">
-        <span>
-          {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'wages' (query-params endDate=lastYear startDate=lastYear search='null')
-            class="builder__questions__question" }}
-            {{t (is-concat 'graph_builder.page_title.location.industries.wages.' model.level)}}
-          {{/link-to}}
-        </span>
-      </div>
-    </li>
-    {{#unless isMunicipality}}
+  {{#if featureToggle.showIndustries }}
+    <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.industry'}}</h4>
+    <ul class="builder__questions__list">
       <li class="builder__questions__item">
-        {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca' (query-params endDate=lastYear startDate=lastYear search='null')
-          class="icon-cidcon_similarity builder__questions__item__icon"
+        {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear search='null')
+          class="icon-cidcon_treemap builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        {{#link-to 'location.visualization' model.id 'industries' 'multiples' 'employment' (query-params endDate=lastYear startDate=firstYear search='null')
+          class="icon-cidcon_multiples builder__questions__item__icon"
           tagNmae='i'
         }}
         {{/link-to}}
         <div class="builder__questions__item__textwrap">
           <span>
-          {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca' (query-params endDate=lastYear startDate=lastYear)
+          {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear search='null')
             class="builder__questions__question"}}
-            {{t (is-concat 'graph_builder.page_title.location.industries.similarity.' model.level)}}
+            {{t (is-concat 'graph_builder.page_title.location.industries.employment.' model.level)}}
+          {{/link-to}}
+          </span>
+        </div>
+      </li>
+      <li class="builder__questions__item">
+        {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'wages' (query-params endDate=lastYear startDate=lastYear search='null')
+          class="icon-cidcon_treemap builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        {{#link-to 'location.visualization' model.id 'industries' 'multiples' 'wages' (query-params endDate=lastYear startDate=firstYear search='null')
+          class="icon-cidcon_multiples builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        <div class="builder__questions__item__textwrap">
+          <span>
+            {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'wages' (query-params endDate=lastYear startDate=lastYear search='null')
+              class="builder__questions__question" }}
+              {{t (is-concat 'graph_builder.page_title.location.industries.wages.' model.level)}}
             {{/link-to}}
           </span>
         </div>
       </li>
-      {{#unless isCountry}}
+      {{#unless isMunicipality}}
         <li class="builder__questions__item">
-          {{#link-to 'location.visualization' model.id 'industries' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
-            class="icon-cidcon_scatter builder__questions__item__icon"
+          {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca' (query-params endDate=lastYear startDate=lastYear search='null')
+            class="icon-cidcon_similarity builder__questions__item__icon"
             tagNmae='i'
           }}
           {{/link-to}}
           <div class="builder__questions__item__textwrap">
             <span>
-              {{#link-to 'location.visualization' model.id 'industries' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
-                class="builder__questions__question"}}
-                {{t (is-concat 'graph_builder.page_title.location.industries.scatter.' model.level)}}
+            {{#link-to 'location.visualization' model.id 'industries' 'similarity' 'rca' (query-params endDate=lastYear startDate=lastYear)
+              class="builder__questions__question"}}
+              {{t (is-concat 'graph_builder.page_title.location.industries.similarity.' model.level)}}
               {{/link-to}}
             </span>
           </div>
         </li>
+        {{#unless isCountry}}
+          <li class="builder__questions__item">
+            {{#link-to 'location.visualization' model.id 'industries' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
+              class="icon-cidcon_scatter builder__questions__item__icon"
+              tagNmae='i'
+            }}
+            {{/link-to}}
+            <div class="builder__questions__item__textwrap">
+              <span>
+                {{#link-to 'location.visualization' model.id 'industries' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear search='null')
+                  class="builder__questions__question"}}
+                  {{t (is-concat 'graph_builder.page_title.location.industries.scatter.' model.level)}}
+                {{/link-to}}
+              </span>
+            </div>
+          </li>
+        {{/unless}}
       {{/unless}}
-    {{/unless}}
-  </ul>
+    </ul>
+  {{/if}}
   <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.export'}}</h4>
   <ul class="builder__questions__list">
     <li class="builder__questions__item">

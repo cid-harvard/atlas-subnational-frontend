@@ -3,9 +3,15 @@
   <div class="pageheader__home__cap"></div>
   <div class="pageheader__wrap">
     <div class="branding">
-      {{#link-to "index"}}
-        <img src="assets/img/branding/datlas-white.svg" alt="Datlas" class="branding__logo">
-      {{/link-to}}
+      {{#if featureToggle.showDatlas }}
+        {{#link-to "index"}}
+          <img src="assets/img/branding/datlas-white.svg" alt="Datlas" class="branding__logo">
+        {{/link-to}}
+      {{else}}
+        {{#link-to "index" class="pageheader__title"}}
+          {{t 'pageheader.alternative_title' }}
+        {{/link-to}}
+      {{/if}}
     </div>
     <nav class="pageheader__nav">
       <div class="togglemod togglemod--languages">

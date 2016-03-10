@@ -64,6 +64,7 @@ app.import('bower_components/mapbox.js/images/icons-000000@2x.png', { destDir: '
 // Admin boundaries for geomap
 app.import('vendor/geodata/col.topojson',  { destDir: 'assets/geodata' });
 app.import('vendor/geodata/mex.topojson',  { destDir: 'assets/geodata' });
+app.import('vendor/geodata/peru.topojson',  { destDir: 'assets/geodata' });
 
 app.import('vendor/networks/product_space.json', { destDir: 'assets/networks' });
 app.import('vendor/networks/col-industry_space.json', { destDir: 'assets/networks' });

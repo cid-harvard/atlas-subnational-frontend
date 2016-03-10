@@ -19,6 +19,7 @@
 // Branding
 
 .branding {
+  height: 30px;
 }
 
 .branding__logo {
@@ -148,6 +149,27 @@
 }
 
 // Menu
+.pageheader__title {
+  font-family: $sans;
+  color: $colorWhite;
+  font-size: $fontBase;
+  font-weight: 600;
+  position: absolute;
+  top: 0;
+  padding: 1.1rem 0;
+  a {
+    color: $colorWhite;
+    &:hover {
+      opacity: .8;
+    }
+  }
+}
+
+.header--pageheader--home {
+  .pageheader__title {
+    color: $colorRed;
+  }
+}
 
 .pageheader__menu {
   @include offset-text;

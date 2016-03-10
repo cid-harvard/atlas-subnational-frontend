@@ -11,10 +11,15 @@ export default Ember.Controller.extend({
   lastYear: computed.alias('featureToggle.last_year'),
 
   validTimeseries: computed.alias('model.timeseries'),
-  departmentsData: computed.oneWay('model.departments'),
+  dotplotData: computed.oneWay('model.dotplotData'),
   occupationData: computed.oneWay('model.occupations'),
   productsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
+
+  hasTimeseries: computed.notEmpty('model.timeseries'),
+  hasOccupationData: computed.notEmpty('model.occupations'),
+  hasProductsData: computed.notEmpty('model.productsData'),
+  hasIndustriesData: computed.notEmpty('model.industriesData'),
 
   isCountry: computed.equal('model.level', 'country'),
   isDepartment: computed.equal('model.level','department'),

@@ -11,6 +11,10 @@ export default Ember.Controller.extend({
   locationIds: computed.alias('featureToggle.index_locations'),
   industryIds: computed.alias('featureToggle.index_industries'),
 
+  showIndustries: computed.notEmpty('featureToggle.index_industries'),
+  showProducts: computed.notEmpty('featureToggle.index_products'),
+  showLocations: computed.notEmpty('featureToggle.index_locations'),
+
   products: computed.filter('model.products', function (product) {
     let id = get(this, 'productIds');
     return _.contains(`${id}`, get(product, 'id'));

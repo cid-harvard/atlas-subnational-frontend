@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   classNames: ['geo__wrap'],
   accessToken: 'pk.eyJ1IjoiZ3dlemVyZWsiLCJhIjoicXJkMjV6WSJ9.Iw_1c5zREHqNSfdtkjlqbA',
   baseMap: computed('elementId', function() {
-    if(!this.get('elementId')) { return false; }
+    if(!this.get('elementId')) { return ; }
 
     let map = new L.mapbox.map(this.get('elementId'), 'gwezerek.22ab4aa8,gwezerek.da867b0d', {
       accessToken: this.accessToken,
@@ -73,7 +73,7 @@ export default Ember.Component.extend({
       style: (feature) => {
         let valueMap = this.get('valueMap');
         return  {
-          className: valueMap.get(_.get(feature, 'properties.cid_id')).class,
+          className: _.get(valueMap.get(_.get(feature, 'properties.cid_id')), 'class') || 'geo__department q0',
           fillOpacity: 1,
           opacity: 1
         };
@@ -96,7 +96,7 @@ export default Ember.Component.extend({
 
           let textKey = this.get('i18n')
             .t(`graph_builder.table.${this.get('varDependent')}`);
-          let textValue = this.get('valueMap').get(location.cid_id).value;
+          let textValue = _.get(this.get('valueMap').get(location.cid_id), 'value');
           this.set('numberFormat', textValue);
           var toolTipText = `<span> ${location.name} </span> </br> ${textKey} : ${this.get('numberFormat')}`;
 
@@ -115,6 +115,7 @@ export default Ember.Component.extend({
     });
   },
   update: observer('data.[]', 'varDependent', 'i18n.locale', function() {
+    if(!this.get('elementId')) { return ; }
     Ember.run.later(this , function() {
       let map =  this.get('baseMap');
       if(!map) { return; }
@@ -129,7 +130,7 @@ export default Ember.Component.extend({
 
           let textKey = this.get('i18n')
             .t(`graph_builder.table.${this.get('varDependent')}`);
-          let textValue = this.get('valueMap').get(location.cid_id).value;
+          let textValue = _.get(this.get('valueMap').get(location.cid_id), 'value');
           this.set('numberFormat', textValue);
           var toolTipText = `<span> ${location.name} </span> </br> ${textKey} : ${this.get('numberFormat')}`;
 
@@ -145,5 +146,10 @@ export default Ember.Component.extend({
       this.set('layer', layer);
       layer.addTo(map);
     }, 200);
-  })
+  }),
+  willDestroyElement: function() {
+    this.removeObserver('i18n.locale', this, this.update);
+    this.removeObserver('data.[]', this, this.update);
+    this.removeObserver('varDependent', this, this.profileTabUpdate);
+  },
 });
