@@ -23,17 +23,19 @@
 	}}
 </section>
 
-<section class="stream__section">
-	<h3 class="section__head">{{ t 'rankings.section.cities' }}</h3>
-  {{component 'table-download'
-    name=sectionCities
-    data=model.msas
-    source='rankings'
-    pageTitle=pageTitle
-  }}
-	{{component 'graphbuilder-table'
-	  data=model.msas
-	  source='rankings'
-	  sortby='eci'
-	}}
-</section>
+{{#if featureToggle.showCities }}
+  <section class="stream__section">
+    <h3 class="section__head">{{ t 'rankings.section.cities' }}</h3>
+    {{component 'table-download'
+      name=sectionCities
+      data=model.msas
+      source='rankings'
+      pageTitle=pageTitle
+    }}
+    {{component 'graphbuilder-table'
+      data=model.msas
+      source='rankings'
+      sortby='eci'
+    }}
+  </section>
+{{/if}}

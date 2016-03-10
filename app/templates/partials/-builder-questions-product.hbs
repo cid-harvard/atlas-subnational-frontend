@@ -37,30 +37,32 @@
       {{/link-to}}
     </ul>
   </div>
-  <div class="menu-section">
-    <h5 class='menu-section__group-name'>{{t 'header.import'}}</h5>
-    <ul class="menu-section__group">
-      {{#link-to 'product.visualization' model.id 'departments' 'geo' 'import_value'
-        (query-params startDate=lastYear endDate=lastYear search='null')
-        tagName='li'
-        classNameBindings="productDepartmentsImports:menu-section__link--active"
-        class="menu-section__link"}}
-        {{t 'header.region'}}
-      {{/link-to}}
-      {{#link-to 'product.visualization' model.id 'cities' 'multiples' 'import_value'
-        (query-params startDate=firstYear endDate=lastYear search='null')
-        tagName='li'
-        classNameBindings="productCitiesImports:menu-section__link--active"
-        class="menu-section__link"}}
-        {{t 'header.subregion'}}
-      {{/link-to}}
-      {{#link-to 'product.visualization' model.id 'partners' 'treemap' 'import_value'
-        (query-params startDate=lastYear endDate=lastYear search='null')
-        tagName='li'
-        classNameBindings="productPartnersImports:menu-section__link--active"
-        class="menu-section__link"}}
-        {{t 'header.origin'}}
-      {{/link-to}}
-    </ul>
-  </div>
+  {{#if featureToggle.showImports }}
+    <div class="menu-section">
+      <h5 class='menu-section__group-name'>{{t 'header.import'}}</h5>
+      <ul class="menu-section__group">
+        {{#link-to 'product.visualization' model.id 'departments' 'geo' 'import_value'
+          (query-params startDate=lastYear endDate=lastYear search='null')
+          tagName='li'
+          classNameBindings="productDepartmentsImports:menu-section__link--active"
+          class="menu-section__link"}}
+          {{t 'header.region'}}
+        {{/link-to}}
+        {{#link-to 'product.visualization' model.id 'cities' 'multiples' 'import_value'
+          (query-params startDate=firstYear endDate=lastYear search='null')
+          tagName='li'
+          classNameBindings="productCitiesImports:menu-section__link--active"
+          class="menu-section__link"}}
+          {{t 'header.subregion'}}
+        {{/link-to}}
+        {{#link-to 'product.visualization' model.id 'partners' 'treemap' 'import_value'
+          (query-params startDate=lastYear endDate=lastYear search='null')
+          tagName='li'
+          classNameBindings="productPartnersImports:menu-section__link--active"
+          class="menu-section__link"}}
+          {{t 'header.origin'}}
+        {{/link-to}}
+      </ul>
+    </div>
+  {{/if}}
 </div>

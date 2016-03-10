@@ -175,10 +175,11 @@
       </li>
   {{/unless}}
   </ul>
+  {{#if featureToggle.showImports }}
     <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.import'}}</h4>
     <ul class="builder__questions__list">
       <li class="builder__questions__item">
-        {{#link-to 'location.visualization' model.id 'products' 'treemap' 'import_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
+        {{#link-to 'location.visualization' model.id 'products' 'treemap' 'import_value' (query-params search='null' startdate=lastyear  enddate=lastyear)
           class="icon-cidcon_treemap builder__questions__item__icon"
           tagNmae='i'
         }}
@@ -240,4 +241,5 @@
       </li>
     {{/if}}
     </ul>
+  {{/if}}
 </div>
