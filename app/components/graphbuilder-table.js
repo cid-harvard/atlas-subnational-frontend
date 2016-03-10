@@ -6,8 +6,10 @@ import HeaderCell from 'ember-table/views/header-cell';
 import TableCell from 'ember-table/views/table-cell';
 import TableMap from '../mixins/table-map';
 
-const { computed,
-  observer } = Ember;
+const {
+  computed,
+  observer
+} = Ember;
 
 var SortableTableHeaderCell = HeaderCell.extend({
   templateName: 'sortable-header-cell',
@@ -38,7 +40,14 @@ var SortableTableHeaderCell = HeaderCell.extend({
 
 var SortableTableCell = TableCell.extend({
   i18n: Ember.inject.service(),
-  templateName: 'sortable-cell'
+  templateName: 'sortable-cell',
+  rowContent: computed.alias('row.content'),
+  isModel: computed.alias('row.content.model'),
+  model: computed.alias('row.content.model'),
+  id: computed.alias('row.content.id'),
+  profileRoute: computed('model', function() {
+    return `${this.get('model')}.show`;
+  })
 });
 
 var SortableColumnMixin = Ember.Object.create({
