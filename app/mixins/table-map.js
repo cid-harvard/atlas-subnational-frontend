@@ -1,6 +1,8 @@
 import Ember from 'ember';
+const {computed, get} = Ember;
 
 export default Ember.Mixin.create({
+  featureToggle: Ember.inject.service(),
   columnSettingsMap: [
     { key: 'average_wages', type: 'int', savedWidth: 290 },
     { key: 'avg_wage', type: 'int', savedWidth: 290 },
@@ -38,32 +40,47 @@ export default Ember.Mixin.create({
     { key: 'employment_growth' },
     { key: 'num_establishments' }
   ],
-  productsMap: [
-    { key: 'code' },
-    { key: 'name', copy: 'export' },
-    { key: 'parent' },
-    { key: 'year' },
-    { key: 'export_value' },
-    { key: 'import_value' },
-    { key: 'export_rca' },
-    { key: 'complexity' },
-    { key: 'distance' },
-    { key: 'cog' }
-   ],
-  citiesMap: [
-    { key: 'code' },
-    { key: 'name', copy: 'location' },
-    { key: 'year' },
-    { key: 'export_value' },
-    { key: 'import_value' },
-    { key: 'export_num_plants' },
-    { key: 'export_rca' },
-    { key: 'distance' },
-    { key: 'monthly_wages' },
-    { key: 'wages' },
-    { key: 'employment' },
-    { key: 'num_establishments' },
-   ],
+  productsMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'export' },
+      { key: 'parent' },
+      { key: 'year' },
+      { key: 'export_value' },
+      { key: 'export_rca' },
+      { key: 'complexity' },
+      { key: 'distance' },
+      { key: 'cog' }
+    ];
+
+    if(get('featureToggle.showImports')) {
+      return columns.concat({key: 'import_value'});
+    } else {
+      return columns;
+    }
+
+  }),
+  cities: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'year' },
+      { key: 'export_value' },
+      { key: 'export_num_plants' },
+      { key: 'export_rca' },
+      { key: 'distance' },
+      { key: 'monthly_wages' },
+      { key: 'wages' },
+      { key: 'employment' },
+      { key: 'num_establishments' },
+     ];
+
+    if(get('featureToggle.showImports')) {
+      return columns.concat({key: 'import_value'});
+    } else {
+      return columns;
+    }
+  }),
   industriesMap: [
     { key: 'code' },
     { key: 'name', copy: 'industry' },
@@ -77,36 +94,50 @@ export default Ember.Mixin.create({
     { key: 'complexity' },
     { key: 'distance' }
    ],
-  departmentsMap: [
-    { key: 'code' },
-    { key: 'name', copy: 'location' },
-    { key: 'year' },
-    { key: 'monthly_wages' },
-    { key: 'wages' },
-    { key: 'num_establishments' },
-    { key: 'employment' },
-    { key: 'rca' },
-    { key: 'distance' },
-    { key: 'export_value' },
-    { key: 'import_value' },
-    { key: 'export_num_plants' },
-    { key: 'export_rca' },
-    { key: 'cog' }
-   ],
+  departmentsMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'year' },
+      { key: 'monthly_wages' },
+      { key: 'wages' },
+      { key: 'num_establishments' },
+      { key: 'employment' },
+      { key: 'rca' },
+      { key: 'distance' },
+      { key: 'export_value' },
+      { key: 'export_num_plants' },
+      { key: 'export_rca' },
+      { key: 'cog' }
+     ];
+
+    if(get('featureToggle.showImports')) {
+      return columns.concat({key: 'import_value'});
+    } else {
+      return columns;
+    }
+  }),
   occupationsMap: [
     { key: 'code' },
     { key: 'name', copy: 'occupation' },
     { key: 'average_wages' },
     { key: 'share' }
   ],
-  partnersMap: [
-    { key: 'code' },
-    { key: 'name', copy: 'country' },
-    { key: 'parent', copy: 'parent.country' },
-    { key: 'export_value' },
-    { key: 'import_value' },
-    { key: 'year' },
-  ],
+  partnersMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'country' },
+      { key: 'parent', copy: 'parent.country' },
+      { key: 'import_value' },
+      { key: 'year' }
+    ];
+
+    if(get('featureToggle.showImports')) {
+      return columns.concat({key: 'import_value'});
+    } else {
+      return columns;
+    }
+  }),
   rankingsMap: [
     { key: 'name' },
     { key: 'year' },

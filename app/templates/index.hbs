@@ -96,15 +96,17 @@
                       {{ t 'index.product_q1' }}
                     {{/link-to}}
                   </li>
-                  <li class="index__questions__item">
-                    {{#link-to
-                      'product.visualization' productSecond 'departments' 'multiples' 'import_value'(query-params endDate=lastYear startDate=firstYear )
-                      data-home-page-industry-question='2'
-                      class="link--stream index__questions__link"
-                    }}
-                      {{ t 'index.product_q2' }}
-                    {{/link-to}}
-                  </li>
+                  {{#if featureToggle.showImports }}
+                    <li class="index__questions__item">
+                      {{#link-to
+                        'product.visualization' productSecond 'departments' 'multiples' 'import_value'(query-params endDate=lastYear startDate=firstYear )
+                        data-home-page-industry-question='2'
+                        class="link--stream index__questions__link"
+                      }}
+                        {{ t 'index.product_q2' }}
+                      {{/link-to}}
+                    </li>
+                  {{/if}}
                   <li class="index__questions__item">
                     {{#link-to
                       'product.show' productFirst

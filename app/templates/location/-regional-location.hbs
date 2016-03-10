@@ -80,11 +80,13 @@
             {{t 'location.show.exports' year=lastYear }}
           </a>
         {{/ivy-tab}}
-        {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-          <a class="tab__link">
-            {{t 'location.show.imports' year=lastYear }}
-          </a>
-        {{/ivy-tab}}
+        {{#if featureToggle.showImports }}
+          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+            <a class="tab__link">
+              {{t 'location.show.imports' year=lastYear }}
+            </a>
+          {{/ivy-tab}}
+        {{/if}}
       {{/ivy-tab-list}}
 
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
@@ -101,20 +103,22 @@
           </div>
         </div>
       {{/ivy-tab-panel}}
-      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod">
-          <div class="vizmod--treemod">
-            {{vistk-treemap
-              isInTab='true'
-              data=productsData
-              immutableData=productsData
-              elementId='import-vistk-treemap'
-              varDependent='import_value'
-              delay=1000
-            }}
+      {{#if featureToggle.showImports }}
+        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+          <div class="vizmod">
+            <div class="vizmod--treemod">
+              {{vistk-treemap
+                isInTab='true'
+                data=productsData
+                immutableData=productsData
+                elementId='import-vistk-treemap'
+                varDependent='import_value'
+                delay=1000
+              }}
+            </div>
           </div>
-        </div>
-      {{/ivy-tab-panel}}
+        {{/ivy-tab-panel}}
+      {{/if}}
     {{/ivy-tabs}}
   </div>
 </section>
