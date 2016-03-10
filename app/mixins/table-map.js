@@ -60,7 +60,7 @@ export default Ember.Mixin.create({
     }
 
   }),
-  cities: computed('featureToggle.showImports', function() {
+  citiesMap: computed('featureToggle.showImports', function() {
     let columns = [
       { key: 'code' },
       { key: 'name', copy: 'location' },
