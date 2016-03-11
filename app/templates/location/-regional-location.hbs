@@ -137,11 +137,13 @@
               {{t 'location.show.subregion.exports' year=lastYear}}
             </a>
           {{/ivy-tab}}
-          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-            <a class="tab__link">
-              {{t 'location.show.subregion.imports' year=lastYear}}
-            </a>
-          {{/ivy-tab}}
+          {{#if featureToggle.showImports }}
+            {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
+              <a class="tab__link">
+                {{t 'location.show.subregion.imports' year=lastYear}}
+              </a>
+            {{/ivy-tab}}
+          {{/if}}
         {{/ivy-tab-list}}
 
         {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
@@ -159,21 +161,23 @@
             </div>
           </div>
         {{/ivy-tab-panel}}
-        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-          <div class="vizmod">
-            <div class="vizmod--treemod">
-              {{vistk-treemap
-                isInTab='true'
-                data=model.subregions
-                immutableData=model.subregions
-                elementId='import-subregions-map'
-                varDependent='import_value'
-                metadata=model.metaData
-                delay=3000
-              }}
+        {{#if featureToggle.showImports }}
+          {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
+            <div class="vizmod">
+              <div class="vizmod--treemod">
+                {{vistk-treemap
+                  isInTab='true'
+                  data=model.subregions
+                  immutableData=model.subregions
+                  elementId='import-subregions-map'
+                  varDependent='import_value'
+                  metadata=model.metaData
+                  delay=3000
+                }}
+              </div>
             </div>
-          </div>
-        {{/ivy-tab-panel}}
+          {{/ivy-tab-panel}}
+        {{/if}}
       {{/ivy-tabs}}
     </div>
   </section>
