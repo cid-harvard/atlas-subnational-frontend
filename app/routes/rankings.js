@@ -29,6 +29,8 @@ export default Ember.Route.extend({
           let locationName = get(locationsMetadata, `${d.department_id}.name_en`);
           d.name_short_en = locationName;
           d.name_short_es = locationName;
+          d.model = 'location';
+          d.id = d.department_id;
         })
         .sortBy('eci')
         .reverse()
@@ -40,6 +42,8 @@ export default Ember.Route.extend({
           let locationName = get(locationsMetadata, `${d.location_id}.name_en`);
           d.name_short_en = locationName;
           d.name_short_es = locationName;
+          d.model = 'location';
+          d.id = d.location_id;
         })
         .sortBy('eci')
         .reverse()

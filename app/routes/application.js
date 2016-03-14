@@ -89,6 +89,7 @@ export default Ember.Route.extend({
 
         d.group = d.id;
         d.color = color;
+        d.model = 'location';
       });
 
       _.forEach(productsMetadata, (d) => {
@@ -104,6 +105,7 @@ export default Ember.Route.extend({
         d.parent_name_es = get(productSectionMap, `${sectionId}.name_es`);
         d.group = get(productSectionMap, `${sectionId}.code`);
         this.store.createRecord('product', d);
+        d.model = 'product';
       });
 
       _.forEach(occupationsMetadata, (d) => {
@@ -131,6 +133,7 @@ export default Ember.Route.extend({
         d.parent_name_en = get(industrySectionMap, `${sectionId}.name_en`);
         d.parent_name_es = get(industrySectionMap, `${sectionId}.name_es`);
         d.color = color;
+        d.model = 'industry';
       });
 
       _.forEach(partnerCountries, (d) => {

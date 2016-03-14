@@ -49,7 +49,9 @@
   line-height: 29px;
   display: block;
 }
-
+.ember-table-content--no-hover {
+  cursor: none;
+}
 .ember-table-color-marker {
   display: inline-block;
   width: 1rem;
@@ -88,3 +90,5 @@
 .ember-table-hover div {
   background: $colorGrayLight;
 }
+
+

@@ -74,12 +74,8 @@ export default Ember.Route.extend({
 
     let data = _.map(locations.data, (d) => {
       let location = locationsMetadata[d.department_id];
-      d.name_short_en = location.name_short_en;
-      d.name_short_es = location.name_short_es;
-      d.color = location.color;
-      d.code = location.code;
-      d.group = location.group;
-      return copy(d);
+      let department = copy(d);
+      return _.merge(department, location);
     });
 
     return Ember.Object.create({
@@ -92,13 +88,9 @@ export default Ember.Route.extend({
     let locationsMetadata  = this.modelFor('application').locations;
 
     let data = _.map(cities.data, (d) => {
-      let city = locationsMetadata[d.msa_id];
-      d.name_short_en = city.name_short_en;
-      d.name_short_es = city.name_short_es;
-      d.color = city.color;
-      d.code = city.code;
-      d.group = city.group;
-      return copy(d);
+      let location = locationsMetadata[d.msa_id];
+      let city = copy(d);
+      return _.merge(city, location);
     });
 
     return Ember.Object.create({
@@ -113,10 +105,11 @@ export default Ember.Route.extend({
     let data = _.map(partners.data, (d) => {
       let country = partnersMetadata[d.country_id];
       let parent = partnersMetadata[country.parent_id];
-      d.parent_name_en = parent.name_en;
-      d.parent_name_es = parent.name_es;
-      d.group = parent.id;
-      return _.merge(copy(d), country);
+      let partner = copy(d);
+      partner.parent_name_en = parent.name_en;
+      partner.parent_name_es = parent.name_es;
+      partner.group = parent.id;
+      return _.merge(partner, parent, country);
     });
 
     return Ember.Object.create({
