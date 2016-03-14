@@ -75,7 +75,7 @@ export default Ember.Route.extend({
     let data = _.map(locations.data, (d) => {
       let location = locationsMetadata[d.department_id];
       let department = copy(d);
-      return _.merge(department, location);
+      return _.merge(department, location, {model: 'location'});
     });
 
     return Ember.Object.create({
@@ -90,7 +90,7 @@ export default Ember.Route.extend({
     let data = _.map(cities.data, (d) => {
       let location = locationsMetadata[d.msa_id];
       let city = copy(d);
-      return _.merge(city, location);
+      return _.merge(city, location, {model: 'location'});
     });
 
     return Ember.Object.create({
@@ -109,6 +109,7 @@ export default Ember.Route.extend({
       partner.parent_name_en = parent.name_en;
       partner.parent_name_es = parent.name_es;
       partner.group = parent.id;
+      d.model = null;
       return _.merge(partner, parent, country);
     });
 

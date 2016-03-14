@@ -78,6 +78,7 @@ export default Ember.Route.extend({
       d.color = industry.color;
       d.code = industry.code;
       d.group = industry.group;
+      d.model = 'location';
       return copy(d);
     });
 
@@ -106,6 +107,7 @@ export default Ember.Route.extend({
       d.name_short_es = occupation.name_short_es;
       d.color = occupation.color;
       d.code = occupation.code;
+      d.model = null;
       return copy(d);
     });
 
@@ -130,6 +132,7 @@ export default Ember.Route.extend({
       d.color = industry.color;
       d.code = industry.code;
       d.group = industry.group;
+      d.model = 'location';
       return copy(d);
     });
 
