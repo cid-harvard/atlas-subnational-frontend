@@ -92,10 +92,15 @@ export default Ember.Route.extend({
 
     let occupationVacanciesSum = 0;
     let data = _.map(occupations.data, (d) => {
-      let occupation = occupationsMetadata[d.occupation_id];
+      let occupation = get(occupationsMetadata, `${d.occupation_id}`);
+      let parent =  get(occupationsMetadata, `${occupation.parent_id}`);
       occupationVacanciesSum += d.num_vacancies;
       d.year = this.get('lastYear');
-      d.group = occupation.code.split('-')[0];
+      d.group = parent.code;
+
+      d.parent_name_en = parent.name_en;
+      d.parent_name_es = parent.name_es;
+
       d.avg_wage = d.wages/d.employment;
       d.name_short_en = occupation.name_short_en;
       d.name_short_es = occupation.name_short_es;

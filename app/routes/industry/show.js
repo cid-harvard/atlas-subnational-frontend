@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import ENV from '../../config/environment';
 const {apiURL} = ENV;
-const {computed, RSVP, getWithDefault, $} = Ember;
+const {computed, RSVP, get, getWithDefault, $} = Ember;
 
 export default Ember.Route.extend({
   i18n: Ember.inject.service(),
@@ -80,9 +80,17 @@ export default Ember.Route.extend({
 
       let occupations = _.map(occupationsData, (d) => {
         let occupation = occupationsMetadata[d.occupation_id];
+        let parent =  get(occupationsMetadata, `${occupation.parent_id}`);
         d.year = this.get('lastYear');
-        d.group = occupation.code.split('-')[0];
-        return _.merge(d, occupation);
+        d.group = parent.code;
+
+        d.color = occupation.color;
+        d.code = occupation.code;
+        d.parent_name_en = parent.name_en;
+        d.parent_name_es = parent.name_es;
+        d.name_short_en = occupation.name_short_en;
+        d.name_short_es = occupation.name_short_es;
+        return d;
       });
 
       model.set('departmentsData', departments);
