@@ -21,7 +21,8 @@ var app = new EmberApp({
     ],
     path: {
       colombia: '.env.colombia',
-      mexico: '.env.mexico'
+      mexico: '.env.mexico',
+      peru: '.env.peru'
     }
   },
   minifyCSS: {

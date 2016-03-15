@@ -62,6 +62,11 @@ OR
 
 * copy `.env.<country>` as `.env`
 
+To add a country env.
+
+* Create `.env.<country>`
+* Add to `Brocfile.js` dotEnv path to country
+
 
 * `ember build` (development) defaults to `.env`
 * `ember build --environment production` (production) defaults to `.env`
