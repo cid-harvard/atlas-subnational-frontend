@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'atlas-colombia',
     environment: environment,
-    baseURL: '/',
+    baseURL: process.env.ROOT_URL || '/',
     locationType: 'auto',
     defaultLocale: process.env.DEFAULT_LOCALE,
     otherLocale: process.env.OTHER_LOCALE,
