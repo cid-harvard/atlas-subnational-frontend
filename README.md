@@ -67,6 +67,8 @@ To add a country env.
 * Create `.env.<country>`
 * Add to `Brocfile.js` dotEnv path to country
 
+SUB-FOLDERS
+* Set `ROOT_URL` to what the sub dir should be in the correct `.env` file before building
 
 * `ember build` (development) defaults to `.env`
 * `ember build --environment production` (production) defaults to `.env`
@@ -77,12 +79,14 @@ To add a country env.
 * Locales follow `country-lang` syntax.  e.g. `usa-en`, `usa-es` or `mex-en`, `mex-es`
 * [ember cli i18n](https://github.com/jamesarosen/ember-i18n) is used for the internalization.
 
+
 * Required `ENV` vars
   * GA (for Google Analytics)
   * DEFAULT_LOCALE
   * OTHER_LOCALE
   * API_URL
   * DOWNLOAD_URL(root name for file downloads)
+
 
 ## Heroku deploy
 
