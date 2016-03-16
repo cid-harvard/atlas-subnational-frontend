@@ -79,6 +79,7 @@ export default Ember.Route.extend({
       d.code = industry.code;
       d.group = industry.group;
       d.model = 'location';
+      d.id = d.department_id;
       return copy(d);
     });
 
@@ -94,13 +95,13 @@ export default Ember.Route.extend({
     let occupationVacanciesSum = 0;
     let data = _.map(occupations.data, (d) => {
       let occupation = get(occupationsMetadata, `${d.occupation_id}`);
-      let parent =  get(occupationsMetadata, `${occupation.parent_id}`);
+      let parent =  get(occupationsMetadata, `${occupation.parent_id}`) || occupation;
       occupationVacanciesSum += d.num_vacancies;
       d.year = this.get('lastYear');
-      d.group = parent.code;
+      d.group = get(parent, 'code');
 
-      d.parent_name_en = parent.name_en;
-      d.parent_name_es = parent.name_es;
+      d.parent_name_en = get(parent,'name_en');
+      d.parent_name_es = get(parent,'name_es');
 
       d.avg_wage = d.wages/d.employment;
       d.name_short_en = occupation.name_short_en;
@@ -133,6 +134,7 @@ export default Ember.Route.extend({
       d.code = industry.code;
       d.group = industry.group;
       d.model = 'location';
+      d.id = d.msa_id;
       return copy(d);
     });
 
