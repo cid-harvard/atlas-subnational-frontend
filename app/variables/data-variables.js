@@ -57,7 +57,7 @@ export default  {
     "index_graphbuilder_id": 87,
     "last_year": 2014,
     "first_year": 2007,
-    "census_year": 2014,
+    "census_year": 2013,
     "geo_center": [-12,-77],
     "subregions" : {
       "country": "department",
