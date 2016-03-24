@@ -174,8 +174,9 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     $.getJSON(`${apiURL}/data/location?level=department`).then((response) => {
       let id = this.get('entityId');
+      let year = this.get('startDate');
       let data = get(response, 'data');
-      let datum = _.first(_.filter(data, {'year': this.get('lastYear'), 'department_id': parseInt(id) }));
+      let datum = _.first(_.filter(data, {'year': parseInt(year), 'department_id': parseInt(id) }));
       this.set('width', this.$().parent().width());
 
       if(this.get('dataType') === 'products' && datum) {
