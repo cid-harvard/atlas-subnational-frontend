@@ -7,17 +7,17 @@ export default Ember.Route.extend({
   },
   model() {
     let hash = {
-     cities: this.store.find('location', { level: 'msa' }),
+     locations: this.store.find('location'),
      products: this.store.find('product', { level: '4digit' }),
      industries: this.store.find('industry', { level: 'division' })
     };
 
     return RSVP.hash(hash).then((hash) => {
-      let {industries, products, cities} = hash;
+      let {industries, products, locations} = hash;
       return Object.create({
         industries: industries,
         products: products,
-        cities: cities
+        locations: locations
       });
     });
   },
