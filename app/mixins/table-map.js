@@ -139,7 +139,7 @@ export default Ember.Mixin.create({
       { key: 'code' },
       { key: 'name', copy: 'country' },
       { key: 'parent', copy: 'parent.country' },
-      { key: 'import_value' },
+      { key: 'export_value' },
       { key: 'year' }
     ];
 
