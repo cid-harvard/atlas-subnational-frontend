@@ -2,7 +2,7 @@ import Ember from 'ember';
 const {computed, get} = Ember;
 
 export default Ember.Mixin.create({
-  featureToggle: Ember.inject.service(),
+  featureToggle: Ember.inject.service('feature-toggle'),
   columnSettingsMap: [
     { key: 'average_wages', type: 'int', savedWidth: 290 },
     { key: 'avg_wage', type: 'int', savedWidth: 290 },
@@ -53,7 +53,7 @@ export default Ember.Mixin.create({
       { key: 'cog' }
     ];
 
-    if(get('featureToggle.showImports')) {
+    if(this.get('featureToggle.showImports')) {
       return columns.concat({key: 'import_value'});
     } else {
       return columns;
@@ -75,7 +75,7 @@ export default Ember.Mixin.create({
       { key: 'num_establishments' },
      ];
 
-    if(get('featureToggle.showImports')) {
+    if(this.get('featureToggle.showImports')) {
       return columns.concat({key: 'import_value'});
     } else {
       return columns;
@@ -111,7 +111,7 @@ export default Ember.Mixin.create({
       { key: 'cog' }
      ];
 
-    if(get('featureToggle.showImports')) {
+    if(this.get('featureToggle.showImports')) {
       return columns.concat({key: 'import_value'});
     } else {
       return columns;
@@ -132,7 +132,7 @@ export default Ember.Mixin.create({
       { key: 'year' }
     ];
 
-    if(get('featureToggle.showImports')) {
+    if(this.get('featureToggle.showImports')) {
       return columns.concat({key: 'import_value'});
     } else {
       return columns;
