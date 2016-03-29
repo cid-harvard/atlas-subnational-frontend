@@ -60,7 +60,7 @@ export default Ember.Mixin.create({
     }
 
   }),
-  citiesMap: computed('featureToggle.showImports', function() {
+  citiesMap: computed('featureToggle.showImports', 'featureToggle.showIndustries', function() {
     let columns = [
       { key: 'code' },
       { key: 'name', copy: 'location' },
@@ -69,17 +69,22 @@ export default Ember.Mixin.create({
       { key: 'export_num_plants' },
       { key: 'export_rca' },
       { key: 'distance' },
-      { key: 'monthly_wages' },
-      { key: 'wages' },
-      { key: 'employment' },
-      { key: 'num_establishments' },
      ];
 
     if(this.get('featureToggle.showImports')) {
-      return columns.concat({key: 'import_value'});
-    } else {
-      return columns;
+      columns = columns.concat({key: 'import_value'});
     }
+
+    if(this.get('featureToggle.showIndustries')) {
+      columns = columns.concat(
+        { key: 'monthly_wages' },
+        { key: 'wages' },
+        { key: 'employment' },
+        { key: 'num_establishments' }
+      );
+    }
+
+    return columns;
   }),
   industriesMap: [
     { key: 'code' },
@@ -94,15 +99,11 @@ export default Ember.Mixin.create({
     { key: 'complexity' },
     { key: 'distance' }
    ],
-  departmentsMap: computed('featureToggle.showImports', function() {
+  departmentsMap: computed('featureToggle.showImports', 'featureToggle.showIndustries', function() {
     let columns = [
       { key: 'code' },
       { key: 'name', copy: 'location' },
       { key: 'year' },
-      { key: 'monthly_wages' },
-      { key: 'wages' },
-      { key: 'num_establishments' },
-      { key: 'employment' },
       { key: 'rca' },
       { key: 'distance' },
       { key: 'export_value' },
@@ -112,10 +113,20 @@ export default Ember.Mixin.create({
      ];
 
     if(this.get('featureToggle.showImports')) {
-      return columns.concat({key: 'import_value'});
-    } else {
-      return columns;
+      columns = columns.concat({key: 'import_value'});
     }
+
+    if(this.get('featureToggle.showIndustries')) {
+      columns = columns.concat(
+        { key: 'monthly_wages' },
+        { key: 'wages' },
+        { key: 'employment' },
+        { key: 'num_establishments' }
+      );
+    }
+
+    return columns;
+
   }),
   occupationsMap: [
     { key: 'code' },
