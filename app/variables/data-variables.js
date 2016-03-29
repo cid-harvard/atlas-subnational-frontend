@@ -18,7 +18,8 @@ export default  {
     "subregions" : {
       "country": "department",
       "department": "municipality"
-    }
+    },
+    "show_downloads": true,
   },
   mex: {
     "index_products": [1143,87],
@@ -39,7 +40,8 @@ export default  {
     "subregions" : {
       "country": "department",
       "department": "municipality",
-    }
+    },
+    "show_downloads": true,
   },
   peru: {
     "index_products": [1143,87],
@@ -60,6 +62,7 @@ export default  {
     "subregions" : {
       "country": "department",
       "department": "msa",
-    }
+    },
+    "show_downloads": false,
   }
 };
