@@ -11,7 +11,6 @@ export default Ember.Component.extend({
   varIndependent: 'code',
   attributeBindings: ['width','height'],
   classNames: ['buildermod__viz--white','buildermod__viz','scatterplot'],
-  lastYear: computed.alias('i18n.lastYear'),
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
@@ -174,8 +173,9 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     $.getJSON(`${apiURL}/data/location?level=department`).then((response) => {
       let id = this.get('entityId');
+      let year = this.get('endDate');
       let data = get(response, 'data');
-      let datum = _.first(_.filter(data, {'year': this.get('lastYear'), 'department_id': parseInt(id) }));
+      let datum = _.first(_.filter(data, {'year': parseInt(year), 'department_id': parseInt(id) }));
       this.set('width', this.$().parent().width());
 
       if(this.get('dataType') === 'products' && datum) {
