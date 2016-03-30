@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {computed, get} = Ember;
+const {computed} = Ember;
 
 export default Ember.Mixin.create({
   featureToggle: Ember.inject.service('feature-toggle'),
