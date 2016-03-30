@@ -11,7 +11,6 @@ export default Ember.Component.extend({
   varIndependent: 'code',
   attributeBindings: ['width','height'],
   classNames: ['buildermod__viz--white','buildermod__viz','scatterplot'],
-  lastYear: computed.alias('i18n.lastYear'),
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
