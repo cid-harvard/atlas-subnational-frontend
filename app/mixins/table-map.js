@@ -1,8 +1,8 @@
 import Ember from 'ember';
-const {computed, get} = Ember;
+const {computed} = Ember;
 
 export default Ember.Mixin.create({
-  featureToggle: Ember.inject.service(),
+  featureToggle: Ember.inject.service('feature-toggle'),
   columnSettingsMap: [
     { key: 'average_wages', type: 'int', savedWidth: 290 },
     { key: 'avg_wage', type: 'int', savedWidth: 290 },
@@ -53,14 +53,14 @@ export default Ember.Mixin.create({
       { key: 'cog' }
     ];
 
-    if(get('featureToggle.showImports')) {
+    if(this.get('featureToggle.showImports')) {
       return columns.concat({key: 'import_value'});
     } else {
       return columns;
     }
 
   }),
-  citiesMap: computed('featureToggle.showImports', function() {
+  citiesMap: computed('featureToggle.showImports', 'featureToggle.showIndustries', function() {
     let columns = [
       { key: 'code' },
       { key: 'name', copy: 'location' },
@@ -69,17 +69,22 @@ export default Ember.Mixin.create({
       { key: 'export_num_plants' },
       { key: 'export_rca' },
       { key: 'distance' },
-      { key: 'monthly_wages' },
-      { key: 'wages' },
-      { key: 'employment' },
-      { key: 'num_establishments' },
      ];
 
-    if(get('featureToggle.showImports')) {
-      return columns.concat({key: 'import_value'});
-    } else {
-      return columns;
+    if(this.get('featureToggle.showImports')) {
+      columns = columns.concat({key: 'import_value'});
     }
+
+    if(this.get('featureToggle.showIndustries')) {
+      columns = columns.concat(
+        { key: 'monthly_wages' },
+        { key: 'wages' },
+        { key: 'employment' },
+        { key: 'num_establishments' }
+      );
+    }
+
+    return columns;
   }),
   industriesMap: [
     { key: 'code' },
@@ -94,15 +99,11 @@ export default Ember.Mixin.create({
     { key: 'complexity' },
     { key: 'distance' }
    ],
-  departmentsMap: computed('featureToggle.showImports', function() {
+  departmentsMap: computed('featureToggle.showImports', 'featureToggle.showIndustries', function() {
     let columns = [
       { key: 'code' },
       { key: 'name', copy: 'location' },
       { key: 'year' },
-      { key: 'monthly_wages' },
-      { key: 'wages' },
-      { key: 'num_establishments' },
-      { key: 'employment' },
       { key: 'rca' },
       { key: 'distance' },
       { key: 'export_value' },
@@ -111,11 +112,21 @@ export default Ember.Mixin.create({
       { key: 'cog' }
      ];
 
-    if(get('featureToggle.showImports')) {
-      return columns.concat({key: 'import_value'});
-    } else {
-      return columns;
+    if(this.get('featureToggle.showImports')) {
+      columns = columns.concat({key: 'import_value'});
     }
+
+    if(this.get('featureToggle.showIndustries')) {
+      columns = columns.concat(
+        { key: 'monthly_wages' },
+        { key: 'wages' },
+        { key: 'employment' },
+        { key: 'num_establishments' }
+      );
+    }
+
+    return columns;
+
   }),
   occupationsMap: [
     { key: 'code' },
@@ -132,7 +143,7 @@ export default Ember.Mixin.create({
       { key: 'year' }
     ];
 
-    if(get('featureToggle.showImports')) {
+    if(this.get('featureToggle.showImports')) {
       return columns.concat({key: 'import_value'});
     } else {
       return columns;
