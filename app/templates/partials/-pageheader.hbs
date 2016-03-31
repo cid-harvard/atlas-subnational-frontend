@@ -61,14 +61,16 @@
           {{/link-to}}
         </li>
         <li>
-          {{#link-to "downloads"
-            current-when="downloads"
-            class="pageheader__menu__item"
-            activeClass="pageheader__menu__item--active"
-            data-side-search-link='data'
-          }}
-            {{ t 'pageheader.download' }}
-          {{/link-to}}
+          {{#if featureToggle.show_downloads }}
+            {{#link-to "downloads"
+              current-when="downloads"
+              class="pageheader__menu__item"
+              activeClass="pageheader__menu__item--active"
+              data-side-search-link='data'
+            }}
+              {{ t 'pageheader.download' }}
+            {{/link-to}}
+          {{/if}}
         </li>
       </ul>
     </div>
