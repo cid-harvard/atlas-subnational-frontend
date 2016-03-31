@@ -20,11 +20,11 @@
 
 .side-nav__item__link {
   transition: color $animationTime $animationEasing;
-  color: $colorGrayLighter;
+  color: $colorGray;
   font-size: $fontSmall;
   display: block;
   font-family: $sans;
-  font-weight: 300;
+  font-weight: 400;
   &:hover {
     color: $colorGrayLight;
   }
@@ -32,4 +32,5 @@
 
 .side-nav__item--active {
   color: $colorGrayDark;
+  font-weight: 600;
 }
