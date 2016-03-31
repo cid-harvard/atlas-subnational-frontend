@@ -27,16 +27,16 @@ export default Ember.Controller.extend({
       return _.find(products, { id: `${d}` });
     });
   }),
-  cities: computed.filter('model.cities', function (city) {
+  locations: computed.filter('model.locations', function (location) {
     let id = get(this, 'locationIds');
-    return _.contains(`${id}`, get(city, 'id'));
+    return _.contains(`${id}`, get(location, 'id'));
   }),
-  sortedCities: computed('locationIds', 'cities', function() {
+  sortedLocations: computed('locationIds', 'locations', function() {
     let id = get(this, 'locationIds');
-    let cities = get(this, 'cities');
+    let locations = get(this, 'locations');
 
     return _.map(id, function(d) {
-      return _.find(cities, { id: `${d}` });
+      return _.find(locations, { id: `${d}` });
     });
   }),
   industries: computed.filter('model.industries', function (industry) {
