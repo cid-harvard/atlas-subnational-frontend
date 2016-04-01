@@ -3,4 +3,3 @@ import ModelAttribute from '../mixins/model-attribute';
 
 export default DS.Model.extend(ModelAttribute, {
 });
-

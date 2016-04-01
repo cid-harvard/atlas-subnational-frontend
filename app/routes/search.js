@@ -1,12 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  i18n: Ember.inject.service(),
   queryParams: {
     query: { refreshModel: true },
     filter: { refreshModel: true }
   },
-  model(transition) {
-    var country = this.store.find('location', { level: 'country' });
+  model: function(transtion) {
+/*  var country = this.store.find('location', { level: 'country' });
     var department = this.store.find('location', { level: 'department' });
     var msa = this.store.find('location', { level: 'msa' });
     var municipality = this.store.find('location', { level: 'municipality' });
@@ -39,11 +40,16 @@ export default Ember.Route.extend({
           return [];
         });
     }
-    return [];
+    return [];*/
+    var lang = this.get('i18n').get('locale');
+    console.log(lang);
+    console.log("route-> model ")
+    return this.store.find('textsearch',{filter : transtion.filter,query:transtion.query,lang:lang});
+
   },
   setupController: function(controller, model) {
     this._super(controller, model);
-    controller.set('metaData', this.modelFor('application'));
+    //controller.set('metaData', this.modelFor('application'));
   },
   deactivate: function() {
     this.controller.set('search', null);
@@ -53,9 +59,9 @@ export default Ember.Route.extend({
       if(query) {
         this.transitionTo('search', { queryParams: { query: query }});
       } else {
+          console.log(" query null");
         this.transitionTo('search', { queryParams: { query: null }});
       }
     }
   }
 });
-
