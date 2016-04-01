@@ -26,6 +26,7 @@ export default Ember.Mixin.create({
     { key: 'year' , type: 'int', savedWidth: 80 },
     { key: 'ranking' , type: 'int', savedWidth: 80 },
     { key: 'eci' , type: 'int', savedWidth: 210 },
+    { key: 'industry_eci' , type: 'int', savedWidth: 210 },
     { key: 'gdp_pc_real' , type: 'int', savedWidth: 200 },
     { key: 'gdp_real' , type: 'int', savedWidth: 190 },
     { key: 'share' , type: 'int', savedWidth: 190 },
@@ -153,6 +154,7 @@ export default Ember.Mixin.create({
     { key: 'name' },
     { key: 'year' },
     { key: 'eci' },
+    { key: 'industry_eci' },
     { key: 'gdp_pc_real' },
     { key: 'gdp_real' },
     { key: 'population' }

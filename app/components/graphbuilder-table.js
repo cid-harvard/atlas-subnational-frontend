@@ -125,6 +125,7 @@ export default EmberTableComponent.extend(TableMap, {
     var decimalVars = [
       'export_rca',
       'eci',
+      'industry_eci',
       'rca',
       'complexity',
       'distance',
