@@ -308,6 +308,7 @@ export default {
   "graph_builder.table.gdp_real": "PIB",
   "graph_builder.table.import_value": "Importaciones, US$",
   "graph_builder.table.industry": "Sector",
+  "graph_builder.table.industry_eci": "Complejidad sectorial",
   "graph_builder.table.less_than_5": "Menos de 5",
   "graph_builder.table.location": "Lugar",
   "graph_builder.table.monthly_wages": "Salarios promedio, MX$",
