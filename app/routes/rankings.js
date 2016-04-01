@@ -32,7 +32,7 @@ export default Ember.Route.extend({
           d.model = 'location';
           d.id = d.department_id;
         })
-        .sortBy('eci')
+        .sortBy('industry_eci')
         .reverse()
         .value();
 
@@ -45,7 +45,7 @@ export default Ember.Route.extend({
           d.model = 'location';
           d.id = d.location_id;
         })
-        .sortBy('eci')
+        .sortBy('industry_eci')
         .reverse()
         .value();
 
