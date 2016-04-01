@@ -12,11 +12,31 @@ export default Ember.Controller.extend({
     return "testProp";
   }.property('queryParams'),
   results : function (){
-     // console.log(this.get('i18n'));
-    return this.get('model').textsearch;
+    return this.get('model');
   }.property('queryParams','model'),
   resultsLength: computed('results', function() {
-    return this.get('results').length;
+    return this.get('results').get('length');
+  }),
+  productResults: computed('results.[]', function() {
+    return this.get('results').filter(function(d){
+      return get(d,'constructor.modelName') === 'product';
+    });
+  }),
+  locationResults: computed('results.[]', function() {
+    return this.get('results').filter(function(d){
+      return get(d,'constructor.modelName') === 'location';
+    });
+  }),
+  industryResults: computed('results.[]', function() {
+    return this.get('results').filter(function(d){
+      return get(d,'constructor.modelName') === 'industry';
+    });
+  }),
+  placeHolderText: computed('filter', function() {
+    if(_.contains(this.get('entity'), this.get('filter'))){
+      return `pageheader.search_placeholder.${this.get('filter')}`;
+    }
+    return `pageheader.search_placeholder`;
   })
 
 });

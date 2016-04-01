@@ -1,12 +1,14 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  i18n: Ember.inject.service(),
   queryParams: {
     query: { refreshModel: true },
     filter: { refreshModel: true }
   },
-  model(transition) {
-    var country = this.store.find('location', { level: 'country' });
+  model(transtion) {
+    
+/*    var country = this.store.find('location', { level: 'country' });
     var department = this.store.find('location', { level: 'department' });
     var msa = this.store.find('location', { level: 'msa' });
     var municipality = this.store.find('location', { level: 'municipality' });
@@ -39,7 +41,11 @@ export default Ember.Route.extend({
           return [];
         });
     }
-    return [];
+    return [];*/
+     var lang = this.get('i18n').get('locale');
+     console.log(lang);
+    return this.store.find('textsearch',{filter : transtion.filter,query:transtion.query,lang:lang});
+
   },
   setupController: function(controller, model) {
     this._super(controller, model);
@@ -58,4 +64,3 @@ export default Ember.Route.extend({
     }
   }
 });
-

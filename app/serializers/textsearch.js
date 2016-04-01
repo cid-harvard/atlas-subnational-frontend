@@ -2,6 +2,6 @@ import DS from 'ember-data';
 
 export default DS.RESTSerializer.extend({
   normalizePayload(payload) {
-    return { textsearch : payload.data };
+    return { textsearch : payload.textsearch };
   }
 });
