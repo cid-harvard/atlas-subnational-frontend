@@ -153,8 +153,8 @@ export default Ember.Mixin.create({
   rankingsMap: [
     { key: 'name' },
     { key: 'year' },
-    { key: 'eci' },
     { key: 'industry_eci' },
+    { key: 'eci' },
     { key: 'gdp_pc_real' },
     { key: 'gdp_real' },
     { key: 'population' }
