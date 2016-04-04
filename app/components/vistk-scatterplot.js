@@ -30,6 +30,7 @@ export default Ember.Component.extend({
       var_x: 'distance',
       var_y: 'complexity',
       var_r: this.get('varSize'),
+      var_group: 'group',
       radius_min: 2,
       radius_max: 10,
       x_domain: this.get('x_domain'),
