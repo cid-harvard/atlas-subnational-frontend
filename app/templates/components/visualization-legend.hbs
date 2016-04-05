@@ -1,7 +1,7 @@
 <div class="buildermod__legend">
 	{{#each key in legend}}
 		<div class="buildermod__legend__item">
-	  		{{visualization-legend-key key=key }}
+	  		{{visualization-legend-key key=key active=activeKey action='changeKey'}}
 	  	</div>
 	{{else}}
 	{{/each}}
