@@ -154,10 +154,15 @@
   margin-left: 6rem;
 }
 
+.buildermod__legend__item .is-active {
+  font-weight: 800;
+}
+
 .buildermod__legend__item {
   display: inline-block;
   width: 100%;
   white-space: nowrap;
+  cursor: pointer;
 
   .fa {
     position: relative;
