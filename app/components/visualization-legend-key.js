@@ -16,5 +16,10 @@ export default Ember.Component.extend({
   active: false,
   isActive: computed('active', function() {
     return this.get('code') === this.get('active');
-  })
+  }),
+  actions: {
+    changeKey() {
+      this.sendAction('action', this.get('code'));
+    }
+  }
 });
