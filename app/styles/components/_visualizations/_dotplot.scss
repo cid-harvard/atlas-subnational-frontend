@@ -24,6 +24,11 @@
     opacity: 1;
    }
 
+  .items__mark__tick {
+    stroke-width: 10px;
+    opacity: .6;
+  }
+
   .items__mark__text {
     font-weight: 300;
     font-size: 1.4rem;
