@@ -80,7 +80,7 @@ export default Ember.Component.extend({
         }],
         selection: [currentSelection]
       });
- }),
+  }),
   draw: function() {
     this.set('width', this.$().parent().width());
     this.set('height', this.$().parent().height());
@@ -97,4 +97,3 @@ export default Ember.Component.extend({
     });
   }
 });
-
