@@ -48,6 +48,17 @@
         {{component 'visualization-legend' legend=legend }}
       {{/if}}
 
+      {{#if isGeo}}
+        {{vistk-legend
+          elementId='dotplot--employment-growth'
+          data=filteredData
+          varX='employment'
+          varText='name_short_en'
+          varId='department_id'
+          type='population'
+        }}
+      {{/if}}
+
       <div class="buildermod__settings__wrap">
         {{component 'graphbuilder-settings'
           classNames='buildermod__settings'
