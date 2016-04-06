@@ -10,6 +10,7 @@ export default Ember.Route.extend({
   model : function (transtion){
       return this.store.find('textsearch',{filter : transtion.filter,query:transtion.query,lang:'en-col'});
   },
+  //Not being used anymore
   model_working : function (transition){
       var lang = this.get('i18n');
 
@@ -29,13 +30,11 @@ export default Ember.Route.extend({
      this._super(controller, model);
      controller.set('metaData', this.modelFor('application'));
    },
-
    deactivate: function() {
      this.controller.set('textsearch', null);
  }.property('queryParams'),
  actions: {
    query: function(query) {
-       console.log(query);
      if(query) {
        this.transitionTo('textsearch', { queryParams: { query: query }});
      } else {

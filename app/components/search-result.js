@@ -30,13 +30,7 @@ export default Ember.Component.extend({
     return crumbs;
   }),
   entity: computed('result', function() {
-//<<<<<<< HEAD
-//    return get(this, 'result.constructor.modelName');
-//======= let's keep it for the time being
-      // Hack to make only product
-      return 'product';
-    //return this.get('result.constructor.modelName');
-//>>>>>>> feature/postgres-text-search
+    return get(this, 'result.type');
   }),
   profileLink: computed('entity', function() {
     return `${this.get('entity')}.show`;
