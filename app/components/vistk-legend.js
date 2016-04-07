@@ -15,8 +15,8 @@ export default Ember.Component.extend({
     let varX = this.get('varX');
     let varId = this.get('varId');
     let data = this.get('data');
-    let currentSelection = +this.get('currentSelection');
 
+    // Temporary color scale (should use _geo.css q0, q1, .. instead)
     let color_scale = d3.scale.linear()
               .domain(d3.extent(data, function(d) { return d[varX]; }))
               .range(["#e5f5f9", "#006D2C"])
@@ -26,9 +26,9 @@ export default Ember.Component.extend({
         type: 'dotplot',
         data: this.get('data'),
         container: this.get('id'),
-        height: 100,
+        height: 150,
         width: this.get('width'),
-        margin: {top: 5, right: 50, bottom: 5, left: 50},
+        margin: {top: 15, right: 50, bottom: 5, left: 50},
         var_id: varId,
         var_x: varX,
         var_y: function() { return this.height/2; },
@@ -84,14 +84,22 @@ export default Ember.Component.extend({
             width: 150,
             height: 'auto'
           }]
-        }],
-        selection: [currentSelection]
+        }]
       });
  }),
   draw: function() {
     this.set('width', this.$().parent().width());
     this.set('height', this.$().parent().height());
     d3.select(this.get('id')).call(this.get('dotPlot'));
+
+    this.get('dotPlot').params().evt.register('highlightOn', function(d, i) {
+      // TODO: highlight geomap
+    });
+
+    this.get('dotPlot').params().evt.register('highlightOut', function(d, i) {
+      d3.selectAll('.items__mark__div').remove();
+    });
+
   },
   update: observer('locale', function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
