@@ -88,6 +88,8 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.addLabelsPane();
+      let data = this.get('data');
+      let parentView = this.get('parentView');
       let layer = omnivore
         .topojson(`assets/geodata/${this.get('i18n').country}.topojson`, null, L.geoJson(null, this.get('customLayerParams')))
         .on('layeradd', (e) => {
@@ -100,17 +102,43 @@ export default Ember.Component.extend({
           this.set('numberFormat', textValue);
           var toolTipText = `<span> ${location.name} </span> </br> ${textKey} : ${this.get('numberFormat')}`;
 
-          marker.bindPopup(toolTipText, {closeButton: false});
-          marker.on('mouseover', function () {
-            this.openPopup();
+          // Retrieve the scatterplot's configuration object
+          let elScatter = parentView.get('childViews').filter(function(d) {
+            return typeof d['dotPlot'] !== 'undefined';
+          })[0];
+
+          marker.on('mouseover', function (e) {
+
+            // Update the geo-legend configuration object (which is a dotplot btw)
+            elScatter.get('dotPlot').params({
+              highlight: [location.cid_id],
+              refresh: true
+            });
+
+            // Refreshing the geo-legend
+            d3.select(elScatter.get('id')).call(elScatter.get('dotPlot'));
+
+           var datum = data.filter(function(d) {
+            return d.department_id === +location.cid_id;
+           })[0];
+
+           // Trigger geo-legend's update to show the tooltip
+           elScatter.get('dotPlot').params().evt.call('highlightOn', datum);
           });
+
+          // Remove tooltip from geo-legend
           marker.on('mouseout', function () {
-            if(! _.get(this,'_popupContent')) { this.closePopup(); }
+            d3.selectAll('.items__mark__div').remove();
+            elScatter.get('dotPlot').params({
+              highlight: [],
+              refresh: true
+            });
+            elScatter.get('dotPlot').params().evt.call('highlightOut');
           });
+
         });
 
       this.set('layer', layer);
-
       layer.addTo(this.get('baseMap'));
     });
   },
