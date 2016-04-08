@@ -203,7 +203,6 @@ export default Ember.Component.extend({
 
     Ember.run.later(this , function() {
       if(this.get('scatter')) {
-
         this.get('scatter').params({filter: keyFilter});
         this.get('scatter').params().refresh = true;
         d3.select(this.get('id')).call(this.get('scatter'));

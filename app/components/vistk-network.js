@@ -63,6 +63,7 @@ export default Ember.Component.extend({
       var_y: 'y',
       radius: 5,
       var_color: 'color',
+      var_group: 'group',
       color: (d) => { return d; },
       y_invert: true,
       var_id: 'id',
@@ -74,7 +75,7 @@ export default Ember.Component.extend({
             //if there is no search, color products export > 0 and rca > 1
             // industries if RCA > 1 ( varDependent for industries is also rca )
             if(keyFilter.length > 0) {
-              if(d.group === keyFilter[0]) {
+              if(d[vars.var_group] === keyFilter[0]) {
                 return d.color;
               } else {
                 return 'white';
@@ -156,7 +157,6 @@ export default Ember.Component.extend({
 
     Ember.run.later(this , function() {
       if(this.get('network')) {
-        console.log('filter netowr', keyFilter)
         d3.select(this.get('id')).call(this.get('network'));
         this.get('network').params({filter: keyFilter});
         this.get('network').params({
@@ -166,7 +166,7 @@ export default Ember.Component.extend({
               type: 'circle',
               fill: (d, i, vars) => {
                 if(keyFilter.length > 0) {
-                  if(d.group === keyFilter[0]) {
+                  if(d[vars.var_group] === keyFilter[0]) {
                     return d.color;
                   } else {
                     return 'white';
