@@ -41,11 +41,12 @@
         entityId=entityId
         variable=variable
         search=search
+        keyFilter=keyFilter
         graph=graph
       }}
 
       {{#if needsLegend }}
-        {{component 'visualization-legend' legend=legend }}
+        {{component 'visualization-legend' legend=legend keyFilter=keyFilter }}
       {{/if}}
 
       <div class="buildermod__settings__wrap">
@@ -56,6 +57,7 @@
           canYearToggle=canYearToggle
           isScatter=isScatter
           rcaFilter=rcaFilter
+          keyFilter=keyFilter
         }}
       </div>
     </div>
