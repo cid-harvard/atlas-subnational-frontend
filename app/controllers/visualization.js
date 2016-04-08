@@ -237,6 +237,8 @@ export default Ember.Controller.extend({
       return 'vistk-scatterplot';
     } else if(visualization === 'similarity') {
       return 'vistk-network';
+    } else if(visualization === 'piescatter') {
+      return 'vistk-piescatter';
     } else if (visualization === 'geo') {
       return 'geo-map';
     }
