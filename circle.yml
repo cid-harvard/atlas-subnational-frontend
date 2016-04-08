@@ -19,6 +19,9 @@ dependencies:
 test:
   pre:
     - cp .env.deploy .env
+  override:
+    - mkdir $CIRCLE_TEST_REPORTS/ember
+    - ember test --reporter xunit --silent | tee $CIRCLE_TEST_REPORTS/ember/report.xml
 deployment:
   staging:
     branch: /.*/
