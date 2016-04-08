@@ -17,6 +17,7 @@ export default Ember.Component.extend({
   scatter: computed('data.@each', 'dataType','eciValue','i18n.locale', function() {
     let eci = this.get('eciValue');
     let lang = this.get('i18n.locale') === 'en-col' ? 'en_EN': 'es_ES';
+    let keyFilter = this.get('keyFilter');
     let format = function(value) { return numeral(value).format('0.00'); };
     return vistk.viz()
     .params({
@@ -160,6 +161,7 @@ export default Ember.Component.extend({
           }
         }]
       }],
+      filter: keyFilter,
       lang: lang
     });
   }),
@@ -195,6 +197,19 @@ export default Ember.Component.extend({
     this.removeObserver('i18n.locale', this, this.update);
     this.removeObserver('data.[]', this, this.update);
   },
+  refresh: observer('keyFilter', function() {
+    if(!this.element){ return ; } //do not redraw if not there
+    let keyFilter = this.get('keyFilter');
+
+    Ember.run.later(this , function() {
+      if(this.get('scatter')) {
+
+        this.get('scatter').params({filter: keyFilter});
+        this.get('scatter').params().refresh = true;
+        d3.select(this.get('id')).call(this.get('scatter'));
+      }
+    });
+  }),
   update: observer('data.@each', 'varRca', 'i18n.locale', 'dataType', function() {
     if(!this.element){ return ; } //do not redraw if not there
     d3.select(this.get('id')).select('svg').remove();
