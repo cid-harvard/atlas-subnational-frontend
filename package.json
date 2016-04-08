@@ -41,6 +41,6 @@
     "ember-export-application-global": "^1.0.2",
     "ember-i18n": "4.1.1",
     "ember-table": "0.9.2",
-    "ivy-tabs": "git://github.com/ivyapp/ivy-tabs.git"
+    "ivy-tabs": "1.2.0"
   }
 }
