@@ -91,19 +91,27 @@ export default Ember.Component.extend({
     this.set('width', this.$().parent().width());
     this.set('height', this.$().parent().height());
     d3.select(this.get('id')).call(this.get('dotPlot'));
-
+    var that = this;
     this.get('dotPlot').params().evt.register('highlightOn', function(d, i) {
-      // TODO: highlight geomap
+      that.set('keyHighlight', [d.department_id]);
     });
-
     this.get('dotPlot').params().evt.register('highlightOut', function(d, i) {
-      d3.selectAll('.items__mark__div').remove();
+      that.set('keyHighlight', []);
     });
-
   },
   update: observer('locale', function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       d3.select(this.get('id')).call(this.get('dotPlot'));
+    });
+  }),
+  refresh: observer('keyHighlight', function() {
+    if(!this.element){ return ; } //do not redraw if not there
+    let keyHighlight = this.get('keyHighlight');
+    Ember.run.later(this , function() {
+      if(this.get('dotPlot')) {
+        this.get('dotPlot').params({highlight: keyHighlight});
+        d3.select(this.get('id')).call(this.get('dotPlot'));
+      }
     });
   }),
   didInsertElement: function() {
