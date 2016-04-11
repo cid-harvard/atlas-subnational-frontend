@@ -305,7 +305,7 @@ export default {
   "graph_builder.table.import_value": "Importaciones, US$",
   "graph_builder.table.industry": "Sector",
   "graph_builder.table.less_than_5": "Menos de 5",
-  "graph_builder.table.location": "Departamento",
+  "graph_builder.table.location": "Lugar",
   "graph_builder.table.monthly_wages": "",
   "graph_builder.table.name": "Nombre",
   "graph_builder.table.num_establishments": "Empresas",
