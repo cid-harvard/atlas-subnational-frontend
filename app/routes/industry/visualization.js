@@ -148,6 +148,7 @@ export default Ember.Route.extend({
     controller.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
     controller.set('drawerQuestionsIsOpen', false); // Turn off other drawers
     controller.set('searchText', controller.get('search'));
+    controller.set('keyHighlight', []);
     window.scrollTo(0, 0);
   },
   resetController(controller, isExiting) {
