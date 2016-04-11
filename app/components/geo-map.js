@@ -40,6 +40,7 @@ export default Ember.Component.extend({
       let shadeClass = sum === 0 ? 'q0' : quantize(sum);
       let params = {
         value: _.sum(location.values, varDependent),
+        department_id: location.values[0].department_id,
         class: `geo__department ${shadeClass}`,
       };
       valueMap.set(parseInt(location.key), params);
@@ -90,50 +91,21 @@ export default Ember.Component.extend({
       this.addLabelsPane();
       let data = this.get('data');
       let parentView = this.get('parentView');
+      let that = this;
       let layer = omnivore
         .topojson(`assets/geodata/${this.get('i18n').country}.topojson`, null, L.geoJson(null, this.get('customLayerParams')))
         .on('layeradd', (e) => {
           let marker = _.get(e, 'layer');
           let location = _.get(e, 'layer.feature.properties');
+          let department_id = _.get(that.get('valueMap').get(location.cid_id), 'department_id');
 
-          let textKey = this.get('i18n')
-            .t(`graph_builder.table.${this.get('varDependent')}`);
-          let textValue = _.get(this.get('valueMap').get(location.cid_id), 'value');
-          this.set('numberFormat', textValue);
-          var toolTipText = `<span> ${location.name} </span> </br> ${textKey} : ${this.get('numberFormat')}`;
-
-          // Retrieve the scatterplot's configuration object
-          let elScatter = parentView.get('childViews').filter(function(d) {
-            return typeof d['dotPlot'] !== 'undefined';
-          })[0];
-
-          marker.on('mouseover', function (e) {
-
-            // Update the geo-legend configuration object (which is a dotplot btw)
-            elScatter.get('dotPlot').params({
-              highlight: [location.cid_id],
-              refresh: true
-            });
-
-            // Refreshing the geo-legend
-            d3.select(elScatter.get('id')).call(elScatter.get('dotPlot'));
-
-           var datum = data.filter(function(d) {
-            return d.department_id === +location.cid_id;
-           })[0];
-
-           // Trigger geo-legend's update to show the tooltip
-           elScatter.get('dotPlot').params().evt.call('highlightOn', datum);
+          marker.on('mouseover', function (f) {
+            that.set('keyHighlight', [department_id]);
           });
 
-          // Remove tooltip from geo-legend
           marker.on('mouseout', function () {
             d3.selectAll('.items__mark__div').remove();
-            elScatter.get('dotPlot').params({
-              highlight: [],
-              refresh: true
-            });
-            elScatter.get('dotPlot').params().evt.call('highlightOut');
+            that.set('keyHighlight', []);
           });
 
         });
@@ -174,6 +146,15 @@ export default Ember.Component.extend({
       this.set('layer', layer);
       layer.addTo(map);
     }, 200);
+  }),
+  refresh: observer('keyHighlight', function() {
+    let keyHighlight = this.get('keyHighlight');
+    if(!this.get('elementId')) { return ; }
+    Ember.run.later(this , function() {
+      let map =  this.get('baseMap');
+      if(!map) { return; }
+      // TODO: refresh geo map with new class
+    });
   }),
   willDestroyElement: function() {
     this.removeObserver('i18n.locale', this, this.update);
