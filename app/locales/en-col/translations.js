@@ -306,6 +306,7 @@ export default {
   "graph_builder.table.gdp_real": "GDP",
   "graph_builder.table.import_value": "Imports, USD",
   "graph_builder.table.industry": "Industry",
+  "graph_builder.table.industry_eci": "Industry complexity",
   "graph_builder.table.less_than_5": "Less than 5",
   "graph_builder.table.location": "Location",
   "graph_builder.table.monthly_wages": "Avg. monthly wage, Col$",
