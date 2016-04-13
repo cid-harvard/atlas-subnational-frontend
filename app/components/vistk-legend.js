@@ -99,7 +99,9 @@ export default Ember.Component.extend({
       that.set('keyHighlight', []);
     });
   },
-  update: observer('locale', function() {
+  update: observer('locale', 'data.@each', function() {
+    if(!this.element){ return ; } //do not redraw if not there
+    d3.select(this.get('id')).select('svg').remove();
     Ember.run.scheduleOnce('afterRender', this , function() {
       d3.select(this.get('id')).call(this.get('dotPlot'));
     });
