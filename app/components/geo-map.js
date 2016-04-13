@@ -122,24 +122,21 @@ export default Ember.Component.extend({
 
       map.removeLayer(this.get('layer'));
 
+      let that = this;
       let layer = omnivore
         .topojson(`assets/geodata/${this.get('i18n').country}.topojson`, null, L.geoJson(null, this.get('customLayerParams')))
         .on('layeradd', (e) => {
           let marker = _.get(e, 'layer');
           let location = _.get(e, 'layer.feature.properties');
+          let department_id = _.get(that.get('valueMap').get(location.cid_id), 'department_id');
 
-          let textKey = this.get('i18n')
-            .t(`graph_builder.table.${this.get('varDependent')}`);
-          let textValue = _.get(this.get('valueMap').get(location.cid_id), 'value');
-          this.set('numberFormat', textValue);
-          var toolTipText = `<span> ${location.name} </span> </br> ${textKey} : ${this.get('numberFormat')}`;
-
-          marker.bindPopup(toolTipText, {closeButton: false});
-          marker.on('mouseover', function () {
-            this.openPopup();
+          marker.on('mouseover', function (f) {
+            that.set('keyHighlight', [department_id]);
           });
+
           marker.on('mouseout', function () {
-            if(! _.get(this,'_popupContent')) { this.closePopup(); }
+            d3.selectAll('.items__mark__div').remove();
+            that.set('keyHighlight', []);
           });
         });
 
