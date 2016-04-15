@@ -47,9 +47,9 @@ export default Ember.Component.extend({
   edges: computed('dataType', function() {
     return this.get('graph').edges;
   }),
-  network: computed('data.[]', 'varDependent', 'dataType', 'vis', 'i18n.locale', function() {
-    let keyFilter = this.get('keyFilter') || [];
-    return vistk.viz().params({
+  config: computed('data.[]', 'varDependent', 'dataType', 'vis', 'i18n.locale', function() {
+     let keyFilter = this.get('keyFilter') || [];
+     return {
       type: 'productspace',
       height: this.get('height'),
       width: this.get('width'),
@@ -138,7 +138,10 @@ export default Ember.Component.extend({
           translate: [0, -10]
         }]
       }]
-    });
+    }
+  }),
+  network: computed('data.[]', 'varDependent', 'dataType', 'vis', 'i18n.locale', function() {
+    return vistk.viz().params(this.get('config'));
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
