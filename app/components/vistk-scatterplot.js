@@ -182,9 +182,9 @@ export default Ember.Component.extend({
         this.set('eciValue', get(datum, 'eci'));
       }
 
-      this.set('x_domain', vistk.utils.extent(this.get('immutableData'), 'distance'));
-      this.set('y_domain', vistk.utils.extent(this.get('immutableData'), 'complexity'));
-      this.set('r_domain', vistk.utils.extent(this.get('immutableData'), this.get('varSize')));
+      this.set('x_domain', vistk.utils.extent(this.get('modelData'), 'distance'));
+      this.set('y_domain', vistk.utils.extent(this.get('modelData'), 'complexity'));
+      this.set('r_domain', vistk.utils.extent(this.get('modelData'), this.get('varSize')));
 
       d3.select(this.get('id')).call(this.get('scatter'));
     });
