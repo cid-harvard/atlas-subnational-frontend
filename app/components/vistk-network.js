@@ -75,7 +75,7 @@ export default Ember.Component.extend({
             //if there is no search, color products export > 0 and rca > 1
             // industries if RCA > 1 ( varDependent for industries is also rca )
             if(keyFilter.length > 0) {
-              if(d[vars.var_group] === keyFilter[0]) {
+              if(d[vars.var_group] === keyFilter[0] && d[this.get('varRCA')] >= 1) {
                 return d.color;
               } else {
                 return 'white';
@@ -169,7 +169,7 @@ export default Ember.Component.extend({
               type: 'circle',
               fill: (d, i, vars) => {
                 if(keyFilter.length > 0) {
-                  if(d[vars.var_group] === keyFilter[0]) {
+                  if(d[vars.var_group] === keyFilter[0] && d[this.get('varRCA')] >= 1) {
                     return d.color;
                   } else {
                     return 'white';
