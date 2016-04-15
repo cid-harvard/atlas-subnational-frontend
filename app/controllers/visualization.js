@@ -208,6 +208,9 @@ export default Ember.Controller.extend({
     let entityType = this.get('model.entity_type');
     return this.get('i18n').t(`general.${entityType}`);
   }),
+  modelData: computed('model.data.[]', function() {
+    return this.get('model.data');
+  }),
   immutableData: computed('model.data.[]','endDate', 'startDate' , function() {
     return this.filterToSelectedYears(this.get('model.data'), this.get('startDate'), this.get('endDate'));
   }),
