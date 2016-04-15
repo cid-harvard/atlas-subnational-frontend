@@ -48,7 +48,7 @@ export default Ember.Component.extend({
     return this.get('graph').edges;
   }),
   network: computed('data.[]', 'varDependent', 'dataType', 'vis', 'i18n.locale', function() {
-    let keyFilter = this.get('keyFilter');
+    let keyFilter = this.get('keyFilter') || [];
     return vistk.viz().params({
       type: 'productspace',
       height: this.get('height'),
@@ -153,7 +153,7 @@ export default Ember.Component.extend({
   },
   refresh: observer('keyFilter', function() {
     if(!this.element){ return ; } //do not redraw if not there
-    let keyFilter = this.get('keyFilter');
+    let keyFilter = this.get('keyFilter') || [];
 
     Ember.run.later(this , function() {
       if(this.get('network')) {
