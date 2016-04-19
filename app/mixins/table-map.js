@@ -150,14 +150,21 @@ export default Ember.Mixin.create({
       return columns;
     }
   }),
-  rankingsMap: [
-    { key: 'name' },
-    { key: 'year' },
-    { key: 'industry_eci' },
-    { key: 'eci' },
-    { key: 'gdp_pc_real' },
-    { key: 'gdp_real' },
-    { key: 'population' }
-   ],
+  rankingsMap: computed('featureToggle.showIndustries', function() {
+      let columns = [
+       { key: 'name' },
+       { key: 'year' },
+       { key: 'eci' },
+       { key: 'gdp_pc_real' },
+       { key: 'gdp_real' },
+       { key: 'population' }
+      ];
+
+    if(this.get('featureToggle.showIndustries')) {
+      columns.splice(3, 0, {key: 'industry_eci'});
+    }
+
+    return columns;
+   })
 });
 
