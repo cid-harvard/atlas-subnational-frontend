@@ -11,14 +11,19 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
+  filterNulls: true,
   dotPlot: computed('id','data', function() {
     let varX = this.get('varX');
     let varId = this.get('varId');
     let currentSelection = +this.get('currentSelection');
+    let data = this.get('data');
+    if (this.get('filterNulls') === true){
+        data = data.filter((x) => x[this.get('varX')] != null);
+    }
     return vistk.viz()
       .params({
         type: 'dotplot',
-        data: this.get('data'),
+        data: data,
         container: this.get('id'),
         height: this.get('height'),
         width: this.get('width'),
