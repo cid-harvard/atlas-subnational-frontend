@@ -151,14 +151,14 @@ export default Ember.Mixin.create({
     }
   }),
   rankingsMap: computed('featureToggle.showIndustries', function() {
-      let columns = [
-       { key: 'name' },
-       { key: 'year' },
-       { key: 'eci' },
-       { key: 'gdp_pc_real' },
-       { key: 'gdp_real' },
-       { key: 'population' }
-      ];
+    let columns = [
+      { key: 'name' },
+      { key: 'year' },
+      { key: 'eci' },
+      { key: 'gdp_pc_real' },
+      { key: 'gdp_real' },
+      { key: 'population' }
+    ];
 
     if(this.get('featureToggle.showIndustries')) {
       columns.splice(3, 0, {key: 'industry_eci'});
