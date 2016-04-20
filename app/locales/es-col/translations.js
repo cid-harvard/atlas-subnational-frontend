@@ -291,7 +291,7 @@ export default {
   "graph_builder.table.average_wages": "Salario mensual promedio, Col$ ",
   "graph_builder.table.avg_wage": "Salario mensual promedio, Col$ ",
   "graph_builder.table.code": "C\u00f3digo",
-  "graph_builder.table.cog": "valor estrat\u00e9gico",
+  "graph_builder.table.cog": "Valor estrat\u00e9gico",
   "graph_builder.table.complexity": "Complejidad",
   "graph_builder.table.country": "Pa\u00eds",
   "graph_builder.table.distance": "Distancia",
