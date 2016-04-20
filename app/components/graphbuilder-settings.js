@@ -46,7 +46,7 @@ export default Ember.Component.extend({
     rcaAll() {
       this.set('rcaFilter', 'all');
       this.set('isOpen', false);
-    },
+    }
   }
 });
 

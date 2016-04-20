@@ -22,6 +22,7 @@ export default Ember.Component.extend({
         d.name_short_en = datum.name_short_en + ` (${datum.code})`;
         d.name_short_es = datum.name_short_es + ` (${datum.code})`;
         d.color = datum.color;
+        d.group = datum.group;
         d[this.get('varDependent')] = datum[this.get('varDependent')];
         d[this.get('varRCA')] = datum[this.get('varRCA')];
       }
@@ -46,8 +47,9 @@ export default Ember.Component.extend({
   edges: computed('dataType', function() {
     return this.get('graph').edges;
   }),
-  network: computed('data.[]', 'varDependent', 'dataType', 'vis', 'i18n.locale', function() {
-    return vistk.viz().params({
+  config: computed('data.[]', 'varDependent', 'dataType', 'vis', 'i18n.locale', function() {
+     let keyFilter = this.get('keyFilter') || [];
+     return {
       type: 'productspace',
       height: this.get('height'),
       width: this.get('width'),
@@ -61,6 +63,7 @@ export default Ember.Component.extend({
       var_y: 'y',
       radius: 5,
       var_color: 'color',
+      var_group: 'group',
       color: (d) => { return d; },
       y_invert: true,
       var_id: 'id',
@@ -68,10 +71,16 @@ export default Ember.Component.extend({
         attr: 'name',
         marks: [{
           type: 'circle',
-          fill: (d) => {
+          fill: (d, i, vars) => {
             //if there is no search, color products export > 0 and rca > 1
             // industries if RCA > 1 ( varDependent for industries is also rca )
-            if(d[this.get('varRCA')] >= 1){
+            if(keyFilter.length > 0) {
+              if(d[vars.var_group] === keyFilter[0] && d[this.get('varRCA')] >= 1) {
+                return d.color;
+              } else {
+                return 'white';
+              }
+            } else if(d[this.get('varRCA')] >= 1) {
               return d.color;
             }
           },
@@ -129,7 +138,10 @@ export default Ember.Component.extend({
           translate: [0, -10]
         }]
       }]
-    });
+    }
+  }),
+  network: computed('data.[]', 'varDependent', 'dataType', 'vis', 'i18n.locale', function() {
+    return vistk.viz().params(this.get('config'));
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
@@ -142,6 +154,38 @@ export default Ember.Component.extend({
     this.removeObserver('i18n.locale', this, this.update);
     this.removeObserver('data.[]', this, this.update);
   },
+  refresh: observer('keyFilter', function() {
+    if(!this.element){ return ; } //do not redraw if not there
+    let keyFilter = this.get('keyFilter') || [];
+
+    Ember.run.later(this , function() {
+      if(this.get('network')) {
+        d3.select(this.get('id')).call(this.get('network'));
+        this.get('network').params({filter: keyFilter});
+        this.get('network').params({
+          y_invert: true,
+          items: [{
+            marks: [{
+              type: 'circle',
+              fill: (d, i, vars) => {
+                if(keyFilter.length > 0) {
+                  if(d[vars.var_group] === keyFilter[0] && d[this.get('varRCA')] >= 1) {
+                    return d.color;
+                  } else {
+                    return 'white';
+                  }
+                } else if(d[this.get('varRCA')] >= 1) {
+                  return d.color;
+                }
+              }
+            }]
+          }]
+        });
+        this.get('network').params().refresh = true;
+        d3.select(this.get('id')).call(this.get('network'));
+      }
+    });
+  }),
   update: observer('data.[]', 'varDependent', 'i18n.locale', function() {
     if(!this.element){ return false; } //do not redraw if not there
     d3.select(this.get('id')).select('svg').remove();
