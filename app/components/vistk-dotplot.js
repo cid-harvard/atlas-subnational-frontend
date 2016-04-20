@@ -18,7 +18,7 @@ export default Ember.Component.extend({
     let currentSelection = +this.get('currentSelection');
     let data = this.get('data');
     if (this.get('filterNulls') === true){
-        data = data.filter((x) => x[this.get('varX')] != null);
+      data = data.filter((x) => x[this.get('varX')] != null);
     }
     return vistk.viz()
       .params({
