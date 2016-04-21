@@ -35,7 +35,7 @@
     <tbody>
       <tr class="table__row table__row--body">
         <td class="table__cell table__cell--summaries">
-          {{t 'location.show.gdp_pc'}}
+          {{t 'location.show.gdp_pc'}} ({{model.censusYear}})
         </td>
         <td class="table__cell table__header--summaries--value">
           {{model.lastGdpPerCapita}}
@@ -55,7 +55,7 @@
       </tr>
       <tr class="table__row table__row--body">
         <td class="table__cell table__cell--summaries">
-          {{t 'location.show.gdp'}}
+          {{t 'location.show.gdp'}} ({{model.censusYear}})
         </td>
         <td class="table__cell table__header--summaries--value">
           {{model.lastGdp}}
@@ -74,7 +74,7 @@
       </tr>
       <tr class="table__row table__row--body">
         <td class="table__cell table__cell--summaries">
-          {{t 'location.show.population'}}
+          {{t 'location.show.population'}} ({{model.censusYear}})
         </td>
         <td class="table__cell table__header--summaries--value">
           {{model.lastPop}}
@@ -94,7 +94,7 @@
       </tr>
       <tr class="table__row table__row--body">
         <td class="table__cell table__cell--summaries">
-          {{t 'location.show.eci'}}
+          {{t 'location.show.eci'}} ({{model.lastYear}})
         </td>
         <td class="table__cell table__header--summaries--value">
           {{model.lastEci}}
