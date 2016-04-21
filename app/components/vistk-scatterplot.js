@@ -118,7 +118,11 @@ export default Ember.Component.extend({
             },{
               'key': 'cog',
               'value':get(d,'cog')
-            }];
+            },{
+              'key': this.get('amount'),
+              'value':get(d,this.get('amount'))
+            }
+            ];
             var textItem = get(d, `name_short_${this.get('i18n').display}`) || d.code;
             var tooltip_text = `<span style="color:${get(d, 'color')}">${textItem} - ${get(d, 'code')}</span>`;
 
@@ -169,6 +173,10 @@ export default Ember.Component.extend({
   rca: computed('dataType', function() {
     if(this.get('dataType') === 'products') { return 'export_rca'; }
     if(this.get('dataType') === 'industries') { return 'rca'; }
+  }),
+  amount: computed('dataType', function() {
+    if(this.get('dataType') === 'products') { return 'export_value'; }
+    if(this.get('dataType') === 'industries') { return 'employment'; }
   }),
   didInsertElement: function() {
     $.getJSON(`${apiURL}/data/location?level=department`).then((response) => {
