@@ -60,7 +60,7 @@
         class="menu-section__link"}}
         {{t 'header.product'}}
       {{/link-to}}
-      {{#if isDepartment}}
+      {{#if showLocationProductsByDestination}}
         {{#link-to 'location.visualization-product' model.id 290 'multiples' 'export_value' (query-params search='null' startDate=firstYear endDate=lastYear)
           tagName='li'
           classNameBindings="locationProductsByDestination:menu-section__link--active"

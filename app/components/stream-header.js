@@ -22,6 +22,10 @@ export default Ember.Component.extend({
   isMunicipality: computed.equal('level','municipality'),
   isMsa: computed.equal('level','msa'),
 
+  //Once all APIs support this, refactor it out to just have (isDepartment or isMsa)
+  showMSALocationProductsByDestination: computed.and('isMsa', 'featureToggle.show_msa_location_products_by_destination'),
+  showLocationProductsByDestination: computed.or('isDepartment', 'showMSALocationProductsByDestination'),
+
   isIndustryClass: computed.equal('level', 'class'),
   isPrescriptiveLocation: computed.or('isDepartment', 'isCountry', 'isMsa'),
 
