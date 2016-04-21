@@ -24,6 +24,7 @@ export default Ember.Component.extend({
         d.color = datum.color;
         d[this.get('varDependent')] = datum[this.get('varDependent')];
         d[this.get('varRCA')] = datum[this.get('varRCA')];
+        d[this.get('varAmount')] = datum[this.get('varAmount')];
       }
       return d;
     }, this);
@@ -38,6 +39,14 @@ export default Ember.Component.extend({
       return 'rca';
     } else if (type === 'products') {
       return 'export_rca';
+    }
+  }),
+  varAmount: computed('dataType', function(){
+    let type = this.get('dataType');
+    if(type === 'industries') {
+      return 'employment';
+    } else if (type === 'products') {
+      return 'export_value';
     }
   }),
   nodes: computed('dataType', function() {
