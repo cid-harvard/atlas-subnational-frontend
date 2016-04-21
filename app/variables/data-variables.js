@@ -64,5 +64,6 @@ export default  {
       "department": "msa",
     },
     "show_downloads": false,
+    "show_msa_location_products_by_destination": true, //Once all APIs support this, refactor it out.
   }
 };
