@@ -113,7 +113,7 @@ export default Ember.Component.extend({
           },
           text: (d)  => {
             var data = [{
-              'key': 'rca',
+              'key': this.get('rca'),
               'value': get(d,this.get('rca'))
             },{
               'key': 'cog',
