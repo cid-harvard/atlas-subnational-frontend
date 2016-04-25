@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   }),
   scatter: computed('data.@each', 'dataType','eciValue','i18n.locale', function() {
     let eci = this.get('eciValue');
-    let lang = this.get('i18n.locale') === 'en-col' ? 'en_EN': 'es_ES';
+    let vistkLanguage = this.get('i18n').display === 'es' ? 'es_ES': 'en_EN';
     let format = function(value) { return numeral(value).format('0.00'); };
     return vistk.viz()
     .params({
@@ -151,7 +151,7 @@ export default Ember.Component.extend({
            return typeof eci !== 'undefined' && i === 0;
           },
           text: function() {
-            var label = lang === 'en_EN' ? 'Average complexity': 'Complejidad media';
+            var label = vistkLanguage === 'en_EN' ? 'Average complexity': 'Complejidad media';
             return label + ': ' + format(eci);
           },
           text_anchor: 'end',
@@ -163,7 +163,7 @@ export default Ember.Component.extend({
           }
         }]
       }],
-      lang: lang
+      lang: vistkLanguage,
     });
   }),
   varSize: computed('dataType', function() {
