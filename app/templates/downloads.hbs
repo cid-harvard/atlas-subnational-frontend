@@ -81,6 +81,7 @@
   </table>
 </section>
 
+{{#if featureToggle.showIndustries}}
 <section class="stream__section">
   <h3 class="section__head">{{ t 'downloads.industry_head' }}</h3>
   <p class="section__p">{{ t 'downloads.industry_copy' }}</p>
@@ -109,7 +110,9 @@
     </tr>
   </table>
 </section>
+{{/if}}
 
+{{#if featureToggle.showOccupations}}
 <section class="stream__section">
   <h3 class="section__head">{{ t 'downloads.occupations_head' }}</h3>
   <p class="section__p">{{ t 'downloads.occupations_copy' }}</p>
@@ -132,6 +135,7 @@
     </tr>
   </table>
 </section>
+{{/if}}
 
 <section class="stream__section">
   <h3 class="section__head">{{ t 'downloads.other_head' }}</h3>
