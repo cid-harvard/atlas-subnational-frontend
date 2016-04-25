@@ -46,7 +46,9 @@
       <th class="table__header downloads__table__header">{{ t 'downloads.thead_national' }}</th>
       <th class="table__header downloads__table__header">{{ t 'downloads.thead_departments' }}</th>
       <th class="table__header downloads__table__header">{{ t 'downloads.thead_met' }}</th>
+      {{#if featureToggle.showMunis}}
       <th class="table__header downloads__table__header">{{ t 'downloads.thead_muni' }}</th>
+      {{/if}}
     </tr>
     <tr class="table__row table__row--body">
       <td class="table__cell">{{ t 'downloads.trade_row_1' yearRange=yearRange}}</td>
@@ -59,9 +61,11 @@
       <td class="table__cell">
         <a href="{{downloadURL}}/products_msa.xlsx" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
       </td>
+      {{#if featureToggle.showMunis}}
       <td class="table__cell">
         <a href="{{downloadURL}}/products_municipality.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
       </td>
+      {{/if}}
     </tr>
     <tr class="table__row table__row--body">
       <td class="table__cell">{{ t 'downloads.trade_row_2' yearRange=yearRange}}</td>
@@ -74,9 +78,11 @@
       <td class="table__cell">
         <a href="{{downloadURL}}/products_rcpy_msa.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
       </td>
+      {{#if featureToggle.showMunis}}
       <td class="table__cell">
         <a href="{{downloadURL}}/products_rcpy_municipality.csv" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
       </td>
+      {{/if}}
     </tr>
   </table>
 </section>
@@ -137,6 +143,7 @@
 </section>
 {{/if}}
 
+{{#if featureToggle.showCustomDemographicDownloads}}
 <section class="stream__section">
   <h3 class="section__head">{{ t 'downloads.other_head' }}</h3>
   <p class="section__p">{{ t 'downloads.other_copy' }}</p>
@@ -165,6 +172,26 @@
     </tr>
   </table>
 </section>
+{{else}}
+<section class="stream__section">
+  <h3 class="section__head">{{ t 'downloads.other_head' }}</h3>
+  <p class="section__p">{{ t 'downloads.other_copy' }}</p>
+  <table class="table">
+    <tr class="table__row">
+      <th class="table__header downloads__table__header"></th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_departments' }}</th>
+    </tr>
+    <tr class="table__row table__row--body">
+      <td class="table__cell">{{ t 'downloads.other_row_1' }}</td>
+      <td class="table__cell">
+        <a href="{{downloadURL}}/demographic_department.xlsx" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+    </tr>
+  </table>
+</section>
+{{/if}}
+
+
 <section class="stream__section">
   <h3 class="section__head">{{ t 'downloads.map.header' }}</h3>
   <table class="table">
