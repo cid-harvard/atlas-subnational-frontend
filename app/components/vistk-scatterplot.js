@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   }),
   scatter: computed('data.@each', 'dataType','eciValue','i18n.locale', function() {
     let eci = this.get('eciValue');
-    let vistkLanguage = this.get('i18n').display === 'es' ? 'es_ES': 'en_EN';
+    let vistkLanguage = this.get('i18n.display') === 'es' ? 'es_ES': 'en_EN';
     let format = function(value) { return numeral(value).format('0.00'); };
     return vistk.viz()
     .params({

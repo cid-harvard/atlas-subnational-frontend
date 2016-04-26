@@ -56,7 +56,7 @@ export default Ember.Component.extend({
     return this.get('graph').edges;
   }),
   network: computed('data.[]', 'varDependent', 'dataType', 'vis', 'i18n.locale', function() {
-    let vistkLanguage = this.get('i18n').display === 'es' ? 'es_ES': 'en_EN';
+    let vistkLanguage = this.get('i18n.display') === 'es' ? 'es_ES': 'en_EN';
     return vistk.viz().params({
       type: 'productspace',
       lang: vistkLanguage,

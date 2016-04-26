@@ -39,7 +39,7 @@ export default Ember.Component.extend({
     let varDependent = this.get('varDependent');
     let varTextItem = `name_short_${this.get('i18n').display}`;
     let varText = this.get('varText');
-    let vistkLanguage = this.get('i18n').display === 'es' ? 'es_ES': 'en_EN';
+    let vistkLanguage = this.get('i18n.display') === 'es' ? 'es_ES': 'en_EN';
     return vistk.viz()
       .params({
         type: 'treemap',
