@@ -1,7 +1,7 @@
 <header class="stream__header stream__header--builder">
   {{#if isLocation}}
     <ul>
-      {{#each crumb in breadcrumbs}}
+      {{#each breadcrumbs as |crumb|}}
         {{#link-to 'location.show' crumb.id  tagName='li' class='breadcrumb'}}
           {{crumb.name_es}}
         {{/link-to}}

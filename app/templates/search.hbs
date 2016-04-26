@@ -26,7 +26,7 @@
 {{#if locationResults.length}}
   <h3 class="section__head results__subhead">{{t 'search.results_locations'}}</h3>
   <ul class="results__list">
-    {{#each result in locationResults}}
+    {{#each locationResults as |result|}}
       {{search-result
         result=result
         tagName="li"
@@ -40,7 +40,7 @@
 {{#if productResults.length}}
   <h3 class="section__head results__subhead">{{t 'search.results_products'}}</h3>
   <ul class="results__list">
-    {{#each result in productResults}}
+    {{#each productResults as |result|}}
       {{search-result
         result=result
         tagName="li"
@@ -52,7 +52,7 @@
 {{#if industryResults.length}}
   <h3 class="section__head results__subhead">{{t 'search.results_industries'}}</h3>
   <ul class="results__list">
-    {{#each result in industryResults}}
+    {{#each industryResults as |result|}}
       {{search-result
         result=result
         tagName="li"

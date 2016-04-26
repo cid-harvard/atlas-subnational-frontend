@@ -1,5 +1,5 @@
 <div class="change-visualization__container">
-  {{#each graph in otherPossibleGraphs}}
+  {{#each otherPossibleGraphs as |graph|}}
     {{#if graph.available}}
       {{component 'graphbuilder-change-graph'
         toggleVisualization='toggleVisualization'

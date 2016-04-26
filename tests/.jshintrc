@@ -30,7 +30,7 @@
   ],
   "node": false,
   "browser": false,
-  "boss": true,
+  "curly": true,
   "curly": false,
   "debug": false,
   "devel": false,
@@ -47,7 +47,8 @@
   "onevar": false,
   "plusplus": false,
   "regexp": false,
-  "undef": true,
+  "esnext": true,
+  "unused": true
   "sub": true,
   "strict": false,
   "white": false,

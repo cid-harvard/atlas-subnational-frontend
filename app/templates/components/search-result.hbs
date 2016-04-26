@@ -1,7 +1,7 @@
 <div class="results__text">
   {{#if isLocation }}
     <ul>
-      {{#each crumb in locationBreadcrumbs}}
+      {{#each locationBreadcrumbs as |crumb|}}
         <li class="results__breadcrumb">
           {{crumb.name_es}}
         </li>

@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default {
   name: 'data-attributes',
   initialize: function() {
-    Ember.View.reopen({
+    Ember.Component.reopen({
       init: function() {
         this._super();
         var self = this;
