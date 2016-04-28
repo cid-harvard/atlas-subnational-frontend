@@ -116,7 +116,7 @@ export default  {
        "products_rcpy_department": "products_rcpy_department.xlsx",
        "products_rcpy_msa": "products_rcpy_province.xlsx",
        "products_rcpy_municipality": "products_rcpy_municipality.xlsx",
-       "demographics_department": "demographic_department.xlsx",
+       "demographics_department": "demographics_department.xlsx",
     },
     "show_msa_location_products_by_destination": true, //Once all APIs support this, refactor it out.
   }
