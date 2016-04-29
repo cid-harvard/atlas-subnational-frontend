@@ -411,7 +411,7 @@ export default {
   "location.show.export_possiblities.footer": "Note that the list is dynamically generated.  Not all exports may make sense given local conditions not captured in our measure of product similarity.",
   "location.show.export_possiblities.intro": "We\u2019ve found that countries which export complex products grow faster than those which export simple products. Using the similarity space we built in the section above, we\u2019ve highlighted \u00a0high potential products for {{name}}, ranked by which have the highest combination of opportunity and complexity.",
   "location.show.exports": "Exports ({{year}})",
-  "location.show.exports_and_imports": "Exports and imports",
+  "location.show.exports_and_imports": "Exports",
   "location.show.gdp": "GDP",
   "location.show.gdp_pc": "GDP per capita",
   "location.show.growth_annual": "Growth, annual ({{yearRange}})",
