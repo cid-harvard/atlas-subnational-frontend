@@ -74,7 +74,7 @@ export default {
   "downloads.industry_head": "Industry data",
   "downloads.industry_row_1": "Employment, wages, firms and complexity (2004\u20132014)",
   "downloads.list_of_cities.header": "Lists of departments, cities and municipalities",
-  "downloads.map.cell": "Map Data",
+  "downloads.map.cell": "Source of cartographic data",
   "downloads.map.header": "Map",
   "downloads.occupations_copy": "All data on occupations come from the National Survey of Occupations and Employment (ENOE) and the 2010 Population Census, both produced by the National Institute of Statistics and Geography (INEGI). Occupations are classified according to the National System of Occupation Classification (SINCO).",
   "downloads.occupations_head": "Occupations data",
