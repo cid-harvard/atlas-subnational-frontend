@@ -183,6 +183,16 @@ export default Ember.Component.extend({
     // definitely is not a scatterplot component concern
     let id = this.get('entityId');
     let locationLevel = this.get(`metadata.locations.${id}.level`);
+    // There are no country level data API (/location/0/?level=country) yet, so
+    // in that case just use some defaults and don't care about ECI value.
+    if (locationLevel === "country"){
+      this.set('width', this.$().parent().width());
+      this.set('x_domain', vistk.utils.extent(this.get('modelData'), 'distance'));
+      this.set('y_domain', vistk.utils.extent(this.get('modelData'), 'complexity'));
+      this.set('r_domain', vistk.utils.extent(this.get('modelData'), this.get('varSize')));
+      d3.select(this.get('id')).call(this.get('scatter'));
+      return;
+    }
     $.getJSON(`${apiURL}/data/location?level=${locationLevel}`).then((response) => {
       let year = this.get('endDate');
       let data = get(response, 'data');
