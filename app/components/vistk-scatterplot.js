@@ -182,7 +182,7 @@ export default Ember.Component.extend({
     // TODO: Why is this code here >:| Getting location level specific data
     // definitely is not a scatterplot component concern
     let id = this.get('entityId');
-    let locationLevel = this.get("metadata.locations")[id].level;
+    let locationLevel = this.get(`metadata.locations.${id}.level`);
     $.getJSON(`${apiURL}/data/location?level=${locationLevel}`).then((response) => {
       let year = this.get('endDate');
       let data = get(response, 'data');
