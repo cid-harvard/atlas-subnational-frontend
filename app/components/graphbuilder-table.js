@@ -77,8 +77,38 @@ export default EmberTableComponent.extend(TableMap, {
     });
     return map;
   }),
-  columns: computed('tableMap', function() {
-    return this.get('tableMap').map((column) => {
+  // Drop fully empty columns in graph builders where the data is locations.
+  // Workaround for COL-958
+  droppedColumns: computed('data.[]', function(){
+
+    // We only need to drop columns in location sources
+    var isLocation = _.contains(['cities', 'departments'], this.get('source'));
+    if(!isLocation){
+      return [];
+    }
+
+    return this.get('tableMap').filter((column) => {
+
+      // Don't ever drop the "name" column
+      if(column.key == "name"){
+        return false;
+      }
+
+      var columnData = _.pluck(this.get('data'), column.key);
+      var columnEmpty = _.every(columnData, (x) => x === null || x === undefined);
+      return columnEmpty;
+    }).map((c) => c.key);
+  }),
+  columns: computed('droppedColumns', 'tableMap', function() {
+
+    var droppedColumns = this.get('droppedColumns');
+    if (!_.isEmpty(droppedColumns)){
+        Ember.Logger.log(`Dropping columns: ${droppedColumns}`);
+    }
+
+    return this.get('tableMap')
+    .filter((c) => !_.contains(droppedColumns, c.key))
+    .map((column) => {
       return this.generateColumnDefinition(column);
     });
   }),
