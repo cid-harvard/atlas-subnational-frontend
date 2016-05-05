@@ -147,6 +147,10 @@ export default Ember.Route.extend({
         });
       }
 
+      if(datum.eci === undefined || datum.eci === null){
+         eciRank = null;
+      }
+
       model.setProperties({
         eciRank: eciRank,
         gdpRank: gdpRank,
