@@ -1,7 +1,13 @@
 <div class="table__cell--rank">
   {{#link-to 'rankings'}}
-    <div class={{if isTop 'value top' 'value'}}>
-      #{{rank}}
-    </div>
+    {{#if isEmpty}}
+      <div class='value'>
+        N/A
+      </div>
+    {{else}}
+      <div class={{if isTop 'value top' 'value'}}>
+        #{{rank}}
+      </div>
+    {{/if}}
   {{/link-to}}
 </div>
