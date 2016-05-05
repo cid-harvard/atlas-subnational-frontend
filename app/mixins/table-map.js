@@ -150,7 +150,7 @@ export default Ember.Mixin.create({
       return columns;
     }
   }),
-  rankingsMap: computed('featureToggle.showIndustries', function() {
+  departmentRankingsMap: computed('featureToggle.showIndustries', function() {
     let columns = [
       { key: 'name' },
       { key: 'year' },
@@ -165,6 +165,20 @@ export default Ember.Mixin.create({
     }
 
     return columns;
+   }),
+  msaRankingsMap: computed('featureToggle.showIndustries', function() {
+    let columns = [
+      { key: 'name' },
+      { key: 'year' },
+      { key: 'eci' },
+    ];
+
+    if(this.get('featureToggle.showIndustries')) {
+      columns.splice(3, 0, {key: 'industry_eci'});
+    }
+
+    return columns;
    })
+
 });
 
