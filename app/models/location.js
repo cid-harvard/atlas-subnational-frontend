@@ -24,6 +24,9 @@ export default DS.Model.extend(ModelAttribute, {
   }),
   lastEci: computed('timeseries','locale', function() {
     let eci = get(this.get('lastDataPoint'), 'eci');
+    if (eci === undefined || eci === null){
+       return "N/A";
+    }
     return numeral(eci).format('0.00');
    }),
   firstCensusDataPoint: computed('timeseries', function() {
