@@ -70,6 +70,7 @@ export default Ember.Mixin.create({
       { key: 'export_num_plants' },
       { key: 'export_rca' },
       { key: 'distance' },
+      { key: 'cog' }
      ];
 
     if(this.get('featureToggle.showImports')) {
