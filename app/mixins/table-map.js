@@ -98,6 +98,7 @@ export default Ember.Mixin.create({
     { key: 'num_establishments' },
     { key: 'rca' },
     { key: 'complexity' },
+    { key: 'cog' },
     { key: 'distance' }
    ],
   departmentsMap: computed('featureToggle.showImports', 'featureToggle.showIndustries', function() {
