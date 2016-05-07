@@ -38,5 +38,9 @@ export default Ember.Controller.extend({
   isSearchRoute: computed.equal('currentRouteName','search'),
   showStreamer: computed('isHomePageRoute', function(){
     return !this.get('isHomePageRoute');
+  }),
+  heroImageStyle: computed(function(){
+    let url = this.get('featureToggle.hero_image');
+    return Ember.String.htmlSafe(`background-image: url('${url}');`);
   })
 });

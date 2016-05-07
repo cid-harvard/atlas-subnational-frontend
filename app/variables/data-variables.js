@@ -19,6 +19,7 @@ export default  {
       "country": "department",
       "department": "municipality"
     },
+    "hero_image": "/assets/img/hero_images/front-header-treemap.png",
     "show_downloads": true,
     "homepage_logos": [
       {
@@ -88,6 +89,7 @@ export default  {
       "country": "department",
       "department": "municipality",
     },
+    "hero_image": "/assets/img/hero_images/front-header-treemap.png",
     "show_downloads": true,
     "download_files": {
        "methodology": "calculation-documentation/Metodos_Calculo_Calculation_Methods.pdf",
@@ -131,6 +133,7 @@ export default  {
       "country": "department",
       "department": "msa",
     },
+    "hero_image": "/assets/img/hero_images/front-header-treemap.png",
     "show_downloads": true,
     "homepage_logos": [
       {
