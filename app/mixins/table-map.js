@@ -8,6 +8,8 @@ export default Ember.Mixin.create({
     { key: 'avg_wage', type: 'int', savedWidth: 290 },
     { key: 'code', savedWidth: 100 },
     { key: 'cog' , type: 'int', savedWidth: 200 },
+    { key: 'coi' , type: 'int', savedWidth: 280 },
+    { key: 'industry_coi' , type: 'int', savedWidth: 280 },
     { key: 'complexity' , type: 'int', savedWidth: 180 },
     { key: 'distance' , type: 'int', savedWidth: 110 },
     { key: 'employment', type: 'int', savedWidth: 130 },
@@ -157,13 +159,15 @@ export default Ember.Mixin.create({
       { key: 'name' },
       { key: 'year' },
       { key: 'eci' },
+      { key: 'coi' },
       { key: 'gdp_pc_real' },
       { key: 'gdp_real' },
-      { key: 'population' }
+      { key: 'population' },
     ];
 
     if(this.get('featureToggle.showIndustries')) {
-      columns.splice(3, 0, {key: 'industry_eci'});
+      columns.splice(4, 0, {key: 'industry_eci'});
+      columns.splice(5, 0, {key: 'industry_coi'});
     }
 
     return columns;
@@ -173,10 +177,12 @@ export default Ember.Mixin.create({
       { key: 'name' },
       { key: 'year' },
       { key: 'eci' },
+      { key: 'coi' },
     ];
 
     if(this.get('featureToggle.showIndustries')) {
-      columns.splice(3, 0, {key: 'industry_eci'});
+      columns.splice(4, 0, {key: 'industry_eci'});
+      columns.splice(5, 0, {key: 'industry_coi'});
     }
 
     return columns;
