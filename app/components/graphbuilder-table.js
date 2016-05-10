@@ -160,6 +160,8 @@ export default EmberTableComponent.extend(TableMap, {
       'complexity',
       'distance',
       'cog',
+      'coi',
+      'industry_coi',
       'population'
     ];
     var percentVars = [
