@@ -147,7 +147,7 @@ export default Ember.Route.extend({
         });
       }
 
-      if(datum.eci === undefined || datum.eci === null){
+      if(datum !== undefined && (datum.eci === undefined || datum.eci === null)){
          eciRank = null;
       }
 
