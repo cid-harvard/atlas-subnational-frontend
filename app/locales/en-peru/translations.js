@@ -290,6 +290,7 @@ export default {
   "graph_builder.table.avg_wage": "Avg. wage, MX$ (in thousands)",
   "graph_builder.table.code": "Code",
   "graph_builder.table.cog": "Opportunity gain",
+  "graph_builder.table.coi": "Export complexity outlook",
   "graph_builder.table.complexity": "Complexity",
   "graph_builder.table.country": "Country",
   "graph_builder.table.distance": "Distance",
