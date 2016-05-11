@@ -50,6 +50,7 @@ export default Ember.Mixin.create({
       { key: 'parent' },
       { key: 'year' },
       { key: 'export_value' },
+      { key: 'export_num_plants' },
       { key: 'export_rca' },
       { key: 'complexity' },
       { key: 'distance' },
