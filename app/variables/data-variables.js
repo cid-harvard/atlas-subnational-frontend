@@ -34,7 +34,7 @@ export default  {
        "industries_country": "industries_country.xlsx",
        "industries_department": "industries_department.xlsx",
        "industries_msa": "industries_msa.xlsx",
-       "industries_municipality": "industries_municipality.csv",
+       "industries_municipality": "industries_municipality.txt",
        "occupations": "occupations.xlsx",
        "demographics_country": "demographic_country.xlsx",
        "demographics_department": "demographic_department.xlsx",
