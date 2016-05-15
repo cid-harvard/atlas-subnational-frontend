@@ -203,5 +203,31 @@
         {{/link-to}}
       </div>
     </section>
+    {{#if featureToggle.show_homepage_logos }}
+    <section class="stream__section index__featuredin__wrap">
+      <ul class="index__featuredin__list" style="margin-bottom: 30px;">
+        <li class="index__featuredin__item">
+        <a href="http://growthlab.cid.harvard.edu/" target="_blank">
+          <img src="assets/img/logos/hks.png" style="max-width: 140px;" alt="Growth Lab at Harvard Kennedy School" class="index__featuredin__img">
+        </a>
+        </li>
+        <li class="index__featuredin__item">
+        <a href="https://www.bancoldex.com/" target="_blank">
+          <img src="assets/img/logos/bancoldex.png" style="max-width: 180px;" alt="Bancoldex" class="index__featuredin__img">
+        </a>
+        </li>
+        <li class="index__featuredin__item">
+        <a href="http://www.fmsd.org.co/" target="_blank">
+          <img src="assets/img/logos/fmsd.png" style="max-width: 190px;" alt="Fundacion Mario Santo Domingo" class="index__featuredin__img">
+        </a>
+        </li>
+        <li class="index__featuredin__item">
+        <a href="http://www.mincit.gov.co/" target="_blank">
+          <img src="assets/img/logos/mincomercio.png" style="max-width: 360px;" alt="MinComercio" class="index__featuredin__img">
+        </a>
+        </li>
+      </ul>
+    </section>
+    {{/if}}
   </article>
 </main>

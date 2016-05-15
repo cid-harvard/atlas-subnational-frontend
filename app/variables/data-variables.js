@@ -20,6 +20,7 @@ export default  {
       "department": "municipality"
     },
     "show_downloads": true,
+    "show_homepage_logos": true,
     "download_files": {
        "methodology": "calculation-documentation/Metodos_Calculo_Calculation_Methods.pdf",
        "location_table": "Lista_Munis_Depts_Mets.xlsx",
@@ -63,6 +64,7 @@ export default  {
       "department": "municipality",
     },
     "show_downloads": true,
+    "show_homepage_logos": false,
     "download_files": {
        "methodology": "calculation-documentation/Metodos_Calculo_Calculation_Methods.pdf",
        "location_table": "Lista_Munis_Depts_Mets.xlsx",
@@ -106,6 +108,7 @@ export default  {
       "department": "msa",
     },
     "show_downloads": true,
+    "show_homepage_logos": false,
     "download_files": {
        "methodology": "calculation-documentation/Metodos_Calculo_Calculation_Methods.pdf",
        "products_country": "products_country.xlsx",
