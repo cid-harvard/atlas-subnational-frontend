@@ -8,6 +8,8 @@ export default Ember.Mixin.create({
     { key: 'avg_wage', type: 'int', savedWidth: 290 },
     { key: 'code', savedWidth: 100 },
     { key: 'cog' , type: 'int', savedWidth: 200 },
+    { key: 'coi' , type: 'int', savedWidth: 280 },
+    { key: 'industry_coi' , type: 'int', savedWidth: 280 },
     { key: 'complexity' , type: 'int', savedWidth: 180 },
     { key: 'distance' , type: 'int', savedWidth: 110 },
     { key: 'employment', type: 'int', savedWidth: 130 },
@@ -26,6 +28,7 @@ export default Ember.Mixin.create({
     { key: 'year' , type: 'int', savedWidth: 80 },
     { key: 'ranking' , type: 'int', savedWidth: 80 },
     { key: 'eci' , type: 'int', savedWidth: 210 },
+    { key: 'industry_eci' , type: 'int', savedWidth: 210 },
     { key: 'gdp_pc_real' , type: 'int', savedWidth: 200 },
     { key: 'gdp_real' , type: 'int', savedWidth: 190 },
     { key: 'share' , type: 'int', savedWidth: 190 },
@@ -47,6 +50,7 @@ export default Ember.Mixin.create({
       { key: 'parent' },
       { key: 'year' },
       { key: 'export_value' },
+      { key: 'export_num_plants' },
       { key: 'export_rca' },
       { key: 'complexity' },
       { key: 'distance' },
@@ -69,6 +73,7 @@ export default Ember.Mixin.create({
       { key: 'export_num_plants' },
       { key: 'export_rca' },
       { key: 'distance' },
+      { key: 'cog' }
      ];
 
     if(this.get('featureToggle.showImports')) {
@@ -97,6 +102,7 @@ export default Ember.Mixin.create({
     { key: 'num_establishments' },
     { key: 'rca' },
     { key: 'complexity' },
+    { key: 'cog' },
     { key: 'distance' }
    ],
   departmentsMap: computed('featureToggle.showImports', 'featureToggle.showIndustries', function() {
@@ -149,13 +155,39 @@ export default Ember.Mixin.create({
       return columns;
     }
   }),
-  rankingsMap: [
-    { key: 'name' },
-    { key: 'year' },
-    { key: 'eci' },
-    { key: 'gdp_pc_real' },
-    { key: 'gdp_real' },
-    { key: 'population' }
-   ],
+  departmentRankingsMap: computed('featureToggle.showIndustries', function() {
+    let columns = [
+      { key: 'name' },
+      { key: 'year' },
+      { key: 'eci' },
+      { key: 'coi' },
+      { key: 'gdp_pc_real' },
+      { key: 'gdp_real' },
+      { key: 'population' },
+    ];
+
+    if(this.get('featureToggle.showIndustries')) {
+      columns.splice(4, 0, {key: 'industry_eci'});
+      columns.splice(5, 0, {key: 'industry_coi'});
+    }
+
+    return columns;
+   }),
+  msaRankingsMap: computed('featureToggle.showIndustries', function() {
+    let columns = [
+      { key: 'name' },
+      { key: 'year' },
+      { key: 'eci' },
+      { key: 'coi' },
+    ];
+
+    if(this.get('featureToggle.showIndustries')) {
+      columns.splice(4, 0, {key: 'industry_eci'});
+      columns.splice(5, 0, {key: 'industry_coi'});
+    }
+
+    return columns;
+   })
+
 });
 

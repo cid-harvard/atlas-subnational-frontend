@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   }),
   scatter: computed('data.@each', 'dataType','eciValue','i18n.locale', function() {
     let eci = this.get('eciValue');
-    let lang = this.get('i18n.locale') === 'en-col' ? 'en_EN': 'es_ES';
+    let vistkLanguage = this.get('i18n.display') === 'es' ? 'es_ES': 'en_EN';
     let format = function(value) { return numeral(value).format('0.00'); };
     return vistk.viz()
     .params({
@@ -113,12 +113,16 @@ export default Ember.Component.extend({
           },
           text: (d)  => {
             var data = [{
-              'key': 'rca',
+              'key': this.get('rca'),
               'value': get(d,this.get('rca'))
             },{
               'key': 'cog',
               'value':get(d,'cog')
-            }];
+            },{
+              'key': this.get('amount'),
+              'value':get(d,this.get('amount'))
+            }
+            ];
             var textItem = get(d, `name_short_${this.get('i18n').display}`) || d.code;
             var tooltip_text = `<span style="color:${get(d, 'color')}">${textItem} - ${get(d, 'code')}</span>`;
 
@@ -147,7 +151,7 @@ export default Ember.Component.extend({
            return typeof eci !== 'undefined' && i === 0;
           },
           text: function() {
-            var label = lang === 'en_EN' ? 'Average complexity': 'Complejidad media';
+            var label = vistkLanguage === 'en_EN' ? 'Average complexity': 'Complejidad media';
             return label + ': ' + format(eci);
           },
           text_anchor: 'end',
@@ -159,7 +163,7 @@ export default Ember.Component.extend({
           }
         }]
       }],
-      lang: lang
+      lang: vistkLanguage,
     });
   }),
   varSize: computed('dataType', function() {
@@ -170,21 +174,47 @@ export default Ember.Component.extend({
     if(this.get('dataType') === 'products') { return 'export_rca'; }
     if(this.get('dataType') === 'industries') { return 'rca'; }
   }),
+  amount: computed('dataType', function() {
+    if(this.get('dataType') === 'products') { return 'export_value'; }
+    if(this.get('dataType') === 'industries') { return 'employment'; }
+  }),
   didInsertElement: function() {
-    $.getJSON(`${apiURL}/data/location?level=department`).then((response) => {
-      let id = this.get('entityId');
+    // TODO: Why is this code here >:| Getting location level specific data
+    // definitely is not a scatterplot component concern
+    let id = this.get('entityId');
+    let locationLevel = this.get(`metadata.locations.${id}.level`);
+    // There are no country level data API (/location/0/?level=country) yet, so
+    // in that case just use some defaults and don't care about ECI value.
+    if (locationLevel === "country"){
+      this.set('width', this.$().parent().width());
+      this.set('x_domain', vistk.utils.extent(this.get('modelData'), 'distance'));
+      this.set('y_domain', vistk.utils.extent(this.get('modelData'), 'complexity'));
+      this.set('r_domain', vistk.utils.extent(this.get('modelData'), this.get('varSize')));
+      d3.select(this.get('id')).call(this.get('scatter'));
+      return;
+    }
+    $.getJSON(`${apiURL}/data/location?level=${locationLevel}`).then((response) => {
       let year = this.get('endDate');
       let data = get(response, 'data');
-      let datum = _.first(_.filter(data, {'year': parseInt(year), 'department_id': parseInt(id) }));
+
+      let locationIdField;
+      if(locationLevel == "msa"){
+        locationIdField = "location_id";
+      } else {
+        locationIdField = `${locationLevel}_id`;
+      }
+      let datum = _.first(_.filter(data, {'year': parseInt(year), [locationIdField]: parseInt(id) }));
       this.set('width', this.$().parent().width());
 
       if(this.get('dataType') === 'products' && datum) {
         this.set('eciValue', get(datum, 'eci'));
+      } else if(this.get('dataType') === 'industries' && datum) {
+        this.set('eciValue', get(datum, 'industry_eci'));
       }
 
-      this.set('x_domain', vistk.utils.extent(this.get('immutableData'), 'distance'));
-      this.set('y_domain', vistk.utils.extent(this.get('immutableData'), 'complexity'));
-      this.set('r_domain', vistk.utils.extent(this.get('immutableData'), this.get('varSize')));
+      this.set('x_domain', vistk.utils.extent(this.get('modelData'), 'distance'));
+      this.set('y_domain', vistk.utils.extent(this.get('modelData'), 'complexity'));
+      this.set('r_domain', vistk.utils.extent(this.get('modelData'), this.get('varSize')));
 
       d3.select(this.get('id')).call(this.get('scatter'));
     });

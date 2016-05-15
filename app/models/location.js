@@ -20,32 +20,36 @@ export default DS.Model.extend(ModelAttribute, {
     return _.first(this.get('timeseries')) || {};
   }),
   lastDataPoint: computed('timeseries', function() {
-    return _.select(this.get('timeseries'), { year: this.get('censusYear')})[0] || {};
+    return _.select(this.get('timeseries'), { year: this.get('lastYear')})[0] || {};
   }),
-  yearRange: computed('timeseries', function() {
-    var firstYear = get(this.get('firstDataPoint'), 'year');
-    var lastYear = get(this.get('lastDataPoint'), 'year');
-    return `${firstYear}–${lastYear}`;
-  }),
-  lastPop: computed('timeseries','locale', function() {
-    let pop = get(this.get('lastDataPoint'), 'population');
-    return numeral(pop).format('0.00a');
-   }),
   lastEci: computed('timeseries','locale', function() {
     let eci = get(this.get('lastDataPoint'), 'eci');
+    if (eci === undefined || eci === null){
+       return "N/A";
+    }
     return numeral(eci).format('0.00');
    }),
+  firstCensusDataPoint: computed('timeseries', function() {
+    return _.first(this.get('timeseries')) || {};
+  }),
+  lastCensusDataPoint: computed('timeseries', function() {
+    return _.select(this.get('timeseries'), { year: this.get('censusYear')})[0] || {};
+  }),
+  lastPop: computed('timeseries','locale', function() {
+    let pop = get(this.get('lastCensusDataPoint'), 'population');
+    return numeral(pop).format('0.00a');
+   }),
   lastGdp: computed('timeseries','locale', function() {
-    let gdp = get(this.get('lastDataPoint'), 'gdp_real') || get(this.get('lastDataPoint'), 'gdp_nominal');
+    let gdp = get(this.get('lastCensusDataPoint'), 'gdp_real') || get(this.get('lastCensusDataPoint'), 'gdp_nominal');
     return numeral(gdp).format('$ 0.00a');
    }),
   lastGdpPerCapita: computed('timeseries','locale', function() {
-    let gdpPC = get(this.get('lastDataPoint'), 'gdp_pc_real') ||  get(this.get('lastDataPoint'), 'gdp_pc_nominal');
+    let gdpPC = get(this.get('lastCensusDataPoint'), 'gdp_pc_real') ||  get(this.get('lastCensusDataPoint'), 'gdp_pc_nominal');
     return numeral(gdpPC).format('$ 0.00a');
    }),
   gdpGrowth:computed('timeseries','locale', function() {
-    var firstGdp = get(this.get('firstDataPoint'), 'gdp_real');
-    var lastGdp = get(this.get('lastDataPoint'), 'gdp_real');
+    var firstGdp = get(this.get('firstCensusDataPoint'), 'gdp_real');
+    var lastGdp = get(this.get('lastCensusDataPoint'), 'gdp_real');
     let difference = lastGdp / firstGdp;
     let power =  1/(this.get('timeseries.length') -1);
     if(difference && power) {

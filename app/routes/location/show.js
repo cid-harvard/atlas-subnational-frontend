@@ -140,11 +140,15 @@ export default Ember.Route.extend({
 
       if(datum) {
         _.each(dotplot, (d) => {
-          if(d.eci > datum.eci ) { eciRank ++; }
-          if(d.gdp_real > datum.gdp_real) { gdpRank ++; }
-          if(d.population > datum.population ) { populationRank ++; }
-          if(d.gdp_pc_real> datum.gdp_pc_real ) { gdpPerCapitaRank++; }
+          if(d.eci != null && d.eci > datum.eci) { eciRank ++; }
+          if(d.gdp_real != null && d.gdp_real > datum.gdp_real) { gdpRank ++; }
+          if(d.population != null && d.population > datum.population ) { populationRank ++; }
+          if(d.gdp_pc_real != null && d.gdp_pc_real> datum.gdp_pc_real ) { gdpPerCapitaRank++; }
         });
+      }
+
+      if(datum !== undefined && (datum.eci === undefined || datum.eci === null)){
+         eciRank = null;
       }
 
       model.setProperties({

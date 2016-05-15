@@ -24,6 +24,7 @@ export default Ember.Component.extend({
         d.color = datum.color;
         d[this.get('varDependent')] = datum[this.get('varDependent')];
         d[this.get('varRCA')] = datum[this.get('varRCA')];
+        d[this.get('varAmount')] = datum[this.get('varAmount')];
       }
       return d;
     }, this);
@@ -40,6 +41,14 @@ export default Ember.Component.extend({
       return 'export_rca';
     }
   }),
+  varAmount: computed('dataType', function(){
+    let type = this.get('dataType');
+    if(type === 'industries') {
+      return 'employment';
+    } else if (type === 'products') {
+      return 'export_value';
+    }
+  }),
   nodes: computed('dataType', function() {
     return this.get('graph').nodes;
   }),
@@ -47,8 +56,10 @@ export default Ember.Component.extend({
     return this.get('graph').edges;
   }),
   network: computed('data.[]', 'varDependent', 'dataType', 'vis', 'i18n.locale', function() {
+    let vistkLanguage = this.get('i18n.display') === 'es' ? 'es_ES': 'en_EN';
     return vistk.viz().params({
       type: 'productspace',
+      lang: vistkLanguage,
       height: this.get('height'),
       width: this.get('width'),
       container: this.get('id'),
@@ -117,12 +128,25 @@ export default Ember.Component.extend({
           },
           class: function() { return 'tooltip'; },
           text: (d) => {
-            let rcaValue = d[this.get('varRCA')];
-            let rcaLabel = this.get('i18n').t('graph_builder.table.rca');
-            let rcaString = `${rcaLabel}: ${numeral(rcaValue).format('0.00a')}`;
-            let name = d[`name_short_${this.get('i18n').display}`];
+            var data = [{
+              'key': this.get('varRCA'),
+              'value': get(d,this.get('varRCA'))
+            },{
+              'key': this.get('varAmount'),
+              'value':get(d,this.get('varAmount'))
+            }
+            ];
+            var textItem = get(d, `name_short_${this.get('i18n').display}`) || d.code;
+            var tooltip_text = `<span style="color:${get(d, 'color')}">${textItem}</span>`;
 
-            return `<span style="color:${get(d, 'color')}">${name}</span></br>${rcaString}`;
+            data.forEach((datum) => {
+              if(datum.key) {
+                let formattedValue = numeral(get(datum, 'value')).format('0.00a');
+                tooltip_text += '<br>' + this.get('i18n').t(`graph_builder.table.${get(datum,'key')}`) + ': ' + formattedValue;
+              }
+            });
+
+            return tooltip_text;
           },
           width: 150,
           height: 'auto',

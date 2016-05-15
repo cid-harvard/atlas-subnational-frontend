@@ -13,13 +13,12 @@
   {{component 'table-download'
     name=sectionDepartments
     data=model.departments
-    source='rankings'
+    source='departmentRankings'
     pageTitle=pageTitle
   }}
 	{{component 'graphbuilder-table'
 	  data=model.departments
-	  source='rankings'
-	  sortby='eci'
+	  source='departmentRankings'
 	}}
 </section>
 
@@ -29,13 +28,12 @@
     {{component 'table-download'
       name=sectionCities
       data=model.msas
-      source='rankings'
+      source='msaRankings'
       pageTitle=pageTitle
     }}
     {{component 'graphbuilder-table'
       data=model.msas
-      source='rankings'
-      sortby='eci'
+      source='msaRankings'
     }}
   </section>
 {{/if}}
