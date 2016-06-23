@@ -19,8 +19,34 @@ export default  {
       "country": "department",
       "department": "municipality"
     },
+    "hero_image": "/assets/img/hero_images/front-header-treemap.png",
     "show_downloads": true,
-    "show_homepage_logos": true,
+    "homepage_logos": [
+      {
+        "name":"Center for International Development at Harvard University",
+        "link":"http://growthlab.cid.harvard.edu/",
+        "logo":"assets/img/logos/hks.png",
+        "max-width": "140px",
+      },
+      {
+        "name":"Bancoldex",
+        "link":"https://www.bancoldex.com/",
+        "logo":"assets/img/logos/bancoldex.png",
+        "max-width": "180px",
+      },
+      {
+        "name":"Fundacion Mario Santo Domingo",
+        "link":"http://www.fmsd.org.co/",
+        "logo":"assets/img/logos/fmsd.png",
+        "max-width": "190px",
+      },
+      {
+        "name":"MinComercio",
+        "link":"http://www.mincit.gov.co/",
+        "logo":"assets/img/logos/mincomercio.png",
+        "max-width": "360px",
+      },
+    ],
     "download_files": {
        "methodology": "calculation-documentation/Metodos_Calculo_Calculation_Methods.pdf",
        "location_table": "Lista_Munis_Depts_Mets.xlsx",
@@ -63,8 +89,8 @@ export default  {
       "country": "department",
       "department": "municipality",
     },
+    "hero_image": "/assets/img/hero_images/front-header-treemap.png",
     "show_downloads": true,
-    "show_homepage_logos": false,
     "download_files": {
        "methodology": "calculation-documentation/Metodos_Calculo_Calculation_Methods.pdf",
        "location_table": "Lista_Munis_Depts_Mets.xlsx",
@@ -107,8 +133,22 @@ export default  {
       "country": "department",
       "department": "msa",
     },
+    "hero_image": "/assets/img/hero_images/front-header-peru.png",
     "show_downloads": true,
-    "show_homepage_logos": false,
+    "homepage_logos": [
+      {
+        "name":"Center for International Development at Harvard University",
+        "link":"http://growthlab.cid.harvard.edu/",
+        "logo":"assets/img/logos/hks.png",
+        "max-width": "200px",
+      },
+      {
+        "name":"Concytec",
+        "link":"https://portal.concytec.gob.pe/",
+        "logo":"assets/img/logos/concytec.png",
+        "max-width": "300px",
+      },
+    ],
     "download_files": {
        "methodology": "calculation-documentation/Metodos_Calculo_Calculation_Methods.pdf",
        "products_country": "products_country.xlsx",
