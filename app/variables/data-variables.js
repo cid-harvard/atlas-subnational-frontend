@@ -1,5 +1,6 @@
 export default  {
   col: {
+    "title": "Datlas Colombia",
     "index_products": [1143,87],
     "index_locations": [41,87,34,40],
     "index_industries": [461, 488],
@@ -70,6 +71,7 @@ export default  {
     },
   },
   mex: {
+    "title": "Atlas de Complejidad Económica de México",
     "index_products": [1143,87],
     "index_locations": [2533, 2501, 2511, 2539],
     "index_industries": [294, 359],
@@ -114,6 +116,7 @@ export default  {
     },
   },
   peru: {
+    "title": "Atlas de Complejidad Económica de Perú",
     "index_products": [262, 891, 77, 214],
     "index_locations": [4, 13, 8, 16],
     "index_industries": [],
