@@ -50,12 +50,15 @@ export default Ember.Mixin.create({
       { key: 'parent' },
       { key: 'year' },
       { key: 'export_value' },
-      { key: 'export_num_plants' },
       { key: 'export_rca' },
       { key: 'complexity' },
       { key: 'distance' },
       { key: 'cog' }
     ];
+
+    if(!this.get('featureToggle.isPeru')) {
+      columns.splice(5, 0, {key: 'export_num_plants'});
+    }
 
     if(this.get('featureToggle.showImports')) {
       return columns.concat({key: 'import_value'});
