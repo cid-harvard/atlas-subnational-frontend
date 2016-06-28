@@ -5,10 +5,12 @@ const {RSVP, $, get, set} = Ember;
 const {apiURL} = ENV;
 
 export default Ember.Route.extend({
+  featureToggle: Ember.inject.service(),
   queryParams: {
     locale: { refreshModel: false }
   },
   beforeModel: function(transition) {
+    document.title = this.get('featureToggle.title');
     let locale = get(transition, 'queryParams.locale');
     if(locale === 'no-copy') {
       set(this, 'i18n.locale', 'no-copy');
