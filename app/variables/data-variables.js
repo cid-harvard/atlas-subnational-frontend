@@ -133,7 +133,7 @@ export default  {
       "country": "department",
       "department": "msa",
     },
-    "hero_image": "/assets/img/hero_images/front-header-peru.png",
+    "hero_image": "/assets/img/hero_images/front-header-peru2.jpg",
     "show_downloads": true,
     "homepage_logos": [
       {
