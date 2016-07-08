@@ -127,7 +127,7 @@ export default Ember.Route.extend({
         /*
          *division industries arent used here.
          */
-        if(sectionId) {
+        if(!_.isUndefined(sectionId)) {
           set(industrySectionMap, `${sectionId}.color`, color);
         }
 
