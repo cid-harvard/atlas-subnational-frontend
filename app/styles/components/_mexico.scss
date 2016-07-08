@@ -1,0 +1,188 @@
+/* ==========  Type Palette  ========== */
+$icon: 'FontAwesome';
+$sans: 'Open Sans', 'Helvetica Neue', 'Helvetica', arial, sans-serif;
+$serif: 'Times New Roman', Times, Georgia, serif;
+$open: 'Open Sans', 'Helvetica Neue', 'Helvetica', arial, sans-serif;
+
+
+/* ==========  Color Palettes  ========== */
+
+$odGreen: #00cc99;
+$odGrayLight: #F6F6F6;
+$odGrayMed: #E9E5E5;
+$odGrayMedDark: #BABABA;
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700);
+
+.body {
+  font-size: $fontBase;
+  font-weight: 500;
+  color: $colorGrayDark;
+  font-family: $open;
+  border-bottom: none;
+}
+
+
+.side-nav__item--active {
+  color: #000;
+}
+
+.btn {
+  box-shadow: none;
+}
+
+.btn--stream, .btn--search, .btn--buildermod {
+  background: $odGreen;
+  color: $colorWhite;
+  &:hover, &:active, &:focus {
+    background: $colorWhite;
+    color: $odGreen;
+  }
+  &--active {
+    background:$odGrayMedDark;
+    &:hover {
+      color: $colorWhite;
+      background:$odGrayMedDark;
+    }
+  }
+  &--disable {
+    background:$odGrayMedDark;
+    &:hover {
+      color: $colorWhite;
+      background:$odGrayMedDark;
+    }
+  }
+}
+
+.btn--buildermod {
+  background: $odGrayMed;
+  color: #222;
+  &:hover, &:active, &:focus {
+    background: $odGreen;
+    color: $colorWhite;
+  }
+}
+
+.ui-selectmenu-button {
+  box-shadow: none;
+}
+
+.link--stream {
+  color: $odGreen;
+  &:hover, &:focus, &:active {
+    color: $colorBlack;
+  }
+}
+
+main.builder .search {
+  background-color: $odGrayLight;
+  &:active, &:focus {
+    &::-webkit-input-placeholder {
+      color: $odGrayMedDark;
+    }
+  }
+}
+
+.table__header--summaries--value:before {
+  background-color: $odGreen;
+}
+
+.dotplot .items__mark__diamond.preselected {
+  stroke: $odGreen;
+  fill: $odGreen;
+}
+
+.index {
+  background: $odGrayLight;
+}
+
+.stream__head.index__head {
+  color: #fff;
+}
+
+.header--pageheader--home .stream__subhead {
+  color: #fff;
+}
+
+.header--pageheader--home .pageheader__menu a{
+  color: #fff;
+}
+
+.onboarding--glyphs {
+  color: $odGreen;
+}
+
+.header--pageheader--home .pageheader__nav .toggle__label__text {
+  color: #fff;
+}
+.header--pageheader--home .pageheader__nav .toggle__label {
+  background-color: $odGrayMedDark;
+  &:after {
+    background-color: $odGrayMedDark;
+  }
+}
+.pageheader__home__cap {
+  background-color: $odGreen;
+}
+
+.header--pageheader  {
+  background: $odGreen;
+}
+
+.stream__head {
+  color: $odGreen;
+}
+
+.section__head.question__head {
+  color: $odGreen;
+}
+
+.toggle__label:before {
+  background: $odGreen;
+}
+
+.menu-section__link--active {
+  color: $odGreen;
+}
+.menu-section__link--active:before {
+  color: $odGreen;
+}
+.stream__article--indent--left {
+  border-image: none;
+  border-left: none;
+}
+
+.header--pageheader--home .pageheader__wrap .branding a {
+  color: #fff;
+}
+
+.branding a {
+  color: #fff;
+}
+
+.results__head {
+  color: $odGreen;
+}
+
+.footer {
+  background: #232323;
+  a:hover {
+    color: #fff;
+  }
+}
+
+.index__featuredin__wrap {
+  margin: 0;
+}
+
+.pageheader__wrap {
+  max-width: 105.4rem;
+}
+
+.cid-link {
+  color: #000;
+}
+
+.stream__section.index__featuredin__wrap {
+  background-color: #e0dad5;
+}
