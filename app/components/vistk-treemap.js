@@ -123,9 +123,9 @@ export default Ember.Component.extend({
                 } else if('num_vacancies' === key) {
                   return numeral(value).format('0,0');
                 } else if('export_value' === key) {
-                  return '$ ' + numeral(value).format('0.0a') + ' USD';
+                  return numeral(value).format('0.0a');
                 } else if('import_value' === key) {
-                  return '$ ' + numeral(value).format('0.0a') + ' USD';
+                  return numeral(value).format('0.0a');
                 } else {
                   return numeral(value).format('0.0a');
                 }
