@@ -91,8 +91,28 @@ export default  {
       "country": "department",
       "department": "municipality",
     },
-    "hero_image": "/assets/img/hero_images/front-header-treemap.png",
+    "hero_image": "/assets/img/hero_images/front-header-mexico.png",
     "show_downloads": true,
+    "homepage_logos": [
+      {
+        "name":"Center for International Development at Harvard University",
+        "link":"http://growthlab.cid.harvard.edu/",
+        "logo":"assets/img/logos/hks.png",
+        "max-width": "180px",
+      },
+      {
+        "name":"SHCP",
+        "link":"http://www.hacienda.gob.mx/Paginas/default.aspx",
+        "logo":"assets/img/logos/shcp.png",
+        "max-width": "220px",
+      },
+      {
+        "name":"CIDE",
+        "link":"http://www.cide.edu/",
+        "logo":"assets/img/logos/cide.png",
+        "max-width": "80px",
+      },
+    ],
     "download_files": {
        "methodology": "calculation-documentation/Metodos_Calculo_Calculation_Methods.pdf",
        "location_table": "Lista_Munis_Depts_Mets.xlsx",
