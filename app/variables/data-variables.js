@@ -12,9 +12,9 @@ export default  {
     "index_product_q2_id": 1143,
     "index_profile_id": 1,
     "index_graphbuilder_id": 87,
-    "last_year": 2014,
+    "last_year": 2013,
     "first_year": 2008,
-    "census_year": 2014,
+    "census_year": 2013,
     "geo_center": [4.6,-74.06],
     "subregions" : {
       "country": "department",
