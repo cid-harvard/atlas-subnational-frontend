@@ -129,8 +129,9 @@ export default Ember.Route.extend({
 
     let data = _.map(livestock.data, (d) => {
       d.year = this.get('lastYear');
-      let livestock = livestockMetadata[d.livestock_id];
-      return _.merge(copy(d), livestock);
+      let merged = _.merge(copy(d), livestockMetadata[d.livestock_id]);
+      merged.group = merged.code;
+      return merged;
     });
 
     return Ember.Object.create({
