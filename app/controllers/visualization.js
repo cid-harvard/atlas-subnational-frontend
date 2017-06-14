@@ -166,6 +166,14 @@ export default Ember.Controller.extend({
         { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
         { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
       ];
+    } else if (source === 'livestock' && _.contains(['treemap'], vis)){
+      return [
+        { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
+        { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+        { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+        { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+        { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+      ];
     } else if (vis === 'scatter'){
       return [
         { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },

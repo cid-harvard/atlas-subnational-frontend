@@ -32,7 +32,9 @@ export default Ember.Mixin.create({
     { key: 'gdp_pc_real' , type: 'int', savedWidth: 200 },
     { key: 'gdp_real' , type: 'int', savedWidth: 190 },
     { key: 'share' , type: 'int', savedWidth: 190 },
-    { key: 'population' , type: 'int', savedWidth: 180 }
+    { key: 'population' , type: 'int', savedWidth: 180 },
+    { key: 'num_farms' , type: 'int', savedWidth: 180 },
+    { key: 'num_livestock' , type: 'int', savedWidth: 100 },
   ],
   industryClassesMap: [
     { key: 'code' },
@@ -142,6 +144,12 @@ export default Ember.Mixin.create({
     { key: 'name', copy: 'occupation' },
     { key: 'average_wages' },
     { key: 'share' }
+  ],
+  livestockMap: [
+    { key: 'code' },
+    { key: 'name', copy: 'livestock' },
+    { key: 'num_farms' },
+    { key: 'num_livestock' }
   ],
   partnersMap: computed('featureToggle.showImports', function() {
     let columns = [
