@@ -35,6 +35,8 @@ export default Ember.Route.extend({
         return this.partnersDataMunging(hash);
       } else if (source_type === 'livestock') {
         return this.livestockDataMunging(hash);
+      } else if (source_type === 'agproducts') {
+        return this.agproductsDataMunging(hash);
       }
     });
   },
@@ -66,6 +68,13 @@ export default Ember.Route.extend({
     return {
       model: this.store.find('location', id),
       livestock: $.getJSON(`${apiURL}/data/location/${id}/livestock/?level=level1`)
+    };
+  }),
+  agproducts: computed('location_id', function() {
+    let id = get(this, 'location_id');
+    return {
+      model: this.store.find('location', id),
+      agproducts: $.getJSON(`${apiURL}/data/location/${id}/agproducts/?level=level2`)
     };
   }),
   partners: computed('location_id', function() {
@@ -130,6 +139,21 @@ export default Ember.Route.extend({
     let data = _.map(livestock.data, (d) => {
       d.year = this.get('lastYear');
       let merged = _.merge(copy(d), livestockMetadata[d.livestock_id]);
+      merged.group = merged.code;
+      return merged;
+    });
+
+    return Ember.Object.create({
+      entity: model,
+      data: Ember.A(data)
+    });
+  },
+  agproductsDataMunging(hash) {
+    let {model, agproducts } = hash;
+    let agproductsMetadata = this.modelFor('application').agproducts;
+
+    let data = _.map(agproducts.data, (d) => {
+      let merged = _.merge(copy(d), agproductsMetadata[d.agproduct_id]);
       merged.group = merged.code;
       return merged;
     });
