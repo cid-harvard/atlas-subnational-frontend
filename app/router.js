@@ -35,5 +35,9 @@ export default Router.map(function() {
     this.route('show', { path: ':industry_id'});
     this.route('visualization', { path: ':industry_id/source/:source_type/visualization/:visualization_type/:variable'});
   });
+  this.resource('landUse', { path: 'landUse'}, function() {
+    this.route('show', { path: ':land_use_id'});
+    this.route('visualization', { path: ':landUse_id/source/:source_type/visualization/:visualization_type/:variable'});
+  });
   this.route('rankings');
 });

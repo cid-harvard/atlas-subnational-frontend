@@ -69,8 +69,13 @@ export default EmberTableComponent.extend(TableMap, {
   attributeBindings: ['height'],
   selectionMode: 'mutiple',
   tableMap: computed('source', function() {
+    let entityType = this.get('entityType');
     let source = this.get('source');
+
     let map = this.get(`${source}Map`);
+    if (entityType === "landUse"){
+      map = this.get("landUsesMap");
+    }
 
     _.forEach(map, (mapping) => {
       if(mapping.key === 'name' || mapping.key == 'parent') { return; }
