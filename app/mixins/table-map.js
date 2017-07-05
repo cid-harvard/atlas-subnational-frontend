@@ -178,6 +178,11 @@ export default Ember.Mixin.create({
     { key: 'name', copy: 'land_use' },
     { key: 'area' },
   ],
+  landUseLocationsMap: [
+    { key: 'code' },
+    { key: 'name', copy: 'location' },
+    { key: 'area' },
+  ],
   partnersMap: computed('featureToggle.showImports', function() {
     let columns = [
       { key: 'code' },
