@@ -74,7 +74,7 @@ export default Ember.Route.extend({
     let id = get(this, 'location_id');
     return {
       model: this.store.find('location', id),
-      agproducts: $.getJSON(`${apiURL}/data/location/${id}/agproducts/?level=level2`)
+      agproducts: $.getJSON(`${apiURL}/data/location/${id}/agproducts/?level=level3`)
     };
   }),
   partners: computed('location_id', function() {
