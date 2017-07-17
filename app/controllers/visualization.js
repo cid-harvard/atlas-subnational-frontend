@@ -149,8 +149,27 @@ export default Ember.Controller.extend({
   otherPossibleGraphs: computed('model.visualization', 'model.source',  function() {
     let vis = this.get('model.visualization');
     let source = this.get('model.source');
+    let entityType = this.get('entityType');
 
-    if(_.contains(['locations', 'departments'], source) && _.contains(['geo', 'treemap', 'multiples'], vis)){
+    if(entityType === "landUse"){
+      if (source === "departments"){
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: true },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      } else {
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      }
+    } else if(_.contains(['locations', 'departments'], source) && _.contains(['geo', 'treemap', 'multiples'], vis)){
       return [
         { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
         { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
@@ -158,15 +177,7 @@ export default Ember.Controller.extend({
         { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
         { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
       ];
-    } else if (source === 'occupations' && _.contains(['treemap'], vis)){
-      return [
-        { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
-        { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
-        { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
-        { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
-        { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
-      ];
-    } else if (source === 'livestock' && _.contains(['treemap'], vis)){
+    } else if (_.contains(['occupations', 'livestock', 'landUses'], source) && _.contains(['treemap'], vis)){
       return [
         { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
         { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },

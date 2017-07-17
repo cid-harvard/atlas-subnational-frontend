@@ -8,8 +8,13 @@ export default Ember.Component.extend(TableMap, {
     return _.deburr(`${this.get('name')} ${this.get('pageTitle')}`).replace(/[^a-z0-9]+/gi," ").trim();
   }),
   tableMap: computed('source', function() {
+    let entityType = this.get('entityType');
     let source = this.get('source');
+
     let map = this.get(`${source}Map`);
+    if (entityType === "landUse"){
+      map = this.get("landUseLocationsMap");
+    }
     return map;
   }),
   actions: {
