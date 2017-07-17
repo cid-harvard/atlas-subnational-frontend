@@ -35,6 +35,11 @@ export default Ember.Mixin.create({
     { key: 'population' , type: 'int', savedWidth: 180 },
     { key: 'num_farms' , type: 'int', savedWidth: 180 },
     { key: 'num_livestock' , type: 'int', savedWidth: 100 },
+    { key: 'land_sown' , type: 'int', savedWidth: 180 },
+    { key: 'land_harvested' , type: 'int', savedWidth: 180 },
+    { key: 'production_tons' , type: 'int', savedWidth: 170 },
+    { key: 'yield_ratio' , type: 'int', savedWidth: 150 },
+    { key: 'yield_index' , type: 'int', savedWidth: 150 },
   ],
   industryClassesMap: [
     { key: 'code' },
@@ -150,6 +155,16 @@ export default Ember.Mixin.create({
     { key: 'name', copy: 'livestock' },
     { key: 'num_farms' },
     { key: 'num_livestock' }
+  ],
+  agproductsMap: [
+    { key: 'code' },
+    { key: 'name', copy: 'agproduct' },
+    { key: 'year' },
+    { key: 'land_sown' },
+    { key: 'land_harvested' },
+    { key: 'production_tons' },
+    { key: 'yield_ratio' },
+    { key: 'yield_index' }
   ],
   partnersMap: computed('featureToggle.showImports', function() {
     let columns = [
