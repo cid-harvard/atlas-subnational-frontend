@@ -86,6 +86,19 @@
   color: $colorGray;
 }
 
+.overview {
+  color: $colorGray;
+  font-weight: 400;
+  font-size: $fontSmall;
+  font-family: $sans;
+  float: left;
+  padding-left: 0rem;
+
+  &:active, &:focus, &:hover {
+    color: red;
+  }
+}
+
 .clear {
   clear: both;
   border: 1px solid black;
@@ -110,6 +123,13 @@
   max-width: 100%;
   width: 100%;
   height: auto;
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid red;
+  padding: 4rem 2rem 4rem 2rem;
+  position: absolute;
+  z-index: 50;
+  display: none;
 }
 
 //Top navigation on interior pages

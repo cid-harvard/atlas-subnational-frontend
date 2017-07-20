@@ -5,7 +5,7 @@
 **/
 
 .buildermod__header {
-  background: $colorGrayLight;
+  background: $colorGrayLightest;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -15,8 +15,10 @@
 .buildermod__head {
   display: inline-block;
   font-weight: 500;
-  padding: $baseSpace/2 $baseSpace;
-  font-size: $fontSmall;
+  padding: $baseSpace 0rem 0rem $baseSpace;
+  margin: $baseSpace 0rem 0rem $baseSpace;
+  margin-bottom: 0rem;
+  font-size: $fontBase;
   align-self: center;
   &~.buildermod__tools .buildermod__tool:first-child {
     border-left: 1px solid $colorGrayLighter;
@@ -25,7 +27,8 @@
 
 .buildermod__tools {
   display: flex;
-  justify-content: flex-end;
+  margin: 5rem 0rem 3rem 0rem;
+  justify-content: start;
 }
 
 .buildermod__tool {
@@ -105,11 +108,13 @@
 // Labels
 .settings__input__wrap {
   padding: $baseSpace * .5;
+  margin-top: $baseSpace;
 }
 
 .settings__input {
-  font-size: $fontLarge;
+  font-size: $fontSmall;
   color: $colorBlack;
+  margin-bottom: $baseSpace * .5;
 }
 
 .settings__input-year {
