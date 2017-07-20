@@ -394,7 +394,7 @@ export default {
   "header.industry": "Industries",
   "header.industry_potential": "Potential",
   "header.industry_space": "Industry space",
-  "header.landUse": "Land Use ",
+  "header.landUse": "Land Use",
   "header.occupation": "Occupations",
   "header.occupation.available_jobs": "Job openings",
   "header.origin": "Origin",
