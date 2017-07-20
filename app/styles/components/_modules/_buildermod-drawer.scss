@@ -49,24 +49,26 @@
   flex-wrap: wrap;
   align-items: center;
   align-content: stretch;
-  justify-content: center;
-  border-left: 1px solid #dddddd;
+  justify-content: start;
 }
 
 .buildermod__tool--change-graph--label {
-  flex: 1 1 auto;
-  vertical-align: middle;
-  line-height: 1em;
-  margin-right: 1rem;
+  vertical-align: bottom;
+  line-height: 5rem;
+  margin-left: 3rem;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: $fontSmall;
+  font-weight: 300;
+  font-style: italic;
+  color: $colorGrayLight;
 }
 
 .change-visualization__container {
-  flex: 1 1 auto;
   width: auto;
   i {
     display: inline-block;
     width: auto;
-    font-size: 35px;
+    font-size: 65px;
     line-height: 30px;
     &:before { margin: 0; padding: 0; }
   }
@@ -82,6 +84,7 @@
   align-items: center;
   justify-content: center;
   color: $colorGray;
+  margin-right: 1.5rem;
   pointer-events: all;
   cursor: pointer;
   &:hover {
