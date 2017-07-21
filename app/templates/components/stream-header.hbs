@@ -34,5 +34,9 @@
     <h2 class="stream__head" data-location-name>{{model.name}}</h2>
     {{ partial 'partials/builder-questions-land-use'}}
   {{/if}}
+  {{#if isAgproduct}}
+    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+    {{ partial 'partials/builder-questions-agproduct'}}
+  {{/if}}
 </header>
 

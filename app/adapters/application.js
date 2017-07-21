@@ -12,6 +12,8 @@ export default DS.RESTAdapter.extend({
       return 'metadata/industries';
     } else if(type === 'land-use') {
       return 'metadata/land_uses';
+    } else if(type === 'agproduct') {
+      return 'metadata/agproducts';
     }
   }
 });
