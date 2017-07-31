@@ -172,7 +172,13 @@ export default Ember.Route.extend({
 
     let data = _.map(agproducts.data, (d) => {
       let merged = _.merge(copy(d), agproductsMetadata[d.agproduct_id]);
-      merged.group = merged.code;
+
+      let parent = agproductsMetadata[merged.parent_id];
+      let grandparent = agproductsMetadata[parent.parent_id];
+      merged.parent_name_en = grandparent.name_short_en;
+      merged.parent_name_es = grandparent.name_short_es;
+      merged.group = grandparent.id;
+
       return merged;
     });
 
