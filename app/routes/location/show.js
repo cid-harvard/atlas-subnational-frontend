@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ENV from '../../config/environment';
+import numeral from 'numeral';
 
 const {apiURL} = ENV;
 const {RSVP, computed, getWithDefault, get} = Ember;
@@ -35,7 +36,10 @@ export default Ember.Route.extend({
 
     var occupations = Ember.$.getJSON(`${apiURL}/data/occupation/?level=minor_group`);
 
-    return RSVP.allSettled([products, dotplot, industries, subregions_trade, occupations]).then((array) => {
+    var ag_farmsizes = Ember.$.getJSON(`${apiURL}/data/farmsize/1/locations/?level=${level}`);
+    var nonag_farmsizes = Ember.$.getJSON(`${apiURL}/data/farmsize/2/locations/?level=${level}`);
+
+    return RSVP.allSettled([products, dotplot, industries, subregions_trade, occupations, ag_farmsizes, nonag_farmsizes]).then((array) => {
       var productsData = getWithDefault(array[0], 'value.data', []);
 
       var dotplotData = getWithDefault(array[1], 'value.data', []);//dotplots
@@ -45,6 +49,9 @@ export default Ember.Route.extend({
       var subregionsTradeData = _.filter(getWithDefault(array[3], 'value.data', []), { 'year': this.get('lastYear')});
 
       var occupationsData = getWithDefault(array[4], 'value.data', []);
+
+      var agFarmsizesData = getWithDefault(array[5], 'value.data', []);
+      var nonagFarmsizesData = getWithDefault(array[6], 'value.data', []);
 
       var productsDataIndex = _.indexBy(productsData, 'product_id');
       var industriesDataIndex = _.indexBy(industriesData, 'industry_data');
@@ -158,8 +165,45 @@ export default Ember.Route.extend({
         populationRank: populationRank
       });
 
+      var agFarmsizeRank = 1;
+      var agFarmsize = _.chain(agFarmsizesData).filter((d) => d.location_id == model.id).first().get("avg_farmsize").value();
+      _.each(agFarmsizesData, (d) => {
+
+        if(d.avg_farmsize != null && d.avg_farmsize > agFarmsize ) { agFarmsizeRank++; }
+
+        d.name_en = _.get(locationsMetadata, d.location_id).name_en;
+        d.name_es = _.get(locationsMetadata, d.location_id).name_es;
+
+      });
+      agFarmsize = numeral(agFarmsize).format('0.00a');
+
+      model.setProperties({
+        agFarmsize: agFarmsize,
+        agFarmsizeRank: agFarmsizeRank,
+      });
+
+      var nonagFarmsizeRank = 1;
+      var nonagFarmsize = _.chain(nonagFarmsizesData).filter((d) => d.location_id == model.id).first().get("avg_farmsize").value();
+      _.each(nonagFarmsizesData, (d) => {
+
+        if(d.avg_farmsize != null && d.avg_farmsize > nonagFarmsize ) { nonagFarmsizeRank++; }
+
+        d.name_en = _.get(locationsMetadata, d.location_id).name_en;
+        d.name_es = _.get(locationsMetadata, d.location_id).name_es;
+
+      });
+      nonagFarmsize = numeral(nonagFarmsize).format('0.00a');
+
+      model.setProperties({
+        nonagFarmsize: nonagFarmsize,
+        nonagFarmsizeRank: nonagFarmsizeRank,
+      });
+
+
       model.set('productsData', products);
       model.set('industriesData', industries);
+      model.set('agFarmsizesData', agFarmsizesData);
+      model.set('nonagFarmsizesData', nonagFarmsizesData);
       model.set('dotplotData', dotplot);
       model.set('occupations', occupations);
       model.set('timeseries', dotplotTimeSeries);

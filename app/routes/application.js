@@ -35,6 +35,7 @@ export default Ember.Route.extend({
     var agproductsMetadata = $.getJSON(apiURL+'/metadata/agproducts/');
     var landUsesMetadata = $.getJSON(apiURL+'/metadata/land_uses/');
     var farmtypesMetadata = $.getJSON(apiURL+'/metadata/farmtypes/');
+    var farmsizesMetadata = $.getJSON(apiURL+'/metadata/farmsizes/');
     var partnerCountries = $.getJSON(apiURL+'/metadata/countries/');
     var productPCI = $.getJSON(apiURL+'/data/product/?level=4digit');
     var industryPCI = $.getJSON(apiURL+'/data/industry/?level=class');
@@ -57,6 +58,7 @@ export default Ember.Route.extend({
       agproductsMetadata,
       landUsesMetadata,
       farmtypesMetadata,
+      farmsizesMetadata,
       productSectionColor,
       industrySectionColor,
       partnerCountries,
@@ -79,13 +81,14 @@ export default Ember.Route.extend({
       let agproductsMetadata = array[9].value.data;
       let landUsesMetadata = array[10].value.data;
       let farmtypesMetadata = array[11].value.data;
-      let productSectionColor = array[12].value;
-      let industrySectionColor = array[13].value;
-      let partnerCountries  = array[14].value.data;
-      let productPCI = array[15].value.data;
-      let industryPCI = array[16].value.data;
-      let productSpace = array[17].value;
-      let industrySpace = array[17].value;
+      let farmsizesMetadata = array[12].value.data;
+      let productSectionColor = array[13].value;
+      let industrySectionColor = array[14].value;
+      let partnerCountries  = array[15].value.data;
+      let productPCI = array[16].value.data;
+      let industryPCI = array[17].value.data;
+      let productSpace = array[18].value;
+      let industrySpace = array[19].value;
 
       // Finds the entity with the `1st digit` that matches
       // sets `group` to the `1st digit code`
@@ -155,6 +158,12 @@ export default Ember.Route.extend({
         d.color = '#ccafaf';
       });
 
+      _.forEach(farmsizesMetadata, (d) => {
+        d.name_short_en = d.name_en;
+        d.name_short_es = d.name_es;
+        d.color = '#ccafaf';
+      });
+
       _.forEach(industriesMetadata, (d) => {
         let sectionId = industriesHierarchy[d.id];
         let color = _.isUndefined(sectionId) ? '#fff' :get(industrySectionColor, `${sectionId}.color`);
@@ -193,6 +202,7 @@ export default Ember.Route.extend({
         agproducts: _.indexBy(agproductsMetadata, 'id'),
         landUses: _.indexBy(landUsesMetadata, 'id'),
         farmtypes: _.indexBy(farmtypesMetadata, 'id'),
+        farmsizes: _.indexBy(farmsizesMetadata, 'id'),
         productParents: _.indexBy(productParentMetadata, 'id'),
         industryParents: _.indexBy(industryParentMetadata, 'id'),
         partnerCountries: _.indexBy(partnerCountries, 'id'),
