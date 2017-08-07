@@ -151,7 +151,7 @@ export default Ember.Controller.extend({
     let source = this.get('model.source');
     let entityType = this.get('entityType');
 
-    if(entityType === "landUse"){
+    if(_.contains(['landUse'], entityType)){
       if (source === "departments"){
         return [
           { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
@@ -169,7 +169,25 @@ export default Ember.Controller.extend({
           { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
         ];
       }
-    } else if(_.contains(['locations', 'departments'], source) && _.contains(['geo', 'treemap', 'multiples'], vis)){
+    } else if(_.contains(['agproduct'], entityType)){
+      if (source === "departments"){
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: true },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      } else {
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      }
+    } else if(_.contains(['locations', 'departments', 'agproducts'], source) && _.contains(['geo', 'treemap', 'multiples'], vis)){
       return [
         { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
         { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
