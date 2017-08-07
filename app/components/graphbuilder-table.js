@@ -169,7 +169,9 @@ export default EmberTableComponent.extend(TableMap, {
       'cog',
       'coi',
       'industry_coi',
-      'population'
+      'population',
+      'yield_ratio',
+      'yield_index',
     ];
     var percentVars = [
       'share',
@@ -188,7 +190,13 @@ export default EmberTableComponent.extend(TableMap, {
       'export_value',
       'import_value',
       'monthly_wages',
-      'average_wages'
+      'average_wages',
+      'area',
+      'production_tons',
+      'land_sown',
+      'land_harvested',
+      'num_farms',
+      'num_livestock',
     ];
 
     if(_.include(wageVarsInThousands, key)){
