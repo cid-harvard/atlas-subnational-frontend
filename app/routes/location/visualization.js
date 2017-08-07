@@ -39,6 +39,8 @@ export default Ember.Route.extend({
         return this.agproductsDataMunging(hash);
       } else if (source_type === 'landUses') {
         return this.landUsesDataMunging(hash);
+      } else if (source_type === 'farmtypes') {
+        return this.farmtypesDataMunging(hash);
       }
     });
   },
@@ -84,6 +86,13 @@ export default Ember.Route.extend({
     return {
       model: this.store.find('location', id),
       landUses: $.getJSON(`${apiURL}/data/location/${id}/land_uses/?level=level2`)
+    };
+  }),
+  farmtypes: computed('location_id', function() {
+    let id = get(this, 'location_id');
+    return {
+      model: this.store.find('location', id),
+      farmtypes: $.getJSON(`${apiURL}/data/location/${id}/farmtypes/?level=level2`)
     };
   }),
   partners: computed('location_id', function() {
@@ -178,6 +187,22 @@ export default Ember.Route.extend({
 
     let data = _.map(landUses.data, (d) => {
       let merged = _.merge(copy(d), landUsesMetadata[d.land_use_id]);
+      merged.year = this.get('lastYear');
+      merged.group = merged.code;
+      return merged;
+    });
+
+    return Ember.Object.create({
+      entity: model,
+      data: Ember.A(data)
+    });
+  },
+  farmtypesDataMunging(hash) {
+    let {model, farmtypes } = hash;
+    let farmtypesMetadata = this.modelFor('application').farmtypes;
+
+    let data = _.map(farmtypes.data, (d) => {
+      let merged = _.merge(copy(d), farmtypesMetadata[d.farmtype_id]);
       merged.year = this.get('lastYear');
       merged.group = merged.code;
       return merged;

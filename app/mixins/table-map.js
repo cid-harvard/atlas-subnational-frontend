@@ -33,7 +33,7 @@ export default Ember.Mixin.create({
     { key: 'gdp_real' , type: 'int', savedWidth: 190 },
     { key: 'share' , type: 'int', savedWidth: 190 },
     { key: 'population' , type: 'int', savedWidth: 180 },
-    { key: 'num_farms' , type: 'int', savedWidth: 180 },
+    { key: 'num_farms' , type: 'int', savedWidth: 220 },
     { key: 'num_livestock' , type: 'int', savedWidth: 100 },
     { key: 'land_sown' , type: 'int', savedWidth: 180 },
     { key: 'land_harvested' , type: 'int', savedWidth: 180 },
@@ -182,6 +182,11 @@ export default Ember.Mixin.create({
     { key: 'code' },
     { key: 'name', copy: 'location' },
     { key: 'area' },
+  ],
+  farmtypesMap: [
+    { key: 'code' },
+    { key: 'name', copy: 'farmtype' },
+    { key: 'num_farms' },
   ],
   partnersMap: computed('featureToggle.showImports', function() {
     let columns = [

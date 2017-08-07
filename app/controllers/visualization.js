@@ -177,7 +177,7 @@ export default Ember.Controller.extend({
         { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
         { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
       ];
-    } else if (_.contains(['occupations', 'livestock', 'landUses'], source) && _.contains(['treemap'], vis)){
+    } else if (_.contains(['occupations', 'livestock', 'landUses', 'farmtypes'], source) && _.contains(['treemap'], vis)){
       return [
         { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
         { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
