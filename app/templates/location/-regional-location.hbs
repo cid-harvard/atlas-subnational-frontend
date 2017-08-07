@@ -9,6 +9,8 @@
   {{partial 'location/department-dotplots'}}
 {{else if isMsa}}
   {{partial 'location/subregion-dotplots'}}
+{{else if isMunicipality}}
+  {{partial 'location/municipality-dotplots'}}
 {{/if}}
 
 {{#if featureToggle.showIndustries }}
