@@ -129,7 +129,11 @@ export default Ember.Controller.extend({
     return this.get('i18n').t(`graph_builder.search.placeholder.${this.get('source')}`);
   }),
   headerValue: computed('model', 'visualization','filteredData', 'variable', 'i18n.locale', function() {
-    let allowedVariables = ['export_value', 'import_value', 'wages', 'employment'];
+    let allowedVariables = ['export_value', 'import_value', 'wages',
+      'employment', 'land_sown', 'land_harvested', 'production_tons', 'area', 'num_farms'];
+    let usdVariables = ['export_value', 'import_value'];
+    let currencyVariables = ['wages'];
+    let areaVariables = ['area'];
     let variable = this.get('variable');
     let data = this.get('filteredData');
     let visualization = this.get('visualization');
@@ -138,13 +142,16 @@ export default Ember.Controller.extend({
     if(visualization === 'multiples') { return ''; }
 
     var sum = _.sum(data, variable);
-    if(variable === 'employment') {
-      return numeral(sum).format('0,00');
+    if(_.contains(currencyVariables, variable)) {
+      return numeral(sum).format('$ 0,0');
     }
-    if(variable === 'export_value' || variable === 'import_value') {
+    if(_.contains(usdVariables, variable)) {
       return '$' + numeral(sum).format('0,0') + ' USD';
     }
-    return numeral(sum).format('$ 0,0');
+    if(_.contains(areaVariables, variable)) {
+      return numeral(sum).format('0,0') + ' ha';
+    }
+    return numeral(sum).format('0,00');
   }),
   otherPossibleGraphs: computed('model.visualization', 'model.source',  function() {
     let vis = this.get('model.visualization');
