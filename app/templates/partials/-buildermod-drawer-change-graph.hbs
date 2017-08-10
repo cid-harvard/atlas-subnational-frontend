@@ -4,10 +4,9 @@
       {{component 'graphbuilder-change-graph'
         toggleVisualization='toggleVisualization'
         type=graph.type
-        isAvailable=graph.available
         visualization=visualization
-        description=graph.description
       }}
+      <span>{{t graph.description}}</span>
     {{/if}}
   {{/each}}
 </div>
