@@ -1,6 +1,6 @@
-<div class="ember-table-content-container" {{action 'sortByColumn' view.content}}>
-  <span {{bind-attr class=":ember-table-content view.content.isAscending:table__header--is--ascending view.content.isDescending:table__header--is--descending"}}>
-    {{t view.content.headerCellName}}
+<div class="ember-table-content-container" {{action 'sortByColumn' content}}>
+  <span {{bind-attr class=":ember-table-content content.isAscending:table__header--is--ascending content.isDescending:table__header--is--descending"}}>
+    {{t content.headerCellName}}
   </span>
 </div>
 

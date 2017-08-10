@@ -1,7 +1,7 @@
 <div class="index__dropdown__wrap">
   <fieldset>
     <select name={{type}}>
-      {{#each item in collection }}
+      {{#each collection as |item|}}
         <option value={{item.id}} selected={{is-equal selected item.id}} >
           {{#if addCode}}
             {{item.name}}, {{item.code}}

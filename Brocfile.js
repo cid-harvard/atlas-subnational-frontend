@@ -10,6 +10,7 @@ var templateTree = new HtmlbarsCompiler('app/templates', {
 });
 
 var app = new EmberApp({
+  'hinting': false,
   dotEnv: {
     clientAllowedKeys: [
       'GA',

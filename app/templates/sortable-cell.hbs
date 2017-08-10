@@ -1,13 +1,8 @@
-{{#if view.isModel }}
-  {{#link-to view.profileRoute view.id
-    tagName='span'
-    class="ember-table-content"
-  }}
-    {{{view.cellContent}}}
-  {{/link-to}}
+{{#if isModel }}
+    {{{cellContent}}}
 {{else}}
   <span class="ember-table-content-custom">
-    {{{view.cellContent}}}
+    {{{cellContent}}}
   </span>
 {{/if}}
 
