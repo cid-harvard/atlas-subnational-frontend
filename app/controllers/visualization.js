@@ -28,6 +28,10 @@ export default Ember.Controller.extend({
 
   variable: computed.alias('model.variable'),
 
+  questionsPartial: computed('entityType', function() {
+    return this.get('entityType') + '/questions';
+  }),
+
   isGeo: computed.equal('visualization','geo'),
   isScatter: computed.equal('visualization','scatter'),
 
