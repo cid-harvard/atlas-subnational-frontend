@@ -107,6 +107,19 @@
   width: 25px;
 }
 
+.stream__transparent {
+    z-index: $zIndex-9;
+    background: rgba(0,0,0,.2);
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+}
+
 .stream___head__menu {
   display: -webkit-flex;
   display: -moz-flex;
@@ -120,16 +133,15 @@
   color: $colorGray;
   font-family: $sans;
   margin-right: -$baseSpace;
-  max-width: 100%;
-  width: 100%;
+  max-width: $xlarge;
+  width: 120%;
   height: auto;
   background-color: white;
   border-radius: 1rem;
   border: 1px solid red;
   padding: 4rem 2rem 4rem 2rem;
-  position: absolute;
-  z-index: 50;
-  display: none;
+  position: fixed;
+  z-index: $zIndex-10;
 }
 
 //Top navigation on interior pages

@@ -18,29 +18,32 @@
       <li class="breadcrumb">{{t 'general.industry' }}</li>
     </ul>
   {{/if}}
-  {{#if isLocation}}
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
-    {{ partial 'partials/builder-questions-location'}}
-  {{/if}}
-  {{#if isProduct}}
-    <h2 class="stream__head" data-location-name>{{model.name}} ({{model.code}})</h2>
-    {{ partial 'partials/builder-questions-product'}}
-  {{/if}}
-  {{#if isIndustry}}
-    <h2 class="stream__head" data-location-name>{{model.name}} ({{model.code}})</h2>
-    {{ partial 'partials/builder-questions-industry'}}
-  {{/if}}
-  {{#if isLandUse}}
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
-    {{ partial 'partials/builder-questions-land-use'}}
-  {{/if}}
-  {{#if isAgproduct}}
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
-    {{ partial 'partials/builder-questions-agproduct'}}
+  {{#if isShowingIndex}}
+    <div class="stream__transparent" {{action 'toggleIndex'}}></div>
+    {{#if isLocation}}
+      <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+      {{ partial 'partials/builder-questions-location'}}
+    {{/if}}
+    {{#if isProduct}}
+      <h2 class="stream__head" data-location-name>{{model.name}} ({{model.code}})</h2>
+      {{ partial 'partials/builder-questions-product'}}
+    {{/if}}
+    {{#if isIndustry}}
+      <h2 class="stream__head" data-location-name>{{model.name}} ({{model.code}})</h2>
+      {{ partial 'partials/builder-questions-industry'}}
+    {{/if}}
+    {{#if isLandUse}}
+      <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+      {{ partial 'partials/builder-questions-land-use'}}
+    {{/if}}
+    {{#if isAgproduct}}
+      <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+      {{ partial 'partials/builder-questions-agproduct'}}
+    {{/if}}
   {{/if}}
     <aside class="cta__wrap--right">
     <a class="btn overview" > Overview </a>
-    <a class="btn btn--standalone btn--text" > INDEX </a>
+    <a class="btn btn--standalone btn--text" {{ action 'toggleIndex' }}> INDEX </a>
     </aside>
 </header>
 

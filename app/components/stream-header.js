@@ -93,5 +93,11 @@ export default Ember.Component.extend({
       parentId = get(parent, 'parent_id');
     }
     return crumbs;
-  })
+  }),
+
+  actions: {
+    toggleIndex() {
+      this.toggleProperty('isShowingIndex');
+    }
+  }
 });
