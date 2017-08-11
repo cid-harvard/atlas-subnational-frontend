@@ -1,5 +1,12 @@
 <section class="stream__section">
-  {{partial "location/questions"}}
+  {{navigation-questions
+    entityType=entityType
+    model=model
+    isDepartment=isDepartment
+    isMunicipality=isMunicipality
+    firstYear=firstYear
+    lastYear=lastYear
+  }}
   <header class="section__header">
      <h3 class="section__head">{{t 'country.show.economic_structure' }}</h3>
   </header>

@@ -5,7 +5,14 @@
   variable=variable
   metaData=model.metaData
 }}
-{{partial questionsPartial}}
+{{navigation-questions
+  entityType=entityType
+  model=model.entity
+  isDepartment=isDepartment
+  isMunicipality=isMunicipality
+  firstYear=firstYear
+  lastYear=lastYear
+}}
 <header class="section__header builder__header">
   <h3 class="section__head question__head">{{pageTitle}}</h3>
 </header>
