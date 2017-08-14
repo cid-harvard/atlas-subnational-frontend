@@ -1,6 +1,6 @@
 <div class="buildermod__questions buildermod__drawer--questions">
   {{#if featureToggle.showIndustries }}
-    <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.industry'}}</h4>
+    <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.industry'}} <span class="builder__questions__triangle"/></h4>
     <ul class="builder__questions__list">
       <li class="builder__questions__item">
         {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear search='null')
@@ -78,7 +78,7 @@
       {{/unless}}
     </ul>
   {{/if}}
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.export'}}</h4>
+  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.export'}} <span class="builder__questions__triangle"/></h4>
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
       {{#link-to 'location.visualization' model.id  'products' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
@@ -176,7 +176,7 @@
   {{/unless}}
   </ul>
   {{#if featureToggle.showImports }}
-    <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.import'}}</h4>
+    <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.import'}} <span class="builder__questions__triangle"/></h4>
     <ul class="builder__questions__list">
       <li class="builder__questions__item">
         {{#link-to 'location.visualization' model.id 'products' 'treemap' 'import_value' (query-params search='null' startdate=lastyear  enddate=lastyear)

@@ -49,6 +49,18 @@
   }
 }
 
+.builder__questions__triangle {
+    width: 0px;
+    height: 0px;
+    display: inline-block;
+    margin: 5px;
+    margin-bottom: 3px;
+    margin-left: 5px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 5px solid #f00;
+}
+
 .builder__questions__item__textwrap {
   margin-left: 10rem;
 }
