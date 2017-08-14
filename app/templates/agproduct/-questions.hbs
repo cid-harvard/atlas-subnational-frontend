@@ -1,5 +1,6 @@
 <div class="buildermod__questions buildermod__drawer--questions">
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.land_sown'}} <span class="builder__questions__triangle"/></h4>
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'land_sown'}}>{{t 'graph_builder.builder_questions.land_sown'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'land_sown') }}
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
       {{#link-to 'agproduct.visualization' model.id 'departments' 'treemap' 'land_sown' (query-params startDate=lastYear endDate=lastYear search='null')
@@ -44,7 +45,9 @@
       </div>
     </li>
   </ul>
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.land_harvested'}} <span class="builder__questions__triangle"/></h4>
+  {{/if}}
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'land_harvested'}}>{{t 'graph_builder.builder_questions.land_harvested'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'land_harvested') }}
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
       {{#link-to 'agproduct.visualization' model.id 'departments' 'treemap' 'land_harvested' (query-params startDate=lastYear endDate=lastYear search='null')
@@ -89,7 +92,9 @@
       </div>
     </li>
   </ul>
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.production_tons'}} <span class="builder__questions__triangle"/></h4>
+  {{/if}}
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'production'}}>{{t 'graph_builder.builder_questions.production_tons'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'production') }}
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
       {{#link-to 'agproduct.visualization' model.id 'departments' 'treemap' 'production_tons' (query-params startDate=lastYear endDate=lastYear search='null')
@@ -134,4 +139,5 @@
       </div>
     </li>
   </ul>
+  {{/if}}
 </div>

@@ -1,5 +1,6 @@
 <div class="buildermod__questions buildermod__drawer--questions">
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.export'}} <span class="builder__questions__triangle"/></h4>
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'exports'}}>{{t 'graph_builder.builder_questions.export'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'exports') }}
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
       {{#link-to 'product.visualization' model.id 'departments' 'treemap' 'export_value' (query-params startDate=lastYear endDate=lastYear search='null')
@@ -63,8 +64,10 @@
       </div>
     </li>
   </ul>
+  {{/if}}
   {{#if featureToggle.showImports }}
-    <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.import'}} <span class="builder__questions__triangle"/></h4>
+    <h4 class="builder__questions__header" {{action 'togglePanel' 'imports'}}>{{t 'graph_builder.builder_questions.import'}} <span class="builder__questions__triangle"/></h4>
+    {{#if (array-contains openPanels 'imports') }}
     <ul class="builder__questions__list">
       <li class="builder__questions__item">
         {{#link-to 'product.visualization' model.id 'departments' 'treemap' 'import_value' (query-params startDate=lastYear endDate=lastYear search='null')
@@ -128,5 +131,6 @@
         </div>
       </li>
     </ul>
+    {{/if}}
   {{/if}}
 </div>

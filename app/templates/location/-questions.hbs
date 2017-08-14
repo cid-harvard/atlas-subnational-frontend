@@ -1,6 +1,7 @@
 <div class="buildermod__questions buildermod__drawer--questions">
   {{#if featureToggle.showIndustries }}
-    <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.industry'}} <span class="builder__questions__triangle"/></h4>
+    <h4 class="builder__questions__header" {{action 'togglePanel' 'industries'}}>{{t 'graph_builder.builder_questions.industry'}} <span class="builder__questions__triangle"/></h4>
+    {{#if (array-contains openPanels 'industries') }}
     <ul class="builder__questions__list">
       <li class="builder__questions__item">
         {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear search='null')
@@ -77,8 +78,10 @@
         {{/unless}}
       {{/unless}}
     </ul>
+    {{/if}}
   {{/if}}
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.export'}} <span class="builder__questions__triangle"/></h4>
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'exports'}}>{{t 'graph_builder.builder_questions.export'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'exports') }}
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
       {{#link-to 'location.visualization' model.id  'products' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
@@ -175,8 +178,10 @@
       </li>
   {{/unless}}
   </ul>
+  {{/if}}
   {{#if featureToggle.showImports }}
-    <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.import'}} <span class="builder__questions__triangle"/></h4>
+    <h4 class="builder__questions__header" {{action 'togglePanel' 'imports'}}>{{t 'graph_builder.builder_questions.import'}} <span class="builder__questions__triangle"/></h4>
+    {{#if (array-contains openPanels 'imports') }}
     <ul class="builder__questions__list">
       <li class="builder__questions__item">
         {{#link-to 'location.visualization' model.id 'products' 'treemap' 'import_value' (query-params search='null' startdate=lastyear  enddate=lastyear)
@@ -241,5 +246,6 @@
       </li>
     {{/if}}
     </ul>
+    {{/if}}
   {{/if}}
 </div>
