@@ -28,7 +28,7 @@ export default Ember.Component.extend({
   openPanels: computed('allPanels', 'entityType', function(){
 
     // If not a profile page, we start with all panels collapsed.
-    var isProfilePage = this.container.lookup("controller:application").currentRouteName.endsWith(".show");
+    var isProfilePage = this.container.lookup("controller:application").get("isProfileRoute");
     if (!isProfilePage){
       return [];
     }
