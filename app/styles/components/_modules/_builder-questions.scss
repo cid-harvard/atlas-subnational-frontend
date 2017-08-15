@@ -8,12 +8,16 @@
   position: relative;
   background: $colorGrayLightest;
   margin: $baseSpace/2 0 $baseSpace 0;
+
+  &:first-child {
+      border-top: 2px solid $colorGrayLightest;
+  }
+
 }
 
 .builder__questions__header {
   font-size: $fontSmall;
   font-weight: 600;
-  margin-bottom: $baseSpace/4;
   color: $colorGray;
   font-family: $sans;
   line-height: 100%;
@@ -21,12 +25,11 @@
   min-height: 4rem;
   padding: 1rem;
   width: inherit;
-  border-bottom: 2px solid #dfdfdf;
-  border-top: 2px solid #eeeeee;
+  border-bottom: 2px solid $colorGrayLightest;
 }
 
+
 .builder__questions__list {
-  margin-bottom: $baseSpace/2;
   padding: 1.5rem 0rem 2rem 0rem;
 }
 
