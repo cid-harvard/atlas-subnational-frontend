@@ -14,6 +14,21 @@
   position: relative;
 }
 
+.stream__head__index{
+  font-weight: bold;
+  color: $colorGray;
+  padding-right: 0;
+
+  & img {
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+      padding-bottom: 0.25rem;
+      padding-left: 1rem;
+      vertical-align: middle;
+  }
+}
+
 .stream__header--builder {
   text-align: left;
 }
@@ -86,7 +101,7 @@
   color: $colorGray;
 }
 
-.overview {
+.stream__head__overview {
   color: $colorGray;
   font-weight: 400;
   font-size: $fontSmall;
