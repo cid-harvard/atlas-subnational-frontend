@@ -22,7 +22,7 @@ export default Ember.Component.extend({
       case 'landUse':
         return ['area'];
       case 'location':
-        return ['industries', 'exports', 'imports'];
+        return ['industries', 'exports', 'imports', 'rural'];
     }
   }),
   openPanels: computed('allPanels', 'entityType', function(){
