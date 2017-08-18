@@ -135,6 +135,13 @@
     height: 100%;
 }
 
+.stream__head__dismiss {
+    display: block;
+    text-align: right;
+    width: 100%;
+    cursor: pointer;
+}
+
 .stream___head__menu {
   display: -webkit-flex;
   display: -moz-flex;
@@ -154,7 +161,7 @@
   background-color: white;
   border-radius: 1rem;
   border: 1px solid red;
-  padding: 4rem 2rem 4rem 2rem;
+  padding: 2rem 2rem 4rem 2rem;
   position: fixed;
   z-index: $zIndex-10;
 }
