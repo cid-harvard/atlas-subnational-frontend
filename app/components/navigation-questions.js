@@ -47,6 +47,12 @@ export default Ember.Component.extend({
     }
   }),
 
+  isIndustryClass: computed('model.level', function(){
+    let entityType = this.get('entityType');
+    let level = this.get('model.level');
+    return (entityType === "industry") && (level === "class");
+  }),
+
   actions: {
     togglePanel(name) {
       if(_.includes(this.get('allPanels'), name)){
