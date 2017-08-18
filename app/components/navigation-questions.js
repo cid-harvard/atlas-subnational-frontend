@@ -47,6 +47,11 @@ export default Ember.Component.extend({
     }
   }),
 
+  isCountry: computed.equal('model.level', 'country'),
+  isDepartment: computed.equal('model.level','department'),
+  isMunicipality: computed.equal('model.level','municipality'),
+  isMsa: computed.equal('model.level','msa'),
+
   isIndustryClass: computed('model.level', function(){
     let entityType = this.get('entityType');
     let level = this.get('model.level');
