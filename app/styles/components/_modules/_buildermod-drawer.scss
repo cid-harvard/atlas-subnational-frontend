@@ -64,13 +64,25 @@
 }
 
 .change-visualization__container {
-  width: auto;
-  i {
+  width: 85%;
+  .change-visualization__item{
+    width: 30%;
     display: inline-block;
-    width: auto;
-    font-size: 65px;
-    line-height: 30px;
-    &:before { margin: 0; padding: 0; }
+    i {
+        font-size: 65px;
+        line-height: 30px;
+        &:before { margin: 0; padding: 0; }
+        span {
+            display: inline-block;
+            margin-left: 2rem;
+            width: 60%;
+
+            font-family: $sans;
+            font-size: $fontSmall;
+            font-style: normal;
+            text-align: left;
+        }
+    }
   }
 }
 
