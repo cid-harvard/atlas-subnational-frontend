@@ -23,6 +23,18 @@
     {{action 'query' search}} >
 </form>
 
+{{#if landuseResults.length}}
+  <h3 class="section__head results__subhead">{{t 'search.results_landuses'}}</h3>
+  <ul class="results__list">
+    {{#each result in landuseResults}}
+      {{search-result
+        result=result
+        tagName="li"
+        class="results__item"
+      }}
+    {{/each}}
+  </ul>
+{{/if}}
 {{#if locationResults.length}}
   <h3 class="section__head results__subhead">{{t 'search.results_locations'}}</h3>
   <ul class="results__list">
@@ -41,6 +53,18 @@
   <h3 class="section__head results__subhead">{{t 'search.results_products'}}</h3>
   <ul class="results__list">
     {{#each result in productResults}}
+      {{search-result
+        result=result
+        tagName="li"
+        class="results__item"
+      }}
+    {{/each}}
+  </ul>
+{{/if}}
+{{#if agproductResults.length}}
+  <h3 class="section__head results__subhead">{{t 'search.results_agproducts'}}</h3>
+  <ul class="results__list">
+    {{#each result in agproductResults}}
       {{search-result
         result=result
         tagName="li"

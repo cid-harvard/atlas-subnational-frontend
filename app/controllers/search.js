@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
   featureToggle: Ember.inject.service(),
   needs: 'application', // inject the application controller
   queryParams: ['query','filter'],
-  entity: ['product', 'industry', 'location'],
+  entity: ['product', 'industry', 'location', 'rural'],
   query: null,
   filter: null,
   search: computed('query', function() {
@@ -34,6 +34,16 @@ export default Ember.Controller.extend({
   productResults: computed('results.[]', function() {
     return this.get('results').filter(function(d){
       return get(d,'constructor.modelName') === 'product';
+    });
+  }),
+  agproductResults: computed('results.[]', function() {
+    return this.get('results').filter(function(d){
+      return get(d,'constructor.modelName') === 'agproduct';
+    });
+  }),
+  landuseResults: computed('results.[]', function() {
+    return this.get('results').filter(function(d){
+      return get(d,'constructor.modelName') === 'land-use';
     });
   }),
   locationResults: computed('results.[]', function() {

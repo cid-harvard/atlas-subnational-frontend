@@ -45,6 +45,17 @@
         {{ t 'search.results_locations' }}
       {{/link-to}}
     </li>
+    <li class="side-nav__item">
+      {{#link-to 'search'
+        (query-params filter='rural')
+        class="side-nav__item__link"
+        activeClass="side-nav__item--active"
+        data-side-search-link='locations'
+      }}
+        {{fa-icon icon= "search"}}
+        {{ t 'search.results_rural' }}
+      {{/link-to}}
+    </li>
   </ul>
 </nav>
 
