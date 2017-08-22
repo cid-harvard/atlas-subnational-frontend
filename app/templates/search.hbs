@@ -85,5 +85,25 @@
     {{/each}}
   </ul>
 {{/if}}
+
+{{#if modelCategorized }}
+<div class="results__reference">
+  <div class="results__reference__menu">
+  {{#each modelCategorizedKeys as |key|}}
+      {{#if (is-equal key referenceKey)}}
+           <div class="results__reference__menuitem results__reference__menuitem__active" {{action 'toggleReferenceKey' key}}>{{t (is-concat 'header.' key)}}</div>
+       {{else}}
+           <div class="results__reference__menuitem" {{action 'toggleReferenceKey' key}}>{{t (is-concat 'header.' key)}}</div>
+       {{/if}}
+  {{/each}}
+  </div>
+  <ul class="results__reference__body">
+  {{#each referenceBody as |item|}}
+      <li>{{item.name}}</li>
+  {{/each}}
+  </ul>
+</div>
+{{/if}}
+
 <p class='results__copy results__copy--postscript'>{{t 'search.didnt_find'}}</p>
 

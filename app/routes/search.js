@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   queryParams: {
-    query: { refreshModel: true },
+    query: { refreshModel: false },
     filter: { refreshModel: true }
   },
   model(transition) {
@@ -33,18 +33,15 @@ export default Ember.Route.extend({
       request = [industriesDivision, industriesClass, country, department, msa, municipality, products];
     }
 
-    if(transition.query) {
-      return Ember.RSVP.all(request)
-        .then(function(array) {
-          return _.chain(array)
-            .map(function(d){ return d.content; })
-            .flatten()
-            .value();
-        },function() {
-          return [];
-        });
-    }
-    return [];
+    return Ember.RSVP.all(request)
+      .then(function(array) {
+        return _.chain(array)
+          .map(function(d){ return d.content; })
+          .flatten()
+          .value();
+      },function() {
+        return [];
+      });
   },
   setupController: function(controller, model) {
     this._super(controller, model);

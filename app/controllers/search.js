@@ -12,7 +12,22 @@ export default Ember.Controller.extend({
   search: computed('query', function() {
     return this.get('query');
   }),
+  modelCategorized: computed('filter', 'model', function(){
+    return _.groupBy(this.get('model'), (x)=>x.constructor.modelName);
+  }),
+  modelCategorizedKeys: computed('modelCategorized', function(){
+    return _.keys(this.get('modelCategorized'));
+  }),
+  referenceKey: computed('modelCategorizedKeys', function(){
+    return this.get('modelCategorizedKeys')[0];
+  }),
+  referenceBody: computed('modelCategorized', 'referenceKey', function(){
+    return this.get(`modelCategorized.${this.get('referenceKey')}`);
+  }),
   results: computed('model.[]', 'query', function() {
+    if (this.get("query") === null){
+      return [];
+    }
     let search = _.deburr(this.get('query'));
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
@@ -61,6 +76,11 @@ export default Ember.Controller.extend({
       return `pageheader.search_placeholder.${this.get('filter')}`;
     }
     return `pageheader.search_placeholder`;
-  })
+  }),
+  actions:{
+    toggleReferenceKey(key) {
+      this.set("referenceKey", key);
+    }
+  }
 });
 
