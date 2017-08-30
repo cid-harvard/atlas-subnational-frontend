@@ -172,6 +172,7 @@ export default EmberTableComponent.extend(TableMap, {
       'population',
       'yield_ratio',
       'yield_index',
+      'average_livestock_load',
     ];
     var percentVars = [
       'share',

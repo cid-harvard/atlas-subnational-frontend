@@ -35,6 +35,7 @@ export default Ember.Mixin.create({
     { key: 'population' , type: 'int', savedWidth: 180 },
     { key: 'num_farms' , type: 'int', savedWidth: 220 },
     { key: 'num_livestock' , type: 'int', savedWidth: 100 },
+    { key: 'average_livestock_load' , type: 'int', savedWidth: 220 },
     { key: 'land_sown' , type: 'int', savedWidth: 180 },
     { key: 'land_harvested' , type: 'int', savedWidth: 180 },
     { key: 'production_tons' , type: 'int', savedWidth: 170 },
@@ -161,7 +162,8 @@ export default Ember.Mixin.create({
     { key: 'code' },
     { key: 'name', copy: 'livestock' },
     { key: 'num_farms' },
-    { key: 'num_livestock' }
+    { key: 'num_livestock' },
+    { key: 'average_livestock_load' },
   ],
   agproductsMap: [
     { key: 'code' },

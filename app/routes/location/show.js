@@ -139,6 +139,7 @@ export default Ember.Route.extend({
       var populationRank = 1;
       var gdpRank = 1;
       var gdpPerCapitaRank = 1;
+      var livestockLoadRank = 1;
 
       let datum = _.chain(dotplotTimeSeries)
         .select({ year: this.get('censusYear')})
@@ -151,6 +152,7 @@ export default Ember.Route.extend({
           if(d.gdp_real != null && d.gdp_real > datum.gdp_real) { gdpRank ++; }
           if(d.population != null && d.population > datum.population ) { populationRank ++; }
           if(d.gdp_pc_real != null && d.gdp_pc_real> datum.gdp_pc_real ) { gdpPerCapitaRank++; }
+          if(d.average_livestock_load != null && d.average_livestock_load> datum.average_livestock_load ) { livestockLoadRank++; }
         });
       }
 
@@ -162,7 +164,8 @@ export default Ember.Route.extend({
         eciRank: eciRank,
         gdpRank: gdpRank,
         gdpPerCapitaRank: gdpPerCapitaRank,
-        populationRank: populationRank
+        populationRank: populationRank,
+        livestockLoadRank: livestockLoadRank,
       });
 
       var agFarmsizeRank = 1;
