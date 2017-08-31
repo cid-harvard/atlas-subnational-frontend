@@ -177,7 +177,15 @@ export default Ember.Controller.extend({
         ];
       }
     } else if(_.contains(['agproduct'], entityType)){
-      if (source === "departments"){
+      if (this.get('variable') === 'yield_ratio'){
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: false },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      } else if (source === "departments"){
         return [
           { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
           { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
@@ -211,13 +219,23 @@ export default Ember.Controller.extend({
         { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
       ];
     } else if (source === "agproducts"){
-      return [
-        { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
-        { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
-        { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
-        { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
-        { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
-      ];
+      if (this.get('variable') === 'yield_ratio'){
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: false },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      } else {
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      }
     } else if (vis === 'scatter'){
       return [
         { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
