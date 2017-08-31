@@ -158,7 +158,7 @@ export default Ember.Controller.extend({
     let source = this.get('model.source');
     let entityType = this.get('entityType');
 
-    if(_.contains(['landUse'], entityType)){
+    if(_.contains(['landUse', 'nonag'], entityType)){
       if (source === "departments"){
         return [
           { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
@@ -202,7 +202,7 @@ export default Ember.Controller.extend({
         { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
         { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
       ];
-    } else if (_.contains(['occupations', 'livestock', 'landUses', 'farmtypes'], source)){
+    } else if (_.contains(['occupations', 'livestock', 'landUses', 'farmtypes', "nonags"], source)){
       return [
         { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
         { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },

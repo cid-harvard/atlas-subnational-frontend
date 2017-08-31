@@ -37,6 +37,8 @@ export default Ember.Route.extend({
         return this.livestockDataMunging(hash);
       } else if (source_type === 'agproducts') {
         return this.agproductsDataMunging(hash);
+      } else if (source_type === 'nonags') {
+        return this.nonagsDataMunging(hash);
       } else if (source_type === 'landUses') {
         return this.landUsesDataMunging(hash);
       } else if (source_type === 'farmtypes') {
@@ -79,6 +81,13 @@ export default Ember.Route.extend({
     return {
       model: this.store.find('location', id),
       agproducts: $.getJSON(`${apiURL}/data/location/${id}/agproducts/?level=level3`)
+    };
+  }),
+  nonags: computed('location_id', function() {
+    let id = get(this, 'location_id');
+    return {
+      model: this.store.find('location', id),
+      nonags: $.getJSON(`${apiURL}/data/location/${id}/nonags/?level=level3`)
     };
   }),
   landUses: computed('location_id', function() {
@@ -179,6 +188,22 @@ export default Ember.Route.extend({
       merged.parent_name_es = grandparent.name_short_es;
       merged.group = grandparent.id;
 
+      return merged;
+    });
+
+    return Ember.Object.create({
+      entity: model,
+      data: Ember.A(data)
+    });
+  },
+  nonagsDataMunging(hash) {
+    let {model, nonags } = hash;
+    let nonagsMetadata = this.modelFor('application').nonags;
+
+    let data = _.map(nonags.data, (d) => {
+      d.year = this.get('lastYear');
+      let merged = _.merge(copy(d), nonagsMetadata[d.nonag_id]);
+      merged.group = merged.code;
       return merged;
     });
 
