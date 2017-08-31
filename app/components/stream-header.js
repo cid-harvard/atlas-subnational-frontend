@@ -19,6 +19,7 @@ export default Ember.Component.extend({
   isIndustry: computed.equal('type', 'industry'),
   isLandUse: computed.equal('type', 'landUse'),
   isAgproduct: computed.equal('type', 'agproduct'),
+  isNonag: computed.equal('type', 'nonag'),
 
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),

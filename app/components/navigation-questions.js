@@ -21,6 +21,8 @@ export default Ember.Component.extend({
         return ['land_sown', 'land_harvested', 'production'];
       case 'landUse':
         return ['area'];
+      case 'nonag':
+        return ['num_farms'];
       case 'location':
         return ['industries', 'exports', 'imports', 'rural'];
     }
@@ -41,6 +43,8 @@ export default Ember.Component.extend({
       case 'product':
         return this.get('allPanels');
       case 'landUse':
+        return this.get('allPanels');
+      case 'nonag':
         return this.get('allPanels');
       default:
         return [];

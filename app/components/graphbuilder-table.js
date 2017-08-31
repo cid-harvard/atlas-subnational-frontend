@@ -77,6 +77,8 @@ export default EmberTableComponent.extend(TableMap, {
       map = this.get("landUseLocationsMap");
     } else if (entityType === "agproduct"){
       map = this.get("agproductLocationsMap");
+    } else if (entityType === "nonag"){
+      map = this.get("nonagLocationsMap");
     }
 
     _.forEach(map, (mapping) => {

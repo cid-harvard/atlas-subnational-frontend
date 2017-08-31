@@ -43,5 +43,9 @@ export default Router.map(function() {
     this.route('show', { path: ':agproduct_id'});
     this.route('visualization', { path: ':agproduct_id/source/:source_type/visualization/:visualization_type/:variable'});
   });
+  this.resource('nonag', { path: 'nonag'}, function() {
+    this.route('show', { path: ':nonag_id'});
+    this.route('visualization', { path: ':nonag_id/source/:source_type/visualization/:visualization_type/:variable'});
+  });
   this.route('rankings');
 });

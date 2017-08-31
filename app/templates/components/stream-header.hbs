@@ -52,6 +52,12 @@
       {{ partial 'partials/builder-questions-agproduct'}}
     {{/if}}
   {{/if}}
+  {{#if isNonag}}
+    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+    {{#if isShowingIndex}}
+      {{ partial 'partials/builder-questions-nonag'}}
+    {{/if}}
+  {{/if}}
     <aside class="cta__wrap--right">
     {{#link-to profileRoute model.id
         data-search-profile=''
