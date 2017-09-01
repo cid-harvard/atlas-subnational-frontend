@@ -7,6 +7,10 @@ export default Ember.Component.extend({
     if(get(this, 'result.level')) {
       let level = get(this, 'i18n').t(`search.level.${get(this, 'result.level')}`);
 
+      if(get(this, 'levelOnly')){
+        return `${level}`;
+      }
+
       if(get(this, 'entity') === 'location') {
         return `${level}`;
       } else {
