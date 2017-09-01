@@ -73,6 +73,18 @@
     {{/each}}
   </ul>
 {{/if}}
+{{#if nonagResults.length}}
+  <h3 class="section__head results__subhead">{{t 'search.results_nonag'}}</h3>
+  <ul class="results__list">
+    {{#each result in nonagResults}}
+      {{search-result
+        result=result
+        tagName="li"
+        class="results__item"
+      }}
+    {{/each}}
+  </ul>
+{{/if}}
 {{#if industryResults.length}}
   <h3 class="section__head results__subhead">{{t 'search.results_industries'}}</h3>
   <ul class="results__list">

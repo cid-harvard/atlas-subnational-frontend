@@ -14,6 +14,7 @@ export default Ember.Route.extend({
     var products = this.store.find('product', { level: '4digit' });
 
     var agproducts = this.store.find('agproduct', { level: 'level3' });
+    var nonags = this.store.find('nonag', { level: 'level3' });
     var landuses = this.store.find('land-use', { level: 'level2' });
 
     var industriesDivision = this.store.find('industry', { level: 'division' });
@@ -28,7 +29,7 @@ export default Ember.Route.extend({
     } else if(transition.filter === 'product') {
       request = [products];
     } else if(transition.filter === 'rural') {
-      request = [agproducts, landuses];
+      request = [agproducts, landuses, nonags];
     } else {
       request = [industriesDivision, industriesClass, country, department, msa, municipality, products];
     }
