@@ -34,7 +34,10 @@ export default Ember.Mixin.create({
     { key: 'share' , type: 'int', savedWidth: 190 },
     { key: 'population' , type: 'int', savedWidth: 180 },
     { key: 'num_farms' , type: 'int', savedWidth: 220 },
+    { key: 'num_farms_ag' , type: 'int', savedWidth: 270 },
+    { key: 'num_farms_nonag' , type: 'int', savedWidth: 270 },
     { key: 'num_livestock' , type: 'int', savedWidth: 100 },
+    { key: 'average_livestock_load' , type: 'int', savedWidth: 220 },
     { key: 'land_sown' , type: 'int', savedWidth: 180 },
     { key: 'land_harvested' , type: 'int', savedWidth: 180 },
     { key: 'production_tons' , type: 'int', savedWidth: 170 },
@@ -161,7 +164,8 @@ export default Ember.Mixin.create({
     { key: 'code' },
     { key: 'name', copy: 'livestock' },
     { key: 'num_farms' },
-    { key: 'num_livestock' }
+    { key: 'num_livestock' },
+    { key: 'average_livestock_load' },
   ],
   agproductsMap: [
     { key: 'code' },
@@ -182,6 +186,20 @@ export default Ember.Mixin.create({
     { key: 'production_tons' },
     { key: 'yield_ratio' },
     { key: 'yield_index' }
+  ],
+  nonagsMap: [
+    { key: 'code' },
+    { key: 'name', copy: 'nonag' },
+    { key: 'num_farms' },
+    { key: 'num_farms_ag' },
+    { key: 'num_farms_nonag' },
+  ],
+  nonagLocationsMap: [
+    { key: 'code' },
+    { key: 'name', copy: 'location' },
+    { key: 'num_farms' },
+    { key: 'num_farms_ag' },
+    { key: 'num_farms_nonag' },
   ],
   landUsesMap: [
     { key: 'code' },

@@ -101,3 +101,40 @@
 
 }
 
+.results__reference {
+    margin-top: 10rem;
+    padding-top: 4rem;
+    border-top: 1px solid $colorGrayLight;
+}
+
+.results__reference__menu {
+    font-family: $sans;
+    font-size: $fontBase;
+    font-variant: small-caps;
+    margin-bottom: 3rem;
+}
+
+.results__reference__menuitem {
+    display: inline-block;
+    padding-right: 1rem;
+}
+
+.results__reference__menuitem__active {
+    font-weight: bold;
+}
+
+.results__reference__menuitem + .results__reference__menuitem{
+    border-left: 1px $colorGrayLighter solid;
+    padding-left: 1rem;
+}
+
+
+.results__reference__body {
+    columns:5;
+    li{
+        margin-bottom: 1rem;
+        font-family: $sans;
+        font-size: $fontTiny;
+    }
+
+}

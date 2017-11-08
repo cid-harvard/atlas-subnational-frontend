@@ -1,4 +1,11 @@
-{{partial 'location/questions'}}
+{{navigation-questions
+  entityType=entityType
+  model=model
+  isDepartment=isDepartment
+  isMunicipality=isMunicipality
+  firstYear=firstYear
+  lastYear=lastYear
+}}
 {{#if description }}
   <p class="section__p">
     {{description}}

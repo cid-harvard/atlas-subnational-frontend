@@ -77,6 +77,8 @@ export default EmberTableComponent.extend(TableMap, {
       map = this.get("landUseLocationsMap");
     } else if (entityType === "agproduct"){
       map = this.get("agproductLocationsMap");
+    } else if (entityType === "nonag"){
+      map = this.get("nonagLocationsMap");
     }
 
     _.forEach(map, (mapping) => {
@@ -172,6 +174,7 @@ export default EmberTableComponent.extend(TableMap, {
       'population',
       'yield_ratio',
       'yield_index',
+      'average_livestock_load',
     ];
     var percentVars = [
       'share',

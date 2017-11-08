@@ -10,11 +10,16 @@ export default Ember.Component.extend({
 
   level: computed.alias('model.level'),
 
+  profileRoute: computed('type', function(){
+    return this.get('type') + ".show";
+  }),
+
   isLocation: computed.equal('type', 'location'),
   isProduct: computed.equal('type', 'product'),
   isIndustry: computed.equal('type', 'industry'),
   isLandUse: computed.equal('type', 'landUse'),
   isAgproduct: computed.equal('type', 'agproduct'),
+  isNonag: computed.equal('type', 'nonag'),
 
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
@@ -93,5 +98,11 @@ export default Ember.Component.extend({
       parentId = get(parent, 'parent_id');
     }
     return crumbs;
-  })
+  }),
+
+  actions: {
+    toggleIndex() {
+      this.toggleProperty('isShowingIndex');
+    }
+  }
 });

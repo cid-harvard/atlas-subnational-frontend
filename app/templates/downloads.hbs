@@ -38,6 +38,92 @@
 </section>
 
 <section class="stream__section">
+  <h3 class="section__head">{{ t 'downloads.rural_head' }}</h3>
+  <p class="section__p">{{ t 'downloads.rural_copy' }}</p>
+  <table class="table">
+    <tr class="table__row">
+      <th class="table__header downloads__table__header"></th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_national' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_departments' }}</th>
+      <th class="table__header downloads__table__header">{{ t 'downloads.thead_muni' }}</th>
+    </tr>
+    <tr class="table__row table__row--body">
+      <td class="table__cell">{{ t 'downloads.rural_agproduct' yearRange=yearRange}}</td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_agproduct_country}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_agproduct_department}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_agproduct_municipality}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+    </tr>
+    <tr class="table__row table__row--body">
+      <td class="table__cell">{{ t 'downloads.rural_nonag' yearRange=yearRange}}</td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_nonag_country}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_nonag_department}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_nonag_municipality}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+    </tr>
+    <tr class="table__row table__row--body">
+      <td class="table__cell">{{ t 'downloads.rural_landuse' yearRange=yearRange}}</td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_landuse_country}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_landuse_department}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_landuse_municipality}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+    </tr>
+    <tr class="table__row table__row--body">
+      <td class="table__cell">{{ t 'downloads.rural_livestock' yearRange=yearRange}}</td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_livestock_country}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_livestock_department}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_livestock_municipality}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+    </tr>
+    <tr class="table__row table__row--body">
+      <td class="table__cell">{{ t 'downloads.rural_farmtype' yearRange=yearRange}}</td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_farmtype_country}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_farmtype_department}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_farmtype_municipality}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+    </tr>
+    <tr class="table__row table__row--body">
+      <td class="table__cell">{{ t 'downloads.rural_farmsize' yearRange=yearRange}}</td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_farmsize_country}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_farmsize_department}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+      <td class="table__cell">
+        <a href="{{downloadFiles.rural_farmsize_municipality}}" class="link--stream link--stream--inline--small">{{ t 'downloads.cta_download' }}</a>
+      </td>
+    </tr>
+  </table>
+</section>
+
+
+<section class="stream__section">
   <h3 class="section__head">{{ t 'downloads.trade_head' }}</h3>
   <p class="section__p">{{ t 'downloads.trade_copy' }}</p>
   <table class="table">

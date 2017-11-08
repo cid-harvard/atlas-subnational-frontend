@@ -1,4 +1,11 @@
 {{component "stream-header" model=model type='product'}}
 <section class="stream__section">
-  {{partial "product/questions"}}
+  {{navigation-questions
+    entityType=entityType
+    model=model
+    isDepartment=isDepartment
+    isMunicipality=isMunicipality
+    firstYear=firstYear
+    lastYear=lastYear
+  }}
 </section>
