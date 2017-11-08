@@ -258,7 +258,8 @@
     </tr>
   </table>
 </section>
-{{else}}
+{{/if}}
+{{#if featureToggle.showCustomDemographicDownloadsOnlyDept}}
 <section class="stream__section">
   <h3 class="section__head">{{ t 'downloads.other_head' }}</h3>
   <p class="section__p">{{ t 'downloads.other_copy' }}</p>

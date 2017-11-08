@@ -64,10 +64,6 @@ export default  {
        "industries_msa": "industries_msa.xlsx",
        "industries_municipality": "industries_municipality.txt",
        "occupations": "occupations.xlsx",
-       "demographics_country": "",
-       "demographics_department": "demographic.xlsx",
-       "demographics_msa": "",
-       "demographics_municipality": "",
 
        "rural_agproduct_country": "agproduct_country.xlsx",
        "rural_agproduct_department": "agproduct_department.xlsx",
