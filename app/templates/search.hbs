@@ -114,7 +114,7 @@
   </div>
   <ul class="results__reference__body">
   {{#each sortedReferenceBody as |item|}}
-      <li>{{item.name}}</li>
+      {{#link-to (is-concat item.profileName ".show") item.id tagName="li"}}{{item.name}}{{/link-to}}
   {{/each}}
   </ul>
 </div>
