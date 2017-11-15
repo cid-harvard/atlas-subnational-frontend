@@ -341,7 +341,7 @@
         {{/link-to}}
         <div class="builder__questions__item__textwrap">
           <span>
-            {{#link-to 'location.visualization' model.id 'nonags' 'treemap' 'num_farms' (query-params search='null' startDate=firstYear  endDate=lastYear)
+            {{#link-to 'location.visualization' model.id 'nonags' 'treemap' 'num_farms' (query-params search='null' startDate=lastYear  endDate=lastYear)
               class="builder__questions__question"}}
               {{t (is-concat 'graph_builder.page_title.location.nonags.num_farms.' model.level)}}
             {{/link-to}}
