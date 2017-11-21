@@ -120,6 +120,35 @@
               </div>
             </li>
           {{/if}}
+          {{#if showFarmAndLand }}
+            <li class="index__topics__item__wrap">
+              <div class="index__topics__item">
+                <div class="index__topics__vspacer"></div>
+                <h4 class="section__subhead">{{ t 'index.farmandland_head' }}</h4>
+                  {{select-dropdown collection=sortedAgproducts type='agproduct'}}
+                <ul>
+                  <li class="index__questions__item">
+                    {{#link-to
+                      'location.visualization' farmAndLandFirst 'livestock' 'treemap' 'num_farms' (query-params endDate=lastYear startDate=lastYear )
+                      data-home-page-farmandland-question='1'
+                      class="link--stream index__questions__link"
+                    }}
+                      {{ t 'index.livestock_q1' }}
+                    {{/link-to}}
+                  </li>
+                    <li class="index__questions__item">
+                      {{#link-to
+                        'landUse.visualization' farmAndLandSecond 'departments' 'treemap' 'area' (query-params endDate=lastYear startDate=lastYear )
+                        data-home-page-farmandland-question='2'
+                        class="link--stream index__questions__link"
+                      }}
+                        {{ t 'index.landuse_q1' }}
+                      {{/link-to}}
+                    </li>
+                </ul>
+              </div>
+            </li>
+          {{/if}}
         </ul>
       </div>
     </section>
