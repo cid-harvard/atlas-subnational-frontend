@@ -174,7 +174,6 @@ export default Ember.Mixin.create({
     { key: 'land_sown' },
     { key: 'land_harvested' },
     { key: 'production_tons' },
-    { key: 'yield_ratio' },
     { key: 'yield_index' }
   ],
   agproductLocationsMap: [
@@ -184,7 +183,6 @@ export default Ember.Mixin.create({
     { key: 'land_sown' },
     { key: 'land_harvested' },
     { key: 'production_tons' },
-    { key: 'yield_ratio' },
     { key: 'yield_index' }
   ],
   nonagsMap: [
