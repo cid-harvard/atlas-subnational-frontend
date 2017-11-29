@@ -45,8 +45,16 @@ var SortableTableCell = TableCell.extend({
   isModel: computed.alias('row.content.model'),
   model: computed.alias('row.content.model'),
   id: computed.alias('row.content.id'),
-  profileRoute: computed('model', function() {
-    return `${this.get('model')}.show`;
+  profileRoute: computed('model', 'controller.source', function() {
+    // Link to the profile of the model type (e.g. agproduct profile if viewing
+    // agproducts) unless we're looking at a location variable (e.g. where is
+    // this agproduct harvested), in which case link to locations.
+    var sourceIsLocation = _.contains(['cities', 'departments', 'municipalities'], this.get('controller.source'));
+    if (sourceIsLocation){
+      return 'location.show';
+    } else {
+      return `${this.get('model')}.show`;
+    }
   })
 });
 
