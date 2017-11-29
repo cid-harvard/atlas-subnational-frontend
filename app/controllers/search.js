@@ -24,6 +24,8 @@ export default Ember.Controller.extend({
   referenceBody: computed('modelCategorized', 'referenceKey', function(){
     return this.get(`modelCategorized.${this.get('referenceKey')}`);
   }),
+  sortDefinition: ["name"],
+  sortedReferenceBody: computed.sort('referenceBody', 'sortDefinition'),
   results: computed('model.[]', 'query', function() {
     if (this.get("query") === null){
       return [];

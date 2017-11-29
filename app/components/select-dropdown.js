@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   transitionLocation: 'transitionLocation',
   transitionIndustry: 'transitionIndustry',
   transitionLocationProducts: 'transitionLocationProducts',
+  transitionAgproduct: 'transitionAgproduct',
   locale: computed.alias('i18n.locale'),
   didInsertElement() {
     let locale = get(this, 'i18n.locale');
@@ -23,6 +24,8 @@ export default Ember.Component.extend({
            this.sendAction('transitionIndustry', id);
          } else if (type === 'location-product') {
            this.sendAction('transitionLocationProducts', id);
+         } else if (type === 'agproduct') {
+           this.sendAction('transitionAgproduct', id);
          }
        }
       })

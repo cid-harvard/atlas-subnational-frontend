@@ -10,10 +10,12 @@ export default Ember.Controller.extend({
   productIds: computed.alias('featureToggle.index_products'),
   locationIds: computed.alias('featureToggle.index_locations'),
   industryIds: computed.alias('featureToggle.index_industries'),
+  agproductIds: computed.alias('featureToggle.index_agproducts'),
 
   showIndustries: computed.notEmpty('featureToggle.index_industries'),
   showProducts: computed.notEmpty('featureToggle.index_products'),
   showLocations: computed.notEmpty('featureToggle.index_locations'),
+  showFarmAndLand: computed.notEmpty('featureToggle.index_agproducts'),
 
   products: computed.filter('model.products', function (product) {
     let id = get(this, 'productIds');
@@ -51,12 +53,26 @@ export default Ember.Controller.extend({
       return _.find(industries, { id: `${d}` });
     });
   }),
+  agproducts: computed.filter('model.agproducts', function (agproduct) {
+    let id = get(this, 'agproductIds');
+    return _.contains(`${id}`, get(agproduct, 'id'));
+  }),
+  sortedAgproducts: computed('agproductIds', 'agproducts', function() {
+    let id = get(this, 'agproductIds');
+    let agproducts = get(this, 'agproducts');
+
+    return _.map(id, function(d) {
+      return _.find(agproducts, { id: `${d}` });
+    });
+  }),
   locationFirst: computed.alias('featureToggle.index_location_q1_id'),
   locationSecond: computed.alias('featureToggle.index_location_q2_id'),
   industryFirst: computed.alias('featureToggle.index_industry_q1_id'),
   industrySecond: computed.alias('featureToggle.index_industry_q2_id'),
   productFirst: computed.alias('featureToggle.index_product_q1_id'),
   productSecond: computed.alias('featureToggle.index_product_q2_id'),
+  farmAndLandFirst: computed.alias('featureToggle.index_livestock_q1_id'),
+  farmAndLandSecond: computed.alias('featureToggle.index_landuse_q1_id'),
   profile: computed.alias('featureToggle.index_profile_id'),
   graphbuilder: computed.alias('featureToggle.index_graphbuilder_id'),
   actions: {
@@ -68,6 +84,9 @@ export default Ember.Controller.extend({
     },
     transitionIndustry(id) {
       this.transitionToRoute('industry.show', id);
-    }
+    },
+    transitionAgproduct(id) {
+      this.transitionToRoute('agproduct.show', id);
+    },
   }
 });

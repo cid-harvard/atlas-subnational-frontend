@@ -18,6 +18,7 @@ export default Ember.Service.extend({
   showCities: computed.or('isMexico', 'isColombia', 'isPeru'),
   showMunis: computed.or('isMexico', 'isColombia'),
   showCustomDemographicDownloads: computed.or('isMexico'),
+  showCustomDemographicDownloadsOnlyDept: computed.or('isPeru'),
   countryVariables: computed('country', function() {
     return get(Variables, get(this, 'country'));
   }),

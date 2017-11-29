@@ -113,8 +113,8 @@
   {{/each}}
   </div>
   <ul class="results__reference__body">
-  {{#each referenceBody as |item|}}
-      <li>{{item.name}}</li>
+  {{#each sortedReferenceBody as |item|}}
+      {{#link-to (is-concat item.profileName ".show") item.id tagName="li"}}{{item.name}}{{/link-to}}
   {{/each}}
   </ul>
 </div>

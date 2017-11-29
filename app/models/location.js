@@ -60,5 +60,6 @@ export default DS.Model.extend(ModelAttribute, {
       return numeral(Math.pow(difference, power) -1).format('0.0%');
      }
     return false;
-  })
+  }),
+  profileName: "location"
 });

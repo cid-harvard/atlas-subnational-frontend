@@ -130,7 +130,8 @@ export default Ember.Controller.extend({
   }),
   headerValue: computed('model', 'visualization','filteredData', 'variable', 'i18n.locale', function() {
     let allowedVariables = ['export_value', 'import_value', 'wages',
-      'employment', 'land_sown', 'land_harvested', 'production_tons', 'area', 'num_farms'];
+      'employment', 'land_sown', 'land_harvested', 'production_tons', 'area',
+      'num_farms', 'num_livestock'];
     let usdVariables = ['export_value', 'import_value'];
     let currencyVariables = ['wages'];
     let areaVariables = ['area'];

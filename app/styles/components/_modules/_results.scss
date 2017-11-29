@@ -117,6 +117,9 @@
 .results__reference__menuitem {
     display: inline-block;
     padding-right: 1rem;
+    &:hover{
+        font-weight: bold;
+    }
 }
 
 .results__reference__menuitem__active {
@@ -135,6 +138,9 @@
         margin-bottom: 1rem;
         font-family: $sans;
         font-size: $fontTiny;
+        &:hover{
+            font-weight: bold;
+        }
     }
 
 }
