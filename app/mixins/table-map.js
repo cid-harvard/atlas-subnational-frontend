@@ -240,6 +240,7 @@ export default Ember.Mixin.create({
       { key: 'gdp_pc_real' },
       { key: 'gdp_real' },
       { key: 'population' },
+      { key: 'yield_index' },
     ];
 
     if(this.get('featureToggle.showIndustries')) {
