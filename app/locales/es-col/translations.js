@@ -582,6 +582,7 @@ export default {
   "location.show.subregion.title": "Exportaciones e importaciones por municipio",
   "location.show.total_wages": "N\u00f3mina salarial ({{lastYear}})",
   "location.show.value": "Valor",
+  "location.show.yield_index": "\u00cdndice de Rendimiento de Cultivos",
   "pageheader.about": "Acerca de Datlas",
   "pageheader.alternative_title": "Atlas de complejidad econ\u00f3mica",
   "pageheader.brand_slogan": "Colombia como usted nunca la ha visto",

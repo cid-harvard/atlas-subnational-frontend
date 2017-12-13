@@ -582,6 +582,7 @@ export default {
   "location.show.subregion.title": "Export and Import by Municipality",
   "location.show.total_wages": "Total wages ({{lastYear}})",
   "location.show.value": "Value",
+  "location.show.yield_index": "Agricultural Yield Index",
   "pageheader.about": "About",
   "pageheader.alternative_title": "Atlas of Economic Complexity",
   "pageheader.brand_slogan": "You haven't seen Colombia like this before",
