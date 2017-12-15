@@ -18,6 +18,7 @@
 </header>
 <section class="stream__section visualization__{{visualization}}">
   <div {{bind-attr class=":section__buildermod drawerChangeGraphIsOpen:buildermod__changegraph--open" }}>
+    {{#unless hideVisualization }}
   <div class="buildermod__tools">
           {{partial "partials/buildermod-drawer-change-graph"}}
       </div>
@@ -64,6 +65,7 @@
         }}
       </div>
     </div>
+    {{/unless}}
     {{component 'visualization-explanation'
       text=visualizationExplanation
     }}
