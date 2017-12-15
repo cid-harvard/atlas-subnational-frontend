@@ -591,7 +591,7 @@ export default {
   "pageheader.profile_link": "Profile",
   "pageheader.rankings": "Rankings",
   "pageheader.search_link": "Search",
-  "pageheader.search_placeholder": "Search for a location, product or industry",
+  "pageheader.search_placeholder": "Search for a location, industry, trade merchandise or agricultural product",
   "pageheader.search_placeholder.industry": "Search for a industry",
   "pageheader.search_placeholder.location": "Search for a location",
   "pageheader.search_placeholder.product": "Search for a product",
