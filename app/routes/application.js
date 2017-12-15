@@ -147,18 +147,21 @@ export default Ember.Route.extend({
         d.name_short_en = d.name_en;
         d.name_short_es = d.name_es;
         d.color = '#ccafaf';
+        d.model = 'agproduct';
       });
 
       _.forEach(nonagsMetadata, (d) => {
         d.name_short_en = d.name_en;
         d.name_short_es = d.name_es;
         d.color = '#ccafaf';
+        d.model = 'nonag';
       });
 
       _.forEach(landUsesMetadata, (d) => {
         d.name_short_en = d.name_en;
         d.name_short_es = d.name_es;
         d.color = '#ccafaf';
+        d.model = 'landUse';
       });
 
       _.forEach(farmtypesMetadata, (d) => {
