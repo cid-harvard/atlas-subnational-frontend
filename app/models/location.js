@@ -47,6 +47,10 @@ export default DS.Model.extend(ModelAttribute, {
     let gdp = get(this.get('lastCensusDataPoint'), 'average_livestock_load');
     return numeral(gdp).format('0.00a');
    }),
+  lastYieldIndex: computed('timeseries','locale', function() {
+    let gdp = get(this.get('lastCensusDataPoint'), 'yield_index');
+    return numeral(gdp).format('0.00a');
+   }),
   lastGdpPerCapita: computed('timeseries','locale', function() {
     let gdpPC = get(this.get('lastCensusDataPoint'), 'gdp_pc_real') ||  get(this.get('lastCensusDataPoint'), 'gdp_pc_nominal');
     return numeral(gdpPC).format('$ 0.00a');

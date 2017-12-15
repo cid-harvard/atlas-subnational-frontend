@@ -237,6 +237,7 @@ export default Ember.Mixin.create({
       { key: 'year' },
       { key: 'eci' },
       { key: 'coi' },
+      { key: 'yield_index' },
       { key: 'gdp_pc_real' },
       { key: 'gdp_real' },
       { key: 'population' },
