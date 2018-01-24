@@ -19,7 +19,7 @@
 {{/if}}
 
 {{#if showParent}}
-  <h3 class="section__head">{{parentBreadcrumb}}</h3>
+  {{#if showParentHeader}}<h3 class="section__head">{{parentBreadcrumb}}</h3>{{/if}}
   {{component 'multiples-graph'
     classNames='buildermod__viz--multiples'
     immutableData=parentSet
@@ -33,7 +33,7 @@
   }}
 {{/if}}
 
-<h3 class="section__head">{{childBreadcrumb}}</h3>
+{{#if showChildHeader}}<h3 class="section__head">{{childBreadcrumb}}</h3>{{/if}}
 {{component 'multiples-graph'
   classNames='buildermod__viz--multiples'
   immutableData=data

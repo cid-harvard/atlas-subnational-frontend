@@ -315,6 +315,12 @@ export default Ember.Controller.extend({
       return 'geo-map';
     }
   }),
+  hideVisualization: computed('variable', 'source', function() {
+    if(this.get('variable') == "num_livestock" && this.get('source') == "livestock") {
+      return true;
+    }
+    return false;
+  }),
   recircUrl: computed('model.entity_type', 'model.entity.code', function() {
     let entityType = this.get('model.entity_type');
 
