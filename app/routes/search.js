@@ -31,7 +31,7 @@ export default Ember.Route.extend({
     } else if(transition.filter === 'rural') {
       request = [agproducts, landuses, nonags];
     } else {
-      request = [country, department, msa, municipality, industriesDivision, industriesClass, products];
+      request = [country, department, msa, municipality, industriesDivision, industriesClass, products, agproducts, landuses, nonags];
     }
 
     return Ember.RSVP.all(request)
