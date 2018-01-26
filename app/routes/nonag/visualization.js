@@ -93,6 +93,7 @@ export default Ember.Route.extend({
           municipality_id: d.location_id,
           group: locationsMetadata[d.location_id].parent_id,
           parent_name_en: locationsMetadata[locationsMetadata[d.location_id].parent_id].name_en,
+          parent_name_es: locationsMetadata[locationsMetadata[d.location_id].parent_id].name_es,
         }
       );
     });

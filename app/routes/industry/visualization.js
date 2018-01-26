@@ -135,6 +135,8 @@ export default Ember.Route.extend({
       d.group = industry.group;
       d.model = 'location';
       d.id = d.msa_id;
+      d.parent_name_en = locationsMetadata[industry.parent_id].name_short_en;
+      d.parent_name_es = locationsMetadata[industry.parent_id].name_short_es;
       return copy(d);
     });
 

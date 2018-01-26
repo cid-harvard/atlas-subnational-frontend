@@ -23,6 +23,7 @@ export default Ember.Mixin.create({
     { key: 'num_establishments' , type: 'int', savedWidth: 200 },
     { key: 'num_vacancies', type: 'int', savedWidth: 100 },
     { key: 'parent', savedWidth: 270 },
+    { key: 'parent_name', savedWidth: 200 },
     { key: 'rca', type: 'int', savedWidth: 280 },
     { key: 'wages', type: 'int', savedWidth: 330 },
     { key: 'year' , type: 'int', savedWidth: 80 },
@@ -82,6 +83,7 @@ export default Ember.Mixin.create({
     let columns = [
       { key: 'code' },
       { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'parent.location' },
       { key: 'year' },
       { key: 'export_value' },
       { key: 'export_num_plants' },
@@ -108,6 +110,7 @@ export default Ember.Mixin.create({
   municipalitiesMap: [
       { key: 'code' },
       { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'parent.location' },
       { key: 'year' },
       { key: 'area' },
   ],
@@ -177,16 +180,25 @@ export default Ember.Mixin.create({
     { key: 'yield_ratio' },
     { key: 'yield_index' }
   ],
-  agproductLocationsMap: [
-    { key: 'code' },
-    { key: 'name', copy: 'location' },
-    { key: 'year' },
-    { key: 'land_sown' },
-    { key: 'land_harvested' },
-    { key: 'production_tons' },
-    { key: 'yield_ratio' },
-    { key: 'yield_index' }
-  ],
+  agproductLocationsMap: computed('source', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'parent.location' },
+      { key: 'year' },
+      { key: 'land_sown' },
+      { key: 'land_harvested' },
+      { key: 'production_tons' },
+      { key: 'yield_ratio' },
+      { key: 'yield_index' }
+    ];
+
+    if(this.get('source') === "departments") {
+      return _.filter(columns, function(x){ return x.key !== "parent_name"; });
+    } else {
+      return columns;
+    }
+  }),
   nonagsMap: [
     { key: 'code' },
     { key: 'name', copy: 'nonag' },
@@ -194,23 +206,41 @@ export default Ember.Mixin.create({
     { key: 'num_farms_ag' },
     { key: 'num_farms_nonag' },
   ],
-  nonagLocationsMap: [
-    { key: 'code' },
-    { key: 'name', copy: 'location' },
-    { key: 'num_farms' },
-    { key: 'num_farms_ag' },
-    { key: 'num_farms_nonag' },
-  ],
+  nonagLocationsMap: computed('source', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'parent.location' },
+      { key: 'num_farms' },
+      { key: 'num_farms_ag' },
+      { key: 'num_farms_nonag' },
+    ];
+
+    if(this.get('source') === "departments") {
+      return _.filter(columns, function(x){ return x.key !== "parent_name"; });
+    } else {
+      return columns;
+    }
+  }),
   landUsesMap: [
     { key: 'code' },
     { key: 'name', copy: 'land_use' },
     { key: 'area' },
   ],
-  landUseLocationsMap: [
-    { key: 'code' },
-    { key: 'name', copy: 'location' },
-    { key: 'area' },
-  ],
+  landUseLocationsMap: computed('source', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'parent.location' },
+      { key: 'area' },
+    ];
+
+    if(this.get('source') === "departments") {
+      return _.filter(columns, function(x){ return x.key !== "parent_name"; });
+    } else {
+      return columns;
+    }
+  }),
   farmtypesMap: [
     { key: 'code' },
     { key: 'name', copy: 'farmtype' },
