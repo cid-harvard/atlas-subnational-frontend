@@ -336,7 +336,9 @@ export default Ember.Controller.extend({
     }
   }),
   hideVisualization: computed('variable', 'source', function() {
-    if(this.get('variable') == "num_livestock" && this.get('source') == "livestock") {
+    if(this.get('source') == "livestock") {
+      return true;
+    } else if(this.get('source') == "nonags" && this.get('variable') == "num_farms") {
       return true;
     }
     return false;
