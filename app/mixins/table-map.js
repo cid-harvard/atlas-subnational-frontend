@@ -164,14 +164,12 @@ export default Ember.Mixin.create({
     { key: 'share' }
   ],
   livestockMap: [
-    { key: 'code' },
     { key: 'name', copy: 'livestock' },
     { key: 'num_farms' },
     { key: 'num_livestock' },
     { key: 'average_livestock_load' },
   ],
   agproductsMap: [
-    { key: 'code' },
     { key: 'name', copy: 'agproduct' },
     { key: 'year' },
     { key: 'land_sown' },
@@ -200,7 +198,6 @@ export default Ember.Mixin.create({
     }
   }),
   nonagsMap: [
-    { key: 'code' },
     { key: 'name', copy: 'nonag' },
     { key: 'num_farms' },
     { key: 'num_farms_ag' },
@@ -223,7 +220,6 @@ export default Ember.Mixin.create({
     }
   }),
   landUsesMap: [
-    { key: 'code' },
     { key: 'name', copy: 'land_use' },
     { key: 'area' },
   ],
@@ -242,7 +238,6 @@ export default Ember.Mixin.create({
     }
   }),
   farmtypesMap: [
-    { key: 'code' },
     { key: 'name', copy: 'farmtype' },
     { key: 'num_farms' },
   ],
