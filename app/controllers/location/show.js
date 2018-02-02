@@ -24,6 +24,7 @@ export default Ember.Controller.extend({
   hasIndustriesData: computed.notEmpty('model.industriesData'),
 
   hasAgproductsData: computed.notEmpty('model.agproductsData'),
+  hasLanduseData: computed.notEmpty('model.landusesData'),
 
   isCountry: computed.equal('model.level', 'country'),
   isDepartment: computed.equal('model.level','department'),
