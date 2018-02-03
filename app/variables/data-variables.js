@@ -45,6 +45,12 @@ export default  {
         "max-width": "190px",
       },
       {
+        "name":"DNP",
+        "link":"https://www.dnp.gov.co/",
+        "logo":"assets/img/logos/dnp.png",
+        "max-width": "180px",
+      },
+      {
         "name":"MinComercio",
         "link":"http://www.mincit.gov.co/",
         "logo":"assets/img/logos/mincomercio.png",

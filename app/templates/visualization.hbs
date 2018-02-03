@@ -37,6 +37,7 @@
         data=filteredData
         dataType=source
         varDependent=varDependent
+        scale=scale
         startDate=startDate
         dateExtent=dateExtent
         endDate=endDate
@@ -50,7 +51,11 @@
       }}
 
       {{#if needsLegend }}
-        {{component 'visualization-legend' legend=legend }}
+        {{#unless isGeo }}
+            {{component 'visualization-legend' legend=legend }}
+        {{else}}
+            {{component 'visualization-legend-geomap' legend=geoLegend }}
+        {{/unless}}
       {{/if}}
 
       <div class="buildermod__settings__wrap">

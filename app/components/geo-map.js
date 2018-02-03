@@ -27,9 +27,7 @@ export default Ember.Component.extend({
     let data = this.get('data');
     let varDependent = this.get('varDependent');
 
-    let quantize = d3.scale.quantize()
-      .domain([0, this.get('maxValue')])
-      .range(d3.range(5).map(function(i) { return 'q' + i + '-5'; }));
+    let quantize = this.get("scale");
 
     let nestByDepartmentId = d3.nest()
       .key(function(d) { return Ember.get(d,'department_id'); })
@@ -62,10 +60,6 @@ export default Ember.Component.extend({
     } else {
       return numeral(value).format('0.0a');
     }
-  }),
-  maxValue: computed('data.[]', 'varDependent', function () {
-    let varDependent = this.get('varDependent');
-    return d3.max(this.get('data'), function(d) { return Ember.get(d, varDependent); });
   }),
   customLayerParams: computed('data.[]', function() {
     return {

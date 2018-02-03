@@ -55,6 +55,27 @@
   }
 }
 
+.q0-5 {
+    color: $colorGreenQ0-5;
+}
+.q1-5 {
+    color: $colorGreenQ1-5;
+}
+.q2-5 {
+    color: $colorGreenQ2-5;
+}
+.q3-5 {
+    color: $colorGreenQ3-5;
+}
+.q4-5 {
+    color: $colorGreenQ4-5;
+}
+
+
+.geo__legend {
+    margin-left: 6rem;
+}
+
 
 // Leaflet styling to fix image paths
 .leaflet-container.dark .map-tooltip .close,

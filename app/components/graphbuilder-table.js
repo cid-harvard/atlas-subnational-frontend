@@ -107,7 +107,7 @@ export default EmberTableComponent.extend(TableMap, {
     return this.get('tableMap').filter((column) => {
 
       // Don't ever drop the "name" column
-      if(column.key == "name"){
+      if(column.key == "name" || column.key == "parent_name"){
         return false;
       }
 
@@ -161,10 +161,12 @@ export default EmberTableComponent.extend(TableMap, {
         let color = row.get('color');
         let testSpan = Ember.String.htmlSafe('<i class="ember-table-color-marker" style=background-color:' + color + '></i>');
         return testSpan + row.get(`parent_name_${this.get('i18n').display}`);
+      } else if(column.key === 'parent_name'){
+        return row.get(`parent_name_${this.get('i18n').display}`);
       } else if(column.key === 'code'){
         return row.get('code');
       } else {
-        return 'N/A';
+        return row.get(column.key);
       }
     };
   },

@@ -90,7 +90,15 @@ export default Ember.Route.extend({
     let data = _.map(cities.data, (d) => {
       let location = locationsMetadata[d.msa_id];
       let city = copy(d);
-      return _.merge(city, location, {model: 'location'});
+      let result = _.merge(
+        city, location,
+        {
+          model: 'location',
+          parent_name_en: locationsMetadata[location.parent_id].name_short_en,
+          parent_name_es: locationsMetadata[location.parent_id].name_short_es,
+        }
+      );
+      return result;
     });
 
     return Ember.Object.create({

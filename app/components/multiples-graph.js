@@ -110,7 +110,7 @@ export default Ember.Component.extend({
       .attr('class', 'chart__title')
       .on('click', expandTitle)
       .text((d) => {
-        if(get(d, 'code') && dataType != 'locations') {
+        if(get(d, 'code') && !_.contains(['landUses', 'farmtypes', 'agproducts', 'nonags', 'livestock', 'locations'], this.get('dataType'))) {
           return `${get(d, 'name')} - ${get(d, 'code')}`;
         } else {
           return get(d, 'name');

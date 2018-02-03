@@ -131,7 +131,12 @@ export default Ember.Component.extend({
                 }
               }
 
-              var tooltip_text = `<span style="color:${get(d, 'color')}">${get(d, varTextItem)} - ${get(d, 'code')}</span>`;
+              var tooltip_text;
+              if (_.contains(['landUses', 'farmtypes', 'agproducts', 'nonags', 'livestock'], this.get('dataType'))){
+                tooltip_text = `<span style="color:${get(d, 'color')}">${get(d, varTextItem)}</span>`;
+              } else {
+                tooltip_text = `<span style="color:${get(d, 'color')}">${get(d, varTextItem)} - ${get(d, 'code')}</span>`;
+              }
 
               data.forEach((d) => {
                  if(d.key) {

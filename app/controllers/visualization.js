@@ -80,7 +80,7 @@ export default Ember.Controller.extend({
   }),
   needsLegend: computed('model.visualization', function() {
     let vis = this.get('model.visualization');
-    return _.contains(['scatter', 'similarity'], vis) ? true : false;
+    return _.contains(['scatter', 'similarity', 'geo'], vis) ? true : false;
   }),
   rca: computed('source', function() {
     let source = this.get('source');
@@ -275,6 +275,26 @@ export default Ember.Controller.extend({
       return 'wages';
     }
   }),
+  maxValue: computed('filteredData.[]', 'varDependent', function () {
+    let varDependent = this.get('varDependent');
+    return d3.max(this.get('filteredData'), function(d) { return Ember.get(d, varDependent); });
+  }),
+  scale: computed('maxValue', function(){
+    return d3.scale.quantize()
+      .domain([0, this.get('maxValue')])
+      .range(d3.range(5).map(function(i) { return 'q' + i + '-5'; }));
+  }),
+  geoLegend: computed('scale', function(){
+    let scale =  this.get('scale');
+    return scale.range().map(function(t){
+      let extents = scale.invertExtent(t);
+      return {
+        "start": numeral(extents[0]).format('0.0a'),
+        "end": numeral(extents[1]).format('0.0a'),
+        "class": new Ember.Handlebars.SafeString(`fa fa-circle ${scale(extents[0])}`)
+      };
+    });
+  }),
   singularEntity: computed('model.entity_type', 'i18n.locale', function() {
     let entityType = this.get('model.entity_type');
     return this.get('i18n').t(`general.${entityType}`);
@@ -316,7 +336,9 @@ export default Ember.Controller.extend({
     }
   }),
   hideVisualization: computed('variable', 'source', function() {
-    if(this.get('variable') == "num_livestock" && this.get('source') == "livestock") {
+    if(this.get('source') == "livestock") {
+      return true;
+    } else if(this.get('source') == "nonags" && this.get('variable') == "num_farms") {
       return true;
     }
     return false;
