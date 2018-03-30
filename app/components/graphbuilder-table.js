@@ -152,6 +152,9 @@ export default EmberTableComponent.extend(TableMap, {
   },
   generateCellContent: function(column) {
     return (row) => {
+      if(_.isNull(row.get(column.key))){
+        return 'N/A';
+      }
       if(_.isNumber(row.get(column.key))){
         let number = row.get(column.key);
         return this.formatNumber(number, column.key, this.get('i18n'));
