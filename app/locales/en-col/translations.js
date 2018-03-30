@@ -419,6 +419,7 @@ export default {
   "graph_builder.table.coi": "Export complexity outlook",
   "graph_builder.table.complexity": "Complexity",
   "graph_builder.table.country": "Country",
+  "graph_builder.table.department": "Department",
   "graph_builder.table.distance": "Distance",
   "graph_builder.table.eci": "Export complexity",
   "graph_builder.table.employment": "Employment",

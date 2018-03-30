@@ -419,6 +419,7 @@ export default {
   "graph_builder.table.coi": "Complejidad exportadora potencial",
   "graph_builder.table.complexity": "Complejidad",
   "graph_builder.table.country": "Pa\u00eds",
+  "graph_builder.table.department": "Departamento",
   "graph_builder.table.distance": "Distancia",
   "graph_builder.table.eci": "Complejidad exportadora",
   "graph_builder.table.employment": "Empleo",

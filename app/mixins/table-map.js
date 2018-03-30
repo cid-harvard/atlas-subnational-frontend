@@ -182,7 +182,7 @@ export default Ember.Mixin.create({
     let columns = [
       { key: 'code' },
       { key: 'name', copy: 'location' },
-      { key: 'parent_name', copy: 'parent.location' },
+      { key: 'parent_name', copy: 'department' },
       { key: 'year' },
       { key: 'land_sown' },
       { key: 'land_harvested' },
@@ -207,7 +207,7 @@ export default Ember.Mixin.create({
     let columns = [
       { key: 'code' },
       { key: 'name', copy: 'location' },
-      { key: 'parent_name', copy: 'parent.location' },
+      { key: 'parent_name', copy: 'department' },
       { key: 'num_farms' },
       { key: 'num_farms_ag' },
       { key: 'num_farms_nonag' },
@@ -227,7 +227,7 @@ export default Ember.Mixin.create({
     let columns = [
       { key: 'code' },
       { key: 'name', copy: 'location' },
-      { key: 'parent_name', copy: 'parent.location' },
+      { key: 'parent_name', copy: 'department' },
       { key: 'area' },
     ];
 
