@@ -279,7 +279,12 @@ export default Ember.Controller.extend({
     let varDependent = this.get('varDependent');
     return d3.max(this.get('filteredData'), function(d) { return Ember.get(d, varDependent); });
   }),
-  scale: computed('maxValue', function(){
+  scale: computed('maxValue', 'varDependent', function(){
+    let varDependent = this.get('varDependent');
+    if(_.isUndefined(varDependent)){
+      return d3.scale.quantize()
+        .range(d3.range(5).map(function(i) { return 'q' + i + '-5'; }));
+    }
     return d3.scale.quantize()
       .domain([0, this.get('maxValue')])
       .range(d3.range(5).map(function(i) { return 'q' + i + '-5'; }));
