@@ -166,21 +166,21 @@
         {{/link-to}}
       </ul>
       <ul class="menu-section__group">
-        {{#link-to 'location.visualization' model.id 'livestock' 'treemap' 'num_farms' (query-params search='null' startdate=lastyear  enddate=lastyear)
+        {{#link-to 'location.visualization' model.id 'livestock' 'treemap' 'num_farms' (query-params search='null' startdate=lastYear  enddate=lastYear)
           tagname='li'
           class="menu-section__link"}}
           {{t 'header.livestock.num_farms'}}
         {{/link-to}}
       </ul>
       <ul class="menu-section__group">
-        {{#link-to 'location.visualization' model.id 'landUses' 'treemap' 'area' (query-params search='null' startdate=lastyear  enddate=lastyear)
+        {{#link-to 'location.visualization' model.id 'landUses' 'treemap' 'area' (query-params search='null' startdate=lastYear  enddate=lastYear)
           tagname='li'
           class="menu-section__link"}}
           {{t 'header.landUses.area'}}
         {{/link-to}}
       </ul>
       <ul class="menu-section__group">
-        {{#link-to 'location.visualization' model.id 'farmtypes' 'treemap' 'num_farms' (query-params search='null' startdate=lastyear  enddate=lastyear)
+        {{#link-to 'location.visualization' model.id 'farmtypes' 'treemap' 'num_farms' (query-params search='null' startdate=lastYear  enddate=lastYear)
           tagname='li'
           class="menu-section__link"}}
           {{t 'header.farmtypes.area'}}
