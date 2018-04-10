@@ -235,10 +235,13 @@ export default Ember.Component.extend({
         },true)
         .attr('dx', function() {
           if (date === parseInt(xExtent[0])) {
-            return '-4';
+            return '30';
           } else if (date === parseInt(xExtent[1])) {
-            return '4';
+            return '-30';
           }
+        })
+        .attr('dy', function() {
+          return '-5';
         })
         .text(function(d) {
           index = bisect(d.values, date, 0, d.values.length - 1);
