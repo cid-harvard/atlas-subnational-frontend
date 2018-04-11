@@ -7,6 +7,7 @@ export default Ember.Controller.extend({
 
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
+
   productIds: computed.alias('featureToggle.index_products'),
   locationIds: computed.alias('featureToggle.index_locations'),
   industryIds: computed.alias('featureToggle.index_industries'),

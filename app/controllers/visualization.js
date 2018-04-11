@@ -16,8 +16,24 @@ export default Ember.Controller.extend({
   drawerChangeGraphIsOpen: false,
   drawerQuestionsIsOpen: false,
 
-  firstYear: computed.alias('featureToggle.first_year'),
-  lastYear: computed.alias('featureToggle.last_year'),
+  firstYear: computed('entityType', 'featureToggle', function(){
+    let entityType = this.get("entityType");
+    let yearRangeKey = `featureToggle.year_ranges.${entityType}.first_year`;
+    if (this.get(yearRangeKey) !== undefined){
+      return this.get(yearRangeKey);
+    } else {
+      return this.get("featureToggle.first_year");
+    }
+  }),
+  lastYear: computed('entityType', 'featureToggle', function(){
+    let entityType = this.get("entityType");
+    let yearRangeKey = `featureToggle.year_ranges.${entityType}.last_year`;
+    if (this.get(yearRangeKey) !== undefined){
+      return this.get(yearRangeKey);
+    } else {
+      return this.get("featureToggle.last_year");
+    }
+  }),
 
   metadata: computed.alias('model.metaData'),
   source: computed.alias('model.source'),
@@ -391,9 +407,10 @@ export default Ember.Controller.extend({
       var startDate = this.get('lastYear');
       var endDate = this.get('lastYear');
 
+      // If showing over-time chart, set start date to the first available
+      // year.
       if(visualization === 'multiples') {
         startDate = this.get('firstYear');
-        endDate = this.get('lastYear');
       }
 
       if(this.get('visualization') === visualization) { return; } //do nothing if currently on the same visualization
