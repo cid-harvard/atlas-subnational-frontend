@@ -118,25 +118,6 @@
         }}
       </td>
     </tr>
-    <tr class="table__row table__row--body">
-      <td class="table__cell table__cell--summaries">
-        {{t 'location.show.average_livestock_load'}}
-      </td>
-      <td class="table__cell table__header--summaries">
-        {{t 'country.show.average_livestock_load'}}
-      </td>
-      <td class="table__cell table__cell--summaries">
-        {{vistk-dotplot
-          elementId='dotplot--livestockload'
-          type='decimal'
-          data=dotplotData
-          varX='average_livestock_load'
-          varText='name'
-          varId='department_id'
-          currentSelection=locationId
-        }}
-      </td>
-    </tr>
   </tbody>
 </table>
 
