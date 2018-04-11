@@ -15,12 +15,16 @@ export default  {
     "index_landuse_q1_id": 6,
     "index_profile_id": 1,
     "index_graphbuilder_id": 87,
+    // These are for trade and industry data
     "last_year": 2016,
     "first_year": 2008,
-    "year_ranges": {
-      "agproduct": { "first_year": 2007, "last_year": 2015 }
-    },
+    // This is for demographic data, e.g. gdp / pop
     "census_year": 2016,
+    // These are for everything else
+    "year_ranges": {
+      "agproduct": { "first_year": 2007, "last_year": 2015 },
+      "agcensus": { "first_year": 2014, "last_year": 2014 } // land use, farm type, etc
+    },
     "geo_center": [4.6,-74.06],
     "subregions" : {
       "country": "department",

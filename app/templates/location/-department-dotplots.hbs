@@ -152,16 +152,16 @@
       </tr>
       <tr class="table__row table__row--body">
         <td class="table__cell table__cell--summaries">
-          {{t 'location.show.yield_index'}}
+            {{t 'location.show.yield_index'}} ({{agproductLastYear}})
         </td>
         <td class="table__cell table__header--summaries--value">
-          {{model.lastYieldIndex}}
+          {{model.yieldIndex}}
           {{table-rank rank=model.yieldIndexRank}}
         </td>
         <td class="table__cell table__cell--summaries">
           {{vistk-dotplot
             elementId='dotplot--yieldindex'
-            data=dotplotData
+            data=model.yieldData
             varX='yield_index'
             varText='name'
             varId='department_id'

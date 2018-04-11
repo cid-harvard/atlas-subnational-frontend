@@ -14,6 +14,7 @@ export default Ember.Route.extend({
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
   censusYear: computed.alias('featureToggle.census_year'),
+  agproductLastYear: computed.alias('featureToggle.year_ranges.agproduct.last_year'),
 
   model: function(params) {
     return this.store.find('location', params.location_id);
@@ -168,8 +169,8 @@ export default Ember.Route.extend({
       var populationRank = 1;
       var gdpRank = 1;
       var gdpPerCapitaRank = 1;
-      var yieldIndexRank = 1;
 
+      // "Datum" contains the hash of data for the year to be displayed.
       let datum = _.chain(dotplotTimeSeries)
         .select({ year: this.get('censusYear')})
         .first()
@@ -181,7 +182,6 @@ export default Ember.Route.extend({
           if(d.gdp_real != null && d.gdp_real > datum.gdp_real) { gdpRank ++; }
           if(d.population != null && d.population > datum.population ) { populationRank ++; }
           if(d.gdp_pc_real != null && d.gdp_pc_real> datum.gdp_pc_real ) { gdpPerCapitaRank++; }
-          if(d.yield_index != null && d.yield_index > datum.yield_index ) { yieldIndexRank++; }
         });
       }
 
@@ -194,7 +194,6 @@ export default Ember.Route.extend({
         gdpRank: gdpRank,
         gdpPerCapitaRank: gdpPerCapitaRank,
         populationRank: populationRank,
-        yieldIndexRank: yieldIndexRank,
       });
 
       var agFarmsizeRank = 1;
@@ -231,6 +230,23 @@ export default Ember.Route.extend({
         nonagFarmsizeRank: nonagFarmsizeRank,
       });
 
+      var yieldIndexRank = 1;
+      var yieldIndex = _.chain(dotplotData).filter((d) => ((d.department_id == model.id || d.location_id == model.id) && d.year == this.get("agproductLastYear"))).first().get("yield_index").value();
+
+      var yieldData = _.filter(dotplotData, (d) => d.year == this.get("agproductLastYear") );
+      _.each(yieldData, (d) => {
+        if(d.yield_index != null && d.yield_index > yieldIndex) { yieldIndexRank++; }
+        let id = _.get(d, 'department_id') || _.get(d, 'location_id');
+        d.name_en = _.get(locationsMetadata, id).name_en;
+        d.name_es = _.get(locationsMetadata, id).name_es;
+      });
+      yieldIndex = numeral(yieldIndex).format('0.00a');
+
+      model.setProperties({
+        yieldIndex: yieldIndex,
+        yieldIndexRank: yieldIndexRank,
+      });
+
 
       model.set('productsData', products);
       model.set('agproductsData', agproducts);
@@ -238,6 +254,7 @@ export default Ember.Route.extend({
       model.set('industriesData', industries);
       model.set('agFarmsizesData', agFarmsizesData);
       model.set('nonagFarmsizesData', nonagFarmsizesData);
+      model.set('yieldData', yieldData);
       model.set('dotplotData', dotplot);
       model.set('occupations', occupations);
       model.set('timeseries', dotplotTimeSeries);
