@@ -11,7 +11,7 @@ export default  {
     "index_industry_q2_id": 461,
     "index_product_q1_id": 461,
     "index_product_q2_id": 1143,
-    "index_livestock_q1_id": 2,
+    "index_livestock_q1_id": 0,
     "index_landuse_q1_id": 6,
     "index_profile_id": 1,
     "index_graphbuilder_id": 87,
