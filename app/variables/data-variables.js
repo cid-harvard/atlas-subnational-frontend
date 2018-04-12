@@ -1,9 +1,9 @@
 export default  {
   col: {
     "title": "Datlas Colombia",
-    "index_products": [1143,87],
-    "index_locations": [41,87,34,40],
-    "index_industries": [461, 488],
+    "index_products": [87, 1143, 290, 400],
+    "index_locations": [0, 3, 34, 40],
+    "index_industries": [461, 488, 468, 450],
     "index_agproducts": [305, 13, 34, 311],
     "index_location_q1_id": 41,
     "index_location_q2_id": 41,
