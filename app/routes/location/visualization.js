@@ -9,6 +9,11 @@ export default Ember.Route.extend({
 
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
+  censusYear: computed.alias('featureToggle.census_year'),
+  agproductFirstYear: computed.alias('featureToggle.year_ranges.agproduct.first_year'),
+  agproductLastYear: computed.alias('featureToggle.year_ranges.agproduct.last_year'),
+  agcensusFirstYear: computed.alias('featureToggle.year_ranges.agcensus.first_year'),
+  agcensusLastYear: computed.alias('featureToggle.year_ranges.agcensus.last_year'),
 
   queryParams: {
     startDate: { refreshModel: false },
@@ -164,7 +169,7 @@ export default Ember.Route.extend({
     let livestockMetadata = this.modelFor('application').livestock;
 
     let data = _.map(livestock.data, (d) => {
-      d.year = this.get('lastYear');
+      d.year = this.get('agcensusLastYear');
       let merged = _.merge(copy(d), livestockMetadata[d.livestock_id]);
       merged.group = merged.code;
       return merged;
@@ -201,7 +206,7 @@ export default Ember.Route.extend({
     let nonagsMetadata = this.modelFor('application').nonags;
 
     let data = _.map(nonags.data, (d) => {
-      d.year = this.get('lastYear');
+      d.year = this.get('agcensusLastYear');
       let merged = _.merge(copy(d), nonagsMetadata[d.nonag_id]);
       merged.group = merged.code;
       return merged;
@@ -218,7 +223,7 @@ export default Ember.Route.extend({
 
     let data = _.map(landUses.data, (d) => {
       let merged = _.merge(copy(d), landUsesMetadata[d.land_use_id]);
-      merged.year = this.get('lastYear');
+      merged.year = this.get('agcensusLastYear');
       merged.group = merged.code;
       return merged;
     });
@@ -234,7 +239,7 @@ export default Ember.Route.extend({
 
     let data = _.map(farmtypes.data, (d) => {
       let merged = _.merge(copy(d), farmtypesMetadata[d.farmtype_id]);
-      merged.year = this.get('lastYear');
+      merged.year = this.get('agcensusLastYear');
       merged.group = merged.code;
       return merged;
     });

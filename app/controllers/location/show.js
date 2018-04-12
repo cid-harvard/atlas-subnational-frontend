@@ -10,7 +10,10 @@ export default Ember.Controller.extend({
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
   censusYear: computed.alias('featureToggle.census_year'),
+  agproductFirstYear: computed.alias('featureToggle.year_ranges.agproduct.first_year'),
   agproductLastYear: computed.alias('featureToggle.year_ranges.agproduct.last_year'),
+  agcensusFirstYear: computed.alias('featureToggle.year_ranges.agcensus.first_year'),
+  agcensusLastYear: computed.alias('featureToggle.year_ranges.agcensus.last_year'),
 
   entityType: "location",
 

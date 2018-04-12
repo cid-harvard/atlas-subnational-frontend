@@ -17,6 +17,12 @@ export default Ember.Controller.extend({
   drawerQuestionsIsOpen: false,
 
   firstYear: computed('entityType', 'featureToggle', function(){
+    // Handle the situation where we're not looking at a location profile but
+    // at a thing-profile like livestock profile. In that case since we're only
+    // looking at one data type, everything is called firstYear and lastYear so
+    // we need to change those to mean the first and last year of the dataset
+    // in question, not the first and last year of the product / industry
+    // datasets
     let entityType = this.get("entityType");
     let yearRangeKey = `featureToggle.year_ranges.${entityType}.first_year`;
     if (this.get(yearRangeKey) !== undefined){
@@ -26,6 +32,7 @@ export default Ember.Controller.extend({
     }
   }),
   lastYear: computed('entityType', 'featureToggle', function(){
+    // See firstYear ^
     let entityType = this.get("entityType");
     let yearRangeKey = `featureToggle.year_ranges.${entityType}.last_year`;
     if (this.get(yearRangeKey) !== undefined){
@@ -34,6 +41,11 @@ export default Ember.Controller.extend({
       return this.get("featureToggle.last_year");
     }
   }),
+  censusYear: computed.alias('featureToggle.census_year'),
+  agproductFirstYear: computed.alias('featureToggle.year_ranges.agproduct.first_year'),
+  agproductLastYear: computed.alias('featureToggle.year_ranges.agproduct.last_year'),
+  agcensusFirstYear: computed.alias('featureToggle.year_ranges.agcensus.first_year'),
+  agcensusLastYear: computed.alias('featureToggle.year_ranges.agcensus.last_year'),
 
   metadata: computed.alias('model.metaData'),
   source: computed.alias('model.source'),
