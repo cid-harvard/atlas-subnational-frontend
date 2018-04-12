@@ -167,7 +167,6 @@ export default Ember.Mixin.create({
     { key: 'name', copy: 'livestock' },
     { key: 'num_farms' },
     { key: 'num_livestock' },
-    { key: 'average_livestock_load' },
   ],
   agproductsMap: [
     { key: 'name', copy: 'agproduct' },
