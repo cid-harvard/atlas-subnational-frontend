@@ -68,7 +68,7 @@ export default  {
     ],
     "download_files": {
        "methodology": "calculation-documentation/Metodos_Calculo_Calculation_Methods.pdf",
-       "location_table": "Lista_Munis_Depts_Mets.xlsx",
+       "location_table": "calculation-documentation/Lista_Munis_Depts_Mets.xlsx",
        "products_country": "products_country.xlsx",
        "products_department": "products_department.xlsx",
        "products_msa": "products_msa.xlsx",
