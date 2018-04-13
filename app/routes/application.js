@@ -141,6 +141,7 @@ export default Ember.Route.extend({
         d.name_short_en = d.name_en;
         d.name_short_es = d.name_es;
         d.color = '#ccafaf';
+        d.model = 'livestock';
       });
 
       _.forEach(agproductsMetadata, (d) => {

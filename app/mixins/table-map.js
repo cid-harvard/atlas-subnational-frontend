@@ -168,6 +168,21 @@ export default Ember.Mixin.create({
     { key: 'num_farms' },
     { key: 'num_livestock' },
   ],
+  livestockLocationsMap: computed('source', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'department' },
+      { key: 'num_farms' },
+      { key: 'num_livestock' },
+    ];
+
+    if(this.get('source') === "departments") {
+      return _.filter(columns, function(x){ return x.key !== "parent_name"; });
+    } else {
+      return columns;
+    }
+  }),
   agproductsMap: [
     { key: 'name', copy: 'agproduct' },
     { key: 'year' },

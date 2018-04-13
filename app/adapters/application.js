@@ -16,6 +16,8 @@ export default DS.RESTAdapter.extend({
       return 'metadata/agproducts';
     } else if(type === 'nonag') {
       return 'metadata/nonags';
+    } else if(type === 'livestock') {
+      return 'metadata/livestock';
     }
   }
 });

@@ -47,5 +47,9 @@ export default Router.map(function() {
     this.route('show', { path: ':nonag_id'});
     this.route('visualization', { path: ':nonag_id/source/:source_type/visualization/:visualization_type/:variable'});
   });
+  this.resource('livestock', { path: 'livestock'}, function() {
+    this.route('show', { path: ':livestock_id'});
+    this.route('visualization', { path: ':livestock_id/source/:source_type/visualization/:visualization_type/:variable'});
+  });
   this.route('rankings');
 });
