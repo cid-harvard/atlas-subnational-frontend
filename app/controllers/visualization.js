@@ -24,9 +24,12 @@ export default Ember.Controller.extend({
     // in question, not the first and last year of the product / industry
     // datasets
     let entityType = this.get("entityType");
-    let yearRangeKey = `featureToggle.year_ranges.${entityType}.first_year`;
-    if (this.get(yearRangeKey) !== undefined){
-      return this.get(yearRangeKey);
+    let datasetYearRangeKey = `featureToggle.year_ranges.${entityType}.first_year`;
+    let agCensusDatasets = this.get('featureToggle.agcensus_datasets');
+    if (_.contains(agCensusDatasets, entityType)){
+      return this.get('featureToggle.year_ranges.agcensus.first_year');
+    } else if (this.get(datasetYearRangeKey) !== undefined){
+      return this.get(datasetYearRangeKey);
     } else {
       return this.get("featureToggle.first_year");
     }
@@ -34,9 +37,12 @@ export default Ember.Controller.extend({
   lastYear: computed('entityType', 'featureToggle', function(){
     // See firstYear ^
     let entityType = this.get("entityType");
-    let yearRangeKey = `featureToggle.year_ranges.${entityType}.last_year`;
-    if (this.get(yearRangeKey) !== undefined){
-      return this.get(yearRangeKey);
+    let datasetYearRangeKey = `featureToggle.year_ranges.${entityType}.last_year`;
+    let agCensusDatasets = this.get('featureToggle.agcensus_datasets');
+    if (_.contains(agCensusDatasets, entityType)){
+      return this.get('featureToggle.year_ranges.agcensus.last_year');
+    } else if (this.get(datasetYearRangeKey) !== undefined){
+      return this.get(datasetYearRangeKey);
     } else {
       return this.get("featureToggle.last_year");
     }
