@@ -26,7 +26,7 @@ export default  {
       "agcensus": { "first_year": 2014, "last_year": 2014 } // land use, farm type, etc
     },
     // These determine which datasets use the "agcensus" year range
-    "agcensus_datasets": ["agproduct", "livestock", "nonag", 'landUse'],
+    "agcensus_datasets": ["livestock", "nonag", "landUse"],
     "geo_center": [4.6,-74.06],
     "subregions" : {
       "country": "department",
