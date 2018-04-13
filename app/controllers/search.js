@@ -63,6 +63,11 @@ export default Ember.Controller.extend({
       return get(d,'constructor.modelName') === 'nonag';
     });
   }),
+  livestockResults: computed('results.[]', function() {
+    return this.get('results').filter(function(d){
+      return get(d,'constructor.modelName') === 'livestock';
+    });
+  }),
   landuseResults: computed('results.[]', function() {
     return this.get('results').filter(function(d){
       return get(d,'constructor.modelName') === 'land-use';
