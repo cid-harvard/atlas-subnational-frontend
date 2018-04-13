@@ -8,8 +8,8 @@ export default Ember.Route.extend({
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
 
-  firstYear: computed.alias('featureToggle.first_year'),
-  lastYear: computed.alias('featureToggle.last_year'),
+  firstYear: computed.alias('featureToggle.year_ranges.agcensus.first_year'),
+  lastYear: computed.alias('featureToggle.year_ranges.agcensus.last_year'),
 
   queryParams: {
     startDate: { refreshModel: false },

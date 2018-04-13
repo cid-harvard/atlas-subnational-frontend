@@ -7,8 +7,8 @@ export default Ember.Controller.extend({
 
   entityType: "nonag",
 
-  firstYear: computed.alias('featureToggle.first_year'),
-  lastYear: computed.alias('featureToggle.last_year'),
+  firstYear: computed.alias('featureToggle.year_ranges.agcensus.first_year'),
+  lastYear: computed.alias('featureToggle.year_ranges.agcensus.last_year'),
 });
 
 
