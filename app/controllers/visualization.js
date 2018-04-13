@@ -187,7 +187,7 @@ export default Ember.Controller.extend({
     let source = this.get('model.source');
     let entityType = this.get('entityType');
 
-    if(_.contains(['landUse', 'nonag'], entityType)){
+    if(_.contains(['landUse', 'nonag', 'livestock'], entityType)){
       if (source === "departments"){
         return [
           { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },

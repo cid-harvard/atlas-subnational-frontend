@@ -58,6 +58,12 @@
       {{ partial 'partials/builder-questions-nonag'}}
     {{/if}}
   {{/if}}
+  {{#if isLivestock}}
+    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+    {{#if isShowingIndex}}
+      {{ partial 'partials/builder-questions-livestock'}}
+    {{/if}}
+  {{/if}}
     <aside class="cta__wrap--right">
     {{#link-to profileRoute model.id
         data-search-profile=''
