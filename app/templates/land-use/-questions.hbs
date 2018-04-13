@@ -28,7 +28,7 @@
       }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
-          {{#link-to 'landUse.visualization' model.id 'municipalities' 'geo' 'area' (query-params startDate=lastYear endDate=lastYear search='null')
+          {{#link-to 'landUse.visualization' model.id 'municipalities' 'treemap' 'area' (query-params startDate=lastYear endDate=lastYear search='null')
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.landUse.municipalities.area'}}
