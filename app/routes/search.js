@@ -48,6 +48,12 @@ export default Ember.Route.extend({
   setupController: function(controller, model) {
     this._super(controller, model);
     controller.set('metaData', this.modelFor('application'));
+    // This is a manual workaround to deal with the problem that clicking on a
+    // left navigation link changes the filter= query parameter but the query
+    // parameter change does not trigger an update event and thus the observers
+    // that depend on it, like referenceKey, don't update.
+    // https://github.com/emberjs/ember.js/issues/9819
+    controller.set('referenceKey', controller.get('modelCategorizedKeys.0'));
   },
   deactivate: function() {
     this.controller.set('search', null);
