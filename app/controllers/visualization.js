@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
   drawerChangeGraphIsOpen: false,
   drawerQuestionsIsOpen: false,
 
-  firstYear: computed('entityType', 'featureToggle', function(){
+  firstYear: computed('entityType', 'source', 'featureToggle', function(){
     // Handle the situation where we're not looking at a location profile but
     // at a thing-profile like livestock profile. In that case since we're only
     // looking at one data type, everything is called firstYear and lastYear so
@@ -24,25 +24,31 @@ export default Ember.Controller.extend({
     // in question, not the first and last year of the product / industry
     // datasets
     let entityType = this.get("entityType");
-    let datasetYearRangeKey = `featureToggle.year_ranges.${entityType}.first_year`;
+    let source = this.get("source");
     let agCensusDatasets = this.get('featureToggle.agcensus_datasets');
-    if (_.contains(agCensusDatasets, entityType)){
+    let agCensusSources = this.get('featureToggle.agcensus_sources');
+    if (_.contains(agCensusDatasets, entityType) || (entityType === 'location' && _.contains(agCensusSources, source))){
+      // If agricultural census
       return this.get('featureToggle.year_ranges.agcensus.first_year');
-    } else if (this.get(datasetYearRangeKey) !== undefined){
-      return this.get(datasetYearRangeKey);
+    } else if (this.get('featureToggle.year_ranges.agproduct.first_year') !== undefined){
+      // If agproduct
+      return this.get('featureToggle.year_ranges.agproduct.first_year');
     } else {
       return this.get("featureToggle.first_year");
     }
   }),
-  lastYear: computed('entityType', 'featureToggle', function(){
+  lastYear: computed('entityType', 'source', 'featureToggle', function(){
     // See firstYear ^
     let entityType = this.get("entityType");
-    let datasetYearRangeKey = `featureToggle.year_ranges.${entityType}.last_year`;
+    let source = this.get("source");
     let agCensusDatasets = this.get('featureToggle.agcensus_datasets');
-    if (_.contains(agCensusDatasets, entityType)){
+    let agCensusSources = this.get('featureToggle.agcensus_sources');
+    if (_.contains(agCensusDatasets, entityType) || (entityType === 'location' && _.contains(agCensusSources, source))){
+      // If agricultural census
       return this.get('featureToggle.year_ranges.agcensus.last_year');
-    } else if (this.get(datasetYearRangeKey) !== undefined){
-      return this.get(datasetYearRangeKey);
+    } else if (this.get('featureToggle.year_ranges.agproduct.last_year') !== undefined){
+      // If agproduct
+      return this.get('featureToggle.year_ranges.agproduct.last_year');
     } else {
       return this.get("featureToggle.last_year");
     }
