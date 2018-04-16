@@ -422,6 +422,12 @@ export default Ember.Controller.extend({
       return _.deburr(`${shortName} ${longName} ${code}`).match(regexp);
     });
   },
+
+  isCountry: computed.equal('model.entity.level', 'country'),
+  isDepartment: computed.equal('model.entity.level','department'),
+  isMsa: computed.equal('model.entity.level','msa'),
+  isMunicipality: computed.equal('model.entity.level','municipality'),
+
   filterToSelectedYears: function(data, start, end) {
     let  timeRange = d3.range(parseInt(start), parseInt(end) + 1); // Makes the range inclusive
     return _.filter(data, function(d) {
