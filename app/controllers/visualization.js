@@ -53,6 +53,22 @@ export default Ember.Controller.extend({
     }
     return value;
   }),
+  firstYearForMenu: computed('model', 'entityType', 'source', 'featureToggle', function(){
+    let entityType = this.get("entityType");
+    if(entityType == "location"){
+      return this.get("featureToggle.first_year");
+    } else {
+      return this.get("firstYear");
+    }
+  }),
+  lastYearForMenu: computed('model', 'entityType', 'source', 'featureToggle', function(){
+    let entityType = this.get("entityType");
+    if(entityType == "location"){
+      return this.get("featureToggle.last_year");
+    } else {
+      return this.get("lastYear");
+    }
+  }),
   censusYear: computed.alias('featureToggle.census_year'),
   agproductFirstYear: computed.alias('featureToggle.year_ranges.agproduct.first_year'),
   agproductLastYear: computed.alias('featureToggle.year_ranges.agproduct.last_year'),
