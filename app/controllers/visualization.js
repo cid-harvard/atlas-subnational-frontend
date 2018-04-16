@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
     // datasets
     let entityType = this.get("entityType");
     let source = this.get("source");
-    let agCensusDatasets = this.get('featureToggle.agcensus_datasets');
+    let agCensusDatasets = this.get('featureToggle.agcensus_entities');
     let agCensusSources = this.get('featureToggle.agcensus_sources');
     var value = this.get("featureToggle.first_year");
     if (_.contains(agCensusDatasets, entityType) || (entityType === 'location' && _.contains(agCensusSources, source))){
@@ -41,7 +41,7 @@ export default Ember.Controller.extend({
     // See firstYear ^
     let entityType = this.get("entityType");
     let source = this.get("source");
-    let agCensusDatasets = this.get('featureToggle.agcensus_datasets');
+    let agCensusDatasets = this.get('featureToggle.agcensus_entities');
     let agCensusSources = this.get('featureToggle.agcensus_sources');
     var value = this.get("featureToggle.last_year");
     if (_.contains(agCensusDatasets, entityType) || (entityType === 'location' && _.contains(agCensusSources, source))){
