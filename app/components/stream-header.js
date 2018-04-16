@@ -22,9 +22,6 @@ export default Ember.Component.extend({
   isNonag: computed.equal('type', 'nonag'),
   isLivestock: computed.equal('type', 'livestock'),
 
-  firstYear: computed.alias('featureToggle.first_year'),
-  lastYear: computed.alias('featureToggle.last_year'),
-
   isCountry: computed.equal('level', 'country'),
   isDepartment: computed.equal('level','department'),
   isMunicipality: computed.equal('level','municipality'),
