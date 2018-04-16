@@ -31,7 +31,7 @@ export default Ember.Controller.extend({
     if (_.contains(agCensusDatasets, entityType) || (entityType === 'location' && _.contains(agCensusSources, source))){
       // If agricultural census
       value = this.get('featureToggle.year_ranges.agcensus.first_year');
-    } else if (this.get('featureToggle.year_ranges.agproduct.first_year') !== undefined){
+    } else if (source === 'agproducts' || entityType == 'agproduct'){
       // If agproduct
       value = this.get('featureToggle.year_ranges.agproduct.first_year');
     }
@@ -47,7 +47,7 @@ export default Ember.Controller.extend({
     if (_.contains(agCensusDatasets, entityType) || (entityType === 'location' && _.contains(agCensusSources, source))){
       // If agricultural census
       value = this.get('featureToggle.year_ranges.agcensus.last_year');
-    } else if (this.get('featureToggle.year_ranges.agproduct.last_year') !== undefined){
+    } else if (source === 'agproducts' || entityType == 'agproduct'){
       // If agproduct
       value = this.get('featureToggle.year_ranges.agproduct.last_year');
     }
