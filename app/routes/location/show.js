@@ -82,7 +82,7 @@ export default Ember.Route.extend({
 
       //get agproducts data for the department
       let agproducts = _.reduce(agproductsData, (memo, d) => {
-        if(d.year != this.get('lastYear')) { return memo; }
+        if(d.year != this.get('agproductLastYear')) { return memo; }
         let product = agproductsMetadata[d.agproduct_id];
         let parent = agproductsMetadata[agproductsMetadata[product.parent_id].parent_id];
         d.group = parent.id;
