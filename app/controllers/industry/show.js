@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
 
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
+  occupationLastYear: computed.alias('featureToggle.year_ranges.occupation.last_year'),
 
   yearRange: computed('firstYear', 'lastYear', function() {
     return `${this.get('firstYear')} - ${this.get('lastYear')}`;

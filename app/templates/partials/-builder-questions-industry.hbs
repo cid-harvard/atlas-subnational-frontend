@@ -55,7 +55,7 @@
       <h5 class='menu-section__group-name'>{{t 'header.occupation'}}</h5>
       <ul class="menu-section__group">
         {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies'
-          (query-params startDate=lastYear endDate=lastYear)
+          (query-params startDate=occupationLastYear endDate=occupationLastYear)
           tagName='li'
           classNameBindings="industryOccupationsVacancies:menu-section__link--active"
           class="menu-section__link"}}

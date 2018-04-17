@@ -98,13 +98,13 @@
   {{#if (array-contains openPanels 'occupation') }}
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
-      {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies' (query-params startDate=lastYear endDate=lastYear)
+      {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies' (query-params startDate=occupationLastYear endDate=occupationLastYear)
         class="icon-cidcon_treemap builder__questions__item__icon"
         tagNmae='i'
       }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
-          {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies' (query-params startDate=lastYear endDate=lastYear)
+          {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies' (query-params startDate=occupationLastYear endDate=occupationLastYear)
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.industry.occupations.num_vacancies'}}

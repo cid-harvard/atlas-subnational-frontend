@@ -23,7 +23,8 @@ export default  {
     // These are for everything else
     "year_ranges": {
       "agproduct": { "first_year": 2007, "last_year": 2015 },
-      "agcensus": { "first_year": 2014, "last_year": 2014 } // land use, farm type, etc
+      "agcensus": { "first_year": 2014, "last_year": 2014 }, // land use, farm type, etc
+      "occupation": { "first_year": 2016, "last_year": 2016 },
     },
     // These determine which datasets use the "agcensus" year range
     "agcensus_entities": ["livestock", "nonag", "landUse"],

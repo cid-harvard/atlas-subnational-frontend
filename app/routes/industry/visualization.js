@@ -97,7 +97,7 @@ export default Ember.Route.extend({
       let occupation = get(occupationsMetadata, `${d.occupation_id}`);
       let parent =  get(occupationsMetadata, `${occupation.parent_id}`) || occupation;
       occupationVacanciesSum += d.num_vacancies;
-      d.year = this.get('lastYear');
+      d.year = this.get('featureToggle.year_ranges.occupation.last_year');
       d.group = get(parent, 'code');
 
       d.parent_name_en = get(parent,'name_en');
