@@ -61,7 +61,7 @@ export default {
   "country.show.landuses": "Uso del Suelo en Colombia",
   "country.show.landuses.area": "\u00c1rea Total (ha)",
   "country.show.nonag_farmsize": "4.53 ha",
-  "country.show.occupation.num_vac": "Vacantes anunciadas (2014)",
+  "country.show.occupation.num_vac": "Vacantes anunciadas",
   "country.show.population": "48,1 mill",
   "country.show.product_space": "Mapa de los productos",
   "country.show.total": "Totales",
