@@ -129,7 +129,7 @@
                 <ul>
                   <li class="index__questions__item">
                     {{#link-to
-                      'location.visualization' farmAndLandFirst 'livestock' 'treemap' 'num_farms' (query-params endDate=lastYear startDate=lastYear )
+                      'location.visualization' farmAndLandFirst 'livestock' 'treemap' 'num_farms' (query-params endDate=agcensusLastYear startDate=agcensusLastYear )
                       data-home-page-farmandland-question='1'
                       class="link--stream index__questions__link"
                     }}
@@ -138,7 +138,7 @@
                   </li>
                     <li class="index__questions__item">
                       {{#link-to
-                        'landUse.visualization' farmAndLandSecond 'departments' 'treemap' 'area' (query-params endDate=lastYear startDate=lastYear )
+                        'landUse.visualization' farmAndLandSecond 'departments' 'treemap' 'area' (query-params endDate=agcensusLastYear startDate=agcensusLastYear )
                         data-home-page-farmandland-question='2'
                         class="link--stream index__questions__link"
                       }}
