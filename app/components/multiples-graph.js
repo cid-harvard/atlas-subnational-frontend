@@ -32,6 +32,7 @@ export default Ember.Component.extend({
       d.name = get(d.values[0], `name_short_${this.get('i18n').display}`) || d.key;
       d.color = get(d.values[0], 'color') || '#ccc1b9';
       d.code = get(d.values[0], 'code');
+      d.values = _.sortBy(d.values, "year");
     });
     return _.sortBy(nest, (d) => {
       return -_.sum(d.values, varDependent);
