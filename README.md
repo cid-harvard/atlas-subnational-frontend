@@ -28,7 +28,7 @@ You will need the following things properly installed on your computer.
 ## Running on API [Depricated]
 * clone `https://github.com/cid-harvard/colombia`
 * get correct db file from Mali
-* `cd` into the the repo
+* `cd` into the repo
 * put db file in `colombia/database.db`
 * run `make dummy && make dev`
 
