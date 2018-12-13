@@ -10,6 +10,14 @@ export default DS.RESTAdapter.extend({
       return 'metadata/products';
     } else if(type === 'industry') {
       return 'metadata/industries';
+    } else if(type === 'land-use') {
+      return 'metadata/land_uses';
+    } else if(type === 'agproduct') {
+      return 'metadata/agproducts';
+    } else if(type === 'nonag') {
+      return 'metadata/nonags';
+    } else if(type === 'livestock') {
+      return 'metadata/livestock';
     }
   }
 });

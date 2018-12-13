@@ -7,6 +7,10 @@ export default Ember.Component.extend({
     if(get(this, 'result.level')) {
       let level = get(this, 'i18n').t(`search.level.${get(this, 'result.level')}`);
 
+      if(get(this, 'levelOnly')){
+        return `${level}`;
+      }
+
       if(get(this, 'entity') === 'location') {
         return `${level}`;
       } else {
@@ -33,6 +37,9 @@ export default Ember.Component.extend({
     return get(this, 'result.constructor.modelName');
   }),
   profileLink: computed('entity', function() {
+    if (this.get('entity') === "land-use"){
+      return 'landUse.show';
+    }
     return `${this.get('entity')}.show`;
   })
 });

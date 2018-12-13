@@ -1,0 +1,143 @@
+<div class="buildermod__questions buildermod__drawer--questions">
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'land_sown'}}>{{t 'graph_builder.builder_questions.land_sown'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'land_sown') }}
+  <ul class="builder__questions__list">
+    <li class="builder__questions__item">
+      {{#link-to 'agproduct.visualization' model.id 'departments' 'treemap' 'land_sown' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'agproduct.visualization' model.id 'departments' 'multiples' 'land_sown' (query-params startDate=firstYear endDate=lastYear search='null')
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'agproduct.visualization' model.id 'departments' 'geo' 'land_sown' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_geo builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      <div class="builder__questions__item__textwrap">
+        <span>
+          {{#link-to 'agproduct.visualization' model.id 'departments' 'geo' 'land_sown' (query-params startDate=lastYear endDate=lastYear search='null')
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.agproduct.departments.land_sown'}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item">
+      {{#link-to 'agproduct.visualization' model.id  'municipalities' 'treemap' 'land_sown' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'agproduct.visualization' model.id  'municipalities' 'multiples' 'land_sown' (query-params startDate=firstYear endDate=lastYear search='null')
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      <div class="builder__questions__item__textwrap">
+        <span>
+          {{#link-to 'agproduct.visualization' model.id  'municipalities' 'multiples' 'land_sown' (query-params startDate=firstYear endDate=lastYear search='null')
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.agproduct.municipalities.land_sown'}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+  </ul>
+  {{/if}}
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'land_harvested'}}>{{t 'graph_builder.builder_questions.land_harvested'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'land_harvested') }}
+  <ul class="builder__questions__list">
+    <li class="builder__questions__item">
+      {{#link-to 'agproduct.visualization' model.id 'departments' 'treemap' 'land_harvested' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'agproduct.visualization' model.id 'departments' 'multiples' 'land_harvested' (query-params startDate=firstYear endDate=lastYear search='null')
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'agproduct.visualization' model.id 'departments' 'geo' 'land_harvested' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_geo builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      <div class="builder__questions__item__textwrap">
+        <span>
+          {{#link-to 'agproduct.visualization' model.id 'departments' 'geo' 'land_harvested' (query-params startDate=lastYear endDate=lastYear search='null')
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.agproduct.departments.land_harvested'}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item">
+      {{#link-to 'agproduct.visualization' model.id  'municipalities' 'treemap' 'land_harvested' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'agproduct.visualization' model.id  'municipalities' 'multiples' 'land_harvested' (query-params startDate=firstYear endDate=lastYear search='null')
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      <div class="builder__questions__item__textwrap">
+        <span>
+          {{#link-to 'agproduct.visualization' model.id  'municipalities' 'multiples' 'land_harvested' (query-params startDate=firstYear endDate=lastYear search='null')
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.agproduct.municipalities.land_harvested'}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+  </ul>
+  {{/if}}
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'production'}}>{{t 'graph_builder.builder_questions.production_tons'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'production') }}
+  <ul class="builder__questions__list">
+    <li class="builder__questions__item">
+      {{#link-to 'agproduct.visualization' model.id 'departments' 'treemap' 'production_tons' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'agproduct.visualization' model.id 'departments' 'multiples' 'production_tons' (query-params startDate=firstYear endDate=lastYear search='null')
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'agproduct.visualization' model.id 'departments' 'geo' 'production_tons' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_geo builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      <div class="builder__questions__item__textwrap">
+        <span>
+          {{#link-to 'agproduct.visualization' model.id 'departments' 'geo' 'production_tons' (query-params startDate=lastYear endDate=lastYear search='null')
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.agproduct.departments.production_tons'}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item">
+      {{#link-to 'agproduct.visualization' model.id  'municipalities' 'treemap' 'production_tons' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'agproduct.visualization' model.id  'municipalities' 'multiples' 'production_tons' (query-params startDate=firstYear endDate=lastYear search='null')
+        class="icon-cidcon_multiples builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      <div class="builder__questions__item__textwrap">
+        <span>
+          {{#link-to 'agproduct.visualization' model.id  'municipalities' 'multiples' 'production_tons' (query-params startDate=firstYear endDate=lastYear search='null')
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.agproduct.municipalities.production_tons'}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+  </ul>
+  {{/if}}
+</div>

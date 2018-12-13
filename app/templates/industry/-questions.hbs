@@ -1,5 +1,6 @@
 <div class="buildermod__questions buildermod__drawer--questions">
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.employment'}}</h4>
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'employment'}}>{{t 'graph_builder.builder_questions.employment'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'employment') }}
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
       {{#link-to 'industry.visualization' model.id 'departments' 'treemap' 'employment' (query-params startDate=lastYear endDate=lastYear)
@@ -44,7 +45,9 @@
       </div>
     </li>
   </ul>
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.wage'}}</h4>
+  {{/if}}
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'wages'}}>{{t 'graph_builder.builder_questions.wage'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'wages') }}
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
       {{#link-to 'industry.visualization' model.id 'departments' 'treemap' 'wages' (query-params startDate=lastYear endDate=lastYear)
@@ -89,17 +92,19 @@
       </div>
     </li>
   </ul>
+  {{/if}}
   {{#unless isIndustryClass}}
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.occupation'}}</h4>
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'occupation'}}>{{t 'graph_builder.builder_questions.occupation'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'occupation') }}
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
-      {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies' (query-params startDate=lastYear endDate=lastYear)
+      {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies' (query-params startDate=occupationLastYear endDate=occupationLastYear)
         class="icon-cidcon_treemap builder__questions__item__icon"
         tagNmae='i'
       }} {{/link-to}}
       <div class="builder__questions__item__textwrap">
         <span>
-          {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies' (query-params startDate=lastYear endDate=lastYear)
+          {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies' (query-params startDate=occupationLastYear endDate=occupationLastYear)
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.industry.occupations.num_vacancies'}}
@@ -108,5 +113,6 @@
       </div>
     </li>
   </ul>
+  {{/if}}
   {{/unless}}
 </div>

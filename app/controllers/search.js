@@ -6,13 +6,30 @@ export default Ember.Controller.extend({
   featureToggle: Ember.inject.service(),
   needs: 'application', // inject the application controller
   queryParams: ['query','filter'],
-  entity: ['product', 'industry', 'location'],
+  entity: ['product', 'industry', 'location', 'rural'],
   query: null,
   filter: null,
   search: computed('query', function() {
     return this.get('query');
   }),
+  modelCategorized: computed('filter', 'model', function(){
+    return _.groupBy(this.get('model'), (x)=>x.constructor.modelName);
+  }),
+  modelCategorizedKeys: computed('modelCategorized', function(){
+    return _.keys(this.get('modelCategorized'));
+  }),
+  referenceKey: computed('modelCategorizedKeys', function(){
+    return this.get('modelCategorizedKeys')[0];
+  }),
+  referenceBody: computed('modelCategorized', 'referenceKey', function(){
+    return this.get(`modelCategorized.${this.get('referenceKey')}`);
+  }),
+  sortDefinition: ["name"],
+  sortedReferenceBody: computed.sort('referenceBody', 'sortDefinition'),
   results: computed('model.[]', 'query', function() {
+    if (this.get("query") === null){
+      return [];
+    }
     let search = _.deburr(this.get('query'));
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
@@ -36,6 +53,26 @@ export default Ember.Controller.extend({
       return get(d,'constructor.modelName') === 'product';
     });
   }),
+  agproductResults: computed('results.[]', function() {
+    return this.get('results').filter(function(d){
+      return get(d,'constructor.modelName') === 'agproduct';
+    });
+  }),
+  nonagResults: computed('results.[]', function() {
+    return this.get('results').filter(function(d){
+      return get(d,'constructor.modelName') === 'nonag';
+    });
+  }),
+  livestockResults: computed('results.[]', function() {
+    return this.get('results').filter(function(d){
+      return get(d,'constructor.modelName') === 'livestock';
+    });
+  }),
+  landuseResults: computed('results.[]', function() {
+    return this.get('results').filter(function(d){
+      return get(d,'constructor.modelName') === 'land-use';
+    });
+  }),
   locationResults: computed('results.[]', function() {
     return this.get('results').filter(function(d){
       return get(d,'constructor.modelName') === 'location';
@@ -51,6 +88,11 @@ export default Ember.Controller.extend({
       return `pageheader.search_placeholder.${this.get('filter')}`;
     }
     return `pageheader.search_placeholder`;
-  })
+  }),
+  actions:{
+    toggleReferenceKey(key) {
+      this.set("referenceKey", key);
+    }
+  }
 });
 

@@ -18,6 +18,18 @@ export default Ember.Component.extend({
   firstYear: computed('featureToggle.first_year', function() {
     return parseInt(this.get('featureToggle.first_year'));
   }),
+  isSingleYear: computed('dateExtent', function(){
+    let dateExtent = this.get('dateExtent');
+    if (dateExtent){
+      if (dateExtent[1] - dateExtent[0] > 0){
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }),
   disableIncreaseYear: computed('year', 'lastYear', function() {
     return this.get('year') >= parseInt(this.get('lastYear'));
   }),

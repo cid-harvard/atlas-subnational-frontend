@@ -14,6 +14,15 @@ export default Ember.Component.extend({
   id: computed('elementId', function() {
     return `#${this.get('elementId')}`;
   }),
+  eciValue: computed('endDate', function(){
+      let datum = _.first(_.filter(this.get('locationData'),
+                                   {'year': parseInt(this.get('endDate'))}));
+      if(this.get('dataType') === 'products' && datum) {
+        return get(datum, 'eci');
+      } else if(this.get('dataType') === 'industries' && datum) {
+        return get(datum, 'industry_eci');
+      }
+  }),
   scatter: computed('data.@each', 'dataType','eciValue','i18n.locale', function() {
     let eci = this.get('eciValue');
     let vistkLanguage = this.get('i18n.display') === 'es' ? 'es_ES': 'en_EN';
@@ -194,7 +203,6 @@ export default Ember.Component.extend({
       return;
     }
     $.getJSON(`${apiURL}/data/location?level=${locationLevel}`).then((response) => {
-      let year = this.get('endDate');
       let data = get(response, 'data');
 
       let locationIdField;
@@ -203,14 +211,11 @@ export default Ember.Component.extend({
       } else {
         locationIdField = `${locationLevel}_id`;
       }
-      let datum = _.first(_.filter(data, {'year': parseInt(year), [locationIdField]: parseInt(id) }));
-      this.set('width', this.$().parent().width());
 
-      if(this.get('dataType') === 'products' && datum) {
-        this.set('eciValue', get(datum, 'eci'));
-      } else if(this.get('dataType') === 'industries' && datum) {
-        this.set('eciValue', get(datum, 'industry_eci'));
-      }
+      let locationData = _.filter(data, {[locationIdField]: parseInt(id) });
+      this.set('locationData', locationData);
+
+      this.set('width', this.$().parent().width());
 
       this.set('x_domain', vistk.utils.extent(this.get('modelData'), 'distance'));
       this.set('y_domain', vistk.utils.extent(this.get('modelData'), 'complexity'));

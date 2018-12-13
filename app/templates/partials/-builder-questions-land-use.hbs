@@ -1,0 +1,34 @@
+<div class="stream___head__menu">
+  <div class="stream__head__dismiss" {{action 'toggleIndex'}}>✕</div>
+  <div class="menu-section menu-section__thin">
+    <h5 class='menu-section__group-name'>{{t 'header.overview'}}</h5>
+    <ul class="menu-section__group">
+      {{#link-to 'landUse.show' model.id
+        tagName='li'
+        data-search-profile=''
+        activeClass="menu-section__link--active"
+        class="menu-section__link"}}
+        {{ t 'pageheader.profile_link' }}
+      {{/link-to}}
+    </ul>
+  </div>
+  <div class="menu-section">
+    <h5 class='menu-section__group-name'>{{t 'header.landUse'}}</h5>
+    <ul class="menu-section__group">
+      {{#link-to 'landUse.visualization' model.id 'departments' 'geo' 'area'
+        (query-params startDate=lastYear endDate=lastYear search='null')
+        tagName='li'
+        classNameBindings="productDepartmentsExports:menu-section__link--active"
+        class="menu-section__link"}}
+        {{t 'header.region'}}
+      {{/link-to}}
+      {{#link-to 'landUse.visualization' model.id  'municipalities' 'treemap' 'area'
+        (query-params startDate=lastYear endDate=lastYear search='null')
+        tagName='li'
+        classNameBindings="productCitiesExports:menu-section__link--active"
+        class="menu-section__link"}}
+        {{t 'header.subsubregion'}}
+      {{/link-to}}
+    </ul>
+  </div>
+</div>

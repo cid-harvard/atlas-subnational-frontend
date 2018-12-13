@@ -56,6 +56,7 @@ export default DS.Model.extend(ModelAttribute, {
   }),
   lastAvgWage: computed('lastDataPoint','i18n.locale', function() {
     return numeral(this.get('lastDataPoint.avg_wage')).format('$ 0.00a');
-  })
+  }),
+  profileName: "industry",
 });
 

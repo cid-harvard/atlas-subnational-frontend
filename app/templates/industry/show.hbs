@@ -1,6 +1,14 @@
-{{component "stream-header" model=model type="industry" }}
+{{component "stream-header" model=model type="industry" occupationLastYear=occupationLastYear }}
 <section class="stream__section">
-  {{partial "industry/questions"}}
+  {{navigation-questions
+    entityType=entityType
+    model=model
+    isDepartment=isDepartment
+    isMunicipality=isMunicipality
+    firstYear=firstYear
+    lastYear=lastYear
+    occupationLastYear=occupationLastYear
+  }}
   <header class="section__header">
     <h3 class="section__head">
       {{t 'industry.show.employment_and_wages'}}
@@ -112,7 +120,7 @@
       {{#ivy-tabs}}
         {{#ivy-tab-list classNames='tabmod__tabs'}}
           {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-            <a class="tab__link"> {{t 'industry.show.occupation_demand' year=lastYear}} </a>
+            <a class="tab__link"> {{t 'industry.show.occupation_demand' year=occupationLastYear}} </a>
           {{/ivy-tab}}
         {{/ivy-tab-list}}
         {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}

@@ -34,6 +34,9 @@ export default Ember.Controller.extend({
     return this.get('model.industries');
   }),
   isGraphBuilderRoute: computed.equal('currentRouteName','graph_builder.index'),
+  isProfileRoute: computed('currentRouteName', function() {
+    return this.get('currentRouteName').endsWith(".show");
+  }),
   isHomePageRoute: computed.equal('currentRouteName','index'),
   isSearchRoute: computed.equal('currentRouteName','search'),
   showStreamer: computed('isHomePageRoute', function(){

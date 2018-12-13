@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ENV from '../../config/environment';
+import numeral from 'numeral';
 
 const {apiURL} = ENV;
 const {RSVP, computed, getWithDefault, get} = Ember;
@@ -13,6 +14,7 @@ export default Ember.Route.extend({
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
   censusYear: computed.alias('featureToggle.census_year'),
+  agproductLastYear: computed.alias('featureToggle.year_ranges.agproduct.last_year'),
 
   model: function(params) {
     return this.store.find('location', params.location_id);
@@ -35,7 +37,13 @@ export default Ember.Route.extend({
 
     var occupations = Ember.$.getJSON(`${apiURL}/data/occupation/?level=minor_group`);
 
-    return RSVP.allSettled([products, dotplot, industries, subregions_trade, occupations]).then((array) => {
+    var agproducts = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/agproducts/?level=level3`);
+    var landuses = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/land_uses/?level=level2`);
+
+    var ag_farmsizes = Ember.$.getJSON(`${apiURL}/data/farmsize/1/locations/?level=${level}`);
+    var nonag_farmsizes = Ember.$.getJSON(`${apiURL}/data/farmsize/2/locations/?level=${level}`);
+
+    return RSVP.allSettled([products, dotplot, industries, subregions_trade, occupations, agproducts, landuses, ag_farmsizes, nonag_farmsizes]).then((array) => {
       var productsData = getWithDefault(array[0], 'value.data', []);
 
       var dotplotData = getWithDefault(array[1], 'value.data', []);//dotplots
@@ -46,6 +54,12 @@ export default Ember.Route.extend({
 
       var occupationsData = getWithDefault(array[4], 'value.data', []);
 
+      var agproductsData = getWithDefault(array[5], 'value.data', []);
+      var landusesData = getWithDefault(array[6], 'value.data', []);
+
+      var agFarmsizesData = getWithDefault(array[7], 'value.data', []);
+      var nonagFarmsizesData = getWithDefault(array[8], 'value.data', []);
+
       var productsDataIndex = _.indexBy(productsData, 'product_id');
       var industriesDataIndex = _.indexBy(industriesData, 'industry_data');
 
@@ -53,6 +67,8 @@ export default Ember.Route.extend({
       let locationsMetadata = this.modelFor('application').locations;
       let industriesMetadata = this.modelFor('application').industries;
       let occupationsMetadata = this.modelFor('application').occupations;
+      let agproductsMetadata = this.modelFor('application').agproducts;
+      let landusesMetadata = this.modelFor('application').landUses;
 
       //get products data for the department
       let products = _.reduce(productsData, (memo, d) => {
@@ -61,6 +77,27 @@ export default Ember.Route.extend({
         let productData = productsDataIndex[d.product_id];
         product.complexity = _.result(_.find(product.pci_data, { year: d.year }), 'pci');
         memo.push(_.merge(d, product, productData));
+        return memo;
+      }, []);
+
+      //get agproducts data for the department
+      let agproducts = _.reduce(agproductsData, (memo, d) => {
+        if(d.year != this.get('agproductLastYear')) { return memo; }
+        let product = agproductsMetadata[d.agproduct_id];
+        let parent = agproductsMetadata[agproductsMetadata[product.parent_id].parent_id];
+        d.group = parent.id;
+        d.parent_name_en = parent.name_en;
+        d.parent_name_es = parent.name_es;
+        memo.push(_.merge(d, product));
+        return memo;
+      }, []);
+
+      //get agproducts data for the department
+      let landuses = _.reduce(landusesData, (memo, d) => {
+        let product = landusesMetadata[d.land_use_id];
+        let parent = landusesMetadata[product.parent_id];
+        d.group = product.name_en;
+        memo.push(_.merge(d, product));
         return memo;
       }, []);
 
@@ -133,6 +170,7 @@ export default Ember.Route.extend({
       var gdpRank = 1;
       var gdpPerCapitaRank = 1;
 
+      // "Datum" contains the hash of data for the year to be displayed.
       let datum = _.chain(dotplotTimeSeries)
         .select({ year: this.get('censusYear')})
         .first()
@@ -155,11 +193,68 @@ export default Ember.Route.extend({
         eciRank: eciRank,
         gdpRank: gdpRank,
         gdpPerCapitaRank: gdpPerCapitaRank,
-        populationRank: populationRank
+        populationRank: populationRank,
       });
 
+      var agFarmsizeRank = 1;
+      var agFarmsize = _.chain(agFarmsizesData).filter((d) => d.location_id == model.id).first().get("avg_farmsize").value();
+      _.each(agFarmsizesData, (d) => {
+
+        if(d.avg_farmsize != null && d.avg_farmsize > agFarmsize ) { agFarmsizeRank++; }
+
+        d.name_en = _.get(locationsMetadata, d.location_id).name_en;
+        d.name_es = _.get(locationsMetadata, d.location_id).name_es;
+
+      });
+      agFarmsize = numeral(agFarmsize).format('0.00a');
+
+      model.setProperties({
+        agFarmsize: agFarmsize,
+        agFarmsizeRank: agFarmsizeRank,
+      });
+
+      var nonagFarmsizeRank = 1;
+      var nonagFarmsize = _.chain(nonagFarmsizesData).filter((d) => d.location_id == model.id).first().get("avg_farmsize").value();
+      _.each(nonagFarmsizesData, (d) => {
+
+        if(d.avg_farmsize != null && d.avg_farmsize > nonagFarmsize ) { nonagFarmsizeRank++; }
+
+        d.name_en = _.get(locationsMetadata, d.location_id).name_en;
+        d.name_es = _.get(locationsMetadata, d.location_id).name_es;
+
+      });
+      nonagFarmsize = numeral(nonagFarmsize).format('0.00a');
+
+      model.setProperties({
+        nonagFarmsize: nonagFarmsize,
+        nonagFarmsizeRank: nonagFarmsizeRank,
+      });
+
+      var yieldIndexRank = 1;
+      var yieldIndex = _.chain(dotplotData).filter((d) => ((d.department_id == model.id || d.location_id == model.id) && d.year == this.get("agproductLastYear"))).first().get("yield_index").value();
+
+      var yieldData = _.filter(dotplotData, (d) => d.year == this.get("agproductLastYear") );
+      _.each(yieldData, (d) => {
+        if(d.yield_index != null && d.yield_index > yieldIndex) { yieldIndexRank++; }
+        let id = _.get(d, 'department_id') || _.get(d, 'location_id');
+        d.name_en = _.get(locationsMetadata, id).name_en;
+        d.name_es = _.get(locationsMetadata, id).name_es;
+      });
+      yieldIndex = numeral(yieldIndex).format('0.00a');
+
+      model.setProperties({
+        yieldIndex: yieldIndex,
+        yieldIndexRank: yieldIndexRank,
+      });
+
+
       model.set('productsData', products);
+      model.set('agproductsData', agproducts);
+      model.set('landusesData', landuses);
       model.set('industriesData', industries);
+      model.set('agFarmsizesData', agFarmsizesData);
+      model.set('nonagFarmsizesData', nonagFarmsizesData);
+      model.set('yieldData', yieldData);
       model.set('dotplotData', dotplot);
       model.set('occupations', occupations);
       model.set('timeseries', dotplotTimeSeries);

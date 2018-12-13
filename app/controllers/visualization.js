@@ -16,8 +16,65 @@ export default Ember.Controller.extend({
   drawerChangeGraphIsOpen: false,
   drawerQuestionsIsOpen: false,
 
-  firstYear: computed.alias('featureToggle.first_year'),
-  lastYear: computed.alias('featureToggle.last_year'),
+  firstYear: computed('model', 'entityType', 'source', 'featureToggle', function(){
+    // Handle the situation where we're not looking at a location profile but
+    // at a thing-profile like livestock profile. In that case since we're only
+    // looking at one data type, everything is called firstYear and lastYear so
+    // we need to change those to mean the first and last year of the dataset
+    // in question, not the first and last year of the product / industry
+    // datasets
+    let entityType = this.get("entityType");
+    let source = this.get("source");
+    let agCensusDatasets = this.get('featureToggle.agcensus_entities');
+    let agCensusSources = this.get('featureToggle.agcensus_sources');
+    var value = this.get("featureToggle.first_year");
+    if (_.contains(agCensusDatasets, entityType) || (entityType === 'location' && _.contains(agCensusSources, source))){
+      // If agricultural census
+      value = this.get('featureToggle.year_ranges.agcensus.first_year');
+    } else if (source === 'agproducts' || entityType == 'agproduct'){
+      // If agproduct
+      value = this.get('featureToggle.year_ranges.agproduct.first_year');
+    }
+    return value;
+  }),
+  lastYear: computed('model', 'entityType', 'source', 'featureToggle', function(){
+    // See firstYear ^
+    let entityType = this.get("entityType");
+    let source = this.get("source");
+    let agCensusDatasets = this.get('featureToggle.agcensus_entities');
+    let agCensusSources = this.get('featureToggle.agcensus_sources');
+    var value = this.get("featureToggle.last_year");
+    if (_.contains(agCensusDatasets, entityType) || (entityType === 'location' && _.contains(agCensusSources, source))){
+      // If agricultural census
+      value = this.get('featureToggle.year_ranges.agcensus.last_year');
+    } else if (source === 'agproducts' || entityType == 'agproduct'){
+      // If agproduct
+      value = this.get('featureToggle.year_ranges.agproduct.last_year');
+    }
+    return value;
+  }),
+  firstYearForMenu: computed('model', 'entityType', 'source', 'featureToggle', function(){
+    let entityType = this.get("entityType");
+    if(entityType == "location"){
+      return this.get("featureToggle.first_year");
+    } else {
+      return this.get("firstYear");
+    }
+  }),
+  lastYearForMenu: computed('model', 'entityType', 'source', 'featureToggle', function(){
+    let entityType = this.get("entityType");
+    if(entityType == "location"){
+      return this.get("featureToggle.last_year");
+    } else {
+      return this.get("lastYear");
+    }
+  }),
+  censusYear: computed.alias('featureToggle.census_year'),
+  agproductFirstYear: computed.alias('featureToggle.year_ranges.agproduct.first_year'),
+  agproductLastYear: computed.alias('featureToggle.year_ranges.agproduct.last_year'),
+  agcensusFirstYear: computed.alias('featureToggle.year_ranges.agcensus.first_year'),
+  agcensusLastYear: computed.alias('featureToggle.year_ranges.agcensus.last_year'),
+  occupationLastYear: computed.alias('featureToggle.year_ranges.occupation.last_year'),
 
   metadata: computed.alias('model.metaData'),
   source: computed.alias('model.source'),
@@ -80,7 +137,7 @@ export default Ember.Controller.extend({
   }),
   needsLegend: computed('model.visualization', function() {
     let vis = this.get('model.visualization');
-    return _.contains(['scatter', 'similarity'], vis) ? true : false;
+    return _.contains(['scatter', 'similarity', 'geo'], vis) ? true : false;
   }),
   rca: computed('source', function() {
     let source = this.get('source');
@@ -129,7 +186,12 @@ export default Ember.Controller.extend({
     return this.get('i18n').t(`graph_builder.search.placeholder.${this.get('source')}`);
   }),
   headerValue: computed('model', 'visualization','filteredData', 'variable', 'i18n.locale', function() {
-    let allowedVariables = ['export_value', 'import_value', 'wages', 'employment'];
+    let allowedVariables = ['export_value', 'import_value', 'wages',
+      'employment', 'land_sown', 'land_harvested', 'production_tons', 'area',
+      'num_farms', 'num_livestock'];
+    let usdVariables = ['export_value', 'import_value'];
+    let currencyVariables = ['wages'];
+    let areaVariables = ['area'];
     let variable = this.get('variable');
     let data = this.get('filteredData');
     let visualization = this.get('visualization');
@@ -138,19 +200,67 @@ export default Ember.Controller.extend({
     if(visualization === 'multiples') { return ''; }
 
     var sum = _.sum(data, variable);
-    if(variable === 'employment') {
-      return numeral(sum).format('0,00');
+    if(_.contains(currencyVariables, variable)) {
+      return numeral(sum).format('$ 0,0');
     }
-    if(variable === 'export_value' || variable === 'import_value') {
+    if(_.contains(usdVariables, variable)) {
       return '$' + numeral(sum).format('0,0') + ' USD';
     }
-    return numeral(sum).format('$ 0,0');
+    if(_.contains(areaVariables, variable)) {
+      return numeral(sum).format('0,0') + ' ha';
+    }
+    return numeral(sum).format('0,00');
   }),
   otherPossibleGraphs: computed('model.visualization', 'model.source',  function() {
     let vis = this.get('model.visualization');
     let source = this.get('model.source');
+    let entityType = this.get('entityType');
 
-    if(_.contains(['locations', 'departments'], source) && _.contains(['geo', 'treemap', 'multiples'], vis)){
+    if(_.contains(['landUse', 'nonag', 'livestock'], entityType)){
+      if (source === "departments"){
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: true },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      } else {
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      }
+    } else if(_.contains(['agproduct'], entityType)){
+      if (this.get('variable') === 'yield_ratio'){
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: false },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      } else if (source === "departments"){
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: true },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      } else {
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      }
+    } else if(_.contains(['locations', 'departments'], source) && _.contains(['geo', 'treemap', 'multiples'], vis)){
       return [
         { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
         { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
@@ -158,7 +268,7 @@ export default Ember.Controller.extend({
         { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
         { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
       ];
-    } else if (source === 'occupations' && _.contains(['treemap'], vis)){
+    } else if (_.contains(['occupations', 'livestock', 'landUses', 'farmtypes', "nonags"], source)){
       return [
         { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
         { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
@@ -166,6 +276,24 @@ export default Ember.Controller.extend({
         { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
         { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
       ];
+    } else if (source === "agproducts"){
+      if (this.get('variable') === 'yield_ratio'){
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: false },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      } else {
+        return [
+          { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: true },
+          { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
+          { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+        ];
+      }
     } else if (vis === 'scatter'){
       return [
         { type: 'multiples', description: 'graph_builder.change_graph.multiples_description', available: false },
@@ -203,6 +331,31 @@ export default Ember.Controller.extend({
     } else if(source  === 'industries') {
       return 'wages';
     }
+  }),
+  maxValue: computed('filteredData.[]', 'varDependent', function () {
+    let varDependent = this.get('varDependent');
+    return d3.max(this.get('filteredData'), function(d) { return Ember.get(d, varDependent); });
+  }),
+  scale: computed('maxValue', 'varDependent', function(){
+    let varDependent = this.get('varDependent');
+    if(_.isUndefined(varDependent)){
+      return d3.scale.quantize()
+        .range(d3.range(5).map(function(i) { return 'q' + i + '-5'; }));
+    }
+    return d3.scale.quantize()
+      .domain([0, this.get('maxValue')])
+      .range(d3.range(5).map(function(i) { return 'q' + i + '-5'; }));
+  }),
+  geoLegend: computed('scale', function(){
+    let scale =  this.get('scale');
+    return scale.range().map(function(t){
+      let extents = scale.invertExtent(t);
+      return {
+        "start": numeral(extents[0]).format('0.0a'),
+        "end": numeral(extents[1]).format('0.0a'),
+        "class": new Ember.Handlebars.SafeString(`fa fa-circle ${scale(extents[0])}`)
+      };
+    });
   }),
   singularEntity: computed('model.entity_type', 'i18n.locale', function() {
     let entityType = this.get('model.entity_type');
@@ -244,6 +397,14 @@ export default Ember.Controller.extend({
       return 'geo-map';
     }
   }),
+  hideVisualization: computed('variable', 'source', function() {
+    if(this.get('source') == "livestock") {
+      return true;
+    } else if(this.get('source') == "nonags" && this.get('variable') == "num_farms") {
+      return true;
+    }
+    return false;
+  }),
   recircUrl: computed('model.entity_type', 'model.entity.code', function() {
     let entityType = this.get('model.entity_type');
 
@@ -262,6 +423,12 @@ export default Ember.Controller.extend({
       return _.deburr(`${shortName} ${longName} ${code}`).match(regexp);
     });
   },
+
+  isCountry: computed.equal('model.entity.level', 'country'),
+  isDepartment: computed.equal('model.entity.level','department'),
+  isMsa: computed.equal('model.entity.level','msa'),
+  isMunicipality: computed.equal('model.entity.level','municipality'),
+
   filterToSelectedYears: function(data, start, end) {
     let  timeRange = d3.range(parseInt(start), parseInt(end) + 1); // Makes the range inclusive
     return _.filter(data, function(d) {
@@ -287,9 +454,10 @@ export default Ember.Controller.extend({
       var startDate = this.get('lastYear');
       var endDate = this.get('lastYear');
 
+      // If showing over-time chart, set start date to the first available
+      // year.
       if(visualization === 'multiples') {
         startDate = this.get('firstYear');
-        endDate = this.get('lastYear');
       }
 
       if(this.get('visualization') === visualization) { return; } //do nothing if currently on the same visualization

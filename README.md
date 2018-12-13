@@ -1,4 +1,4 @@
-#atlas-subnational-frontend
+# Subnational Atlas Frontend Code
 
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
@@ -8,52 +8,56 @@ A short introduction of this app could easily go here.
 You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
+* [Node.js](http://nodejs.org/) (6.x with NPM -- we used 6.13.1)
+* [Bower](http://bower.io/) with `npm install -g bower`
 * [Ember CLI](http://www.ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
+* Get this repository on to your computer with `git clone <repository-url>` -
+  if you already have it then skip this step.
+* Go to the terminal and move to this the new directory.
+* Run `npm install`
+* Run `bower install`
 
 ## Running / Development
 
-* `ember server` or `ember s` (these are the same)
+* Run `ember server` or `ember s` (these are the same)
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
-## Running on API [Depricated]
-* clone `https://github.com/cid-harvard/colombia`
-* get correct db file from Mali
-* `cd` into the the repo
-* put db file in `colombia/database.db`
-* run `make dummy && make dev`
+## Directory Structure
 
-*  In a seperate terminal window `cd` into the ember app
-*  Run `ember s --proxy http://127.0.0.1:8001/`
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-## Subfolder
-
-In the `config/enviroment.js` file adjust the `baseURL` variable in the `var ENV` object for the enviroment e.g. `enviroment === 'production'`
+- `app.js` is the entry point for the application.
+- `config/environment.js` is the main Ember configuration file for the
+  frontend. However for the most part you won't have to touch this file.
+- In many cases, this file reads a hidden file in the main directory called
+  `.env` that contains the most common options, like the translation files to
+  use (`DEFAULT_LOCALE` and `OTHER_LOCALE`) and the address where the API will
+  be (`API_URL`) and the downloads files will be (`DOWNLOAD_URL`).
+- `/app/locales` contains all of the translation keys.
+- `/app/variables/data-variables.js` contains most of the configuration related
+  to website data, e.g. which products to show on the homepage dropdown, how
+  many years of trade data there are, what logos to show on the homepage, what
+  paths under `DOWNLOAD_URL` to find each download file etc. This is read by
+  `services/feature-toggle.js`.
+- `instance-initializers/locale-setter.js` handles the locale / translation
+  settings.
+- `mixins/table-map.js` includes many table related settings, including the
+  widths of each column and what columns to show in what page.
+- The main application logic is contained in the `routes/` `controllers/` and
+  `templates/`. The routes determine what data to fetch and how, the
+  controllers handle display-related logic (and user events like clicks) and
+  the templates handle the actual HTML structure that ends up on the page. Read
+  the ember.js documentation for more on this.
+- `router.js` has the mapping from URLs to files in `routes/blah.js`.
 
 ### Building
 
-Current ENV files
-*  colombia
-*  mexico
-*  peru
+Current `.env` files
+*  `colombia.env`
+*  `mexico.env`
+*  `peru.env`
 
 To use a country
 * run `ember build -e <enviroment>` e.g. `ember build -e colombia`
@@ -101,4 +105,3 @@ SUB-FOLDERS
 * Development Browser Extensions
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
-

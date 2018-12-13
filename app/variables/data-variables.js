@@ -1,19 +1,34 @@
 export default  {
   col: {
-    "index_products": [1143,87],
-    "index_locations": [41,87,34,40],
-    "index_industries": [461, 488],
+    "title": "Datlas Colombia",
+    "index_products": [87, 1143, 290, 400],
+    "index_locations": [0, 3, 34, 40],
+    "index_industries": [461, 488, 468, 450],
+    "index_agproducts": [305, 13, 34, 311],
     "index_location_q1_id": 41,
     "index_location_q2_id": 41,
     "index_industry_q1_id": 461,
     "index_industry_q2_id": 461,
     "index_product_q1_id": 461,
     "index_product_q2_id": 1143,
+    "index_livestock_q1_id": 0,
+    "index_landuse_q1_id": 6,
     "index_profile_id": 1,
     "index_graphbuilder_id": 87,
-    "last_year": 2014,
+    // These are for trade and industry data
+    "last_year": 2016,
     "first_year": 2008,
-    "census_year": 2014,
+    // This is for demographic data, e.g. gdp / pop
+    "census_year": 2016,
+    // These are for everything else
+    "year_ranges": {
+      "agproduct": { "first_year": 2007, "last_year": 2015 },
+      "agcensus": { "first_year": 2014, "last_year": 2014 }, // land use, farm type, etc
+      "occupation": { "first_year": 2016, "last_year": 2016 },
+    },
+    // These determine which datasets use the "agcensus" year range
+    "agcensus_entities": ["livestock", "nonag", "landUse"],
+    "agcensus_sources": ["livestock", "nonags", "farmtypes", "landUses"],
     "geo_center": [4.6,-74.06],
     "subregions" : {
       "country": "department",
@@ -41,6 +56,12 @@ export default  {
         "max-width": "190px",
       },
       {
+        "name":"DNP",
+        "link":"https://www.dnp.gov.co/",
+        "logo":"assets/img/logos/dnp.png",
+        "max-width": "180px",
+      },
+      {
         "name":"MinComercio",
         "link":"http://www.mincit.gov.co/",
         "logo":"assets/img/logos/mincomercio.png",
@@ -49,7 +70,7 @@ export default  {
     ],
     "download_files": {
        "methodology": "calculation-documentation/Metodos_Calculo_Calculation_Methods.pdf",
-       "location_table": "Lista_Munis_Depts_Mets.xlsx",
+       "location_table": "calculation-documentation/Lista_Munis_Depts_Mets.xlsx",
        "products_country": "products_country.xlsx",
        "products_department": "products_department.xlsx",
        "products_msa": "products_msa.xlsx",
@@ -63,13 +84,29 @@ export default  {
        "industries_msa": "industries_msa.xlsx",
        "industries_municipality": "industries_municipality.txt",
        "occupations": "occupations.xlsx",
-       "demographics_country": "demographic_country.xlsx",
-       "demographics_department": "demographic_department.xlsx",
-       "demographics_msa": "demographic_msa.xlsx",
-       "demographics_municipality": "demographic_municipality.xls",
+
+       "rural_agproduct_country": "agproduct_country.xlsx",
+       "rural_agproduct_department": "agproduct_department.xlsx",
+       "rural_agproduct_municipality": "agproduct_municipality.xlsx",
+       "rural_nonag_country": "nonag_country.xlsx",
+       "rural_nonag_department": "nonag_department.xlsx",
+       "rural_nonag_municipality": "nonag_municipality.xlsx",
+       "rural_landuse_country": "land_use_country.xlsx",
+       "rural_landuse_department": "land_use_department.xlsx",
+       "rural_landuse_municipality": "land_use_municipality.xlsx",
+       "rural_livestock_country": "livestock_country.xlsx",
+       "rural_livestock_department": "livestock_department.xlsx",
+       "rural_livestock_municipality": "livestock_municipality.xlsx",
+       "rural_farmtype_country": "farmtype_country.xlsx",
+       "rural_farmtype_department": "farmtype_department.xlsx",
+       "rural_farmtype_municipality": "farmtype_municipality.xlsx",
+       "rural_farmsize_country": "farmsize_country.xlsx",
+       "rural_farmsize_department": "farmsize_department.xlsx",
+       "rural_farmsize_municipality": "farmsize_municipality.xlsx",
     },
   },
   mex: {
+    "title": "Atlas de Complejidad Económica de México",
     "index_products": [1143,87],
     "index_locations": [2533, 2501, 2511, 2539],
     "index_industries": [294, 359],
@@ -89,8 +126,28 @@ export default  {
       "country": "department",
       "department": "municipality",
     },
-    "hero_image": "/assets/img/hero_images/front-header-treemap.png",
+    "hero_image": "/assets/img/hero_images/front-header-mexico.png",
     "show_downloads": true,
+    "homepage_logos": [
+      {
+        "name":"Center for International Development at Harvard University",
+        "link":"http://growthlab.cid.harvard.edu/",
+        "logo":"assets/img/logos/hks.png",
+        "max-width": "180px",
+      },
+      {
+        "name":"SHCP",
+        "link":"http://www.hacienda.gob.mx/Paginas/default.aspx",
+        "logo":"assets/img/logos/shcp.png",
+        "max-width": "220px",
+      },
+      {
+        "name":"CIDE",
+        "link":"http://www.cide.edu/",
+        "logo":"assets/img/logos/cide.png",
+        "max-width": "80px",
+      },
+    ],
     "download_files": {
        "methodology": "calculation-documentation/Metodos_Calculo_Calculation_Methods.pdf",
        "location_table": "Lista_Munis_Depts_Mets.xlsx",
@@ -114,6 +171,7 @@ export default  {
     },
   },
   peru: {
+    "title": "Atlas de Complejidad Económica de Perú",
     "index_products": [262, 891, 77, 214],
     "index_locations": [4, 13, 8, 16],
     "index_industries": [],
@@ -133,7 +191,7 @@ export default  {
       "country": "department",
       "department": "msa",
     },
-    "hero_image": "/assets/img/hero_images/front-header-peru.png",
+    "hero_image": "/assets/img/hero_images/front-header-peru2.jpg",
     "show_downloads": true,
     "homepage_logos": [
       {

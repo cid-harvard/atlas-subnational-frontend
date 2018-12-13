@@ -1,4 +1,14 @@
-{{component "stream-header" model=model type="location"  metaData=model.metaData}}
+{{component "stream-header"
+    model=model
+    type="location"
+    metaData=model.metaData
+    firstYear=firstYear
+    lastYear=lastYear
+    agproductFirstYear=agproductFirstYear
+    agproductLastYear=agproductLastYear
+    agcensusFirstYear=agcensusFirstYear
+    agcensusLastYear=agcensusLastYear
+}}
 {{#if isCountry }}
   {{partial 'location/country-location'}}
 {{else}}

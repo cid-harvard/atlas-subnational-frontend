@@ -18,17 +18,59 @@
       <li class="breadcrumb">{{t 'general.industry' }}</li>
     </ul>
   {{/if}}
+
+  {{#if isShowingIndex}}
+    <div class="stream__transparent" {{action 'toggleIndex'}}></div>
+  {{/if}}
   {{#if isLocation}}
     <h2 class="stream__head" data-location-name>{{model.name}}</h2>
-    {{ partial 'partials/builder-questions-location'}}
+    {{#if isShowingIndex}}
+      {{ partial 'partials/builder-questions-location'}}
+    {{/if}}
   {{/if}}
   {{#if isProduct}}
     <h2 class="stream__head" data-location-name>{{model.name}} ({{model.code}})</h2>
-    {{ partial 'partials/builder-questions-product'}}
+    {{#if isShowingIndex}}
+      {{ partial 'partials/builder-questions-product'}}
+    {{/if}}
   {{/if}}
   {{#if isIndustry}}
     <h2 class="stream__head" data-location-name>{{model.name}} ({{model.code}})</h2>
-    {{ partial 'partials/builder-questions-industry'}}
+    {{#if isShowingIndex}}
+      {{ partial 'partials/builder-questions-industry'}}
+    {{/if}}
   {{/if}}
+  {{#if isLandUse}}
+    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+    {{#if isShowingIndex}}
+      {{ partial 'partials/builder-questions-land-use'}}
+    {{/if}}
+  {{/if}}
+  {{#if isAgproduct}}
+    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+    {{#if isShowingIndex}}
+      {{ partial 'partials/builder-questions-agproduct'}}
+    {{/if}}
+  {{/if}}
+  {{#if isNonag}}
+    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+    {{#if isShowingIndex}}
+      {{ partial 'partials/builder-questions-nonag'}}
+    {{/if}}
+  {{/if}}
+  {{#if isLivestock}}
+    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+    {{#if isShowingIndex}}
+      {{ partial 'partials/builder-questions-livestock'}}
+    {{/if}}
+  {{/if}}
+    <aside class="cta__wrap--right">
+    {{#link-to profileRoute model.id
+        data-search-profile=''
+        class="btn stream__head__overview"}}
+      {{ t 'header.overview' }}
+    {{/link-to}}
+    <a class="btn btn--standalone btn--text stream__head__index" {{ action 'toggleIndex' }}> {{t 'header.index'}} <img src="assets/img/general/index.png" class="stream__head__indexicon"/></a>
+    </aside>
 </header>
 

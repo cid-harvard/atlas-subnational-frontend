@@ -14,6 +14,19 @@ export default Ember.Component.extend({
     if(dataType === 'partners') { return true; }
     return false;
   }),
+  showParentHeader: computed('dataType', function() {
+    return true;
+  }),
+  showChildHeader: computed('dataType', function() {
+    let dataType = this.get('dataType');
+    if(dataType === 'agproducts') { return false; }
+    return true;
+  }),
+  showTotal: computed('varDependent', function() {
+    let varDependent = this.get('varDependent');
+    if(varDependent === 'yield_ratio') { return false; }
+    return true;
+  }),
   parentBreadcrumb: computed('result.level', 'i18n.locale', function() {
     if(this.get('result.level')) {
       let level = this.get('i18n').t(`search.level.parent.${this.get('result.level')}`);

@@ -4,6 +4,25 @@
   source='product-country'
   variable=variable
   metaData=model.metaData
+  firstYear=firstYear
+  lastYear=lastYear
+  agproductFirstYear=agproductFirstYear
+  agproductLastYear=agproductLastYear
+  agcensusFirstYear=agcensusFirstYear
+  agcensusLastYear=agcensusLastYear
+}}
+{{navigation-questions
+  model=model.entity
+  entityType='location'
+  isDepartment=isDepartment
+  isMunicipality=isMunicipality
+  firstYear=firstYear
+  lastYear=lastYear
+  agproductFirstYear=agproductFirstYear
+  agproductLastYear=agproductLastYear
+  agcensusFirstYear=agcensusFirstYear
+  agcensusLastYear=agcensusLastYear
+  occupationLastYear=occupationLastYear
 }}
 
 <header class="section__header builder__header">
@@ -11,16 +30,11 @@
 </header>
 <section class="stream__section visualization__{{visualization}}">
   <div {{bind-attr class=":section__buildermod drawerChangeGraphIsOpen:buildermod__changegraph--open" }}>
+  <div class="buildermod__tools">
+          {{partial "partials/buildermod-drawer-change-graph"}}
+      </div>
     <header class="buildermod__header">
       <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
-      <div class="buildermod__tools">
-        <div class="btn btn--standalone btn--buildermod buildermod__tool--change_graph">
-          <div class="buildermod__tool--change-graph--label">
-            {{t 'graph_builder.change_graph.label'}}
-          </div>
-          {{partial "partials/buildermod-drawer-change-graph"}}
-        </div>
-      </div>
     </header>
     <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--fixedheight isGeo:buildermod__vizwrap--geo"}}>
       {{#unless isGeo }}

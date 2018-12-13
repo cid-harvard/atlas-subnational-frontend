@@ -45,8 +45,16 @@ var SortableTableCell = TableCell.extend({
   isModel: computed.alias('row.content.model'),
   model: computed.alias('row.content.model'),
   id: computed.alias('row.content.id'),
-  profileRoute: computed('model', function() {
-    return `${this.get('model')}.show`;
+  profileRoute: computed('model', 'controller.source', function() {
+    // Link to the profile of the model type (e.g. agproduct profile if viewing
+    // agproducts) unless we're looking at a location variable (e.g. where is
+    // this agproduct harvested), in which case link to locations.
+    var sourceIsLocation = _.contains(['cities', 'departments', 'municipalities'], this.get('controller.source'));
+    if (sourceIsLocation){
+      return 'location.show';
+    } else {
+      return `${this.get('model')}.show`;
+    }
   })
 });
 
@@ -69,8 +77,19 @@ export default EmberTableComponent.extend(TableMap, {
   attributeBindings: ['height'],
   selectionMode: 'mutiple',
   tableMap: computed('source', function() {
+    let entityType = this.get('entityType');
     let source = this.get('source');
+
     let map = this.get(`${source}Map`);
+    if (entityType === "landUse"){
+      map = this.get("landUseLocationsMap");
+    } else if (entityType === "agproduct"){
+      map = this.get("agproductLocationsMap");
+    } else if (entityType === "nonag"){
+      map = this.get("nonagLocationsMap");
+    } else if (entityType === "livestock"){
+      map = this.get("livestockLocationsMap");
+    }
 
     _.forEach(map, (mapping) => {
       if(mapping.key === 'name' || mapping.key == 'parent') { return; }
@@ -90,7 +109,7 @@ export default EmberTableComponent.extend(TableMap, {
     return this.get('tableMap').filter((column) => {
 
       // Don't ever drop the "name" column
-      if(column.key == "name"){
+      if(column.key == "name" || column.key == "parent_name"){
         return false;
       }
 
@@ -135,6 +154,9 @@ export default EmberTableComponent.extend(TableMap, {
   },
   generateCellContent: function(column) {
     return (row) => {
+      if(_.isNull(row.get(column.key))){
+        return 'N/A';
+      }
       if(_.isNumber(row.get(column.key))){
         let number = row.get(column.key);
         return this.formatNumber(number, column.key, this.get('i18n'));
@@ -144,10 +166,12 @@ export default EmberTableComponent.extend(TableMap, {
         let color = row.get('color');
         let testSpan = Ember.String.htmlSafe('<i class="ember-table-color-marker" style=background-color:' + color + '></i>');
         return testSpan + row.get(`parent_name_${this.get('i18n').display}`);
+      } else if(column.key === 'parent_name'){
+        return row.get(`parent_name_${this.get('i18n').display}`);
       } else if(column.key === 'code'){
         return row.get('code');
       } else {
-        return 'N/A';
+        return row.get(column.key);
       }
     };
   },
@@ -162,7 +186,10 @@ export default EmberTableComponent.extend(TableMap, {
       'cog',
       'coi',
       'industry_coi',
-      'population'
+      'population',
+      'yield_ratio',
+      'yield_index',
+      'average_livestock_load',
     ];
     var percentVars = [
       'share',
@@ -181,7 +208,13 @@ export default EmberTableComponent.extend(TableMap, {
       'export_value',
       'import_value',
       'monthly_wages',
-      'average_wages'
+      'average_wages',
+      'area',
+      'production_tons',
+      'land_sown',
+      'land_harvested',
+      'num_farms',
+      'num_livestock',
     ];
 
     if(_.include(wageVarsInThousands, key)){

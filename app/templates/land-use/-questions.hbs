@@ -1,0 +1,41 @@
+<div class="buildermod__questions buildermod__drawer--questions">
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'area'}}>{{t 'graph_builder.builder_questions.landUse'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'area') }}
+  <ul class="builder__questions__list">
+    <li class="builder__questions__item">
+      {{#link-to 'landUse.visualization' model.id 'departments' 'treemap' 'area' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      {{#link-to 'landUse.visualization' model.id 'departments' 'geo' 'area' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_geo builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      <div class="builder__questions__item__textwrap">
+        <span>
+          {{#link-to 'landUse.visualization' model.id 'departments' 'geo' 'area' (query-params startDate=lastYear endDate=lastYear search='null')
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.landUse.departments.area'}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+    <li class="builder__questions__item">
+      {{#link-to 'landUse.visualization' model.id 'municipalities' 'treemap' 'area' (query-params startDate=lastYear endDate=lastYear search='null')
+        class="icon-cidcon_treemap builder__questions__item__icon"
+        tagNmae='i'
+      }} {{/link-to}}
+      <div class="builder__questions__item__textwrap">
+        <span>
+          {{#link-to 'landUse.visualization' model.id 'municipalities' 'treemap' 'area' (query-params startDate=lastYear endDate=lastYear search='null')
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.landUse.municipalities.area'}}
+          {{/link-to}}
+        </span>
+      </div>
+    </li>
+  </ul>
+  {{/if}}
+</div>

@@ -1,6 +1,7 @@
 <div class="buildermod__questions buildermod__drawer--questions">
   {{#if featureToggle.showIndustries }}
-    <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.industry'}}</h4>
+    <h4 class="builder__questions__header" {{action 'togglePanel' 'industries'}}>{{t 'graph_builder.builder_questions.industry'}} <span class="builder__questions__triangle"/></h4>
+    {{#if (array-contains openPanels 'industries') }}
     <ul class="builder__questions__list">
       <li class="builder__questions__item">
         {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear search='null')
@@ -77,8 +78,10 @@
         {{/unless}}
       {{/unless}}
     </ul>
+    {{/if}}
   {{/if}}
-  <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.export'}}</h4>
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'exports'}}>{{t 'graph_builder.builder_questions.export'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'exports') }}
   <ul class="builder__questions__list">
     <li class="builder__questions__item">
       {{#link-to 'location.visualization' model.id  'products' 'treemap' 'export_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
@@ -175,11 +178,13 @@
       </li>
   {{/unless}}
   </ul>
+  {{/if}}
   {{#if featureToggle.showImports }}
-    <h4 class="builder__questions__header">{{t 'graph_builder.builder_questions.import'}}</h4>
+    <h4 class="builder__questions__header" {{action 'togglePanel' 'imports'}}>{{t 'graph_builder.builder_questions.import'}} <span class="builder__questions__triangle"/></h4>
+    {{#if (array-contains openPanels 'imports') }}
     <ul class="builder__questions__list">
       <li class="builder__questions__item">
-        {{#link-to 'location.visualization' model.id 'products' 'treemap' 'import_value' (query-params search='null' startdate=lastyear  enddate=lastyear)
+        {{#link-to 'location.visualization' model.id 'products' 'treemap' 'import_value' (query-params search='null' startDate=lastYear  endDate=lastYear)
           class="icon-cidcon_treemap builder__questions__item__icon"
           tagNmae='i'
         }}
@@ -241,5 +246,178 @@
       </li>
     {{/if}}
     </ul>
+    {{/if}}
   {{/if}}
+
+  {{#unless isMsa }}
+    <h4 class="builder__questions__header" {{action 'togglePanel' 'rural'}}>{{t 'graph_builder.builder_questions.rural'}} <span class="builder__questions__triangle"/></h4>
+    {{#if (array-contains openPanels 'rural') }}
+    <ul class="builder__questions__list">
+
+
+      <li class="builder__questions__item">
+        {{#link-to 'location.visualization' model.id 'landUses' 'treemap' 'area' (query-params search='null' startDate=agcensusLastYear  endDate=agcensusLastYear)
+          class="icon-cidcon_treemap builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        <div class="builder__questions__item__textwrap">
+          <span>
+            {{#link-to 'location.visualization' model.id 'landUses' 'treemap' 'area' (query-params search='null' startDate=agcensusLastYear  endDate=agcensusLastYear)
+              class="builder__questions__question"}}
+              {{t (is-concat 'graph_builder.page_title.location.landUses.area.' model.level)}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+
+      <li class="builder__questions__item">
+        {{#link-to 'location.visualization' model.id 'farmtypes' 'treemap' 'num_farms' (query-params search='null' startDate=agcensusLastYear  endDate=agcensusLastYear)
+          class="icon-cidcon_treemap builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        <div class="builder__questions__item__textwrap">
+          <span>
+            {{#link-to 'location.visualization' model.id 'farmtypes' 'treemap' 'num_farms' (query-params search='null' startDate=agcensusLastYear  endDate=agcensusLastYear)
+              class="builder__questions__question"}}
+              {{t (is-concat 'graph_builder.page_title.location.farmtypes.num_farms.' model.level)}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+
+
+      <li class="builder__questions__item">
+        {{#link-to 'location.visualization' model.id 'agproducts' 'treemap' 'land_sown' (query-params search='null' startDate=agproductLastYear  endDate=agproductLastYear)
+          class="icon-cidcon_treemap builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        {{#link-to 'location.visualization' model.id 'agproducts' 'multiples' 'land_sown' (query-params search='null' startDate=agproductFirstYear  endDate=agproductLastYear)
+          class="icon-cidcon_multiples builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        <div class="builder__questions__item__textwrap">
+          <span>
+            {{#link-to 'location.visualization' model.id 'agproducts' 'treemap' 'land_sown' (query-params search='null' startDate=agproductLastYear  endDate=agproductLastYear)
+              class="builder__questions__question"}}
+              {{t (is-concat 'graph_builder.page_title.location.agproducts.land_sown.' model.level)}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+
+      <li class="builder__questions__item">
+        {{#link-to 'location.visualization' model.id 'agproducts' 'treemap' 'land_harvested' (query-params search='null' startDate=agproductLastYear  endDate=agproductLastYear)
+          class="icon-cidcon_treemap builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        {{#link-to 'location.visualization' model.id 'agproducts' 'multiples' 'land_harvested' (query-params search='null' startDate=agproductFirstYear  endDate=agproductLastYear)
+          class="icon-cidcon_multiples builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        <div class="builder__questions__item__textwrap">
+          <span>
+            {{#link-to 'location.visualization' model.id 'agproducts' 'treemap' 'land_harvested' (query-params search='null' startDate=agproductLastYear  endDate=agproductLastYear)
+              class="builder__questions__question"}}
+              {{t (is-concat 'graph_builder.page_title.location.agproducts.land_harvested.' model.level)}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+
+      <li class="builder__questions__item">
+        {{#link-to 'location.visualization' model.id 'agproducts' 'treemap' 'production_tons' (query-params search='null' startDate=agproductLastYear  endDate=agproductLastYear)
+          class="icon-cidcon_treemap builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        {{#link-to 'location.visualization' model.id 'agproducts' 'multiples' 'production_tons' (query-params search='null' startDate=agproductFirstYear  endDate=agproductLastYear)
+          class="icon-cidcon_multiples builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        <div class="builder__questions__item__textwrap">
+          <span>
+            {{#link-to 'location.visualization' model.id 'agproducts' 'treemap' 'production_tons' (query-params search='null' startDate=agproductLastYear  endDate=agproductLastYear)
+              class="builder__questions__question"}}
+              {{t (is-concat 'graph_builder.page_title.location.agproducts.production_tons.' model.level)}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+
+      <li class="builder__questions__item">
+        {{#link-to 'location.visualization' model.id 'agproducts' 'multiples' 'yield_ratio' (query-params search='null' startDate=agproductFirstYear  endDate=agproductLastYear)
+          class="icon-cidcon_multiples builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        <div class="builder__questions__item__textwrap">
+          <span>
+            {{#link-to 'location.visualization' model.id 'agproducts' 'multiples' 'yield_ratio' (query-params search='null' startDate=agproductFirstYear  endDate=agproductLastYear)
+              class="builder__questions__question"}}
+              {{t (is-concat 'graph_builder.page_title.location.agproducts.yield_ratio.' model.level)}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+
+      <li class="builder__questions__item">
+        {{#link-to 'location.visualization' model.id 'nonags' 'treemap' 'num_farms' (query-params search='null' startDate=agcensusLastYear  endDate=agcensusLastYear)
+          class="icon-cidcon_treemap builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        <div class="builder__questions__item__textwrap">
+          <span>
+            {{#link-to 'location.visualization' model.id 'nonags' 'treemap' 'num_farms' (query-params search='null' startDate=agcensusLastYear  endDate=agcensusLastYear)
+              class="builder__questions__question"}}
+              {{t (is-concat 'graph_builder.page_title.location.nonags.num_farms.' model.level)}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+
+
+      <li class="builder__questions__item">
+        {{#link-to 'location.visualization' model.id 'livestock' 'treemap' 'num_livestock' (query-params search='null' startDate=agcensusLastYear  endDate=agcensusLastYear)
+          class="icon-cidcon_treemap builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        <div class="builder__questions__item__textwrap">
+          <span>
+            {{#link-to 'location.visualization' model.id 'livestock' 'treemap' 'num_livestock' (query-params search='null' startDate=agcensusLastYear  endDate=agcensusLastYear)
+              class="builder__questions__question"}}
+              {{t (is-concat 'graph_builder.page_title.location.livestock.num_livestock.' model.level)}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+
+      <li class="builder__questions__item">
+        {{#link-to 'location.visualization' model.id 'livestock' 'treemap' 'num_farms' (query-params search='null' startDate=agcensusLastYear  endDate=agcensusLastYear)
+          class="icon-cidcon_treemap builder__questions__item__icon"
+          tagNmae='i'
+        }}
+        {{/link-to}}
+        <div class="builder__questions__item__textwrap">
+          <span>
+            {{#link-to 'location.visualization' model.id 'livestock' 'treemap' 'num_farms' (query-params search='null' startDate=agcensusLastYear  endDate=agcensusLastYear)
+              class="builder__questions__question"}}
+              {{t (is-concat 'graph_builder.page_title.location.livestock.num_farms.' model.level)}}
+            {{/link-to}}
+          </span>
+        </div>
+      </li>
+
+
+    </ul>
+    {{/if}}
+  {{/unless}}
 </div>

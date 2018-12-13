@@ -1,4 +1,5 @@
 <div class="stream___head__menu">
+  <div class="stream__head__dismiss" {{action 'toggleIndex'}}>✕</div>
   <div class="menu-section menu-section__thin">
     <h5 class='menu-section__group-name'>{{t 'header.overview'}}</h5>
     <ul class="menu-section__group">
@@ -124,4 +125,68 @@
         </ul>
     </div>
   {{/if}}
+
+  {{#unless isMsa }}
+    <div class="menu-section">
+      <h5 class='menu-section__group-name'>{{t 'header.rural'}}</h5>
+      <ul class="menu-section__group">
+        {{#link-to 'location.visualization' model.id 'agproducts' 'multiples' 'land_sown' (query-params search='null' startDate=agproductFirstYear  endDate=agproductLastYear)
+          tagName='li'
+          class="menu-section__link"}}
+          {{t 'header.land_sown'}}
+        {{/link-to}}
+      </ul>
+      <ul class="menu-section__group">
+        {{#link-to 'location.visualization' model.id 'agproducts' 'multiples' 'land_harvested' (query-params search='null' startDate=agproductFirstYear  endDate=agproductLastYear)
+          tagName='li'
+          class="menu-section__link"}}
+          {{t 'header.land_harvested'}}
+        {{/link-to}}
+      </ul>
+      <ul class="menu-section__group">
+        {{#link-to 'location.visualization' model.id 'agproducts' 'multiples' 'production_tons' (query-params search='null' startDate=agproductFirstYear  endDate=agproductLastYear)
+          tagName='li'
+          class="menu-section__link"}}
+          {{t 'header.production_tons'}}
+        {{/link-to}}
+      </ul>
+      <ul class="menu-section__group">
+        {{#link-to 'location.visualization' model.id 'agproducts' 'multiples' 'yield_ratio' (query-params search='null' startDate=agproductFirstYear  endDate=agproductLastYear)
+          tagName='li'
+          classNameBindings="locationProductOpportunity:menu-section__link--active"
+          class="menu-section__link"}}
+          {{t 'header.yield_ratio'}}
+        {{/link-to}}
+      </ul>
+      <ul class="menu-section__group">
+        {{#link-to 'location.visualization' model.id 'livestock' 'treemap' 'num_livestock' (query-params search='null' startDate=agcensusLastYear  endDate=agcensusLastYear)
+          tagName='li'
+          class="menu-section__link"}}
+          {{t 'header.livestock.num_livestock'}}
+        {{/link-to}}
+      </ul>
+      <ul class="menu-section__group">
+        {{#link-to 'location.visualization' model.id 'livestock' 'treemap' 'num_farms' (query-params search='null' startdate=agcensusLastYear  enddate=agcensusLastYear)
+          tagname='li'
+          class="menu-section__link"}}
+          {{t 'header.livestock.num_farms'}}
+        {{/link-to}}
+      </ul>
+      <ul class="menu-section__group">
+        {{#link-to 'location.visualization' model.id 'landUses' 'treemap' 'area' (query-params search='null' startdate=agcensusLastYear  enddate=agcensusLastYear)
+          tagname='li'
+          class="menu-section__link"}}
+          {{t 'header.landUses.area'}}
+        {{/link-to}}
+      </ul>
+      <ul class="menu-section__group">
+        {{#link-to 'location.visualization' model.id 'farmtypes' 'treemap' 'num_farms' (query-params search='null' startdate=agcensusLastYear  enddate=agcensusLastYear)
+          tagname='li'
+          class="menu-section__link"}}
+          {{t 'header.farmtypes.area'}}
+        {{/link-to}}
+      </ul>
+    </div>
+  {{/unless}}
+
 </div>

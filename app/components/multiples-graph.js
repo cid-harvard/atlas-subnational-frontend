@@ -32,6 +32,7 @@ export default Ember.Component.extend({
       d.name = get(d.values[0], `name_short_${this.get('i18n').display}`) || d.key;
       d.color = get(d.values[0], 'color') || '#ccc1b9';
       d.code = get(d.values[0], 'code');
+      d.values = _.sortBy(d.values, "year");
     });
     return _.sortBy(nest, (d) => {
       return -_.sum(d.values, varDependent);
@@ -110,7 +111,7 @@ export default Ember.Component.extend({
       .attr('class', 'chart__title')
       .on('click', expandTitle)
       .text((d) => {
-        if(get(d, 'code') && dataType != 'locations') {
+        if(get(d, 'code') && !_.contains(['landUses', 'farmtypes', 'agproducts', 'nonags', 'livestock', 'locations'], this.get('dataType'))) {
           return `${get(d, 'name')} - ${get(d, 'code')}`;
         } else {
           return get(d, 'name');
@@ -235,10 +236,13 @@ export default Ember.Component.extend({
         },true)
         .attr('dx', function() {
           if (date === parseInt(xExtent[0])) {
-            return '-4';
+            return '30';
           } else if (date === parseInt(xExtent[1])) {
-            return '4';
+            return '-30';
           }
+        })
+        .attr('dy', function() {
+          return '-5';
         })
         .text(function(d) {
           index = bisect(d.values, date, 0, d.values.length - 1);

@@ -1,4 +1,15 @@
-{{partial 'location/questions'}}
+{{navigation-questions
+  entityType=entityType
+  model=model
+  isDepartment=isDepartment
+  isMunicipality=isMunicipality
+  firstYear=firstYear
+  lastYear=lastYear
+  agproductFirstYear=agproductFirstYear
+  agproductLastYear=agproductLastYear
+  agcensusFirstYear=agcensusFirstYear
+  agcensusLastYear=agcensusLastYear
+}}
 {{#if description }}
   <p class="section__p">
     {{description}}
@@ -9,6 +20,8 @@
   {{partial 'location/department-dotplots'}}
 {{else if isMsa}}
   {{partial 'location/subregion-dotplots'}}
+{{else if isMunicipality}}
+  {{partial 'location/municipality-dotplots'}}
 {{/if}}
 
 {{#if featureToggle.showIndustries }}

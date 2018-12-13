@@ -9,6 +9,14 @@ export default Ember.Controller.extend({
 
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
+  censusYear: computed.alias('featureToggle.census_year'),
+  agproductFirstYear: computed.alias('featureToggle.year_ranges.agproduct.first_year'),
+  agproductLastYear: computed.alias('featureToggle.year_ranges.agproduct.last_year'),
+  agcensusFirstYear: computed.alias('featureToggle.year_ranges.agcensus.first_year'),
+  agcensusLastYear: computed.alias('featureToggle.year_ranges.agcensus.last_year'),
+  occupationLastYear: computed.alias('featureToggle.year_ranges.occupation.last_year'),
+
+  entityType: "location",
 
   validTimeseries: computed.alias('model.timeseries'),
   dotplotData: computed.oneWay('model.dotplotData'),
@@ -20,6 +28,9 @@ export default Ember.Controller.extend({
   hasOccupationData: computed.notEmpty('model.occupations'),
   hasProductsData: computed.notEmpty('model.productsData'),
   hasIndustriesData: computed.notEmpty('model.industriesData'),
+
+  hasAgproductsData: computed.notEmpty('model.agproductsData'),
+  hasLanduseData: computed.notEmpty('model.landusesData'),
 
   isCountry: computed.equal('model.level', 'country'),
   isDepartment: computed.equal('model.level','department'),

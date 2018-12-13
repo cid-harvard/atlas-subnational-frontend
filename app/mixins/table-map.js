@@ -6,7 +6,7 @@ export default Ember.Mixin.create({
   columnSettingsMap: [
     { key: 'average_wages', type: 'int', savedWidth: 290 },
     { key: 'avg_wage', type: 'int', savedWidth: 290 },
-    { key: 'code', savedWidth: 100 },
+    { key: 'code', savedWidth: 120 },
     { key: 'cog' , type: 'int', savedWidth: 200 },
     { key: 'coi' , type: 'int', savedWidth: 280 },
     { key: 'industry_coi' , type: 'int', savedWidth: 280 },
@@ -19,10 +19,11 @@ export default Ember.Mixin.create({
     { key: 'export_value', type: 'int', savedWidth: 180 },
     { key: 'import_value', type: 'int', savedWidth: 180 },
     { key: 'monthly_wages', type: 'int', savedWidth: 290 },
-    { key: 'name', copy: 'export', savedWidth: 200 },
+    { key: 'name', copy: 'export', savedWidth: 230 },
     { key: 'num_establishments' , type: 'int', savedWidth: 200 },
     { key: 'num_vacancies', type: 'int', savedWidth: 100 },
     { key: 'parent', savedWidth: 270 },
+    { key: 'parent_name', savedWidth: 200 },
     { key: 'rca', type: 'int', savedWidth: 280 },
     { key: 'wages', type: 'int', savedWidth: 330 },
     { key: 'year' , type: 'int', savedWidth: 80 },
@@ -32,7 +33,18 @@ export default Ember.Mixin.create({
     { key: 'gdp_pc_real' , type: 'int', savedWidth: 200 },
     { key: 'gdp_real' , type: 'int', savedWidth: 190 },
     { key: 'share' , type: 'int', savedWidth: 190 },
-    { key: 'population' , type: 'int', savedWidth: 180 }
+    { key: 'population' , type: 'int', savedWidth: 180 },
+    { key: 'num_farms' , type: 'int', savedWidth: 270 },
+    { key: 'num_farms_ag' , type: 'int', savedWidth: 420 },
+    { key: 'num_farms_nonag' , type: 'int', savedWidth: 370 },
+    { key: 'num_livestock' , type: 'int', savedWidth: 200 },
+    { key: 'average_livestock_load' , type: 'int', savedWidth: 220 },
+    { key: 'land_sown' , type: 'int', savedWidth: 180 },
+    { key: 'land_harvested' , type: 'int', savedWidth: 180 },
+    { key: 'production_tons' , type: 'int', savedWidth: 170 },
+    { key: 'yield_ratio' , type: 'int', savedWidth: 260 },
+    { key: 'yield_index' , type: 'int', savedWidth: 260 },
+    { key: 'area' , type: 'int', savedWidth: 180 },
   ],
   industryClassesMap: [
     { key: 'code' },
@@ -50,12 +62,15 @@ export default Ember.Mixin.create({
       { key: 'parent' },
       { key: 'year' },
       { key: 'export_value' },
-      { key: 'export_num_plants' },
       { key: 'export_rca' },
       { key: 'complexity' },
       { key: 'distance' },
       { key: 'cog' }
     ];
+
+    if(!this.get('featureToggle.isPeru')) {
+      columns.splice(5, 0, {key: 'export_num_plants'});
+    }
 
     if(this.get('featureToggle.showImports')) {
       return columns.concat({key: 'import_value'});
@@ -68,6 +83,7 @@ export default Ember.Mixin.create({
     let columns = [
       { key: 'code' },
       { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'parent.location' },
       { key: 'year' },
       { key: 'export_value' },
       { key: 'export_num_plants' },
@@ -91,6 +107,13 @@ export default Ember.Mixin.create({
 
     return columns;
   }),
+  municipalitiesMap: [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'parent.location' },
+      { key: 'year' },
+      { key: 'area' },
+  ],
   industriesMap: [
     { key: 'code' },
     { key: 'name', copy: 'industry' },
@@ -140,6 +163,98 @@ export default Ember.Mixin.create({
     { key: 'average_wages' },
     { key: 'share' }
   ],
+  livestockMap: [
+    { key: 'name', copy: 'livestock' },
+    { key: 'num_farms' },
+    { key: 'num_livestock' },
+  ],
+  livestockLocationsMap: computed('source', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'department' },
+      { key: 'num_farms' },
+      { key: 'num_livestock' },
+    ];
+
+    if(this.get('source') === "departments") {
+      return _.filter(columns, function(x){ return x.key !== "parent_name"; });
+    } else {
+      return columns;
+    }
+  }),
+  agproductsMap: [
+    { key: 'name', copy: 'agproduct' },
+    { key: 'year' },
+    { key: 'land_sown' },
+    { key: 'land_harvested' },
+    { key: 'production_tons' },
+    { key: 'yield_ratio' },
+    { key: 'yield_index' }
+  ],
+  agproductLocationsMap: computed('source', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'department' },
+      { key: 'year' },
+      { key: 'land_sown' },
+      { key: 'land_harvested' },
+      { key: 'production_tons' },
+      { key: 'yield_ratio' },
+      { key: 'yield_index' }
+    ];
+
+    if(this.get('source') === "departments") {
+      return _.filter(columns, function(x){ return x.key !== "parent_name"; });
+    } else {
+      return columns;
+    }
+  }),
+  nonagsMap: [
+    { key: 'name', copy: 'nonag' },
+    { key: 'num_farms' },
+    { key: 'num_farms_ag' },
+    { key: 'num_farms_nonag' },
+  ],
+  nonagLocationsMap: computed('source', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'department' },
+      { key: 'num_farms' },
+      { key: 'num_farms_ag' },
+      { key: 'num_farms_nonag' },
+    ];
+
+    if(this.get('source') === "departments") {
+      return _.filter(columns, function(x){ return x.key !== "parent_name"; });
+    } else {
+      return columns;
+    }
+  }),
+  landUsesMap: [
+    { key: 'name', copy: 'land_use' },
+    { key: 'area' },
+  ],
+  landUseLocationsMap: computed('source', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'department' },
+      { key: 'area' },
+    ];
+
+    if(this.get('source') === "departments") {
+      return _.filter(columns, function(x){ return x.key !== "parent_name"; });
+    } else {
+      return columns;
+    }
+  }),
+  farmtypesMap: [
+    { key: 'name', copy: 'farmtype' },
+    { key: 'num_farms' },
+  ],
   partnersMap: computed('featureToggle.showImports', function() {
     let columns = [
       { key: 'code' },
@@ -161,6 +276,7 @@ export default Ember.Mixin.create({
       { key: 'year' },
       { key: 'eci' },
       { key: 'coi' },
+      { key: 'yield_index' },
       { key: 'gdp_pc_real' },
       { key: 'gdp_real' },
       { key: 'population' },

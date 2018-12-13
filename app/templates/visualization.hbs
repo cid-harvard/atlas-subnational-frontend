@@ -3,23 +3,39 @@
   type=entityType
   source=source
   variable=variable
+  firstYear=firstYearForMenu
+  lastYear=lastYearForMenu
+  agproductFirstYear=agproductFirstYear
+  agproductLastYear=agproductLastYear
+  agcensusFirstYear=agcensusFirstYear
+  agcensusLastYear=agcensusLastYear
+  occupationLastYear=occupationLastYear
   metaData=model.metaData
+}}
+{{navigation-questions
+  entityType=entityType
+  model=model.entity
+  isDepartment=isDepartment
+  isMunicipality=isMunicipality
+  firstYear=firstYearForMenu
+  lastYear=lastYearForMenu
+  agproductFirstYear=agproductFirstYear
+  agproductLastYear=agproductLastYear
+  agcensusFirstYear=agcensusFirstYear
+  agcensusLastYear=agcensusLastYear
+  occupationLastYear=occupationLastYear
 }}
 <header class="section__header builder__header">
   <h3 class="section__head question__head">{{pageTitle}}</h3>
 </header>
 <section class="stream__section visualization__{{visualization}}">
   <div {{bind-attr class=":section__buildermod drawerChangeGraphIsOpen:buildermod__changegraph--open" }}>
+    {{#unless hideVisualization }}
+  <div class="buildermod__tools">
+          {{partial "partials/buildermod-drawer-change-graph"}}
+      </div>
     <header class="buildermod__header">
       <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
-      <div class="buildermod__tools">
-        <div class="btn btn--standalone btn--buildermod buildermod__tool--change_graph">
-          <div class="buildermod__tool--change-graph--label">
-            {{t 'graph_builder.change_graph.label'}}
-          </div>
-          {{partial "partials/buildermod-drawer-change-graph"}}
-        </div>
-      </div>
     </header>
     <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--fixedheight isGeo:buildermod__vizwrap--geo"}}>
       {{#unless isGeo }}
@@ -33,6 +49,7 @@
         data=filteredData
         dataType=source
         varDependent=varDependent
+        scale=scale
         startDate=startDate
         dateExtent=dateExtent
         endDate=endDate
@@ -46,7 +63,11 @@
       }}
 
       {{#if needsLegend }}
-        {{component 'visualization-legend' legend=legend }}
+        {{#unless isGeo }}
+            {{component 'visualization-legend' legend=legend }}
+        {{else}}
+            {{component 'visualization-legend-geomap' legend=geoLegend }}
+        {{/unless}}
       {{/if}}
 
       <div class="buildermod__settings__wrap">
@@ -54,12 +75,14 @@
           classNames='buildermod__settings'
           startDate=startDate
           endDate=endDate
+          dateExtent=dateExtent
           canYearToggle=canYearToggle
           isScatter=isScatter
           rcaFilter=rcaFilter
         }}
       </div>
     </div>
+    {{/unless}}
     {{component 'visualization-explanation'
       text=visualizationExplanation
     }}
@@ -68,11 +91,13 @@
         name=builderModHeader
         data=immutableData
         source=source
+        entityType=entityType
         pageTitle=pageTitle
       }}
       {{component 'graphbuilder-table'
         data=filteredData
         source=source
+        entityType=entityType
         search=search
       }}
     </div>

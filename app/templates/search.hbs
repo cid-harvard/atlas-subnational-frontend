@@ -23,6 +23,19 @@
     {{action 'query' search}} >
 </form>
 
+{{#if landuseResults.length}}
+  <h3 class="section__head results__subhead">{{t 'search.results_landuses'}}</h3>
+  <ul class="results__list">
+    {{#each result in landuseResults}}
+      {{search-result
+        result=result
+        tagName="li"
+        class="results__item"
+        levelOnly=true
+      }}
+    {{/each}}
+  </ul>
+{{/if}}
 {{#if locationResults.length}}
   <h3 class="section__head results__subhead">{{t 'search.results_locations'}}</h3>
   <ul class="results__list">
@@ -49,6 +62,45 @@
     {{/each}}
   </ul>
 {{/if}}
+{{#if agproductResults.length}}
+  <h3 class="section__head results__subhead">{{t 'search.results_agproducts'}}</h3>
+  <ul class="results__list">
+    {{#each result in agproductResults}}
+      {{search-result
+        result=result
+        tagName="li"
+        class="results__item"
+        levelOnly=true
+      }}
+    {{/each}}
+  </ul>
+{{/if}}
+{{#if nonagResults.length}}
+  <h3 class="section__head results__subhead">{{t 'search.results_nonag'}}</h3>
+  <ul class="results__list">
+    {{#each result in nonagResults}}
+      {{search-result
+        result=result
+        tagName="li"
+        class="results__item"
+        levelOnly=true
+      }}
+    {{/each}}
+  </ul>
+{{/if}}
+{{#if livestockResults.length}}
+  <h3 class="section__head results__subhead">{{t 'search.results_livestock'}}</h3>
+  <ul class="results__list">
+    {{#each result in livestockResults}}
+      {{search-result
+        result=result
+        tagName="li"
+        class="results__item"
+        levelOnly=true
+      }}
+    {{/each}}
+  </ul>
+{{/if}}
 {{#if industryResults.length}}
   <h3 class="section__head results__subhead">{{t 'search.results_industries'}}</h3>
   <ul class="results__list">
@@ -61,5 +113,25 @@
     {{/each}}
   </ul>
 {{/if}}
+
+{{#if modelCategorized }}
+<div class="results__reference">
+  <div class="results__reference__menu">
+  {{#each modelCategorizedKeys as |key|}}
+      {{#if (is-equal key referenceKey)}}
+           <div class="results__reference__menuitem results__reference__menuitem__active" {{action 'toggleReferenceKey' key}}>{{t (is-concat 'header.' key)}}</div>
+       {{else}}
+           <div class="results__reference__menuitem" {{action 'toggleReferenceKey' key}}>{{t (is-concat 'header.' key)}}</div>
+       {{/if}}
+  {{/each}}
+  </div>
+  <ul class="results__reference__body">
+  {{#each sortedReferenceBody as |item|}}
+      {{#link-to (is-concat item.profileName ".show") item.id tagName="li"}}{{item.name}}{{/link-to}}
+  {{/each}}
+  </ul>
+</div>
+{{/if}}
+
 <p class='results__copy results__copy--postscript'>{{t 'search.didnt_find'}}</p>
 
