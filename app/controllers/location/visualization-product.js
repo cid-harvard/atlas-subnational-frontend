@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
 
   isFixedHeight: computed('model.visualization', function() {
     let vis = this.get('model.visualization');
-     return _.contains(['geo', 'treemap', 'scatter', 'similarity'], vis) ? true : false;
+     return _.contains(['geo', 'treemap', 'scatter', 'similarity', 'piescatter'], vis) ? true : false;
   }),
   isOneYear: computed('startDate', 'endDate', function() {
     return this.get('startDate') == this.get('endDate');
@@ -66,7 +66,7 @@ export default Ember.Controller.extend({
   }),
   needsLegend: computed('model.visualization', function() {
     let vis = this.get('model.visualization');
-    return _.contains(['scatter', 'similarity'], vis) ? true : false;
+    return _.contains(['scatter', 'similarity', 'piescatter'], vis) ? true : false;
   }),
   name: computed('entityType', 'model.entity.name', 'i18n.locale', function() {
     if(this.get('entityType') === 'location') {
@@ -78,7 +78,7 @@ export default Ember.Controller.extend({
   i18nString: computed('entityType', 'entity', 'variable', 'i18n.locale', function() {
     let i18nString = `${this.get('entityType')}.${this.get('source')}`;
     let visualization = this.get('visualization');
-    if(visualization === 'scatter' || visualization === 'similarity') {
+    if(visualization === 'scatter' || visualization === 'similarity' || visualization === 'piescatter') {
       return `${i18nString}.${visualization}`;
     }
     return `${i18nString}.${this.get('variable')}`;
@@ -123,7 +123,8 @@ export default Ember.Controller.extend({
       { type: 'treemap', description: 'graph_builder.change_graph.treemap_description', available: true },
       { type: 'geo', description: 'graph_builder.change_graph.geo_description', available: false },
       { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: false },
-      { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false }
+      { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: false },
+      { type: 'piescatter', description: 'graph_builder.change_graph.scatter_description', available: false }
     ];
   }),
   varDependent: computed.alias('variable'),
