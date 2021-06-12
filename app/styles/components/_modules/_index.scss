@@ -9,7 +9,7 @@
 }
 
 .index__section {
-  padding: 0 $baseSpace * 3;
+  padding: 0;
   display: relative;
 }
 
@@ -44,7 +44,6 @@
 .stream__head.index__head {
   margin-bottom: $baseSpace;
   max-width: 100rem;
-  font-size: $fontXLarge;
 }
 
 .index__search__wrap {
@@ -186,8 +185,9 @@
 // Research featured in media grid
 .index__featuredin__wrap {
   margin: 0 $baseSpace*3;
-  background: $colorBrown300;
+  background: $colorBase;
   padding: $baseSpace * 2;
+  margin-top: 5rem !important;
 }
 
 .index__featuredin__list {
@@ -221,7 +221,10 @@
   margin: 0 auto;
 
   .section__head {
-    margin: $baseSpace*1.75 0 $baseSpace 0;
+    margin: $baseSpace*3 0 $baseSpace*3 0;
+    color: $colorYellow;
+    text-transform: uppercase;
+    font-size: 5rem;
   }
 }
 
@@ -329,7 +332,7 @@
 .index__questions__link {
   font-size: $fontSmall;
   display: block;
-  
+
   &.index__questions__link--viewall {
     font-style: italic;
     font-weight: 400;
@@ -404,4 +407,98 @@
 
 .index__featuredin__wrap {
   margin: 0;
+}
+
+.stream__section__wrap__yellow{
+  color: $colorYellow;
+  text-transform: uppercase;
+  font-size: 4rem;
+}
+
+.stream__section__wrap__white{
+  color: $colorWhite;
+  text-transform: uppercase;
+  font-size: 5rem;
+}
+
+.stream__section__subhead__wrap__white{
+  color: $colorWhite;
+  text-transform: uppercase;
+}
+
+.update__sections__head__wrap__white{
+  color: $colorWhite;
+  text-transform: uppercase;
+  font-size: 3rem;
+}
+
+.dropdown-update .ui-selectmenu-button{
+  box-shadow: none;
+  width: 100% !important;
+  background: none;
+  color: $colorWhite;
+  border: solid 1px $colorWhite;
+  border-radius: 3px;
+}
+
+.ui-selectmenu-button.ui-state-hover{
+  background: none !important;
+  color: $colorWhite;
+  opacity: 0.8;
+}
+
+.ui-menu-item{
+  background: $colorBase !important;
+  color: $colorWhite !important;
+}
+
+.section__message_dropbox{
+  color: $colorYellow;
+}
+
+.section__card-cian-sophistication_route{
+  background: $colorSecondary;
+  height: 100%;
+  padding: 4rem;
+}
+
+.section__card-cian-sophistication_route > h1,p{
+  color: $colorBlack;
+}
+
+.section__card-yellow > h1{
+  color: $colorBlack;
+}
+
+.section__card-yellow{
+  background: $colorYellow;
+  padding: 4rem;
+}
+
+.bordered-div-yellow{
+  border: solid 1px $colorYellow;
+}
+
+.section__card__wrap__yellow{
+  color: $colorYellow;
+  text-transform: uppercase;
+  font-size: 8rem;
+}
+
+.section__card__wrap__white{
+  color: $colorWhite;
+  text-transform: uppercase;
+  font-size: 8rem;
+}
+
+.section__card__profile{
+  margin-top: 10rem;
+  margin-left: 8rem;
+  button{
+    margin-top: 6rem;
+  }
+}
+
+.btn-large{
+  font-size: 3rem;
 }

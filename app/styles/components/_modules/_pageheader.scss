@@ -5,26 +5,24 @@
 **/
 
 .header--pageheader {
-  background: $colorRed;
-  padding: 0 $baseSpace;
+  background: $colorBase;
+  color: $colorWhite;
 }
 
 .pageheader__wrap {
-  padding: $baseSpace/2 0;
   position: relative;
-  max-width: $xlarge;
   margin: auto;
+  padding: 6rem 12rem;
 }
 
 // Branding
 
 .branding {
-  height: 30px;
+  height: 100%;
 }
 
 .branding__logo {
-  width: 12rem;
-  margin-top: -5px;
+  height: 4rem;
 }
 
 .branding__slogan {
@@ -216,11 +214,11 @@
 
   .index__header__wrap {
     padding: $baseSpace*1.5 0 0 0;
-    max-width: $baseSpace*20;
+    max-width: fit-content;
   }
 
   .stream__head {
-    color: $colorRed;
+    color: $colorWhite;
     letter-spacing: 0;
     font-size: $fontXLarge;
     margin: $fontXLarge/3 0 $fontXLarge/3 0;
@@ -268,7 +266,7 @@
   background-color: $colorRed;
 }
 
-.header--pageheader--home .pageheader__home__cap { display: block; }
+.header--pageheader--home .pageheader__home__cap { display: none; }
 
 .stream__section .pageheader__home__cap {
   display: block;
@@ -296,4 +294,32 @@
   background: $colorWhite;
 }
 
+.bordered-div{
+    border: solid 1px $colorWhite;
+}
 
+.pageheader__menu__item{
+  color: $colorWhite;
+  text-transform: uppercase;
+  &:hover {
+    opacity: 0.8;
+    color: $colorWhite;
+    text-decoration: none;
+  }
+}
+
+.index__header__wrap .index__header .stream__head{
+  color: $colorYellow;
+  text-transform: uppercase;
+}
+
+.index__header__wrap .index__header .stream__subhead{
+  color: $colorWhite;
+  text-transform: uppercase;
+  font-size: $fontLarge;
+}
+
+.btn btn-outline-warning{
+  color: $colorYellow;
+  border-color: $colorYellow;
+}

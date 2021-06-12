@@ -6,7 +6,7 @@
 
 .search__wrap {
   display: inline-block;
-  width: 60%;
+  width: 100%;
   position: relative;
 
   .btn--search, .btn--buildermod {
@@ -32,6 +32,7 @@
   width: 100%;
   height: 100%;
   font-family: $sans;
+  border: solid 1px $colorWhite;
 
   &:active, &:focus {
     outline: 0;

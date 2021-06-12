@@ -4,7 +4,7 @@ const {computed, get} = Ember;
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
-
+  needs: ['search'],
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
   agcensusLastYear: computed.alias('featureToggle.year_ranges.agcensus.last_year'),
