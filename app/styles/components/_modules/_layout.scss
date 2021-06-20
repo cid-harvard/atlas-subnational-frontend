@@ -5,9 +5,10 @@
 **/
 
 .body {
-  // height: 100%;
+  width: 100%;
   background: $colorBase;
-  border-bottom: 5px solid $colorRed;
+  padding:0;
+  margin: 0;
 }
 
 .stream {

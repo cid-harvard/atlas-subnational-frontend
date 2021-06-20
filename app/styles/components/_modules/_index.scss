@@ -7,7 +7,6 @@
 .index {
   // background: $colorBrown200;
 }
-
 .index__section {
   padding: 0;
   display: relative;
@@ -224,7 +223,7 @@
     margin: $baseSpace*3 0 $baseSpace*3 0;
     color: $colorYellow;
     text-transform: uppercase;
-    font-size: 5rem;
+    font-size: 4rem;
   }
 }
 
@@ -424,6 +423,7 @@
 .stream__section__subhead__wrap__white{
   color: $colorWhite;
   text-transform: uppercase;
+  padding-right: 1rem;
 }
 
 .update__sections__head__wrap__white{
@@ -492,10 +492,10 @@
 }
 
 .section__card__profile{
-  margin-top: 10rem;
-  margin-left: 8rem;
+  margin-top: 5rem;
+  margin-left: 3rem;
   button{
-    margin-top: 6rem;
+    margin-top: 4rem;
   }
 }
 

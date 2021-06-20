@@ -3,7 +3,7 @@
     <section class="stream__section index__section index__questions__wrap">
       <div class="stream__section__wrap mb-5">
 
-        <div class="container">
+        <div class="container-fluid" style="padding: 4vh;">
           <div class="row">
             <div class="col-sm-12 col-md-6">
               <h1 class="stream__section__wrap__yellow">{{ t 'index.header_h1_p1' }}</h1>
@@ -11,7 +11,7 @@
             </div>
             <div class="col-sm-12 col-md-6">
               <h2 class="stream__section__subhead__wrap__white mb-5">{{ t 'index.header_subhead' }}</h2>
-              <form class="search__wrap">
+              <form class="search__wrap ">
         <div class="search__field__wrap">
           {{input
             class="search"
@@ -35,17 +35,17 @@
 
         <h1 class="section__head text-center">{{ t 'index.questions_head_p1' }}</h1>
 
-        <div class="row mt-5">
-          <div class="col-sm-12 col-md-6" style="padding-left: 8rem;">
+        <div class="row mt-5" style="padding-right: 4vw; padding-left:4vw ">
+          <div class="col-sm-12 col-md-6">
 
-            <h1 class="update__sections__head__wrap__white mb-5"><strong>{{ t 'index.questions_head_p2' }}</strong></h1>
+            <h1 class="update__sections__head__wrap__white mb-5" style=" text-align: center"><strong>{{ t 'index.questions_head_p2' }}</strong></h1>
 
             {{#if showLocations }}
             <div class="row">
-              <div class="col-sm-12 col-md-6">
+              <div class="col-sx-6 col-md-6">
                 <h2 class="section__message_dropbox text-right mt-4">{{ t 'index.location_head' }}</h2>
               </div>
-              <div class="col-sm-12 col-md-6">
+              <div class="col-sx-6  col-md-6">
                 {{select-dropdown collection=sortedLocations selected=sortedLocations.[0].id type='location' class="dropdown-update"}}
               </div>
             </div>
@@ -53,10 +53,10 @@
 
             {{#if showIndustries }}
             <div class="row">
-              <div class="col-sm-12 col-md-6">
+              <div class="col-sx-6  col-md-6">
                 <h2 class="section__message_dropbox text-right mt-4">{{ t 'index.industry_head' }}</h2>
               </div>
-              <div class="col-sm-12 col-md-6">
+              <div class="col-sx-6  col-md-6">
                 {{select-dropdown collection=sortedIndustries selected=sortedIndustries.[0].id type='industry' class="dropdown-update"}}
               </div>
             </div>
@@ -64,10 +64,10 @@
 
             {{#if showProducts }}
             <div class="row">
-              <div class="col-sm-12 col-md-6">
+              <div class="col-sx-6  col-md-6">
                 <h2 class="section__message_dropbox text-right mt-4">{{ t 'index.product_head' }}</h2>
               </div>
-              <div class="col-sm-12 col-md-6">
+              <div class="col-sx-6  col-md-6">
                 {{select-dropdown collection=sortedProducts selected=sortedProducts.[0].id type='product' class="dropdown-update"}}
               </div>
             </div>
@@ -75,10 +75,10 @@
 
             {{#if showFarmAndLand }}
             <div class="row">
-              <div class="col-sm-12 col-md-6">
+              <div class="col-sx-6  col-md-6">
                 <h2 class="section__message_dropbox text-right mt-4">{{ t 'index.farmandland_head' }}</h2>
               </div>
-              <div class="col-sm-12 col-md-6">
+              <div class="col-sx-6  col-md-6">
                 {{select-dropdown collection=sortedAgproducts selected=sortedAgproducts.[0].id type='agproduct' class="dropdown-update"}}
               </div>
             </div>
@@ -86,7 +86,7 @@
 
 
           </div>
-          <div class="col-sm-12 col-md-6" style="padding-left: 3rem;">
+          <div class="col-sm-12 col-md-6">
             <div class="section__card-cian-sophistication_route">
               <h1 class="mb-5"><strong>{{ t 'index.sophistication_route'}}</strong></h1>
               <p>
@@ -146,7 +146,7 @@
           </div>
         </div>
         <div class="col-sm-12 col-md-7">
-          <div class="row">
+          <div class="flex-row justify-content-around">
             <div class="col-sm-12 col-md-6">
               <div class="section__card__profile">
                 <h1 class="section__card__wrap__white">{{ t 'index.country_profile_p1' }}</h1>
@@ -161,7 +161,7 @@
               </div>
 
             </div>
-            <div class="col-sm-12 col-md-6 my-5">
+            <div class="col align-self-center">
               <img src="assets/img/branding/ico_mapa_colombia.svg" class="mx-auto d-block mb-2">
             </div>
           </div>
