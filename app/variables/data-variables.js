@@ -16,15 +16,15 @@ export default  {
     "index_profile_id": 1,
     "index_graphbuilder_id": 87,
     // These are for trade and industry data
-    "last_year": 2016,
-    "first_year": 2008,
+"last_year": 2017,
+"first_year": 2008,
     // This is for demographic data, e.g. gdp / pop
-    "census_year": 2016,
+"census_year": 2017,
     // These are for everything else
     "year_ranges": {
-      "agproduct": { "first_year": 2007, "last_year": 2015 },
-      "agcensus": { "first_year": 2014, "last_year": 2014 }, // land use, farm type, etc
-      "occupation": { "first_year": 2016, "last_year": 2016 },
+"agproduct": { "first_year": 2007, "last_year": 2016 },
+"agcensus": { "first_year": 2014, "last_year": 2014 },
+"occupation": { "first_year": 2017, "last_year": 2017 },
     },
     // These determine which datasets use the "agcensus" year range
     "agcensus_entities": ["livestock", "nonag", "landUse"],
@@ -118,9 +118,9 @@ export default  {
     "index_product_q2_id": 1143,
     "index_profile_id": 206,
     "index_graphbuilder_id": 87,
-    "last_year": 2014,
-    "first_year": 2004,
-    "census_year": 2010,
+"last_year": 2017,
+"first_year": 2008,
+"census_year": 2017,
     "geo_center": [19,-99],
     "subregions" : {
       "country": "department",
@@ -183,9 +183,9 @@ export default  {
     "index_product_q2_id": 267,
     "index_profile_id": 0,
     "index_graphbuilder_id": 87,
-    "last_year": 2014,
-    "first_year": 2007,
-    "census_year": 2014,
+"last_year": 2017,
+"first_year": 2008,
+"census_year": 2017,
     "geo_center": [-12,-77],
     "subregions" : {
       "country": "department",
