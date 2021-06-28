@@ -38,12 +38,22 @@ export default Ember.Controller.extend({
     return this.get('currentRouteName').endsWith(".show");
   }),
   isHomePageRoute: computed.equal('currentRouteName','index'),
+
   isSearchRoute: computed.equal('currentRouteName','search'),
+
   showStreamer: computed('isHomePageRoute', function(){
     return !this.get('isHomePageRoute');
   }),
   heroImageStyle: computed(function(){
     let url = this.get('featureToggle.hero_image');
     return Ember.String.htmlSafe(`background-image: url('${url}');`);
+  }),
+  screenSize: computed(function(){
+        var width = window.screen.width;
+        var height = window.screen.height*window.devicePixelRatio;
+        if (width>767){ 
+        alert(width);
+        return true; 
+        }  
   })
-});
+ });

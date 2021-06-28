@@ -38,34 +38,22 @@ export default  {
     "show_downloads": true,
     "homepage_logos": [
       {
-        "name":"Center for International Development at Harvard University",
-        "link":"http://growthlab.cid.harvard.edu/",
-        "logo":"assets/img/logos/hks.png",
-        "max-width": "140px",
+        "name":"Gobierno",
+        "link":"https://www.gov.co/",
+        "logo":"assets/img/logos/mark_presidencia.svg",
+        "max-width": "360px",
       },
       {
         "name":"Bancoldex",
         "link":"https://www.bancoldex.com/",
-        "logo":"assets/img/logos/bancoldex.png",
-        "max-width": "180px",
+        "logo":"assets/img/logos/mark_bancoldex.svg",
+        "max-width": "360px",
       },
       {
         "name":"Fundacion Mario Santo Domingo",
         "link":"http://www.fmsd.org.co/",
-        "logo":"assets/img/logos/fmsd.png",
+        "logo":"assets/img/logos/mark_fundacion.svg",
         "max-width": "190px",
-      },
-      {
-        "name":"DNP",
-        "link":"https://www.dnp.gov.co/",
-        "logo":"assets/img/logos/dnp.png",
-        "max-width": "180px",
-      },
-      {
-        "name":"MinComercio",
-        "link":"http://www.mincit.gov.co/",
-        "logo":"assets/img/logos/mincomercio.png",
-        "max-width": "360px",
       },
     ],
     "download_files": {

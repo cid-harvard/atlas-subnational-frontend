@@ -7,13 +7,17 @@
 /* ==========  Type Palette  ========== */
 
 $icon: 'FontAwesome';
-$sans: 'Source Sans Pro', sans-serif;  // 'Alegreya Sans', Arial, sans-serif;
+$sans: 'RF Rufo', sans-serif;  // 'Alegreya Sans', Arial, sans-serif;
 $sansAlt: $sans;
 $sansSC: 'Alegreya Sans SC', Arial, sans-serif;
 $serif: 'Alegreya', 'Times New Roman', Georgia, serif;  // 'Bitter', serif; // 'Source Serif Pro', Georgia, serif;
 $serifSC: 'Alegreya SC', Georgia, serif;
 
 /* ==========  Color Palettes  ========== */
+
+$colorBase: #292A48;
+$colorYellow: #FFCD00;
+$colorSecondary: #C2C4FF;
 
 $colorBlack: rgb( 25, 25, 20 );
 $colorGrayDark: rgb( 83, 83, 79 );

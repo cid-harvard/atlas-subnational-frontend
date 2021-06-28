@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="margin: 0%;">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,6 +21,9 @@
     <link rel="icon" type="image/png" href="assets/img/branding/favicon/favicon-16x16.png" sizes="16x16">
     <link rel="manifest" href="assets/img/branding/favicon/manifest.json">
     <link rel="shortcut icon" href="assets/img/branding/favicon/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <meta name="msapplication-TileColor" content="#ee4036">
     <meta name="msapplication-TileImage" content="assets/img/branding/favicon/mstile-144x144.png">
     <meta name="msapplication-config" content="assets/img/branding/favicon/browserconfig.xml">
@@ -28,18 +31,21 @@
 
     {{content-for 'head'}}
 
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300,900|Bitter:400,400italic,700|Alegreya:400,700,400italic,700italic,900,900italic|Source+Serif+Pro:400,600,700|Alegreya+SC:400,700|Alegreya+Sans+SC:400,300,500,700|Alegreya+Sans:400,300,500,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    
+    <link href='assets/font/RF_Rufo/RFRufo-Bold.ttf' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/atlas-colombia.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     {{content-for 'head-footer'}}
   </head>
-  <body class="body">
+  <body class="body m-0">
     {{content-for 'body'}}
 
     <script src="assets/vendor.js"></script>
     <script src="assets/atlas-colombia.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
 
     {{content-for 'body-footer'}}
   </body>
