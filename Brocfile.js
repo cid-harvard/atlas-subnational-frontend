@@ -92,8 +92,6 @@ app.import('bower_components/font-awesome/fonts/FontAwesome.otf', { destDir: 'fo
 app.import('bower_components/cidcons/css/cidcons-codes.css');
 app.import('bower_components/cidcons/font/cidcons.woff', { destDir: 'fonts' });
 
-app.import('vendor/bootstrap/dist/js/bootstrap.js');
-app.import('vendor/bootstrap/dist/css/bootstrap.css');
 // Use `app.import` to add additional libraries to the generated
 // output files.
 //
