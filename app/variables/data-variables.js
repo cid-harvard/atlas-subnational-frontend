@@ -16,15 +16,15 @@ export default  {
     "index_profile_id": 1,
     "index_graphbuilder_id": 87,
     // These are for trade and industry data
-    "last_year": 2016,
-    "first_year": 2008,
+"last_year": 2017,
+"first_year": 2008,
     // This is for demographic data, e.g. gdp / pop
-    "census_year": 2016,
+"census_year": 2017,
     // These are for everything else
     "year_ranges": {
-      "agproduct": { "first_year": 2007, "last_year": 2015 },
-      "agcensus": { "first_year": 2014, "last_year": 2014 }, // land use, farm type, etc
-      "occupation": { "first_year": 2016, "last_year": 2016 },
+"agproduct": { "first_year": 2007, "last_year": 2016 },
+"agcensus": { "first_year": 2014, "last_year": 2014 },
+"occupation": { "first_year": 2017, "last_year": 2017 },
     },
     // These determine which datasets use the "agcensus" year range
     "agcensus_entities": ["livestock", "nonag", "landUse"],
@@ -38,34 +38,22 @@ export default  {
     "show_downloads": true,
     "homepage_logos": [
       {
-        "name":"Center for International Development at Harvard University",
-        "link":"http://growthlab.cid.harvard.edu/",
-        "logo":"assets/img/logos/hks.png",
-        "max-width": "140px",
+        "name":"Gobierno",
+        "link":"https://www.gov.co/",
+        "logo":"assets/img/logos/mark_presidencia.svg",
+        "max-width": "360px",
       },
       {
         "name":"Bancoldex",
         "link":"https://www.bancoldex.com/",
-        "logo":"assets/img/logos/bancoldex.png",
-        "max-width": "180px",
+        "logo":"assets/img/logos/mark_bancoldex.svg",
+        "max-width": "360px",
       },
       {
         "name":"Fundacion Mario Santo Domingo",
         "link":"http://www.fmsd.org.co/",
-        "logo":"assets/img/logos/fmsd.png",
+        "logo":"assets/img/logos/mark_fundacion.svg",
         "max-width": "190px",
-      },
-      {
-        "name":"DNP",
-        "link":"https://www.dnp.gov.co/",
-        "logo":"assets/img/logos/dnp.png",
-        "max-width": "180px",
-      },
-      {
-        "name":"MinComercio",
-        "link":"http://www.mincit.gov.co/",
-        "logo":"assets/img/logos/mincomercio.png",
-        "max-width": "360px",
       },
     ],
     "download_files": {
@@ -118,9 +106,9 @@ export default  {
     "index_product_q2_id": 1143,
     "index_profile_id": 206,
     "index_graphbuilder_id": 87,
-    "last_year": 2014,
-    "first_year": 2004,
-    "census_year": 2010,
+"last_year": 2017,
+"first_year": 2008,
+"census_year": 2017,
     "geo_center": [19,-99],
     "subregions" : {
       "country": "department",
@@ -183,9 +171,9 @@ export default  {
     "index_product_q2_id": 267,
     "index_profile_id": 0,
     "index_graphbuilder_id": 87,
-    "last_year": 2014,
-    "first_year": 2007,
-    "census_year": 2014,
+"last_year": 2017,
+"first_year": 2008,
+"census_year": 2017,
     "geo_center": [-12,-77],
     "subregions" : {
       "country": "department",

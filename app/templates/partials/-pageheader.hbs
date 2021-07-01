@@ -2,107 +2,101 @@
   <div class="pageheader__bground" style={{heroImageStyle}}></div>
   <div class="pageheader__home__cap"></div>
   <div class="pageheader__wrap">
-    <div class="branding">
-      {{#if featureToggle.showDatlas }}
-        {{#link-to "index"}}
-          <img src="assets/img/branding/datlas-white.svg" alt="Datlas" class="branding__logo">
-        {{/link-to}}
-      {{else}}
-        {{#link-to "index" class="pageheader__title"}}
-          {{t 'pageheader.alternative_title' }}
-        {{/link-to}}
-      {{/if}}
-    </div>
-    <nav class="pageheader__nav">
-      <div class="togglemod togglemod--languages">
-        <p {{bind-attr class=":toggle__label__text isDefaultLocale::toggle__label--is--active"}}>
-          {{otherLanguage}}
-        </p>
-        {{input
-          type='checkbox'
-          id='toggle--languages'
-          class='toggle toggle--languages'
-          checked=isDefaultLocale
-          data-language-toggle=''
-          }}
-        <label class="toggle__label" for="toggle--languages"></label>
-        <p {{bind-attr class=":toggle__label__text isDefaultLocale:toggle__label--is--active"}}>
-          {{defaultLanguage}}
-        </p>
-      </div>
-    </nav>
-    <div class="pageheader__menu">
-      <ul>
-        <li>
-          {{#link-to "rankings"
-            class="pageheader__menu__item"
-            activeClass="pageheader__menu__item--active"
-            data-side-search-link='about'
-          }}
-            {{ t 'pageheader.rankings' }}
-          {{/link-to}}
-        </li>
-        <li>
-          {{#link-to "about.project-description"
-            class="pageheader__menu__item"
-            activeClass="pageheader__menu__item--active"
-            data-side-search-link='about'
-          }}
-            {{ t 'pageheader.about' }}
-          {{/link-to}}
-        </li>
-        <li>
-          {{#link-to "about.glossary"
-            class="pageheader__menu__item"
-            activeClass="pageheader__menu__item--active"
-            data-side-search-link='glossary'
-          }}
-            {{ t 'general.glossary' }}
-          {{/link-to}}
-        </li>
-        <li>
-          {{#if featureToggle.show_downloads }}
-            {{#link-to "downloads"
-              current-when="downloads"
-              class="pageheader__menu__item"
-              activeClass="pageheader__menu__item--active"
-              data-side-search-link='data'
-            }}
-              {{ t 'pageheader.download' }}
+    <div class="container-fluid d-flex align-items-center">
+          {{#if featureToggle.showDatlas }}
+            {{#link-to "index" class='mr-auto'}}
+              <img src="assets/img/branding/datlas-white.svg" alt="Datlas" class="branding__logo">
+            {{/link-to}}
+            <img src="assets/img/branding/bancoldex-white.svg" alt="Datlas" class="branding__logo mr-3">
+            <div class="bordered-div d-flex social_network_marging ">
+              <div class="d-flex align-items-center px-4 py-3">
+                  <i class="fab fa-facebook-square fa-lg text-white pr-3"></i>
+                  <i class="fab fa-twitter-square fa-lg  text-white pr-3"></i>
+                  <i class="fab fa-linkedin fa-lg text-white"></i>
+              </div>
+            </div>
+            <div class="togglemod togglemod--languages d-flex align-items-center p-3 ">
+                <p {{bind-attr class=":toggle__label__text isDefaultLocale::toggle__label--is--active"}}>
+                  {{otherLanguage}}
+                </p>
+                {{input
+                  type='checkbox'
+                  id='toggle--languages'
+                  class='toggle toggle--languages'
+                  checked=isDefaultLocale
+                  data-language-toggle=''
+                  }}
+                <label class="toggle__label" for="toggle--languages"></label>
+                <p {{bind-attr class=":toggle__label__text isDefaultLocale:toggle__label--is--active"}}>
+                  {{defaultLanguage}}
+                </p>
+          </div>
+          {{else}}
+            {{#link-to "index" class="pageheader__title"}}
+              {{t 'pageheader.alternative_title' }}
             {{/link-to}}
           {{/if}}
-        </li>
-      </ul>
+          
     </div>
-
+    <nav class="navbar navbar-expand-md navbar-light border border-light pt-3 pb-3 mt-4">
+      <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon bg-light fa-2x"></span>
+      </button>      
+      <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item active pr-5 text-center">
+            {{#link-to "rankings"
+                class="pageheader__menu__item"
+                activeClass="pageheader__menu__item--active"
+                data-side-search-link='about'
+              }}
+                {{ t 'pageheader.rankings' }}
+              {{/link-to}}
+          </li>
+          <li class="nav-item active px-5 text-center">
+            {{#link-to "about.project-description"
+                class="pageheader__menu__item"
+                activeClass="pageheader__menu__item--active"
+                data-side-search-link='about'
+              }}
+                {{ t 'pageheader.about' }}
+              {{/link-to}}
+          </li>
+          <li class="nav-item active px-5 text-center">
+            {{#link-to "about.glossary"
+                class="pageheader__menu__item"
+                activeClass="pageheader__menu__item--active"
+                data-side-search-link='glossary'
+              }}
+                {{ t 'general.glossary' }}
+              {{/link-to}}
+          </li>
+          <li class="nav-item active pl-5 text-center">
+            {{#if featureToggle.show_downloads }}
+                {{#link-to "downloads"
+                  current-when="downloads"
+                  class="pageheader__menu__item"
+                  activeClass="pageheader__menu__item--active"
+                  data-side-search-link='data'
+                }}
+                  {{ t 'pageheader.download' }}
+                {{/link-to}}
+              {{/if}}
+          </li>
+        </ul>
+      </div>
+    </nav>
     {{#if isHomePageRoute }}
       {{!-- special display of introductory text on index --}}
       <div class="pageheader__homeintro">
         <header class="index__header__wrap">
           <div class="stream__header index__header">
-            <h1 class="stream__head index__head">{{ t 'index.header_h1' }}</h1>
-            <h2 class="stream__subhead">{{ t 'index.header_subhead' }}</h2>
+            <h1 class="stream__head index__head mb-2" style="font-size: 6rem;">{{ t 'index.header_h1_add' }}</h1>
+            <h1 class="stream__subhead" style="font-size: 6rem;">{{ t 'index.header_subhead_add' }}</h1>
+            <!-- el botón no se nota a menos que el cursos apunte a él, considerar cambio-->
+            <button type="button" class="btn btn-outline-warning" style="font-size: 2rem;">MÁS INFORMACIÓN</button>
           </div>
         </header>
-
-        <form class="search__wrap">
-          <div class="search__field__wrap">
-            {{input
-              class="search"
-              placeholder=( t 'pageheader.search_placeholder' )
-              value=query
-              enter='query'
-              target=controllers.search
-              required='required'
-            }}
-            <button class="search__reset fa fa-close" type="reset"></button>
-          </div>
-          <input class="search__submit btn btn--standalone btn--search"
-            type="submit"
-            value="{{ t 'pageheader.search_link' }}"
-            {{action 'query' query target=controllers.search}}
-          >
-        </form>
       </div>
     {{/if}}
   </div>
