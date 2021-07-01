@@ -2,19 +2,35 @@
   <div class="pageheader__bground" style={{heroImageStyle}}></div>
   <div class="pageheader__home__cap"></div>
   <div class="pageheader__wrap">
-    <div class="branding d-flex ">
+    <div class="container-fluid d-flex align-items-center">
           {{#if featureToggle.showDatlas }}
             {{#link-to "index" class='mr-auto'}}
               <img src="assets/img/branding/datlas-white.svg" alt="Datlas" class="branding__logo">
             {{/link-to}}
             <img src="assets/img/branding/bancoldex-white.svg" alt="Datlas" class="branding__logo mr-3">
             <div class="bordered-div d-flex social_network_marging ">
-              <div class="d-flex align-items-center px-4">
+              <div class="d-flex align-items-center px-4 py-3">
                   <i class="fab fa-facebook-square fa-lg text-white pr-3"></i>
                   <i class="fab fa-twitter-square fa-lg  text-white pr-3"></i>
                   <i class="fab fa-linkedin fa-lg text-white"></i>
               </div>
             </div>
+            <div class="togglemod togglemod--languages d-flex align-items-center p-3 ">
+                <p {{bind-attr class=":toggle__label__text isDefaultLocale::toggle__label--is--active"}}>
+                  {{otherLanguage}}
+                </p>
+                {{input
+                  type='checkbox'
+                  id='toggle--languages'
+                  class='toggle toggle--languages'
+                  checked=isDefaultLocale
+                  data-language-toggle=''
+                  }}
+                <label class="toggle__label" for="toggle--languages"></label>
+                <p {{bind-attr class=":toggle__label__text isDefaultLocale:toggle__label--is--active"}}>
+                  {{defaultLanguage}}
+                </p>
+          </div>
           {{else}}
             {{#link-to "index" class="pageheader__title"}}
               {{t 'pageheader.alternative_title' }}

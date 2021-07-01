@@ -47,13 +47,5 @@ export default Ember.Controller.extend({
   heroImageStyle: computed(function(){
     let url = this.get('featureToggle.hero_image');
     return Ember.String.htmlSafe(`background-image: url('${url}');`);
-  }),
-  screenSize: computed(function(){
-        var width = window.screen.width;
-        var height = window.screen.height*window.devicePixelRatio;
-        if (width>767){ 
-        alert(width);
-        return true; 
-        }  
   })
  });

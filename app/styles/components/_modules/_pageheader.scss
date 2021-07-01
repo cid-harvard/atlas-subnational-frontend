@@ -27,13 +27,16 @@
 }
 
 .branding__logo {
-  height: 15vh;
-  width: 18vw;
+  height: 8vh;
+ // width: 15vh/;
+  //width: ;
+ // height: 15vh;
+  //width: 20vw;
   padding: 0px;
 }
 .branding__logo__social_network {
-  height: 3vh;
-  width: 3vw;
+  height: 2vh;
+  width: 2vw;
 }
 
 .branding__slogan {
@@ -89,7 +92,8 @@
 
 
 // Toggle
-
+.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20rem; }
+.toggle.ios .toggle-handle { border-radius: 20rem; }
 .togglemod--languages {
   height: auto;
   display: inline-block;
@@ -102,7 +106,7 @@
   margin-left: -9999px;
   visibility: hidden;
   &:checked ~ .toggle__label:after {
-    margin-left: 15px;
+    margin-left: 19px;
   }
 }
 
@@ -112,11 +116,13 @@
   cursor: pointer;
   outline: none;
   user-select: none;
-  padding: $baseSpace / 10;
-  width: 35px;
-  height: 20px;
-  background-color: $colorWhite;
+  padding: 0;
+  width: 5rem;
+  height: 3rem;
+  background-color: transparent;
   border-radius: 20px;
+  border-width: 0.3rem;
+  border-color: white;
   margin: 0 auto;
   &:before,
   &:after {
@@ -125,35 +131,33 @@
     content: '';
   }
   &:before {
-    top: 2px;
-    left: 2px;
-    bottom: 2px;
-    right: 2px;
-    background-color: $colorRed;
-    border-radius: $baseSpace / 2;
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 42px;
+    height: 22px;
+    background-color: transparent;
+    border-radius: 11px;
+    transition: all 0.25s linear;
+
   }
   &:after {
-    top: 6px;
-    left: 6px;
-    bottom: 6px;
-    right: 0;
-    width: 8px;
-    height: 8px;
+    width: 25px;
+    height: 24px;
     background-color: $colorWhite;
-    border-radius: 8px;
+    border-radius: 22px;
+    transition: all 0.4s ease-in-out;
   }
-  &:hover:after {
-    background-color: $colorWhite;
-  }
+  
 }
 
 .toggle__label__text {
   @include offset-text;
   color: $colorWhite;
-  font-size: $fontSmall;
+  font-size: $fontBase;
   display: inline;
-  font-weight: 600;
   vertical-align: 6px;
+  padding:2px;  
   font-family: $sans;
 }
 
