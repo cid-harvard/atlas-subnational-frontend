@@ -67,14 +67,9 @@
 }
 
 .breadcrumb {
-  color: $colorGrayLight;
-  font-size: $fontSmall;
-  font-family: $sansSC;
-  text-transform: lowercase;
-  font-weight: 400;
-  cursor: pointer;
-  display: inline-block;
-  margin-right: $baseSpace / 3;
+
+  background-color: $colorBase;
+  padding: 0;
 
   &:active, &:focus, &:hover {
     color: $colorGrayDark;
@@ -95,6 +90,14 @@
       content: none;
     }
   }
+}
+
+.breadcrumb-item.active {
+  color: $colorYellow;
+}
+
+.breadcrumb-item a{
+  color: $colorSecondary;
 }
 
 .breadcrumb__link {
@@ -245,4 +248,29 @@
   margin-bottom: $baseSpace / 2;
   font-family: $sansAlt;
   color: $colorRed;
+}
+
+.stream-header__title{
+  color: $colorSecondary;
+  text-transform: uppercase;
+}
+
+.stream-header__subtitle{
+  color: $colorYellow;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px){
+  .pl-md-x10{
+    padding-left: ($spacer * 10) !important;
+  }
+
+  .pr-md-x10{
+    padding-right: ($spacer * 10) !important;
+  }
+}
+
+.center-pills {
+  display: flex;
+  justify-content: center;
 }

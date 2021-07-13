@@ -1,4 +1,5 @@
-<header class="stream__header stream__header--builder">
+<div class="container-fluid my-5 pl-sm-5 pl-md-x10">
+  <header class="stream__header stream__header--builder">
   {{#if isLocation}}
     <ul>
       {{#each crumb in breadcrumbs}}
@@ -14,9 +15,13 @@
     </ul>
   {{/if}}
   {{#if isIndustry}}
-    <ul>
-      <li class="breadcrumb">{{t 'general.industry' }}</li>
-    </ul>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">{{#link-to 'index'}}Inicio{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="industry")}}Sectores{{/link-to}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{model.name}}</li>
+      </ol>
+    </nav>
   {{/if}}
 
   {{#if isShowingIndex}}
@@ -35,7 +40,10 @@
     {{/if}}
   {{/if}}
   {{#if isIndustry}}
-    <h2 class="stream__head" data-location-name>{{model.name}} ({{model.code}})</h2>
+    <div class="my-5">
+      <h1 class="stream-header__title">SECTOR</h1>
+      <h1 class="stream-header__subtitle">{{model.name}} ({{model.code}})</h1>
+    </div>
     {{#if isShowingIndex}}
       {{ partial 'partials/builder-questions-industry'}}
     {{/if}}
@@ -64,13 +72,6 @@
       {{ partial 'partials/builder-questions-livestock'}}
     {{/if}}
   {{/if}}
-    <aside class="cta__wrap--right">
-    {{#link-to profileRoute model.id
-        data-search-profile=''
-        class="btn stream__head__overview"}}
-      {{ t 'header.overview' }}
-    {{/link-to}}
-    <a class="btn btn--standalone btn--text stream__head__index" {{ action 'toggleIndex' }}> {{t 'header.index'}} <img src="assets/img/general/index.png" class="stream__head__indexicon"/></a>
-    </aside>
 </header>
+</div>
 

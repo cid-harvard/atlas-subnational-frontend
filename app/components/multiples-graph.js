@@ -4,7 +4,7 @@ const {computed, observer, get:get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
-  classNames: ['buildermod__viz'],
+  classNames: ['buildermod__viz', 'container-fluid'],
   margin: { top: 20, right: 10, bottom: 30, left: 70 },
   height: 140,
   firstSlice: 48,
@@ -19,6 +19,21 @@ export default Ember.Component.extend({
   xRange: computed('startDate', 'endDate', function() {
     return d3.range(this.get('startDate'), this.get('endDate'));
   }),
+  max_values: function(values) {
+    let varDependent = this.get('varDependent');
+    let max = 0;
+    let year = 0;
+
+    values.forEach(function (o) {
+      max = Math.max(max, o[varDependent]);
+
+      if(o[varDependent] === max){
+        year = o["year"];
+      }
+
+    });
+    return {"x": year, "y": max};
+  },
   nestedData: computed('data.[]', 'i18n.locale', function() {
     let key = this.get('varId');
     let varDependent = this.get('varDependent');
@@ -30,9 +45,10 @@ export default Ember.Component.extend({
     _.each(nest, (d) => {
       // terrible assumption, but assume that all value share the same name.
       d.name = get(d.values[0], `name_short_${this.get('i18n').display}`) || d.key;
-      d.color = get(d.values[0], 'color') || '#ccc1b9';
+      d.color = '#FFCD00';
       d.code = get(d.values[0], 'code');
       d.values = _.sortBy(d.values, "year");
+      d.max_values = this.max_values(d.values);
     });
     return _.sortBy(nest, (d) => {
       return -_.sum(d.values, varDependent);
@@ -87,11 +103,11 @@ export default Ember.Component.extend({
     let data = this.firstSliceData(this.get('nestedData'));
     let dataType = this.get('dataType');
 
-    var container = d3.select("#"+this.get('elementId')).select('.multiples').selectAll('div')
+    var container = d3.select("#"+this.get('elementId')).select('.row').selectAll('div')
       .data(data, (d,i) => { return [d.key, i, this.get('i18n').locale]; });
 
     var div = container.enter().append('div')
-      .attr('class', 'multiple');
+      .attr('class', 'multiple col-12 col-md-6 col-lg-3');
 
     //has to be retrieved after the 'multiple' div is appended.
     let w = this.get('width');
@@ -120,8 +136,7 @@ export default Ember.Component.extend({
 
     var svg = div.append('svg')
       .attr('class', 'chart__wrap')
-      .attr('width', w + margin.left + margin.right)
-      .attr('height', h + margin.top + margin.bottom)
+      .attr('viewBox', `0 0 ${w + margin.left + margin.right} ${h + margin.top + margin.bottom}`)
     .append('g')
       .attr('class', 'chart')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
@@ -142,7 +157,7 @@ export default Ember.Component.extend({
 
     svg.append('text')
       .attr('class', 'static_year')
-      .attr('text-anchor', 'start')
+      .attr('text-anchor', 'middle')
       .attr('dy', 13)
       .attr('y', h)
       .attr('x', 0)
@@ -150,7 +165,7 @@ export default Ember.Component.extend({
 
     svg.append('text')
       .attr('class', 'static_year')
-      .attr('text-anchor', 'end')
+      .attr('text-anchor', 'middle')
       .attr('dy', 13)
       .attr('y', h)
       .attr('x', w)
@@ -174,14 +189,65 @@ export default Ember.Component.extend({
     svg.append('rect')
       .classed('marker', true)
       .classed(this.get('markerGroup'), true)
-      .attr('width', 5)
-      .attr('height', 5)
+      .attr('width', 10)
+      .attr('height', 10)
       .attr('opacity', 0);
+
+    // Max value
+    svg.append('rect')
+      .classed('marker_fixed', true)
+      .attr('width', 10)
+      .attr('height', 10)
+      .attr('opacity', 1)
+      .attr('x', function(d) {
+        return x(d.max_values.x);
+      })
+      .attr('y', function(d) {
+        return y(d.max_values.y);
+      })
+      .attr('transform', function(d) {
+        return 'translate(0, -3.54) rotate( 45 ' + x(d.max_values.x) + ' ' + y(d.max_values.y) + ')';
+      });
+
+    svg.append('text')
+      .classed('max_value', true)
+      .classed(markerGroup, true)
+      .attr('text-anchor', 'end')
+      .attr('dy', -5)
+      .attr('x', function(d) {
+        return x(d.max_values.x)
+      })
+      .attr('y', function(d) {
+        return y(d.max_values.y)
+      })
+
+    svg.append('text')
+      .classed('max_value_year', true)
+      .classed(markerGroup, true)
+      .attr('text-anchor', 'middle')
+      .attr('dy', 13)
+      .attr('x', function(d) {
+        return x(d.max_values.x)
+      })
+      .attr('y', h);
+
+    d3.selectAll('text.max_value')
+      .text(function(d) {
+        return numeral(d.max_values.y).format('0.0a');
+      });
+
+    d3.selectAll('text.max_value_year')
+      .text(function(d) {
+        return truncateYear(d.max_values.x)
+      });
+
+
+
 
     svg.append('text')
       .classed('caption', true)
       .classed(this.get('markerGroup'), true)
-      .attr('text-anchor', 'middle')
+      .attr('text-anchor', 'end')
       .attr('dy', -8);
 
     svg.append('text')
@@ -236,9 +302,9 @@ export default Ember.Component.extend({
         },true)
         .attr('dx', function() {
           if (date === parseInt(xExtent[0])) {
-            return '30';
+            return '0';
           } else if (date === parseInt(xExtent[1])) {
-            return '-30';
+            return '0';
           }
         })
         .attr('dy', function() {
@@ -298,7 +364,7 @@ export default Ember.Component.extend({
     if(!this.element){ return false; } //do not redraw if not there
     Ember.run.scheduleOnce('afterRender', this , function() {
       d3.select("#"+this.get('elementId'))
-        .select('.multiples')
+        .select('.row')
         .selectAll('*')
         .remove(); /// TODO REMOVE THIS LATER FOR TRANSITIONS
       if(this.initCharts) { this.initCharts();}

@@ -1,88 +1,92 @@
 <header {{bind-attr class=":header--pageheader isHomePageRoute:header--pageheader--home"}}>
-  <div class="pageheader__bground" style={{heroImageStyle}}></div>
-  <div class="pageheader__home__cap"></div>
-  <div class="pageheader__wrap">
-    <div class="branding d-flex ">
-          {{#if featureToggle.showDatlas }}
-            {{#link-to "index" class='mr-auto'}}
-              <img src="assets/img/branding/datlas-white.svg" alt="Datlas" class="branding__logo">
-            {{/link-to}}
-            <img src="assets/img/branding/bancoldex-white.svg" alt="Datlas" class="branding__logo mr-3">
-            <div class="bordered-div d-flex social_network_marging ">
-              <div class="d-flex align-items-center px-4">
-                  <i class="fab fa-facebook-square fa-lg text-white pr-3"></i>
-                  <i class="fab fa-twitter-square fa-lg  text-white pr-3"></i>
-                  <i class="fab fa-linkedin fa-lg text-white"></i>
-              </div>
+    <div class="pageheader__bground" style={{heroImageStyle}}></div>
+    <div class="pageheader__home__cap"></div>
+    <div class="pageheader__wrap">
+      {{#if featureToggle.showDatlas }}
+      <nav class="navbar">
+        {{#link-to "index" class="navbar-brand"}}
+          <img src="assets/img/branding/datlas-white.svg" alt="Datlas" height="50">
+        {{/link-to}}
+        <ul class="navbar-nav mr-auto"></ul>
+        <div class="d-block d-sm-flex">
+          <img src="assets/img/branding/bancoldex-white.svg" alt="Bancoldex" class="mr-3" height="50">
+          <div class="d-flex mt-4 mt-md-0" style="min-height: 50px !important;">
+            <div class="d-flex bordered-div align-items-center px-4">
+                <i class="fab fa-facebook-square fa-lg text-white pr-3"></i>
+                <i class="fab fa-twitter-square fa-lg  text-white pr-3"></i>
+                <i class="fab fa-linkedin fa-lg text-white"></i>
             </div>
-          {{else}}
-            {{#link-to "index" class="pageheader__title"}}
-              {{t 'pageheader.alternative_title' }}
-            {{/link-to}}
-          {{/if}}
-          
-    </div>
-    <nav class="navbar navbar-expand-md navbar-light border border-light pt-3 pb-3 mt-4">
-      <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon bg-light fa-2x"></span>
-      </button>      
-      <div class=" collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item active pr-5 text-center">
-            {{#link-to "rankings"
-                class="pageheader__menu__item"
-                activeClass="pageheader__menu__item--active"
-                data-side-search-link='about'
-              }}
-                {{ t 'pageheader.rankings' }}
-              {{/link-to}}
-          </li>
-          <li class="nav-item active px-5 text-center">
-            {{#link-to "about.project-description"
-                class="pageheader__menu__item"
-                activeClass="pageheader__menu__item--active"
-                data-side-search-link='about'
-              }}
-                {{ t 'pageheader.about' }}
-              {{/link-to}}
-          </li>
-          <li class="nav-item active px-5 text-center">
-            {{#link-to "about.glossary"
-                class="pageheader__menu__item"
-                activeClass="pageheader__menu__item--active"
-                data-side-search-link='glossary'
-              }}
-                {{ t 'general.glossary' }}
-              {{/link-to}}
-          </li>
-          <li class="nav-item active pl-5 text-center">
-            {{#if featureToggle.show_downloads }}
-                {{#link-to "downloads"
-                  current-when="downloads"
+          </div>
+        </div>
+
+      </nav>
+      {{else}}
+        {{#link-to "index" class="pageheader__title"}}
+          {{t 'pageheader.alternative_title' }}
+        {{/link-to}}
+      {{/if}}
+
+      <nav class="navbar navbar-expand-md navbar-light border-div-navbar pt-3 pb-3 mt-4">
+        <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon bg-light fa-2x"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item active px-5 text-center">
+              {{#link-to "rankings"
                   class="pageheader__menu__item"
                   activeClass="pageheader__menu__item--active"
-                  data-side-search-link='data'
+                  data-side-search-link='about'
                 }}
-                  {{ t 'pageheader.download' }}
+                  {{ t 'pageheader.rankings' }}
                 {{/link-to}}
-              {{/if}}
-          </li>
-        </ul>
-      </div>
-    </nav>
-    {{#if isHomePageRoute }}
-      {{!-- special display of introductory text on index --}}
-      <div class="pageheader__homeintro">
-        <header class="index__header__wrap">
-          <div class="stream__header index__header">
-            <h1 class="stream__head index__head mb-2" style="font-size: 6rem;">{{ t 'index.header_h1_add' }}</h1>
-            <h1 class="stream__subhead" style="font-size: 6rem;">{{ t 'index.header_subhead_add' }}</h1>
-            <!-- el botón no se nota a menos que el cursos apunte a él, considerar cambio-->
-            <button type="button" class="btn btn-outline-warning" style="font-size: 2rem;">MÁS INFORMACIÓN</button>
-          </div>
-        </header>
-      </div>
-    {{/if}}
-  </div>
+            </li>
+            <li class="nav-item active px-5 text-center">
+              {{#link-to "about.project-description"
+                  class="pageheader__menu__item"
+                  activeClass="pageheader__menu__item--active"
+                  data-side-search-link='about'
+                }}
+                  {{ t 'pageheader.about' }}
+                {{/link-to}}
+            </li>
+            <li class="nav-item active px-5 text-center">
+              {{#link-to "about.glossary"
+                  class="pageheader__menu__item"
+                  activeClass="pageheader__menu__item--active"
+                  data-side-search-link='glossary'
+                }}
+                  {{ t 'general.glossary' }}
+                {{/link-to}}
+            </li>
+            <li class="nav-item active px-5 text-center">
+              {{#if featureToggle.show_downloads }}
+                  {{#link-to "downloads"
+                    current-when="downloads"
+                    class="pageheader__menu__item"
+                    activeClass="pageheader__menu__item--active"
+                    data-side-search-link='data'
+                  }}
+                    {{ t 'pageheader.download' }}
+                  {{/link-to}}
+                {{/if}}
+            </li>
+          </ul>
+        </div>
+      </nav>
+      {{#if isHomePageRoute }}
+        {{!-- special display of introductory text on index --}}
+        <div class="pageheader__homeintro">
+          <header class="index__header__wrap">
+            <div class="stream__header index__header">
+              <h1 class="stream__head index__head mb-2" style="font-size: 6rem;">{{ t 'index.header_h1_add' }}</h1>
+              <h1 class="stream__subhead" style="font-size: 6rem;">{{ t 'index.header_subhead_add' }}</h1>
+              <!-- el botón no se nota a menos que el cursos apunte a él, considerar cambio-->
+              <button type="button" class="btn btn-outline-warning" style="font-size: 2rem;">MÁS INFORMACIÓN</button>
+            </div>
+          </header>
+        </div>
+      {{/if}}
+    </div>
 </header>
 
