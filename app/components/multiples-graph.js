@@ -209,11 +209,23 @@ export default Ember.Component.extend({
         return 'translate(0, -3.54) rotate( 45 ' + x(d.max_values.x) + ' ' + y(d.max_values.y) + ')';
       });
 
+    svg.append('rect')
+    .attr('width', 80)
+    .attr('height', 20)
+    .attr('opacity', 1)
+    .attr('fill', 'white')
+    .attr('x', function(d) {
+      return x(d.max_values.x) - 75;
+    })
+    .attr('y', function(d) {
+      return y(d.max_values.y) - 25;
+    });
+
     svg.append('text')
       .classed('max_value', true)
       .classed(markerGroup, true)
       .attr('text-anchor', 'end')
-      .attr('dy', -5)
+      .attr('dy', - 10)
       .attr('x', function(d) {
         return x(d.max_values.x)
       })
@@ -285,7 +297,7 @@ export default Ember.Component.extend({
           let yValue = d.values[index] ? Ember.get(d.values[index], varDependent, 0): 0;
           return 'translate(0, -3.54) rotate( 45 ' + x(date) + ' ' + y(yValue) + ')';
         });
-
+      
       d3.selectAll('text.caption.'+markerGroup)
         .attr('x', x(date))
         .attr('y', function(d) {
