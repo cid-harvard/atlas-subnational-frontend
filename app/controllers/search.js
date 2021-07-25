@@ -9,6 +9,19 @@ export default Ember.Controller.extend({
   entity: ['product', 'industry', 'location', 'rural'],
   query: null,
   filter: null,
+  modelData: computed('model', 'i18n.locale', function() {
+    let model = get(this, 'model');
+    let locale = this.get('i18n').display
+
+    return model.map(function(models){
+      if(models.get('profileName') === "agproduct"){
+        return {id: models.id, text: models.get(`name_${locale}`) }
+      }
+      else{
+        return {id: models.id, text: models.get(`name_short_${locale}`) + " (" + models.get('code') + ")" }
+      }
+    })
+  }),
   search: computed('query', function() {
     return this.get('query');
   }),
@@ -92,7 +105,19 @@ export default Ember.Controller.extend({
   actions:{
     toggleReferenceKey(key) {
       this.set("referenceKey", key);
-    }
+    },
+    transitionLocation(id) {
+      this.transitionToRoute('location.show', id);
+    },
+    transitionProduct(id) {
+      this.transitionToRoute('product.show', id);
+    },
+    transitionIndustry(id) {
+      this.transitionToRoute('industry.show', id);
+    },
+    transitionAgproduct(id) {
+      this.transitionToRoute('agproduct.show', id);
+    },
   }
 });
 

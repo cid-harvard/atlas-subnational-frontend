@@ -19,6 +19,43 @@ export default Ember.Controller.extend({
   showLocations: computed.notEmpty('featureToggle.index_locations'),
   showFarmAndLand: computed.notEmpty('featureToggle.index_agproducts'),
 
+
+  locationsData: computed('model.locations', 'i18n.locale', function() {
+    let locations = get(this, 'model.locations');
+    let locale = this.get('i18n').display
+
+    return locations.map(function(location){
+      return {id: location.id, text: location.get(`name_short_${locale}`) }
+    })
+  }),
+
+  industriesData: computed('model.industries', 'i18n.locale', function() {
+    let industries = get(this, 'model.industries');
+    let locale = this.get('i18n').display
+
+    return industries.map(function(industry){
+      return {id: industry.id, text: industry.get(`name_short_${locale}`) + " (" + industry.get('code') + ")" }
+    })
+  }),
+
+  productsData: computed('model.products', 'i18n.locale', function() {
+    let products = get(this, 'model.products');
+    let locale = this.get('i18n').display
+
+    return products.map(function(product){
+      return {id: product.id, text: product.get(`name_short_${locale}`) + " (" + product.get('code') + ")" }
+    })
+  }),
+
+  agproductsData: computed('model.agproducts', 'i18n.locale', function() {
+    let agproducts = get(this, 'model.agproducts');
+    let locale = this.get('i18n').display
+
+    return agproducts.map(function(agproduct){
+      return {id: agproduct.id, text: agproduct.get(`name_${locale}`) }
+    })
+  }),
+
   products: computed.filter('model.products', function (product) {
     let id = get(this, 'productIds');
     return _.contains(`${id}`, get(product, 'id'));

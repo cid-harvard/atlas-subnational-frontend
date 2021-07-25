@@ -19,6 +19,32 @@
           </div>
         </div>
 
+        <div class="ml-md-3">
+          <div class="togglemod togglemod--languages d-flex align-items-center">
+            <div class="pr-3">
+              <p {{bind-attr class=":toggle__label__text isDefaultLocale::toggle__label--is--active"}}>
+                {{otherLanguage}}
+              </p>
+            </div>
+
+            {{input
+              type='checkbox'
+              id='toggle--languages'
+              class='toggle toggle--languages'
+              checked=isDefaultLocale
+              data-language-toggle=''
+            }}
+
+            <label class="toggle__label" for="toggle--languages"></label>
+            <div class="pl-3">
+              <p {{bind-attr class=":toggle__label__text isDefaultLocale:toggle__label--is--active"}}>
+              {{defaultLanguage}}
+            </p>
+            </div>
+
+          </div>
+        </div>
+
       </nav>
       {{else}}
         {{#link-to "index" class="pageheader__title"}}
@@ -82,7 +108,7 @@
               <h1 class="stream__head index__head mb-2" style="font-size: 6rem;">{{ t 'index.header_h1_add' }}</h1>
               <h1 class="stream__subhead" style="font-size: 6rem;">{{ t 'index.header_subhead_add' }}</h1>
               <!-- el botón no se nota a menos que el cursos apunte a él, considerar cambio-->
-              <button type="button" class="btn btn-outline-warning" style="font-size: 2rem;">MÁS INFORMACIÓN</button>
+              <button type="button" class="btn btn-outline-warning text-uppercase" style="font-size: 2rem;">{{ t 'index.button_more_information' }}</button>
             </div>
           </header>
         </div>

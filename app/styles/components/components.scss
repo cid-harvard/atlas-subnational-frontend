@@ -27,6 +27,9 @@
 @import '_components/_tooltip';
 @import '_components/_spinner';
 @import '_components/_columns';
+@import '_components/_treemap';
+@import '_components/_datatables';
+@import '_components/_modal';
 
 // Modules
 @import '_modules/_layout';
@@ -55,6 +58,7 @@
 @import '_modules/_results';
 @import '_modules/_explanation';
 @import '_modules/_select-dropdown';
+@import '_modules/_header-nav';
 
 // Visualizations
 @import '_visualizations/_dotplot';

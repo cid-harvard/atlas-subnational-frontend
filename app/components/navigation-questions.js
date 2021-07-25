@@ -75,7 +75,6 @@ export default Ember.Component.extend({
           this.set('openPanels', _.union(this.get('openPanels'), [name]));
         }
       } else {
-        console.log("Invalid panel " + name + ", we have " + this.get('allPanels'));
       }
     }
   },

@@ -408,16 +408,20 @@
   margin: 0;
 }
 
-.stream__section__wrap__yellow{
+.title_yellow{
   color: $colorYellow;
   text-transform: uppercase;
   font-size: 4rem;
 }
 
-.stream__section__wrap__white{
+.text_yellow{
+  color: $colorYellow;
+}
+
+.title_white{
   color: $colorWhite;
   text-transform: uppercase;
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 .stream__section__subhead__wrap__white{

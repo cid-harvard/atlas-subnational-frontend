@@ -44,6 +44,12 @@
 }
 
 .chart__title {
+  color: $colorBase;
+  text-align: center !important;
+  background-color: $colorSecondary;
+  padding: 5px;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
   font-weight: 500;
   font-size: $fontSmall;
   position: relative;
@@ -66,7 +72,7 @@
 .chart__wrap {
   font-size: $fontTiny;
   text {
-    fill: $colorSecondary;
+    fill: white;
   }
 }
 
@@ -114,7 +120,7 @@
 
 .axis--y {
   line {
-    stroke: $colorSecondary;
+    stroke: $colorWhite;
     fill: none;
     shape-rendering: crispEdges;
     pointer-events: none;
@@ -126,7 +132,7 @@
 }
 
 .marker_fixed{
-  fill: #ee4036;
+  fill: #80D8FF;
 }
 
 .caption, .year, .marker {
@@ -135,4 +141,20 @@
 
 .hidden {
   opacity: 0;
+}
+
+.tooltip-max_value, .tooltip-value{
+  fill: white;
+}
+
+.max_value{
+  fill: black !important;
+}
+
+rect{
+  stroke: none;
+}
+
+.caption{
+  fill: black !important;
 }

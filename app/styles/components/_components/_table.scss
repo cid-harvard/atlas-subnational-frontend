@@ -64,4 +64,15 @@
 }
 
 
+.datlas-table th, .datlas-table td{
+  vertical-align: middle;
+  border: none;
+}
 
+.datlas-table .even{
+  background-color: $colorThree;
+}
+
+.select2-container{
+  flex: 1 1 auto !important;
+}

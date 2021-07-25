@@ -3,11 +3,11 @@ const {computed, get} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
-  tagName: 'i',
+  tagName: 'div',
   classNames: ['changegraph__icon'],
   classNameBindings: ['iconClass', 'isChecked'],
   iconClass: computed('type', function() {
-    return `icon-cidcon_${get(this, 'type')}`;
+    return `${get(this, 'type')}`;
   }),
   isChecked: computed('type', 'visualization', function() {
     if(get(this, 'type') === get(this, 'visualization')) {

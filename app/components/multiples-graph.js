@@ -107,7 +107,7 @@ export default Ember.Component.extend({
       .data(data, (d,i) => { return [d.key, i, this.get('i18n').locale]; });
 
     var div = container.enter().append('div')
-      .attr('class', 'multiple col-12 col-md-6 col-lg-3');
+      .attr('class', 'multiple d-flex flex-row col-12 col-md-6 col-lg-3 pt-5');
 
     //has to be retrieved after the 'multiple' div is appended.
     let w = this.get('width');
@@ -171,9 +171,7 @@ export default Ember.Component.extend({
       .attr('x', w)
       .text(truncateYear(this.get('xExtent')[1]));
 
-    svg.append('g')
-      .attr('class', 'axis axis--y')
-      .call(yAxis);
+    
 
     svg.append('path')
       .attr('class', 'area')
@@ -186,34 +184,43 @@ export default Ember.Component.extend({
         return line(d.values);
       });
 
+      svg.append('g')
+      .attr('class', 'axis axis--y')
+      .call(yAxis);
+
     svg.append('rect')
       .classed('marker', true)
       .classed(this.get('markerGroup'), true)
       .attr('width', 10)
       .attr('height', 10)
       .attr('opacity', 0);
+      
 
     // Max value
-    svg.append('rect')
+    svg.append('circle')
       .classed('marker_fixed', true)
-      .attr('width', 10)
-      .attr('height', 10)
+      //.attr('width', 10)
+      //.attr('height', 10)
       .attr('opacity', 1)
-      .attr('x', function(d) {
+      .attr('r', 5)
+      .attr('cx', function(d) {
         return x(d.max_values.x);
       })
-      .attr('y', function(d) {
+      .attr('cy', function(d) {
         return y(d.max_values.y);
       })
-      .attr('transform', function(d) {
-        return 'translate(0, -3.54) rotate( 45 ' + x(d.max_values.x) + ' ' + y(d.max_values.y) + ')';
-      });
+      //.attr('transform', function(d) {
+      //  return 'translate(0, -3.54) rotate( 45 ' + x(d.max_values.x) + ' ' + y(d.max_values.y) + ')';
+      //});
 
     svg.append('rect')
+    .classed('tooltip-max_value', true)
     .attr('width', 80)
     .attr('height', 20)
     .attr('opacity', 1)
     .attr('fill', 'white')
+    .attr('rx', '5')
+    .attr('ry', '5')
     .attr('x', function(d) {
       return x(d.max_values.x) - 75;
     })
@@ -225,6 +232,7 @@ export default Ember.Component.extend({
       .classed('max_value', true)
       .classed(markerGroup, true)
       .attr('text-anchor', 'end')
+      .attr('fill', 'black')
       .attr('dy', - 10)
       .attr('x', function(d) {
         return x(d.max_values.x)
@@ -254,6 +262,15 @@ export default Ember.Component.extend({
       });
 
 
+      svg.append('rect')
+      .classed('tooltip-value', true)
+      .classed(this.get('markerGroup'), true)
+      .attr('width', 80)
+      .attr('height', 20)
+      .attr('opacity', 0)
+      .attr('fill', 'white')
+      .attr('rx', '5')
+      .attr('ry', '5');
 
 
     svg.append('text')
@@ -274,6 +291,9 @@ export default Ember.Component.extend({
     }
 
     function mouseover() {
+      d3.selectAll('rect.tooltip-max_value').attr('opacity', 0);
+      d3.selectAll('rect.tooltip-value.'+markerGroup).attr('opacity', 1);
+      d3.selectAll('text.max_value').attr('opacity', 0);
       d3.selectAll('rect.marker.'+markerGroup).attr('opacity', 1);
       d3.selectAll('.static_year').classed('hidden', true);
       mousemove.call(this);
@@ -295,9 +315,9 @@ export default Ember.Component.extend({
         .attr('transform', function(d) {
           index = bisect(d.values, date, 0, d.values.length - 1);
           let yValue = d.values[index] ? Ember.get(d.values[index], varDependent, 0): 0;
-          return 'translate(0, -3.54) rotate( 45 ' + x(date) + ' ' + y(yValue) + ')';
+          return 'translate(0, -6.54) rotate( 45 ' + x(date) + ' ' + y(yValue) + ')';
         });
-      
+
       d3.selectAll('text.caption.'+markerGroup)
         .attr('x', x(date))
         .attr('y', function(d) {
@@ -320,7 +340,7 @@ export default Ember.Component.extend({
           }
         })
         .attr('dy', function() {
-          return '-5';
+          return '-10';
         })
         .text(function(d) {
           index = bisect(d.values, date, 0, d.values.length - 1);
@@ -333,6 +353,15 @@ export default Ember.Component.extend({
           return numeral(yValue).format('0.0a');
         });
 
+      
+        d3.selectAll('rect.tooltip-value')
+        .attr('x', x(date) - 75)
+        .attr('y', function(d) {
+          index = bisect(d.values, date, 0, d.values.length - 1);
+          let yValue = d.values[index] ? Ember.get(d.values[index], varDependent, 0): 0;
+          return y(yValue) - 25;
+        })
+
 
       d3.selectAll('text.year.'+markerGroup)
         .attr('x', x(date))
@@ -340,6 +369,9 @@ export default Ember.Component.extend({
     }
 
     function mouseout() {
+      d3.selectAll('rect.tooltip-max_value').attr('opacity', 1);
+      d3.selectAll('rect.tooltip-value').attr('opacity', 0);
+      d3.selectAll('text.max_value').attr('opacity', 1);
       d3.selectAll('rect.marker').attr('opacity', 0);
       d3.selectAll('.static_year').classed('hidden', false);
       d3.selectAll('text.caption').text('');

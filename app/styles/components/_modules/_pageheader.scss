@@ -19,6 +19,7 @@
   margin: auto;
   padding:4vw;
   padding-top: 10vh;
+  padding-bottom: 5vh;
 }
 // Branding
 
@@ -128,7 +129,7 @@
     left: 2px;
     bottom: 2px;
     right: 2px;
-    background-color: $colorRed;
+    background-color: $colorBase;
     border-radius: $baseSpace / 2;
   }
   &:after {
