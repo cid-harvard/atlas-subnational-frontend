@@ -1,104 +1,116 @@
-<main class="stream index">
-  <article class="stream__article">
-    <section class="stream__section index__section index__questions__wrap">
-      <div class="stream__section__wrap mb-5">
+<main>
+  <article>
 
-        <div class="container-fluid" style="padding: 4vh;">
-          <div class="row">
-            <div class="col-sm-12 col-md-6">
-              <h1 class="stream__section__wrap__yellow">{{ t 'index.header_h1_p1' }}</h1>
-              <h1 class="stream__section__wrap__white">{{ t 'index.header_h1_p2' }}</h1>
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <h2 class="stream__section__subhead__wrap__white mb-5">{{ t 'index.header_subhead' }}</h2>
-              <form class="search__wrap ">
-        <div class="search__field__wrap">
-          {{input
-            class="search"
-            placeholder=( t 'pageheader.search_placeholder' )
-            value=query
-            enter='query'
-            target=controllers.search
-            required='required'
-          }}
-          <button class="search__reset fa fa-close" type="reset"></button>
+    <div class="container-fluid px-md-x10">
+
+      <!-- P1 -->
+      <div class="row px-md-x10 pt-md-x10 mt-sm-5">
+        <div class="col-sm-12 col-md-6">
+          <h1 class="title_yellow">{{ t 'index.header_h1_p1' }}</h1>
+          <h1 class="title_white" style="font-size: 5rem;">{{ t 'index.header_h1_p2' }}</h1>
         </div>
-        <input class="search__submit btn btn--standalone btn--search"
-          type="submit"
-          value="{{ t 'pageheader.search_link' }}"
-          {{action 'query' query target=controllers.search}}
-        >
-      </form>
+        <div class="col-sm-12 col-md-6">
+          <h2 class="text-uppercase text-white mb-5">{{ t 'index.header_subhead' }}</h2>
+
+          <div class="input-group mb-3">
+            {{input
+              class="form-control search"
+              type="text"
+              placeholder=( t 'pageheader.search_placeholder' )
+              value=query
+              enter='query'
+              target=controllers.search
+              required='required'
+              autocomplete='off'
+            }}
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit" {{action 'query' query target=controllers.search}}>{{ t 'pageheader.search_link' }}</button>
             </div>
           </div>
+
         </div>
-
-        <h1 class="section__head text-center">{{ t 'index.questions_head_p1' }}</h1>
-
-        <div class="row mt-5" style="padding-right: 4vw; padding-left:4vw ">
-          <div class="col-sm-12 col-md-6">
-
-            <h1 class="update__sections__head__wrap__white mb-5" style=" text-align: center"><strong>{{ t 'index.questions_head_p2' }}</strong></h1>
-
-            {{#if showLocations }}
-            <div class="row">
-              <div class="col-sx-6 col-md-6">
-                <h2 class="section__message_dropbox text-right mt-4">{{ t 'index.location_head' }}</h2>
-              </div>
-              <div class="col-sx-6  col-md-6">
-                {{select-dropdown collection=sortedLocations selected=sortedLocations.[0].id type='location' class="dropdown-update"}}
-              </div>
-            </div>
-            {{/if}}
-
-            {{#if showIndustries }}
-            <div class="row">
-              <div class="col-sx-6  col-md-6">
-                <h2 class="section__message_dropbox text-right mt-4">{{ t 'index.industry_head' }}</h2>
-              </div>
-              <div class="col-sx-6  col-md-6">
-                {{select-dropdown collection=sortedIndustries selected=sortedIndustries.[0].id type='industry' class="dropdown-update border-light"}}
-              </div>
-            </div>
-            {{/if}}
-
-            {{#if showProducts }}
-            <div class="row">
-              <div class="col-sx-6  col-md-6">
-                <h2 class="section__message_dropbox text-right mt-4">{{ t 'index.product_head' }}</h2>
-              </div>
-              <div class="col-sx-6  col-md-6">
-                {{select-dropdown collection=sortedProducts selected=sortedProducts.[0].id type='product' class="dropdown-update"}}
-              </div>
-            </div>
-            {{/if}}
-
-            {{#if showFarmAndLand }}
-            <div class="row">
-              <div class="col-sx-6  col-md-6">
-                <h2 class="section__message_dropbox text-right mt-4">{{ t 'index.farmandland_head' }}</h2>
-              </div>
-              <div class="col-sx-6  col-md-6">
-                {{select-dropdown collection=sortedAgproducts selected=sortedAgproducts.[0].id type='agproduct' class="dropdown-update"}}
-              </div>
-            </div>
-            {{/if}}
-
-
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <div class="section__card-cian-sophistication_route">
-              <h1 class="mb-5"><strong>{{ t 'index.sophistication_route'}}</strong></h1>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a porta dolor, at vehicula enim. Fusce dignissim massa magna, quis mollis arcu scelerisque fringilla. Sed semper risus ipsum, tempus pretium leo ullamcorper eget. Donec in erat at elit tempor aliquet vitae quis dolor. Quisque mi erat, luctus sed orci eu, aliquet maximus odio. Quisque tempus scelerisque tortor vel volutpat. Nunc volutpat justo non arcu mollis, a suscipit lacus porttitor. Cras euismod, nunc ac lacinia tristique, ipsum odio tempor metus, at lobortis nibh tellus sed lacus. Quisque mollis cursus sem, nec pellentesque dolor faucibus quis.
-              </p>
-              <button type="button" class="btn btn-outline-light mt-5">VER MÁS</button>
-            </div>
-          </div>
-        </div>
-
       </div>
-      <div class="row bordered-div-yellow">
+
+      <!-- P2 -->
+
+      <div class="row pt-md-x10 pt-sm-5">
+        <div class="col-sm-12">
+          <h1 class="title_yellow text-uppercase text-center">{{ t 'index.questions_head_p1' }}</h1> 
+        </div> 
+      </div>
+
+      
+    </div>
+
+    <div>
+      <!-- P3 -->
+
+      <div class="row mt-5 pt-5 row-without-margin">
+        <div class="col-sm-12 col-md-6 px-md-5">
+
+          <h1 class="update__sections__head__wrap__white mb-5" style=" text-align: center"><strong>{{ t 'index.questions_head_p2' }}</strong></h1>
+
+          {{#if showLocations }}
+          <div class="row mb-5">
+            <div class="col-sx-6 col-md-6">
+              <h2 class="section__message_dropbox text-right mb-sm-3">{{ t 'index.location_head' }}</h2>
+            </div>
+            <div class="col-sx-6 col-md-6">
+              {{autocomplete-input-datlas data_search=locationsData type='location' idSelect='location_search'}}
+            </div>
+          </div>
+          {{/if}}
+
+          {{#if showIndustries }}
+          <div class="row mb-5">
+            <div class="col-sx-6 col-md-6">
+              <h2 class="section__message_dropbox text-right mb-sm-3">{{ t 'index.industry_head' }}</h2>
+            </div>
+            <div class="col-sx-6  col-md-6">
+              {{autocomplete-input-datlas data_search=industriesData type='industry' idSelect='industry_search'}}
+            </div>
+          </div>
+          {{/if}}
+
+          {{#if showProducts }}
+          <div class="row mb-5">
+            <div class="col-sx-6 col-md-6">
+              <h2 class="section__message_dropbox text-right mb-sm-3">{{ t 'index.product_head' }}</h2>
+            </div>
+            <div class="col-sx-6  col-md-6">
+              {{autocomplete-input-datlas data_search=productsData type='product' idSelect='product_search'}}
+            </div>
+          </div>
+          {{/if}}
+
+          {{#if showFarmAndLand }}
+          <div class="row">
+            <div class="col-sx-6  col-md-6">
+              <h2 class="section__message_dropbox text-right mb-sm-3">{{ t 'index.farmandland_head' }}</h2>
+            </div>
+            <div class="col-sx-6  col-md-6">
+              {{autocomplete-input-datlas data_search=agproductsData type='rural' idSelect='agproduct_search'}}
+            </div>
+          </div>
+          {{/if}}
+
+
+        </div>
+        <div class="col-sm-12 col-md-6 mt-sm-5 mt-md-0 px-0">
+          <div class="section__card-cian-sophistication_route">
+            <h1 class="mb-5"><strong>{{ t 'index.sophistication_route'}}</strong></h1>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a porta dolor, at vehicula enim. Fusce dignissim massa magna, quis mollis arcu scelerisque fringilla. Sed semper risus ipsum, tempus pretium leo ullamcorper eget. Donec in erat at elit tempor aliquet vitae quis dolor. Quisque mi erat, luctus sed orci eu, aliquet maximus odio. Quisque tempus scelerisque tortor vel volutpat. Nunc volutpat justo non arcu mollis, a suscipit lacus porttitor. Cras euismod, nunc ac lacinia tristique, ipsum odio tempor metus, at lobortis nibh tellus sed lacus. Quisque mollis cursus sem, nec pellentesque dolor faucibus quis.
+            </p>
+            <button type="button" class="btn btn-outline-light mt-5">VER MÁS</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- P4 -->
+
+
+      <div class="row bordered-div-yellow row-without-margin">
         <div class="section__card-yellow col-sm-12 col-md-6 col-lg-3">
           <h1 class="text-uppercase mb-5"><bold>{{ t 'index.present_head' }}</bold></h1>
           <p>{{ t 'index.present_subhead' }}</p>
@@ -116,7 +128,8 @@
           <h2 class="text-center text-white ">{{ t 'general.geo' }}</h2>
         </div>
       </div>
-      <div class="row bordered-div-yellow">
+
+      <div class="row bordered-div-yellow row-without-margin">
         <div class="col-sm-12 col-md-6 col-lg-4 py-5">
           <img src="assets/img/branding/ico_grafico_de_dispersion.svg" class="mx-auto d-block mb-2">
           <h2 class="text-center text-white ">{{ t 'general.scatter' }}</h2>
@@ -130,23 +143,22 @@
           <p>{{ t 'index.future_subhead' }}</p>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-12 col-md-5">
-          <div class="section__card-cian-sophistication_route">
-            <h1 class="mb-5 text-uppercase"><strong>{{ t 'index.complexity_head' }}</strong></h1>
-            <p>{{ t 'index.complexity_subhead' }}</p>
-            <div style="margin-top: 5rem;">
-              {{#link-to 'about.glossary'
-                data-home-page-product=''
-                class="text-uppercase btn btn-outline-light btn-large mt-5"
-              }}
-                {{ t 'index.complexity_cta' }}
-              {{/link-to}}
-            </div>
+
+      <div class="row row-without-margin">
+        <div class="col-sm-12 col-md-5 section__card-cian-sophistication_route">
+          <h1 class="mb-5 text-uppercase"><strong>{{ t 'index.complexity_head' }}</strong></h1>
+          <p>{{ t 'index.complexity_subhead' }}</p>
+          <div style="margin-top: 5rem;">
+            {{#link-to 'about.glossary'
+              data-home-page-product=''
+              class="text-uppercase btn btn-outline-light btn-large mt-5"
+            }}
+              {{ t 'index.complexity_cta' }}
+            {{/link-to}}
           </div>
         </div>
         <div class="col-sm-12 col-md-7">
-          <div class="flex-row justify-content-around">
+          <div class="row">
             <div class="col-sm-12 col-md-6">
               <div class="section__card__profile">
                 <h1 class="section__card__wrap__white">{{ t 'index.country_profile_p1' }}</h1>
@@ -161,26 +173,30 @@
               </div>
 
             </div>
-            <div class="col align-self-center">
-              <img src="assets/img/branding/ico_mapa_colombia.svg" class="mx-auto d-block mb-2">
+            <div class="col-sm-12 col-md-6">
+              <img src="assets/img/branding/ico_mapa_colombia.svg" class="mx-sm-auto d-block mb-2" style="height: 70%; margin-top: 4rem;">
             </div>
           </div>
         </div>
       </div>
-    </section>
 
-    {{#if featureToggle.homepage_logos }}
-    <section class="stream__section index__featuredin__wrap">
-      <ul class="index__featuredin__list" style="margin-bottom: 30px;">
-        {{#each logo in featureToggle.homepage_logos}}
-        <li class="index__featuredin__item">
-        <a href="{{logo.link}}" target="_blank">
-          <img src="{{logo.logo}}" style="max-width: {{logo.max-width}};" alt="{{logo.name}}" class="index__featuredin__img">
-        </a>
-        </li>
-        {{/each}}
-      </ul>
-    </section>
-    {{/if}}
+      {{#if featureToggle.homepage_logos }}
+      <section class="stream__section index__featuredin__wrap">
+        <ul class="index__featuredin__list" style="margin-bottom: 30px;">
+          {{#each logo in featureToggle.homepage_logos}}
+          <li class="index__featuredin__item">
+          <a href="{{logo.link}}" target="_blank">
+            <img src="{{logo.logo}}" style="max-width: {{logo.max-width}};" alt="{{logo.name}}" class="index__featuredin__img">
+          </a>
+          </li>
+          {{/each}}
+        </ul>
+      </section>
+      {{/if}}
+
+
+    </div>
+
+    
   </article>
 </main>

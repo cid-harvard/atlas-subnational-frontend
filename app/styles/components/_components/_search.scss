@@ -13,7 +13,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    
+
   }
 }
 
@@ -25,15 +25,11 @@
 }
 
 .search {
-  transition: background $animationTime $animationEasing;
-  background: $colorGrayLightest;
   font-size: $fontSmall;
   font-weight: 300;
   padding: $baseSpace/2 $baseSpace;
-  width: 100%;
-  height: 100%;
   font-family: $sans;
-  border: solid 1px $colorWhite;
+  height: auto;
 
   &:active, &:focus {
     outline: 0;
@@ -42,7 +38,6 @@
     }
   }
   &::-webkit-input-placeholder {
-    transition: color $animationTime $animationEasing;
     color: $colorGrayLight;
     font-size: $fontSmall;
   }
@@ -78,4 +73,9 @@
 
 .search:invalid ~ .search__reset {
   display: none;
+}
+
+.seach__placeholder__title{
+  font-size: 6rem;
+  color: $colorSecondary;
 }

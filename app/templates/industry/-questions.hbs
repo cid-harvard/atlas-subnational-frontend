@@ -1,118 +1,59 @@
-<div class="buildermod__questions buildermod__drawer--questions">
-  <h4 class="builder__questions__header" {{action 'togglePanel' 'employment'}}>{{t 'graph_builder.builder_questions.employment'}} <span class="builder__questions__triangle"/></h4>
-  {{#if (array-contains openPanels 'employment') }}
-  <ul class="builder__questions__list">
-    <li class="builder__questions__item">
-      {{#link-to 'industry.visualization' model.id 'departments' 'treemap' 'employment' (query-params startDate=lastYear endDate=lastYear)
-        class="icon-cidcon_treemap builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'employment' (query-params startDate=firstYear endDate=lastYear)
-        class="icon-cidcon_multiples builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      {{#link-to 'industry.visualization' model.id 'departments' 'geo' 'employment' (query-params startDate=lastYear endDate=lastYear)
-        class="icon-cidcon_geo builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      <div class="builder__questions__item__textwrap">
-        <span>
+<div class="new__buildermod__questions">
+
+  <div class="container-fluid px-md-x10 pb-5">
+    <div class="row row-without-margin">
+      <div class="col-sm-12 pl-md-0">
+        <h1 class="question__title my-5">Realice una búsqueda por Temáticas del sector</h1>
+      </div>
+    </div>
+    <div class="row row-without-margin">
+
+      <div class="col-sm-12 col-md-6 pl-md-0">
+        <h2 class="new__builder__questions__header">{{t 'graph_builder.builder_questions.employment'}}</h2>
+
+        <div class="mt-4">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
           {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'employment' (query-params startDate=firstYear endDate=lastYear)
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.industry.departments.employment'}}
           {{/link-to}}
-        </span>
+        </div>
+
+        <div class="mt-3">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'employment' (query-params startDate=firstYear endDate=lastYear)
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.industry.cities.employment'}}
+          {{/link-to}}
+        </div>
+
       </div>
-    </li>
-    <li class="builder__questions__item">
-      {{#link-to 'industry.visualization' model.id 'cities' 'treemap' 'employment' (query-params startDate=lastYear endDate=lastYear)
-        class="icon-cidcon_treemap builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'employment' (query-params startDate=firstYear endDate=lastYear)
-        class="icon-cidcon_multiples builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      <div class="builder__questions__item__textwrap">
-        <span>
-        {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'employment' (query-params startDate=firstYear endDate=lastYear)
-          class="builder__questions__question"
-        }}
-          {{t 'graph_builder.page_title.industry.cities.employment'}}
-        {{/link-to}}
-        </span>
-      </div>
-    </li>
-  </ul>
-  {{/if}}
-  <h4 class="builder__questions__header" {{action 'togglePanel' 'wages'}}>{{t 'graph_builder.builder_questions.wage'}} <span class="builder__questions__triangle"/></h4>
-  {{#if (array-contains openPanels 'wages') }}
-  <ul class="builder__questions__list">
-    <li class="builder__questions__item">
-      {{#link-to 'industry.visualization' model.id 'departments' 'treemap' 'wages' (query-params startDate=lastYear endDate=lastYear)
-        class="icon-cidcon_treemap builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'wages' (query-params startDate=firstYear endDate=lastYear)
-        class="icon-cidcon_multiples builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      {{#link-to 'industry.visualization' model.id 'departments' 'geo' 'wages' (query-params startDate=lastYear endDate=lastYear)
-        class="icon-cidcon_geo builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      <div class="builder__questions__item__textwrap">
-        <span>
+
+      <div class="col-sm-12 col-md-6 pt-5 pt-md-0">
+        <h2 class="new__builder__questions__header">{{t 'graph_builder.builder_questions.wage'}}</h2>
+
+        <div class="mt-4">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
           {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'wages' (query-params startDate=firstYear endDate=lastYear)
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.industry.departments.wages'}}
           {{/link-to}}
-        </span>
-      </div>
-    </li>
-    <li class="builder__questions__item">
-      {{#link-to 'industry.visualization' model.id 'cities' 'treemap' 'wages' (query-params startDate=lastYear endDate=lastYear)
-        class="icon-cidcon_treemap builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'wages' (query-params startDate=firstYear endDate=lastYear)
-        class="icon-cidcon_multiples builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      <div class="builder__questions__item__textwrap">
-        <span>
-        {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'wages' (query-params startDate=firstYear endDate=lastYear)
-            class="builder__questions__question"
-          }}
-          {{t 'graph_builder.page_title.industry.cities.wages'}}
-        {{/link-to}}
-        </span>
-      </div>
-    </li>
-  </ul>
-  {{/if}}
-  {{#unless isIndustryClass}}
-  <h4 class="builder__questions__header" {{action 'togglePanel' 'occupation'}}>{{t 'graph_builder.builder_questions.occupation'}} <span class="builder__questions__triangle"/></h4>
-  {{#if (array-contains openPanels 'occupation') }}
-  <ul class="builder__questions__list">
-    <li class="builder__questions__item">
-      {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies' (query-params startDate=occupationLastYear endDate=occupationLastYear)
-        class="icon-cidcon_treemap builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      <div class="builder__questions__item__textwrap">
-        <span>
-          {{#link-to 'industry.visualization' model.id 'occupations' 'treemap' 'num_vacancies' (query-params startDate=occupationLastYear endDate=occupationLastYear)
-            class="builder__questions__question"
-          }}
-            {{t 'graph_builder.page_title.industry.occupations.num_vacancies'}}
+        </div>
+
+        <div class="mt-3">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          {{#link-to 'industry.visualization' model.id 'cities' 'multiples' 'wages' (query-params startDate=firstYear endDate=lastYear)
+              class="builder__questions__question"
+            }}
+            {{t 'graph_builder.page_title.industry.cities.wages'}}
           {{/link-to}}
-        </span>
+        </div>
+
       </div>
-    </li>
-  </ul>
-  {{/if}}
-  {{/unless}}
+
+    </div>
+  </div>
 </div>

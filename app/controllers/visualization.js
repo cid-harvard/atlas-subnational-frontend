@@ -16,6 +16,15 @@ export default Ember.Controller.extend({
   drawerChangeGraphIsOpen: false,
   drawerQuestionsIsOpen: false,
 
+  locationsData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.locations'))
+
+    return locations.filter(item => item[1].level === "department").map((item) => {
+      return {id:item[1].id, text:item[1].name_short_es}
+    })
+  }),
+
   firstYear: computed('model', 'entityType', 'source', 'featureToggle', function(){
     // Handle the situation where we're not looking at a location profile but
     // at a thing-profile like livestock profile. In that case since we're only
@@ -386,7 +395,7 @@ export default Ember.Controller.extend({
   visualizationComponent: computed('visualization', function(){
     let visualization = this.get('visualization');
     if(visualization === 'treemap') {
-      return 'vistk-treemap';
+      return 'zoomable-treemap';
     } else if(visualization === 'multiples') {
       return 'small-multiples-set';
     } else if(visualization === 'scatter') {

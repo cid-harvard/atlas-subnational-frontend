@@ -32,3 +32,17 @@
 .stream__article--no--indent {
   margin: $baseSpace*3;
 }
+
+.row-without-margin{
+  margin: 0;
+}
+
+.select2-selection--single {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.select2-drop li {
+  white-space: pre-line;
+}

@@ -21,6 +21,8 @@
   overflow: initial !important;
   box-shadow: -1px -1px 5px rgba(0,0,0,0.2);
   transform: translate(-50%, calc(-100% - 10px));
+  opacity: 1;
+  color: $colorBlack;
   &:after {
     top: 100%;
     left: 50%;

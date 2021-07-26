@@ -76,3 +76,21 @@ button::-moz-focus-inner {
 .btn--text {
   text-align: right;
 }
+
+.btn-outline-secondary{
+  color: $colorSecondary;
+  border-color: $colorSecondary;
+  font-size: 1.8rem;
+}
+
+.btn-outline-secondary:not(:disabled):not(.disabled).active, .btn-outline-secondary:not(:disabled):not(.disabled):active, .show>.btn-outline-secondary.dropdown-toggle{
+  color: $colorBase;
+  background-color: $colorSecondary;
+  border-color: $colorSecondary;
+}
+
+.btn-outline-secondary:hover{
+  color: $colorBase;
+  background-color: $colorSecondary;
+  border-color: $colorSecondary;
+}

@@ -25,90 +25,104 @@
   agcensusLastYear=agcensusLastYear
   occupationLastYear=occupationLastYear
 }}
-<header class="section__header builder__header">
-  <h3 class="section__head question__head">{{pageTitle}}</h3>
-</header>
-<section class="stream__section visualization__{{visualization}}">
-  <div {{bind-attr class=":section__buildermod drawerChangeGraphIsOpen:buildermod__changegraph--open" }}>
+
+<div class="container-fluid px-md-x10 my-5 py-5">
+  <div class="row row-without-margin d-flex align-items-center">
+
+    <div class="col-sm-12 col-md-6">
+      <h3 class="title_yellow">{{pageTitle}}</h3>
+    </div>
+
+    <div class="col-sm-12 col-md-6">
+      <h1 class="text-center my-5 text_yellow">{{ t 'graph_builder.types' }}</h1>
+      {{partial "partials/buildermod-drawer-change-graph"}}
+    </div>
+
+  </div>
+</div>
+
+
+<div class="container-fluid px-md-x10 my-md-5 py-md-5 my-sm-1 py-sm-1">
+  <div class="row row-without-margin d-flex align-items-center">
+
     {{#unless hideVisualization }}
-  <div class="buildermod__tools">
-          {{partial "partials/buildermod-drawer-change-graph"}}
+
+      <div class="col-sm-12 col-md-8">
+        <h1 class="title_yellow" style="font-size: 6rem;">{{builderModHeader}}</h1>
+        <h1 class="pt-2" style="font-size: 6rem;">{{headerValue}}</h1>
+        <h1 class="pt-2 mb-5" style="font-size: 6rem;">{{years}}</h1>
       </div>
-    <header class="buildermod__header">
-      <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
-    </header>
-    <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--fixedheight isGeo:buildermod__vizwrap--geo"}}>
-      {{#unless isGeo }}
-        {{partial "partials/buildermod-search"}}
-      {{/unless}}
 
-      {{component visualizationComponent
-        classNames='buildermod__viz'
-        immutableData=immutableData
-        modelData=modelData
-        data=filteredData
-        dataType=source
-        varDependent=varDependent
-        scale=scale
-        startDate=startDate
-        dateExtent=dateExtent
-        endDate=endDate
-        metadata=metadata
-        isFiltered=isFiltered
-        entityType=entityType
-        entityId=entityId
-        variable=variable
-        search=search
-        graph=graph
-      }}
-
-      {{#if needsLegend }}
+      <div class="col-sm-12 col-md-4">
         {{#unless isGeo }}
-            {{component 'visualization-legend' legend=legend }}
-        {{else}}
-            {{component 'visualization-legend-geomap' legend=geoLegend }}
+          {{partial "partials/buildermod-search"}}
         {{/unless}}
-      {{/if}}
+      </div>
 
-      <div class="buildermod__settings__wrap">
-        {{component 'graphbuilder-settings'
-          classNames='buildermod__settings'
+      <div class="col-sm-12 mt-5 pt-5">
+
+        {{component visualizationComponent
+          classNames='buildermod__viz'
+          immutableData=immutableData
+          modelData=modelData
+          data=filteredData
+          dataType=source
+          varDependent=varDependent
+          scale=scale
+          startDate=startDate
+          dateExtent=dateExtent
+          endDate=endDate
+          metadata=metadata
+          isFiltered=isFiltered
+          entityType=entityType
+          entityId=entityId
+          variable=variable
+          search=search
+          graph=graph
+          elementId=source
+        }}
+
+        
+
+        {{#if needsLegend }}
+          {{#unless isGeo }}
+              {{component 'visualization-legend' legend=legend }}
+          {{else}}
+              {{component 'visualization-legend-geomap' legend=geoLegend }}
+          {{/unless}}
+        {{/if}}
+
+      </div>
+
+      
+
+      <div class="col-sm-12">
+        {{component 'visualization-explanation' text=visualizationExplanation}}
+      </div>
+
+      <div class="col-sm-12 mt-5">
+
+        {{
+          datlas-table
+          data=filteredData
+          source=source
+          entityType=entityType
+          search=search
           startDate=startDate
           endDate=endDate
-          dateExtent=dateExtent
-          canYearToggle=canYearToggle
-          isScatter=isScatter
-          rcaFilter=rcaFilter
+          elementId="sourceTable"
         }}
+
       </div>
-    </div>
+
     {{/unless}}
-    {{component 'visualization-explanation'
-      text=visualizationExplanation
-    }}
-    <div class="ember__table__wrap">
-      {{component 'table-download'
-        name=builderModHeader
-        data=immutableData
-        source=source
-        entityType=entityType
-        pageTitle=pageTitle
-      }}
-      {{component 'graphbuilder-table'
-        data=filteredData
-        source=source
-        entityType=entityType
-        search=search
-      }}
-    </div>
-    <small class="table__footer">
-      {{ t 'graph_builder.table.read_more' }}
-      {{#link-to 'about.glossary' class='link--stream link--stream--inline--tiny table__footer__link--glossary'}}
-        {{t 'general.glossary'}}.
-      {{/link-to}}
-    </small>
+
   </div>
-</section>
+</div>
+
+
+
+
 <section class="stream__section recirc builder__recirc">
   <div class="recirc__bground" style="background-image: url({{recircUrl}})"></div>
   <div class="recirc__wrap">

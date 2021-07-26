@@ -9,7 +9,7 @@
   position: relative;
 
   .items__mark__diamond {
-    fill: $colorGray;
+    fill: $colorWhite;
     opacity: .3;
   }
 
@@ -34,7 +34,7 @@
   }
 
   .axis > .domain {
-    stroke: $colorGray;
+    stroke: $colorWhite;
     stroke-dasharray: 1,1;
     stroke-width: .5px;
   }
@@ -44,4 +44,12 @@
     font-size: 1.4rem;
   }
 
+  text {
+    fill: $colorWhite;
+  }
+
+}
+
+.dotplot--div{
+  width: 40vw;
 }

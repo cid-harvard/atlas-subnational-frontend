@@ -92,7 +92,7 @@
   &.icon-cidcon_geo { }
   &.icon-cidcon_multiples { left: 30px;}
   &.icon-cidcon_treemap, &.icon-cidcon_scatter, &.icon-cidcon_similarity { left: 60px;}
-  
+
 }
 
 .builder__questions__label {
@@ -101,11 +101,7 @@
 }
 
 .builder__questions__question {
-  font-weight: 400;
-  color: $colorGray;
-  font-size: $fontSmall;
-  display: inline-block;
-  font-family: $sans;
+  color: black;
 }
 
 .builder__icon--placeholder:before {
@@ -117,4 +113,17 @@
 }
 .buildermod__tool--questions {
   border-left-color: $colorBrown300;
+}
+
+.new__buildermod__questions{
+  background-color: $colorSecondary;
+  color: black;
+}
+
+.question__title{
+  color: black;
+}
+
+.new__builder__questions__header {
+  color: black;
 }
