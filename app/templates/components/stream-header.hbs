@@ -60,25 +60,78 @@
   {{/if}}
 
   {{#if isLandUse}}
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="rural")}}{{ t 'search.results_rural' }}{{/link-to}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ t 'search.rural.land-use' }}</li>
+      </ol>
+    </nav>
+
+    <div class="my-5">
+      <h1 class="stream-header__title">{{ t 'search.results_rural' }}</h1>
+      <h1 class="stream-header__subtitle">{{model.name}}</h1>
+    </div>
+
     {{#if isShowingIndex}}
       {{ partial 'partials/builder-questions-land-use'}}
     {{/if}}
   {{/if}}
   {{#if isAgproduct}}
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="rural")}}{{ t 'search.results_rural' }}{{/link-to}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ t 'search.rural.agproduct' }}</li>
+      </ol>
+    </nav>
+
+    <div class="my-5">
+      <h1 class="stream-header__title">{{ t 'search.rural.agproduct' }}</h1>
+      <h1 class="stream-header__subtitle">{{model.name}}</h1>
+    </div>
+
     {{#if isShowingIndex}}
       {{ partial 'partials/builder-questions-agproduct'}}
     {{/if}}
   {{/if}}
   {{#if isNonag}}
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="rural")}}{{ t 'search.results_rural' }}{{/link-to}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ t 'search.rural.nonag' }}</li>
+      </ol>
+    </nav>
+
+    <div class="my-5">
+      <h1 class="stream-header__title">{{ t 'search.results_rural' }}</h1>
+      <h1 class="stream-header__subtitle">{{model.name}}</h1>
+    </div>
+
     {{#if isShowingIndex}}
       {{ partial 'partials/builder-questions-nonag'}}
     {{/if}}
   {{/if}}
   {{#if isLivestock}}
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="rural")}}{{ t 'search.results_rural' }}{{/link-to}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ t 'search.rural.livestock' }}</li>
+      </ol>
+    </nav>
+
+    <div class="my-5">
+      <h1 class="stream-header__title">{{ t 'search.results_rural' }}</h1>
+      <h1 class="stream-header__subtitle">{{model.name}}</h1>
+    </div>
+
     {{#if isShowingIndex}}
       {{ partial 'partials/builder-questions-livestock'}}
     {{/if}}

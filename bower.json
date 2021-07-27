@@ -22,7 +22,7 @@
     "antiscroll": "*",
     "jquery-mousewheel": "~3.1.4",
     "jquery-ui": "~1.11.4",
-    "vis-toolkit": "https://github.com/cid-harvard/vis-toolkit.git#master"
+    "vis-toolkit": "https://github.com/Dandresfsoto/vis-toolkit.git#master"
   },
   "devDependencies": {
     "d3": "~3.5.5",

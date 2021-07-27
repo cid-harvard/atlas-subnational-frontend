@@ -451,9 +451,10 @@ export default {
   "pageheader.search_link": "Buscar",
   "pageheader.search_placeholder": "Busque el lugar, producto o sector",
   "pageheader.search_placeholder.header": "Realice una busqueda por",
-  "pageheader.search_placeholder.industry": "Sector o por c\u00f3digo CIIU",
+  "pageheader.search_placeholder.industry": "Busqueda por Nombre o c\u00f3digo CIIU",
   "pageheader.search_placeholder.location": "Busque un lugar",
   "pageheader.search_placeholder.product": "Busque un producto",
+  "pageheader.search_placeholder.rural": "Busqueda por producto agricola, uso de suelo, actividad agropecuaria o especie pecuaria",
   "rankings.explanation.body": "",
   "rankings.explanation.title": "Explicaci\u00f3n",
   "rankings.intro.p": "Compare entidades y ciudades mexicanas.",
@@ -483,9 +484,29 @@ export default {
   "search.message.p1": "En el siguiente campo usted podra diligenciar su consulta, tambien usted podra realizar esta misma busqueda por codigo CIIU.",
   "search.message.p2": "Haga uso del interrogante para ampliar la información.",
   "search.modal.title": "CODIGO CIIU",
-  "search.modal.p1": "Clasificacion numerica que identifica las actividades economicas. Aunque pertenece a las naciones unidas, en Colombia, el DANE realiza la ultima clasificacion a 4 digitos.",
   "search.placeholder.select2": "Busqueda por Nombre o Codigo CIIU",
   "search.modal.close": "Cerrar",
+  "search.modal.title.industry": "Codigo CIIU",
+  "search.modal.p1.industry": "Clasificacion numerica que identifica las actividades economicas. Aunque pertenece a las naciones unidas, en Colombia, el DANE realiza la ultima clasificacion a 4 digitos.",
+  "search.modal.link.industry": "https://clasificaciones.dane.gov.co/ciiu4-0/ciiu4_dispone",
+
+  "search.modal.title.rural": "Búsqueda",
+  "search.modal.p1.rural": "En esta opción puede buscar con nombre un producto agrícola, uso de suelo, actividad no agropecuaria o especie pecuaria.<br><br>En caso de no encontrar lo deseado, en la parte inferior puede encontrar cada una de las actividades agropecuarias y seleccionarlas directamente.",
+  "search.modal.link.rural": "",
+
+  "search.rural.agproduct": "Producto Agrícola",
+  "search.rural.land-use": "Uso de Suelo",
+  "search.rural.nonag": "Actividades Agropecuarias",
+  "search.rural.livestock": "Especies Pecuarias",
+
+  "search.industry.title": "Realice una busqueda por",
+  "search.industry.subtitle": "Sector o por codigo CIIU",
+  "search.industry.body": "En el siguiente campo usted podra diligenciar su consulta, tambien usted podra realizar esta misma busqueda por codigo CIIU.<br><br>Haga uso del interrogante para ampliar la información.",
+
+  "search.rural.title": "Búsqueda por",
+  "search.rural.subtitle": "Una actividad rural",
+  "search.rural.body": "En el siguiente campo usted podra realizar una búsqueda por producto agrícola, uso del suelo, actividad agropecuaria o especie pecuaria.<br><br>Haga uso del interrogante para ampliar la información.",
+
   "table.export_data": "Descargar Datos",
   "thousands_delimiter": ",",
   "header_nav.search": "REALICE UNA BUSQUEDA POR"

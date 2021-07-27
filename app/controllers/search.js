@@ -9,21 +9,51 @@ export default Ember.Controller.extend({
   entity: ['product', 'industry', 'location', 'rural'],
   query: null,
   filter: null,
-  modelData: computed('model', 'i18n.locale', function() {
-    let model = get(this, 'model');
+  modelData: computed('model', 'filter', 'i18n.locale', function() {
+    let model = get(this, 'modelCategorized');
     let locale = this.get('i18n').display
+    var self = this
 
-    return model.map(function(models){
-      if(models.get('profileName') === "agproduct"){
-        return {id: models.id, text: models.get(`name_${locale}`) }
-      }
-      else{
-        return {id: models.id, text: models.get(`name_short_${locale}`) + " (" + models.get('code') + ")" }
-      }
-    })
+    
+    if(model.hasOwnProperty("agproduct")){
+
+      return Object.entries(model).map(function(models){
+        
+        var key = models[0]
+
+        return models[1].map(function(models){
+
+          var to_concatenate = self.get('i18n').t(`search.rural.${key}`).string
+
+          return {id: models.id, text: models.get(`name_${locale}`) + ' - ' + to_concatenate, key: key }
+
+        })
+
+      }).reduce((accum, item) => accum.concat(item))
+
+    }
+    else{
+
+
+      return Object.entries(model).map(function(models){
+
+        return models[1].map(function(models){
+          return {id: models.id, text: models.get(`name_short_${locale}`) + " (" + models.get('code') + ")" }
+        })
+
+      })[0]
+
+    }
+    
   }),
   search: computed('query', function() {
     return this.get('query');
+  }),
+  isRural: computed('filter', function(){
+    if(this.get('filter') == 'rural'){
+      return true
+    }
+    return false
   }),
   modelCategorized: computed('filter', 'model', function(){
     return _.groupBy(this.get('model'), (x)=>x.constructor.modelName);
@@ -96,11 +126,41 @@ export default Ember.Controller.extend({
       return get(d,'constructor.modelName') === 'industry';
     });
   }),
-  placeHolderText: computed('filter', function() {
+  subTitleText: computed('filter', function() {
     if(_.contains(this.get('entity'), this.get('filter'))){
-      return `pageheader.search_placeholder.${this.get('filter')}`;
+      return `search.${this.get('filter')}.subtitle`;
     }
-    return `pageheader.search_placeholder`;
+    return `search.subtitle`;
+  }),
+  titleText: computed('filter', function() {
+    if(_.contains(this.get('entity'), this.get('filter'))){
+      return `search.${this.get('filter')}.title`;
+    }
+    return `search.title`;
+  }),
+  bodyText: computed('filter', function() {
+    if(_.contains(this.get('entity'), this.get('filter'))){
+      return `search.${this.get('filter')}.body`;
+    }
+    return `search.body`;
+  }),
+  modalTitle: computed('filter', function() {
+    if(_.contains(this.get('entity'), this.get('filter'))){
+      return `search.modal.title.${this.get('filter')}`;
+    }
+    return `search.modal.title`;
+  }),
+  modalContent: computed('filter', function() {
+    if(_.contains(this.get('entity'), this.get('filter'))){
+      return `search.modal.p1.${this.get('filter')}`;
+    }
+    return `search.modal.p1`;
+  }),
+  modalLink: computed('filter', function() {
+    if(_.contains(this.get('entity'), this.get('filter'))){
+      return `search.modal.link.${this.get('filter')}`;
+    }
+    return `search.modal.link`;
   }),
   actions:{
     toggleReferenceKey(key) {
@@ -117,6 +177,15 @@ export default Ember.Controller.extend({
     },
     transitionAgproduct(id) {
       this.transitionToRoute('agproduct.show', id);
+    },
+    transitionLivestock(id) {
+      this.transitionToRoute('livestock.show', id);
+    },
+    transitionNonag(id) {
+      this.transitionToRoute('nonag.show', id);
+    },
+    transitionLanduse(id) {
+      this.transitionToRoute('landUse.show', id);
     },
   }
 });

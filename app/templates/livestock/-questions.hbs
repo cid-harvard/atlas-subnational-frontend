@@ -1,42 +1,69 @@
-<div class="buildermod__questions buildermod__drawer--questions">
-  <h4 class="builder__questions__header" {{action 'togglePanel' 'num_farms'}}>{{t 'graph_builder.builder_questions.livestock_num_farms'}} <span class="builder__questions__triangle"/></h4>
-  {{#if (array-contains openPanels 'num_farms') }}
-  <ul class="builder__questions__list">
-    <li class="builder__questions__item">
-      {{#link-to 'livestock.visualization' model.id 'departments' 'treemap' 'num_farms' (query-params startDate=lastYear endDate=lastYear search='null')
-        class="icon-cidcon_treemap builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      {{#link-to 'livestock.visualization' model.id 'departments' 'geo' 'num_farms' (query-params startDate=lastYear endDate=lastYear search='null')
-        class="icon-cidcon_geo builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      <div class="builder__questions__item__textwrap">
-        <span>
+<div class="new__buildermod__questions position-relative">
+
+  <div class="container-fluid px-md-x10 pb-5">
+    <div class="row row-without-margin">
+      <div class="col-sm-12 pl-md-0">
+        <h1 class="question__title my-5">Realice una búsqueda por:</h1>
+      </div>
+    </div>
+    <div class="row row-without-margin">
+
+      <div class="col-sm-12 col-md-6 pl-md-0">
+        <h2 class="new__builder__questions__header">{{t 'graph_builder.builder_questions.livestock_num_farms'}}</h2>
+
+        <div class="mt-4">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
           {{#link-to 'livestock.visualization' model.id 'departments' 'geo' 'num_farms' (query-params startDate=lastYear endDate=lastYear search='null')
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.livestock.departments.num_farms'}}
           {{/link-to}}
-        </span>
-      </div>
-    </li>
-    <li class="builder__questions__item">
-      {{#link-to 'livestock.visualization' model.id 'municipalities' 'treemap' 'num_farms' (query-params startDate=lastYear endDate=lastYear search='null')
-        class="icon-cidcon_treemap builder__questions__item__icon"
-        tagNmae='i'
-      }} {{/link-to}}
-      <div class="builder__questions__item__textwrap">
-        <span>
+        </div>
+
+        <div class="mt-3">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
           {{#link-to 'livestock.visualization' model.id 'municipalities' 'treemap' 'num_farms' (query-params startDate=lastYear endDate=lastYear search='null')
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.livestock.municipalities.num_farms'}}
           {{/link-to}}
-        </span>
+        </div>
+
       </div>
-    </li>
-  </ul>
+
+      <div class="col-sm-12 col-md-6 pt-5 pt-md-0">
+        <h2 class="new__builder__questions__header">{{t 'graph_builder.builder_questions.livestock_num_livestock'}}</h2>
+
+        <div class="mt-4">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          {{#link-to 'livestock.visualization' model.id 'departments' 'geo' 'num_livestock' (query-params startDate=lastYear endDate=lastYear search='null')
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.livestock.departments.num_livestock'}}
+          {{/link-to}}
+        </div>
+
+        <div class="mt-3">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+           {{#link-to 'livestock.visualization' model.id 'municipalities' 'treemap' 'num_livestock' (query-params startDate=lastYear endDate=lastYear search='null')
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.livestock.municipalities.num_livestock'}}
+          {{/link-to}}
+        </div>
+
+      </div>
+
+      <img src="assets/img/general/illustracion_1.svg" class="position-absolute img-fluid d-none d-xl-block" style="right: 0; bottom: 0; height: 100%;">
+
+    </div>
+  </div>
+</div>
+
+<!--<div class="buildermod__questions buildermod__drawer--questions">
+  <h4 class="builder__questions__header" {{action 'togglePanel' 'num_farms'}}>{{t 'graph_builder.builder_questions.livestock_num_farms'}} <span class="builder__questions__triangle"/></h4>
+  {{#if (array-contains openPanels 'num_farms') }}
+
   {{/if}}
   <h4 class="builder__questions__header" {{action 'togglePanel' 'num_livestock'}}>{{t 'graph_builder.builder_questions.livestock_num_livestock'}} <span class="builder__questions__triangle"/></h4>
   {{#if (array-contains openPanels 'num_livestock') }}
@@ -77,4 +104,4 @@
     </li>
   </ul>
   {{/if}}
-</div>
+</div>-->

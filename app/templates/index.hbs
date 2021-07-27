@@ -46,9 +46,7 @@
       <!-- P3 -->
 
       <div class="row mt-5 pt-5 row-without-margin">
-        <div class="col-sm-12 col-md-6 px-md-5">
-
-          <h1 class="update__sections__head__wrap__white mb-5" style=" text-align: center"><strong>{{ t 'index.questions_head_p2' }}</strong></h1>
+        <div class="col-sm-12 col-md-6 px-md-5 d-flex flex-column justify-content-around">
 
           {{#if showLocations }}
           <div class="row mb-5">
@@ -84,12 +82,12 @@
           {{/if}}
 
           {{#if showFarmAndLand }}
-          <div class="row">
+          <div class="row mb-5">
             <div class="col-sx-6  col-md-6">
               <h2 class="section__message_dropbox text-right mb-sm-3">{{ t 'index.farmandland_head' }}</h2>
             </div>
             <div class="col-sx-6  col-md-6">
-              {{autocomplete-input-datlas data_search=agproductsData type='rural' idSelect='agproduct_search'}}
+              {{autocomplete-input-datlas data_search=ruralData type='rural' idSelect='agproduct_search'}}
             </div>
           </div>
           {{/if}}
@@ -97,13 +95,27 @@
 
         </div>
         <div class="col-sm-12 col-md-6 mt-sm-5 mt-md-0 px-0">
-          <div class="section__card-cian-sophistication_route">
-            <h1 class="mb-5"><strong>{{ t 'index.sophistication_route'}}</strong></h1>
+
+
+          <div class="section__card-cian-sophistication_route mb-5">
+            <h1 class="mb-5"><strong>{{ t 'search.sophistication_path_place'}}</strong></h1>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a porta dolor, at vehicula enim. Fusce dignissim massa magna, quis mollis arcu scelerisque fringilla. Sed semper risus ipsum, tempus pretium leo ullamcorper eget. Donec in erat at elit tempor aliquet vitae quis dolor. Quisque mi erat, luctus sed orci eu, aliquet maximus odio. Quisque tempus scelerisque tortor vel volutpat. Nunc volutpat justo non arcu mollis, a suscipit lacus porttitor. Cras euismod, nunc ac lacinia tristique, ipsum odio tempor metus, at lobortis nibh tellus sed lacus. Quisque mollis cursus sem, nec pellentesque dolor faucibus quis.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a porta dolor, at vehicula enim. Fusce dignissim massa magna, quis mollis arcu scelerisque fringilla.
+            </p>
+            <button class="btn btn-outline-light mt-5" {{action 'transitionLocationSearch' }}>VER MÁS</button>
+            
+          </div>
+
+
+          <div class="section__card-cian-sophistication_route my-5">
+            <h1 class="mb-5"><strong>{{ t 'search.sophistication_path_product'}}</strong></h1>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a porta dolor, at vehicula enim. Fusce dignissim massa magna, quis mollis arcu scelerisque fringilla.
             </p>
             <button type="button" class="btn btn-outline-light mt-5">VER MÁS</button>
           </div>
+
+
         </div>
       </div>
 

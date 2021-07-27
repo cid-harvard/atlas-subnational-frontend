@@ -34,6 +34,18 @@ export default Ember.Component.extend({
       return d3.nest().entries(updatedData);
     }
   }),
+  getColors: computed('updatedData', 'search', 'color', function () {
+
+    var color = this.get('color')
+
+    if(color === 'pink'){
+      return ["#880E4F", "#F06292"]
+    }
+    else if(color === 'green'){
+      return ["#33691E", "#9CCC65"]
+    }
+    return ["#880E4F", "#F06292"]
+  }),
   treemap: computed('data.[]', 'id', 'updatedData', 'nestedData', 'varDependent', 'i18n.locale', 'varText', 'search', function () {
 
     var elementId = this.get('id');
@@ -47,8 +59,7 @@ export default Ember.Component.extend({
       height: 500,
       value_text: value_text,
       percent_text: this.get('i18n').t(`graph_builder.table.share`).string,
-      start_color: "#D81B60",
-      end_color: "#880E4F",
+      colors: this.get('getColors'),
       principal_color: "#292A48"
     };
     var o = {title: "World Population"}
@@ -65,7 +76,7 @@ export default Ember.Component.extend({
         height = opts.height - margin.top - margin.bottom - theight,
         transitioning;
 
-    var color = d3.scale.linear().domain([0,1]).interpolate(d3.interpolateHcl).range([d3.rgb(defaults.start_color), d3.rgb(defaults.end_color)]);
+    var color = d3.scale.linear().domain([100, 0]).interpolate(d3.interpolateHcl).range([defaults.colors[0], defaults.colors[1]]);
 
     var x = d3.scale.linear()
         .domain([0, width])
@@ -97,12 +108,15 @@ export default Ember.Component.extend({
     grandparent.append("rect")
         .attr("y", -margin.top)
         .attr("width", width)
-        .attr("height", margin.top);
+        .attr("height", margin.top)
+        .style("fill", "orange")
+        .style("stroke", "#292A48")
 
     grandparent.append("text")
         .attr("x", 6)
         .attr("y", 6 - margin.top)
-        .attr("dy", ".75em");
+        .attr("dy", ".75em")
+        .style("font-family", "sans-serif");
 
     var Tooltip = d3.select(elementId)
       .append("div")
@@ -222,9 +236,15 @@ export default Ember.Component.extend({
 
       t.append("tspan")
           .attr("class", "tspan-treemap")
+          .style("fill", "white")
+          .style("font-size", "1rem")
+          .style("font-family", "sans-serif")
           .text(function(d) { return d.key; });
       t.append("tspan")
           .attr("class", "tspan-treemap")
+          .style("fill", "white")
+          .style("font-size", "1rem")
+          .style("font-family", "sans-serif")
           .attr("dy", "1.2em")
           .text(function(d) {
             return (d.area * 100).toFixed(1) + "%";
@@ -233,8 +253,9 @@ export default Ember.Component.extend({
 
       g.selectAll("rect")
           .style("fill", function(d) {
-            return color(d.area);
-          });
+            return color(d.area*100);
+          })
+          .style("stroke", "#292A48")
 
       function transition(d) {
         if (transitioning || !d) return;
@@ -339,9 +360,78 @@ export default Ember.Component.extend({
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender',this , function() {
-      d3.select(this.get('id')).selectAll('svg').remove();
+
+      var id = this.get('id')
+
+      d3.select(id).selectAll('svg').remove();
       this.get('treemap');
+
+      
+
     });
+  },
+  actions: {
+    savePng() {
+
+      var id = this.get('id')      
+      var svgElement = $(`${id} svg`).get(0)
+      var d = new Date();
+      var file_name = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds()
+
+      svgElement.setAttribute("width", svgElement.getBoundingClientRect().width);
+      svgElement.setAttribute("height", svgElement.getBoundingClientRect().height);
+      svgElement.style.width = null;
+      svgElement.style.height= null;
+
+      html2canvas(svgElement, {
+          onrendered: function(canvas) {
+              var myImage = canvas.toDataURL("image/png");
+              saveAs(myImage, `${file_name}.png`);
+          }
+      });
+
+    },
+    savePdf() {
+
+      var id = this.get('id')      
+      var svgElement = $(`${id} svg`).get(0)
+      var d = new Date();
+      var file_name = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds()
+
+      svgElement.setAttribute("width", svgElement.getBoundingClientRect().width);
+      svgElement.setAttribute("height", svgElement.getBoundingClientRect().height);
+      svgElement.style.width = null;
+      svgElement.style.height= null;
+
+      var HTML_Width = svgElement.getBoundingClientRect().width;
+      var HTML_Height = svgElement.getBoundingClientRect().height;
+      var top_left_margin = 15;
+      var PDF_Width = HTML_Width + (top_left_margin * 2);
+      var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+      var canvas_image_width = HTML_Width;
+      var canvas_image_height = HTML_Height;
+
+      var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+      html2canvas(svgElement, {
+          onrendered: function(canvas) {
+              var myImage = canvas.toDataURL("image/jpeg", 1.0);
+              var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+
+              pdf.addImage(myImage, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+
+              for (var i = 1; i <= totalPDFPages; i++) { 
+                  pdf.addPage(PDF_Width, PDF_Height);
+                  pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+              }
+
+              pdf.save(`${file_name}.pdf`);
+
+              saveAs(pdf, `${file_name}.pdf`);
+          }
+      });
+
+    },
   },
   update: observer('i18n.display', 'search', function() {
     d3.select(this.get('id')).selectAll('svg').remove();

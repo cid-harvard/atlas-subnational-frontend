@@ -5,8 +5,8 @@
   <div class="row h-100">
 
     <div class="col-sm-12 col-md-6 my-auto">
-      <h1 class="text-uppercase seach__placeholder__title">{{ t 'pageheader.search_placeholder.header' }}</h1>
-      <h1 class="text-uppercase seach__placeholder__title">{{t placeHolderText}}</h1>
+      <h1 class="text-uppercase seach__placeholder__title">{{ t titleText }}</h1>
+      <h1 class="text-uppercase seach__placeholder__title">{{t subTitleText}}</h1>
     </div>
 
     <div class="col-sm-12 col-md-6 my-auto">
@@ -14,8 +14,7 @@
       <div class="row">
 
         <div class="col-sm-12 col-md-8 my-auto mt-sm-5">
-          <p class="text-light">{{t 'search.message.p1' }}</p>
-          <p class="text-light my-5">{{t 'search.message.p2' }}</p>
+          <p class="text-light">{{t bodyText }}</p>
         </div>
         
         <div class="col-sm-12 col-md-4 my-auto text-center mt-sm-5">
@@ -38,9 +37,9 @@
                   
                   <div class="row h-100 px-4">
                     <div class="col-sm-12 col-md-6 my-auto text-left">
-                      <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'search.modal.title' }}</h2>
-                      <p class="text-white">{{ t 'search.modal.p1' }}</p>
-                      <a target="_blank" href="https://clasificaciones.dane.gov.co/ciiu4-0/ciiu4_dispone">https://clasificaciones.dane.gov.co/ciiu4-0/ciiu4_dispone</a>
+                      <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t modalTitle }}</h2>
+                      <p class="text-white mb-3">{{ t modalContent }}</p>
+                      <a target="_blank" href={{ t modalLink }}>{{ t modalLink }}</a>
                     </div>
                     <div class="col-sm-12 col-md-6 my-auto">
                       <img src="assets/img/general/illustracion_2.svg" class="img-fluid">
@@ -77,6 +76,7 @@
   {{#if query}}
 
     {{#if filter}}
+
     {{else}}
       {{#if landuseResults.length}}
         <h3 class="section__head results__subhead">{{t 'search.results_landuses'}}</h3>
@@ -171,6 +171,36 @@
 
     {{/if}}
 
+  {{/if}}
+
+
+  {{#if isRural }}
+    <div class="mt-5 pt-5">
+
+      <div class="row">
+        {{#each modelCategorizedKeys as |key|}}
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            {{#if (is-equal key referenceKey)}}
+              <button class="btn btn-outline-secondary btn-lg btn-block active" {{action 'toggleReferenceKey' key}}>{{t (is-concat 'header.' key)}}</button>
+            {{else}}
+              <button class="btn btn-outline-secondary btn-lg btn-block" {{action 'toggleReferenceKey' key}}>{{t (is-concat 'header.' key)}}</button>
+            {{/if}}
+          </div>
+        {{/each}}
+      </div>
+      
+      <div class="row mt-5">
+        
+        {{#each sortedReferenceBody as |item|}}
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            {{#link-to (is-concat item.profileName ".show") item.id tagName="a"}}{{item.name}}{{/link-to}}
+          </div>
+        {{/each}}
+        
+      </div>
+
+
+    </div>
   {{/if}}
 
 </div>

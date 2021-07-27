@@ -451,9 +451,10 @@ export default {
   "pageheader.search_link": "Search",
   "pageheader.search_placeholder": "Search for a location, product or industry",
   "pageheader.search_placeholder.header": "Make a search by",
-  "pageheader.search_placeholder.industry": "Industry or by CIIU code",
+  "pageheader.search_placeholder.industry": "Find by name or by CIIU code",
   "pageheader.search_placeholder.location": "Search for a location",
   "pageheader.search_placeholder.product": "Search for a product",
+  "pageheader.search_placeholder.rural": "Search by agricultural product, land use, agricultural activity or livestock species",
   "rankings.explanation.body": "",
   "rankings.explanation.title": "Explanation",
   "rankings.intro.p": "Compare states and cities across Mexico.",
@@ -483,9 +484,29 @@ export default {
   "search.message.p1": "In the next field you can fill out your query, you can also carry out this same search by CIIU code.",
   "search.message.p2": "Use the question mark to expand the information.",
   "search.modal.title": "CIIU Code",
-  "search.modal.p1": "Numerical classification that identifies economic activities. Although it belongs to the United Nations, in Colombia, DANE performs the last 4-digit classification.",
   "search.placeholder.select2": "Search by Name or CIIU Code",
   "search.modal.close": "Close",
+  "search.modal.title.industry": "CIIU Code",
+  "search.modal.p1.industry": "Numerical classification that identifies economic activities. Although it belongs to the United Nations, in Colombia, DANE performs the last 4-digit classification.",
+  "search.modal.link.industry": "https://clasificaciones.dane.gov.co/ciiu4-0/ciiu4_dispone",
+
+  "search.modal.title.rural": "Search",
+  "search.modal.p1.rural": "In this option you can search for an agricultural product, land use, non-agricultural activity or livestock species by name.<br><br>In case you do not find what you want, at the bottom you can find each of the agricultural activities and select them directly.",
+  "search.modal.link.rural": "",
+
+  "search.rural.agproduct": "Agricultural Product",
+  "search.rural.land-use": "Land Use",
+  "search.rural.nonag": "Agricultural Activities",
+  "search.rural.livestock": "Live Stock",
+
+  "search.industry.title": "Search for",
+  "search.industry.subtitle": "Sector or by CIIU code",
+  "search.industry.body": "In the next field you can fill out your query, you can also carry out this same search by CIIU code.<br><br>Use the question mark to expand the information.",
+
+  "search.rural.title": "Search for",
+  "search.rural.subtitle": "Rural activity",
+  "search.rural.body": "In the next field you can search by agricultural product, land use, agricultural activity or livestock species.<br><br>Use the question mark to expand the information.",
+
   "table.export_data": "Export Data",
   "thousands_delimiter": ",",
   "header_nav.search": "Search by"

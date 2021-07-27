@@ -61,28 +61,28 @@
 
       <div class="col-sm-12 mt-5 pt-5">
 
-        {{component visualizationComponent
-          classNames='buildermod__viz'
-          immutableData=immutableData
-          modelData=modelData
-          data=filteredData
-          dataType=source
-          varDependent=varDependent
-          scale=scale
-          startDate=startDate
-          dateExtent=dateExtent
-          endDate=endDate
-          metadata=metadata
-          isFiltered=isFiltered
-          entityType=entityType
-          entityId=entityId
-          variable=variable
-          search=search
-          graph=graph
-          elementId=source
-        }}
-
-        
+        <div class="visualizationComponent">
+          {{component visualizationComponent
+            classNames='buildermod__viz'
+            immutableData=immutableData
+            modelData=modelData
+            data=filteredData
+            dataType=source
+            varDependent=varDependent
+            scale=scale
+            startDate=startDate
+            dateExtent=dateExtent
+            endDate=endDate
+            metadata=metadata
+            isFiltered=isFiltered
+            entityType=entityType
+            entityId=entityId
+            variable=variable
+            search=search
+            graph=graph
+            elementId=source
+          }}
+        </div>        
 
         {{#if needsLegend }}
           {{#unless isGeo }}
