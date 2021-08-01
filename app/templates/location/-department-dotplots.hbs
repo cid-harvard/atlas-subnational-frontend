@@ -1,48 +1,29 @@
-<section class="stream__section">
-  <header class="section__header">
-  <h3 class="section__head">{{t 'location.show.overview'}}</h3>
-  </header>
-  <ul class="list--section list--section--bullets">
-    {{#if model.gdpGrowth }}
-      <li class="list__item--section--bullets">
-        {{t 'location.show.bullet.gdp_grow_rate' gdpGrowth=model.gdpGrowth yearRange=model.yearRange}}
-      </li>
-    {{/if}}
-    <li class="list__item--section--bullets">
-      {{t 'location.show.bullet.gdp_pc' name=model.name lastGdpPerCapita=model.lastGdpPerCapita}}
-    </li>
-    <li class="list__item--section--bullets">
-      {{t 'location.show.bullet.last_pop' lastPop=model.lastPop}}
-    </li>
-  </ul>
-  <table class="table--summaries">
+<div class="container-fluid pl-md-x10 pr-md-x10 mt-5">
+
+  <div class="row">
+    <table class="table datlas-table">
+    <col style="width:30%">
+    <col style="width:20%">
+    <col style="width:50%">
     <thead>
-      <tr class="table__row table__row--header">
-        <th class="table__header"></th>
-        <th class="table__header table__header--summaries--value">
-          {{t 'location.show.value'}}
-          <div class="table__cell--rank title">
-            <div class="value title">
-              {{t 'rankings.table-title'}}
-            </div>
-          </div>
+      <tr class="table__row--header">
+        <th scope="col"></th>
+        <th scope="col" class="d-flex justify-content-between">
+          <div>{{t 'location.show.value'}}</div>
+          <div>{{t 'rankings.table-title'}}</div>
         </th>
-        <th class="table__header table__header--summaries--dotplot">
-          {{t 'location.show.all_departments'}}
-        </th>
+        <th scope="col">{{t 'location.show.all_departments'}}</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="text-white">
+
       <tr class="table__row table__row--body">
-        <td class="table__cell table__cell--summaries">
-          {{t 'location.show.gdp_pc'}} ({{model.censusYear}})
-        </td>
-        <td class="table__cell table__header--summaries--value">
+        <td scope="row">{{t 'location.show.gdp_pc'}} ({{model.censusYear}})</td>
+        <td class="d-flex justify-content-between">
           {{model.lastGdpPerCapita}}
           {{table-rank rank=model.gdpPerCapitaRank}}
-
         </td>
-        <td class="table__cell table__cell--summaries">
+        <td class="table__cell table__cell--summaries" style="height:10rem;">
           {{vistk-dotplot
             elementId='dotplot--gdp-pc'
             data=dotplotData
@@ -53,15 +34,14 @@
           }}
         </td>
       </tr>
+
       <tr class="table__row table__row--body">
-        <td class="table__cell table__cell--summaries">
-          {{t 'location.show.gdp'}} ({{model.censusYear}})
-        </td>
-        <td class="table__cell table__header--summaries--value">
+        <td scope="row">{{t 'location.show.gdp'}} ({{model.censusYear}})</td>
+        <td class="d-flex justify-content-between">
           {{model.lastGdp}}
           {{table-rank rank=model.gdpRank}}
-        </td>
-        <td class="table__cell table__cell--summaries">
+          </td>
+        <td class="table__cell table__cell--summaries" style="height:10rem;">
           {{vistk-dotplot
             elementId='dotplot--gdp'
             data=dotplotData
@@ -72,15 +52,14 @@
           }}
         </td>
       </tr>
+
       <tr class="table__row table__row--body">
-        <td class="table__cell table__cell--summaries">
-          {{t 'location.show.population'}} ({{model.censusYear}})
-        </td>
-        <td class="table__cell table__header--summaries--value">
+        <td scope="row">{{t 'location.show.population'}} ({{model.censusYear}})</td>
+        <td class="d-flex justify-content-between">
           {{model.lastPop}}
           {{table-rank rank=model.populationRank}}
         </td>
-        <td class="table__cell table__cell--summaries">
+        <td class="table__cell table__cell--summaries" style="height:10rem;">
           {{vistk-dotplot
             elementId='dotplot--population'
             data=dotplotData
@@ -92,15 +71,14 @@
           }}
         </td>
       </tr>
+
       <tr class="table__row table__row--body">
-        <td class="table__cell table__cell--summaries">
-          {{t 'location.show.eci'}} ({{model.lastYear}})
-        </td>
-        <td class="table__cell table__header--summaries--value">
+        <td scope="row">{{t 'location.show.eci'}} ({{model.lastYear}})</td>
+        <td class="d-flex justify-content-between">
           {{model.lastEci}}
           {{table-rank rank=model.eciRank}}
         </td>
-        <td class="table__cell table__cell--summaries">
+        <td class="table__cell table__cell--summaries" style="height:10rem;">
           {{vistk-dotplot
             elementId='dotplot--eci'
             data=dotplotData
@@ -112,15 +90,14 @@
           }}
         </td>
       </tr>
+
       <tr class="table__row table__row--body">
-        <td class="table__cell table__cell--summaries">
-          {{t 'location.show.ag_farmsize'}}
-        </td>
-        <td class="table__cell table__header--summaries--value">
+        <td scope="row">{{t 'location.show.ag_farmsize'}}</td>
+        <td class="d-flex justify-content-between">
           {{model.agFarmsize}}
           {{table-rank rank=model.agFarmsizeRank}}
         </td>
-        <td class="table__cell table__cell--summaries">
+        <td class="table__cell table__cell--summaries" style="height:10rem;">
           {{vistk-dotplot
             elementId='dotplot--agfarmsizes'
             data=model.agFarmsizesData
@@ -131,15 +108,14 @@
           }}
         </td>
       </tr>
+
       <tr class="table__row table__row--body">
-        <td class="table__cell table__cell--summaries">
-          {{t 'location.show.nonag_farmsize'}}
-        </td>
-        <td class="table__cell table__header--summaries--value">
+        <td scope="row">{{t 'location.show.nonag_farmsize'}}</td>
+        <td class="d-flex justify-content-between">
           {{model.nonagFarmsize}}
           {{table-rank rank=model.nonagFarmsizeRank}}
         </td>
-        <td class="table__cell table__cell--summaries">
+        <td class="table__cell table__cell--summaries" style="height:10rem;">
           {{vistk-dotplot
             elementId='dotplot--nonagfarmsizes'
             data=model.nonagFarmsizesData
@@ -150,15 +126,14 @@
           }}
         </td>
       </tr>
+
       <tr class="table__row table__row--body">
-        <td class="table__cell table__cell--summaries">
-            {{t 'location.show.yield_index'}} ({{agproductLastYear}})
-        </td>
-        <td class="table__cell table__header--summaries--value">
+        <td scope="row">{{t 'location.show.yield_index'}} ({{agproductLastYear}})</td>
+        <td class="d-flex justify-content-between">
           {{model.yieldIndex}}
           {{table-rank rank=model.yieldIndexRank}}
         </td>
-        <td class="table__cell table__cell--summaries">
+        <td class="table__cell table__cell--summaries" style="height:10rem;">
           {{vistk-dotplot
             elementId='dotplot--yieldindex'
             data=model.yieldData
@@ -170,7 +145,12 @@
           }}
         </td>
       </tr>
+
+
     </tbody>
-  </table>
-</section>
+    </table>
+  </div>
+  
+
+</div>
 

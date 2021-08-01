@@ -22,6 +22,8 @@ export default Ember.Component.extend({
     var data = this.get('data_search')
     var placeholder = this.get("placeHolder")
 
+    
+
     if(placeholder === null){
       placeholder = this.get('i18n').t(`pageheader.search_placeholder.${type}`).string
     }
@@ -47,6 +49,7 @@ export default Ember.Component.extend({
 
       let id = $eventSelect.val();
       let text= $(`#${id_select} option:selected`).text();
+      let type = self.get('type');
 
       if(id !== ""){
         if(type === 'location') {
@@ -64,7 +67,7 @@ export default Ember.Component.extend({
 
           self.sendAction(action, id);
 
-        } else if (type === 'search') {
+        } else if (type == 'search') {
           self.set('search', text);
         }
       }
@@ -108,6 +111,7 @@ export default Ember.Component.extend({
 
       let id = $eventSelect.val();
       let text= $(`#${id_select} option:selected`).text();
+      let type = self.get('type');
 
       if(id !== ""){
         if(type === 'location') {

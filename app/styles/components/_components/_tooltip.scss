@@ -38,3 +38,16 @@
     margin-left: -10px;
   }
 }
+
+.tooltip-category{
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  background: $colorSecondary;
+  height: auto;
+  max-width: none;
+}
+
+.tooltip-category:after{
+  border-top-color: $colorSecondary;
+}

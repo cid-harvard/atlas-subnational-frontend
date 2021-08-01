@@ -27,12 +27,21 @@ export default Ember.Component.extend({
   }),
   nestedData: computed('updatedData', 'search', function () {
     var updatedData = this.get('updatedData');
-    if(updatedData[0].hasOwnProperty("group")){
-      return d3.nest().key(function(d) { return d.group; }).entries(updatedData);
+
+    if(updatedData[0] !== undefined){
+      if(updatedData[0].hasOwnProperty("group")){
+
+        if(updatedData[0].group == undefined){
+          return d3.nest().entries(updatedData);
+        }
+
+        return d3.nest().key(function(d) { return d.group; }).entries(updatedData);
+      }
+      else{
+        return d3.nest().entries(updatedData);
+      }
     }
-    else{
-      return d3.nest().entries(updatedData);
-    }
+
   }),
   getColors: computed('updatedData', 'search', 'color', function () {
 
@@ -226,6 +235,11 @@ export default Ember.Component.extend({
           .attr("class", "child")
           .call(rect)
 
+      children.append("text")
+          .attr("class", "ctext")
+          .text(function(d) { return d.key; })
+          .call(text2);
+
       g.append("rect")
           .attr("class", "parent")
           .call(rect);
@@ -323,7 +337,7 @@ export default Ember.Component.extend({
     }
 
     function text2(text) {
-      text.attr("x", function(d) { return x(d.x + d.dx) - this.getComputedTextLength() - 6; })
+      text.attr("x", function(d) { return x(d.x) + 6; })
           .attr("y", function(d) { return y(d.y + d.dy) - 6; })
           .style("opacity", function(d) { 
 
@@ -341,7 +355,10 @@ export default Ember.Component.extend({
               return 0
             }
 
-          });
+          })
+          .style("fill", "white")
+          //.style("font-size", "1rem")
+          .style("font-family", "sans-serif");
     }
 
     function rect(rect) {
@@ -433,7 +450,7 @@ export default Ember.Component.extend({
 
     },
   },
-  update: observer('i18n.display', 'search', function() {
+  update: observer('i18n.display', 'updatedData', function() {
     d3.select(this.get('id')).selectAll('svg').remove();
     this.get('treemap');
   })

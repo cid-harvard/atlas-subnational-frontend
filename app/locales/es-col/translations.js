@@ -257,7 +257,7 @@ export default {
   "graph_builder.explanation.agproduct.municipalities.land_sown": "Muestra la composici\u00f3n de lugares que siembran este producto agropecuario, por \u00e1rea sembrada. Fuente: Agronet (2017), Ministerio de Agricultura. <a href=\"http://www.agronet.gov.co/Paginas/default.aspx\">Link</a>",
   "graph_builder.explanation.agproduct.municipalities.production_tons": "Muestra la composici\u00f3n de lugares que producen este producto agropecuario, por toneladas producidas. Fuente: Agronet (2017), Ministerio de Agricultura. <a href=\"http://www.agronet.gov.co/Paginas/default.aspx\">Link</a>",
   "graph_builder.explanation.hide": "Oculte",
-  "graph_builder.explanation.industry.cities.employment": "Muestra la composici\u00f3n por departamentos del empleo formal del sector. Fuente: PILA.",
+  "graph_builder.explanation.industry.cities.employment": "Muestra la composici\u00f3n por ciudades del empleo formal del sector. Fuente: PILA.",
   "graph_builder.explanation.industry.cities.wages": "Muestra la composici\u00f3n por departamentos de la n\u00f3mina salarial del sector. Fuente: PILA.",
   "graph_builder.explanation.industry.departments.employment": "Muestra la composici\u00f3n por departamentos del empleo formal del sector. Fuente: PILA.",
   "graph_builder.explanation.industry.departments.wages": "Muestra la composici\u00f3n por departamentos de la n\u00f3mina salarial del sector. Fuente: PILA.",
@@ -704,5 +704,21 @@ export default {
 
   "table.export_data": "Descargar Datos",
   "thousands_delimiter": ".",
-  "header_nav.search": "REALICE UNA BUSQUEDA POR"
+  "header_nav.search": "REALICE UNA BUSQUEDA POR",
+
+  "visualization.geo": "Mapea los datos",
+  "visualization.treemap": "Muestra la descomposici\u00f3n en varios niveles",
+  "visualization.multiples": "Muestra la evolución en varios períodos",
+
+  "visualization.clear": "Borrar",
+
+  "visualization.source.departments": "Ingrese el nombre del departamento o código CIIU",
+  "visualization.source.cities": "Búsqueda por departamento, ciudad o código CIIU",
+  "visualization.source.municipalities": "Búsque por departamento, municipio o código CIIU",
+  "visualization.source.products": "Búsque por nombre de producto o partida arancelaría",
+
+  "visualization.search.departments": "Búsque por departamento o código DANE",
+  "visualization.search.cities": "Búsque por departamento, ciudad o código DANE",
+  "visualization.search.municipalities": "Búsque por departamento, municipio o código DANE",
+  "visualization.search.products": "Búsque por nombre de producto o partida arancelaría",
 };

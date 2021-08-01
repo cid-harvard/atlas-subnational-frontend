@@ -11,9 +11,13 @@
   agcensusLastYear=agcensusLastYear
 }}
 {{#if description }}
-  <p class="section__p">
-    {{description}}
-  </p>
+
+  <div class="container-fluid px-md-x10 pb-5 text-white mt-5 pt-5">
+    <div class="row mx-5 px-5">
+      {{description}}
+    </div>
+  </div>
+
 {{/if}}
 
 {{#if isDepartment }}
@@ -24,6 +28,197 @@
   {{partial 'location/municipality-dotplots'}}
 {{/if}}
 
+
+<div class="container-fluid px-md-x10 mt-5">
+
+    <div class="col-md-12 text-center">
+      <ul class="nav nav-pills center-pills" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-exports-tab" data-toggle="pill" href="#pills-exports" role="tab" aria-controls="pills-exports" aria-selected="true">
+            {{t 'location.show.exports' year=lastYear }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-imports-tab" data-toggle="pill" href="#pills-imports" role="tab" aria-controls="pills-imports" aria-selected="false">
+            {{t 'location.show.imports' year=lastYear }}
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-employment-tab" data-toggle="pill" href="#pills-employment" role="tab" aria-controls="pills-employment" aria-selected="false">
+            {{t 'location.show.employment' lastYear=lastYear}}
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-total_wages-tab" data-toggle="pill" href="#pills-total_wages" role="tab" aria-controls="pills-total_wages" aria-selected="false">
+            {{t 'location.show.total_wages' lastYear=lastYear}}
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-product_space-tab" data-toggle="pill" href="#pills-product_space" role="tab" aria-controls="pills-product_space" aria-selected="false">
+             {{t 'country.show.product_space' lastYear=lastYear}}
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-space-tab" data-toggle="pill" href="#pills-space" role="tab" aria-controls="pills-space" aria-selected="false">
+             {{t 'country.show.industry_space' lastYear=lastYear}}
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="mt-5 tab-content" id="pills-tabContent">
+
+      <div class="tab-pane fade active show" id="pills-exports" role="tabpanel" aria-labelledby="pills-exports">
+        <div class="container-fluid">
+          {{
+            zoomable-treemap
+            data=productsData
+            varDependent='export_value'
+            elementId='zoomable-export-value-treemap'
+            class="position-relative"
+            color='pink'
+          }}
+        </div>
+        <div class="container-fluid">
+          {{
+            category-buttons
+            data=productsData
+            immutableData=inmutableProductsData
+          }}
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="pills-imports" role="tabpanel" aria-labelledby="pills-imports">
+        <div class="container-fluid">
+          {{
+            zoomable-treemap
+            data=productsData
+            varDependent='import_value'
+            elementId='zoomable-import-value-treemap'
+            class="position-relative"
+            color='green'
+          }}
+        </div>
+        <div class="container-fluid">
+          {{
+            category-buttons
+            data=productsData
+            immutableData=inmutableProductsData
+          }}
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="pills-employment" role="tabpanel" aria-labelledby="pills-employment">
+        <div class="container-fluid">
+          {{
+            zoomable-treemap
+            data=lastIndustryData
+            varDependent='employment'
+            elementId='zoomable-employment-treemap'
+            class="position-relative"
+            color='pink'
+          }}
+        </div>
+        <div class="container-fluid">
+          {{
+            category-buttons
+            data=lastIndustryData
+            immutableData=lastIndustryData
+          }}
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="pills-total_wages" role="tabpanel" aria-labelledby="pills-total_wages">
+        <div class="container-fluid">
+          {{
+            zoomable-treemap
+            data=industriesData
+            varDependent='wages'
+            elementId='zoomable-wages-treemap'
+            class="position-relative"
+            color='green'
+          }}
+        </div>
+        <div class="container-fluid">
+          {{
+            category-buttons
+            data=industriesData
+            immutableData=industriesData
+          }}
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="pills-product_space" role="tabpanel" aria-labelledby="pills-product_space">
+        <div class="container-fluid mt-5 pt-5">
+
+          <div class="row">
+            <div class="col-sm-12 col-md-6 text-center">
+              <p class="text_yellow">ALTO NIVEL DE COMPLEJIDAD</p>
+            </div>
+            <div class="col-sm-12 col-md-6 text-center">
+              <p class="text_yellow">BAJO NIVEL DE COMPLEJIDAD</p>
+            </div>
+          </div>
+
+          
+          <div class="row">
+            {{vistk-network
+              data=productsData
+              immutableData=productsData
+              elementId='product-space'
+              dataType='products'
+              metadata=model.metaData
+              varDependent='export_value'
+              graph=productSpace
+              height=600
+              delay=3500
+              showMiddle=true
+            }}
+          </div>
+
+          <div class="row">
+            {{
+              category-buttons
+              data=productsData
+              immutableData=productsData
+            }}
+          </div>    
+
+        </div>
+
+      </div>
+
+      <div class="tab-pane fade show" id="pills-space" role="tabpanel" aria-labelledby="pills-space">
+        <div class="container-fluid mt-5 pt-5">
+          {{vistk-network
+            data=lastIndustryData
+            immutableData=lastIndustryData
+            elementId='industry-space'
+            dataType='industries'
+            graph=industrySpace
+            height=600
+            delay=2000
+          }}
+        </div>
+        <div class="container-fluid mt-5 pt-5">
+          {{
+            category-buttons
+            data=lastIndustryData
+            immutableData=lastIndustryData
+          }}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+<!--
 {{#if featureToggle.showIndustries }}
   <section class="stream__section">
     <header class="section__header">
@@ -105,14 +300,7 @@
       {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
         <div class="vizmod">
           <div class="vizmod--treemod">
-            {{vistk-treemap
-              isInTab='true'
-              data=productsData
-              immutableData=productsData
-              elementId='export-vistk-treemap'
-              varDependent='export_value'
-              delay=500
-            }}
+
           </div>
         </div>
       {{/ivy-tab-panel}}
@@ -120,14 +308,7 @@
         {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
           <div class="vizmod">
             <div class="vizmod--treemod">
-              {{vistk-treemap
-                isInTab='true'
-                data=productsData
-                immutableData=productsData
-                elementId='import-vistk-treemap'
-                varDependent='import_value'
-                delay=1000
-              }}
+              
             </div>
           </div>
         {{/ivy-tab-panel}}
@@ -194,5 +375,5 @@
       {{/ivy-tabs}}
     </div>
   </section>
-{{/if}}
+{{/if}}-->
 

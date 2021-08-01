@@ -16,6 +16,13 @@ export default Ember.Component.extend({
   }),
   click: function() {
     this.sendAction('toggleVisualization',  get(this, 'type'));
-  }
+  },
+  didInsertElement: function() {
+    Ember.run.scheduleOnce('afterRender',this , function() {
+      tippy('.tooltip_graph', {
+        theme: 'datlas',
+      });
+    });
+  },
 });
 

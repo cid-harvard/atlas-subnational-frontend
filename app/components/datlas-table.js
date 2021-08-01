@@ -203,13 +203,19 @@ export default Ember.Component.extend(TableMap, {
     })
 
   }),
+  getUrl: computed('data.[]', 'tableMap', 'i18n.locale', 'source', 'search', 'startDate', function(){
+    if(this.get('i18n').display === 'es'){
+      return "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+    }
+    else{
+      return "https://cdn.datatables.net/plug-ins/1.10.16/i18n/English.json"
+    }
+  }),
   renderTable: computed('data.[]', 'id', 'updatedData', 'titles', 'tableMap', 'droppedColumns', 'columns', 'i18n.locale', 'source', 'search', 'startDate', function() {
 
     var data = this.get('data');
     var id_element = this.get('id');
     var updatedData = this.get('updatedData');
-
-    console.log(updatedData)
 
     
 
@@ -217,14 +223,8 @@ export default Ember.Component.extend(TableMap, {
     let source = this.get('source');
     let self = this;
     var export_data_text = this.get('i18n').t('table.export_data').string;
+    var url = this.get("getUrl")
 
-
-    if(this.get('i18n').display === 'es'){
-      var url = "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-    }
-    else{
-      var url = "https://cdn.datatables.net/plug-ins/1.10.16/i18n/English.json"
-    }
 
     var table = $(id_element).DataTable({
       dom: 'Bfrtip',
@@ -246,6 +246,7 @@ export default Ember.Component.extend(TableMap, {
         url: url
       },
     });
+
 
     $(`${id_element} tbody`).on( 'click', 'tr', function () {
 
@@ -275,15 +276,27 @@ export default Ember.Component.extend(TableMap, {
     });
   },
   update: observer('i18n.display', 'search', 'data.[]', function() {
-    console.log("update")
+    
 
     var id = this.get('id');
     var updatedData = this.get('updatedData');
+    var columns = this.get('updateTitles');
+
     var datatable = new $.fn.dataTable.Api( id );
 
     datatable.clear();
+
+    columns.forEach((item, index) => {
+      $(datatable.column(index).header()).text(item.title)
+    })
+
     datatable.rows.add(updatedData);
     datatable.draw();
 
-  })
+  }),
+  willDestroyElement: function() {
+    this.removeObserver('i18n.locale', this, this.update);
+    this.removeObserver('search', this, this.update);
+    this.removeObserver('data.[]', this, this.update);
+  },
 });

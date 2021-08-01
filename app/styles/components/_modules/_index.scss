@@ -505,3 +505,13 @@
 .btn-large{
   font-size: 3rem;
 }
+
+.tippy-box[data-theme~='datlas'] {
+  background-color: $colorSecondary;
+  color: $colorBase;
+  font-size: 2rem;
+}
+
+.tippy-arrow{
+  color: $colorSecondary;
+}

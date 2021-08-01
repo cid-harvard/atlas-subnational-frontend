@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   tagName: 'div',
   height: 500,
-  classNames: ['buildermod__viz--white','buildermod__viz'],
+  classNames: ['buildermod__viz'],
   attributeBindings: ['width','height'],
   varIndependent: ['group', 'code'],
   id: computed('elementId', function() {
@@ -159,6 +159,19 @@ export default Ember.Component.extend({
     Ember.run.scheduleOnce('afterRender', this , function() {
       if(!this.get('width')){ this.set('width', this.$().parent().width()); }
       d3.select(this.get('id')).call(this.get('network'));
+      
+      if(this.get('showMiddle')){
+        var svg = d3.select(this.get('id')).select('svg')
+        var line = svg.append("g").append("line")
+
+        line.attr("x1", parseInt(svg.style("width"), 10)/2)
+        line.attr("y1", 0)
+        line.attr("x2", parseInt(svg.style("width"), 10)/2)
+        line.attr("y2", parseInt(svg.style("height"), 10))
+        line.attr("stroke-dasharray", "15")
+        line.attr("stroke", "#FFCD00")
+      }
+
     });
   },
   willDestroyElement: function() {

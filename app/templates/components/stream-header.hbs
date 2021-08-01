@@ -1,13 +1,15 @@
 <div class="container-fluid my-5 pl-sm-5 pl-md-x10">
   <header class="stream__header stream__header--builder">
   {{#if isLocation}}
-    <ul>
-      {{#each crumb in breadcrumbs}}
-        {{#link-to 'location.show' crumb.id  tagName='li' class='breadcrumb'}}
-          {{crumb.name_es}}
-        {{/link-to}}
-      {{/each}}
-    </ul>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="location")}}{{ t 'search.results_locations' }}{{/link-to}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{model.name}}</li>
+      </ol>
+    </nav>
+
   {{/if}}
 
   {{#if isIndustry}}
@@ -24,7 +26,12 @@
     <div class="stream__transparent" {{action 'toggleIndex'}}></div>
   {{/if}}
   {{#if isLocation}}
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+
+    <div class="my-5">
+      <h1 class="stream-header__title">{{ t 'general.locations' }}</h1>
+      <h1 class="stream-header__subtitle">{{model.name}} ({{model.code}})</h1>
+    </div>
+
     {{#if isShowingIndex}}
       {{ partial 'partials/builder-questions-location'}}
     {{/if}}

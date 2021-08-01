@@ -14,7 +14,7 @@ export default Ember.Component.extend({
     let map = new L.mapbox.map(this.get('elementId'), 'gwezerek.22ab4aa8,gwezerek.da867b0d', {
       accessToken: this.accessToken,
       center: this.get('featureToggle.geo_center'),
-      zoom: 5,
+      zoom: 6,
       maxZoom: 19,
       minZoom: 5,
       zoomControl: false,
@@ -74,6 +74,9 @@ export default Ember.Component.extend({
       }
     };
   }),
+  getSecondVar: computed(function(){
+    return ''
+  }),
   addLabelsPane: function() {
     let map = this.get('baseMap');
     L.mapbox.accessToken = this.accessToken;
@@ -92,7 +95,7 @@ export default Ember.Component.extend({
             .t(`graph_builder.table.${this.get('varDependent')}`);
           let textValue = _.get(this.get('valueMap').get(location.cid_id), 'value');
           this.set('numberFormat', textValue);
-          var toolTipText = `<span> ${location.name} </span> </br> ${textKey} : ${this.get('numberFormat')}`;
+          var toolTipText = `<div class="text-center"><span class="text_yellow"> ${location.name} </span> </br> ${textKey} : ${this.get('numberFormat')} ${this.get('getSecondVar')}</div>`;
 
           marker.bindPopup(toolTipText, {closeButton: false});
           marker.on('mouseover', function () {

@@ -28,10 +28,10 @@
         <div class="mb-3">
 
           <i class="fas fa-search text-white"></i>
-          <span class="text-white">BÚSQUE POR DEPARTAMENTO O CÓDIGO DANE</span>
+          <span class="text-white text-uppercase">{{ t (is-concat 'visualization.search.' source) }}</span>
         </div>
         
-        {{autocomplete-input-datlas data_search=locationsData type='search' idSelect='searchSelect' placeHolder="Búsqueda por departamento o código CIIU" search=search reset="reset" className="d-flex justify-content-center"}}
+        {{autocomplete-input-datlas data_search=filterData type='search' idSelect='searchSelect' placeHolder=placeHolderText search=search reset="reset"}}
       </div>
     </div>
   </div>

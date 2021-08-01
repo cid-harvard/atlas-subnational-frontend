@@ -21,7 +21,48 @@ export default Ember.Controller.extend({
     var locations = Object.entries(this.get('model.metaData.locations'))
 
     return locations.filter(item => item[1].level === "department").map((item) => {
-      return {id:item[1].id, text:item[1].name_short_es}
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name} (${item[1].code})`}
+    })
+  }),
+
+  citiesData: computed('model', function(){
+
+    var cities = Object.entries(this.get('model.metaData.locations'))
+
+    return cities.filter(item => item[1].level === "msa" || item[1].level === "department").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name} (${item[1].code})`}
+    })
+  }),
+
+  municipalitiesData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.locations'))
+
+    return locations.filter(item => item[1].level === "municipality" || item[1].level === "department").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name} (${item[1].code})`}
+    })
+  }),
+
+  productsData: computed('model', function(){
+
+    console.log(this.get("model"))
+
+    var locations = Object.entries(this.get('model.metaData.products'))
+
+    return locations.filter(item => item[1].level === "4digit").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name} (${item[1].code})`}
     })
   }),
 
@@ -96,6 +137,29 @@ export default Ember.Controller.extend({
 
   isGeo: computed.equal('visualization','geo'),
   isScatter: computed.equal('visualization','scatter'),
+
+  filterData: computed('source', function(){
+
+    if(this.get('source') == 'departments'){
+      return this.get('locationsData')
+    }
+    else if(this.get('source') == 'cities'){
+      return this.get('citiesData')
+    }
+    else if(this.get('source') == 'municipalities'){
+      return this.get('municipalitiesData')
+    }
+    else if(this.get('source') == 'products'){
+      return this.get('productsData')
+    }
+    else{
+      return []
+    }
+  }),
+
+  placeHolderText: computed('i18n.locale', 'source', function(){
+    return this.get('i18n').t(`visualization.source.${this.get('source')}`).string
+  }),
 
   isFixedHeight: computed('model.visualization', function() {
     let vis = this.get('model.visualization');
@@ -422,13 +486,17 @@ export default Ember.Controller.extend({
     if(entityType === 'industry') { return 'assets/img/hero_images/industry/industry_1.jpg'; }
   }),
   searchFilter: function(data) {
+
     let search = _.deburr(this.get('search'));
+
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
+
     return _.filter(data, (d) => {
       let longName = get(d,`name_${this.get('i18n').display}`);
       let shortName = get(d,`name_short_${this.get('i18n').display}`);
       let code = get(d, 'code');
+
       return _.deburr(`${shortName} ${longName} ${code}`).match(regexp);
     });
   },

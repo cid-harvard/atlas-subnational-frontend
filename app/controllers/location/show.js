@@ -22,6 +22,7 @@ export default Ember.Controller.extend({
   dotplotData: computed.oneWay('model.dotplotData'),
   occupationData: computed.oneWay('model.occupations'),
   productsData: computed.oneWay('model.productsData'),
+  inmutableProductsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
 
   hasTimeseries: computed.notEmpty('model.timeseries'),

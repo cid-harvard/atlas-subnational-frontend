@@ -6,15 +6,16 @@
 
 // Nested here instead of giving ever el a class in the js
 .geo__wrap {
-  height: $minBuildermodHeight;
+  height: 80rem;
   padding: 0;
-  border: 1px solid $colorGrayLight;
+  background: $colorBase;
 
   svg {
     position: relative;
   }
 
   .leaflet-control-attribution {
+    display: none;
     padding: 5px 7px;
     background: $colorWhite;
     color: $colorGrayLighter;
@@ -27,14 +28,14 @@
   }
 
   .geo__department {
-    fill: #000;
-    stroke: $colorGrayLight;
-    stroke-width: 2px;
+    fill: $colorWhite;
+    stroke: $colorWhite;
+    stroke-width: 1px;
   }
 
   // If the value of the data is exactly 0
   .q0 {
-    fill: $colorWhite;
+    fill: $colorSecondary;
   }
 
   // The scale if the value is positive
@@ -94,7 +95,6 @@
 }
 
 .leaflet-left .leaflet-control {
-  box-shadow: -1px 2px 2px $colorGrayLighter;
   margin: 0 0 $baseSpace*1.5 $baseSpace*1.5;
 }
 
@@ -106,4 +106,8 @@
 .leaflet-container .leaflet-control-attribution a {
   font-weight: 300;
   color: $colorGrayLight;
+}
+
+.geo_background{
+  background: $colorBase;
 }

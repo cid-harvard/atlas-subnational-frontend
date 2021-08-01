@@ -257,7 +257,7 @@ export default {
   "graph_builder.explanation.agproduct.municipalities.land_sown": "Shows the composition of locations that sow this agricultural product, by area of land sown. Source: Agronet (2017), Ministerio de Agricultura. <a href=\"http://www.agronet.gov.co/Paginas/default.aspx\">Link</a>",
   "graph_builder.explanation.agproduct.municipalities.production_tons": "Shows the composition of locations that produce this agricultural product, by tons produced. Source: Agronet (2017), Ministerio de Agricultura. <a href=\"http://www.agronet.gov.co/Paginas/default.aspx\">Link</a>",
   "graph_builder.explanation.hide": "Hide",
-  "graph_builder.explanation.industry.cities.employment": "Shows the composition by department of formal employment in the industry. Source: PILA.",
+  "graph_builder.explanation.industry.cities.employment": "Shows the composition by city of formal employment in the industry. Source: PILA.",
   "graph_builder.explanation.industry.cities.wages": "Shows the composition by department of total wages paid by the industry. Source: PILA.",
   "graph_builder.explanation.industry.departments.employment": "Shows the composition by department of formal employment in the industry. Source: PILA.",
   "graph_builder.explanation.industry.departments.wages": "Shows the composition by department of total wages paid by the industry. Source: PILA.",
@@ -702,5 +702,21 @@ export default {
 
   "table.export_data": "Export Data",
   "thousands_delimiter": ",",
-  "header_nav.search": "Search by"
+  "header_nav.search": "Search by",
+
+  "visualization.geo": "Map the data",
+  "visualization.treemap": "See composition at different levels",
+  "visualization.multiples": "Compare growth over time",
+
+  "visualization.clear": "Clear",
+
+  "visualization.source.departments": "Insert the department name or CIIU code",
+  "visualization.source.cities": "Find by department, city or CIIU code",
+  "visualization.source.municipalities": "Find by department, municipaly or CIIU code",
+  "visualization.source.products": "Find by prodcut name or tariff heading",
+
+  "visualization.search.departments": "Search by departament or DANE code",
+  "visualization.search.cities": "Find by department, city or DANE code",
+  "visualization.search.municipalities": "Find by department, municipaly or DANE code",
+  "visualization.search.products": "Find by prodcut name or tariff heading",
 };

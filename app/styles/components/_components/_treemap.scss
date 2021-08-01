@@ -48,7 +48,7 @@ rect.parent {
 
 .children rect.parent {
   fill: #bbb;
-  fill-opacity: 1;
+  fill-opacity: 0.5;
 }
 
 .children:hover rect.child {
@@ -76,4 +76,8 @@ rect{
 
 .depth rect, .grandparent rect {
   stroke: $colorBase;
+}
+
+text.ctext{
+  font-size: 1rem;
 }

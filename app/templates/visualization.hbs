@@ -54,14 +54,11 @@
       </div>
 
       <div class="col-sm-12 col-md-4">
-        {{#unless isGeo }}
-          {{partial "partials/buildermod-search"}}
-        {{/unless}}
+        {{partial "partials/buildermod-search"}}
       </div>
 
-      <div class="col-sm-12 mt-5 pt-5">
-
-        <div class="visualizationComponent">
+      <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
+        <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
           {{component visualizationComponent
             classNames='buildermod__viz'
             immutableData=immutableData
@@ -82,21 +79,21 @@
             graph=graph
             elementId=source
           }}
-        </div>        
+        </div>
 
         {{#if needsLegend }}
           {{#unless isGeo }}
               {{component 'visualization-legend' legend=legend }}
           {{else}}
-              {{component 'visualization-legend-geomap' legend=geoLegend }}
+              {{component 'visualization-legend-geomap' legend=geoLegend classNames='col-md-4 d-flex flex-column justify-content-around' }}
           {{/unless}}
         {{/if}}
 
       </div>
 
-      
 
-      <div class="col-sm-12">
+
+      <div class="col-sm-12 mt-5">
         {{component 'visualization-explanation' text=visualizationExplanation}}
       </div>
 
