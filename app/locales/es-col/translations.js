@@ -604,6 +604,8 @@ export default {
   "location.show.export_possiblities.footer": "Los productos indicados pueden no ser viables debido a condiciones del lugar que no se consideran en el an\u00e1lisis de similitud tecnol\u00f3gica.",
   "location.show.export_possiblities.intro": "Hemos encontrado que los pa\u00edses que exportan productos m\u00e1s complejos crecen m\u00e1s r\u00e1pido. Usando el \"mapa del producto\" presentado arriba, estamos destacando productos de alto potencial para {{name}}, ordenados por las mejores combinaciones de complejidad actual y valor estrat\u00e9gico.",
   "location.show.exports": "Exportaciones ({{year}})",
+  "location.show.exports_filtered": "Exportaciones por producto ({{year}})",
+  "location.show.exports_country_filtered": "Exportaciones por pais de destino ({{year}})",
   "location.show.exports_and_imports": "Exportaciones e importaciones",
   "location.show.gdp": "PIB",
   "location.show.gdp_pc": "PIB per c\u00e1pita",

@@ -604,6 +604,8 @@ export default {
   "location.show.export_possiblities.footer": "Some exports make not be viable due to local factors not considered by the technological similarity approach.",
   "location.show.export_possiblities.intro": "We\u2019ve found that countries which export complex products grow faster than those which export simple products. Using the product space presented above, we\u2019ve highlighted \u00a0high potential products for {{name}}, ranked by which have the highest combination of opportunity and complexity.",
   "location.show.exports": "Exports ({{year}})",
+  "location.show.exports_filtered": "Exports by product ({{year}})",
+  "location.show.exports_country_filtered": "Exports by destination country product ({{year}})",
   "location.show.exports_and_imports": "Exports and imports",
   "location.show.gdp": "GDP",
   "location.show.gdp_pc": "GDP per Capita",
