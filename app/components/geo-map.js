@@ -69,7 +69,7 @@ export default Ember.Component.extend({
         var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
         var d = new Date();
         var file_name = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds()
-        html2canvas(containerElement), {
+        html2canvas(containerElement, {
           allowTaint: true,
           onrendered: function(canvas) {
             var myImage = canvas.toDataURL("image/jpeg", 1.0);
@@ -79,7 +79,7 @@ export default Ember.Component.extend({
               pdf.addPage(PDF_Width, PDF_Height);
               pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
             }
-            screens.removeChild(document.getElementById("geo_img"));
+            screens.removeChild(document.getElementById("geo_img"))
             $(svgElement).show();
             pdf.save(`${file_name}.pdf`);
             saveAs(pdf, `${file_name}.pdf`);
@@ -144,7 +144,7 @@ export default Ember.Component.extend({
     };
   }),
   getSecondVar: computed(function(){
-    return '';
+    return ''
   }),
   addLabelsPane: function() {
     let map = this.get('baseMap');
