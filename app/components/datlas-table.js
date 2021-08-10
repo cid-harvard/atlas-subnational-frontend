@@ -217,8 +217,6 @@ export default Ember.Component.extend(TableMap, {
     var id_element = this.get('id');
     var updatedData = this.get('updatedData');
 
-    
-
     var columns = this.get('updateTitles');
     let source = this.get('source');
     let self = this;
@@ -247,13 +245,12 @@ export default Ember.Component.extend(TableMap, {
       },
     });
 
-
     $(`${id_element} tbody`).on( 'click', 'tr', function () {
 
       if(!$(event.target).attr('class')){
 
         var id = data[table.row( this ).index()].id
-        
+
         if(source === 'location') {
           self.sendAction('transitionLocation', id);
         } else if (source === 'product') {
@@ -276,22 +273,13 @@ export default Ember.Component.extend(TableMap, {
     });
   },
   update: observer('i18n.display', 'search', 'data.[]', function() {
-    
+
 
     var id = this.get('id');
-    var updatedData = this.get('updatedData');
-    var columns = this.get('updateTitles');
-
     var datatable = new $.fn.dataTable.Api( id );
 
-    datatable.clear();
-
-    columns.forEach((item, index) => {
-      $(datatable.column(index).header()).text(item.title)
-    })
-
-    datatable.rows.add(updatedData);
-    datatable.draw();
+    datatable.destroy();
+    this.get('renderTable');
 
   }),
   willDestroyElement: function() {
