@@ -1,8 +1,14 @@
-<div class="buildermod__legend geo__legend">
+<div class="row">
 	{{#each key in legend}}
-		<div class="buildermod__legend__item">
+		<div class="col-sm-12 text-white">
             <i class="fa fa-circle" class={{key.class}}></i> {{key.start}} - {{key.end}}
 	  	</div>
 	{{else}}
 	{{/each}}
+	<div class="col-lg-12 mt-5">
+        <div class="text-left">
+            <button type="button" class="btn btn-outline-secondary" {{action 'savePng'}}><i class="fas fa-file-image mr-3"></i>Descargar grafico (PNG)</button>
+            <button type="button" class="btn btn-outline-secondary" {{action 'savePdf'}}><i class="fas fa-file-pdf mr-3"></i>Descargar grafico (PDF)</button>
+        </div>
+    </div>
 </div>

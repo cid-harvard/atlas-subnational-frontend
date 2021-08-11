@@ -5,26 +5,44 @@
 **/
 
 .header--pageheader {
-  background: $colorRed;
-  padding: 0 $baseSpace;
+  background: $colorBase;
+  color: $colorWhite;
 }
-
+.navbar_button{
+  background: $colorBase;
+}
+.navbar{
+  border-radius: 0.5rem;
+}
 .pageheader__wrap {
-  padding: $baseSpace/2 0;
   position: relative;
-  max-width: $xlarge;
   margin: auto;
+  padding:4vw;
+  padding-top: 10vh;
+  padding-bottom: 5vh;
 }
-
 // Branding
 
 .branding {
-  height: 30px;
+  height:7vh;
 }
 
 .branding__logo {
-  width: 12rem;
-  margin-top: -5px;
+<<<<<<< HEAD
+  height: 8vh;
+ // width: 15vh/;
+  //width: ;
+ // height: 15vh;
+  //width: 20vw;
+  padding: 0px;
+=======
+  height: 100%;
+  padding: 0;
+>>>>>>> c0b707a273c3db5783be59e7f821e376d05ff041
+}
+.branding__logo__social_network {
+  height: 2vh;
+  width: 2vw;
 }
 
 .branding__slogan {
@@ -80,7 +98,8 @@
 
 
 // Toggle
-
+.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20rem; }
+.toggle.ios .toggle-handle { border-radius: 20rem; }
 .togglemod--languages {
   height: auto;
   display: inline-block;
@@ -93,7 +112,7 @@
   margin-left: -9999px;
   visibility: hidden;
   &:checked ~ .toggle__label:after {
-    margin-left: 15px;
+    margin-left: 19px;
   }
 }
 
@@ -103,11 +122,13 @@
   cursor: pointer;
   outline: none;
   user-select: none;
-  padding: $baseSpace / 10;
-  width: 35px;
-  height: 20px;
-  background-color: $colorWhite;
+  padding: 0;
+  width: 5rem;
+  height: 3rem;
+  background-color: transparent;
   border-radius: 20px;
+  border-width: 0.3rem;
+  border-color: white;
   margin: 0 auto;
   &:before,
   &:after {
@@ -116,35 +137,42 @@
     content: '';
   }
   &:before {
+<<<<<<< HEAD
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 42px;
+    height: 22px;
+    background-color: transparent;
+    border-radius: 11px;
+    transition: all 0.25s linear;
+
+=======
     top: 2px;
     left: 2px;
     bottom: 2px;
     right: 2px;
-    background-color: $colorRed;
+    background-color: $colorBase;
     border-radius: $baseSpace / 2;
+>>>>>>> c0b707a273c3db5783be59e7f821e376d05ff041
   }
   &:after {
-    top: 6px;
-    left: 6px;
-    bottom: 6px;
-    right: 0;
-    width: 8px;
-    height: 8px;
+    width: 25px;
+    height: 24px;
     background-color: $colorWhite;
-    border-radius: 8px;
+    border-radius: 22px;
+    transition: all 0.4s ease-in-out;
   }
-  &:hover:after {
-    background-color: $colorWhite;
-  }
+  
 }
 
 .toggle__label__text {
   @include offset-text;
   color: $colorWhite;
-  font-size: $fontSmall;
+  font-size: $fontBase;
   display: inline;
-  font-weight: 600;
   vertical-align: 6px;
+  padding:2px;  
   font-family: $sans;
 }
 
@@ -216,11 +244,11 @@
 
   .index__header__wrap {
     padding: $baseSpace*1.5 0 0 0;
-    max-width: $baseSpace*20;
+    max-width: fit-content;
   }
 
   .stream__head {
-    color: $colorRed;
+    color: $colorWhite;
     letter-spacing: 0;
     font-size: $fontXLarge;
     margin: $fontXLarge/3 0 $fontXLarge/3 0;
@@ -268,7 +296,7 @@
   background-color: $colorRed;
 }
 
-.header--pageheader--home .pageheader__home__cap { display: block; }
+.header--pageheader--home .pageheader__home__cap { display: none; }
 
 .stream__section .pageheader__home__cap {
   display: block;
@@ -296,4 +324,44 @@
   background: $colorWhite;
 }
 
+.bordered-div{
+    border: solid 1px $colorWhite;
+}
+.social_network_marging{
+  height: 100%;
+}
+.pageheader__menu__item{
+  color: $colorWhite;
+  text-transform: uppercase;
+  &:hover {
+    opacity: 0.8;
+    color: $colorWhite;
+    text-decoration: none;
+  }
+}
 
+.index__header__wrap .index__header .stream__head{
+  color: $colorYellow;
+  text-transform: uppercase;
+}
+
+.index__header__wrap .index__header .stream__subhead{
+  color: $colorWhite;
+  text-transform: uppercase;
+  font-size: $fontLarge;
+}
+
+.btn btn-outline-warning{
+  color: $colorYellow;
+  border-color: $colorYellow;
+}
+
+.navbar{
+  padding: 0;
+}
+
+@media (min-width: 768px){
+  .border-div-navbar {
+    border: 1px solid $colorWhite;
+  }
+}

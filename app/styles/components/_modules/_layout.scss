@@ -5,9 +5,10 @@
 **/
 
 .body {
-  // height: 100%;
-  background: white;
-  border-bottom: 5px solid $colorRed;
+  width: 100%;
+  background: $colorBase;
+  padding:0;
+  margin: 0;
 }
 
 .stream {
@@ -30,4 +31,18 @@
 
 .stream__article--no--indent {
   margin: $baseSpace*3;
+}
+
+.row-without-margin{
+  margin: 0;
+}
+
+.select2-selection--single {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.select2-drop li {
+  white-space: pre-line;
 }

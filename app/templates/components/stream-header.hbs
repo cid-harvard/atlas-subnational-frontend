@@ -1,76 +1,148 @@
-<header class="stream__header stream__header--builder">
+<div class="container-fluid my-5 pl-sm-5 pl-md-x10">
+  <header class="stream__header stream__header--builder">
   {{#if isLocation}}
-    <ul>
-      {{#each crumb in breadcrumbs}}
-        {{#link-to 'location.show' crumb.id  tagName='li' class='breadcrumb'}}
-          {{crumb.name_es}}
-        {{/link-to}}
-      {{/each}}
-    </ul>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="location")}}{{ t 'search.results_locations' }}{{/link-to}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{model.name}}</li>
+      </ol>
+    </nav>
+
   {{/if}}
-  {{#if isProduct }}
-    <ul>
-      <li class="breadcrumb">{{t 'general.product' }}</li>
-    </ul>
-  {{/if}}
+
   {{#if isIndustry}}
-    <ul>
-      <li class="breadcrumb">{{t 'general.industry' }}</li>
-    </ul>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="industry")}}{{ t 'search.results_industries' }}{{/link-to}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{model.name}}</li>
+      </ol>
+    </nav>
   {{/if}}
 
   {{#if isShowingIndex}}
     <div class="stream__transparent" {{action 'toggleIndex'}}></div>
   {{/if}}
   {{#if isLocation}}
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+
+    <div class="my-5">
+      <h1 class="stream-header__title">{{ t 'general.locations' }}</h1>
+      <h1 class="stream-header__subtitle">{{model.name}} ({{model.code}})</h1>
+    </div>
+
     {{#if isShowingIndex}}
       {{ partial 'partials/builder-questions-location'}}
     {{/if}}
   {{/if}}
   {{#if isProduct}}
-    <h2 class="stream__head" data-location-name>{{model.name}} ({{model.code}})</h2>
-    {{#if isShowingIndex}}
-      {{ partial 'partials/builder-questions-product'}}
-    {{/if}}
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="product")}}{{ t 'search.results_products' }}{{/link-to}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{model.name}}</li>
+      </ol>
+    </nav>
+
   {{/if}}
   {{#if isIndustry}}
-    <h2 class="stream__head" data-location-name>{{model.name}} ({{model.code}})</h2>
+    <div class="my-5">
+      <h1 class="stream-header__title">{{ t 'general.industry' }}</h1>
+      <h1 class="stream-header__subtitle">{{model.name}} ({{model.code}})</h1>
+    </div>
     {{#if isShowingIndex}}
       {{ partial 'partials/builder-questions-industry'}}
     {{/if}}
   {{/if}}
+
+  {{#if isProduct }}
+
+  <div class="my-5">
+    <h1 class="stream-header__title">{{ t 'general.product' }}</h1>
+    <h1 class="stream-header__subtitle">{{model.name}} ({{model.code}})</h1>
+  </div>
+
+  {{/if}}
+
   {{#if isLandUse}}
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="rural")}}{{ t 'search.results_rural' }}{{/link-to}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ t 'search.rural.land-use' }}</li>
+      </ol>
+    </nav>
+
+    <div class="my-5">
+      <h1 class="stream-header__title">{{ t 'search.results_rural' }}</h1>
+      <h1 class="stream-header__subtitle">{{model.name}}</h1>
+    </div>
+
     {{#if isShowingIndex}}
       {{ partial 'partials/builder-questions-land-use'}}
     {{/if}}
   {{/if}}
   {{#if isAgproduct}}
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="rural")}}{{ t 'search.results_rural' }}{{/link-to}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ t 'search.rural.agproduct' }}</li>
+      </ol>
+    </nav>
+
+    <div class="my-5">
+      <h1 class="stream-header__title">{{ t 'search.rural.agproduct' }}</h1>
+      <h1 class="stream-header__subtitle">{{model.name}}</h1>
+    </div>
+
     {{#if isShowingIndex}}
       {{ partial 'partials/builder-questions-agproduct'}}
     {{/if}}
   {{/if}}
   {{#if isNonag}}
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="rural")}}{{ t 'search.results_rural' }}{{/link-to}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ t 'search.rural.nonag' }}</li>
+      </ol>
+    </nav>
+
+    <div class="my-5">
+      <h1 class="stream-header__title">{{ t 'search.results_rural' }}</h1>
+      <h1 class="stream-header__subtitle">{{model.name}}</h1>
+    </div>
+
     {{#if isShowingIndex}}
       {{ partial 'partials/builder-questions-nonag'}}
     {{/if}}
   {{/if}}
   {{#if isLivestock}}
-    <h2 class="stream__head" data-location-name>{{model.name}}</h2>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="rural")}}{{ t 'search.results_rural' }}{{/link-to}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ t 'search.rural.livestock' }}</li>
+      </ol>
+    </nav>
+
+    <div class="my-5">
+      <h1 class="stream-header__title">{{ t 'search.results_rural' }}</h1>
+      <h1 class="stream-header__subtitle">{{model.name}}</h1>
+    </div>
+
     {{#if isShowingIndex}}
       {{ partial 'partials/builder-questions-livestock'}}
     {{/if}}
   {{/if}}
-    <aside class="cta__wrap--right">
-    {{#link-to profileRoute model.id
-        data-search-profile=''
-        class="btn stream__head__overview"}}
-      {{ t 'header.overview' }}
-    {{/link-to}}
-    <a class="btn btn--standalone btn--text stream__head__index" {{ action 'toggleIndex' }}> {{t 'header.index'}} <img src="assets/img/general/index.png" class="stream__head__indexicon"/></a>
-    </aside>
 </header>
+</div>
 

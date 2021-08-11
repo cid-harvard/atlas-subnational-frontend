@@ -11,7 +11,19 @@
     agcensusFirstYear=agcensusFirstYear
     agcensusLastYear=agcensusLastYear
   }}
-  <header class="section__header">
+
+
+  <div class="container-fluid px-md-x10 mt-5">
+    <div class="row row-without-margin">
+      <div class="col-md-12">
+        {{partial 'location/country-dotplots'}}
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--<header class="section__header">
      <h3 class="section__head">{{t 'country.show.economic_structure' }}</h3>
   </header>
   <p class="section__p">
@@ -19,8 +31,9 @@
   </p>
   <p class="section__p">
     {{t 'country.show.economic_structure.copy.p2' }}
-  </p>
-  {{partial 'location/country-dotplots'}}
+  </p>-->
+
+
 </section>
 
 {{#if hasIndustriesData }}

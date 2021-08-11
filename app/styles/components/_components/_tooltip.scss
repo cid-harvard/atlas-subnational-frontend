@@ -21,6 +21,8 @@
   overflow: initial !important;
   box-shadow: -1px -1px 5px rgba(0,0,0,0.2);
   transform: translate(-50%, calc(-100% - 10px));
+  opacity: 1;
+  color: $colorBlack;
   &:after {
     top: 100%;
     left: 50%;
@@ -35,4 +37,17 @@
     border-width: 10px;
     margin-left: -10px;
   }
+}
+
+.tooltip-category{
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  background: $colorSecondary;
+  height: auto;
+  max-width: none;
+}
+
+.tooltip-category:after{
+  border-top-color: $colorSecondary;
 }

@@ -1,249 +1,214 @@
-<main class="stream index">
-  <article class="stream__article">
-    <section class="stream__section index__section index__questions__wrap">
-      <div class="stream__section__wrap">
-        <h3 class="section__head">{{ t 'index.questions_head' }}</h3>
-        <ul class="index__topics__list">
-          {{#if showLocations }}
-            <li class="index__topics__item__wrap">
-              <div class="index__topics__item">
-                <div class="index__topics__vspacer"></div>
-                <h4 class="section__subhead">{{ t 'index.location_head' }}</h4>
-                {{select-dropdown collection=sortedLocations selected=sortedLocations.[0].id type='location'}}
-                <ul>
-                  <li class="index__questions__item">
-                    {{#link-to
-                      'location.visualization' locationFirst 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear)
-                      data-home-page-location-question='1'
-                      class="link--stream index__questions__link"
-                    }}
-                      {{ t 'index.location_q1' }}
-                    {{/link-to}}
-                  </li>
-                  <li class="index__questions__item">
-                    {{#link-to
-                      'location.visualization' locationSecond 'products' 'scatter' 'opportunity' (query-params endDate=lastYear startDate=lastYear)
-                      data-home-page-location-question='2'
-                      class="link--stream index__questions__link"
-                    }}
-                      {{ t 'index.location_q2' }}
-                    {{/link-to}}
-                  </li>
-                  <li class="index__questions__item">
-                    {{#link-to
-                      'location.show' locationFirst
-                      data-home-page-location-question='2'
-                      class="link--stream index__questions__link index__questions__link--viewall"
-                    }}
-                      {{ t 'index.location_viewall' }}
-                    {{/link-to}}
-                  </li>
-                </ul>
-              </div>
-            </li>
-          {{/if}}
-          {{#if showIndustries }}
-            <li class="index__topics__item__wrap">
-              <div class="index__topics__item">
-                <div class="index__topics__vspacer"></div>
-                <h4 class="section__subhead">{{ t 'index.industry_head' }}</h4>
-                  {{select-dropdown collection=sortedIndustries selected=sortedIndustries.[0].id type='industry'}}
-                <ul>
-                  <li class="index__questions__item">
-                    {{#link-to
-                      'industry.visualization' industryFirst 'departments' 'multiples' 'employment'(query-params endDate=lastYear startDate=firstYear )
-                      data-home-page-product-question='1'
-                      class="link--stream index__questions__link"
-                    }}
-                      {{ t 'index.industry_q1' }}
-                    {{/link-to}}
-                  </li>
-                  <li class="index__questions__item">
-                    {{#link-to
-                      'industry.visualization' industrySecond 'occupations' 'treemap' 'num_vacancies'(query-params endDate=lastYear startDate=firstYear )
-                      data-home-page-product-question='2'
-                      class="link--stream index__questions__link"
-                    }}
-                      {{ t 'index.industry_q2' }}
-                    {{/link-to}}
-                  </li>
-                  <li class="index__questions__item">
-                    {{#link-to
-                      'industry.show' industryFirst
-                      data-home-page-product-question='1'
-                      class="link--stream index__questions__link index__questions__link--viewall"
-                    }}
-                      {{ t 'index.location_viewall' }}
-                    {{/link-to}}
-                  </li>
-                </ul>
-              </div>
-            </li>
-          {{/if}}
-          {{#if showProducts }}
-            <li class="index__topics__item__wrap">
-              <div class="index__topics__item">
-                <div class="index__topics__vspacer"></div>
-                <h4 class="section__subhead">{{ t 'index.product_head' }}</h4>
-                  {{select-dropdown collection=sortedProducts selected=sortedProducts.[0].id type='product'}}
-                <ul>
-                  <li class="index__questions__item">
-                    {{#link-to
-                      'product.visualization' productFirst 'departments' 'geo' 'export_value' (query-params endDate=lastYear startDate=lastYear )
-                      data-home-page-industry-question='1'
-                      class="link--stream index__questions__link"
-                    }}
-                      {{ t 'index.product_q1' }}
-                    {{/link-to}}
-                  </li>
-                  {{#if featureToggle.showImports }}
-                    <li class="index__questions__item">
-                      {{#link-to
-                        'product.visualization' productSecond 'departments' 'multiples' 'import_value'(query-params endDate=lastYear startDate=firstYear )
-                        data-home-page-industry-question='2'
-                        class="link--stream index__questions__link"
-                      }}
-                        {{ t 'index.product_q2' }}
-                      {{/link-to}}
-                    </li>
-                  {{/if}}
-                  <li class="index__questions__item">
-                    {{#link-to
-                      'product.show' productFirst
-                      data-home-page-industry-question='1'
-                      class="link--stream index__questions__link index__questions__link--viewall"
-                    }}
-                      {{ t 'index.location_viewall' }}
-                    {{/link-to}}
-                  </li>
-                </ul>
-              </div>
-            </li>
-          {{/if}}
-          {{#if showFarmAndLand }}
-            <li class="index__topics__item__wrap">
-              <div class="index__topics__item">
-                <div class="index__topics__vspacer"></div>
-                <h4 class="section__subhead">{{ t 'index.farmandland_head' }}</h4>
-                  {{select-dropdown collection=sortedAgproducts selected=sortedAgproducts.[0].id type='agproduct'}}
-                <ul>
-                  <li class="index__questions__item">
-                    {{#link-to
-                      'location.visualization' farmAndLandFirst 'livestock' 'treemap' 'num_farms' (query-params endDate=agcensusLastYear startDate=agcensusLastYear )
-                      data-home-page-farmandland-question='1'
-                      class="link--stream index__questions__link"
-                    }}
-                      {{ t 'index.livestock_q1' }}
-                    {{/link-to}}
-                  </li>
-                    <li class="index__questions__item">
-                      {{#link-to
-                        'landUse.visualization' farmAndLandSecond 'departments' 'treemap' 'area' (query-params endDate=agcensusLastYear startDate=agcensusLastYear )
-                        data-home-page-farmandland-question='2'
-                        class="link--stream index__questions__link"
-                      }}
-                        {{ t 'index.landuse_q1' }}
-                      {{/link-to}}
-                    </li>
-                </ul>
-              </div>
-            </li>
-          {{/if}}
-        </ul>
-      </div>
-    </section>
-    <section class="stream__section index__section onboarding">
-      <div class="stream__section__wrap">
-        <div class="column__container">
-          <div class="column__6">
-            <h3 class="section__head">
-              {{ t 'index.present_head' }}
-            </h3>
-            <ul class="onboarding--glyphs">
-              <li>
-                <i class="icon-cidcon_treemap onboarding--glyphs--icon"></i>
-                <h6>{{ t 'general.treemap' }}</h6>
-              </li>
-              <li>
-                <i class="icon-cidcon_multiples onboarding--glyphs--icon"></i>
-                <h6>{{ t 'general.multiples' }}</h6>
-              </li>
-              <li>
-                <i class="icon-cidcon_geo onboarding--glyphs--icon"></i>
-                <h6>{{ t 'general.geo' }}</h6>
-              </li>
-            </ul>
-            <p>{{ t 'index.present_subhead' }}</p>
+<main>
+  <article>
+
+    <div class="container-fluid px-md-x10">
+
+      <!-- P1 -->
+      <div class="row px-md-x10 pt-md-x10 mt-sm-5">
+        <div class="col-sm-12 col-md-6">
+          <h1 class="title_yellow">{{ t 'index.header_h1_p1' }}</h1>
+          <h1 class="title_white" style="font-size: 5rem;">{{ t 'index.header_h1_p2' }}</h1>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <h2 class="text-uppercase text-white mb-5">{{ t 'index.header_subhead' }}</h2>
+
+          <div class="input-group mb-3">
+            {{input
+              class="form-control search"
+              type="text"
+              placeholder=( t 'pageheader.search_placeholder' )
+              value=query
+              enter='query'
+              target=controllers.search
+              required='required'
+              autocomplete='off'
+            }}
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit" {{action 'query' query target=controllers.search}}>{{ t 'pageheader.search_link' }}</button>
+            </div>
           </div>
-          <div class="column__6">
-            <h3 class="section__head">
-              {{ t 'index.future_head' }}
-            </h3>
-            <ul class="onboarding--glyphs">
-              <li>
-                <i class="icon-cidcon_scatter onboarding--glyphs--icon"></i>
-                <h6>{{ t 'general.scatter' }}</h6>
-              </li>
-              <li>
-                <i class="icon-cidcon_similarity onboarding--glyphs--icon"></i>
-                <h6>{{ t 'general.similarity' }}</h6>
-              </li>
-            </ul>
-            <p>{{ t 'index.future_subhead' }}</p>
-          </div>
+
         </div>
       </div>
-    </section>
-    <section class="stream__section index__section complexity">
-      <div class="stream__section__wrap">
-      <div class="pageheader__home__cap"></div>
-        <div class="column__container">
-          <div class="column__3">
-            <h3 class="section__head">
-              {{ t 'index.complexity_head' }}
-            </h3>
+
+      <!-- P2 -->
+
+      <div class="row pt-md-x10 pt-sm-5">
+        <div class="col-sm-12">
+          <h1 class="title_yellow text-uppercase text-center">{{ t 'index.questions_head_p1' }}</h1> 
+        </div> 
+      </div>
+
+      
+    </div>
+
+    <div>
+      <!-- P3 -->
+
+      <div class="row mt-5 pt-5 row-without-margin">
+        <div class="col-sm-12 col-md-6 px-md-5 d-flex flex-column justify-content-around">
+
+          {{#if showLocations }}
+          <div class="row mb-5">
+            <div class="col-sx-6 col-md-6">
+              <h2 class="section__message_dropbox text-right mb-sm-3">{{ t 'index.location_head' }}</h2>
+            </div>
+            <div class="col-sx-6 col-md-6">
+              {{autocomplete-input-datlas data_search=locationsData type='location' idSelect='location_search'}}
+            </div>
           </div>
-          <div class="column__9">
-            <p class="section__p">
-              {{ t 'index.complexity_subhead' }}
+          {{/if}}
+
+          {{#if showIndustries }}
+          <div class="row mb-5">
+            <div class="col-sx-6 col-md-6">
+              <h2 class="section__message_dropbox text-right mb-sm-3">{{ t 'index.industry_head' }}</h2>
+            </div>
+            <div class="col-sx-6  col-md-6">
+              {{autocomplete-input-datlas data_search=industriesData type='industry' idSelect='industry_search'}}
+            </div>
+          </div>
+          {{/if}}
+
+          {{#if showProducts }}
+          <div class="row mb-5">
+            <div class="col-sx-6 col-md-6">
+              <h2 class="section__message_dropbox text-right mb-sm-3">{{ t 'index.product_head' }}</h2>
+            </div>
+            <div class="col-sx-6  col-md-6">
+              {{autocomplete-input-datlas data_search=productsData type='product' idSelect='product_search'}}
+            </div>
+          </div>
+          {{/if}}
+
+          {{#if showFarmAndLand }}
+          <div class="row mb-5">
+            <div class="col-sx-6  col-md-6">
+              <h2 class="section__message_dropbox text-right mb-sm-3">{{ t 'index.farmandland_head' }}</h2>
+            </div>
+            <div class="col-sx-6  col-md-6">
+              {{autocomplete-input-datlas data_search=ruralData type='rural' idSelect='agproduct_search'}}
+            </div>
+          </div>
+          {{/if}}
+
+
+        </div>
+        <div class="col-sm-12 col-md-6 mt-sm-5 mt-md-0 px-0">
+
+
+          <div class="section__card-cian-sophistication_route mb-5">
+            <h1 class="mb-5"><strong>{{ t 'search.sophistication_path_place'}}</strong></h1>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a porta dolor, at vehicula enim. Fusce dignissim massa magna, quis mollis arcu scelerisque fringilla.
             </p>
+            <button class="btn btn-outline-light mt-5" {{action 'transitionLocationSearch' }}>VER MÁS</button>
+            
+          </div>
+
+
+          <div class="section__card-cian-sophistication_route my-5">
+            <h1 class="mb-5"><strong>{{ t 'search.sophistication_path_product'}}</strong></h1>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a porta dolor, at vehicula enim. Fusce dignissim massa magna, quis mollis arcu scelerisque fringilla.
+            </p>
+            <button type="button" class="btn btn-outline-light mt-5">VER MÁS</button>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!-- P4 -->
+
+
+      <div class="row bordered-div-yellow row-without-margin">
+        <div class="section__card-yellow col-sm-12 col-md-6 col-lg-3">
+          <h1 class="text-uppercase mb-5"><bold>{{ t 'index.present_head' }}</bold></h1>
+          <p>{{ t 'index.present_subhead' }}</p>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 py-5">
+          <img src="assets/img/branding/ico_grafico_composicion.svg" class="mx-auto d-block mb-2">
+          <h2 class="text-center text-white ">{{ t 'general.treemap' }}</h2>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 py-5">
+          <img src="assets/img/branding/ico_grafico_de_areas.svg" class="mx-auto d-block mb-2">
+          <h2 class="text-center text-white ">{{ t 'general.multiples' }}</h2>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 py-5">
+          <img src="assets/img/branding/ico_mapa_geografico.svg" class="mx-auto d-block mb-2">
+          <h2 class="text-center text-white ">{{ t 'general.geo' }}</h2>
+        </div>
+      </div>
+
+      <div class="row bordered-div-yellow row-without-margin">
+        <div class="col-sm-12 col-md-6 col-lg-4 py-5">
+          <img src="assets/img/branding/ico_grafico_de_dispersion.svg" class="mx-auto d-block mb-2">
+          <h2 class="text-center text-white ">{{ t 'general.scatter' }}</h2>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 py-5">
+          <img src="assets/img/branding/ico_mapa_de_sectores.svg" class="mx-auto d-block mb-2">
+          <h2 class="text-center text-white ">{{ t 'general.similarity' }}</h2>
+        </div>
+        <div class="section__card-yellow col-sm-12 col-md-6 col-lg-4">
+          <h1 class="text-uppercase mb-5"><bold>{{ t 'index.future_head' }}</bold></h1>
+          <p>{{ t 'index.future_subhead' }}</p>
+        </div>
+      </div>
+
+      <div class="row row-without-margin">
+        <div class="col-sm-12 col-md-5 section__card-cian-sophistication_route">
+          <h1 class="mb-5 text-uppercase"><strong>{{ t 'index.complexity_head' }}</strong></h1>
+          <p>{{ t 'index.complexity_subhead' }}</p>
+          <div style="margin-top: 5rem;">
             {{#link-to 'about.glossary'
               data-home-page-product=''
-              class="btn btn--standalone btn--stream index__complexity__cta"
+              class="text-uppercase btn btn-outline-light btn-large mt-5"
             }}
               {{ t 'index.complexity_cta' }}
             {{/link-to}}
           </div>
         </div>
+        <div class="col-sm-12 col-md-7">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="section__card__profile">
+                <h1 class="section__card__wrap__white">{{ t 'index.country_profile_p1' }}</h1>
+                <h1 class="section__card__wrap__yellow mt-4">{{ t 'index.country_profile_p2' }}</h1>
+                {{#link-to
+                  'location.show' 0
+                  data-home-page-industry-question='2'
+                  class="text-uppercase btn btn-outline-light btn-large mt-5"
+                }}
+                  {{ t 'pageheader.profile_link' }}
+                {{/link-to}}
+              </div>
+
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <img src="assets/img/branding/ico_mapa_colombia.svg" class="mx-sm-auto d-block mb-2" style="height: 70%; margin-top: 4rem;">
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
-    <section class="stream__section index__section recirc">
-      <div class="recirc__bground" style="background-image: url('assets/img/hero_images/location/COL.jpg')"></div>
-      <div class="recirc__wrap stream__section__wrap">
-        <h3 class="section__head recirc__head">
-          {{t 'index.country_profile'}}
-        </h3>
-        {{#link-to
-          'location.show' 0
-          data-home-page-industry-question='2'
-          class="btn btn--standalone btn--stream"
-        }}
-          {{ t 'pageheader.profile_link' }}
-        {{/link-to}}
-      </div>
-    </section>
-    {{#if featureToggle.homepage_logos }}
-    <section class="stream__section index__featuredin__wrap">
-      <ul class="index__featuredin__list" style="margin-bottom: 30px;">
-        {{#each logo in featureToggle.homepage_logos}}
-        <li class="index__featuredin__item">
-        <a href="{{logo.link}}" target="_blank">
-          <img src="{{logo.logo}}" style="max-width: {{logo.max-width}};" alt="{{logo.name}}" class="index__featuredin__img">
-        </a>
-        </li>
-        {{/each}}
-      </ul>
-    </section>
-    {{/if}}
+
+      {{#if featureToggle.homepage_logos }}
+      <section class="stream__section index__featuredin__wrap">
+        <ul class="index__featuredin__list" style="margin-bottom: 30px;">
+          {{#each logo in featureToggle.homepage_logos}}
+          <li class="index__featuredin__item">
+          <a href="{{logo.link}}" target="_blank">
+            <img src="{{logo.logo}}" style="max-width: {{logo.max-width}};" alt="{{logo.name}}" class="index__featuredin__img">
+          </a>
+          </li>
+          {{/each}}
+        </ul>
+      </section>
+      {{/if}}
+
+
+    </div>
+
+    
   </article>
 </main>

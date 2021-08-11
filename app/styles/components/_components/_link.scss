@@ -30,3 +30,12 @@ a {
   color: $colorGrayLighter;
   pointer-events: none;
 }
+
+a{
+  color: $colorWhite;
+}
+
+a:hover{
+  color: $colorYellow;
+  text-decoration: none;
+}

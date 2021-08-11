@@ -14,6 +14,11 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "RF Rufo";
+  src: url('public/assets/font/RF_Rufo/RFRufo-Bold.ttf');
+}
+
 [class^="icon-cidcon_"]::before, [class*=" icon-cidcon_"]::before {
   font-family: 'cidcons';
   font-style: normal;

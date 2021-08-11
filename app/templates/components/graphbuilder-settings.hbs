@@ -1,6 +1,26 @@
 {{#if canYearToggle}}
   {{#unless isSingleYear}}
-  <fieldset class="settings__input__wrap">
+
+  <div class="col-sm-12 mb-5">
+    <h1 class="text-uppercase">{{t 'graph_builder.settings.year'}}</h1>
+  </div>
+
+  <div class="col-sm-12 mb-5">
+    
+    <div class="d-lg-flex d-md-block justify-content-between text-center">
+      <button data-prev-year {{bind-attr class=":btn :btn-outline-secondary disableDecreaseYear:btn--stream--disable" disabled="disableDecreaseYear"}} {{action "decreaseYear"}}>
+      {{t 'graph_builder.settings.year.previous'}}
+      </button>
+      <p class="text-white text-uppercase">{{year}}</p>
+      <button data-next-year {{bind-attr class=":btn :btn-outline-secondary  disableIncreaseYear:disabled" disabled="disableIncreaseYear"}} {{action "increaseYear"}}>
+        {{t 'graph_builder.settings.year.next'}}
+      </button>
+    </div>
+
+    
+  </div>
+
+  <!--<fieldset class="settings__input__wrap">
     <label class="settings__input">
       {{t 'graph_builder.settings.year'}}
     </label>
@@ -13,11 +33,13 @@
     <button data-next-year {{bind-attr class=":btn :btn--standalone :btn--stream  disableIncreaseYear:btn--stream--disable" disabled="disableIncreaseYear"}} {{action "increaseYear"}}>
       {{t 'graph_builder.settings.year.next'}}
     </button>
-  </fieldset>
+  </fieldset>-->
+
   {{/unless}}
 {{/if}}
 
 {{#if isScatter }}
+
   <fieldset class="settings__input__wrap">
     <label class="settings__input">
       {{t 'graph_builder.settings.rca'}}
@@ -32,5 +54,6 @@
       {{t 'graph_builder.settings.rca.all'}}
     </button>
   </fieldset>
+
 {{/if}}
 

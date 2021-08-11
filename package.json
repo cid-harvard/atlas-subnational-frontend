@@ -23,7 +23,7 @@
     "ember-cli": "1.13.1",
     "ember-cli-app-version": "0.3.3",
     "ember-cli-autoprefixer": "^0.3.0",
-    "ember-cli-babel": "^5.0.0",
+    "ember-cli-babel": "^6.6.0",
     "ember-cli-content-security-policy": "0.4.0",
     "ember-cli-dependency-checker": "^1.0.0",
     "ember-cli-dotenv": "git://github.com/QuinnLee/ember-cli-dotenv.git",
@@ -41,6 +41,8 @@
     "ember-export-application-global": "^1.0.2",
     "ember-i18n": "4.1.1",
     "ember-table": "0.9.2",
-    "ivy-tabs": "1.2.0"
+    "ember-truth-helpers": "^2.1.0",
+    "ivy-tabs": "1.2.0",
+    "jspdf": "^2.3.1"
   }
 }

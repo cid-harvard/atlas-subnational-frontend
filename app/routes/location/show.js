@@ -3,7 +3,7 @@ import ENV from '../../config/environment';
 import numeral from 'numeral';
 
 const {apiURL} = ENV;
-const {RSVP, computed, getWithDefault, get} = Ember;
+const {RSVP, computed, getWithDefault, get, copy} = Ember;
 
 export default Ember.Route.extend({
 // `this.store.find` makes an api call for `params.location_id` and returns a promise
@@ -43,7 +43,9 @@ export default Ember.Route.extend({
     var ag_farmsizes = Ember.$.getJSON(`${apiURL}/data/farmsize/1/locations/?level=${level}`);
     var nonag_farmsizes = Ember.$.getJSON(`${apiURL}/data/farmsize/2/locations/?level=${level}`);
 
-    return RSVP.allSettled([products, dotplot, industries, subregions_trade, occupations, agproducts, landuses, ag_farmsizes, nonag_farmsizes]).then((array) => {
+    var partners = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/partners/?level=country`)
+
+    return RSVP.allSettled([products, dotplot, industries, subregions_trade, occupations, agproducts, landuses, ag_farmsizes, nonag_farmsizes, partners]).then((array) => {
       var productsData = getWithDefault(array[0], 'value.data', []);
 
       var dotplotData = getWithDefault(array[1], 'value.data', []);//dotplots
@@ -60,6 +62,8 @@ export default Ember.Route.extend({
       var agFarmsizesData = getWithDefault(array[7], 'value.data', []);
       var nonagFarmsizesData = getWithDefault(array[8], 'value.data', []);
 
+      var partnersData = getWithDefault(array[9], 'value.data', []);
+
       var productsDataIndex = _.indexBy(productsData, 'product_id');
       var industriesDataIndex = _.indexBy(industriesData, 'industry_data');
 
@@ -69,6 +73,8 @@ export default Ember.Route.extend({
       let occupationsMetadata = this.modelFor('application').occupations;
       let agproductsMetadata = this.modelFor('application').agproducts;
       let landusesMetadata = this.modelFor('application').landUses;
+      let partnersMetadata = this.modelFor('application').partnerCountries;
+
 
       //get products data for the department
       let products = _.reduce(productsData, (memo, d) => {
@@ -79,6 +85,32 @@ export default Ember.Route.extend({
         memo.push(_.merge(d, product, productData));
         return memo;
       }, []);
+
+      
+      //get products data for the department
+      let allProducts = _.reduce(productsData, (memo, d) => {
+        let product = productsMetadata[d.product_id];
+        let productData = productsDataIndex[d.product_id];
+
+        product.complexity = _.result(_.find(product.pci_data, { year: d.year }), 'pci');
+        memo.push(_.merge(d, productData, {year: d.year}, product));
+        return memo;
+      }, []);
+
+
+      let allPartners = _.map(partnersData, (d) => {
+
+        let country = partnersMetadata[d.country_id];
+        let parent = partnersMetadata[country.parent_id];
+        d.parent_name_en = parent.name_en;
+        d.parent_name_es = parent.name_es;
+        d.group = parent.id;
+
+        return _.merge(copy(d), country);
+      });
+
+      console.log(allPartners)
+
 
       //get agproducts data for the department
       let agproducts = _.reduce(agproductsData, (memo, d) => {
@@ -260,6 +292,8 @@ export default Ember.Route.extend({
       model.set('timeseries', dotplotTimeSeries);
       model.set('metaData', this.modelFor('application'));
       model.set('subregions', subregions);
+      model.set('allPartners', allPartners)
+      model.set('allProducts', allProducts)
 
       return model;
     });

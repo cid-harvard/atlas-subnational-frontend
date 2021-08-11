@@ -1,4 +1,45 @@
-<form class="search__wrap buildermod__highlight__wrap">
+
+
+<div class="bordered-div-yellow position-relative">
+  
+  <svg width="50" height="50" class="position-absolute" style="top: -25px; left: -25px;">
+    <rect width="50" height="50" class="rect-principal"/>
+  </svg>
+  <img src="assets/img/general/ico_questions.svg" class="position-absolute" style="width: 50px; top: -25px; left: -25px;">
+
+  <div class="container-fluid p-5">
+    <div class="row">
+
+
+      <div class="col-sm-12">
+        {{component 'graphbuilder-settings'
+          classNames='buildermod__settings'
+          startDate=startDate
+          endDate=endDate
+          dateExtent=dateExtent
+          canYearToggle=canYearToggle
+          isScatter=isScatter
+          rcaFilter=rcaFilter
+        }}
+      </div>
+
+
+      <div class="col-sm-12 text-center">
+        <div class="mb-3">
+
+          <i class="fas fa-search text-white"></i>
+          <span class="text-white text-uppercase">{{ t (is-concat 'visualization.search.' source) }}</span>
+        </div>
+        
+        {{autocomplete-input-datlas data_search=filterData type='search' idSelect='searchSelect' placeHolder=placeHolderText search=search reset="reset"}}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!--<form class="search__wrap buildermod__highlight__wrap">
   <div class="search__field__wrap">
     {{input
       class="search"
@@ -10,5 +51,5 @@
     <button class="search__reset fa fa-close" type="reset"{{action 'resetSearch'}}></button>
   </div>
   <input class="search__submit btn btn--standalone btn--buildermod" type="submit" value="{{t 'graph_builder.search.submit'}}" {{action 'search'}}>
-</form>
+</form>-->
 
