@@ -26,6 +26,7 @@ export default Ember.Route.extend({
     set(this, 'visualization_type', visualization_type);
     set(this, 'variable', variable);
 
+
     return RSVP.hash(this.get(source_type)).then((hash) => {
       if(source_type === 'departments') {
         return this.departmentDataMunging(hash);
@@ -66,9 +67,14 @@ export default Ember.Route.extend({
       cities: $.getJSON(`${apiURL}/data/industry/${id}/participants/?level=msa`)
     };
   }),
+
   departmentDataMunging(hash) {
     let {model, departments} = hash;
     let locationsMetadata = this.modelFor('application').locations;
+
+    var cities = RSVP.hash(this.get("cities")).then((hash) => {
+      return this.citiesDataMunging(hash);
+    })
 
     let data = _.map(departments.data, (d) => {
       let industry = locationsMetadata[d.department_id];
@@ -86,6 +92,7 @@ export default Ember.Route.extend({
     return Ember.Object.create({
       entity: model,
       data: data,
+      cities: cities
     });
   },
   occupationsDataMunging(hash) {

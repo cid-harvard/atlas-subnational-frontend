@@ -17,22 +17,28 @@
 .pageheader__wrap {
   position: relative;
   margin: auto;
-  padding:4vh;
-  padding-top: 5vw;
+  padding:4vw;
+  padding-top: 10vh;
+  padding-bottom: 5vh;
 }
 // Branding
 
 .branding {
-  height:100%;
+  height:7vh;
 }
 
 .branding__logo {
+<<<<<<< HEAD
   height: 8vh;
  // width: 15vh/;
   //width: ;
  // height: 15vh;
   //width: 20vw;
   padding: 0px;
+=======
+  height: 100%;
+  padding: 0;
+>>>>>>> c0b707a273c3db5783be59e7f821e376d05ff041
 }
 .branding__logo__social_network {
   height: 2vh;
@@ -131,6 +137,7 @@
     content: '';
   }
   &:before {
+<<<<<<< HEAD
     content: '';
     position: absolute;
     left: 0;
@@ -140,6 +147,14 @@
     border-radius: 11px;
     transition: all 0.25s linear;
 
+=======
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    background-color: $colorBase;
+    border-radius: $baseSpace / 2;
+>>>>>>> c0b707a273c3db5783be59e7f821e376d05ff041
   }
   &:after {
     width: 25px;
@@ -313,8 +328,7 @@
     border: solid 1px $colorWhite;
 }
 .social_network_marging{
-  margin-top: 3vh;
-  margin-bottom: 4vh;
+  height: 100%;
 }
 .pageheader__menu__item{
   color: $colorWhite;
@@ -340,4 +354,14 @@
 .btn btn-outline-warning{
   color: $colorYellow;
   border-color: $colorYellow;
+}
+
+.navbar{
+  padding: 0;
+}
+
+@media (min-width: 768px){
+  .border-div-navbar {
+    border: 1px solid $colorWhite;
+  }
 }

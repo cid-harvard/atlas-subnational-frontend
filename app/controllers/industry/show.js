@@ -44,6 +44,25 @@ export default Ember.Controller.extend({
   }),
   hasChildrenIndustries: computed('model.classIndustries', function() {
     return this.get('model.classIndustries').length;
-  })
+  }),
+  init: function(){
+    Ember.run.schedule("afterRender", this, function() {
+      
+    })
+  },
+  actions: {
+    transitionLocation(id) {
+      this.transitionToRoute('location.show', id);
+    },
+    transitionProduct(id) {
+      this.transitionToRoute('product.show', id);
+    },
+    transitionIndustry(id) {
+      this.transitionToRoute('industry.show', id);
+    },
+    transitionAgproduct(id) {
+      this.transitionToRoute('agproduct.show', id);
+    },
+  }
 });
 

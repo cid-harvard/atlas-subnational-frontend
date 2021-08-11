@@ -19,6 +19,84 @@ export default Ember.Controller.extend({
   showLocations: computed.notEmpty('featureToggle.index_locations'),
   showFarmAndLand: computed.notEmpty('featureToggle.index_agproducts'),
 
+
+  locationsData: computed('model.locations', 'i18n.locale', function() {
+    let locations = get(this, 'model.locations');
+    let locale = this.get('i18n').display
+
+    return locations.map(function(location){
+      return {id: location.id, text: location.get(`name_short_${locale}`) + " (" + location.get('code') + ")" }
+    })
+  }),
+
+  industriesData: computed('model.industries', 'i18n.locale', function() {
+    let industries = get(this, 'model.industries');
+    let locale = this.get('i18n').display
+
+    return industries.map(function(industry){
+      return {id: industry.id, text: industry.get(`name_short_${locale}`) + " (" + industry.get('code') + ")" }
+    })
+  }),
+
+  productsData: computed('model.products', 'i18n.locale', function() {
+    let products = get(this, 'model.products');
+    let locale = this.get('i18n').display
+
+    return products.map(function(product){
+      return {id: product.id, text: product.get(`name_short_${locale}`) + " (" + product.get('code') + ")" }
+    })
+  }),
+
+  agproductsData: computed('model.agproducts', 'i18n.locale', function() {
+    let agproducts = get(this, 'model.agproducts');
+    let locale = this.get('i18n').display
+
+    return agproducts.map(function(agproduct){
+      return {id: agproduct.id, text: agproduct.get(`name_${locale}`) }
+    })
+  }),
+
+  ruralData: computed('model.agproducts', 'i18n.locale', function() {
+    let agproducts = get(this, 'model.agproducts');
+    let nonags = get(this, 'model.nonags');
+    let livestock = get(this, 'model.livestock');
+    let landuses = get(this, 'model.landuses');
+    let locale = this.get('i18n').display
+    var self = this
+
+
+    var agproducts_data = agproducts.map(function(agproduct){
+      var key = "agproduct"
+      var to_concatenate = self.get('i18n').t(`search.rural.${key}`).string
+
+      return {id: agproduct.id, text: agproduct.get(`name_${locale}`) + ' - ' + to_concatenate, key: key }
+    })
+
+    var nonags_data = nonags.map(function(nonags){
+      var key = "nonag"
+      var to_concatenate = self.get('i18n').t(`search.rural.${key}`).string
+      
+      return {id: nonags.id, text: nonags.get(`name_${locale}`) + ' - ' + to_concatenate, key: key, key: key }
+    })
+
+    var livestock_data = livestock.map(function(livestock){
+      var key = "livestock"
+      var to_concatenate = self.get('i18n').t(`search.rural.${key}`).string
+
+      return {id: livestock.id, text: livestock.get(`name_${locale}`) + ' - ' + to_concatenate, key: key, key: key  }
+    })
+
+    var landuses_data = landuses.map(function(landuses){
+      var key = "land-use"
+      var to_concatenate = self.get('i18n').t(`search.rural.${key}`).string
+
+      return {id: landuses.id, text: landuses.get(`name_${locale}`) + ' - ' + to_concatenate, key: key, key: key  }
+    })
+
+    return agproducts_data.concat(nonags_data).concat(livestock_data).concat(landuses_data)
+
+  }),
+
   products: computed.filter('model.products', function (product) {
     let id = get(this, 'productIds');
     return _.contains(`${id}`, get(product, 'id'));
@@ -81,6 +159,9 @@ export default Ember.Controller.extend({
     transitionLocation(id) {
       this.transitionToRoute('location.show', id);
     },
+    transitionLocationSearch() {
+      this.transitionToRoute('search', {queryParams: { filter: 'location' }});
+    },
     transitionProduct(id) {
       this.transitionToRoute('product.show', id);
     },
@@ -90,5 +171,14 @@ export default Ember.Controller.extend({
     transitionAgproduct(id) {
       this.transitionToRoute('agproduct.show', id);
     },
+    transitionLivestock(id) {
+      this.transitionToRoute('livestock.show', id);
+    },
+    transitionNonag(id) {
+      this.transitionToRoute('nonag.show', id);
+    },
+    transitionLanduse(id) {
+      this.transitionToRoute('landUse.show', id);
+    }
   }
 });

@@ -9,79 +9,95 @@
     lastYear=lastYear
     occupationLastYear=occupationLastYear
   }}
-  <header class="section__header">
-    <h3 class="section__head">
-      {{t 'industry.show.employment_and_wages'}}
-    </h3>
-  </header>
-  <table class="table--summaries">
-    <thead>
-      <tr class="table__row table__row--header">
-        <th class="table__header"></th>
-        <th class="table__header table__header--summaries--value">
-          {{t 'industry.show.value'}}
-        </th>
-        <th class="table__header table__header--summaries--dotplot">
-          {{t 'industry.show.industries'}}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="table__row table__row--body">
-        <td class="table__cell table__cell--summaries">
-          {{t 'industry.show.employment_growth' yearRange=yearRange}}
-        </td>
-        <td class="table__cell table__cell--summaries">
-          {{model.displayEmploymentGrowth}}
-        </td>
-        <td class="table__cell table__cell--summaries">
-          {{vistk-dotplot
-            elementId='dotplot--employment-growth'
-            data=employmentGrowthDotPlot
-            varX='employment_growth'
-            varText='name_en'
-            varId='industry_id'
-            type='percentage'
-            currentSelection=model.id
-          }}
-        </td>
-      </tr>
-      {{#if hasAverageWage }}
-        <tr class="table__row table__row--body">
-          <td class="table__cell table__cell--summaries">
-            {{t 'industry.show.avg_wages' year=lastYear}}
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{model.lastAvgWage}}
-          </td>
-          <td class="table__cell table__cell--summaries">
-            {{vistk-dotplot
-              elementId='dotplot--avg-wage'
-              data=averageWageDotPlot
-              varX='avg_wage'
-              varText='name_en'
-              varId='industry_id'
-              currentSelection=model.id
-            }}
-          </td>
-        </tr>
-        {{/if}}
-    </tbody>
-  </table>
-  <div class="tabmod">
-    {{#ivy-tabs}}
-      {{#ivy-tab-list classNames='tabmod__tabs'}}
+
+  <div class="container-fluid px-md-x10 mt-5">
+    <div class="row row-without-margin">
+
+      <div class="col-md-12 col-lg-1 mb-sm-5">
+        <h3 class="title_yellow pt-5">
+          {{t 'industry.show.employment_and_wages'}}
+        </h3>
+      </div>
+
+      <div class="col-md-12 offset-lg-1 col-lg-10">
+
+        <div class="table-responsive-sm pt-5">
+          <table class="table datlas-table">
+            <col style="width:30%">
+            <col style="width:20%">
+            <col style="width:50%">
+            <thead>
+              <tr class="table__row--header">
+                <th scope="col">Item</th>
+                <th scope="col">{{t 'industry.show.value'}}</th>
+                <th scope="col">{{t 'industry.show.industries'}}</th>
+              </tr>
+            </thead>
+            <tbody class="text-white">
+              <tr class="table__row table__row--body">
+                <td scope="row">{{t 'industry.show.employment_growth' yearRange=yearRange}}</td>
+                <td>{{model.displayEmploymentGrowth}}</td>
+                <td class="table__cell table__cell--summaries" style="height:10rem;">
+
+                  {{vistk-dotplot
+                    elementId='dotplot--employment-growth'
+                    data=employmentGrowthDotPlot
+                    varX='employment_growth'
+                    varText='name_en'
+                    varId='industry_id'
+                    type='percentage'
+                    currentSelection=model.id
+                  }}
+                </td>
+              </tr>
+              {{#if hasAverageWage }}
+                <tr class="table__row table__row--body even">
+                  <td>{{t 'industry.show.avg_wages' year=lastYear}}</td>
+                  <td>{{model.lastAvgWage}}</td>
+                  <td class="table__cell table__cell--summaries" style="height:10rem;">
+
+                    {{vistk-dotplot
+                      elementId='dotplot--avg-wage'
+                      data=averageWageDotPlot
+                      varX='avg_wage'
+                      varText='name_en'
+                      varId='industry_id'
+                      currentSelection=model.id
+                    }}
+                  </td>
+                </tr>
+                {{/if}}
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="container-fluid px-md-x10 mt-5">
+
+    <div class="col-md-12 text-center">
+    <ul class="nav nav-pills center-pills" id="pills-tab" role="tablist">
+      <li class="nav-item mr-md-5">
+        <a class="nav-link active btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-avg_wages-tab" data-toggle="pill" href="#pills-avg_wages" role="tab" aria-controls="pills-avg_wages" aria-selected="true">
+          {{t 'industry.show.avg_wages' year=yearRange }}
+        </a>
+      </li>
+      <li class="nav-item ml-md-5">
+        <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-employment-tab" data-toggle="pill" href="#pills-employment" role="tab" aria-controls="pills-employment" aria-selected="false">
+          {{t 'industry.show.employment' year=lastYear}}
+        </a>
+      </li>
+    </ul>
+    </div>
+
+    <div class="mt-5 tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-avg_wages" role="tabpanel" aria-labelledby="pills-avg_wages-tab">
         {{#if hasAverageWage }}
-          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active' action='puts'}}
-            <a class="tab__link"> {{t 'industry.show.avg_wages' year=yearRange }} </a>
-          {{/ivy-tab}}
-        {{/if}}
-        {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-          <a class="tab__link"> {{t 'industry.show.employment' year=lastYear}} </a>
-        {{/ivy-tab}}
-      {{/ivy-tab-list}}
-      {{#if hasAverageWage }}
-        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
           <div class="vizmod">
             <div class="vizmod--treemod">
               {{multiples-graph
@@ -94,59 +110,59 @@
               }}
             </div>
           </div>
-        {{/ivy-tab-panel}}
-      {{/if}}
-      {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-        <div class="vizmod">
-          <div class="vizmod--treemod">
-            {{vistk-treemap
-              isInTab='true'
-              data=recentDepartmentsData
-              immutableData=recentDepartmentsData
-              elementId='employment-vistk-treemap'
-              varDependent='employment'
-            }}
-          </div>
+        {{/if}}
+      </div>
+      <div class="tab-pane fade show" id="pills-employment" role="tabpanel" aria-labelledby="pills-employment-tab">
+        <div class="container-fluid">
+          {{
+            zoomable-treemap
+            data=recentDepartmentsData
+            varDependent='employment'
+            elementId='employment-vistk-treemap'
+            class="position-relative"
+            color='pink'
+          }}
         </div>
-      {{/ivy-tab-panel}}
-    {{/ivy-tabs}}
+
+      </div>
+    </div>
+
   </div>
+
 </section>
 {{#unless isIndustryClass}}
-  <section class="stream__section">
-    <header class="section__header">
-      <h3 class="section__head">{{t 'industry.show.occupation'}}</h3>
-    </header>
-      {{#ivy-tabs}}
-        {{#ivy-tab-list classNames='tabmod__tabs'}}
-          {{#ivy-tab classNames='tabmod__tab' activeClass='tabmod__tab--is--active'}}
-            <a class="tab__link"> {{t 'industry.show.occupation_demand' year=occupationLastYear}} </a>
-          {{/ivy-tab}}
-        {{/ivy-tab-list}}
-        {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
-          <div class="vizmod">
-            <div class="vizmod--treemod">
-              {{vistk-treemap
-                isInTab='true'
-                data=occupationsData
-                immutableData=occupationsData
-                elementId='occupation-vistk-treemap'
-                varDependent='num_vacancies'
-              }}
-            </div>
-          </div>
-        {{/ivy-tab-panel}}
-      {{/ivy-tabs}}
-  </section>
+
+  <div class="container-fluid px-md-x10 mt-5">
+    <div class="row row-without-margin">
+      <div class="col-sm-12">
+        <h3 class="section__head">{{t 'industry.show.occupation_demand'}} {{occupationLastYear}}</h3>
+        {{
+          zoomable-treemap
+          data=occupationsData
+          varDependent='num_vacancies'
+          elementId='occupation-vistk-treemap'
+          class="position-relative"
+          color='pink'
+        }}
+      </div>
+    </div>
+  </div>
+
 {{/unless}}
+
 {{#if hasChildrenIndustries}}
-  <section class="stream__section">
-    <header class="section__header">
+
+  <div class="container-fluid px-md-x10 my-5 py-5">
+    <div class="col-md-12">
       <h3 class="section__head">{{t 'industry.show.industry_composition' year=lastYear}}</h3>
-    </header>
-    {{component 'graphbuilder-table'
-      data=model.classIndustries
-      source="industries"
-    }}
-  </section>
+      {{
+        datlas-table
+        data=model.classIndustries
+        source="industries"
+        entityType=entityType
+        elementId="industriesTable"
+      }}
+    </div>
+  </div>
+
 {{/if}}

@@ -419,7 +419,7 @@ export default {
   "graph_builder.settings.rca.greater": "> 1",
   "graph_builder.settings.rca.less": "< 1",
   "graph_builder.settings.to": "to",
-  "graph_builder.settings.year": "Years",
+  "graph_builder.settings.year": "Years selector",
   "graph_builder.settings.year.next": "Next",
   "graph_builder.settings.year.previous": "Previous",
   "graph_builder.table.agproduct": "Agricultural Product",
