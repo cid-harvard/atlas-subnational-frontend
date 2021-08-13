@@ -10,7 +10,6 @@ export default Ember.Component.extend({
   accessToken: 'pk.eyJ1IjoiZ3dlemVyZWsiLCJhIjoicXJkMjV6WSJ9.Iw_1c5zREHqNSfdtkjlqbA',
   baseMap: computed('elementId', function() {
     if(!this.get('elementId')) { return ; }
-
     let map = new L.mapbox.map(this.get('elementId'), 'gwezerek.22ab4aa8,gwezerek.da867b0d', {
       accessToken: this.accessToken,
       center: this.get('featureToggle.geo_center'),
@@ -20,6 +19,76 @@ export default Ember.Component.extend({
       zoomControl: false,
     });
     map.addControl(L.control.zoom({ position: 'bottomleft' })); // Customize position of map zoom
+    var simpleMapScreenshoter = L.simpleMapScreenshoter({
+      hidden: true, // hide screen btn on map
+    }).addTo(map);
+    document.getElementById("savepng").addEventListener('click', function () {
+      simpleMapScreenshoter.takeScreen('image').then(image => {
+        var svgElement = $(`.leaflet-container`).get(0);
+        $(svgElement).hide();
+        var img = document.createElement('img');
+        img.id = "geo_img";
+        img.src = image;
+        var screens = document.getElementById('screens')
+        screens.prepend(img);
+        var d = new Date();
+        var file_name = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds()
+          html2canvas($(`.visualizationComponent_div`).get(0), {
+            allowTaint: true,
+            onrendered: function(canvas) {
+              var myImage = canvas.toDataURL("image/png");
+              saveAs(myImage, `${file_name}.png`);
+              screens.removeChild(document.getElementById("geo_img"));
+              $(svgElement).show();
+            }
+          });
+      }).catch(e => {
+        alert(e.toString());
+      });
+    });
+
+    document.getElementById("savepdf").addEventListener('click', function () {
+      simpleMapScreenshoter.takeScreen('image').then(image => {
+        var svgElement = $(`.leaflet-container`).get(0);
+        var containerElement = $(`.visualizationComponent_div`).get(0);
+        var HTML_Width = containerElement.getBoundingClientRect().width;
+        var HTML_Height = containerElement.getBoundingClientRect().height;
+        $(svgElement).hide();
+        var img = document.createElement('img');
+        img.id = "geo_img";
+        img.src = image;
+        var screens = document.getElementById('screens');
+        screens.prepend(img);
+        var top_left_margin = 15;
+        var PDF_Width = HTML_Width + (top_left_margin * 2);
+        var PDF_Height = HTML_Height + (top_left_margin * 2);
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+        var pageOrientation = HTML_Width < HTML_Height ? "portrait" : "landscape";
+
+        var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+        var d = new Date();
+        var file_name = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds()
+        html2canvas(containerElement, {
+          allowTaint: true,
+          onrendered: function(canvas) {
+            var myImage = canvas.toDataURL("image/jpeg", 1.0);
+            var pdf = new jsPDF(pageOrientation, 'pt', [PDF_Width, PDF_Height]);
+            pdf.addImage(myImage, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+            for (var i = 1; i <= totalPDFPages; i++) {
+              pdf.addPage(PDF_Width, PDF_Height);
+              pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+            }
+            screens.removeChild(document.getElementById("geo_img"))
+            $(svgElement).show();
+            pdf.save(`${file_name}.pdf`);
+            saveAs(pdf, `${file_name}.pdf`);
+          }
+        });
+      }).catch(e => {
+        alert(e.toString());
+      });
+    });
     return map;
   }),
   valueMap: computed('data.[]', 'varDependent', function() {
