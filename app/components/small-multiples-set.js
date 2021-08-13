@@ -67,13 +67,13 @@ export default Ember.Component.extend({
         value[this.get('varDependent')] = sum;
         memo.push(value);
         return memo;
-       }, [] )
+      }, [])
       .value();
   }),
   parentSet: computed('data.[]', function() {
     let data = this.get('data');
 
-    return  _.chain(data)
+    return _.chain(data)
       .groupBy(function(d) {return d.group +'/'+ d.year;})
       .values()
       .reduce((memo, d) => {
@@ -91,8 +91,54 @@ export default Ember.Component.extend({
         value[this.get('varDependent')] = sum;
         memo.push(value);
         return memo;
-       }, [] )
+      }, [])
       .sortBy('year')
       .value();
-  })
+  }),
+  actions: {
+    savePdf: function savePdf() {
+      alert('La descarga tardara un momento. Por favor espere...');
+      var PDF_Width = 800;
+      var PDF_Height = 600;
+      var pdf = new jsPDF('l', 'pt', [PDF_Width, PDF_Height]);
+      var domNodes = $('.multiple');
+      console.log(domNodes)
+      var totalPDFPages = domNodes.length;
+      var countPages = totalPDFPages;
+      var d = new Date();
+      var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
+
+      for (var domNode of domNodes) {
+        var options = {
+          width: domNode.clientWidth * 4,
+          height: domNode.clientHeight * 4,
+          style: {
+            transform: 'scale(' + 4 + ')',
+            transformOrigin: 'top left'
+          }
+        };
+
+        var HTML_Width = 800;
+        var HTML_Height = 600;
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+
+        domtoimage.toJpeg(domNode, options)
+          .then(function (dataUrl) {
+            var myImage = dataUrl;
+            pdf.addImage(myImage, 'JPG', 0, 0, canvas_image_width, canvas_image_height);
+            countPages--;
+            if (countPages === 0) {
+              pdf.save(file_name + '.pdf');
+              saveAs(pdf, file_name + '.pdf');
+            } else {
+              pdf.addPage(PDF_Width, PDF_Height);
+            }
+          })
+          .catch(function (error) {
+            console.error('oops, something went wrong!', error);
+          });
+      }
+    }
+  }
 });
