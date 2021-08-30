@@ -6,8 +6,10 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
 
-  queryParams: ['search', 'startDate', 'endDate'],
+  queryParams: ['search', 'startDate', 'endDate', 'toolTips'],
   search: null,
+
+  toolTips: null,
   rcaFilter: 'less',
   startDate: null,
   endDate: null,
@@ -53,8 +55,6 @@ export default Ember.Controller.extend({
   }),
 
   productsData: computed('model', function(){
-
-    console.log(this.get("model"))
 
     var locations = Object.entries(this.get('model.metaData.products'))
 
@@ -492,13 +492,53 @@ export default Ember.Controller.extend({
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
 
-    return _.filter(data, (d) => {
-      let longName = get(d,`name_${this.get('i18n').display}`);
-      let shortName = get(d,`name_short_${this.get('i18n').display}`);
-      let code = get(d, 'code');
+    if(this.get('source') == 'departments'){
+        return _.filter(data, (d) => {
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
 
-      return _.deburr(`${shortName} ${longName} ${code}`).match(regexp);
-    });
+        return _.deburr(`${shortName} ${longName} ${code}`).match(regexp);
+      });
+    }
+    else if(this.get('source') == 'cities'){
+
+      return _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+    }
+    else if(this.get('source') == 'municipalities'){
+      return _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+    }
+    else if(this.get('source') == 'products'){
+      return []
+    }
+    else{
+      return []
+    }
+
   },
 
   isCountry: computed.equal('model.entity.level', 'country'),

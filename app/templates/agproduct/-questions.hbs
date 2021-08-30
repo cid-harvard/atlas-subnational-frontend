@@ -13,7 +13,7 @@
 
         <div class="mt-4">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'agproduct.visualization' model.id 'departments' 'geo' 'land_sown' (query-params startDate=lastYear endDate=lastYear search='null')
+          {{#link-to 'agproduct.visualization' model.id 'departments' 'geo' 'land_sown' (query-params startDate=lastYear endDate=lastYear search='null' toolTips="production_tons,yield_ratio")
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.agproduct.departments.land_sown'}}
@@ -22,7 +22,7 @@
 
         <div class="mt-3">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'agproduct.visualization' model.id  'municipalities' 'multiples' 'land_sown' (query-params startDate=firstYear endDate=lastYear search='null')
+          {{#link-to 'agproduct.visualization' model.id  'municipalities' 'multiples' 'land_sown' (query-params startDate=firstYear endDate=lastYear search='null' toolTips="production_tons,yield_ratio")
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.agproduct.municipalities.land_sown'}}
@@ -36,7 +36,7 @@
 
         <div class="mt-4">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'agproduct.visualization' model.id 'departments' 'geo' 'land_harvested' (query-params startDate=lastYear endDate=lastYear search='null')
+          {{#link-to 'agproduct.visualization' model.id 'departments' 'geo' 'land_harvested' (query-params startDate=lastYear endDate=lastYear search='null' toolTips="production_tons,yield_ratio")
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.agproduct.departments.land_harvested'}}
@@ -45,7 +45,7 @@
 
         <div class="mt-3">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-           {{#link-to 'agproduct.visualization' model.id  'municipalities' 'multiples' 'land_harvested' (query-params startDate=firstYear endDate=lastYear search='null')
+           {{#link-to 'agproduct.visualization' model.id  'municipalities' 'multiples' 'land_harvested' (query-params startDate=firstYear endDate=lastYear search='null' toolTips="production_tons,yield_ratio")
             class="builder__questions__question"
             }}
               {{t 'graph_builder.page_title.agproduct.municipalities.land_harvested'}}
@@ -59,7 +59,7 @@
 
         <div class="mt-4">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'agproduct.visualization' model.id 'departments' 'geo' 'production_tons' (query-params startDate=lastYear endDate=lastYear search='null')
+          {{#link-to 'agproduct.visualization' model.id 'departments' 'geo' 'production_tons' (query-params startDate=lastYear endDate=lastYear search='null' toolTips="yield_ratio")
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.agproduct.departments.production_tons'}}
@@ -68,7 +68,7 @@
 
         <div class="mt-3">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-           {{#link-to 'agproduct.visualization' model.id  'municipalities' 'multiples' 'production_tons' (query-params startDate=firstYear endDate=lastYear search='null')
+           {{#link-to 'agproduct.visualization' model.id  'municipalities' 'multiples' 'production_tons' (query-params startDate=firstYear endDate=lastYear search='null' toolTips="yield_ratio")
               class="builder__questions__question"
             }}
               {{t 'graph_builder.page_title.agproduct.municipalities.production_tons'}}

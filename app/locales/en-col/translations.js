@@ -721,4 +721,11 @@ export default {
   "visualization.search.cities": "Find by department, city or DANE code",
   "visualization.search.municipalities": "Find by department, municipaly or DANE code",
   "visualization.search.products": "Find by prodcut name or tariff heading",
+
+  "employment": "Total employment",
+  "wages": "Total payroll salary, Col$ (miles)",
+  "land_sown": "Land sown (ha)",
+  "land_harvested": "Land harvested (ha)",
+  "production_tons": "Production (tons)",
+  "area": "Area (ha)",
 };

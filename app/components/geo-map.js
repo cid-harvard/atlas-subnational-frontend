@@ -91,10 +91,26 @@ export default Ember.Component.extend({
     });
     return map;
   }),
-  valueMap: computed('data.[]', 'varDependent', function() {
+  toolTipsData: computed('toolTips', function (){
+    let toolTips = this.get('toolTips');
+    let varDependent = this.get('varDependent');
+
+
+    if(toolTips==null){
+      return [varDependent];
+    }
+    else{
+      let tooltips = toolTips.split(',');
+      tooltips.unshift(varDependent);
+      return tooltips;
+    }
+
+  }),
+  valueMap: computed('data.[]', 'varDependent', 'toolTips', function() {
     let valueMap = d3.map();
     let data = this.get('data');
-    let varDependent = this.get('varDependent');
+
+    let toolTipsData = this.get('toolTipsData');
 
     let quantize = this.get("scale");
 
@@ -103,12 +119,15 @@ export default Ember.Component.extend({
       .entries(data);
 
     _.forEach(nestByDepartmentId, function(location) {
-      let sum = _.sum(location.values, varDependent) || 0;
-      let shadeClass = sum === 0 ? 'q0' : quantize(sum);
-      let params = {
-        value: _.sum(location.values, varDependent),
-        class: `geo__department ${shadeClass}`,
-      };
+      let params = {};
+      toolTipsData.forEach(varDependent => {
+        let sum = _.sum(location.values, varDependent) || 0;
+        let shadeClass = sum === 0 ? 'q0' : quantize(sum);
+        params[varDependent] = {
+          value: _.sum(location.values, varDependent),
+          class: `geo__department ${shadeClass}`,
+        };
+      });
       valueMap.set(parseInt(location.key), params);
     });
 
@@ -130,21 +149,19 @@ export default Ember.Component.extend({
       return numeral(value).format('0.0a');
     }
   }),
-  customLayerParams: computed('data.[]', function() {
+  customLayerParams: computed('data.[]', 'varDependent', function() {
+    let variable = this.get('varDependent')
     return {
       type: 'layer--',
       style: (feature) => {
         let valueMap = this.get('valueMap');
         return  {
-          className: _.get(valueMap.get(_.get(feature, 'properties.cid_id')), 'class') || 'geo__department q0',
+          className: _.get(_.get(valueMap.get(_.get(feature, 'properties.cid_id')), variable), 'class') || 'geo__department q0',
           fillOpacity: 1,
           opacity: 1
         };
       }
     };
-  }),
-  getSecondVar: computed(function(){
-    return ''
   }),
   addLabelsPane: function() {
     let map = this.get('baseMap');
@@ -154,17 +171,24 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
       this.addLabelsPane();
+      let varDependentList = this.get('toolTipsData');
       let layer = omnivore
         .topojson(`assets/geodata/${this.get('i18n').country}.topojson`, null, L.geoJson(null, this.get('customLayerParams')))
         .on('layeradd', (e) => {
           let marker = _.get(e, 'layer');
           let location = _.get(e, 'layer.feature.properties');
 
-          let textKey = this.get('i18n')
-            .t(`graph_builder.table.${this.get('varDependent')}`);
-          let textValue = _.get(this.get('valueMap').get(location.cid_id), 'value');
-          this.set('numberFormat', textValue);
-          var toolTipText = `<div class="text-center"><span class="text_yellow"> ${location.name} </span> </br> ${textKey} : ${this.get('numberFormat')} ${this.get('getSecondVar')}</div>`;
+          let dataTooltip = '';
+
+          varDependentList.forEach(varDependent =>{
+            let textKey = this.get('i18n')
+              .t(`graph_builder.table.${varDependent}`);
+            let textValue = _.get(_.get(this.get('valueMap').get(location.cid_id), varDependent), 'value');
+            this.set('numberFormat', textValue);
+            dataTooltip += `<span>${textKey} : ${this.get('numberFormat')} </span> </br>`;
+          });
+
+          var toolTipText = `<div class="text-center"><span class="text_yellow"> ${location.name} </span> </br>${dataTooltip}</div>`;
 
           marker.bindPopup(toolTipText, {closeButton: false});
           marker.on('mouseover', function () {
@@ -188,17 +212,24 @@ export default Ember.Component.extend({
 
       map.removeLayer(this.get('layer'));
 
+      let varDependentList = this.get('toolTipsData');
       let layer = omnivore
         .topojson(`assets/geodata/${this.get('i18n').country}.topojson`, null, L.geoJson(null, this.get('customLayerParams')))
         .on('layeradd', (e) => {
           let marker = _.get(e, 'layer');
           let location = _.get(e, 'layer.feature.properties');
 
-          let textKey = this.get('i18n')
-            .t(`graph_builder.table.${this.get('varDependent')}`);
-          let textValue = _.get(this.get('valueMap').get(location.cid_id), 'value');
-          this.set('numberFormat', textValue);
-          var toolTipText = `<span> ${location.name} </span> </br> ${textKey} : ${this.get('numberFormat')}`;
+          let dataTooltip = '';
+
+          varDependentList.forEach(varDependent =>{
+            let textKey = this.get('i18n')
+              .t(`graph_builder.table.${varDependent}`);
+            let textValue = _.get(_.get(this.get('valueMap').get(location.cid_id), varDependent), 'value');
+            this.set('numberFormat', textValue);
+            dataTooltip += `<span>${textKey} : ${this.get('numberFormat')} </span> </br>`;
+          });
+
+          var toolTipText = `<div class="text-center"><span class="text_yellow"> ${location.name} </span> </br>${dataTooltip}</div>`;
 
           marker.bindPopup(toolTipText, {closeButton: false});
           marker.on('mouseover', function () {

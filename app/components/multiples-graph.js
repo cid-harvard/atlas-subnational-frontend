@@ -107,7 +107,8 @@ export default Ember.Component.extend({
       .data(data, (d,i) => { return [d.key, i, this.get('i18n').locale]; });
 
     var div = container.enter().append('div')
-      .attr('class', 'multiple d-flex flex-row col-12 col-md-6 col-lg-3 pt-5');
+      .attr('class', 'multiple d-flex flex-row col-12 col-md-6 col-lg-3 pt-5')
+      .style('background-color', '#292A48');
 
     //has to be retrieved after the 'multiple' div is appended.
     let w = this.get('width');
@@ -171,7 +172,7 @@ export default Ember.Component.extend({
       .attr('x', w)
       .text(truncateYear(this.get('xExtent')[1]));
 
-    
+
 
     svg.append('path')
       .attr('class', 'area')
@@ -194,7 +195,7 @@ export default Ember.Component.extend({
       .attr('width', 10)
       .attr('height', 10)
       .attr('opacity', 0);
-      
+
 
     // Max value
     svg.append('circle')
@@ -353,7 +354,7 @@ export default Ember.Component.extend({
           return numeral(yValue).format('0.0a');
         });
 
-      
+
         d3.selectAll('rect.tooltip-value')
         .attr('x', x(date) - 75)
         .attr('y', function(d) {
@@ -419,6 +420,50 @@ export default Ember.Component.extend({
       this.set('firstSlice', this.get('nestedData').length);
       this.set('hasMore', false);
       this.initCharts();
+    },
+    savePdf: function savePdf() {
+      alert('Iniciando la descarga, este proceso tardara un momento.');
+      var PDF_Width = 800;
+      var PDF_Height = 600;
+      var pdf = new jsPDF('l', 'pt', [PDF_Width, PDF_Height]);
+      var domNodes = $('.multiple');
+      console.log(domNodes)
+      var totalPDFPages = domNodes.length;
+      var countPages = totalPDFPages;
+      var d = new Date();
+      var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
+
+      for (var domNode of domNodes) {
+        var options = {
+          width: domNode.clientWidth * 4,
+          height: domNode.clientHeight * 4,
+          style: {
+            transform: 'scale(' + 4 + ')',
+            transformOrigin: 'top left'
+          }
+        };
+
+        var HTML_Width = 800;
+        var HTML_Height = 600;
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+
+        domtoimage.toJpeg(domNode, options)
+          .then(function (dataUrl) {
+            var myImage = dataUrl;
+            pdf.addImage(myImage, 'JPG', 0, 0, canvas_image_width, canvas_image_height);
+            countPages--;
+            if (countPages === 0) {
+              pdf.save(file_name + '.pdf');
+              saveAs(pdf, file_name + '.pdf');
+            } else {
+              pdf.addPage(PDF_Width, PDF_Height);
+            }
+          })
+          .catch(function (error) {
+            console.error('oops, something went wrong!', error);
+          });
+      }
     }
   }
 });

@@ -1,9 +1,13 @@
-{{yield}}
 <div class="row mb-5">
     <div class="col-lg-12">
         <div class="text-right">
-            <button type="button" class="btn btn-outline-secondary" {{action 'savePng'}}><i class="fas fa-file-image mr-3"></i>Descargar grafico</button>
-            <button type="button" class="btn btn-outline-secondary" {{action 'savePdf'}}><i class="fas fa-file-pdf mr-3"></i>Descargar grafico</button>
+            <button type="button" class="btn btn-outline-secondary" {{action 'savePng'}}><i class="fas fa-file-image mr-3"></i>Descargar grafico (PNG)</button>
+            <button type="button" class="btn btn-outline-secondary" {{action 'savePdf'}}><i class="fas fa-file-pdf mr-3"></i>Descargar grafico (PDF)</button>
         </div>
     </div>
 </div>
+<section>
+  <div class="text-right mb-5">
+    <button type="button" class="btn btn-outline-warning d-none"><i class="fas fa-caret-square-left mr-3"></i>Regresar</button>
+  </div>
+</section>

@@ -11,6 +11,8 @@
   agcensusLastYear=agcensusLastYear
   occupationLastYear=occupationLastYear
   metaData=model.metaData
+  isVisualization=true
+  pageTitle=pageTitle
 }}
 {{navigation-questions
   entityType=entityType
@@ -78,6 +80,7 @@
             search=search
             graph=graph
             elementId=source
+            toolTips=toolTips
           }}
           <div id="screens" style="padding: 10px"></div>
         </div>
@@ -86,7 +89,7 @@
           {{#unless isGeo }}
               {{component 'visualization-legend' legend=legend }}
           {{else}}
-              {{component 'visualization-legend-geomap' legend=geoLegend classNames='col-md-4 d-flex flex-column justify-content-around' }}
+              {{component 'visualization-legend-geomap' legend=geoLegend varDependent=varDependent classNames='col-md-4 d-flex flex-column justify-content-around' }}
           {{/unless}}
         {{/if}}
 

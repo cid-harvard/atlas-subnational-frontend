@@ -17,7 +17,12 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
         <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="industry")}}{{ t 'search.results_industries' }}{{/link-to}}</li>
-        <li class="breadcrumb-item active" aria-current="page">{{model.name}}</li>
+        {{#if isVisualization}}
+          <li class="breadcrumb-item">{{#link-to 'industry.show' model.id}}{{model.name}}{{/link-to}}</li>
+          <li class="breadcrumb-item active" aria-current="page">{{pageTitle}}</li>
+        {{else}}
+          <li class="breadcrumb-item active" aria-current="page">{{model.name}}</li>
+        {{/if}}
       </ol>
     </nav>
   {{/if}}
@@ -72,7 +77,16 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
         <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="rural")}}{{ t 'search.results_rural' }}{{/link-to}}</li>
-        <li class="breadcrumb-item active" aria-current="page">{{ t 'search.rural.land-use' }}</li>
+
+        <li class="breadcrumb-item"><a href="javascript:void(0);">{{ t 'search.rural.land-use' }}</a></li>
+
+        {{#if isVisualization}}
+          <li class="breadcrumb-item">{{#link-to 'landUse.show' model.id}}{{model.name}}{{/link-to}}</li>
+          <li class="breadcrumb-item active" aria-current="page">{{pageTitle}}</li>
+        {{else}}
+          <li class="breadcrumb-item active" aria-current="page">{{model.name}}</li>
+        {{/if}}
+
       </ol>
     </nav>
 
@@ -91,7 +105,15 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
         <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="rural")}}{{ t 'search.results_rural' }}{{/link-to}}</li>
-        <li class="breadcrumb-item active" aria-current="page">{{ t 'search.rural.agproduct' }}</li>
+        <li class="breadcrumb-item"><a href="javascript:void(0);">{{ t 'search.rural.agproduct' }}</a></li>
+
+        {{#if isVisualization}}
+          <li class="breadcrumb-item">{{#link-to 'agproduct.show' model.id}}{{model.name}}{{/link-to}}</li>
+          <li class="breadcrumb-item active" aria-current="page">{{pageTitle}}</li>
+        {{else}}
+          <li class="breadcrumb-item active" aria-current="page">{{model.name}}</li>
+        {{/if}}
+
       </ol>
     </nav>
 

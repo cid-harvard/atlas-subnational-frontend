@@ -575,7 +575,7 @@ export default {
   "index.questions_head_p2": "M\u00f3dulos comercio exterior y sectores",
   "index.questions_subhead": "index.questions_subhead",
   "index.research_head": "Investigaci\u00f3n mencionada en",
-  "index.sophistication_route": "Ruta de sofisticaci\u00f3n y diversificaci\u00f3n de producto",
+  "index.sophistication_route": "Ruta de sofisticación y diversificación de producto",
   "industry.show.avg_wages": "Salarios promedio ({{year}})",
   "industry.show.employment": "Empleo ({{year}})",
   "industry.show.employment_and_wages": "Empleo formal y salarios",
@@ -666,16 +666,16 @@ export default {
   "search.results_nonag": "Actividades no agropecuarias",
   "search.results_products": "Productos",
   "search.results_rural": "Actividades rurales",
-  "search.sophistication_path_place": "Ruta de sofisticacion y diversificacion de lugar",
-  "search.sophistication_path_product": "Ruta de sofisticacion y diversificacion de producto",
-  "search.message.p1": "En el siguiente campo usted podra diligenciar su consulta, tambien usted podra realizar esta misma busqueda por codigo CIIU.",
+  "search.sophistication_path_place": "Ruta de sofisticación y diversificación de lugar",
+  "search.sophistication_path_product": "Ruta de sofisticación y diversificación de producto",
+  "search.message.p1": "En el siguiente campo usted podrá diligenciar su consulta, tambien usted podra realizar esta misma busqueda por codigo CIIU.",
   "search.message.p2": "Haga uso del interrogante para ampliar la información.",
-  "search.modal.title": "CODIGO CIIU",
-  "search.placeholder.select2": "Busqueda por Nombre o Codigo CIIU",
+  "search.modal.title": "Código CIIU",
+  "search.placeholder.select2": "Busqueda por Nombre o Código CIIU",
   "search.modal.close": "Cerrar",
 
-  "search.modal.title.industry": "Codigo CIIU",
-  "search.modal.p1.industry": "Clasificacion numerica que identifica las actividades economicas. Aunque pertenece a las naciones unidas, en Colombia, el DANE realiza la ultima clasificacion a 4 digitos.",
+  "search.modal.title.industry": "Código CIIU",
+  "search.modal.p1.industry": "Clasificación numérica que identifica las actividades económicas. Aunque pertenece a las naciones unidas, en Colombia, el DANE realiza la última clasificacion a 4 digitos.",
   "search.modal.link.industry": "https://clasificaciones.dane.gov.co/ciiu4-0/ciiu4_dispone",
 
   "search.modal.title.rural": "Búsqueda",
@@ -691,9 +691,9 @@ export default {
   "search.rural.nonag": "Actividades no Agropecuarias",
   "search.rural.livestock": "Especies Pecuarias",
 
-  "search.industry.title": "Realice una busqueda por",
-  "search.industry.subtitle": "Sector o por codigo CIIU",
-  "search.industry.body": "En el siguiente campo usted podra diligenciar su consulta, tambien usted podra realizar esta misma busqueda por codigo CIIU.<br><br>Haga uso del interrogante para ampliar la información.",
+  "search.industry.title": "Realice una búsqueda por",
+  "search.industry.subtitle": "Sector o por código CIIU",
+  "search.industry.body": "En el siguiente campo usted podrá diligenciar el nombre del sector a consultar, también usted podrá realizar esta misma busqueda por código CIIU.<br><br>Haga uso del interrogante para ampliar la información.",
 
   "search.rural.title": "Búsqueda por",
   "search.rural.subtitle": "Una actividad rural",
@@ -706,7 +706,7 @@ export default {
 
   "table.export_data": "Descargar Datos",
   "thousands_delimiter": ".",
-  "header_nav.search": "REALICE UNA BUSQUEDA POR",
+  "header_nav.search": "REALICE UNA BÚSQUEDA POR",
 
   "visualization.geo": "Mapea los datos",
   "visualization.treemap": "Muestra la descomposici\u00f3n en varios niveles",
@@ -723,4 +723,11 @@ export default {
   "visualization.search.cities": "Búsque por departamento, ciudad o código DANE",
   "visualization.search.municipalities": "Búsque por departamento, municipio o código DANE",
   "visualization.search.products": "Búsque por nombre de producto o partida arancelaría",
+
+  "employment": "Empleo total",
+  "wages": "Nómina salarial total, Col$ (miles)",
+  "land_sown": "Área sembrada (ha)",
+  "land_harvested": "Área cosechada (ha)",
+  "production_tons": "Producción (toneladas)",
+  "area": "Área (ha)",
 };

@@ -13,7 +13,8 @@ export default Ember.Route.extend({
   queryParams: {
     startDate: { refreshModel: true },
     endDate: { refreshModel: true },
-    search: { refreshModel: false }
+    search: { refreshModel: false },
+    toolTips: { refreshModel: false },
   },
   controllerName: 'visualization',
   renderTemplate() {

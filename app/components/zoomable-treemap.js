@@ -1,26 +1,60 @@
 import Ember from 'ember';
 const {computed, observer, get:get} = Ember;
+import numeral from 'numeral';
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
+  varDependentTooltip: null,
   id: computed('elementId', function() {
-    return `#${this.get('elementId')}`;
+    return `#${this.get('elementId')} section`;
   }),
   varText: computed('i18n.locale', function() {
     return `name_short_${this.get('i18n').display}`;
   }),
-  updatedData: computed('data.[]', 'varDependent', 'varText', 'i18n.locale', 'search', function() {
+  toolTipsData: computed('toolTips', function (){
+    let toolTips = this.get('toolTips');
+
+    if(toolTips==null){
+      return [];
+    }
+    else{
+      return toolTips.split(',');
+    }
+
+  }),
+  updatedData: computed('data.[]', 'varDependent', 'varText', 'i18n.locale', 'search', 'toolTips', function() {
 
     var key = this.get('varText');
     var dependent = this.get('varDependent');
+    var toolTipsData = this.get('toolTipsData');
+    var self = this;
 
     return this.get('data').map(item => {
 
       if(_.get(item, `parent_name_${this.get('i18n').display}`) === _.get(item, `name_${this.get('i18n').display}`)){
-        return { key:_.get(item, key), value:_.get(item, dependent) }
+        return {
+          key:_.get(item, key),
+          value: self.formatNumber(_.get(item, dependent), dependent, self.get('i18n')),
+          tooltips: toolTipsData.map(varDependent => {
+            return {
+              "name": self.get('i18n').t(`graph_builder.table.${varDependent}`).string,
+              "value": self.formatNumber(_.get(item, varDependent), varDependent, self.get('i18n'))
+            };
+          })
+        };
       }
       else{
-        return { key:_.get(item, key), value:_.get(item, dependent), group: _.get(item, `parent_name_${this.get('i18n').display}`) }
+        return {
+          key: _.get(item, key),
+          value: self.formatNumber(_.get(item, dependent), dependent, self.get('i18n')),
+          group: _.get(item, `parent_name_${this.get('i18n').display}`),
+          tooltips: toolTipsData.map(varDependent => {
+            return {
+              "name": self.get('i18n').t(`graph_builder.table.${varDependent}`).string,
+              "value": self.formatNumber(_.get(item, varDependent), varDependent, self.get('i18n'))
+            };
+          })
+        };
       }
 
     });
@@ -30,11 +64,9 @@ export default Ember.Component.extend({
 
     if(updatedData[0] !== undefined){
       if(updatedData[0].hasOwnProperty("group")){
-
         if(updatedData[0].group == undefined){
           return d3.nest().entries(updatedData);
         }
-
         return d3.nest().key(function(d) { return d.group; }).entries(updatedData);
       }
       else{
@@ -55,6 +87,69 @@ export default Ember.Component.extend({
     }
     return ["#880E4F", "#F06292"]
   }),
+  formatNumber: (number, key, i18n) => {
+    var decimalVars = [
+      'export_rca',
+      'eci',
+      'industry_eci',
+      'rca',
+      'complexity',
+      'distance',
+      'cog',
+      'coi',
+      'industry_coi',
+      'population',
+      'yield_ratio',
+      'yield_index',
+      'average_livestock_load',
+    ];
+    var percentVars = [
+      'share',
+      'employment_growth'
+    ];
+    var wageVarsInThousands = [
+      'wages',
+      'avg_wages',
+      'avg_wage',
+    ];
+    var moneyVars = [
+      'gdp_pc_real',
+      'gdp_real',
+    ];
+    var largeNumbers = [
+      'export_value',
+      'import_value',
+      'monthly_wages',
+      'average_wages',
+      'area',
+      'production_tons',
+      'land_sown',
+      'land_harvested',
+      'num_farms',
+      'num_livestock',
+    ];
+
+    if(_.include(wageVarsInThousands, key)){
+      return numeral(number).divide(1000).format('0,0');
+    } else if(_.include(decimalVars, key)){
+      return numeral(number).format('0.00a');
+    } else if(key === 'employment'){
+      return numeral(Math.ceil(number)).format('0,0');
+    } else if(key === 'num_establishments' || key === 'export_num_plants'){
+      if(parseInt(number) < 6) {
+        return i18n.t('graph_builder.table.less_than_5');
+      }
+      return numeral(number).format('0,0');
+    } else if(_.include(percentVars, key)){
+      return numeral(number).format('0.00%');
+    } else if(_.include(largeNumbers, key)) {
+      return numeral(number).format('0,0');
+    } else if(_.include(moneyVars, key)) {
+      return numeral(number).format('$0.00a');
+    } else {
+      return number;
+    }
+  },
   treemap: computed('data.[]', 'id', 'updatedData', 'nestedData', 'varDependent', 'i18n.locale', 'varText', 'search', function () {
 
     var elementId = this.get('id');
@@ -67,6 +162,7 @@ export default Ember.Component.extend({
       width: 1000,
       height: 500,
       value_text: value_text,
+      tooltips: '',
       percent_text: this.get('i18n').t(`graph_builder.table.share`).string,
       colors: this.get('getColors'),
       principal_color: "#292A48"
@@ -100,6 +196,8 @@ export default Ember.Component.extend({
         .sort(function(a, b) { return a.value - b.value; })
         .mode('squarify')
         .round(false);
+
+    var back = d3.select(`#${this.get('elementId')} section button`)
 
     var svg = d3.select(elementId).append("svg")
         .attr('viewBox', `0 0 ${defaults.width} ${defaults.height}`)
@@ -141,10 +239,21 @@ export default Ember.Component.extend({
       Tooltip.style("visibility", "visible")
     }
     var mousemove = function(d) {
+
+      let dataTooltip = '';
+
+      if(d.hasOwnProperty("tooltips")){
+        d.tooltips.forEach(item =>{
+          dataTooltip += `<p class="text-center mb-0">${item.name}: ${item.value}</p>`;
+        });
+      }
+
+
       Tooltip
         .html(`
         <p class="text-center mb-0 text_yellow">${d.key}</p>
         <p class="text-center mb-0">${defaults.value_text}: ${d.value}</p>
+        ${dataTooltip}
         <p class="text-center mb-0">${defaults.percent_text}: ${(d.area * 100).toFixed(1)} %</p>
         `)
         .style("left", function() {
@@ -152,18 +261,18 @@ export default Ember.Component.extend({
           var width = this.getBoundingClientRect().width
 
           if(event.clientX - width > 0){
-            return (event.pageX - $(elementId).offset().left ) - width + "px"
+            return (event.pageX - $(elementId).offset().left ) - width - 10 + "px"
           }
           else{
-            return (event.pageX - $(elementId).offset().left ) + "px"
+            return (event.pageX - $(elementId).offset().left ) + 10 + "px"
           }
 
         })
         .style("top", function() {
-          return (event.pageY - $(elementId).offset().top) + 10 + "px"
+          return (event.pageY - $(elementId).offset().top) - 50 + "px"
         })
 
-        
+
     }
     var mouseleave = function(d) {
       Tooltip.style("visibility", "hidden")
@@ -208,6 +317,8 @@ export default Ember.Component.extend({
   }
 
     function display(d) {
+
+      back.datum(d.parent).on("click", transition);
 
       grandparent
           .datum(d.parent)
@@ -275,6 +386,13 @@ export default Ember.Component.extend({
         if (transitioning || !d) return;
         transitioning = true;
 
+        if ($(`${elementId} button`).hasClass("d-none")){
+          $(`${elementId} button`).removeClass("d-none");
+        }
+        else{
+          $(`${elementId} button`).addClass("d-none");
+        }
+
         var g2 = display(d),
             t1 = g1.transition().duration(750),
             t2 = g2.transition().duration(750);
@@ -311,10 +429,10 @@ export default Ember.Component.extend({
     }
 
     function text(text) {
-      
+
       text.selectAll("tspan")
           .attr("x", function(d) { return x(d.x) + 6; })
-          
+
       text.attr("x", function(d) { return x(d.x) + 6; })
           .attr("y", function(d) { return y(d.y) + 6; })
           .style("opacity", function(d) {
@@ -339,7 +457,7 @@ export default Ember.Component.extend({
     function text2(text) {
       text.attr("x", function(d) { return x(d.x) + 6; })
           .attr("y", function(d) { return y(d.y + d.dy) - 6; })
-          .style("opacity", function(d) { 
+          .style("opacity", function(d) {
 
             var rect = this.getBoundingClientRect()
 
@@ -383,14 +501,14 @@ export default Ember.Component.extend({
       d3.select(id).selectAll('svg').remove();
       this.get('treemap');
 
-      
+
 
     });
   },
   actions: {
     savePng() {
 
-      var id = this.get('id')      
+      var id = this.get('id')
       var svgElement = $(`${id} svg`).get(0)
       var d = new Date();
       var file_name = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds()
@@ -410,7 +528,7 @@ export default Ember.Component.extend({
     },
     savePdf() {
 
-      var id = this.get('id')      
+      var id = this.get('id')
       var svgElement = $(`${id} svg`).get(0)
       var d = new Date();
       var file_name = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds()
@@ -437,7 +555,7 @@ export default Ember.Component.extend({
 
               pdf.addImage(myImage, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
 
-              for (var i = 1; i <= totalPDFPages; i++) { 
+              for (var i = 1; i <= totalPDFPages; i++) {
                   pdf.addPage(PDF_Width, PDF_Height);
                   pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
               }
