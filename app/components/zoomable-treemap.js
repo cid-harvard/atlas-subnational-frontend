@@ -34,7 +34,7 @@ export default Ember.Component.extend({
       if(_.get(item, `parent_name_${this.get('i18n').display}`) === _.get(item, `name_${this.get('i18n').display}`)){
         return {
           key:_.get(item, key),
-          value: self.formatNumber(_.get(item, dependent), dependent, self.get('i18n')),
+          value: _.get(item, dependent),
           tooltips: toolTipsData.map(varDependent => {
             return {
               "name": self.get('i18n').t(`graph_builder.table.${varDependent}`).string,
@@ -46,7 +46,7 @@ export default Ember.Component.extend({
       else{
         return {
           key: _.get(item, key),
-          value: self.formatNumber(_.get(item, dependent), dependent, self.get('i18n')),
+          value: _.get(item, dependent),
           group: _.get(item, `parent_name_${this.get('i18n').display}`),
           tooltips: toolTipsData.map(varDependent => {
             return {
@@ -169,6 +169,8 @@ export default Ember.Component.extend({
     };
     var o = {title: "World Population"}
     var data = {key: value_text, values: this.get("nestedData")}
+
+    console.log(data)
 
     var root,
       opts = $.extend(true, {}, defaults, o),
