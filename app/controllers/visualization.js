@@ -4,16 +4,21 @@ const {computed, observer, get:get } = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
+  mapService: Ember.inject.service(),
+  buildermodSearchService: Ember.inject.service(),
+  treemapService: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
 
   queryParams: ['search', 'startDate', 'endDate', 'toolTips'],
   search: null,
+  range: null,
 
   toolTips: null,
   rcaFilter: 'less',
   startDate: null,
   endDate: null,
   searchText: null,
+  filteredMapData: null,
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
   drawerQuestionsIsOpen: false,
@@ -425,8 +430,11 @@ export default Ember.Controller.extend({
       let extents = scale.invertExtent(t);
       return {
         "start": numeral(extents[0]).format('0.0a'),
+        "start_value": extents[0],
         "end": numeral(extents[1]).format('0.0a'),
-        "class": new Ember.Handlebars.SafeString(`fa fa-circle ${scale(extents[0])}`)
+        "end_value": extents[1],
+        "class": new Ember.Handlebars.SafeString(`fa fa-circle ${scale(extents[0])}`),
+        "range": `${scale(extents[0])}`
       };
     });
   }),
@@ -435,14 +443,60 @@ export default Ember.Controller.extend({
     return this.get('i18n').t(`general.${entityType}`);
   }),
   modelData: computed('model.data.[]', function() {
+    if(this.get('source') === "departments" && this.get('visualization') === "treemap"){
+      return this.get('model.cities');
+    }
     return this.get('model.data');
   }),
   immutableData: computed('model.data.[]','endDate', 'startDate' , function() {
+    if(this.get('source') === "departments" && this.get('visualization') === "treemap"){
+      return this.filterToSelectedYears(this.get('model.cities'), this.get('startDate'), this.get('endDate'));
+    }
     return this.filterToSelectedYears(this.get('model.data'), this.get('startDate'), this.get('endDate'));
   }),
-  filteredData: computed('immutableData.[]', 'search', 'startDate', 'endDate', 'rcaFilter', function() {
+  filteredData: computed('immutableData.[]', 'startDate', 'endDate', 'rcaFilter', 'buildermodSearchService.search', function() {
+
+    //console.log("filteredData")
+
     let data = this.get('immutableData');
-    if(this.get('search')){ data = this.searchFilter(data); }
+    console.log(data)
+
+    this.set('search', this.get('buildermodSearchService.search'));
+
+    //console.log(this.get('buildermodSearchService.search'));
+
+    if(this.get('search')){ data = this.searchFilter(data, 'filteredData'); }
+
+    if(this.get('visualization') === 'scatter'){
+      let rca = this.get('rca');
+      let rcaFilter = this.get('rcaFilter');
+      if(rcaFilter === 'less') {
+        return _.filter(data, (d) => { return _.get(d,rca) <= 1;});
+      }
+      if (rcaFilter === 'greater') {
+        return _.filter(data, (d) => { return _.get(d,rca) > 1;});
+      }
+    }
+    return data;
+  }),
+  filteredDataTable: computed('immutableData.[]', 'search', 'startDate', 'endDate', 'rcaFilter', 'mapService.range', function() {
+
+    let data = this.filterToSelectedYears(this.get('model.data'), this.get('startDate'), this.get('endDate'));
+
+    var range = this.get('mapService.range');
+    var self = this;
+
+    this.set("range", this.get("mapService.range"))
+
+    if(range !== null){
+      this.set('search', null);
+      return _.filter(data, (d) => {
+        let varDependent = _.get(d, self.get('varDependent'));
+        return varDependent >= range[0] && varDependent <= range[1];
+      });
+    }
+
+    if(this.get('search')){ data = this.searchFilter(data, 'filteredDataTable'); }
 
     if(this.get('visualization') === 'scatter'){
       let rca = this.get('rca');
@@ -457,6 +511,8 @@ export default Ember.Controller.extend({
     return data;
   }),
   visualizationComponent: computed('visualization', function(){
+    this.set("range", null);
+    this.set("mapService.range", null);
     let visualization = this.get('visualization');
     if(visualization === 'treemap') {
       return 'zoomable-treemap';
@@ -485,7 +541,7 @@ export default Ember.Controller.extend({
     if(entityType === 'product') { return 'assets/img/hero_images/product/product_1.jpg'; }
     if(entityType === 'industry') { return 'assets/img/hero_images/industry/industry_1.jpg'; }
   }),
-  searchFilter: function(data) {
+  searchFilter: function(data, variable) {
 
     let search = _.deburr(this.get('search'));
 
@@ -493,13 +549,31 @@ export default Ember.Controller.extend({
       .replace(/\s+/g, ''), "gi");
 
     if(this.get('source') == 'departments'){
-        return _.filter(data, (d) => {
-        let longName = get(d,`name_${this.get('i18n').display}`);
-        let shortName = get(d,`name_short_${this.get('i18n').display}`);
-        let code = get(d, 'code');
 
-        return _.deburr(`${shortName} ${longName} ${code}`).match(regexp);
-      });
+      if(variable === 'filteredData'){
+        return _.filter(data, (d) => {
+          let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+          let longName = get(d,`name_${this.get('i18n').display}`);
+          let shortName = get(d,`name_short_${this.get('i18n').display}`);
+          let code = get(d, 'code');
+
+          var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+          if(result_city !== null){
+            return result_city;
+          }
+          return _.deburr(`${parentName} ${code}`).match(regexp);
+        });
+      }
+      else{
+        return _.filter(data, (d) => {
+          let longName = get(d,`name_${this.get('i18n').display}`);
+          let shortName = get(d,`name_short_${this.get('i18n').display}`);
+          let code = get(d, 'code');
+
+          return _.deburr(`${shortName} ${longName} ${code}`).match(regexp);
+        });
+      }
     }
     else if(this.get('source') == 'cities'){
 

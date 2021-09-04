@@ -4,6 +4,8 @@ import numeral from 'numeral';
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
+  buildermodSearchService: Ember.inject.service(),
+  treemapService: Ember.inject.service(),
   varDependentTooltip: null,
   id: computed('elementId', function() {
     return `#${this.get('elementId')} section`;
@@ -30,7 +32,6 @@ export default Ember.Component.extend({
     var self = this;
 
     return this.get('data').map(item => {
-
       if(_.get(item, `parent_name_${this.get('i18n').display}`) === _.get(item, `name_${this.get('i18n').display}`)){
         return {
           key:_.get(item, key),
@@ -48,6 +49,7 @@ export default Ember.Component.extend({
           key: _.get(item, key),
           value: _.get(item, dependent),
           group: _.get(item, `parent_name_${this.get('i18n').display}`),
+          parent_code: _.get(item, `parent_code`),
           tooltips: toolTipsData.map(varDependent => {
             return {
               "name": self.get('i18n').t(`graph_builder.table.${varDependent}`).string,
@@ -153,7 +155,8 @@ export default Ember.Component.extend({
   treemap: computed('data.[]', 'id', 'updatedData', 'nestedData', 'varDependent', 'i18n.locale', 'varText', 'search', function () {
 
     var elementId = this.get('id');
-    var value_text = this.get('i18n').t(`graph_builder.table.${this.get('varDependent')}`).string
+    var value_text = this.get('i18n').t(`graph_builder.table.${this.get('varDependent')}`).string;
+    var self = this;
 
     var defaults = {
       margin: {top: 24, right: 0, bottom: 0, left: 0},
@@ -169,8 +172,6 @@ export default Ember.Component.extend({
     };
     var o = {title: "World Population"}
     var data = {key: value_text, values: this.get("nestedData")}
-
-    console.log(data)
 
     var root,
       opts = $.extend(true, {}, defaults, o),
@@ -227,8 +228,11 @@ export default Ember.Component.extend({
         .attr("dy", ".75em")
         .style("font-family", "sans-serif");
 
+    d3.selectAll(".treemap-tooltip").remove();
+
     var Tooltip = d3.select(elementId)
       .append("div")
+      .attr("class", "treemap-tooltip")
       .style("position", "absolute")
       .style("visibility", "hidden")
       .style("background-color", "white")
@@ -320,7 +324,7 @@ export default Ember.Component.extend({
 
     function display(d) {
 
-      back.datum(d.parent).on("click", transition);
+      back.datum(d.parent).on("click", transition)
 
       grandparent
           .datum(d.parent)
@@ -385,14 +389,32 @@ export default Ember.Component.extend({
           .style("stroke", "#292A48")
 
       function transition(d) {
+
+        if(d.hasOwnProperty("parent")){
+          self.set("buildermodSearchService.search", `${d.key}`);
+          //$(`${elementId} button`).removeClass("d-none");
+          //d3.selectAll(".treemap-tooltip").remove();
+        }
+        else{
+          //$(`${elementId} button`).addClass("d-none");
+          //d3.selectAll(".treemap-tooltip").remove();
+        }
+
+
+        //self.set("buildermodSearchService.search", `${d.key}`);
+
         if (transitioning || !d) return;
         transitioning = true;
 
         if ($(`${elementId} button`).hasClass("d-none")){
-          $(`${elementId} button`).removeClass("d-none");
+          //$(`${elementId} button`).removeClass("d-none");
+
+          //d3.selectAll(".treemap-tooltip").remove();
         }
         else{
-          $(`${elementId} button`).addClass("d-none");
+          //$(`${elementId} button`).addClass("d-none");
+          //self.set("buildermodSearchService.search", null);
+          //d3.selectAll(".treemap-tooltip").remove();
         }
 
         var g2 = display(d),
@@ -498,7 +520,8 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender',this , function() {
 
-      var id = this.get('id')
+      console.log(this.get('data'))
+      var id = this.get('id');
 
       d3.select(id).selectAll('svg').remove();
       this.get('treemap');
@@ -573,5 +596,5 @@ export default Ember.Component.extend({
   update: observer('i18n.display', 'updatedData', function() {
     d3.select(this.get('id')).selectAll('svg').remove();
     this.get('treemap');
-  })
+  }),
 });

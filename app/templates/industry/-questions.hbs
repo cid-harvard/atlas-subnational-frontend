@@ -13,7 +13,7 @@
 
         <div class="mt-4">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'employment' (query-params startDate=firstYear endDate=lastYear toolTips="rca")
+          {{#link-to 'industry.visualization' model.id 'departments' 'geo' 'employment' (query-params startDate=lastYear endDate=lastYear toolTips="rca")
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.industry.departments.employment'}}
@@ -36,7 +36,7 @@
 
         <div class="mt-4">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'industry.visualization' model.id 'departments' 'multiples' 'wages' (query-params startDate=firstYear endDate=lastYear toolTips="employment,rca")
+          {{#link-to 'industry.visualization' model.id 'departments' 'geo' 'wages' (query-params startDate=lastYear endDate=lastYear toolTips="employment,rca")
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.industry.departments.wages'}}

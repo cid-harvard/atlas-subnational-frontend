@@ -3,6 +3,8 @@ const {computed, get, observer} = Ember;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
+  buildermodSearchService: Ember.inject.service(),
+  treemapService: Ember.inject.service(),
   search: null,
   placeHolder: null,
   transitionProduct: 'transitionProduct',
@@ -13,7 +15,7 @@ export default Ember.Component.extend({
   transitionLivestock: 'transitionLivestock',
   transitionNonag: 'transitionNonag',
   transitionLanduse: 'transitionLanduse',
-  runSelect: computed('idSelect', 'type', 'data_search', 'placeHolder', 'search', 'i18n', function(){
+  runSelect: computed('idSelect', 'data_search', 'placeHolder', 'search', 'i18n', function(){
 
     let id_select = this.get('idSelect');
     var $eventSelect = $(`#${id_select}`);
@@ -22,12 +24,16 @@ export default Ember.Component.extend({
     var data = this.get('data_search')
     var placeholder = this.get("placeHolder")
 
-    
+
 
     if(placeholder === null){
       placeholder = this.get('i18n').t(`pageheader.search_placeholder.${type}`).string
     }
-    
+
+    if(data === undefined){
+      data = [];
+    }
+
     data.unshift({ id: "", text: ""})
 
     $eventSelect.select2({
@@ -69,20 +75,26 @@ export default Ember.Component.extend({
 
         } else if (type == 'search') {
           self.set('search', text);
+          self.set("buildermodSearchService.search", text);
         }
       }
-      
+
     });
   }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this , function() {
 
       this.get("runSelect");
+      this.get("buildermodSearchService.search");
 
     });
   },
-  update: observer('i18n.display', 'data_search', function() {
+  update: observer('i18n.display', 'data_search', 'buildermodSearchService.search', function() {
+
+    //console.log("autocomplete")
+
     let id_select = this.get('idSelect');
+    var buildermodSearchService = this.get("buildermodSearchService.search");
     var $eventSelect = $(`#${id_select}`);
     var placeholder = this.get("placeHolder")
     let type = this.get('type');
@@ -107,11 +119,20 @@ export default Ember.Component.extend({
       }
     });
 
+    let val = $eventSelect.find("option:contains('"+buildermodSearchService+"')").val();
+
+    if(val !== undefined){
+      $eventSelect.val(val).trigger('change.select2');
+      let text= $(`#${id_select} option:selected`).text();
+      if (type === 'search') {
+        this.set('search', text);
+      }
+    }
+
     $eventSelect.on("select2:select", function (e) {
 
       let id = $eventSelect.val();
       let text= $(`#${id_select} option:selected`).text();
-      let type = self.get('type');
 
       if(id !== ""){
         if(type === 'location') {
@@ -131,15 +152,17 @@ export default Ember.Component.extend({
 
         } else if (type === 'search') {
           self.set('search', text);
+          self.set("buildermodSearchService.search", text);
         }
       }
-      
+
     });
 
   }),
   actions: {
     reset: function() {
       this.set('search', null);
+      this.set("buildermodSearchService.search", null);
 
       let id_select = this.get('idSelect');
       var $eventSelect = $(`#${id_select}`);

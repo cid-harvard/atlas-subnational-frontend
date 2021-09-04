@@ -167,8 +167,8 @@ export default {
   "graph_builder.builder_mod_header.location.products.import_value": "Importaciones totales",
   "graph_builder.builder_mod_header.location.products.scatter": "Complejidad, distancia y valor estrat\u00e9gico de exportaciones potenciales",
   "graph_builder.builder_mod_header.location.products.similarity": "Exportaciones con ventaja comparativa revelada >1 (con color) y <1 (gris)",
-  "graph_builder.builder_mod_header.nonag.departments.num_farms": "N\u00famero de UPNAs",
-  "graph_builder.builder_mod_header.nonag.municipalities.num_farms": "N\u00famero de UPNAs",
+  "graph_builder.builder_mod_header.nonag.departments.num_farms": "N\u00famero de Unidades de Producción",
+  "graph_builder.builder_mod_header.nonag.municipalities.num_farms": "N\u00famero de Unidades de Producción",
   "graph_builder.builder_mod_header.product.cities.export_value": "Exportaciones totales",
   "graph_builder.builder_mod_header.product.cities.import_value": "Importaciones totales",
   "graph_builder.builder_mod_header.product.departments.export_value": "Exportaciones totales",
@@ -632,7 +632,7 @@ export default {
   "pageheader.search_placeholder.header": "Realice una busqueda por",
   "pageheader.search_placeholder.industry": "Busqueda por Nombre o c\u00f3digo CIIU",
   "pageheader.search_placeholder.location": "Busque un lugar",
-  "pageheader.search_placeholder.product": "Busque un producto",
+  "pageheader.search_placeholder.product": "Búsque por nombre de producto o partida arancelaría",
   "pageheader.search_placeholder.rural": "Busqueda por producto agricola, uso de suelo, actividad agropecuaria o especie pecuaria",
   "rankings.explanation.body": "",
   "rankings.explanation.title": "Explicaci\u00f3n",
@@ -686,6 +686,10 @@ export default {
   "search.modal.p1.location": "Clasificación numérica que identifica las actividades económicas. En colombia, el DANE determina estas clasificaciones<br><br>",
   "search.modal.link.location": "https://www.dane.gov.co/files/censo2005/provincias/subregiones.pdf",
 
+  "search.modal.title.product": "Búsqueda",
+  "search.modal.p1.product": "Partida arancelaria: Clasificación numérica internacional que identifica las mercancias dentro del Sistema Armonizado en Colombia, la DIAN determina estas clasificaciones.<br><br>",
+  "search.modal.link.product": "https://muisca.dian.gov.co/WebArancel/DefConsultaEstructuraArancelaria.faces#",
+
   "search.rural.agproduct": "Producto Agrícola",
   "search.rural.land-use": "Uso de Suelo",
   "search.rural.nonag": "Actividades no Agropecuarias",
@@ -703,6 +707,11 @@ export default {
   "search.location.title": "Búsqueda por un lugar",
   "search.location.subtitle": "",
   "search.location.body": "En el siguiente campo usted podrá realizar una búsqueda por un lugar o código DANE.<br><br>Haga uso del interrogante para ampliar la información.",
+
+  "search.product.title": "Búsqueda por",
+  "search.product.subtitle": "Nombre de producto o partida arancelaria",
+  "search.product.body": "En el siguiente campo usted podra realizar una búsqueda por nombre de producto o codigo de partida arancelaria.<br><br>Haga uso del interrogante para ampliar la información.",
+
 
   "table.export_data": "Descargar Datos",
   "thousands_delimiter": ".",
@@ -730,4 +739,11 @@ export default {
   "land_harvested": "Área cosechada (ha)",
   "production_tons": "Producción (toneladas)",
   "area": "Área (ha)",
+  "num_farms": "Número de Unidades de Producción",
+  "num_livestock": "Número de animales",
+
+  "modal.geo.visualization.title": "Ayuda del componente",
+  "modal.geo.visualization.p1": "En el selector de año haga uso de los botones ",
+  "modal.geo.visualization.p2": "para navegar por los años, esto hara que el componente y su información varie dependiendo de la selección.",
+  "modal.geo.visualization.p3": "En el siguiente componente puede ingresar o selecionar un termino, esto hara que la visualización y su información se actualice.",
 };

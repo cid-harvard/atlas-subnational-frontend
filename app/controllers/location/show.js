@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
   industriesData: computed.oneWay('model.industriesData'),
 
   rangeYears: computed('firstYear', 'lastYear', function(){
-    
+
     this.set('startDate', this.get("lastYear"))
     this.set('endDate', this.get("lastYear"))
 
@@ -48,9 +48,6 @@ export default Ember.Controller.extend({
   filteredPartnersData: computed('model', 'startDate', 'endDate', function (){
 
     var partners = this.get("model.allPartners")
-
-    console.log(this.get("model"))
-
     return partners.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
   }),
 

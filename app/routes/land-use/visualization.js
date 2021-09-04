@@ -48,7 +48,8 @@ export default Ember.Route.extend({
     let id = get(this, 'land_use_id');
     return {
       model: this.store.find('land-use', id),
-      landUses: $.getJSON(`${apiURL}/data/land_use/${id}/locations/?level=department`)
+      landUses: $.getJSON(`${apiURL}/data/land_use/${id}/locations/?level=department`),
+      cities: $.getJSON(`${apiURL}/data/land_use/${id}/locations/?level=municipality`)
     };
   }),
   municipalities: computed('land_use_id', function() {
@@ -59,7 +60,7 @@ export default Ember.Route.extend({
     };
   }),
   departmentsDataMunging(hash) {
-    let {model,landUses} = hash;
+    let {model, landUses, cities} = hash;
     let locationsMetadata  = this.modelFor('application').locations;
 
     let data = _.map(landUses.data, (d) => {
@@ -74,9 +75,25 @@ export default Ember.Route.extend({
       );
     });
 
+    let datas = _.map(cities.data, (d) => {
+      return _.merge(
+        locationsMetadata[d.location_id],
+        copy(d),
+        {
+          model: 'landUse',
+          year: this.get("lastYear"),
+          municipality_id: d.location_id,
+          group: locationsMetadata[d.location_id].parent_id,
+          parent_name_en: locationsMetadata[locationsMetadata[d.location_id].parent_id].name_en,
+          parent_name_es: locationsMetadata[locationsMetadata[d.location_id].parent_id].name_es,
+        }
+      );
+    });
+
     return Ember.Object.create({
       entity: model,
       data: data,
+      cities:datas
     });
   },
   municipalitiesDataMunging(hash) {

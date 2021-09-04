@@ -33,7 +33,7 @@ export default Ember.Route.extend({
         return this.departmentDataMunging(hash);
       } else if (source_type === 'occupations') {
         return this.occupationsDataMunging(hash);
-      } else if (source_type == 'cities') {
+      } else if (source_type === 'cities') {
         return this.citiesDataMunging(hash);
       }
     });
@@ -51,7 +51,8 @@ export default Ember.Route.extend({
     let id = get(this, 'industry_id');
     return {
       model: this.store.find('industry', id),
-      departments: $.getJSON(`${apiURL}/data/industry/${id}/participants?level=department`)
+      departments: $.getJSON(`${apiURL}/data/industry/${id}/participants?level=department`),
+      cities: $.getJSON(`${apiURL}/data/industry/${id}/participants/?level=msa`)
     };
   }),
   occupations: computed('industry_id', function() {
@@ -70,12 +71,8 @@ export default Ember.Route.extend({
   }),
 
   departmentDataMunging(hash) {
-    let {model, departments} = hash;
+    let {model, departments, cities} = hash;
     let locationsMetadata = this.modelFor('application').locations;
-
-    var cities = RSVP.hash(this.get("cities")).then((hash) => {
-      return this.citiesDataMunging(hash);
-    })
 
     let data = _.map(departments.data, (d) => {
       let industry = locationsMetadata[d.department_id];
@@ -90,10 +87,26 @@ export default Ember.Route.extend({
       return copy(d);
     });
 
+    let datas = _.map(cities.data, (d) => {
+      let industry = locationsMetadata[d.msa_id];
+      d.avg_wage =  d.wages/d.employment;
+      d.name_short_en = industry.name_short_en;
+      d.name_short_es = industry.name_short_es;
+      d.color = industry.color;
+      d.code = industry.code;
+      d.group = industry.group;
+      d.model = 'location';
+      d.id = d.msa_id;
+      d.parent_name_en = locationsMetadata[industry.parent_id].name_short_en;
+      d.parent_name_es = locationsMetadata[industry.parent_id].name_short_es;
+      d.parent_code = locationsMetadata[locationsMetadata[d.msa_id].parent_id].code;
+      return copy(d);
+    });
+
     return Ember.Object.create({
       entity: model,
       data: data,
-      cities: cities
+      cities:datas
     });
   },
   occupationsDataMunging(hash) {

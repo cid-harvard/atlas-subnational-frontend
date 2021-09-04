@@ -6,6 +6,7 @@ const { computed, observer } = Ember;
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
+  mapService: Ember.inject.service(),
   classNames: ['geo__wrap'],
   accessToken: 'pk.eyJ1IjoiZ3dlemVyZWsiLCJhIjoicXJkMjV6WSJ9.Iw_1c5zREHqNSfdtkjlqbA',
   baseMap: computed('elementId', function() {
@@ -106,9 +107,11 @@ export default Ember.Component.extend({
     }
 
   }),
-  valueMap: computed('data.[]', 'varDependent', 'toolTips', function() {
+  valueMap: computed('data.[]', 'varDependent', 'toolTips', 'range', function() {
     let valueMap = d3.map();
     let data = this.get('data');
+
+    var range = this.get('range');
 
     let toolTipsData = this.get('toolTipsData');
 
@@ -123,6 +126,12 @@ export default Ember.Component.extend({
       toolTipsData.forEach(varDependent => {
         let sum = _.sum(location.values, varDependent) || 0;
         let shadeClass = sum === 0 ? 'q0' : quantize(sum);
+
+        if(range !== null){
+          if(shadeClass !== range[2]){
+            shadeClass = 'q0'
+          }
+        }
         params[varDependent] = {
           value: _.sum(location.values, varDependent),
           class: `geo__department ${shadeClass}`,
@@ -204,7 +213,10 @@ export default Ember.Component.extend({
       layer.addTo(this.get('baseMap'));
     });
   },
-  update: observer('data.[]', 'varDependent', 'i18n.locale', function() {
+  update: observer('data.[]', 'varDependent', 'i18n.locale', 'range', function() {
+
+
+
     if(!this.get('elementId')) { return ; }
     Ember.run.later(this , function() {
       let map =  this.get('baseMap');

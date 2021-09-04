@@ -427,7 +427,6 @@ export default Ember.Component.extend({
       var PDF_Height = 600;
       var pdf = new jsPDF('l', 'pt', [PDF_Width, PDF_Height]);
       var domNodes = $('.multiple');
-      console.log(domNodes)
       var totalPDFPages = domNodes.length;
       var countPages = totalPDFPages;
       var d = new Date();
@@ -461,7 +460,6 @@ export default Ember.Component.extend({
             }
           })
           .catch(function (error) {
-            console.error('oops, something went wrong!', error);
           });
       }
     }

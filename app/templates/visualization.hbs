@@ -55,8 +55,24 @@
         <h1 class="pt-2 mb-5" style="font-size: 6rem;">{{years}}</h1>
       </div>
 
-      <div class="col-sm-12 col-md-4">
+      <!--<div class="col-sm-12 col-md-4">
         {{partial "partials/buildermod-search"}}
+      </div>-->
+
+      <div class="col-sm-12 col-md-4">
+        {{
+          component 'buildermod-search'
+          source=source
+          filterData=filterData
+          placeHolderText=placeHolderText
+          visualization=visualization
+          startDate=startDate
+          endDate=endDate
+          dateExtent=dateExtent
+          canYearToggle=canYearToggle
+          isScatter=isScatter
+          rcaFilter=rcaFilter
+        }}
       </div>
 
       <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
@@ -81,6 +97,7 @@
             graph=graph
             elementId=source
             toolTips=toolTips
+            range=range
           }}
           <div id="screens" style="padding: 10px"></div>
         </div>
@@ -105,7 +122,7 @@
 
         {{
           datlas-table
-          data=filteredData
+          data=filteredDataTable
           source=source
           entityType=entityType
           search=search

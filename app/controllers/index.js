@@ -75,7 +75,7 @@ export default Ember.Controller.extend({
     var nonags_data = nonags.map(function(nonags){
       var key = "nonag"
       var to_concatenate = self.get('i18n').t(`search.rural.${key}`).string
-      
+
       return {id: nonags.id, text: nonags.get(`name_${locale}`) + ' - ' + to_concatenate, key: key, key: key }
     })
 
@@ -164,6 +164,9 @@ export default Ember.Controller.extend({
     },
     transitionProduct(id) {
       this.transitionToRoute('product.show', id);
+    },
+    transitionProductSearch() {
+      this.transitionToRoute('search',{queryParams: { filter: 'product' }});
     },
     transitionIndustry(id) {
       this.transitionToRoute('industry.show', id);

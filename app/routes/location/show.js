@@ -86,7 +86,7 @@ export default Ember.Route.extend({
         return memo;
       }, []);
 
-      
+
       //get products data for the department
       let allProducts = _.reduce(productsData, (memo, d) => {
         let product = productsMetadata[d.product_id];
@@ -108,8 +108,6 @@ export default Ember.Route.extend({
 
         return _.merge(copy(d), country);
       });
-
-      console.log(allPartners)
 
 
       //get agproducts data for the department

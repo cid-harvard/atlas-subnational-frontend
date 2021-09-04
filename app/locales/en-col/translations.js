@@ -167,8 +167,8 @@ export default {
   "graph_builder.builder_mod_header.location.products.import_value": "Total imports",
   "graph_builder.builder_mod_header.location.products.scatter": "Complexity, distance and opportunity gain of potential export products",
   "graph_builder.builder_mod_header.location.products.similarity": "Export products with revealed comparative advantage >1 (colored) and <1 (grey)",
-  "graph_builder.builder_mod_header.nonag.departments.num_farms": "Number of UPNAs",
-  "graph_builder.builder_mod_header.nonag.municipalities.num_farms": "Number of UPNAs",
+  "graph_builder.builder_mod_header.nonag.departments.num_farms": "Number of production units",
+  "graph_builder.builder_mod_header.nonag.municipalities.num_farms": "Number of production units",
   "graph_builder.builder_mod_header.product.cities.export_value": "Total Exports",
   "graph_builder.builder_mod_header.product.cities.import_value": "Total Imports",
   "graph_builder.builder_mod_header.product.departments.export_value": "Total Exports",
@@ -632,7 +632,7 @@ export default {
   "pageheader.search_placeholder.header": "Make a search by",
   "pageheader.search_placeholder.industry": "Find by name or by CIIU code",
   "pageheader.search_placeholder.location": "Search for a location",
-  "pageheader.search_placeholder.product": "Search for a product",
+  "pageheader.search_placeholder.product": "Search by product name or tariff item",
   "pageheader.search_placeholder.rural": "Search by agricultural product, land use, agricultural activity or livestock species",
   "rankings.explanation.body": "",
   "rankings.explanation.title": "Explanation",
@@ -685,6 +685,10 @@ export default {
   "search.modal.p1.location": "Numerical classification that identifies economic activities. In Colombia, DANE determines these classifications<br><br>",
   "search.modal.link.location": "https://www.dane.gov.co/files/censo2005/provincias/subregiones.pdf",
 
+  "search.modal.title.product": "Search",
+  "search.modal.p1.product": "Tariff article: International numerical classification that identifies the goods within the Harmonized System in Colombia, the DIAN determines these classifications.<br><br>",
+  "search.modal.link.product": "https://muisca.dian.gov.co/WebArancel/DefConsultaEstructuraArancelaria.faces#",
+
   "search.rural.agproduct": "Agricultural Product",
   "search.rural.land-use": "Land Use",
   "search.rural.nonag": "Non-agricultural Activities",
@@ -728,4 +732,11 @@ export default {
   "land_harvested": "Land harvested (ha)",
   "production_tons": "Production (tons)",
   "area": "Area (ha)",
+  "num_farms": "Number of production units",
+  "num_livestock": "Number of livestock",
+
+  "modal.geo.visualization.title": "Component help",
+  "modal.geo.visualization.p1": "In the year selector use the buttons ",
+  "modal.geo.visualization.p2": "to navigate through the years, this will make the component and its information vary depending on the selection.",
+  "modal.geo.visualization.p3": "In the next component you can enter or select a term, this will make the visualization and its information update.",
 };

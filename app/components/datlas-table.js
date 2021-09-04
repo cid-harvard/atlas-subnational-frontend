@@ -5,6 +5,7 @@ const {computed, observer, get:get} = Ember;
 
 export default Ember.Component.extend(TableMap, {
   i18n: Ember.inject.service(),
+  titlesCache: null,
   transitionProduct: 'transitionProduct',
   transitionLocation: 'transitionLocation',
   transitionIndustry: 'transitionIndustry',
@@ -423,7 +424,13 @@ export default Ember.Component.extend(TableMap, {
     let source = this.get('source');
     let self = this;
     var export_data_text = this.get('i18n').t('table.export_data').string;
-    var language = this.get("getLanguage")
+    var language = this.get("getLanguage");
+
+    if(columns.length === 0){
+      columns = this.get('titlesCache');
+    }else{
+      this.set('titlesCache', columns);
+    }
 
 
     var table = $(id_element).DataTable({
@@ -432,6 +439,7 @@ export default Ember.Component.extend(TableMap, {
       data: updatedData,
       columns: columns,
       retrieve: true,
+      order: [[ 0, "desc" ]],
       buttons: [
         {
           text: export_data_text,
