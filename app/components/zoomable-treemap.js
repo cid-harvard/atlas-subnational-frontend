@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {computed, observer, get:get} = Ember;
+const {computed, observer, get:get, set:set} = Ember;
 import numeral from 'numeral';
 
 export default Ember.Component.extend({
@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   buildermodSearchService: Ember.inject.service(),
   treemapService: Ember.inject.service(),
   varDependentTooltip: null,
+  inmutableData: null,
   id: computed('elementId', function() {
     return `#${this.get('elementId')} section`;
   }),
@@ -27,14 +28,23 @@ export default Ember.Component.extend({
   updatedData: computed('data.[]', 'varDependent', 'varText', 'i18n.locale', 'search', 'toolTips', function() {
 
     var key = this.get('varText');
+    var data = this.get('data');
     var dependent = this.get('varDependent');
     var toolTipsData = this.get('toolTipsData');
     var self = this;
 
-    return this.get('data').map(item => {
+    if(data.length === 0){
+      data = []
+    }
+
+    console.log(data)
+
+    return data.map(item => {
       if(_.get(item, `parent_name_${this.get('i18n').display}`) === _.get(item, `name_${this.get('i18n').display}`)){
         return {
           key:_.get(item, key),
+          color: _.get(item, "color"),
+          icon: _.get(item, "icon"),
           value: _.get(item, dependent),
           tooltips: toolTipsData.map(varDependent => {
             return {
@@ -47,6 +57,8 @@ export default Ember.Component.extend({
       else{
         return {
           key: _.get(item, key),
+          color: _.get(item, "color"),
+          icon: _.get(item, "icon"),
           value: _.get(item, dependent),
           group: _.get(item, `parent_name_${this.get('i18n').display}`),
           parent_code: _.get(item, `parent_code`),
@@ -61,6 +73,70 @@ export default Ember.Component.extend({
 
     });
   }),
+  inmutableNestedData: computed('data.[]', 'varDependent', 'varText', 'i18n.locale', 'search', 'toolTips', function () {
+    var key = this.get('varText');
+    var data = this.get('data');
+
+    if(data.length === 0){
+      data = []
+    }
+
+    var dependent = this.get('varDependent');
+    var toolTipsData = this.get('toolTipsData');
+    var self = this;
+    var updatedData = data.map(item => {
+
+      if(_.get(item, `parent_name_${this.get('i18n').display}`) === _.get(item, `name_${this.get('i18n').display}`)){
+        return {
+          key:_.get(item, key),
+          color: _.get(item, "color"),
+          icon: _.get(item, "icon"),
+          value: _.get(item, dependent),
+          tooltips: toolTipsData.map(varDependent => {
+            return {
+              "name": self.get('i18n').t(`graph_builder.table.${varDependent}`).string,
+              "value": self.formatNumber(_.get(item, varDependent), varDependent, self.get('i18n'))
+            };
+          })
+        };
+      }
+      else{
+        return {
+          key: _.get(item, key),
+          color: _.get(item, "color"),
+          icon: _.get(item, "icon"),
+          value: _.get(item, dependent),
+          group: _.get(item, `parent_name_${this.get('i18n').display}`),
+          parent_code: _.get(item, `parent_code`),
+          tooltips: toolTipsData.map(varDependent => {
+            return {
+              "name": self.get('i18n').t(`graph_builder.table.${varDependent}`).string,
+              "value": self.formatNumber(_.get(item, varDependent), varDependent, self.get('i18n'))
+            };
+          })
+        };
+      }
+
+    });
+
+    this.set("inmutableData", updatedData);
+
+    if(updatedData[0] !== undefined){
+      if(updatedData[0].hasOwnProperty("group")){
+        if(updatedData[0].group == undefined){
+          return d3.nest().entries(updatedData);
+        }
+        return d3.nest().key(function(d) { return d.group; }).entries(updatedData);
+      }
+      else{
+        return d3.nest().entries(updatedData);
+      }
+    }
+    else{
+      return []
+    }
+
+  }),
   nestedData: computed('updatedData', 'search', function () {
     var updatedData = this.get('updatedData');
 
@@ -74,6 +150,9 @@ export default Ember.Component.extend({
       else{
         return d3.nest().entries(updatedData);
       }
+    }
+    else{
+      return []
     }
 
   }),
@@ -151,6 +230,10 @@ export default Ember.Component.extend({
     } else {
       return number;
     }
+  },
+  getColor: (color, area) => {
+    var color_dynamic = d3.scale.linear().domain([100, 0]).interpolate(d3.interpolateHcl).range([color, color]);
+    return color_dynamic(area);
   },
   treemap: computed('data.[]', 'id', 'updatedData', 'nestedData', 'varDependent', 'i18n.locale', 'varText', 'search', function () {
 
@@ -384,7 +467,23 @@ export default Ember.Component.extend({
 
       g.selectAll("rect")
           .style("fill", function(d) {
-            return color(d.area*100);
+            if(d.hasOwnProperty("color")){
+              if(d.color !== undefined){
+                //didi
+                return self.getColor(d.color, d.area*100);
+              }
+              return color(d.area*100);
+            }
+            else{
+              if(d.hasOwnProperty("values")){
+                if(d.values.length > 0){
+                  return self.getColor(d.values[0].color, d.area*100);
+                }
+                return color(d.area*100);
+              }
+              return color(d.area*100);
+            }
+
           })
           .style("stroke", "#292A48")
 
@@ -517,16 +616,177 @@ export default Ember.Component.extend({
     }
 
   }),
+  categoriesObject: computed('inmutableNestedData', 'i18n.locale', function() {
+    var categories = this.get('inmutableNestedData').map(item => {
+
+        var color = "#33691e";
+        var icon = "fas fa-atom";
+
+        if(item.hasOwnProperty("color")){
+          color = item.color;
+        }
+        else{
+          if(item.hasOwnProperty("values")){
+            if(item.values.length > 0){
+              if(item.values[0].hasOwnProperty("color")){
+                color = item.values[0].color;
+              }
+            }
+          }
+        }
+
+
+
+        if(item.hasOwnProperty("icon")){
+          icon = item.icon;
+        }
+        else{
+          if(item.hasOwnProperty("values")){
+            if(item.values.length > 0){
+              if(item.values[0].hasOwnProperty("icon")){
+                icon = item.values[0].icon;
+              }
+            }
+          }
+        }
+
+
+        return {
+            name: item.key,
+            color: color,
+            icon: icon,
+            hide: false,
+            isolate: false
+        }
+    })
+
+    return categories;
+
+    }),
+  updateCategoriesObject: function (index, attr) {
+
+    var temp = this.get('categoriesObject').objectAt(index);
+    let newValue = !_.get(temp, attr);
+
+    if(attr === "hide"){
+
+      if(newValue === true){
+        this.get('categoriesObject').map((item, index_item) =>{
+
+          var temp = this.get('categoriesObject').objectAt(index_item);
+
+          if(index_item === index){
+            set(temp, "hide", true);
+            set(temp, "isolate", false);
+          }
+          else{
+            set(temp, "isolate", false);
+          }
+
+        });
+
+      }
+      else{
+        this.get('categoriesObject').map((item, index_item) =>{
+
+          var temp = this.get('categoriesObject').objectAt(index_item);
+
+          set(temp, "hide", false);
+          set(temp, "isolate", false);
+
+        });
+      }
+
+
+    }
+    else if(attr === "isolate"){
+
+      if(newValue === true){
+
+
+        this.get('categoriesObject').map((item, index_item) =>{
+
+          var temp = this.get('categoriesObject').objectAt(index_item);
+
+          if(index_item !== index){
+            set(temp, "isolate", false);
+            set(temp, "hide", true);
+          }
+          else{
+            set(temp, "isolate", true);
+            set(temp, "hide", false);
+          }
+        });
+
+
+
+      }
+      else{
+
+        this.get('categoriesObject').map((item, index_item) =>{
+
+          var temp = this.get('categoriesObject').objectAt(index_item);
+
+          set(temp, "isolate", false);
+          set(temp, "hide", false);
+
+        });
+
+      }
+
+
+
+    }
+
+
+    var updatedData = [];
+
+    for(let category of this.get('categoriesObject')) {
+      var isolate = category.isolate;
+      var hide = category.hide;
+
+      if(isolate === true){
+        updatedData = this.get("inmutableData").filter(item => {
+          return item.group === category.name;
+        });
+        break;
+      }
+
+      if(hide === false){
+        var toAddupdatedData = this.get("inmutableData").filter(item => {
+          return item.group === category.name;
+        })
+        updatedData = updatedData.concat(toAddupdatedData);
+      }
+
+    }
+
+    this.set("updatedData", updatedData);
+
+    //var temp = this.get('categoriesObject').objectAt(index)
+    //set(temp, attr, !_.get(temp, attr))
+
+  },
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender',this , function() {
 
-      console.log(this.get('data'))
+      this.get('categoriesObject');
+
       var id = this.get('id');
+
 
       d3.select(id).selectAll('svg').remove();
       this.get('treemap');
 
+      $('.category-button').on("mouseover", function(e) {
 
+          $(this).find("div.tooltip").removeClass("d-none")
+
+      })
+
+      $('.category-button').on("mouseleave", function(e) {
+          $(this).find("div.tooltip").addClass("d-none");
+      })
 
     });
   },
@@ -592,6 +852,9 @@ export default Ember.Component.extend({
       });
 
     },
+    check(index, attr) {
+      this.updateCategoriesObject(index, attr)
+    }
   },
   update: observer('i18n.display', 'updatedData', function() {
     d3.select(this.get('id')).selectAll('svg').remove();

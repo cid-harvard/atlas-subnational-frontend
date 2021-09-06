@@ -136,6 +136,15 @@
     {{/unless}}
 
   </div>
+  {{#if (is-equal entityType "product")}}
+    <div class="container-fluid my-5">
+      <div class="text-right">
+        {{#link-to 'product.show' model.entity.id class="btn btn-outline-secondary"}}
+        ANTERIOR
+        {{/link-to}}
+      </div>
+    </div>
+  {{/if}}
 </div>
 
 

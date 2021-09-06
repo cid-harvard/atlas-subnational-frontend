@@ -20,7 +20,7 @@ export default Ember.Component.extend({
     let id_select = this.get('idSelect');
     var $eventSelect = $(`#${id_select}`);
     let type = this.get('type');
-    let self = this
+    let self = this;
     var data = this.get('data_search')
     var placeholder = this.get("placeHolder")
 
@@ -73,7 +73,7 @@ export default Ember.Component.extend({
 
           self.sendAction(action, id);
 
-        } else if (type == 'search') {
+        } else if (type === 'search') {
           self.set('search', text);
           self.set("buildermodSearchService.search", text);
         }
@@ -96,9 +96,10 @@ export default Ember.Component.extend({
     let id_select = this.get('idSelect');
     var buildermodSearchService = this.get("buildermodSearchService.search");
     var $eventSelect = $(`#${id_select}`);
-    var placeholder = this.get("placeHolder")
+    var placeholder = this.get("placeHolder");
     let type = this.get('type');
-    var data = this.get('data_search')
+    var data = this.get('data_search');
+    var self = this;
 
     if(placeholder === null){
       placeholder = this.get('i18n').t(`pageheader.search_placeholder.${type}`).string

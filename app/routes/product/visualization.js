@@ -51,7 +51,8 @@ export default Ember.Route.extend({
     let id = get(this, 'product_id');
     return {
       model: this.store.find('product', id),
-      locations: $.getJSON(`${apiURL}/data/product/${id}/exporters?level=department`)
+      locations: $.getJSON(`${apiURL}/data/product/${id}/exporters?level=department`),
+      cities: $.getJSON(`${apiURL}/data/product/${id}/exporters?level=msa`)
     };
   }),
   partners: computed('product_id', function() {
@@ -69,7 +70,7 @@ export default Ember.Route.extend({
     };
   }),
   departmentsDataMunging(hash) {
-    let {model,locations} = hash;
+    let {model,locations, cities} = hash;
     let locationsMetadata  = this.modelFor('application').locations;
 
     let data = _.map(locations.data, (d) => {
@@ -78,9 +79,24 @@ export default Ember.Route.extend({
       return _.merge(department, location, {model: 'location'});
     });
 
+    let datas = _.map(cities.data, (d) => {
+      let location = locationsMetadata[d.msa_id];
+      let city = copy(d);
+      let result = _.merge(
+        city, location,
+        {
+          model: 'location',
+          parent_name_en: locationsMetadata[location.parent_id].name_short_en,
+          parent_name_es: locationsMetadata[location.parent_id].name_short_es,
+        }
+      );
+      return result;
+    });
+
     return Ember.Object.create({
       entity: model,
       data: data,
+      cities: datas
     });
   },
   citiesDataMunging(hash) {

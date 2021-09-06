@@ -105,7 +105,7 @@ export default Ember.Route.extend({
       industryPCI= _.groupBy(industryPCI, 'industry_id');
 
       _.forEach(locationsMetadata, (d) => {
-        let color = '#d7cbf2';
+        let color = '#880e4f';
 
         d.group = d.id;
         d.color = color;
@@ -115,10 +115,13 @@ export default Ember.Route.extend({
       _.forEach(productsMetadata, (d) => {
         let sectionId = productsHierarchy[d.id];
         let color = _.isUndefined(sectionId) ? '#fff' : get(productSectionColor, `${sectionId}.color`);
+        let icon = _.isUndefined(sectionId) ? 'fas fa-arrow-alt-circle-up' : get(productSectionColor, `${sectionId}.icon`);
 
         d.color = color;
+        d.icon = icon;
 
         set(productSectionMap, `${sectionId}.color`, color);
+        set(productSectionMap, `${sectionId}.icon`, icon);
 
         d.pci_data = get(productPCI, `${d.id}`);
         d.parent_name_en = get(productSectionMap, `${sectionId}.name_en`);
@@ -180,6 +183,7 @@ export default Ember.Route.extend({
       _.forEach(industriesMetadata, (d) => {
         let sectionId = industriesHierarchy[d.id];
         let color = _.isUndefined(sectionId) ? '#fff' :get(industrySectionColor, `${sectionId}.color`);
+        let icon = _.isUndefined(sectionId) ? 'fas fa-arrow-alt-circle-up' : get(industrySectionColor, `${sectionId}.icon`);
 
         d.pci_data = get(industryPCI, `${d.id}`);
         /*
@@ -189,15 +193,21 @@ export default Ember.Route.extend({
           set(industrySectionMap, `${sectionId}.color`, color);
         }
 
+        if(!_.isUndefined(sectionId)) {
+          set(industrySectionMap, `${sectionId}.icon`, icon);
+        }
+
+
         d.group = get(industrySectionMap, `${sectionId}.code`);
         d.parent_name_en = get(industrySectionMap, `${sectionId}.name_en`);
         d.parent_name_es = get(industrySectionMap, `${sectionId}.name_es`);
         d.color = color;
+        d.icon = icon;
         d.model = 'industry';
       });
 
       _.forEach(partnerCountries, (d) => {
-        let color = '#d7cbf2';
+        let color = '#880e4f';
         d.name_short_en = d.name_en;
         d.name_short_es = d.name_es;
         d.color = color;

@@ -217,6 +217,7 @@ export default {
   "graph_builder.download.employment_growth": "Employment growth rate ({{yearRange}})",
   "graph_builder.download.export": "Export",
   "graph_builder.download.export_num_plants": "Firm number",
+  "graph_builder.download.import_num_plants": "Firm number",
   "graph_builder.download.export_rca": "Revealed comparative advantage",
   "graph_builder.download.export_value": "Exports, USD",
   "graph_builder.download.farmtype": "Type of UPA",
@@ -734,6 +735,8 @@ export default {
   "area": "Area (ha)",
   "num_farms": "Number of production units",
   "num_livestock": "Number of livestock",
+  "export_value": "Exports (In millions of dollars FOB)",
+  "import_value": "Imports (In millions of dollars FOB)",
 
   "modal.geo.visualization.title": "Component help",
   "modal.geo.visualization.p1": "In the year selector use the buttons ",

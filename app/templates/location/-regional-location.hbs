@@ -87,7 +87,7 @@
 
                 <div class="tab-pane fade active show" id="pills-exports" role="tabpanel" aria-labelledby="pills-exports">
                   <div class="container-fluid">
-                    
+
                     <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
                       <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
                         {{
@@ -131,7 +131,7 @@
 
                 <div class="tab-pane fade show" id="pills-exports-country" role="tabpanel" aria-labelledby="pills-exports-country">
                   <div class="container-fluid">
-                    
+
                     <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
                       <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
                         {{
@@ -249,7 +249,7 @@
 
           </div>
 
-          
+
         </div>
 
       </div>
@@ -287,7 +287,7 @@
 
 {{/if}}
 
-<!--<div class="container-fluid px-md-x10 mt-5">
+<div class="container-fluid px-md-x10 mt-5">
 
     <div class="col-md-12 text-center">
       <ul class="nav nav-pills center-pills" id="pills-tab" role="tablist">
@@ -339,14 +339,7 @@
             varDependent='export_value'
             elementId='zoomable-export-value-treemap'
             class="position-relative"
-            color='pink'
-          }}
-        </div>
-        <div class="container-fluid">
-          {{
-            category-buttons
-            data=productsData
-            immutableData=inmutableProductsData
+            filterCategory=true
           }}
         </div>
       </div>
@@ -359,14 +352,7 @@
             varDependent='import_value'
             elementId='zoomable-import-value-treemap'
             class="position-relative"
-            color='green'
-          }}
-        </div>
-        <div class="container-fluid">
-          {{
-            category-buttons
-            data=productsData
-            immutableData=inmutableProductsData
+            filterCategory=true
           }}
         </div>
       </div>
@@ -379,14 +365,7 @@
             varDependent='employment'
             elementId='zoomable-employment-treemap'
             class="position-relative"
-            color='pink'
-          }}
-        </div>
-        <div class="container-fluid">
-          {{
-            category-buttons
-            data=lastIndustryData
-            immutableData=lastIndustryData
+            filterCategory=true
           }}
         </div>
       </div>
@@ -399,14 +378,7 @@
             varDependent='wages'
             elementId='zoomable-wages-treemap'
             class="position-relative"
-            color='green'
-          }}
-        </div>
-        <div class="container-fluid">
-          {{
-            category-buttons
-            data=industriesData
-            immutableData=industriesData
+            filterCategory=true
           }}
         </div>
       </div>
@@ -423,7 +395,7 @@
             </div>
           </div>
 
-          
+
           <div class="row">
             {{vistk-network
               data=productsData
@@ -445,7 +417,7 @@
               data=productsData
               immutableData=productsData
             }}
-          </div>    
+          </div>
 
         </div>
 
@@ -566,7 +538,7 @@
         {{#ivy-tab-panel classNames='tabmod__card' activeClass='tabmod__card--is--active'}}
           <div class="vizmod">
             <div class="vizmod--treemod">
-              
+
             </div>
           </div>
         {{/ivy-tab-panel}}

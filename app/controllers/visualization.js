@@ -71,6 +71,20 @@ export default Ember.Controller.extend({
     })
   }),
 
+  partnersData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.partnerCountries'))
+
+    console.log(locations)
+
+    return locations.filter(item => item[1].level === "country").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name} (${item[1].code})`}
+    })
+  }),
+
   firstYear: computed('model', 'entityType', 'source', 'featureToggle', function(){
     // Handle the situation where we're not looking at a location profile but
     // at a thing-profile like livestock profile. In that case since we're only
@@ -156,6 +170,10 @@ export default Ember.Controller.extend({
     }
     else if(this.get('source') == 'products'){
       return this.get('productsData')
+    }
+    else if(this.get('source') == 'partners'){
+      console.log(this.get('partnersData'))
+      return this.get('partnersData')
     }
     else{
       return []
@@ -459,7 +477,6 @@ export default Ember.Controller.extend({
     //console.log("filteredData")
 
     let data = this.get('immutableData');
-    console.log(data)
 
     this.set('search', this.get('buildermodSearchService.search'));
 

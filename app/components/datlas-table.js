@@ -19,6 +19,7 @@ export default Ember.Component.extend(TableMap, {
     let source = this.get('source');
 
     let map = this.get(`${source}Map`);
+
     if (entityType === "landUse"){
       map = this.get("landUseLocationsMap");
     } else if (entityType === "agproduct"){
@@ -158,7 +159,11 @@ export default Ember.Component.extend(TableMap, {
     }
   },
   updatedData: computed('data.[]', 'tableMap', 'i18n.locale', 'source', 'search', 'startDate', function() {
-    var data = this.get("data")
+    var data = this.get("data");
+
+    if(data === undefined){
+      data = [];
+    }
 
     var columns = this.get('tableMap').map((column) => { return column.key })
 

@@ -39,7 +39,6 @@ export default Ember.Controller.extend({
   }),
 
   filteredProductsData: computed('model', 'startDate', 'endDate', function (){
-
     var products = this.get("model.allProducts")
 
     return products.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
