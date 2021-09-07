@@ -7,7 +7,8 @@ export default Ember.Component.extend({
   buildermodSearchService: Ember.inject.service(),
   treemapService: Ember.inject.service(),
   varDependentTooltip: null,
-  inmutableData: null,
+  inmutableDataInternal: null,
+  lastDataUpdate: null,
   id: computed('elementId', function() {
     return `#${this.get('elementId')} section`;
   }),
@@ -25,7 +26,15 @@ export default Ember.Component.extend({
     }
 
   }),
-  updatedData: computed('data.[]', 'varDependent', 'varText', 'i18n.locale', 'search', 'toolTips', function() {
+  updatedData: computed('data.[]', 'varDependent', 'varText', 'i18n.locale', 'search', 'toolTips', 'treemapService.filter_updated_data', function() {
+
+    if(this.get("lastDataUpdate") !== this.get("treemapService.filter_update")){
+
+      this.set("lastDataUpdate", this.get("treemapService.filter_update"));
+      var filter_updated_data = this.get("treemapService.filter_updated_data").map(item => item.item);
+
+      return filter_updated_data;
+    }
 
     var key = this.get('varText');
     var data = this.get('data');
@@ -37,8 +46,6 @@ export default Ember.Component.extend({
       data = []
     }
 
-    console.log(data)
-
     return data.map(item => {
       if(_.get(item, `parent_name_${this.get('i18n').display}`) === _.get(item, `name_${this.get('i18n').display}`)){
         return {
@@ -46,6 +53,7 @@ export default Ember.Component.extend({
           color: _.get(item, "color"),
           icon: _.get(item, "icon"),
           value: _.get(item, dependent),
+          item: item,
           tooltips: toolTipsData.map(varDependent => {
             return {
               "name": self.get('i18n').t(`graph_builder.table.${varDependent}`).string,
@@ -60,6 +68,7 @@ export default Ember.Component.extend({
           color: _.get(item, "color"),
           icon: _.get(item, "icon"),
           value: _.get(item, dependent),
+          item: item,
           group: _.get(item, `parent_name_${this.get('i18n').display}`),
           parent_code: _.get(item, `parent_code`),
           tooltips: toolTipsData.map(varDependent => {
@@ -73,9 +82,11 @@ export default Ember.Component.extend({
 
     });
   }),
-  inmutableNestedData: computed('data.[]', 'varDependent', 'varText', 'i18n.locale', 'search', 'toolTips', function () {
+  inmutableNestedData: computed('data.[]', 'varDependent', 'varText', 'i18n.locale', 'toolTips', function () {
     var key = this.get('varText');
     var data = this.get('data');
+
+    console.log(data)
 
     if(data.length === 0){
       data = []
@@ -92,6 +103,7 @@ export default Ember.Component.extend({
           color: _.get(item, "color"),
           icon: _.get(item, "icon"),
           value: _.get(item, dependent),
+          item: item,
           tooltips: toolTipsData.map(varDependent => {
             return {
               "name": self.get('i18n').t(`graph_builder.table.${varDependent}`).string,
@@ -106,6 +118,7 @@ export default Ember.Component.extend({
           color: _.get(item, "color"),
           icon: _.get(item, "icon"),
           value: _.get(item, dependent),
+          item: item,
           group: _.get(item, `parent_name_${this.get('i18n').display}`),
           parent_code: _.get(item, `parent_code`),
           tooltips: toolTipsData.map(varDependent => {
@@ -119,7 +132,7 @@ export default Ember.Component.extend({
 
     });
 
-    this.set("inmutableData", updatedData);
+    this.set("inmutableDataInternal", updatedData);
 
     if(updatedData[0] !== undefined){
       if(updatedData[0].hasOwnProperty("group")){
@@ -240,6 +253,7 @@ export default Ember.Component.extend({
     var elementId = this.get('id');
     var value_text = this.get('i18n').t(`graph_builder.table.${this.get('varDependent')}`).string;
     var self = this;
+    var canUpdateBuildermodSearchService = this.get("canUpdateBuildermodSearchService");
 
     var defaults = {
       margin: {top: 24, right: 0, bottom: 0, left: 0},
@@ -311,7 +325,8 @@ export default Ember.Component.extend({
         .attr("dy", ".75em")
         .style("font-family", "sans-serif");
 
-    d3.selectAll(".treemap-tooltip").remove();
+    d3.selectAll(".treemap-tooltip").empty();
+    d3.selectAll(".treemap-tooltip").style("visibility", "hidden");
 
     var Tooltip = d3.select(elementId)
       .append("div")
@@ -490,7 +505,9 @@ export default Ember.Component.extend({
       function transition(d) {
 
         if(d.hasOwnProperty("parent")){
-          self.set("buildermodSearchService.search", `${d.key}`);
+          if(canUpdateBuildermodSearchService){
+            self.set("buildermodSearchService.search", `${d.key}`);
+          }
           //$(`${elementId} button`).removeClass("d-none");
           //d3.selectAll(".treemap-tooltip").remove();
         }
@@ -619,50 +636,47 @@ export default Ember.Component.extend({
   categoriesObject: computed('inmutableNestedData', 'i18n.locale', function() {
     var categories = this.get('inmutableNestedData').map(item => {
 
-        var color = "#33691e";
-        var icon = "fas fa-atom";
+      var color = "#33691e";
+      var icon = "fas fa-atom";
+      var icon_color = "#FFFFFF";
 
-        if(item.hasOwnProperty("color")){
-          color = item.color;
-        }
-        else{
-          if(item.hasOwnProperty("values")){
-            if(item.values.length > 0){
-              if(item.values[0].hasOwnProperty("color")){
-                color = item.values[0].color;
-              }
+      if(item.hasOwnProperty("color")){
+        color = item.color;
+      }
+      else{
+        if(item.hasOwnProperty("values")){
+          if(item.values.length > 0){
+            if(item.values[0].hasOwnProperty("color")){
+              color = item.values[0].color;
             }
           }
         }
+      }
 
-
-
-        if(item.hasOwnProperty("icon")){
-          icon = item.icon;
-        }
-        else{
-          if(item.hasOwnProperty("values")){
-            if(item.values.length > 0){
-              if(item.values[0].hasOwnProperty("icon")){
-                icon = item.values[0].icon;
-              }
+      if(item.hasOwnProperty("icon")){
+        icon = item.icon;
+      }
+      else{
+        if(item.hasOwnProperty("values")){
+          if(item.values.length > 0){
+            if(item.values[0].hasOwnProperty("icon")){
+              icon = item.values[0].icon;
             }
           }
         }
+      }
 
-
-        return {
-            name: item.key,
-            color: color,
-            icon: icon,
-            hide: false,
-            isolate: false
-        }
-    })
-
+      return {
+          name: item.key,
+          color: color,
+          icon: icon,
+          icon_color: icon_color,
+          hide: false,
+          isolate: false
+      };
+    });
     return categories;
-
-    }),
+  }),
   updateCategoriesObject: function (index, attr) {
 
     var temp = this.get('categoriesObject').objectAt(index);
@@ -678,10 +692,12 @@ export default Ember.Component.extend({
           if(index_item === index){
             set(temp, "hide", true);
             set(temp, "isolate", false);
+            set(temp, "icon_color", "#292A48");
           }
           else{
             set(temp, "isolate", false);
           }
+
 
         });
 
@@ -691,8 +707,14 @@ export default Ember.Component.extend({
 
           var temp = this.get('categoriesObject').objectAt(index_item);
 
-          set(temp, "hide", false);
-          set(temp, "isolate", false);
+          if(index_item === index){
+            set(temp, "hide", false);
+            set(temp, "isolate", false);
+            set(temp, "icon_color", "#FFFFFF");
+          }
+          else{
+            set(temp, "isolate", false);
+          }
 
         });
       }
@@ -711,14 +733,14 @@ export default Ember.Component.extend({
           if(index_item !== index){
             set(temp, "isolate", false);
             set(temp, "hide", true);
+            set(temp, "icon_color", "#292A48");
           }
           else{
             set(temp, "isolate", true);
             set(temp, "hide", false);
+            set(temp, "icon_color", "#FFFFFF");
           }
         });
-
-
 
       }
       else{
@@ -729,6 +751,7 @@ export default Ember.Component.extend({
 
           set(temp, "isolate", false);
           set(temp, "hide", false);
+          set(temp, "icon_color", "#FFFFFF");
 
         });
 
@@ -746,14 +769,14 @@ export default Ember.Component.extend({
       var hide = category.hide;
 
       if(isolate === true){
-        updatedData = this.get("inmutableData").filter(item => {
+        updatedData = this.get("inmutableDataInternal").filter(item => {
           return item.group === category.name;
         });
         break;
       }
 
       if(hide === false){
-        var toAddupdatedData = this.get("inmutableData").filter(item => {
+        var toAddupdatedData = this.get("inmutableDataInternal").filter(item => {
           return item.group === category.name;
         })
         updatedData = updatedData.concat(toAddupdatedData);
@@ -761,16 +784,26 @@ export default Ember.Component.extend({
 
     }
 
-    this.set("updatedData", updatedData);
-
-    //var temp = this.get('categoriesObject').objectAt(index)
-    //set(temp, attr, !_.get(temp, attr))
+    this.set("treemapService.filter_update", new Date())
+    this.set("treemapService.filter_updated_data", updatedData)
+    //this.set("updatedData", updatedData);
 
   },
+  resetCategoriesObject: observer('search', function () {
+
+    this.get('categoriesObject').map((item, index_item) =>{
+
+      var temp = this.get('categoriesObject').objectAt(index_item);
+
+      set(temp, "hide", false);
+      set(temp, "isolate", false);
+      set(temp, "icon_color", "#FFFFFF");
+
+    });
+
+  }),
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender',this , function() {
-
-      this.get('categoriesObject');
 
       var id = this.get('id');
 
@@ -780,8 +813,7 @@ export default Ember.Component.extend({
 
       $('.category-button').on("mouseover", function(e) {
 
-          $(this).find("div.tooltip").removeClass("d-none")
-
+        $(this).find("div.tooltip").removeClass("d-none")
       })
 
       $('.category-button').on("mouseleave", function(e) {
@@ -859,5 +891,13 @@ export default Ember.Component.extend({
   update: observer('i18n.display', 'updatedData', function() {
     d3.select(this.get('id')).selectAll('svg').remove();
     this.get('treemap');
+
+    $('.category-button').on("mouseover", function(e) {
+        $(this).find("div.tooltip").removeClass("d-none")
+    })
+
+    $('.category-button').on("mouseleave", function(e) {
+        $(this).find("div.tooltip").addClass("d-none");
+    })
   }),
 });

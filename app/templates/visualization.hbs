@@ -77,6 +77,7 @@
 
       <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
         <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
+          {{resetFilter}}
           {{component visualizationComponent
             classNames='buildermod__viz'
             immutableData=immutableData
@@ -98,6 +99,9 @@
             elementId=source
             toolTips=toolTips
             range=range
+            canUpdateBuildermodSearchService=canUpdateBuildermodSearchService
+            filterCategory=canFilterCategory
+            resetFilter=resetFilter
           }}
           <div id="screens" style="padding: 10px"></div>
         </div>

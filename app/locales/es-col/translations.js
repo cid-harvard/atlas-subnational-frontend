@@ -728,11 +728,13 @@ export default {
   "visualization.source.cities": "Búsqueda por departamento, ciudad o código CIIU",
   "visualization.source.municipalities": "Búsque por departamento, municipio o código CIIU",
   "visualization.source.products": "Búsque por nombre de producto o partida arancelaría",
+  "visualization.source.industries": "Ingrese el nombre del sector o código CIUU",
 
   "visualization.search.departments": "Búsque por departamento o código DANE",
   "visualization.search.cities": "Búsque por departamento, ciudad o código DANE",
   "visualization.search.municipalities": "Búsque por departamento, municipio o código DANE",
   "visualization.search.products": "Búsque por nombre de producto o partida arancelaría",
+  "visualization.search.industries": "Búsque por sector o código CIIU",
 
   "employment": "Empleo total",
   "wages": "Nómina salarial total, Col$ (miles)",

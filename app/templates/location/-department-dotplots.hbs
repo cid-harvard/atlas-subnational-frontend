@@ -1,4 +1,4 @@
-<div class="new__buildermod__questions">
+<!--<div class="new__buildermod__questions">
   <div class="container-fluid px-md-x10 pb-5">
     <div class="row row-without-margin">
       <div class="col-sm-12 pl-md-0">
@@ -19,16 +19,23 @@
           {{t 'location.show.bullet.last_pop' lastPop=model.lastPop}}
         </div>
 
-        
+
       </div>
     </div>
 
   </div>
-</div>
+</div>-->
 
 
 <div class="container-fluid pl-md-x10 pr-md-x10 mt-5">
+  <div class="row mt-5">
+    <div class="col-sm-12">
+      {{#if description }}
+        <p class="text-white">{{description}}</p>
+      {{/if}}
+    </div>
 
+  </div>
   <div class="row">
     <table class="table datlas-table">
     <col style="width:30%">
@@ -179,7 +186,9 @@
     </tbody>
     </table>
   </div>
-  
+
 
 </div>
+
+<p>DEPARMENT</p>
 
