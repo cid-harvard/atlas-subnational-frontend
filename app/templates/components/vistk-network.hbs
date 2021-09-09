@@ -1,16 +1,5 @@
-<div class="row mb-5">
-    <div class="col-lg-12">
-        <div class="text-right">
-            <button type="button" class="btn btn-outline-secondary" {{action 'savePng'}}><i class="fas fa-file-image mr-3"></i>Descargar grafico (PNG)</button>
-            <button type="button" class="btn btn-outline-secondary" {{action 'savePdf'}}><i class="fas fa-file-pdf mr-3"></i>Descargar grafico (PDF)</button>
-        </div>
-    </div>
-</div>
+<section class="mb-5 pb-5">
 
-<section>
-  <div class="text-right mb-5">
-    <button type="button" class="btn btn-outline-warning d-none"><i class="fas fa-caret-square-left mr-3"></i>Regresar</button>
-  </div>
 </section>
 {{#if filterCategory }}
 <div class="row d-flex justify-content-center">
@@ -23,7 +12,7 @@
     {{#each category in categoriesObject}}
 
     <div class="category-button position-relative mr-5" data-title={{category.name}}>
-        <div class='tooltip tooltip-category text-center d-none'>
+        <div class='tooltip tooltip-category text-center d-none selector_{{_view.contentIndex}}'>
             <h3 class="mb-5 text-principal">{{category.name}}</h3>
 
             <div class="form-check form-check-inline">
@@ -35,7 +24,7 @@
             </div>
 
         </div>
-        <a href="javascript:void(0);" class="btn" style={{ is-concat 'background: ' category.color '; padding: 12px; transform: rotate(45deg);' }}>
+        <a href="javascript:void(0);" class="btn button_{{_view.contentIndex}}" style={{ is-concat 'background: ' category.color '; padding: 12px; transform: rotate(45deg);' }}>
             <i class={{ is-concat category.icon ' fa-2x'}} style="color: {{ is-concat category.icon_color }}; transform: rotate(-45deg);"></i>
         </a>
         <!--<i class={{category.icon}} style={{ is-concat 'color: ' category.color '; margin-top: 10px;'}}></i>-->
@@ -46,4 +35,3 @@
 </div>
 <div style="min-height: 100px;"></div>
 {{/if}}
-

@@ -721,11 +721,13 @@ export default {
   "visualization.source.cities": "Find by department, city or CIIU code",
   "visualization.source.municipalities": "Find by department, municipaly or CIIU code",
   "visualization.source.products": "Find by prodcut name or tariff heading",
+  "visualization.source.industries": "Insert the sector name oy CIUU code",
 
   "visualization.search.departments": "Search by departament or DANE code",
   "visualization.search.cities": "Find by department, city or DANE code",
   "visualization.search.municipalities": "Find by department, municipaly or DANE code",
   "visualization.search.products": "Find by prodcut name or tariff heading",
+  "visualization.search.industries": "Find by sector name or CIIU code",
 
   "employment": "Total employment",
   "wages": "Total payroll salary, Col$ (miles)",

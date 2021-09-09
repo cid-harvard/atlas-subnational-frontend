@@ -15,7 +15,7 @@
 
         <div class="mt-4">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear search='null')
+          {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'employment' (query-params endDate=lastYear startDate=lastYear search=null)
             class="builder__questions__question"}}
             {{t (is-concat 'graph_builder.page_title.location.industries.employment.' model.level)}}
           {{/link-to}}
@@ -23,7 +23,7 @@
 
         <div class="mt-3">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'wages' (query-params endDate=lastYear startDate=lastYear search='null')
+          {{#link-to 'location.visualization' model.id 'industries' 'treemap' 'wages' (query-params endDate=lastYear startDate=lastYear search=null)
               class="builder__questions__question" }}
               {{t (is-concat 'graph_builder.page_title.location.industries.wages.' model.level)}}
             {{/link-to}}
@@ -135,6 +135,7 @@
 
       </div>
 
+      <!--
       {{#unless isMsa }}
 
       <div class="col-sm-12 col-md-6 pl-md-0 mt-5">
@@ -217,7 +218,7 @@
       </div>
 
       {{/unless}}
-
+      -->
     </div>
   </div>
 </div>

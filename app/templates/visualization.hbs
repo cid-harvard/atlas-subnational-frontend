@@ -98,13 +98,16 @@
             elementId=source
             toolTips=toolTips
             range=range
+            canUpdateBuildermodSearchService=canUpdateBuildermodSearchService
+            filterCategory=canFilterCategory
+            resetFilter=resetFilter
           }}
           <div id="screens" style="padding: 10px"></div>
         </div>
 
         {{#if needsLegend }}
           {{#unless isGeo }}
-              {{component 'visualization-legend' legend=legend }}
+
           {{else}}
               {{component 'visualization-legend-geomap' legend=geoLegend varDependent=varDependent classNames='col-md-4 d-flex flex-column justify-content-around' }}
           {{/unless}}

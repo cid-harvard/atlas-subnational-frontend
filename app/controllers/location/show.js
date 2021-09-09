@@ -86,8 +86,11 @@ export default Ember.Controller.extend({
     }, 0);
     return '$' + numeral(total).format('0.0a') + ' USD';
   }),
-  lastIndustryData: computed.filter('industriesData', function(datum) {
-    return parseInt(get(datum, 'year')) === this.get('lastYear');
+  lastIndustryData: computed('industriesData', function() {
+    return this.get("industriesData");
+  }),
+  lastProductsData: computed('productsData', function() {
+    return this.get("productsData");
   }),
   graphbuilderLink: computed('model.id', function() {
     return `location-${this.get('model.id')}`;
