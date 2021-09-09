@@ -491,6 +491,9 @@ export default Ember.Controller.extend({
     if(this.get('source') === "industries"){
       return true;
     }
+    else if(this.get('source') === "products"){
+      return true;
+    }
     return false;
   }),
   immutableData: computed('model.data.[]','endDate', 'startDate' , function() {
@@ -683,7 +686,19 @@ export default Ember.Controller.extend({
       });
     }
     else if(this.get('source') == 'products'){
-      return []
+      return _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
     }
     else{
       return []

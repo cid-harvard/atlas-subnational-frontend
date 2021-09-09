@@ -1,0 +1,37 @@
+<section class="mb-5 pb-5">
+
+</section>
+{{#if filterCategory }}
+<div class="row d-flex justify-content-center">
+
+    <div class="category-button position-relative mr-5">
+      <p class="text_yellow">{{title}}</p>
+      <p class="text_yellow">{{subtitle}}</p>
+    </div>
+
+    {{#each category in categoriesObject}}
+
+    <div class="category-button position-relative mr-5" data-title={{category.name}}>
+        <div class='tooltip tooltip-category text-center d-none selector_{{_view.contentIndex}}'>
+            <h3 class="mb-5 text-principal">{{category.name}}</h3>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" checked={{category.hide}} {{action "check" _view.contentIndex "hide" on="change"}}>
+                <label class="form-check-label mr-5 text-principal"><strong>Ocultar</strong></label>
+
+                <input class="form-check-input" type="checkbox" checked={{category.isolate}} {{action "check" _view.contentIndex "isolate" on="change"}}>
+                <label class="form-check-label text-principal"><strong>Aislar</strong></label>
+            </div>
+
+        </div>
+        <a href="javascript:void(0);" class="btn button_{{_view.contentIndex}}" style={{ is-concat 'background: ' category.color '; padding: 12px; transform: rotate(45deg);' }}>
+            <i class={{ is-concat category.icon ' fa-2x'}} style="color: {{ is-concat category.icon_color }}; transform: rotate(-45deg);"></i>
+        </a>
+        <!--<i class={{category.icon}} style={{ is-concat 'color: ' category.color '; margin-top: 10px;'}}></i>-->
+    </div>
+
+
+    {{/each}}
+</div>
+<div style="min-height: 100px;"></div>
+{{/if}}

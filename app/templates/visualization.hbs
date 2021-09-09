@@ -77,7 +77,6 @@
 
       <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
         <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
-          {{resetFilter}}
           {{component visualizationComponent
             classNames='buildermod__viz'
             immutableData=immutableData
@@ -108,7 +107,7 @@
 
         {{#if needsLegend }}
           {{#unless isGeo }}
-              {{component 'visualization-legend' legend=legend }}
+
           {{else}}
               {{component 'visualization-legend-geomap' legend=geoLegend varDependent=varDependent classNames='col-md-4 d-flex flex-column justify-content-around' }}
           {{/unless}}

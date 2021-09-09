@@ -9,6 +9,8 @@ export default Ember.Component.extend({
   varDependentTooltip: null,
   inmutableDataInternal: null,
   lastDataUpdate: null,
+  newUpdatedData: null,
+  categoriesFilter: null,
   id: computed('elementId', function() {
     return `#${this.get('elementId')} section`;
   }),
@@ -26,24 +28,17 @@ export default Ember.Component.extend({
     }
 
   }),
-  updatedData: computed('data.[]', 'varDependent', 'varText', 'i18n.locale', 'search', 'toolTips', 'treemapService.filter_updated_data', function() {
-
-    if(this.get("lastDataUpdate") !== this.get("treemapService.filter_update")){
-
-      this.set("lastDataUpdate", this.get("treemapService.filter_update"));
-      var filter_updated_data = this.get("treemapService.filter_updated_data").map(item => item.item);
-
-      return filter_updated_data;
-    }
+  updatedData: computed('data.[]', 'varDependent', 'varText', 'i18n.locale', 'search', 'toolTips', 'categoriesFilter', function() {
 
     var key = this.get('varText');
+    var categoriesFilter = this.get('categoriesFilter');
     var data = this.get('data');
     var dependent = this.get('varDependent');
     var toolTipsData = this.get('toolTipsData');
     var self = this;
 
-    if(data.length === 0){
-      data = []
+    if(categoriesFilter !== null){
+      data = data.filter(item => categoriesFilter.includes(item.parent_name_es));
     }
 
     return data.map(item => {
@@ -86,7 +81,7 @@ export default Ember.Component.extend({
     var key = this.get('varText');
     var data = this.get('data');
 
-    console.log(data)
+    //console.log(data)
 
     if(data.length === 0){
       data = []
@@ -762,30 +757,29 @@ export default Ember.Component.extend({
     }
 
 
-    var updatedData = [];
+    var categoriesFilter = [];
 
     for(let category of this.get('categoriesObject')) {
+
       var isolate = category.isolate;
       var hide = category.hide;
 
       if(isolate === true){
-        updatedData = this.get("inmutableDataInternal").filter(item => {
-          return item.group === category.name;
-        });
+        categoriesFilter = [category.name];
         break;
       }
 
       if(hide === false){
-        var toAddupdatedData = this.get("inmutableDataInternal").filter(item => {
-          return item.group === category.name;
-        })
-        updatedData = updatedData.concat(toAddupdatedData);
+        categoriesFilter.push(category.name);
       }
 
     }
 
-    this.set("treemapService.filter_update", new Date())
-    this.set("treemapService.filter_updated_data", updatedData)
+    this.set("categoriesFilter", categoriesFilter);
+    console.log(categoriesFilter)
+
+    //this.set("treemapService.filter_update", new Date())
+    //this.set("treemapService.filter_updated_data", updatedData)
     //this.set("updatedData", updatedData);
 
   },
@@ -811,14 +805,18 @@ export default Ember.Component.extend({
       d3.select(id).selectAll('svg').remove();
       this.get('treemap');
 
-      $('.category-button').on("mouseover", function(e) {
+      Ember.run.later(this , function() {
+        $('.category-button').on("mouseover", function(e) {
 
-        $(this).find("div.tooltip").removeClass("d-none")
-      })
+          $(this).find("div.tooltip").removeClass("d-none")
+        })
 
-      $('.category-button').on("mouseleave", function(e) {
-          $(this).find("div.tooltip").addClass("d-none");
-      })
+        $('.category-button').on("mouseleave", function(e) {
+            $(this).find("div.tooltip").addClass("d-none");
+        })
+      }, 100);
+
+
 
     });
   },
@@ -892,12 +890,16 @@ export default Ember.Component.extend({
     d3.select(this.get('id')).selectAll('svg').remove();
     this.get('treemap');
 
-    $('.category-button').on("mouseover", function(e) {
-        $(this).find("div.tooltip").removeClass("d-none")
-    })
+    Ember.run.later(this , function() {
+        $('.category-button').on("mouseover", function(e) {
 
-    $('.category-button').on("mouseleave", function(e) {
-        $(this).find("div.tooltip").addClass("d-none");
-    })
+          $(this).find("div.tooltip").removeClass("d-none")
+        })
+
+        $('.category-button').on("mouseleave", function(e) {
+            $(this).find("div.tooltip").addClass("d-none");
+        })
+      }, 100);
+
   }),
 });
