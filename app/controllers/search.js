@@ -6,19 +6,29 @@ export default Ember.Controller.extend({
   featureToggle: Ember.inject.service(),
   needs: 'application', // inject the application controller
   queryParams: ['query','filter'],
-  entity: ['product', 'industry', 'location', 'rural'],
+  entity: ['product', 'industry', 'location', 'rural', 'locations_route', 'products_route'],
   query: null,
   filter: null,
   modelData: computed('model', 'filter', 'i18n.locale', function() {
     let model = get(this, 'modelCategorized');
+    let filter = get(this, 'filter');
     let locale = this.get('i18n').display
     var self = this
 
-    
+    //console.log(filter);
+
+    if(filter === "locations_route"){
+      model = {"location": model.location}
+    }
+
+    if(filter === "product_route"){
+      model = {"product": model.product}
+    }
+
+
     if(model.hasOwnProperty("agproduct")){
 
       return Object.entries(model).map(function(models){
-        
         var key = models[0]
 
         return models[1].map(function(models){
@@ -38,13 +48,14 @@ export default Ember.Controller.extend({
       return Object.entries(model).map(function(models){
 
         return models[1].map(function(models){
+
           return {id: models.id, text: models.get(`name_short_${locale}`) + " (" + models.get('code') + ")" }
         })
 
       })[0]
 
     }
-    
+
   }),
   search: computed('query', function() {
     return this.get('query');
@@ -56,7 +67,10 @@ export default Ember.Controller.extend({
     return false
   }),
   modelCategorized: computed('filter', 'model', function(){
-    return _.groupBy(this.get('model'), (x)=>x.constructor.modelName);
+    var modelCategorized = _.groupBy(this.get('model'), (x)=>x.constructor.modelName);
+    //modelCategorized["locations_route"] = modelCategorized["location"];
+    //modelCategorized["products_route"] = modelCategorized["product"];
+    return modelCategorized;
   }),
   modelCategorizedKeys: computed('modelCategorized', function(){
     return _.keys(this.get('modelCategorized'));
@@ -171,6 +185,9 @@ export default Ember.Controller.extend({
     },
     transitionProduct(id) {
       this.transitionToRoute('product.show', id);
+    },
+    transitionLocationRoute(id) {
+      this.transitionToRoute('location.route', id);
     },
     transitionIndustry(id) {
       this.transitionToRoute('industry.show', id);

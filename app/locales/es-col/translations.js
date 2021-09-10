@@ -633,8 +633,14 @@ export default {
   "pageheader.search_placeholder.header": "Realice una busqueda por",
   "pageheader.search_placeholder.industry": "Busqueda por Nombre o c\u00f3digo CIIU",
   "pageheader.search_placeholder.location": "Busque un lugar",
+  "pageheader.search_placeholder.locations_route": "Busque un lugar",
   "pageheader.search_placeholder.product": "Búsque por nombre de producto o partida arancelaría",
+  "pageheader.search_placeholder.products_route": "Búsque por nombre de producto o partida arancelaría",
   "pageheader.search_placeholder.rural": "Busqueda por producto agricola, uso de suelo, actividad agropecuaria o especie pecuaria",
+
+  "pageheader.search_placeholder.first.chained.partners": "Seleccione una región",
+  "pageheader.search_placeholder.second.chained.partners": "Seleccione un país",
+
   "rankings.explanation.body": "",
   "rankings.explanation.title": "Explicaci\u00f3n",
   "rankings.intro.p": "Comparaci\u00f3n entre departamentos o ciudades",
@@ -687,6 +693,10 @@ export default {
   "search.modal.p1.location": "Clasificación numérica que identifica las actividades económicas. En colombia, el DANE determina estas clasificaciones<br><br>",
   "search.modal.link.location": "https://www.dane.gov.co/files/censo2005/provincias/subregiones.pdf",
 
+  "search.modal.title.locations_route": "Código DANE",
+  "search.modal.p1.locations_route": "Clasificación numérica que identifica las actividades económicas. En colombia, el DANE determina estas clasificaciones<br><br>",
+  "search.modal.link.locations_route": "https://www.dane.gov.co/files/censo2005/provincias/subregiones.pdf",
+
   "search.modal.title.product": "Búsqueda",
   "search.modal.p1.product": "Partida arancelaria: Clasificación numérica internacional que identifica las mercancias dentro del Sistema Armonizado en Colombia, la DIAN determina estas clasificaciones.<br><br>",
   "search.modal.link.product": "https://muisca.dian.gov.co/WebArancel/DefConsultaEstructuraArancelaria.faces#",
@@ -709,6 +719,10 @@ export default {
   "search.location.subtitle": "",
   "search.location.body": "En el siguiente campo usted podrá realizar una búsqueda por un lugar o código DANE.<br><br>Haga uso del interrogante para ampliar la información.",
 
+  "search.locations_route.title": "Búsqueda por un lugar",
+  "search.locations_route.subtitle": "",
+  "search.locations_route.body": "En el siguiente campo usted podrá realizar una búsqueda por un lugar o código DANE.<br><br>Haga uso del interrogante para ampliar la información.",
+
   "search.product.title": "Búsqueda por",
   "search.product.subtitle": "Nombre de producto o partida arancelaria",
   "search.product.body": "En el siguiente campo usted podra realizar una búsqueda por nombre de producto o codigo de partida arancelaria.<br><br>Haga uso del interrogante para ampliar la información.",
@@ -729,12 +743,16 @@ export default {
   "visualization.source.municipalities": "Búsque por departamento, municipio o código CIIU",
   "visualization.source.products": "Búsque por nombre de producto o partida arancelaría",
   "visualization.source.industries": "Ingrese el nombre del sector o código CIUU",
+  "visualization.source.partners": "Busque por nombre de país",
 
   "visualization.search.departments": "Búsque por departamento o código DANE",
   "visualization.search.cities": "Búsque por departamento, ciudad o código DANE",
   "visualization.search.municipalities": "Búsque por departamento, municipio o código DANE",
   "visualization.search.products": "Búsque por nombre de producto o partida arancelaría",
   "visualization.search.industries": "Búsque por sector o código CIIU",
+  "visualization.search.partners": "Búsque socios comerciales",
+  "visualization.search.first.partners": "REGIÓN",
+  "visualization.search.second.partners": "PAÍS",
 
   "employment": "Empleo total",
   "wages": "Nómina salarial total, Col$ (miles)",

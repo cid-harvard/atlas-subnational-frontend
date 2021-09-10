@@ -1,0 +1,230 @@
+<div class="container-fluid px-md-x10 mt-5">
+  <div class="row">
+
+    <div class="col-sm-12">
+      <p class="text-white">Filtrar por Año</p>
+    </div>
+
+    <div class="col-sm-12">
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 my-auto">
+          <div class="">
+            <select class="form-control form-filter" id="selectYear">
+
+              {{#each year in rangeYears }}
+                <option>{{year}}</option>
+              {{/each}}
+
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mx-auto">
+          <button class="btn btn-outline-secondary" {{action "setStartYear"}}>FILTRAR</button>
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+          <ul class="nav nav-pills center-pills" id="pills-tab-tables-graphics" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-graphic-tab" data-toggle="pill" href="#pills-graphics" role="tab" aria-controls="pills-graphics" aria-selected="true">
+                VER COMO GRÁFICA
+              </a>
+            </li>
+
+            <li class="nav-item ml-5">
+              <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-table-tab" data-toggle="pill" href="#pills-tables" role="tab" aria-controls="pills-tables" aria-selected="true">
+                VER COMO TABLA
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-12">
+      <div class="mt-5 tab-content" id="pills-tabContent">
+
+        <div class="tab-pane fade active show" id="pills-graphics" role="tabpanel" aria-labelledby="pills-graphics">
+          <div class="container-fluid px-md-x10 mt-5">
+            <div class="col-md-12 text-center">
+
+              <ul class="nav nav-pills center-pills" id="pills-tab" role="tablist">
+
+                <li class="nav-item">
+                  <a class="nav-link active btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-exports-tab" data-toggle="pill" href="#pills-exports" role="tab" aria-controls="pills-exports" aria-selected="true">
+                    {{t 'location.show.exports_filtered' year=startDate }}
+                  </a>
+                </li>
+
+                <li class="nav-item ml-5">
+                  <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-exports-country-tab" data-toggle="pill" href="#pills-exports-country" role="tab" aria-controls="pills-exports-country" aria-selected="true">
+                    {{t 'location.show.exports_country_filtered' year=startDate }}
+                  </a>
+                </li>
+
+              </ul>
+
+              <div class="mt-5 tab-content" id="pills-tabContent">
+
+                <div class="tab-pane fade active show" id="pills-exports" role="tabpanel" aria-labelledby="pills-exports">
+                  <div class="container-fluid">
+
+                    <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
+                      <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
+                        {{
+                          zoomable-treemap
+                          data=filteredProductsData
+                          immutableData=filteredProductsData
+                          varDependent='export_value'
+                          elementId='zoomable-export-value-treemap'
+                          class="position-relative"
+                          color='pink'
+                          filterCategory=true
+                          toolTips="rca"
+                        }}
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div class="container-fluid my-5">
+                    <div class="text-right">
+                      {{#link-to 'location.visualization' model.id 'products' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null')
+                        class="btn btn-outline-secondary"
+                      }}
+                      VER MAS
+                      {{/link-to}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade show" id="pills-exports-country" role="tabpanel" aria-labelledby="pills-exports-country">
+                  <div class="container-fluid">
+
+                    <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
+                      <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
+                        {{
+                          zoomable-treemap
+                          data=filteredPartnersData
+                          immutableData=filteredPartnersData
+                          varDependent='export_value'
+                          elementId='zoomable-export-value-treemap-partner'
+                          class="position-relative"
+                          color='pink'
+                          filterCategory=true
+                        }}
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div class="container-fluid my-5">
+                    <div class="text-right">
+                      {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null')
+                        class="btn btn-outline-secondary"
+                      }}
+                      VER MAS
+                      {{/link-to}}
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade show" id="pills-tables" role="tabpanel" aria-labelledby="pills-tables">
+
+
+          <div class="container-fluid px-md-x10 mt-5">
+            <div class="row">
+              <div class="col-sm-12">
+                <h1 class="text_yellow">Productos que más exporta {{model.name}}</h1>
+              </div>
+
+              <div class="col-sm-12">
+                {{
+                  datlas-table
+                  data=filteredProductsData
+                  source='products'
+                  entityType=''
+                  search=search
+                  startDate=startDate
+                  endDate=endDate
+                  elementId="productssourceTable"
+                }}
+              </div>
+
+              <div class="container-fluid my-5 pr-5">
+                <div class="text-right">
+                  {{#link-to 'location.visualization' model.id 'products' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null')
+                    class="btn btn-outline-secondary"
+                  }}
+                  VER MAS
+                  {{/link-to}}
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-12">
+                <h1 class="text_yellow">Paises donde más exporta {{model.name}}</h1>
+              </div>
+
+              <div class="col-sm-12">
+                {{
+                  datlas-table
+                  data=filteredPartnersData
+                  source='partners'
+                  entityType=''
+                  search=search
+                  startDate=startDate
+                  endDate=endDate
+                  elementId="partnerssourceTable"
+                }}
+              </div>
+
+              <div class="container-fluid my-5">
+                <div class="text-right">
+                  {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null')
+                    class="btn btn-outline-secondary"
+                  }}
+                  VER MAS
+                  {{/link-to}}
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="container-fluid px-md-x10 pb-5">
+  <div class="text-right">
+    {{#link-to 'location.visualization' model.id 'products' 'scatter' 'opportunity' (query-params startDate=startDate endDate=startDate search='null')
+      class="btn btn-outline-secondary"
+    }}
+    SIGUIENTE
+    {{/link-to}}
+  </div>
+</div>

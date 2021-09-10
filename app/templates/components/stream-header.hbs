@@ -5,7 +5,11 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+        {{#if isLocationRoute}}
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="locations_route")}}{{ t 'search.results_locations' }}{{/link-to}}</li>
+        {{else}}
         <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="location")}}{{ t 'search.results_locations' }}{{/link-to}}</li>
+        {{/if}}
         <li class="breadcrumb-item active" aria-current="page">{{model.name}}</li>
       </ol>
     </nav>

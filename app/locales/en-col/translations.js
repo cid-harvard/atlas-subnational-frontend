@@ -633,7 +633,9 @@ export default {
   "pageheader.search_placeholder.header": "Make a search by",
   "pageheader.search_placeholder.industry": "Find by name or by CIIU code",
   "pageheader.search_placeholder.location": "Search for a location",
+  "pageheader.search_placeholder.locations_route": "Search for a location",
   "pageheader.search_placeholder.product": "Search by product name or tariff item",
+  "pageheader.search_placeholder.products_route": "Search by product name or tariff item",
   "pageheader.search_placeholder.rural": "Search by agricultural product, land use, agricultural activity or livestock species",
   "rankings.explanation.body": "",
   "rankings.explanation.title": "Explanation",
@@ -686,6 +688,10 @@ export default {
   "search.modal.p1.location": "Numerical classification that identifies economic activities. In Colombia, DANE determines these classifications<br><br>",
   "search.modal.link.location": "https://www.dane.gov.co/files/censo2005/provincias/subregiones.pdf",
 
+  "search.modal.title.locations_route": "DANE Code",
+  "search.modal.p1.locations_route": "Numerical classification that identifies economic activities. In Colombia, DANE determines these classifications<br><br>",
+  "search.modal.link.locations_route": "https://www.dane.gov.co/files/censo2005/provincias/subregiones.pdf",
+
   "search.modal.title.product": "Search",
   "search.modal.p1.product": "Tariff article: International numerical classification that identifies the goods within the Harmonized System in Colombia, the DIAN determines these classifications.<br><br>",
   "search.modal.link.product": "https://muisca.dian.gov.co/WebArancel/DefConsultaEstructuraArancelaria.faces#",
@@ -707,6 +713,10 @@ export default {
   "search.location.subtitle": "",
   "search.location.body": "In the next field you can search for a place or DANE code.<br><br>Use the question mark to expand the information.",
 
+  "search.locations_route.title": "Search by place",
+  "search.locations_route.subtitle": "",
+  "search.locations_route.body": "In the next field you can search for a place or DANE code.<br><br>Use the question mark to expand the information.",
+
   "table.export_data": "Export Data",
   "thousands_delimiter": ",",
   "header_nav.search": "Search by",
@@ -722,12 +732,14 @@ export default {
   "visualization.source.municipalities": "Find by department, municipaly or CIIU code",
   "visualization.source.products": "Find by prodcut name or tariff heading",
   "visualization.source.industries": "Insert the sector name oy CIUU code",
+  "visualization.source.partners": "Find partners",
 
   "visualization.search.departments": "Search by departament or DANE code",
   "visualization.search.cities": "Find by department, city or DANE code",
   "visualization.search.municipalities": "Find by department, municipaly or DANE code",
   "visualization.search.products": "Find by prodcut name or tariff heading",
   "visualization.search.industries": "Find by sector name or CIIU code",
+  "visualization.search.partners": "Find partners",
 
   "employment": "Total employment",
   "wages": "Total payroll salary, Col$ (miles)",

@@ -25,6 +25,32 @@
         }}
       </div>
 
+      {{#if (is-equal source "partners") }}
+
+        {{#if (is-equal visualization "multiples")}}
+          <div class="col-sm-12">
+
+            <div class="mb-3">
+              <span class="text-white text-uppercase">{{ t (is-concat 'visualization.search.first.' source) }}</span>
+            </div>
+            {{autocomplete-chained-input-datlas data_search=partnersDataChained type='chained' idSelect='searchSelect' idSelect2='searchSelect2' source=source search=search reset="reset"}}
+
+          </div>
+        {{else}}
+
+          <div class="col-sm-12 text-center">
+            <div class="mb-3">
+
+              <i class="fas fa-search text-white"></i>
+              <span class="text-white text-uppercase">{{ t (is-concat 'visualization.search.' source) }}</span>
+            </div>
+            {{autocomplete-input-datlas data_search=filterData type='search' idSelect='searchSelect' placeHolder=placeHolderText search=search reset="reset"}}
+          </div>
+
+        {{/if}}
+
+
+      {{else}}
 
       <div class="col-sm-12 text-center">
         <div class="mb-3">
@@ -34,6 +60,9 @@
         </div>
         {{autocomplete-input-datlas data_search=filterData type='search' idSelect='searchSelect' placeHolder=placeHolderText search=search reset="reset"}}
       </div>
+
+      {{/if}}
+
     </div>
   </div>
 

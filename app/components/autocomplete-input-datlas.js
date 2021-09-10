@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   placeHolder: null,
   transitionProduct: 'transitionProduct',
   transitionLocation: 'transitionLocation',
+  transitionLocationRoute: 'transitionLocationRoute',
   transitionIndustry: 'transitionIndustry',
   transitionLocationProducts: 'transitionLocationProducts',
   transitionAgproduct: 'transitionAgproduct',
@@ -62,6 +63,8 @@ export default Ember.Component.extend({
           self.sendAction('transitionLocation', id);
         } else if (type === 'product') {
           self.sendAction('transitionProduct', id);
+        } else if (type === 'locations_route') {
+          self.sendAction('transitionLocationRoute', id);
         } else if (type === 'industry') {
           self.sendAction('transitionIndustry', id);
         } else if (type === 'location-product') {
@@ -140,6 +143,8 @@ export default Ember.Component.extend({
           self.sendAction('transitionLocation', id);
         } else if (type === 'product') {
           self.sendAction('transitionProduct', id);
+        } else if (type === 'locations_route') {
+          self.sendAction('transitionLocationRoute', id);
         } else if (type === 'industry') {
           self.sendAction('transitionIndustry', id);
         } else if (type === 'location-product') {

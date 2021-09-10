@@ -776,7 +776,6 @@ export default Ember.Component.extend({
     }
 
     this.set("categoriesFilter", categoriesFilter);
-    console.log(categoriesFilter)
 
     //this.set("treemapService.filter_update", new Date())
     //this.set("treemapService.filter_updated_data", updatedData)

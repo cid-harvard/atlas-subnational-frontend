@@ -61,7 +61,7 @@
 
     <div class="col-sm-12 col-md-6 mt-md-5">
       {{#link-to 'search'
-        (query-params filter='results_products')
+        (query-params filter='locations_route')
         class="btn btn-outline-secondary btn-lg btn-block text-uppercase"
         activeClass="active"
         data-side-search-link='locations'
@@ -72,10 +72,10 @@
 
     <div class="col-sm-12 col-md-6 mt-md-5">
       {{#link-to 'search'
-        (query-params filter='results_products')
+        (query-params filter='products_route')
         class="btn btn-outline-secondary btn-lg btn-block text-uppercase"
         activeClass="active"
-        data-side-search-link='locations'
+        data-side-search-link='products'
       }}
         {{ t 'search.sophistication_path_product' }}
       {{/link-to}}

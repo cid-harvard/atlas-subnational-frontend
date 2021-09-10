@@ -42,6 +42,7 @@ export default Ember.Route.extend({
     var industryPCI = $.getJSON(apiURL+'/data/industry/?level=class');
 
     var productSectionColor = $.getJSON('assets/color_mappings/product_section_colors.json');
+    var partnersSectionColor = $.getJSON('assets/color_mappings/partners_section_colors.json');
     var industrySectionColor = $.getJSON(`assets/color_mappings/${this.get('i18n.country')}-industry_section_colors.json`);
     var industrySpace = $.getJSON(`assets/networks/${this.get('i18n.country')}-industry_space.json`);
     var productSpace = $.getJSON('assets/networks/product_space.json');
@@ -67,7 +68,8 @@ export default Ember.Route.extend({
       productPCI,
       industryPCI,
       productSpace,
-      industrySpace
+      industrySpace,
+      partnersSectionColor
     ];
 
     return RSVP.allSettled(promises).then((array) => {
@@ -92,6 +94,7 @@ export default Ember.Route.extend({
       let industryPCI = array[18].value.data;
       let productSpace = array[19].value;
       let industrySpace = array[20].value;
+      let partnersSectionColor = array[21].value;
 
       // Finds the entity with the `1st digit` that matches
       // sets `group` to the `1st digit code`
@@ -208,9 +211,20 @@ export default Ember.Route.extend({
 
       _.forEach(partnerCountries, (d) => {
         let color = '#880e4f';
+        let icon = 'fas fa-globe';
+
+        if(partnersSectionColor[d.parent_id] !== undefined){
+          color = partnersSectionColor[d.parent_id].color;
+        }
+
+        if(partnersSectionColor[d.parent_id] !== undefined){
+          icon = partnersSectionColor[d.parent_id].icon;
+        }
+
         d.name_short_en = d.name_en;
         d.name_short_es = d.name_es;
         d.color = color;
+        d.icon = icon;
       });
 
       // Index metadata by entity id's

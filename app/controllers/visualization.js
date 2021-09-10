@@ -86,6 +86,28 @@ export default Ember.Controller.extend({
     })
   }),
 
+  partnersDataChained: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.partnerCountries'))
+
+
+
+    var partnerCountriesRegion = locations.filter(item => item[1].level === "region").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      var chained = locations.filter(item2 => item2[1].level === "country" && item2[1].parent_id === item[1].id).map((item2) => {
+        var name = get(item2[1], `name_short_${this.get('i18n').display}`)
+        return {id:item2[1].id, text: `${name} (${item2[1].code})`}
+      });
+
+      return {id:item[1].id, text: `${name}`, chained: chained}
+    })
+
+    return partnerCountriesRegion
+
+  }),
+
   industriesData: computed('model', function(){
 
     var locations = Object.entries(this.get('model.metaData.industries'))
@@ -194,7 +216,18 @@ export default Ember.Controller.extend({
       return []
     }
   }),
+  filterDataRegion: computed('source', function(){
 
+    if(this.get('source') == 'partners'){
+
+      var partnersDataChained = this.get('partnersDataChained');
+
+      return this.get('partnersDataChained');
+    }
+    else{
+      return []
+    }
+  }),
   placeHolderText: computed('i18n.locale', 'source', function(){
     return this.get('i18n').t(`visualization.source.${this.get('source')}`).string
   }),
@@ -699,6 +732,23 @@ export default Ember.Controller.extend({
         }
         return _.deburr(`${parentName} ${code}`).match(regexp);
       });
+    }
+    else if(this.get('source') == 'partners'){
+      console.log(data)
+      var data_result = _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+      return data_result
     }
     else{
       return []

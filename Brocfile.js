@@ -72,6 +72,7 @@ app.import('vendor/networks/col-industry_space.json', { destDir: 'assets/network
 app.import('vendor/networks/mex-industry_space.json', { destDir: 'assets/networks' });
 
 app.import('vendor/color_mappings/product_section_colors.json', { destDir: 'assets/color_mappings' });
+app.import('vendor/color_mappings/partners_section_colors.json', { destDir: 'assets/color_mappings' });
 
 app.import('vendor/color_mappings/col-industry_section_colors.json', { destDir: 'assets/color_mappings' });
 app.import('vendor/color_mappings/mex-industry_section_colors.json', { destDir: 'assets/color_mappings' });

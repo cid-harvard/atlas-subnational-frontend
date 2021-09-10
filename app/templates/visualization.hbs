@@ -64,6 +64,7 @@
           component 'buildermod-search'
           source=source
           filterData=filterData
+          partnersDataChained=partnersDataChained
           placeHolderText=placeHolderText
           visualization=visualization
           startDate=startDate
@@ -148,6 +149,17 @@
       </div>
     </div>
   {{/if}}
+
+  {{#if (is-equal entityType "location")}}
+    <div class="container-fluid my-5">
+      <div class="text-right">
+        {{#link-to 'location.route' model.entity.id class="btn btn-outline-secondary"}}
+        ANTERIOR
+        {{/link-to}}
+      </div>
+    </div>
+  {{/if}}
+
 </div>
 
 
