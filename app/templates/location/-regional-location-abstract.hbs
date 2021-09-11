@@ -1,0 +1,7 @@
+{{#if isDepartment }}
+  {{partial 'location/department-dotplots-abstract'}}
+{{else if isMsa}}
+  {{partial 'location/subregion-dotplots-abstract'}}
+{{else if isMunicipality}}
+  {{partial 'location/municipality-dotplots-abstract'}}
+{{/if}}

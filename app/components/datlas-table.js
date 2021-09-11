@@ -438,13 +438,20 @@ export default Ember.Component.extend(TableMap, {
     }
 
 
+    var order = [[ 0, "desc" ]];
+
+    if(this.get("order") !== undefined){
+      order = this.get("order")
+    }
+
+
     var table = $(id_element).DataTable({
       dom: 'Bfrtip',
       lengthChange: false,
       data: updatedData,
       columns: columns,
       retrieve: true,
-      order: [[ 0, "desc" ]],
+      order: order,
       buttons: [
         {
           text: export_data_text,

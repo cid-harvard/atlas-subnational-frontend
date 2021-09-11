@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   tagName: 'div',
   height: 500,
   categoriesFilter: null,
+  VCRValue: 1,
   inmutableDataInternal: null,
   classNames: ['buildermod__viz'],
   attributeBindings: ['width','height'],
@@ -327,6 +328,11 @@ export default Ember.Component.extend({
     var updated = this.get("inmutableDataInternal").filter(item => categoriesFilter.includes(item.parent_name_es) )
     this.set("data", updated)
   }),
+  update_vcr_filter: observer('VCRValue', function () {
+    var VCRValue = this.get("VCRValue");
+    var updated = this.get("inmutableDataInternal").filter(item => item.rca >= VCRValue )
+    this.set("data", updated)
+  }),
   update: observer('data.[]', 'varDependent', 'i18n.locale', function() {
 
     if(!this.element){ return false; } //do not redraw if not there
@@ -462,6 +468,9 @@ export default Ember.Component.extend({
   actions: {
     check(index, attr) {
       this.updateCategoriesObject(index, attr);
+    },
+    range_update(){
+      this.set("VCRValue", $("#customRange1").val());
     }
   }
 });

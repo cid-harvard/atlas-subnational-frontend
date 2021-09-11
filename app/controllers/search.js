@@ -187,7 +187,7 @@ export default Ember.Controller.extend({
       this.transitionToRoute('product.show', id);
     },
     transitionLocationRoute(id) {
-      this.transitionToRoute('location.route', id);
+      this.transitionToRoute('location.abstract', id);
     },
     transitionIndustry(id) {
       this.transitionToRoute('industry.show', id);

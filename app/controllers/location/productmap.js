@@ -44,33 +44,10 @@ export default Ember.Controller.extend({
     return products.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
   }),
 
-  filteredProductsDataTop5Export: computed('model', 'startDate', 'endDate', function (){
-    var products = this.get("model.allProducts")
-    var filtered = products.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.export_value;}), 0, 5);
-    return sorted;
-  }),
-
-  filteredProductsDataTop5ExportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 3, "desc" ]];
-  }),
-
   filteredPartnersData: computed('model', 'startDate', 'endDate', function (){
 
     var partners = this.get("model.allPartners")
     return partners.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
-  }),
-
-  filteredPartnersDataTop5Export: computed('model', 'startDate', 'endDate', function (){
-
-    var partners = this.get("model.allPartners")
-    var filtered = partners.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.export_value;}), 0, 5);
-    return sorted;
-  }),
-
-  filteredPartnersDataTop5ExportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 3, "desc" ]];
   }),
 
   hasTimeseries: computed.notEmpty('model.timeseries'),

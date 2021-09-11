@@ -529,6 +529,18 @@ export default Ember.Controller.extend({
     }
     return false;
   }),
+  canFilterVcr: computed('source', 'visualization', function(){
+    if(this.get('source') === "industries" && this.get('visualization') === "similarity"){
+      return true;
+    }
+    else if(this.get('source') === "industries" && this.get('visualization') === "scatter"){
+      return true;
+    }
+    else if(this.get('source') === "products"){
+      return true;
+    }
+    return false;
+  }),
   immutableData: computed('model.data.[]','endDate', 'startDate' , function() {
     if(this.get('source') === "departments" && this.get('visualization') === "treemap"){
       return this.filterToSelectedYears(this.get('model.cities'), this.get('startDate'), this.get('endDate'));

@@ -28,7 +28,18 @@ export default Router.map(function() {
   });
   this.resource('location', { path: 'location'}, function() {
     this.route('show', {path: ':location_id'});
+    this.route('abstract', {path: ':location_id/abstract/'});
+
     this.route('route', {path: ':location_id/route/'});
+    this.route('productmap', {path: ':location_id/route/product_map/'});
+
+    this.route('locationimports', {path: ':location_id/route/imports/'});
+
+    this.route('locationwages', {path: ':location_id/route/wages/'});
+
+
+    //this.route('productmapdecentralized', {path: ':location_id/route/product_map/decentralized/'});
+
     this.route('visualization', { path: ':location_id/source/:source_type/visualization/:visualization_type/:variable'});
     this.route('visualization-product', { path: ':location_id/product/:product_id/visualization/:visualization_type/:variable'});
   });

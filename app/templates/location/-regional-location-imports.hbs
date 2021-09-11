@@ -45,7 +45,7 @@
     </div>
 
     <div class="col-sm-12">
-      <h1 class="text-white mt-5 pt-5">Exportaciones</h1>
+      <h1 class="text-white mt-5 pt-5">Importaciones</h1>
     </div>
 
     <div class="col-sm-12">
@@ -59,13 +59,13 @@
 
                 <li class="nav-item">
                   <a class="nav-link active btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-exports-tab" data-toggle="pill" href="#pills-exports" role="tab" aria-controls="pills-exports" aria-selected="true">
-                    {{t 'location.show.exports_filtered' year=startDate }}
+                    {{t 'location.show.imports_filtered' year=startDate }}
                   </a>
                 </li>
 
                 <li class="nav-item ml-5">
                   <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-exports-country-tab" data-toggle="pill" href="#pills-exports-country" role="tab" aria-controls="pills-exports-country" aria-selected="true">
-                    {{t 'location.show.exports_country_filtered' year=startDate }}
+                    {{t 'location.show.imports_country_filtered' year=startDate }}
                   </a>
                 </li>
 
@@ -82,7 +82,7 @@
                           zoomable-treemap
                           data=filteredProductsData
                           immutableData=filteredProductsData
-                          varDependent='export_value'
+                          varDependent='import_value'
                           elementId='zoomable-export-value-treemap'
                           class="position-relative"
                           color='pink'
@@ -97,7 +97,7 @@
 
                   <div class="container-fluid my-5">
                     <div class="text-right">
-                      {{#link-to 'location.visualization' model.id 'products' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null')
+                      {{#link-to 'location.visualization' model.id 'products' 'treemap' 'import_value' (query-params startDate=startDate endDate=startDate search='null')
                         class="btn btn-outline-secondary"
                       }}
                         <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -116,7 +116,7 @@
                           zoomable-treemap
                           data=filteredPartnersData
                           immutableData=filteredPartnersData
-                          varDependent='export_value'
+                          varDependent='import_value'
                           elementId='zoomable-export-value-treemap-partner'
                           class="position-relative"
                           color='pink'
@@ -130,7 +130,7 @@
 
                   <div class="container-fluid my-5">
                     <div class="text-right">
-                      {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null')
+                      {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'import_value' (query-params startDate=startDate endDate=startDate search='null')
                         class="btn btn-outline-secondary"
                       }}
                         <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -153,26 +153,26 @@
           <div class="container-fluid px-md-x10 mt-5">
             <div class="row">
               <div class="col-sm-12">
-                <h1 class="text_yellow">Productos que más exporta {{model.name}}</h1>
+                <h1 class="text_yellow">Productos que más importa {{model.name}}</h1>
               </div>
 
               <div class="col-sm-12">
                 {{
                   datlas-table
-                  data=filteredProductsDataTop5Export
-                  source='productsExports'
+                  data=filteredProductsDataTop5Import
+                  source='productsImports'
                   entityType=''
                   search=search
                   startDate=startDate
                   endDate=endDate
                   elementId="productssourceTable"
-                  order=filteredProductsDataTop5ExportOrder
+                  order=filteredProductsDataTop5ImportOrder
                 }}
               </div>
 
               <div class="container-fluid my-5 pr-5">
                 <div class="text-right">
-                  {{#link-to 'location.visualization' model.id 'products' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null')
+                  {{#link-to 'location.visualization' model.id 'products' 'treemap' 'import_value' (query-params startDate=startDate endDate=startDate search='null')
                     class="btn btn-outline-secondary"
                   }}
                     <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -186,26 +186,26 @@
 
             <div class="row">
               <div class="col-sm-12">
-                <h1 class="text_yellow">Paises a donde más exporta {{model.name}}</h1>
+                <h1 class="text_yellow">Paises de donde más importa {{model.name}}</h1>
               </div>
 
               <div class="col-sm-12">
                 {{
                   datlas-table
-                  data=filteredPartnersDataTop5Export
+                  data=filteredPartnersDataTop5Import
                   source='partnersExports'
                   entityType=''
                   search=search
                   startDate=startDate
                   endDate=endDate
                   elementId="partnerssourceTable"
-                  order=filteredPartnersDataTop5ExportOrder
+                  order=filteredPartnersDataTop5ImportOrder
                 }}
               </div>
 
               <div class="container-fluid my-5">
                 <div class="text-right">
-                  {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null')
+                  {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'import_value' (query-params startDate=startDate endDate=startDate search='null')
                     class="btn btn-outline-secondary"
                   }}
                     <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -229,9 +229,16 @@
   </div>
 </div>
 
-<div class="container-fluid px-md-x10 pb-5">
-  <div class="text-right">
+<div class="container-fluid px-md-x10 pb-5 text-right">
+  <div class="d-inline">
     {{#link-to 'location.productmap' model.id
+      class="btn btn-outline-secondary"
+    }}
+    ANTERIOR
+    {{/link-to}}
+  </div>
+  <div class="d-inline">
+    {{#link-to 'location.locationwages' model.id
       class="btn btn-outline-secondary"
     }}
     SIGUIENTE

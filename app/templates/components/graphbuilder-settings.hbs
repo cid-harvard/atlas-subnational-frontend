@@ -6,7 +6,7 @@
   </div>
 
   <div class="col-sm-12 mb-5">
-    
+
     <div class="d-lg-flex d-md-block justify-content-between text-center">
       <button data-prev-year {{bind-attr class=":btn :btn-outline-secondary disableDecreaseYear:btn--stream--disable" disabled="disableDecreaseYear"}} {{action "decreaseYear"}}>
       {{t 'graph_builder.settings.year.previous'}}
@@ -17,7 +17,7 @@
       </button>
     </div>
 
-    
+
   </div>
 
   <!--<fieldset class="settings__input__wrap">
@@ -40,7 +40,7 @@
 
 {{#if isScatter }}
 
-  <fieldset class="settings__input__wrap">
+  <!--<fieldset class="settings__input__wrap">
     <label class="settings__input">
       {{t 'graph_builder.settings.rca'}}
     </label>
@@ -53,7 +53,7 @@
     <button {{bind-attr class=":btn :btn--standalone :btn--stream isAll:btn--stream--active"}}{{action 'rcaAll'}}>
       {{t 'graph_builder.settings.rca.all'}}
     </button>
-  </fieldset>
+  </fieldset>-->
 
 {{/if}}
 

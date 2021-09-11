@@ -79,6 +79,45 @@ export default Ember.Mixin.create({
     }
 
   }),
+  productsExportsMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'name' },
+      { key: 'parent' },
+      { key: 'year' },
+      { key: 'export_value' },
+      { key: 'export_rca' },
+      { key: 'export_num_plants' },
+    ];
+
+    return columns;
+
+  }),
+  productsImportsMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'name' },
+      { key: 'parent' },
+      { key: 'year' },
+      { key: 'import_value' },
+      { key: 'rca' },
+      { key: 'import_num_plants' },
+    ];
+
+    return columns;
+
+  }),
+  industriesTopMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'name', copy: 'industry' },
+      { key: 'parent' },
+      { key: 'year' },
+      { key: 'employment' },
+      { key: 'wages' },
+      { key: 'num_establishments' },
+     ]
+
+    return columns;
+
+  }),
   citiesMap: computed('featureToggle.showImports', 'featureToggle.showIndustries', function() {
     let columns = [
       { key: 'code' },
@@ -337,6 +376,17 @@ export default Ember.Mixin.create({
     } else {
       return columns;
     }
+  }),
+  partnersExportsMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'name', copy: 'country' },
+      { key: 'parent', copy: 'parent.country' },
+      { key: 'year' },
+      { key: 'export_value' },
+      { key: 'import_value' },
+    ];
+
+    return columns;
   }),
   exportPartnersMap: computed('featureToggle.showImports', function() {
     let columns = [

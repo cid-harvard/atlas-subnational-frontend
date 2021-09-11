@@ -1,0 +1,17 @@
+{{component "stream-header"
+    model=model
+    type="location"
+    extra_type="location_route"
+    metaData=model.metaData
+    firstYear=firstYear
+    lastYear=lastYear
+    agproductFirstYear=agproductFirstYear
+    agproductLastYear=agproductLastYear
+    agcensusFirstYear=agcensusFirstYear
+    agcensusLastYear=agcensusLastYear
+}}
+{{#if isCountry }}
+  {{partial 'location/country-location-route'}}
+{{else}}
+  {{partial 'location/regional-location-imports'}}
+{{/if}}

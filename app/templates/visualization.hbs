@@ -102,6 +102,7 @@
             canUpdateBuildermodSearchService=canUpdateBuildermodSearchService
             filterCategory=canFilterCategory
             resetFilter=resetFilter
+            canFilterVcr=canFilterVcr
           }}
           <div id="screens" style="padding: 10px"></div>
         </div>
@@ -151,13 +152,47 @@
   {{/if}}
 
   {{#if (is-equal entityType "location")}}
-    <div class="container-fluid my-5">
-      <div class="text-right">
-        {{#link-to 'location.route' model.entity.id class="btn btn-outline-secondary"}}
-        ANTERIOR
-        {{/link-to}}
+
+    {{#if (is-equal variable "export_value")}}
+      <div class="container-fluid my-5">
+        <div class="text-right">
+          {{#link-to 'location.route' model.entity.id class="btn btn-outline-secondary"}}
+          ANTERIOR
+          {{/link-to}}
+        </div>
       </div>
-    </div>
+    {{/if}}
+
+    {{#if (is-equal variable "import_value")}}
+      <div class="container-fluid my-5">
+        <div class="text-right">
+          {{#link-to 'location.locationimports' model.entity.id class="btn btn-outline-secondary"}}
+          ANTERIOR
+          {{/link-to}}
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if (is-equal variable "employment")}}
+      <div class="container-fluid my-5">
+        <div class="text-right">
+          {{#link-to 'location.locationwages' model.entity.id class="btn btn-outline-secondary"}}
+          ANTERIOR
+          {{/link-to}}
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if (is-equal variable "wages")}}
+      <div class="container-fluid my-5">
+        <div class="text-right">
+          {{#link-to 'location.locationwages' model.entity.id class="btn btn-outline-secondary"}}
+          ANTERIOR
+          {{/link-to}}
+        </div>
+      </div>
+    {{/if}}
+
   {{/if}}
 
 </div>
