@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
       model = {"location": model.location}
     }
 
-    if(filter === "product_route"){
+    if(filter === "products_route"){
       model = {"product": model.product}
     }
 
@@ -188,6 +188,9 @@ export default Ember.Controller.extend({
     },
     transitionLocationRoute(id) {
       this.transitionToRoute('location.abstract', id);
+    },
+    transitionProductsRoute(id) {
+      this.transitionToRoute('product.abstract', id);
     },
     transitionIndustry(id) {
       this.transitionToRoute('industry.show', id);

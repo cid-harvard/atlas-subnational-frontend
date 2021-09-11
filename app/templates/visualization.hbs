@@ -142,13 +142,29 @@
 
   </div>
   {{#if (is-equal entityType "product")}}
-    <div class="container-fluid my-5">
-      <div class="text-right">
-        {{#link-to 'product.show' model.entity.id class="btn btn-outline-secondary"}}
-        ANTERIOR
-        {{/link-to}}
+
+
+    {{#if (is-equal variable "export_value")}}
+      <div class="container-fluid my-5">
+        <div class="text-right">
+          {{#link-to 'product.abstract' model.entity.id class="btn btn-outline-secondary"}}
+          ANTERIOR
+          {{/link-to}}
+        </div>
       </div>
-    </div>
+    {{/if}}
+
+    {{#if (is-equal variable "import_value")}}
+      <div class="container-fluid my-5">
+        <div class="text-right">
+          {{#link-to 'product.abstract' model.entity.id class="btn btn-outline-secondary"}}
+          ANTERIOR
+          {{/link-to}}
+        </div>
+      </div>
+    {{/if}}
+
+
   {{/if}}
 
   {{#if (is-equal entityType "location")}}

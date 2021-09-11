@@ -1,0 +1,221 @@
+{{component "stream-header" model=modelData type='product' firstYear=firstYear lastYear=lastYear}}
+
+<div class="container-fluid px-md-x10 mt-5 pt-5">
+  <div class="row">
+
+    <div class="col-sm-12">
+      <p class="text-white">Filtrar por Año</p>
+    </div>
+
+    <div class="col-sm-12">
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 my-auto">
+          <div class="">
+            <select class="form-control form-filter" id="selectYear">
+
+              {{#each year in rangeYears }}
+                <option>{{year}}</option>
+              {{/each}}
+
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+          <button class="btn btn-outline-secondary" {{action "setStartYear"}}>FILTRAR</button>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="text_yellow mt-5 mb-5">EXPORTACIONES PARA EL AÑO {{startDate}}</h1>
+    </div>
+
+
+    <div class="col-sm-12">
+      <h1 class="text_yellow mt-5">Departamentos en Colombia que más exportan el producto {{startDate}}</h1>
+    </div>
+
+    <div class="col-sm-12">
+      {{
+        datlas-table
+        data=filteredDataLocationsTop5Export
+        source="exportsDepartments"
+        entityType=entityType
+        search=''
+        startDate=startDate
+        endDate=endDate
+        elementId="productssourceTable"
+        order=filteredDataLocationsTop5ExportOrder
+      }}
+    </div>
+    <div class="container-fluid my-5">
+      <div class="text-right">
+        {{#link-to 'product.visualization' modelData.id 'departments' 'geo' 'export_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca")
+          class="btn btn-outline-secondary"
+        }}
+          <i class="far fa-plus pr-2" aria-hidden="true"></i>
+          VER MAS
+        {{/link-to}}
+      </div>
+    </div>
+
+    <div class="col-sm-12">
+      <h1 class="text_yellow mt-5">Ciudades en Colombia que más exportan el producto {{startDate}}</h1>
+    </div>
+
+    <div class="col-sm-12">
+      {{
+        datlas-table
+        data=filteredDataCitiesTop5Export
+        source="exportsCities"
+        entityType=entityType
+        search=''
+        startDate=startDate
+        endDate=endDate
+        elementId="productssourceTable2"
+        order=filteredDataCitiesTop5ExportOrder
+      }}
+    </div>
+
+    <div class="container-fluid my-5">
+      <div class="text-right">
+        {{#link-to 'product.visualization' modelData.id 'cities' 'multiples' 'export_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca")
+          class="btn btn-outline-secondary"
+        }}
+          <i class="far fa-plus pr-2" aria-hidden="true"></i>
+          VER MAS
+        {{/link-to}}
+      </div>
+    </div>
+
+
+    <div class="col-sm-12">
+      <h1 class="text_yellow mt-5">Países a donde más se exporta el producto {{startDate}}</h1>
+    </div>
+
+    <div class="col-sm-12">
+      {{
+        datlas-table
+        data=filteredDataPartnersTop5Export
+        source="exportPartners"
+        entityType=entityType
+        search=''
+        startDate=startDate
+        endDate=endDate
+        elementId="productssourceTable21"
+        order=filteredDataPartnersTop5ExportOrder
+      }}
+    </div>
+    <div class="container-fluid my-5">
+      <div class="text-right">
+        {{#link-to 'product.visualization' modelData.id 'partners' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca")
+          class="btn btn-outline-secondary"
+        }}
+          <i class="far fa-plus pr-2" aria-hidden="true"></i>
+          VER MAS
+        {{/link-to}}
+      </div>
+    </div>
+
+    <div class="col-sm-12">
+      <h1 class="text_yellow mt-5 mb-5">IMPORTACIONES PARA EL AÑO {{startDate}}</h1>
+    </div>
+
+    <div class="col-sm-12">
+      <h1 class="text_yellow mt-5">Departamentos en Colombia que más importan el producto {{startDate}}</h1>
+    </div>
+
+    <div class="col-sm-12">
+      {{
+        datlas-table
+        data=filteredDataLocationsTop5Import
+        source="importsDepartments"
+        entityType=entityType
+        search=''
+        startDate=startDate
+        endDate=endDate
+        elementId="productssourceTable3"
+        order=filteredDataLocationsTop5ImportOrder
+      }}
+    </div>
+
+    <div class="container-fluid my-5">
+      <div class="text-right">
+        {{#link-to 'product.visualization' modelData.id 'departments' 'geo' 'import_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca")
+          class="btn btn-outline-secondary"
+        }}
+          <i class="far fa-plus pr-2" aria-hidden="true"></i>
+          VER MAS
+        {{/link-to}}
+      </div>
+    </div>
+
+    <div class="col-sm-12">
+      <h1 class="text_yellow mt-5">Ciudades en Colombia que más importan el producto {{startDate}}</h1>
+    </div>
+
+    <div class="col-sm-12">
+      {{
+        datlas-table
+        data=filteredDataCitiesTop5Import
+        source="importsCities"
+        entityType=entityType
+        search=''
+        startDate=startDate
+        endDate=endDate
+        elementId="productssourceTable4"
+        order=filteredDataCitiesTop5ImportOrder
+      }}
+    </div>
+
+    <div class="container-fluid my-5">
+      <div class="text-right">
+        {{#link-to 'product.visualization' modelData.id 'cities' 'multiples' 'import_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca")
+          class="btn btn-outline-secondary"
+        }}
+          <i class="far fa-plus pr-2" aria-hidden="true"></i>
+          VER MAS
+        {{/link-to}}
+      </div>
+    </div>
+
+    <div class="col-sm-12">
+      <h1 class="text_yellow mt-5">Países de donde más se importa el producto {{startDate}}</h1>
+    </div>
+
+    <div class="col-sm-12">
+      {{
+        datlas-table
+        data=filteredDataPartnersTop5Import
+        source="importPartners"
+        entityType=entityType
+        search=''
+        startDate=startDate
+        endDate=endDate
+        elementId="productssourceTable212"
+        order=filteredDataPartnersTop5ImportOrder
+      }}
+    </div>
+
+    <div class="container-fluid my-5">
+      <div class="text-right">
+        {{#link-to 'product.visualization' modelData.id 'partners' 'treemap' 'import_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca")
+          class="btn btn-outline-secondary"
+        }}
+          <i class="far fa-plus pr-2" aria-hidden="true"></i>
+          VER MAS
+        {{/link-to}}
+      </div>
+    </div>
+
+  </div>
+
+</div>

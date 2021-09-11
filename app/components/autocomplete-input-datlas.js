@@ -12,6 +12,7 @@ export default Ember.Component.extend({
   transitionLocationRoute: 'transitionLocationRoute',
   transitionIndustry: 'transitionIndustry',
   transitionLocationProducts: 'transitionLocationProducts',
+  transitionProductsRoute: 'transitionProductsRoute',
   transitionAgproduct: 'transitionAgproduct',
   transitionLivestock: 'transitionLivestock',
   transitionNonag: 'transitionNonag',
@@ -24,6 +25,8 @@ export default Ember.Component.extend({
     let self = this;
     var data = this.get('data_search')
     var placeholder = this.get("placeHolder")
+
+    console.log(type)
 
 
 
@@ -67,8 +70,8 @@ export default Ember.Component.extend({
           self.sendAction('transitionLocationRoute', id);
         } else if (type === 'industry') {
           self.sendAction('transitionIndustry', id);
-        } else if (type === 'location-product') {
-          self.sendAction('transitionLocationProducts', id);
+        } else if (type === 'products_route') {
+          self.sendAction('transitionProductsRoute', id);
         } else if (type === 'rural') {
 
           var key = $(`#${id_select}`).find(':selected').data("key").replace('-', '')
@@ -147,8 +150,8 @@ export default Ember.Component.extend({
           self.sendAction('transitionLocationRoute', id);
         } else if (type === 'industry') {
           self.sendAction('transitionIndustry', id);
-        } else if (type === 'location-product') {
-          self.sendAction('transitionLocationProducts', id);
+        } else if (type === 'products_route') {
+          self.sendAction('transitionProductsRoute', id);
         } else if (type === 'rural') {
 
           var key = $(`#${id_select}`).find(':selected').data("key").replace('-', '')

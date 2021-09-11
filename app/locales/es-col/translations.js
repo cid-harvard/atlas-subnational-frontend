@@ -705,6 +705,10 @@ export default {
   "search.modal.p1.product": "Partida arancelaria: Clasificación numérica internacional que identifica las mercancias dentro del Sistema Armonizado en Colombia, la DIAN determina estas clasificaciones.<br><br>",
   "search.modal.link.product": "https://muisca.dian.gov.co/WebArancel/DefConsultaEstructuraArancelaria.faces#",
 
+  "search.modal.title.products_route": "Búsqueda",
+  "search.modal.p1.products_route": "Partida arancelaria: Clasificación numérica internacional que identifica las mercancias dentro del Sistema Armonizado en Colombia, la DIAN determina estas clasificaciones.<br><br>",
+  "search.modal.link.products_route": "https://muisca.dian.gov.co/WebArancel/DefConsultaEstructuraArancelaria.faces#",
+
   "search.rural.agproduct": "Producto Agrícola",
   "search.rural.land-use": "Uso de Suelo",
   "search.rural.nonag": "Actividades no Agropecuarias",
@@ -730,6 +734,10 @@ export default {
   "search.product.title": "Búsqueda por",
   "search.product.subtitle": "Nombre de producto o partida arancelaria",
   "search.product.body": "En el siguiente campo usted podra realizar una búsqueda por nombre de producto o codigo de partida arancelaria.<br><br>Haga uso del interrogante para ampliar la información.",
+
+  "search.products_route.title": "Búsqueda por",
+  "search.products_route.subtitle": "Nombre de producto o partida arancelaria",
+  "search.products_route.body": "En el siguiente campo usted podra realizar una búsqueda por nombre de producto o codigo de partida arancelaria.<br><br>Haga uso del interrogante para ampliar la información.",
 
 
   "table.export_data": "Descargar Datos",

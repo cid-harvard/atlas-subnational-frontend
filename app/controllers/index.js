@@ -162,11 +162,17 @@ export default Ember.Controller.extend({
     transitionLocationSearch() {
       this.transitionToRoute('search', {queryParams: { filter: 'location' }});
     },
+    transitionLocationRouteSearch() {
+      this.transitionToRoute('search', {queryParams: { filter: 'locations_route' }});
+    },
     transitionProduct(id) {
       this.transitionToRoute('product.show', id);
     },
     transitionProductSearch() {
       this.transitionToRoute('search',{queryParams: { filter: 'product' }});
+    },
+    transitionProductRouteSearch() {
+      this.transitionToRoute('search',{queryParams: { filter: 'products_route' }});
     },
     transitionIndustry(id) {
       this.transitionToRoute('industry.show', id);

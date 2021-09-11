@@ -24,6 +24,8 @@ export default Router.map(function() {
   // Profiles
   this.resource('product', { path: 'product'}, function() {
     this.route('show', { path: ':product_id'});
+    this.route('abstract', { path: ':product_id/abstract/'});
+
     this.route('visualization', { path: ':product_id/source/:source_type/visualization/:visualization_type/:variable'});
   });
   this.resource('location', { path: 'location'}, function() {
