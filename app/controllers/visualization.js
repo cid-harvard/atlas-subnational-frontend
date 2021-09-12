@@ -74,6 +74,42 @@ export default Ember.Controller.extend({
     })
   }),
 
+  landUsesData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.landUses'))
+
+    return locations.filter(item => item[1].level === "level2").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name}`}
+    })
+  }),
+
+  farmtypesData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.farmtypes'))
+
+    return locations.filter(item => item[1].level === "level2").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name}`}
+    })
+  }),
+
+  agproductsData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.agproducts'))
+
+    return locations.filter(item => item[1].level === "level3").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name}`}
+    })
+  }),
+
   partnersData: computed('model', function(){
 
     var locations = Object.entries(this.get('model.metaData.partnerCountries'))
@@ -194,6 +230,8 @@ export default Ember.Controller.extend({
 
   filterData: computed('source', function(){
 
+    console.log(this.get("model"))
+
     if(this.get('source') == 'departments'){
       return this.get('locationsData')
     }
@@ -211,6 +249,15 @@ export default Ember.Controller.extend({
     }
     else if(this.get('source') == 'industries'){
       return this.get('industriesData')
+    }
+    else if(this.get('source') == 'landUses'){
+      return this.get('landUsesData')
+    }
+    else if(this.get('source') == 'farmtypes'){
+      return this.get('farmtypesData')
+    }
+    else if(this.get('source') == 'agproducts'){
+      return this.get('agproductsData')
     }
     else{
       return []
@@ -527,6 +574,12 @@ export default Ember.Controller.extend({
     else if(this.get('source') === "products"){
       return true;
     }
+    else if(this.get('source') === "farmtypes"){
+      return true;
+    }
+    else if(this.get('source') === "agproducts"){
+      return true;
+    }
     return false;
   }),
   canFilterVcr: computed('source', 'visualization', function(){
@@ -745,8 +798,52 @@ export default Ember.Controller.extend({
         return _.deburr(`${parentName} ${code}`).match(regexp);
       });
     }
+    else if(this.get('source') == 'landUses'){
+      return _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+    }
+    else if(this.get('source') == 'farmtypes'){
+      return _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+    }
+    else if(this.get('source') == 'agproducts'){
+      return _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+    }
     else if(this.get('source') == 'partners'){
-      console.log(data)
       var data_result = _.filter(data, (d) => {
         let parentName = get(d,`parent_name_${this.get('i18n').display}`);
         let longName = get(d,`name_${this.get('i18n').display}`);

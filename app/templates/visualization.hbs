@@ -209,6 +209,38 @@
       </div>
     {{/if}}
 
+    {{#if (is-equal source "landUses")}}
+      <div class="container-fluid my-5">
+        <div class="text-right">
+          {{#link-to 'location.ruralactivities' model.entity.id class="btn btn-outline-secondary"}}
+          ANTERIOR
+          {{/link-to}}
+        </div>
+      </div>
+    {{/if}}
+
+
+    {{#if (is-equal source "farmtypes")}}
+      <div class="container-fluid my-5">
+        <div class="text-right">
+          {{#link-to 'location.ruralactivities' model.entity.id class="btn btn-outline-secondary"}}
+          ANTERIOR
+          {{/link-to}}
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if (is-equal source "agproducts")}}
+      <div class="container-fluid my-5">
+        <div class="text-right">
+          {{#link-to 'location.ruralactivities' model.entity.id class="btn btn-outline-secondary"}}
+          ANTERIOR
+          {{/link-to}}
+        </div>
+      </div>
+    {{/if}}
+
+
   {{/if}}
 
 </div>

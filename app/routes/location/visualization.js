@@ -184,6 +184,8 @@ export default Ember.Route.extend({
     let {model, agproducts } = hash;
     let agproductsMetadata = this.modelFor('application').agproducts;
 
+    var ids = []
+
     let data = _.map(agproducts.data, (d) => {
       let merged = _.merge(copy(d), agproductsMetadata[d.agproduct_id]);
 
@@ -239,8 +241,13 @@ export default Ember.Route.extend({
 
     let data = _.map(farmtypes.data, (d) => {
       let merged = _.merge(copy(d), farmtypesMetadata[d.farmtype_id]);
+      let parent = farmtypesMetadata[merged.parent_id];
+
+      merged.parent_name_en = parent.name_short_en;
+      merged.parent_name_es = parent.name_short_es;
       merged.year = this.get('agcensusLastYear');
       merged.group = merged.code;
+      merged.same_parent = true;
       return merged;
     });
 

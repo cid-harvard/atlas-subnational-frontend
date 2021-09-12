@@ -757,6 +757,9 @@ export default {
   "visualization.source.products": "Búsque por nombre de producto o partida arancelaría",
   "visualization.source.industries": "Ingrese el nombre del sector o código CIUU",
   "visualization.source.partners": "Busque por nombre de país",
+  "visualization.source.landUses": "Busque el uso de suelo de su interes",
+  "visualization.source.farmtypes": "Ingrese un tipo de producción rural",
+  "visualization.source.agproducts": "Busque su producto agropecuario de interes",
 
   "visualization.search.departments": "Búsque por departamento o código DANE",
   "visualization.search.cities": "Búsque por departamento, ciudad o código DANE",
@@ -764,6 +767,9 @@ export default {
   "visualization.search.products": "Búsque por nombre de producto o partida arancelaría",
   "visualization.search.industries": "Búsque por sector o código CIIU",
   "visualization.search.partners": "Búsque socios comerciales",
+  "visualization.search.landUses": "Búsque por uso de suelo",
+  "visualization.search.farmtypes": "Búsque por producción rural",
+  "visualization.search.agproducts": "Búsque por producto agropecuario",
   "visualization.search.first.partners": "REGIÓN",
   "visualization.search.second.partners": "PAÍS",
 

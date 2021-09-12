@@ -31,13 +31,13 @@ export default Router.map(function() {
   this.resource('location', { path: 'location'}, function() {
     this.route('show', {path: ':location_id'});
     this.route('abstract', {path: ':location_id/abstract/'});
-
     this.route('route', {path: ':location_id/route/'});
     this.route('productmap', {path: ':location_id/route/product_map/'});
-
     this.route('locationimports', {path: ':location_id/route/imports/'});
-
     this.route('locationwages', {path: ':location_id/route/wages/'});
+
+    this.route('complexsectors', {path: ':location_id/route/complex_sectors/'});
+    this.route('ruralactivities', {path: ':location_id/route/rural_activities/'});
 
 
     //this.route('productmapdecentralized', {path: ':location_id/route/product_map/decentralized/'});

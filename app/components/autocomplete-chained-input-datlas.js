@@ -99,7 +99,6 @@ export default Ember.Component.extend({
     }
 
     data.unshift({ id: "", text: ""})
-    console.log(placeholder)
 
     $eventSelect2.select2({
       placeholder: placeholder,

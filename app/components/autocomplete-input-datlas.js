@@ -26,8 +26,6 @@ export default Ember.Component.extend({
     var data = this.get('data_search')
     var placeholder = this.get("placeHolder")
 
-    console.log(type)
-
 
 
     if(placeholder === null){

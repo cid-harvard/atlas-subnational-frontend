@@ -43,6 +43,8 @@ export default Ember.Route.extend({
 
     var productSectionColor = $.getJSON('assets/color_mappings/product_section_colors.json');
     var partnersSectionColor = $.getJSON('assets/color_mappings/partners_section_colors.json');
+    var farmtypesSectionColor = $.getJSON('assets/color_mappings/farmtypes_section_colors.json');
+    var agproductsSectionColor = $.getJSON('assets/color_mappings/agproducts_section_colors.json');
     var industrySectionColor = $.getJSON(`assets/color_mappings/${this.get('i18n.country')}-industry_section_colors.json`);
     var industrySpace = $.getJSON(`assets/networks/${this.get('i18n.country')}-industry_space.json`);
     var productSpace = $.getJSON('assets/networks/product_space.json');
@@ -69,7 +71,9 @@ export default Ember.Route.extend({
       industryPCI,
       productSpace,
       industrySpace,
-      partnersSectionColor
+      partnersSectionColor,
+      farmtypesSectionColor,
+      agproductsSectionColor
     ];
 
     return RSVP.allSettled(promises).then((array) => {
@@ -95,6 +99,8 @@ export default Ember.Route.extend({
       let productSpace = array[19].value;
       let industrySpace = array[20].value;
       let partnersSectionColor = array[21].value;
+      let farmtypesSectionColor = array[22].value;
+      let agproductsSectionColor = array[23].value;
 
       // Finds the entity with the `1st digit` that matches
       // sets `group` to the `1st digit code`
@@ -151,9 +157,27 @@ export default Ember.Route.extend({
       });
 
       _.forEach(agproductsMetadata, (d) => {
+
+        let parent = agproductsMetadata[d.parent_id];
+        let color = '#880e4f';
+        let icon = 'fas fa-globe';
+
+        if(parent !== undefined){
+
+          if(d.level === "level3"){
+            let grandparent = agproductsMetadata[parent.parent_id];
+            if(agproductsSectionColor[grandparent.id] !== undefined){
+              color = agproductsSectionColor[grandparent.id].color;
+              icon = agproductsSectionColor[grandparent.id].icon;
+            }
+          }
+
+        }
+
         d.name_short_en = d.name_en;
         d.name_short_es = d.name_es;
-        d.color = '#ccafaf';
+        d.color = color;
+        d.icon = icon;
         d.model = 'agproduct';
       });
 
@@ -167,14 +191,27 @@ export default Ember.Route.extend({
       _.forEach(landUsesMetadata, (d) => {
         d.name_short_en = d.name_en;
         d.name_short_es = d.name_es;
-        d.color = '#ccafaf';
+        d.color = '#880e4f';
         d.model = 'landUse';
       });
 
       _.forEach(farmtypesMetadata, (d) => {
+
+        let color = '#880e4f';
+        let icon = 'fas fa-globe';
+
+        if(farmtypesSectionColor[d.parent_id] !== undefined){
+          color = farmtypesSectionColor[d.parent_id].color;
+        }
+
+        if(farmtypesSectionColor[d.parent_id] !== undefined){
+          icon = farmtypesSectionColor[d.parent_id].icon;
+        }
+
         d.name_short_en = d.name_en;
         d.name_short_es = d.name_es;
-        d.color = '#ccafaf';
+        d.color = color;
+        d.icon = icon;
       });
 
       _.forEach(farmsizesMetadata, (d) => {

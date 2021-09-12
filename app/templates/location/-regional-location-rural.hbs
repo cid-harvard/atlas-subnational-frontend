@@ -1,0 +1,140 @@
+<div class="container-fluid px-md-x10 mt-5">
+  <div class="row">
+
+    <div class="col-sm-12">
+      <p class="text-white">Filtrar por Año</p>
+    </div>
+
+    <div class="col-sm-12">
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 my-auto">
+          <div class="">
+            <select class="form-control form-filter" id="selectYear">
+
+              {{#each year in rangeYears }}
+                <option>{{year}}</option>
+              {{/each}}
+
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mx-auto">
+          <button class="btn btn-outline-secondary" {{action "setStartYear"}}>FILTRAR</button>
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+          <ul class="nav nav-pills center-pills" id="pills-tab-tables-graphics" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-graphic-tab" data-toggle="pill" href="#pills-graphics" role="tab" aria-controls="pills-graphics" aria-selected="true">
+                VER COMO GRÁFICA
+              </a>
+            </li>
+
+            <li class="nav-item ml-5">
+              <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-table-tab" data-toggle="pill" href="#pills-tables" role="tab" aria-controls="pills-tables" aria-selected="true">
+                VER COMO TABLA
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-12">
+      <h1 class="text-white mt-5 pt-5">Actividades rurales</h1>
+    </div>
+
+    <div class="col-sm-12 mt-5 pt-5">
+      <h1 class="text-white d-inline">Selector</h1>
+      <p class="text-white d-inline ml-5 pl-5">Utilice el selector para cambiar la Información</p>
+    </div>
+
+    <div class="col-sm-12 mt-5">
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 my-auto">
+          <div class="">
+            <select class="form-control form-filter" id="selectType" {{action "selectSource" on="change"}}>
+              <option value="1">Uso del suelo</option>
+              <option value="2">Unidades de producción agropecuaria y no agropecuaria</option>
+              <option value="3">Hectáreas sembradas por cultivo</option>
+              <option value="4">Hectáreas cosechadas por cultivo</option>
+              <option value="5">Toneladas producidas por cultivo</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-sm-12">
+      <div class="mt-5 tab-content" id="pills-tabContent">
+
+        <div class="tab-pane fade active show" id="pills-graphics" role="tabpanel" aria-labelledby="pills-graphics">
+          <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
+            <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
+              {{#if showGrap}}
+                <h1 class="text-white">{{Title}}: {{headerValue}} ({{startDate}})</h1>
+                {{
+                  zoomable-treemap
+                  data=filteredData
+                  immutableData=filteredData
+                  varDependent=variable
+                  elementId='zoomable-export-value-treemap'
+                  class="position-relative"
+                  color='pink'
+                  filterCategory=canFilterCategory
+                }}
+              {{/if}}
+            </div>
+
+          </div>
+        </div>
+
+        <div class="tab-pane fade show" id="pills-tables" role="tabpanel" aria-labelledby="pills-tables">
+
+
+          <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
+            <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
+              {{
+                datlas-table
+                data=filteredData
+                source=source
+                entityType=''
+                search=search
+                startDate=startDate
+                endDate=endDate
+                elementId="productssourceTable"
+              }}
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container-fluid my-5 pr-5">
+      <div class="text-right">
+
+        {{#link-to 'location.visualization' model.id source vizualization variable (query-params startDate=startDate endDate=startDate search='null')
+          class="btn btn-outline-secondary"
+        }}
+          <i class="far fa-plus pr-2" aria-hidden="true"></i>
+          VER MAS
+        {{/link-to}}
+
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

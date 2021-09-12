@@ -42,7 +42,7 @@ export default Ember.Component.extend({
     }
 
     return data.map(item => {
-      if(_.get(item, `parent_name_${this.get('i18n').display}`) === _.get(item, `name_${this.get('i18n').display}`)){
+      if(_.get(item, `parent_name_${this.get('i18n').display}`) === _.get(item, `name_${this.get('i18n').display}`) && _.get(item, `same_parent`) === undefined){
         return {
           key:_.get(item, key),
           color: _.get(item, "color"),
@@ -92,7 +92,7 @@ export default Ember.Component.extend({
     var self = this;
     var updatedData = data.map(item => {
 
-      if(_.get(item, `parent_name_${this.get('i18n').display}`) === _.get(item, `name_${this.get('i18n').display}`)){
+      if(_.get(item, `parent_name_${this.get('i18n').display}`) === _.get(item, `name_${this.get('i18n').display}`) && _.get(item, `same_parent`) === undefined){
         return {
           key:_.get(item, key),
           color: _.get(item, "color"),
