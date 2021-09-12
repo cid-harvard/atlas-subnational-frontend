@@ -160,12 +160,13 @@ export default Ember.Component.extend(TableMap, {
   },
   updatedData: computed('data.[]', 'tableMap', 'i18n.locale', 'source', 'search', 'startDate', function() {
     var data = this.get("data");
+    var tableMap = this.get('tableMap')
 
     if(data === undefined){
       data = [];
     }
 
-    var columns = this.get('tableMap').map((column) => { return column.key })
+    var columns = tableMap.map((column) => { return column.key })
 
     var that = this;
 
@@ -186,7 +187,10 @@ export default Ember.Component.extend(TableMap, {
         return testSpan + item[`parent_name_${that.get('i18n').display}`];
       }
       else if(key === 'parent_name'){
-        return item[`parent_name_${that.get('i18n').display}`];
+        if(item.hasOwnProperty(`parent_name_${that.get('i18n').display}`)){
+          return item[`parent_name_${that.get('i18n').display}`];
+        }
+        return ""
       }
       else if(!item.hasOwnProperty(key)){
         return null;
@@ -432,7 +436,7 @@ export default Ember.Component.extend(TableMap, {
     var language = this.get("getLanguage");
 
     if(columns.length === 0){
-      columns = this.get('titlesCache');
+      columns = [{"title": "", "data": ""}];
     }else{
       this.set('titlesCache', columns);
     }
@@ -442,6 +446,10 @@ export default Ember.Component.extend(TableMap, {
 
     if(this.get("order") !== undefined){
       order = this.get("order")
+    }
+
+    if(updatedData.length === 0){
+      order = [[ 0, "desc" ]];
     }
 
 

@@ -230,8 +230,6 @@ export default Ember.Controller.extend({
 
   filterData: computed('source', function(){
 
-    console.log(this.get("model"))
-
     if(this.get('source') == 'departments'){
       return this.get('locationsData')
     }

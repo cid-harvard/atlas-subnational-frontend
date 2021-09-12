@@ -377,6 +377,14 @@ export default Ember.Mixin.create({
       return columns;
     }
   }),
+  livestockDataMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'name', copy: 'livestock' },
+      { key: 'num_farms' },
+      { key: 'num_livestock' },
+    ];
+    return columns;
+  }),
   partnersExportsMap: computed('featureToggle.showImports', function() {
     let columns = [
       { key: 'name', copy: 'country' },

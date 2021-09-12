@@ -50,7 +50,11 @@ export default Ember.Route.extend({
 
     var farmtypes = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/farmtypes/?level=level2`);
 
-    return RSVP.allSettled([products, dotplot, industries, subregions_trade, occupations, agproducts, landuses, ag_farmsizes, nonag_farmsizes, partners, farmtypes]).then((array) => {
+    var nonags = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/nonags/?level=level3`);
+
+    var livestock = Ember.$.getJSON(`${apiURL}/data/location/${model.id}/livestock/?level=level1`);
+
+    return RSVP.allSettled([products, dotplot, industries, subregions_trade, occupations, agproducts, landuses, ag_farmsizes, nonag_farmsizes, partners, farmtypes, nonags, livestock]).then((array) => {
       var productsData = getWithDefault(array[0], 'value.data', []);
 
       var dotplotData = getWithDefault(array[1], 'value.data', []);//dotplots
@@ -69,6 +73,8 @@ export default Ember.Route.extend({
 
       var partnersData = getWithDefault(array[9], 'value.data', []);
       var farmtypesDataValues = getWithDefault(array[10], 'value.data', []);
+      var nonagsDataValues = getWithDefault(array[11], 'value.data', []);
+      var livestockDataValues = getWithDefault(array[12], 'value.data', []);
 
       var productsDataIndex = _.indexBy(productsData, 'product_id');
       var industriesDataIndex = _.indexBy(industriesData, 'industry_data');
@@ -81,6 +87,8 @@ export default Ember.Route.extend({
       let landusesMetadata = this.modelFor('application').landUses;
       let partnersMetadata = this.modelFor('application').partnerCountries;
       let farmtypesMetadata = this.modelFor('application').farmtypes;
+      let nonagsMetadata = this.modelFor('application').nonags;
+      let livestockMetadata = this.modelFor('application').livestock;
 
 
       //get products data for the department
@@ -298,6 +306,22 @@ export default Ember.Route.extend({
         return merged;
       });
 
+      let nonagsData = _.map(nonagsDataValues, (d) => {
+        d.year = this.get('agcensusLastYear');
+        let merged = _.merge(copy(d), nonagsMetadata[d.nonag_id]);
+        merged.group = merged.code;
+        return merged;
+      });
+
+      let livestockData = _.map(livestockDataValues, (d) => {
+        d.year = this.get('agcensusLastYear');
+        let merged = _.merge(copy(d), livestockMetadata[d.livestock_id]);
+        merged.group = merged.code;
+        return merged;
+      });
+
+
+
 
       model.set('productsData', products);
       model.set('agproductsData', agproducts);
@@ -314,6 +338,8 @@ export default Ember.Route.extend({
       model.set('allPartners', allPartners);
       model.set('allProducts', allProducts);
       model.set('farmtypesData', farmtypesData);
+      model.set('nonagsData', nonagsData);
+      model.set('livestockData', livestockData);
 
       return model;
     });
