@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
 
 
   locationsData: computed('model.locations', 'i18n.locale', function() {
-    let locations = get(this, 'model.locations');
+    let locations = get(this, 'model.locations').filter(item => item.id !== '0');
     let locale = this.get('i18n').display
 
     return locations.map(function(location){

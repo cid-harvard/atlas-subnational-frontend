@@ -784,8 +784,12 @@ export default {
   "export_value": "Exportaciones (En millones de dólares FOB)",
   "import_value": "Importaciones (En millones de dólares FOB)",
 
-  "modal.geo.visualization.title": "Ayuda del componente",
-  "modal.geo.visualization.p1": "En el selector de año haga uso de los botones ",
-  "modal.geo.visualization.p2": "para navegar por los años, esto hara que el componente y su información varie dependiendo de la selección.",
-  "modal.geo.visualization.p3": "En el siguiente componente puede ingresar o selecionar un termino, esto hara que la visualización y su información se actualice.",
+  "modal.visualization.title": "Ayuda del componente",
+  "modal.visualization.p1": "En el selector de año haga uso de los botones ",
+  "modal.visualization.p2": "para navegar por los años, esto hara que el componente y su información varie dependiendo de la selección.",
+  "modal.visualization.p3": "En el Buscador haga uso del siguiente campo",
+  "modal.visualization.p4.departments": "para diligenciar un termino de busqueda en este caso puede ser por departamento o codigo CIIU, esto hara que el componente y su información varie dependiendo del termino buscado.",
+  "modal.visualization.p4.cities": "para diligenciar un termino de busqueda en este caso puede ser por departamento, ciudad o codigo CIIU, esto hara que el componente y su información varie dependiendo del termino buscado.",
+  "modal.visualization.p4.partners": "para diligenciar un termino de busqueda en este caso puede ser por nombre del país y/o región, esto hara que el componente y su información varie dependiendo del termino buscado.",
+  "modal.visualization.p4.products": "para diligenciar un termino de busqueda en este caso puede ser por nombre de producto o partida arancelaria, esto hara que el componente y su información varie dependiendo del termino buscado.",
 };

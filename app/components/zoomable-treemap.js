@@ -249,6 +249,7 @@ export default Ember.Component.extend({
     var value_text = this.get('i18n').t(`graph_builder.table.${this.get('varDependent')}`).string;
     var self = this;
     var canUpdateBuildermodSearchService = this.get("canUpdateBuildermodSearchService");
+    var varDependent = this.get('varDependent');
 
     var defaults = {
       margin: {top: 24, right: 0, bottom: 0, left: 0},
@@ -359,10 +360,14 @@ export default Ember.Component.extend({
     }
     var mousemove = function(d) {
 
+      var valueFormated = self.formatNumber(d.value, varDependent, self.get('i18n'));
+
       let dataTooltip = '';
 
       if(d.hasOwnProperty("tooltips")){
         d.tooltips.forEach(item =>{
+          //DIDI
+
           dataTooltip += `<p class="text-center mb-0">${item.name}: ${item.value}</p>`;
         });
       }
@@ -371,7 +376,7 @@ export default Ember.Component.extend({
       Tooltip
         .html(`
         <p class="text-center mb-0 text_yellow">${d.key}</p>
-        <p class="text-center mb-0">${defaults.value_text}: ${d.value}</p>
+        <p class="text-center mb-0">${defaults.value_text}: ${valueFormated}</p>
         ${dataTooltip}
         <p class="text-center mb-0">${defaults.percent_text}: ${(d.area * 100).toFixed(1)} %</p>
         `)

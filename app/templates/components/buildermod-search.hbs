@@ -76,63 +76,152 @@
         </div>
         <div class="modal-body">
 
-          {{#if (is-equal visualization "geo")}}
-            <div class="row h-100 px-4">
-              <div class="col-sm-12 col-md-12 my-auto text-left">
-                <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.geo.visualization.title'}}</h2>
-                <div class="mb-3 mt-3">
-                  <p class="text-white d-inline mr-3">1. {{ t 'modal.geo.visualization.p1'}} </p>
-                  <button class="btn btn-outline-secondary d-inline mr-3">{{t 'graph_builder.settings.year.previous'}}</button>
-                  <p class="text-white d-inline mr-3">{{startDate}}</p>
-                  <button class="btn btn-outline-secondary d-inline mr-3">{{t 'graph_builder.settings.year.next'}}</button>
-                  <p class="text-white d-inline mr-3">{{ t 'modal.geo.visualization.p2'}}</p>
+          {{#if isSingleYearData}}
+            {{#if (is-equal visualization "geo")}}
+              <div class="row h-100 px-4">
+                  <div class="col-sm-12 col-md-12 my-auto text-left">
+                    <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.visualization.title'}}</h2>
+                    <div class="mb-3 my-5">
+                      <p class="text-white mr-3 mb-3">1. {{ t 'modal.visualization.p3'}}</p>
+                      {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
+                      <p class="text-white mr-3 mb-3 mt-3">{{ t (is-concat 'modal.visualization.p4.' source) }}</p>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
+                  </div>
                 </div>
-                <div class="mb-3 my-5">
-                  <p class="text-white mr-3 mb-3">2. {{ t 'modal.geo.visualization.p3'}}</p>
-                  {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
-                </div>
-              </div>
-              <div class="col-sm-12">
-                <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
-              </div>
-            </div>
-          {{/if}}
+            {{/if}}
 
-          {{#if (is-equal visualization "treemap")}}
-            <div class="row h-100 px-4">
-              <div class="col-sm-12 col-md-12 my-auto text-left">
-                <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.geo.visualization.title'}}</h2>
-                <div class="mb-3 mt-3">
-                  <p class="text-white d-inline mr-3">1. {{ t 'modal.geo.visualization.p1'}} </p>
-                  <button class="btn btn-outline-secondary d-inline mr-3">{{t 'graph_builder.settings.year.previous'}}</button>
-                  <p class="text-white d-inline mr-3">{{startDate}}</p>
-                  <button class="btn btn-outline-secondary d-inline mr-3">{{t 'graph_builder.settings.year.next'}}</button>
-                  <p class="text-white d-inline mr-3">{{ t 'modal.geo.visualization.p2'}}</p>
+            {{#if (is-equal visualization "treemap")}}
+              <div class="row h-100 px-4">
+                <div class="col-sm-12 col-md-12 my-auto text-left">
+                  <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.visualization.title'}}</h2>
+                  <div class="mb-3 my-5">
+                    <p class="text-white mr-3 mb-3">1. {{ t 'modal.visualization.p3'}}</p>
+                    {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
+                    <p class="text-white mr-3 mb-3 mt-3">{{ t (is-concat 'modal.visualization.p4.' source) }}</p>
+                  </div>
                 </div>
-                <div class="mb-3 my-5">
-                  <p class="text-white mr-3 mb-3">2. {{ t 'modal.geo.visualization.p3'}}</p>
-                  {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
+                <div class="col-sm-12">
+                  <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
                 </div>
               </div>
-              <div class="col-sm-12">
-                <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
-              </div>
-            </div>
-          {{/if}}
+            {{/if}}
 
-          {{#if (is-equal visualization "multiples")}}
-            <div class="row h-100 px-4">
-              <div class="col-sm-12 col-md-12 my-auto text-left">
-                <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.geo.visualization.title'}}</h2>
-                <div class="mb-3 my-5">
-                  <p class="text-white mr-3 mb-3">1. {{ t 'modal.geo.visualization.p3'}}</p>
-                  {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
+            {{#if (is-equal visualization "multiples")}}
+
+              {{#if (is-equal source "partners")}}
+                <div class="row h-100 px-4">
+                <div class="col-sm-12 col-md-12 my-auto text-left">
+                  <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.visualization.title'}}</h2>
+                  <div class="mb-3 my-5">
+                    <p class="text-white mr-3 mb-3">1. {{ t 'modal.visualization.p3'}}</p>
+                    <p class="text-white mr-3 mb-3">REGIÓN</p>
+                    {{autocomplete-chained-input-datlas data_search=filterDataNull type='chained' idSelect='searchSelect3' idSelect2='searchSelect4' source=source search=search}}
+                    <p class="text-white mr-3 mb-3 mt-3">{{ t (is-concat 'modal.visualization.p4.' source) }}</p>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
                 </div>
               </div>
-              <div class="col-sm-12">
-                <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
+              {{else}}
+                <div class="row h-100 px-4">
+                <div class="col-sm-12 col-md-12 my-auto text-left">
+                  <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.visualization.title'}}</h2>
+                  <div class="mb-3 my-5">
+                    <p class="text-white mr-3 mb-3">1. {{ t 'modal.visualization.p3'}}</p>
+                    {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
+                    <p class="text-white mr-3 mb-3 mt-3">{{ t (is-concat 'modal.visualization.p4.' source) }}</p>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
+                </div>
               </div>
-            </div>
+              {{/if}}
+
+            {{/if}}
+          {{else}}
+            {{#if (is-equal visualization "geo")}}
+              <div class="row h-100 px-4">
+                <div class="col-sm-12 col-md-12 my-auto text-left">
+                  <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.visualization.title'}}</h2>
+                  <div class="mb-3 mt-3">
+                    <p class="text-white d-inline mr-3">1. {{ t 'modal.visualization.p1'}} </p>
+                    <button class="btn btn-outline-secondary d-inline mr-3">{{t 'graph_builder.settings.year.previous'}}</button>
+                    <p class="text-white d-inline mr-3">{{startDate}}</p>
+                    <button class="btn btn-outline-secondary d-inline mr-3">{{t 'graph_builder.settings.year.next'}}</button>
+                    <p class="text-white d-inline mr-3">{{ t 'modal.visualization.p2'}}</p>
+                  </div>
+                  <div class="mb-3 my-5">
+                    <p class="text-white mr-3 mb-3">2. {{ t 'modal.visualization.p3'}}</p>
+                    {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
+                    <p class="text-white mr-3 mb-3 mt-3">{{ t (is-concat 'modal.visualization.p4.' source) }}</p>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
+                </div>
+              </div>
+            {{/if}}
+
+            {{#if (is-equal visualization "treemap")}}
+              <div class="row h-100 px-4">
+                <div class="col-sm-12 col-md-12 my-auto text-left">
+                  <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.visualization.title'}}</h2>
+                  <div class="mb-3 mt-3">
+                    <p class="text-white d-inline mr-3">1. {{ t 'modal.visualization.p1'}} </p>
+                    <button class="btn btn-outline-secondary d-inline mr-3">{{t 'graph_builder.settings.year.previous'}}</button>
+                    <p class="text-white d-inline mr-3">{{startDate}}</p>
+                    <button class="btn btn-outline-secondary d-inline mr-3">{{t 'graph_builder.settings.year.next'}}</button>
+                    <p class="text-white d-inline mr-3">{{ t 'modal.visualization.p2'}}</p>
+                  </div>
+                  <div class="mb-3 my-5">
+                    <p class="text-white mr-3 mb-3">2. {{ t 'modal.visualization.p3'}}</p>
+                    {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
+                    <p class="text-white mr-3 mb-3 mt-3">{{ t (is-concat 'modal.visualization.p4.' source) }}</p>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
+                </div>
+              </div>
+            {{/if}}
+
+            {{#if (is-equal visualization "multiples")}}
+              {{#if (is-equal source "partners")}}
+                <div class="row h-100 px-4">
+                <div class="col-sm-12 col-md-12 my-auto text-left">
+                  <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.visualization.title'}}</h2>
+                  <div class="mb-3 my-5">
+                    <p class="text-white mr-3 mb-3">1. {{ t 'modal.visualization.p3'}}</p>
+                    <p class="text-white mr-3 mb-3">REGIÓN</p>
+                    {{autocomplete-chained-input-datlas data_search=filterDataNull type='chained' idSelect='searchSelect3' idSelect2='searchSelect4' source=source search=search}}
+                    <p class="text-white mr-3 mb-3 mt-3">{{ t (is-concat 'modal.visualization.p4.' source) }}</p>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
+                </div>
+              </div>
+              {{else}}
+                <div class="row h-100 px-4">
+                <div class="col-sm-12 col-md-12 my-auto text-left">
+                  <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.visualization.title'}}</h2>
+                  <div class="mb-3 my-5">
+                    <p class="text-white mr-3 mb-3">1. {{ t 'modal.visualization.p3'}}</p>
+                    {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
+                    <p class="text-white mr-3 mb-3 mt-3">{{ t (is-concat 'modal.visualization.p4.' source) }}</p>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
+                </div>
+              </div>
+              {{/if}}
+            {{/if}}
           {{/if}}
 
           <!--<div class="row h-100 px-4">

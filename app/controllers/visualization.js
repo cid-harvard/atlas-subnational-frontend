@@ -311,6 +311,18 @@ export default Ember.Controller.extend({
     }
     return  [this.get('firstYear'), this.get('lastYear')];
   }),
+  isSingleYearData: computed('dateExtent', function(){
+    let dateExtent = this.get('dateExtent');
+    if (dateExtent){
+      if (dateExtent[1] - dateExtent[0] > 0){
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }),
   dateRange: computed('dateExtent', function() {
     return d3.range(this.get('dateExtent')[0], this.get('dateExtent')[1] + 1);
   }),

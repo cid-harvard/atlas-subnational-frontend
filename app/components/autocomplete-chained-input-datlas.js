@@ -83,8 +83,14 @@ export default Ember.Component.extend({
     var data = []
     var placeholder = this.get("placeHolder")
 
+    var data_search = this.get('data_search');
 
-    this.get('data_search').filter(item => {
+
+    if(data_search === undefined){
+      data_search = []
+    }
+
+    data_search.filter(item => {
       return item.id == searchSelect1
     }).map(item => {
       item.chained.map(item => data.push(item))

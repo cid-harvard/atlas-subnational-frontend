@@ -17,12 +17,16 @@ export default Ember.Controller.extend({
 
     //console.log(filter);
 
+    if(filter === "location"){
+      model = {"location": model.location.filter(item => item.id !== '0')};
+    }
+
     if(filter === "locations_route"){
-      model = {"location": model.location}
+      model = {"location": model.location.filter(item => item.id !== '0')};
     }
 
     if(filter === "products_route"){
-      model = {"product": model.product}
+      model = {"product": model.product};
     }
 
 
