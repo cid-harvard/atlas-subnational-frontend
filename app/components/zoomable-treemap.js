@@ -304,6 +304,26 @@ export default Ember.Component.extend({
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         .style("shape-rendering", "crispEdges");
 
+    if(data.values.length === 0){
+      var zero_g = svg.append("g")
+
+      var rectdata = zero_g.append("rect")
+        .attr("y", -margin.top)
+        .attr("width", width)
+        .attr("height", height)
+        .style("fill", "#C2C4FF")
+        .style("stroke", "#292A48")
+
+      zero_g.append("text")
+        .attr("x", width/3 + width/15)
+        .attr("y", height/2)
+        .attr("dy", ".75em")
+        .style("font-family", "sans-serif")
+        .style("font-size", "1.5rem")
+        .text("NO HAY DATOS DISPONIBLES");
+
+    }
+
     var grandparent = svg.append("g")
         .attr("class", "grandparent");
 
@@ -382,6 +402,8 @@ export default Ember.Component.extend({
     } else {
       root = data;
     }
+
+
 
     initialize(root);
     accumulate(root);

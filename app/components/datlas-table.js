@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import TableMap from '../mixins/table-map';
+import numeral from 'numeral';
 
 const {computed, observer, get:get} = Ember;
 
@@ -96,6 +97,7 @@ export default Ember.Component.extend(TableMap, {
 
   }),
   formatNumber: (number, key, i18n) => {
+
     var decimalVars = [
       'export_rca',
       'eci',
@@ -140,7 +142,8 @@ export default Ember.Component.extend(TableMap, {
     if(_.include(wageVarsInThousands, key)){
       return numeral(number).divide(1000).format('0,0');
     } else if(_.include(decimalVars, key)){
-      return numeral(number).format('0.00a');
+      var result = numeral(number).format('0.00a')
+      return String(result).replace(",", "@").replace(".", "").replace("@", ".");
     } else if(key === 'employment'){
       return numeral(Math.ceil(number)).format('0,0');
     } else if(key === 'num_establishments' || key === 'export_num_plants'){
@@ -261,7 +264,7 @@ export default Ember.Component.extend(TableMap, {
               "fillHorizontal": "Rellenar celdas horizontalmente",
               "fillVertical": "Rellenar celdas verticalmentemente"
           },
-          "decimal": ",",
+          "decimal": ".",
           "searchBuilder": {
               "add": "Añadir condición",
               "button": {
@@ -349,7 +352,7 @@ export default Ember.Component.extend(TableMap, {
                   "_": "%d filas seleccionadas"
               }
           },
-          "thousands": ".",
+          "thousands": ",",
           "datetime": {
               "previous": "Anterior",
               "next": "Proximo",

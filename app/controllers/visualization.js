@@ -874,6 +874,10 @@ export default Ember.Controller.extend({
       return _.contains(timeRange, get(d, 'year'));
     });
   },
+  updateSearch: observer('source', 'variable', function () {
+    this.set('buildermodSearchService.search', null)
+  }),
+
   scrollTopWhenUpdate: observer('variable', function() {
     window.scrollTo(0,0);
   }),

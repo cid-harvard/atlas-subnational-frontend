@@ -166,6 +166,14 @@ export default Ember.Component.extend({
     });
 
   }),
+  updatebuildermodSearchService: observer('buildermodSearchService.search', function () {
+    if(this.get("buildermodSearchService.search") === null){
+      let id_select = this.get('idSelect');
+      var $eventSelect = $(`#${id_select}`);
+      $eventSelect.val('');
+      $eventSelect.trigger('change');
+    }
+  }),
   actions: {
     reset: function() {
       this.set('search', null);

@@ -184,8 +184,6 @@ export default Ember.Route.extend({
     let {model, agproducts } = hash;
     let agproductsMetadata = this.modelFor('application').agproducts;
 
-    var ids = []
-
     let data = _.map(agproducts.data, (d) => {
       let merged = _.merge(copy(d), agproductsMetadata[d.agproduct_id]);
 

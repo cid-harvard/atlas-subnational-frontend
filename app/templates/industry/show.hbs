@@ -166,3 +166,13 @@
   </div>
 
 {{/if}}
+
+<div class="container-fluid px-md-x10 pb-5">
+  <div class="text-right">
+    {{#link-to 'industry.visualization' model.id 'departments' 'geo' 'employment' (query-params startDate=lastYear endDate=lastYear toolTips="rca")
+      class="btn btn-outline-secondary"
+    }}
+    SIGUIENTE
+    {{/link-to}}
+  </div>
+</div>
