@@ -549,14 +549,20 @@ export default Ember.Controller.extend({
   }),
   geoLegend: computed('scale', function(){
     let scale =  this.get('scale');
+    var self = this;
     return scale.range().map(function(t){
       let extents = scale.invertExtent(t);
+      let alterShadeClass = '';
+      if (self.get('endDate') || self.get('startDate')){
+        const date = self.get('endDate') || self.get('startDate');
+        alterShadeClass = `s${date % 3}`;
+      }
       return {
         "start": numeral(extents[0]).format('0.0a'),
         "start_value": extents[0],
         "end": numeral(extents[1]).format('0.0a'),
         "end_value": extents[1],
-        "class": new Ember.Handlebars.SafeString(`fa fa-circle ${scale(extents[0])}`),
+        "class": new Ember.Handlebars.SafeString(`fa fa-circle ${scale(extents[0])} ${alterShadeClass}`),
         "range": `${scale(extents[0])}`
       };
     });

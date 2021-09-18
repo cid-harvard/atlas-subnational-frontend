@@ -122,7 +122,13 @@
           {{#unless isGeo }}
 
           {{else}}
-              {{component 'visualization-legend-geomap' legend=geoLegend varDependent=varDependent classNames='col-md-4 d-flex flex-column justify-content-around' }}
+              {{component 'visualization-legend-geomap'
+                          legend=geoLegend
+                          varDependent=varDependent
+                          startDate=startDate
+                          dateExtent=dateExtent
+                          endDate=endDate
+                          classNames='col-md-4 d-flex flex-column justify-content-around' }}
           {{/unless}}
         {{/if}}
 
