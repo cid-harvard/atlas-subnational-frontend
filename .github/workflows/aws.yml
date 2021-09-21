@@ -34,7 +34,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    environment: deploy
+    environment: deploy2
 
     steps:
     - name: Checkout
@@ -67,7 +67,7 @@ jobs:
 
     - name: Download task definition
       run: |
-        aws ecs describe-task-definition --task-definition datlas-col-app-front --query taskDefinition > task-definition.json
+        aws ecs describe-task-definition --task-definition ${{ secrets.ECS_TASK_DEFINITION }} --query taskDefinition > task-definition.json
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
