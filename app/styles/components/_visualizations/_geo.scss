@@ -39,37 +39,99 @@
   }
 
   // The scale if the value is positive
-  .q0-5 {
+  .q0-5.s0 {
     fill: $colorGreenQ0-5;
   }
-  .q1-5 {
+  .q0-5.s1 {
+    fill: $colorBlueQ0-5;
+  }
+  .q0-5.s2 {
+    fill: $colorPinkQ0-5;
+  }
+  .q1-5.s0 {
     fill: $colorGreenQ1-5;
   }
-  .q2-5 {
+  .q1-5.s1 {
+    fill: $colorBlueQ1-5;
+  }
+  .q1-5.s2 {
+    fill: $colorPinkQ1-5;
+  }
+  .q2-5.s0 {
     fill: $colorGreenQ2-5;
   }
-  .q3-5 {
+  .q2-5.s1 {
+    fill: $colorBlueQ2-5;
+  }
+  .q2-5.s2 {
+    fill: $colorPinkQ2-5;
+  }
+  .q3-5.s0 {
     fill: $colorGreenQ3-5;
   }
-  .q4-5 {
+  .q3-5.s1 {
+    fill: $colorBlueQ3-5;
+  }
+  .q3-5.s2 {
+    fill: $colorPinkQ3-5;
+  }
+  .q4-5.s0 {
     fill: $colorGreenQ4-5;
+  }
+  .q4-5.s1 {
+    fill: $colorBlueQ4-5;
+  }
+  .q4-5.s2 {
+    fill: $colorPinkQ4-5;
   }
 }
 
-.q0-5 {
-    color: $colorGreenQ0-5;
+.q0-5.s0 {
+  color: $colorGreenQ0-5;
 }
-.q1-5 {
-    color: $colorGreenQ1-5;
+.q0-5.s1 {
+  color: $colorBlueQ0-5;
 }
-.q2-5 {
-    color: $colorGreenQ2-5;
+.q0-5.s2 {
+  color: $colorPinkQ0-5;
 }
-.q3-5 {
-    color: $colorGreenQ3-5;
+.q1-5.s0 {
+  color: $colorGreenQ1-5;
 }
-.q4-5 {
-    color: $colorGreenQ4-5;
+.q1-5.s1 {
+  color: $colorBlueQ1-5;
+}
+.q1-5.s2 {
+  color: $colorPinkQ1-5;
+}
+.q2-5.s0 {
+  color: $colorGreenQ2-5;
+}
+.q2-5.s1 {
+  color: $colorBlueQ2-5;
+}
+.q2-5.s2 {
+  color: $colorPinkQ2-5;
+}
+
+.q3-5.s0 {
+  color: $colorGreenQ3-5;
+}
+.q3-5.s1 {
+  color: $colorBlueQ3-5;
+}
+.q3-5.s2 {
+  color: $colorPinkQ3-5;
+}
+
+.q4-5.s0 {
+  color: $colorGreenQ4-5;
+}
+.q4-5.s1 {
+  color: $colorBlueQ4-5;
+}
+.q4-5.s2 {
+  color: $colorPinkQ4-5;
 }
 
 

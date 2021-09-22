@@ -120,21 +120,25 @@ export default Ember.Component.extend({
     let nestByDepartmentId = d3.nest()
       .key(function(d) { return Ember.get(d,'department_id'); })
       .entries(data);
-
+    var self = this;
     _.forEach(nestByDepartmentId, function(location) {
       let params = {};
       toolTipsData.forEach(varDependent => {
         let sum = _.sum(location.values, varDependent) || 0;
         let shadeClass = sum === 0 ? 'q0' : quantize(sum);
-
+        let alterShadeClass = '';
+        if (self.get('endDate') || self.get('startDate')){
+          const date = self.get('endDate') || self.get('startDate');
+          alterShadeClass = `s${date % 3}`;
+        }
         if(range !== null){
           if(shadeClass !== range[2]){
-            shadeClass = 'q0'
+            shadeClass = 'q0';
           }
         }
         params[varDependent] = {
           value: _.sum(location.values, varDependent),
-          class: `geo__department ${shadeClass}`,
+          class: `geo__department ${shadeClass} ${alterShadeClass}`,
         };
       });
       valueMap.set(parseInt(location.key), params);
