@@ -303,7 +303,7 @@
               <p class="text_yellow">BAJO NIVEL DE COMPLEJIDAD</p>
             </div>
           </div>
-
+          <p>{{vistkNetworkService.updated}}</p>
 
           <div class="row">
             {{vistk-network
@@ -320,13 +320,14 @@
               filterCategory=true
               title="SECTORES DE"
               subtitle="LOS PRODUCTOS"
+              categoriesFilterList=categoriesFilterListlastProductsData
             }}
           </div>
 
         </div>
 
       </div>
-
+      <p>{{categoriesFilterListlastIndustryData}}</p>
       <div class="tab-pane fade show" id="pills-space" role="tabpanel" aria-labelledby="pills-space">
         <div class="container-fluid mt-5 pt-5">
           {{vistk-network
@@ -342,6 +343,7 @@
             filterCategory=true
             title="SECTORES"
             subtitle="LOS PRODUCTOS"
+            categoriesFilterList=categoriesFilterListlastIndustryData
           }}
         </div>
       </div>

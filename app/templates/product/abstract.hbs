@@ -1,4 +1,4 @@
-{{component "stream-header" model=modelData type='product' firstYear=firstYear lastYear=lastYear}}
+{{component "stream-header" model=modelData type='product' extra_type="product_route" firstYear=firstYear lastYear=lastYear}}
 
 <div class="container-fluid px-md-x10 mt-5 pt-5">
   <div class="row">
@@ -218,4 +218,14 @@
 
   </div>
 
+</div>
+
+<div class="container-fluid px-md-x10 pb-5">
+  <div class="text-right">
+    {{#link-to 'product.complexmap' modelData.id (query-params startDate=startDate endDate=startDate)
+      class="btn btn-outline-secondary"
+    }}
+    SIGUIENTE
+    {{/link-to}}
+  </div>
 </div>

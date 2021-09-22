@@ -16,6 +16,7 @@ export default Ember.Component.extend({
 
   isLocation: computed.equal('type', 'location'),
   isLocationRoute: computed.equal('extra_type', 'location_route'),
+  isProductRoute: computed.equal('extra_type', 'product_route'),
   isProduct: computed.equal('type', 'product'),
   isIndustry: computed.equal('type', 'industry'),
   isLandUse: computed.equal('type', 'landUse'),

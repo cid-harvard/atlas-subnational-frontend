@@ -278,6 +278,24 @@
   }
 }
 
+@media (min-width: 768px){
+  .ml-md-x10{
+    margin-left: ($spacer * 10) !important;
+  }
+
+  .mr-md-x10{
+    margin-right: ($spacer * 10) !important;
+  }
+
+  .mt-md-x10{
+    margin-top: ($spacer * 10) !important;
+  }
+
+  .mx-md-x10{
+    margin: 0 ($spacer * 10);
+  }
+}
+
 .center-pills {
   display: flex;
   justify-content: center;

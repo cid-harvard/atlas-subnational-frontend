@@ -50,7 +50,12 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">{{#link-to 'index'}}Home{{/link-to}}</li>
+
+        {{#if isProductRoute}}
+        <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="products_route")}}{{ t 'search.results_products' }}{{/link-to}}</li>
+        {{else}}
         <li class="breadcrumb-item">{{#link-to 'search' (query-params filter="product")}}{{ t 'search.results_products' }}{{/link-to}}</li>
+        {{/if}}
 
         {{#if isVisualization}}
           <li class="breadcrumb-item">{{#link-to 'product.show' model.id}}{{model.name}}{{/link-to}}</li>

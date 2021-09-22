@@ -25,6 +25,8 @@ export default Router.map(function() {
   this.resource('product', { path: 'product'}, function() {
     this.route('show', { path: ':product_id'});
     this.route('abstract', { path: ':product_id/abstract/'});
+    this.route('complexmap', { path: ':product_id/complexmap/'});
+    this.route('complexmapprimaries', { path: ':product_id/complexmap/primaries/'});
 
     this.route('visualization', { path: ':product_id/source/:source_type/visualization/:visualization_type/:variable'});
   });

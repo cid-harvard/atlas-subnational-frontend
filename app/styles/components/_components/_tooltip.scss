@@ -55,3 +55,60 @@
 .text-principal{
   color: $colorBase;
 }
+
+
+.tooltip_network {
+  background: $colorWhite;
+  height: 110%;
+  padding: $baseSpace/2;
+  z-index: $zIndex-9;
+  min-width: 15rem;
+  max-width: 25rem;
+  font-size: $fontTiny;
+  overflow: initial !important;
+  box-shadow: -1px -1px 5px rgba(0,0,0,0.2);
+  transform: translate(-50%, calc(-100% - 10px));
+  opacity: 1;
+  color: $colorBlack;
+
+  &:after {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: '';
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255, 255, 255, 0);
+    border-top-color: $colorWhite;
+    border-width: 10px;
+    margin-left: -10px;
+  }
+}
+
+
+.irs--sharp .irs-min, .irs--sharp .irs-max{
+  background-color: $colorSecondary;
+}
+
+.irs--sharp .irs-bar{
+  background-color: $colorSecondary;
+}
+
+.irs--sharp .irs-from, .irs--sharp .irs-to, .irs--sharp .irs-single{
+  background-color: $colorSecondary;
+  color: $colorBase;
+}
+
+.irs--sharp .irs-from:before, .irs--sharp .irs-to:before, .irs--sharp .irs-single:before{
+  border-top-color: $colorSecondary;
+}
+
+.irs--sharp .irs-handle{
+  background-color: $colorSecondary;
+}
+
+.irs--sharp .irs-handle>i:first-child{
+  border-top-color: $colorSecondary;
+}

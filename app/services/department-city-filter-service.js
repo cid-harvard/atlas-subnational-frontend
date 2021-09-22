@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
-  search: null,
-  id: null
+  name: "Colombia",
+  id: 0,
+  data: null,
+  date: null,
 });

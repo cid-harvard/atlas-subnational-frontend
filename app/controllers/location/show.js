@@ -5,10 +5,13 @@ const {computed, get:get} = Ember;
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
+  vistkNetworkService: Ember.inject.service(),
   queryParams: ['year'],
 
   startDate: null,
   endDate: null,
+  categoriesFilterListlastProductsData: [],
+  categoriesFilterListlastIndustryData: [],
 
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),

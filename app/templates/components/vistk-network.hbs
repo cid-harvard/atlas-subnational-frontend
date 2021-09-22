@@ -37,8 +37,23 @@
 {{/if}}
 
 {{#if canFilterVcr }}
-  <div class="row d-flex justify-content-center">
-    <label for="customRange1" class="form-label mr-5 title_yellow">VCR: {{VCRValue}}</label>
-    <input type="range" class="form-range" id="customRange1" min="0" max="10" step="1" value="{{VCRValue}}" {{action "range_update" on="change"}}>
+  <div class="row d-flex justify-content-center mb-5 pb-5">
+    <div style="width: 300px;">
+      <input type="text" class="js-range-slider" name="my_range" value="" />
+    </div>
+    <div class="ml-5 align-self-center">
+      <h1>VCR</h1>
+    </div>
   </div>
 {{/if}}
+
+ <div class="container-fluid pl-md-x10 pr-md-x10">
+    <div class="row mb-5">
+      <div class="col-lg-12">
+          <div class="text-center">
+              <button type="button" class="btn btn-outline-secondary" {{action 'savePng'}}><i class="fas fa-file-image mr-3"></i>Descargar grafico (PNG)</button>
+              <button type="button" class="btn btn-outline-secondary" {{action 'savePdf'}}><i class="fas fa-file-pdf mr-3"></i>Descargar grafico (PDF)</button>
+          </div>
+      </div>
+  </div>
+ </div>
