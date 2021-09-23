@@ -22,18 +22,37 @@
     </div>
     <div class="col-sm-0 col-lg-4"></div>
     <div class="col-sm-12 col-md-6 col-lg-4 mt-5 pt-5">
-      <div>
-        {{#link-to 'product.complexmapprimaries' model.entity.id (query-params startDate=startDate endDate=endDate)
-          class="btn btn-outline-secondary btn-block"
-        }}
-          CONEXIONES PRIMARIAS
-        {{/link-to}}
+
+      <div class="row">
+        <div class="col-sm-12 px-5">
+          <p class="text-center text-white">CONEXIONES SECUNDARIAS</p>
+        </div>
       </div>
-      <div>
-        {{
-          component 'department-city-filter'
-          departmentsDataSelect=departmentsDataSelect
-        }}
+
+      <div class="row mt-5">
+
+        <div class="col-sm-12 px-5">
+          <div>
+            {{#link-to 'product.complexmapprimaries' model.entity.id
+              class="btn btn-outline-secondary btn-block"
+            }}
+              RING CHART
+            {{/link-to}}
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-12 px-5">
+
+          {{
+            component 'department-city-filter'
+            departmentsDataSelect=departmentsDataSelect
+          }}
+
+        </div>
       </div>
     </div>
   </div>
@@ -70,7 +89,6 @@
       </div>
     </div>
     <p class="d-none">{{vistkNetworkService.updated}}</p>
-    <p>{{buildermodSearchService.search}}</p>
     <div class="row">
       {{vistk-network
         data=productsData
@@ -91,6 +109,8 @@
         VCRValue=VCRValue
         categoriesFilterList=categoriesFilterList
         selectedProducts=selectedProducts
+        showPrimaries=true
+        showSecondaries=true
       }}
     </div>
 
@@ -124,7 +144,7 @@
 
 <div class="container-fluid px-md-x10 pb-5">
   <div class="text-right">
-    {{#link-to 'product.abstract' modelData.id
+    {{#link-to 'product.complexmapprimaries' modelData.id (query-params startDate=startDate endDate=endDate)
       class="btn btn-outline-secondary"
     }}
     ANTERIOR

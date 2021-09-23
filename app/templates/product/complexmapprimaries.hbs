@@ -25,7 +25,7 @@
 
       <div class="row">
         <div class="col-sm-12 px-5">
-          {{#link-to 'product.complexmapprimaries' model.entity.id
+          {{#link-to 'product.complexmapsecondaries' model.entity.id (query-params startDate=startDate endDate=endDate)
             class="btn btn-outline-secondary btn-block"
           }}
             CONEXIONES SECUNDARIAS
@@ -36,7 +36,7 @@
       <div class="row mt-5">
         <div class="col-sm-12 col-md-6 px-5">
           <div>
-            {{#link-to 'product.complexmapprimaries' model.entity.id
+            {{#link-to 'product.complexmap' model.entity.id (query-params startDate=startDate endDate=endDate)
               class="btn btn-outline-secondary btn-block"
             }}
               MAPA DE PRODUCTOS
@@ -102,6 +102,7 @@
       </div>
     </div>
     <p class="d-none">{{vistkNetworkService.updated}}</p>
+    <p>{{buildermodSearchService.search}}</p>
     <div class="row">
       {{vistk-network
         data=productsData

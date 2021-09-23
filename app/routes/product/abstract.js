@@ -9,7 +9,7 @@ export default Ember.Route.extend({
 
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
-
+  departmentCityFilterService: Ember.inject.service(),
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
   product_id: null,
@@ -75,6 +75,8 @@ export default Ember.Route.extend({
     });
   },
   setupController(controller, model) {
+    this.set("departmentCityFilterService.id", 0);
+    this.set("departmentCityFilterService.name", "Colombia");
     this._super(controller, model);
     window.scrollTo(0, 0);
   },

@@ -10,6 +10,7 @@ export default Ember.Component.extend({
   height: 500,
   inmutableDataInternal: null,
   showPrimaries: false,
+  showSecondaries: false,
   updatedData: null,
   classNames: ['buildermod__viz'],
   attributeBindings: ['width','height'],
@@ -112,15 +113,12 @@ export default Ember.Component.extend({
   },
   network: computed('data.[]', 'varDependent', 'dataType', 'vis', 'i18n.locale', 'toolTipsData', 'categoriesFilterList', 'vistkNetworkService.updated', function() {
 
-    console.log(this.get("vistkNetworkService.updated"))
-
     let vistkLanguage = this.get('i18n.display') === 'es' ? 'es_ES': 'en_EN';
     var selectedProducts = this.get("selectedProducts");
     var VCRValue = this.get("VCRValue");
     var categoriesFilter = this.get("categoriesFilterList");
     var showPrimaries = this.get("showPrimaries");
-
-    console.log(selectedProducts)
+    var showSecondaries = this.get("showSecondaries");
 
     if(categoriesFilter == undefined){
       categoriesFilter = []
@@ -259,6 +257,16 @@ export default Ember.Component.extend({
                               d3.selectAll(`.connected_${id}_${id2}`).classed("selected", true)
                               d3.selectAll(`.connected_${id2}_${id}`).classed("selected", true)
                             }, 2000)
+
+                            if(showSecondaries){
+                              for(let id3 of selectedProducts[id][id2]){
+                                setTimeout(function(){
+                                  d3.selectAll(`.connected_${id2}_${id3}`).classed("selected__secondary", true)
+                                  d3.selectAll(`.connected_${id3}_${id2}`).classed("selected__secondary", true)
+                                }, 2000)
+                              }
+                            }
+
                           }
 
                        }
@@ -280,9 +288,25 @@ export default Ember.Component.extend({
                     self.set('vistkNetworkService.updated', new Date());
                     $( `.tooltip_${d.id}_${elementId}` ).addClass("d-none");
                   }else {
+
+
+                    for(let id2 of Object.keys(selectedProducts[d.id])){
+                      d3.selectAll(`.connected_${d.id}_${id2}`).classed("selected", false)
+                      d3.selectAll(`.connected_${id2}_${d.id}`).classed("selected", false)
+
+                      for(let id3 of selectedProducts[d.id][id2]){
+                        d3.selectAll(`.connected_${id2}_${id3}`).classed("selected__secondary", false)
+                        d3.selectAll(`.connected_${id3}_${id2}`).classed("selected__secondary", false)
+                      }
+
+                    }
+
+
+
                     delete selectedProducts[`${d.id}`]
                     self.set('vistkNetworkService.updated', new Date());
                     $( `.tooltip_${d.id}_${elementId}` ).addClass("d-none");
+
                   }
 
                 }

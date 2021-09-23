@@ -109,7 +109,7 @@ export default Ember.Controller.extend({
     var id = this.get("model.entity.id")
     var selected_products = {}
 
-    selected_products[id] = this.getPrimariesSecondaries(id)
+    selected_products[id] = this.getPrimariesSecondaries2(parseInt(id))
 
     return selected_products
   }),
@@ -162,10 +162,21 @@ export default Ember.Controller.extend({
       result.map(item => {
         //selected.push(String(item.id))
         selected[String(item.id)] = self.getPrimariesSecondaries2(parseInt(item.id))
-        self.set('vistkNetworkService.updated', new Date());
-        console.log(self.get("selectedProducts"));
         d3.selectAll(`.tooltip_${item.id}_${elementId}`).classed('d-none', false);
       });
+
+      self.set('vistkNetworkService.updated', new Date());
+
+      for(let id of Object.keys(selected)){
+        for(let id2 of Object.keys(selected[id])){
+          setTimeout(function(){
+            d3.selectAll(`.connected_${id}_${id2}`).classed("selected", true)
+            d3.selectAll(`.connected_${id2}_${id}`).classed("selected", true)
+          }, 2000)
+        }
+
+     }
+
     }
 
   }),
@@ -184,6 +195,7 @@ export default Ember.Controller.extend({
     this.get('buildermodSearchService.search')
     return this.get("departmentCityFilterService.name");
   }),
+
   departmentsDataSelect: computed("model", function () {
 
     this.set("selectedProducts", this.get("initialSelectedProducts"))
@@ -200,6 +212,7 @@ export default Ember.Controller.extend({
   filteredDataTable: computed("model", 'vistkNetworkService.updated', 'departmentCityFilterService.data', 'endDate', function () {
 
     var selectedProducts = this.get("selectedProducts")
+
     var ids = []
 
     for(let id of Object.keys(selectedProducts)){
@@ -243,8 +256,8 @@ export default Ember.Controller.extend({
   }),
 
   dateExtent: computed('model', function() {
-    this.set('startDate', this.get('lastYear'));
-    this.set('endDate', this.get('lastYear'));
+    //this.set('startDate', this.get('lastYear'));
+    //this.set('endDate', this.get('lastYear'));
     return  [this.get('firstYear'), this.get('lastYear')];
   }),
 

@@ -9,7 +9,7 @@ export default Ember.Route.extend({
 
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
-
+  buildermodSearchService: Ember.inject.service(),
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
   product_id: null,
@@ -54,15 +54,13 @@ export default Ember.Route.extend({
     });
   },
   setupController(controller, model) {
+    this.set('buildermodSearchService.search', null);
     this._super(controller, model);
     window.scrollTo(0, 0);
   },
   resetController(controller, isExiting) {
-
     if (isExiting) {
       controller.setProperties({
-        startDate: this.get('firstYear'),
-        endDate: this.get('lastYear')
       });
     }
   }
