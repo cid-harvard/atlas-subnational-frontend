@@ -107,7 +107,7 @@ export default Ember.Component.extend({
       .data(data, (d,i) => { return [d.key, i, this.get('i18n').locale]; });
 
     var div = container.enter().append('div')
-      .attr('class', 'multiple d-flex flex-row col-12 col-md-6 col-lg-3 pt-5')
+      .attr('class', 'multiple d-flex flex-row col-12 col-md-6 col-lg-3 pt-5 ' + this.get('markerGroup'))
       .style('background-color', '#292A48');
 
     //has to be retrieved after the 'multiple' div is appended.
@@ -426,7 +426,7 @@ export default Ember.Component.extend({
       var PDF_Width = 800;
       var PDF_Height = 600;
       var pdf = new jsPDF('l', 'pt', [PDF_Width, PDF_Height]);
-      var domNodes = $('.multiple');
+      var domNodes = $('.multiple.' + this.get('markerGroup'));
       var totalPDFPages = domNodes.length;
       var countPages = totalPDFPages;
       var d = new Date();
@@ -438,7 +438,9 @@ export default Ember.Component.extend({
           height: domNode.clientHeight * 4,
           style: {
             transform: 'scale(' + 4 + ')',
-            transformOrigin: 'top left'
+            transformOrigin: 'top left',
+            padding: 0,
+            paddingTop: '30px'
           }
         };
 
