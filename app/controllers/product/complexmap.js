@@ -13,52 +13,23 @@ export default Ember.Controller.extend({
   categoriesFilterList: [],
   elementId: 'product_space',
   VCRValue: 1,
-  getPrimariesSecondaries: function (id) {
+  entityType: "product",
+  source: "products",
+  visualization: "products",
 
-    var edges = this.get('productSpace').edges;
-    var result_object = {}
-
-    var primaries = edges.filter(function(e) {
-      if(typeof e.source !== 'undefined' && typeof e.target !== 'undefined') {
-        return e.source == id || e.target == id;
-      } else {
+  isSingleYearData: computed('dateExtent', function(){
+    let dateExtent = this.get('dateExtent');
+    if (dateExtent){
+      if (dateExtent[1] - dateExtent[0] > 0){
         return false;
+      } else {
+        return true;
       }
-    })
-    .map(item => {
-      if(item.source == id){
-        return item.target
-      }
-      else {
-        return item.source
-      }
-    })
-
-    for(let id2 of primaries){
-      var secondaries_acumm = edges.filter(function(e) {
-        if(typeof e.source !== 'undefined' && typeof e.target !== 'undefined') {
-          return e.source == id2 || e.target == id2;
-        } else {
-          return false;
-        }
-      })
-      .map(item => {
-        if(item.source == id2){
-          return item.target
-        }
-        else {
-          return item.source
-        }
-      })
-      .filter(item => item != id)
-
-      result_object[`${id2}`] = secondaries_acumm
-
+    } else {
+      return false;
     }
+  }),
 
-    return result_object
-
-  },
   getPrimariesSecondaries2: function (id) {
 
     var edges = this.get('productSpace').edges;
@@ -66,35 +37,72 @@ export default Ember.Controller.extend({
 
      var primaries = edges.filter(function(e) {
       if(typeof e.source !== 'undefined' && typeof e.target !== 'undefined') {
-        return e.source.id == id || e.target.id == id;
+        if(e.source.id === undefined){
+          return e.source == id || e.target == id;
+        }
+        else{
+          return e.source.id == id || e.target.id == id;
+        }
       } else {
         return false;
       }
     })
     .map(item => {
-      if(item.source.id == id){
-        return item.target.id
-      }
-      else {
-        return item.source.id
-      }
-    })
 
-    for(let id2 of primaries){
-      var secondaries_acumm = edges.filter(function(e) {
-        if(typeof e.source.id !== 'undefined' && typeof e.target.id !== 'undefined') {
-          return e.source.id == id2 || e.target.id == id2;
-        } else {
-          return false;
+      if(item.source.id === undefined){
+        if(item.source == id){
+          return item.target
         }
-      })
-      .map(item => {
-        if(item.source.id == id2){
+        else {
+          return item.source
+        }
+      }
+      else{
+        if(item.source.id == id){
           return item.target.id
         }
         else {
           return item.source.id
         }
+      }
+
+
+    })
+
+    for(let id2 of primaries){
+      var secondaries_acumm = edges.filter(function(e) {
+        if(typeof e.source !== 'undefined' && typeof e.target !== 'undefined') {
+
+          if(e.source.id === undefined){
+            return e.source == id2 || e.target == id2;
+          }
+          else{
+            return e.source.id == id2 || e.target.id == id2;
+          }
+        } else {
+          return false;
+        }
+      })
+      .map(item => {
+
+        if(item.source.id === undefined){
+          if(item.source == id2){
+            return item.target
+          }
+          else {
+            return item.source
+          }
+        }
+        else{
+          if(item.source.id == id2){
+            return item.target.id
+          }
+          else {
+            return item.source.id
+          }
+        }
+
+
       })
       .filter(item => item != id)
 
@@ -176,9 +184,6 @@ export default Ember.Controller.extend({
     return [...Array(max - min + 1).keys()].map(i => i + min);
   }),
 
-  entityType: "product",
-  source: "products",
-
   location: computed("departmentCityFilterService.name", function (){
     this.get("departmentCityFilterService.data")
     this.get('buildermodSearchService.search')
@@ -186,18 +191,6 @@ export default Ember.Controller.extend({
   }),
   locationId: computed("departmentCityFilterService.id", function (){
     return this.get("departmentCityFilterService.id");
-  }),
-  departmentsDataSelect: computed("model", function () {
-
-    this.set("selectedProducts", this.get("initialSelectedProducts"))
-
-    var all_locations = Object.values(this.get("model.metaData.locations"))
-
-    var locations = all_locations.filter(item => item.level === "department").map( (item) => {
-      var chained = all_locations.filter(item2 => item.id === item2.parent_id).map(item => ({'id': item.id, 'text': `${item.name_es} (${item.code})`}))
-      return {'id': item.id, 'text': `${item.name_es} (${item.code})`, 'chained': chained}
-    })
-    return locations
   }),
 
   filteredDataTable: computed("model", 'vistkNetworkService.updated', 'departmentCityFilterService.data', 'endDate', function () {
@@ -295,86 +288,6 @@ export default Ember.Controller.extend({
   exportDataLocations: computed('model.data', 'startDate', function (){
     return this.get("model.locationsData").filter(item => item.year === this.get("startDate"));
   }),
-
-  filteredDataLocationsTop5Export: computed('model', 'startDate', function (){
-    var products = this.get("model.locationsData")
-    var filtered = products.filter(item => item.year === this.get("startDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.export_value;}), 0, 5);
-    return sorted;
-  }),
-  filteredDataLocationsTop5ExportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 3, "desc" ]];
-  }),
-
-  filteredDataLocationsTop5Import: computed('model', 'startDate', function (){
-    var products = this.get("model.locationsData")
-    var filtered = products.filter(item => item.year === this.get("startDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.import_value;}), 0, 5);
-    return sorted;
-  }),
-  filteredDataLocationsTop5ImportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 3, "desc" ]];
-  }),
-
-  exportDataCities: computed('model.data', 'startDate', function (){
-    return this.get("model.citiesData").filter(item => item.year === this.get("startDate"));
-  }),
-
-
-  filteredDataCitiesTop5Export: computed('model.data', 'startDate', function (){
-    var products = this.get("model.citiesData")
-    var filtered = products.filter(item => item.year === this.get("startDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.export_value;}), 0, 5);
-    return sorted;
-  }),
-  filteredDataCitiesTop5ExportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 4, "desc" ]];
-  }),
-
-  filteredDataCitiesTop5Import: computed('model.data', 'startDate', function (){
-    var products = this.get("model.citiesData")
-    var filtered = products.filter(item => item.year === this.get("startDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.import_value;}), 0, 5);
-    return sorted;
-  }),
-  filteredDataCitiesTop5ImportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 4, "desc" ]];
-  }),
-
-
-  exportDataPartners: computed('model.data', 'startDate', function (){
-    return this.get("model.partnersData").filter(item => item.year === this.get("startDate"));
-  }),
-
-  filteredDataPartnersTop5Export: computed('model.data', 'startDate', function (){
-    var products = this.get("model.partnersData")
-    var filtered = products.filter(item => item.year === this.get("startDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.export_value;}), 0, 5);
-    return sorted;
-  }),
-  filteredDataPartnersTop5ExportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 4, "desc" ]];
-  }),
-
-  filteredDataPartnersTop5Import: computed('model.data', 'startDate', function (){
-    var products = this.get("model.partnersData")
-    var filtered = products.filter(item => item.year === this.get("startDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.import_value;}), 0, 5);
-    return sorted;
-  }),
-  filteredDataPartnersTop5ImportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 4, "desc" ]];
-  }),
-
-  actions: {
-    setStartYear(){
-
-      var year = parseInt($("#selectYear").val());
-
-      this.set('startDate', year);
-      this.set('endDate', year);
-    }
-  }
 });
 
 

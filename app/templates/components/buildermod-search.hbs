@@ -143,6 +143,23 @@
               {{/if}}
 
             {{/if}}
+
+            {{#if (is-equal visualization "products")}}
+              <div class="row h-100 px-4">
+                <div class="col-sm-12 col-md-12 my-auto text-left">
+                  <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.visualization.title'}}</h2>
+                  <div class="mb-3 my-5">
+                    <p class="text-white mr-3 mb-3">1. {{ t 'modal.visualization.p3'}}</p>
+                    {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
+                    <p class="text-white mr-3 mb-3 mt-3">{{ t (is-concat 'modal.visualization.p4.' source) }}</p>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
+                </div>
+              </div>
+            {{/if}}
+
           {{else}}
             {{#if (is-equal visualization "geo")}}
               <div class="row h-100 px-4">
@@ -222,6 +239,23 @@
               </div>
               {{/if}}
             {{/if}}
+
+            {{#if (is-equal visualization "products")}}
+              <div class="row h-100 px-4">
+                  <div class="col-sm-12 col-md-12 my-auto text-left">
+                    <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.visualization.title'}}</h2>
+                    <div class="mb-3 my-5">
+                      <p class="text-white mr-3 mb-3">1. {{ t 'modal.visualization.p3'}}</p>
+                      {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
+                      <p class="text-white mr-3 mb-3 mt-3">{{ t (is-concat 'modal.visualization.p4.' source) }}</p>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
+                  </div>
+                </div>
+            {{/if}}
+
           {{/if}}
 
           <!--<div class="row h-100 px-4">

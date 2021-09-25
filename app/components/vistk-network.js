@@ -717,10 +717,71 @@ export default Ember.Component.extend({
       this.updateCategoriesObject(index, attr);
     },
     savePng() {
-
+      alert('Iniciando la descarga, este proceso tardara un momento.');
+      var domNode = $('#complexmap')[0];
+      var d = new Date();
+      var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
+      var options = {
+        width: domNode.clientWidth * 4,
+        height: domNode.clientHeight * 4,
+        style: {
+          transform: 'scale(' + 4 + ')',
+          transformOrigin: 'top left',
+          padding: 0,
+          paddingTop: '30px',
+          background: '#292A48'
+        },
+        imagePlaceholder: ""
+      };
+      domtoimage.toBlob(document.getElementById('complexmap'), options)
+        .then(function (blob) {
+          window.saveAs(blob, `${file_name}.png`);
+        });
     },
-    savePdf() {
+    savePdf: function savePdf() {
+      alert('Iniciando la descarga, este proceso tardara un momento.');
+      var PDF_Width = 1024;
+      var PDF_Height = 800;
+      var pdf = new jsPDF('l', 'pt', [PDF_Width, PDF_Height]);
+      var domNodes = $('#complexmap');
+      var totalPDFPages = domNodes.length;
+      var countPages = totalPDFPages;
+      var d = new Date();
+      var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
 
-    },
+      for (var domNode of domNodes) {
+        var options = {
+          width: domNode.clientWidth * 4,
+          height: domNode.clientHeight * 4,
+          style: {
+            transform: 'scale(' + 4 + ')',
+            transformOrigin: 'top left',
+            padding: 0,
+            paddingTop: '30px',
+            background: '#292A48'
+          }
+        };
+
+        var HTML_Width = 1024;
+        var HTML_Height = 800;
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+
+        domtoimage.toJpeg(domNode, options)
+          .then(function (dataUrl) {
+            var myImage = dataUrl;
+            pdf.addImage(myImage, 'JPG', 0, 0, canvas_image_width, canvas_image_height);
+            countPages--;
+            if (countPages === 0) {
+              pdf.save(file_name + '.pdf');
+              saveAs(pdf, file_name + '.pdf');
+            } else {
+              pdf.addPage(PDF_Width, PDF_Height);
+            }
+          })
+          .catch(function (error) {
+          });
+      }
+    }
   }
 });

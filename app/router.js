@@ -28,6 +28,7 @@ export default Router.map(function() {
     this.route('complexmap', { path: ':product_id/complexmap/'});
     this.route('complexmapprimaries', { path: ':product_id/complexmap/primaries/'});
     this.route('complexmapsecondaries', { path: ':product_id/complexmap/secondaries/'});
+    this.route('ringchart', { path: ':product_id/ringchart/'});
 
     this.route('visualization', { path: ':product_id/source/:source_type/visualization/:visualization_type/:variable'});
   });

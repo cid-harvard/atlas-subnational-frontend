@@ -54,7 +54,7 @@ export default Ember.Route.extend({
     });
   },
   setupController(controller, model) {
-    this.set('buildermodSearchService.search', null);
+    //this.set('buildermodSearchService.search', null);
     this._super(controller, model);
     window.scrollTo(0, 0);
   },

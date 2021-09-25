@@ -17,6 +17,7 @@ export default Ember.Route.extend({
   queryParams: {
     startDate: { refreshModel: false },
     endDate: { refreshModel: false },
+    centerId: { refreshModel: true },
   },
 
   model(params) {
@@ -59,9 +60,15 @@ export default Ember.Route.extend({
     window.scrollTo(0, 0);
   },
   resetController(controller, isExiting) {
+
     if (isExiting) {
       controller.setProperties({
       });
+    }
+  },
+  actions: {
+    refreshRoute: function() {
+      this.refresh();
     }
   }
 });

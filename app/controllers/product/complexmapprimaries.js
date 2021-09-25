@@ -13,52 +13,23 @@ export default Ember.Controller.extend({
   categoriesFilterList: [],
   elementId: 'product_space',
   VCRValue: 1,
-  getPrimariesSecondaries: function (id) {
+  entityType: "product",
+  source: "products",
+  visualization: "products",
 
-    var edges = this.get('productSpace').edges;
-    var result_object = {}
-
-    var primaries = edges.filter(function(e) {
-      if(typeof e.source !== 'undefined' && typeof e.target !== 'undefined') {
-        return e.source == id || e.target == id;
-      } else {
+  isSingleYearData: computed('dateExtent', function(){
+    let dateExtent = this.get('dateExtent');
+    if (dateExtent){
+      if (dateExtent[1] - dateExtent[0] > 0){
         return false;
+      } else {
+        return true;
       }
-    })
-    .map(item => {
-      if(item.source == id){
-        return item.target
-      }
-      else {
-        return item.source
-      }
-    })
-
-    for(let id2 of primaries){
-      var secondaries_acumm = edges.filter(function(e) {
-        if(typeof e.source !== 'undefined' && typeof e.target !== 'undefined') {
-          return e.source == id2 || e.target == id2;
-        } else {
-          return false;
-        }
-      })
-      .map(item => {
-        if(item.source == id2){
-          return item.target
-        }
-        else {
-          return item.source
-        }
-      })
-      .filter(item => item != id)
-
-      result_object[`${id2}`] = secondaries_acumm
-
+    } else {
+      return false;
     }
+  }),
 
-    return result_object
-
-  },
   getPrimariesSecondaries2: function (id) {
 
     var edges = this.get('productSpace').edges;
@@ -66,35 +37,72 @@ export default Ember.Controller.extend({
 
      var primaries = edges.filter(function(e) {
       if(typeof e.source !== 'undefined' && typeof e.target !== 'undefined') {
-        return e.source.id == id || e.target.id == id;
+        if(e.source.id === undefined){
+          return e.source == id || e.target == id;
+        }
+        else{
+          return e.source.id == id || e.target.id == id;
+        }
       } else {
         return false;
       }
     })
     .map(item => {
-      if(item.source.id == id){
-        return item.target.id
-      }
-      else {
-        return item.source.id
-      }
-    })
 
-    for(let id2 of primaries){
-      var secondaries_acumm = edges.filter(function(e) {
-        if(typeof e.source.id !== 'undefined' && typeof e.target.id !== 'undefined') {
-          return e.source.id == id2 || e.target.id == id2;
-        } else {
-          return false;
+      if(item.source.id === undefined){
+        if(item.source == id){
+          return item.target
         }
-      })
-      .map(item => {
-        if(item.source.id == id2){
+        else {
+          return item.source
+        }
+      }
+      else{
+        if(item.source.id == id){
           return item.target.id
         }
         else {
           return item.source.id
         }
+      }
+
+
+    })
+
+    for(let id2 of primaries){
+      var secondaries_acumm = edges.filter(function(e) {
+        if(typeof e.source !== 'undefined' && typeof e.target !== 'undefined') {
+
+          if(e.source.id === undefined){
+            return e.source == id2 || e.target == id2;
+          }
+          else{
+            return e.source.id == id2 || e.target.id == id2;
+          }
+        } else {
+          return false;
+        }
+      })
+      .map(item => {
+
+        if(item.source.id === undefined){
+          if(item.source == id2){
+            return item.target
+          }
+          else {
+            return item.source
+          }
+        }
+        else{
+          if(item.source.id == id2){
+            return item.target.id
+          }
+          else {
+            return item.source.id
+          }
+        }
+
+
       })
       .filter(item => item != id)
 
@@ -116,7 +124,6 @@ export default Ember.Controller.extend({
   selectedProducts: computed('model.[]', function () {
     return this.get("initialSelectedProducts");
   }),
-
   searchFilter: observer('buildermodSearchService.search', function() {
 
     var data = this.get("model.metaData.products");
@@ -180,22 +187,16 @@ export default Ember.Controller.extend({
     }
 
   }),
-
   rangeYears: computed('firstYear', 'lastYear', function(){
     var min = this.get("firstYear");
     var max = this.get("lastYear");
     return [...Array(max - min + 1).keys()].map(i => i + min);
   }),
-
-  entityType: "product",
-  source: "products",
-
   location: computed("departmentCityFilterService.name", function (){
     this.get("departmentCityFilterService.data")
     this.get('buildermodSearchService.search')
     return this.get("departmentCityFilterService.name");
   }),
-
   departmentsDataSelect: computed("model", function () {
 
     this.set("selectedProducts", this.get("initialSelectedProducts"))
@@ -208,7 +209,6 @@ export default Ember.Controller.extend({
     })
     return locations
   }),
-
   filteredDataTable: computed("model", 'vistkNetworkService.updated', 'departmentCityFilterService.data', 'endDate', function () {
 
     var selectedProducts = this.get("selectedProducts")
@@ -229,7 +229,6 @@ export default Ember.Controller.extend({
 
     return result
   }),
-
   productSpace: computed.alias('model.metaData.productSpace'),
   productsData: computed('model', 'endDate', 'departmentCityFilterService.data', 'VCRValue', 'categoriesFilterList', function () {
 
@@ -254,13 +253,11 @@ export default Ember.Controller.extend({
     return data_filtered
 
   }),
-
   dateExtent: computed('model', function() {
     //this.set('startDate', this.get('lastYear'));
     //this.set('endDate', this.get('lastYear'));
     return  [this.get('firstYear'), this.get('lastYear')];
   }),
-
   productsDataValues: computed('model', function(){
 
     var locations = Object.entries(this.get('model.metaData.products'))
@@ -272,11 +269,9 @@ export default Ember.Controller.extend({
       return {id:item[1].id, text: `${name} (${item[1].code})`}
     })
   }),
-
   placeHolderText: computed('i18n.locale', 'source', function(){
     return this.get('i18n').t(`visualization.source.${this.get('source')}`).string
   }),
-
   filteredDataAsync: observer("departmentCityFilterService.id", function () {
 
     var id = this.get("departmentCityFilterService.id");
@@ -302,13 +297,9 @@ export default Ember.Controller.extend({
       return productsDataResponse
     });
   }),
-
   filterData: computed('source', function(){
     return this.get('productsDataValues');
   }),
-
-  dataNull: [],
-
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
   occupationsData: computed.alias('model.occupationsData'),
@@ -316,86 +307,6 @@ export default Ember.Controller.extend({
   exportDataLocations: computed('model.data', 'startDate', function (){
     return this.get("model.locationsData").filter(item => item.year === this.get("startDate"));
   }),
-
-  filteredDataLocationsTop5Export: computed('model', 'startDate', function (){
-    var products = this.get("model.locationsData")
-    var filtered = products.filter(item => item.year === this.get("startDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.export_value;}), 0, 5);
-    return sorted;
-  }),
-  filteredDataLocationsTop5ExportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 3, "desc" ]];
-  }),
-
-  filteredDataLocationsTop5Import: computed('model', 'startDate', function (){
-    var products = this.get("model.locationsData")
-    var filtered = products.filter(item => item.year === this.get("startDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.import_value;}), 0, 5);
-    return sorted;
-  }),
-  filteredDataLocationsTop5ImportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 3, "desc" ]];
-  }),
-
-  exportDataCities: computed('model.data', 'startDate', function (){
-    return this.get("model.citiesData").filter(item => item.year === this.get("startDate"));
-  }),
-
-
-  filteredDataCitiesTop5Export: computed('model.data', 'startDate', function (){
-    var products = this.get("model.citiesData")
-    var filtered = products.filter(item => item.year === this.get("startDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.export_value;}), 0, 5);
-    return sorted;
-  }),
-  filteredDataCitiesTop5ExportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 4, "desc" ]];
-  }),
-
-  filteredDataCitiesTop5Import: computed('model.data', 'startDate', function (){
-    var products = this.get("model.citiesData")
-    var filtered = products.filter(item => item.year === this.get("startDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.import_value;}), 0, 5);
-    return sorted;
-  }),
-  filteredDataCitiesTop5ImportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 4, "desc" ]];
-  }),
-
-
-  exportDataPartners: computed('model.data', 'startDate', function (){
-    return this.get("model.partnersData").filter(item => item.year === this.get("startDate"));
-  }),
-
-  filteredDataPartnersTop5Export: computed('model.data', 'startDate', function (){
-    var products = this.get("model.partnersData")
-    var filtered = products.filter(item => item.year === this.get("startDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.export_value;}), 0, 5);
-    return sorted;
-  }),
-  filteredDataPartnersTop5ExportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 4, "desc" ]];
-  }),
-
-  filteredDataPartnersTop5Import: computed('model.data', 'startDate', function (){
-    var products = this.get("model.partnersData")
-    var filtered = products.filter(item => item.year === this.get("startDate"))
-    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.import_value;}), 0, 5);
-    return sorted;
-  }),
-  filteredDataPartnersTop5ImportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 4, "desc" ]];
-  }),
-
-  actions: {
-    setStartYear(){
-
-      var year = parseInt($("#selectYear").val());
-
-      this.set('startDate', year);
-      this.set('endDate', year);
-    }
-  }
 });
 
 

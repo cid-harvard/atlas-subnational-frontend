@@ -33,7 +33,7 @@
 
         <div class="col-sm-12 px-5">
           <div>
-            {{#link-to 'product.complexmapprimaries' model.entity.id
+            {{#link-to 'product.ringchart' model.entity.id (query-params startDate=startDate endDate=endDate)
               class="btn btn-outline-secondary btn-block"
             }}
               RING CHART
@@ -80,6 +80,42 @@
 
   <div style="border: #888888 1px solid;" id="complexmap">
 
+    <div class="row mt-5">
+      <div class="col-sm-12 text-right mr-5 pr-5">
+
+        <a href="" data-toggle="modal" data-target="#modalHelp12">
+          <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px;">
+        </a>
+
+        <div class="modal fade" id="modalHelp12" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+                  <i class="fas fa-times fa-2x"></i>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <div class="row h-100 px-4">
+                  <img src="assets/img/infografias/12.jpg" class="img-fluid">
+                </div>
+
+              </div>
+              <div class="modal-footer">
+
+                <div class="col text-center mb-4">
+                  <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <div class="row mt-5 pt-5">
       <div class="col-sm-12 col-md-6 text-center">
         <p class="text_yellow">ALTO NIVEL DE COMPLEJIDAD</p>
@@ -111,6 +147,7 @@
         selectedProducts=selectedProducts
         showPrimaries=true
         showSecondaries=true
+        show12=true
       }}
     </div>
 
