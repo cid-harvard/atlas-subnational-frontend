@@ -37,6 +37,12 @@ export default Router.map(function() {
     this.route('abstract', {path: ':location_id/abstract/'});
     this.route('route', {path: ':location_id/route/'});
     this.route('productmap', {path: ':location_id/route/product_map/'});
+
+    this.route('productmapdetail', {path: ':location_id/route/product_map/detail/'});
+    this.route('productmapprimaries', {path: ':location_id/route/product_map/primaries/'});
+    this.route('productmapsecondaries', {path: ':location_id/route/product_map/secondaries/'});
+    this.route('ringchart', {path: ':location_id/route/ringchart/'});
+
     this.route('locationimports', {path: ':location_id/route/imports/'});
     this.route('locationwages', {path: ':location_id/route/wages/'});
 

@@ -3,6 +3,18 @@
 </div>
 
 <div class="container-fluid px-md-x10 pb-5 text-right">
+
+  <div class="d-inline">
+    {{#link-to 'location.productmapdetail' model.id (query-params startDate=startDate endDate=startDate)
+      class="btn btn-outline-secondary"
+    }}
+    CASO 23
+    {{/link-to}}
+  </div>
+
+</div>
+
+<div class="container-fluid px-md-x10 pb-5 text-right">
   <div class="d-inline">
     {{#link-to 'location.route' model.id
       class="btn btn-outline-secondary"

@@ -16,6 +16,11 @@ export default Ember.Route.extend({
   censusYear: computed.alias('featureToggle.census_year'),
   agproductLastYear: computed.alias('featureToggle.year_ranges.agproduct.last_year'),
 
+  queryParams: {
+    startDate: { refreshModel: false },
+    endDate: { refreshModel: false },
+  },
+
   model: function(params) {
     return this.store.find('location', params.location_id);
   },

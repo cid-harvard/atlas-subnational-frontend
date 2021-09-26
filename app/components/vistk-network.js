@@ -115,6 +115,9 @@ export default Ember.Component.extend({
 
     let vistkLanguage = this.get('i18n.display') === 'es' ? 'es_ES': 'en_EN';
     var selectedProducts = this.get("selectedProducts");
+
+    //console.log(selectedProducts)
+
     var VCRValue = this.get("VCRValue");
     var categoriesFilter = this.get("categoriesFilterList");
     var showPrimaries = this.get("showPrimaries");

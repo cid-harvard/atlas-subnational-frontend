@@ -5,7 +5,7 @@ const {computed, get:get} = Ember;
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
-  queryParams: ['year'],
+  queryParams: ['year', 'startDate', 'endDate'],
 
   startDate: null,
   endDate: null,
@@ -24,7 +24,8 @@ export default Ember.Controller.extend({
   validTimeseries: computed.alias('model.timeseries'),
   dotplotData: computed.oneWay('model.dotplotData'),
   occupationData: computed.oneWay('model.occupations'),
-  productsData: computed.oneWay('model.productsData'),
+
+
   inmutableProductsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
 

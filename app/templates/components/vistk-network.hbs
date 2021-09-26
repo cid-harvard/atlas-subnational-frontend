@@ -147,6 +147,40 @@
     </div>
     {{/if}}
 
+    {{#if show23 }}
+    <div class="ml-5 align-self-center">
+      <a href="" data-toggle="modal" data-target="#modalHelp23">
+        <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px;">
+      </a>
+
+      <div class="modal fade" id="modalHelp23" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+                <i class="fas fa-times fa-2x"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="row h-100 px-4">
+                <img src="assets/img/infografias/23.png" class="img-fluid">
+              </div>
+
+            </div>
+            <div class="modal-footer">
+
+              <div class="col text-center mb-4">
+                <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
 
   </div>
 {{/if}}

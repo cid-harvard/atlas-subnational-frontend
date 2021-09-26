@@ -10,7 +10,8 @@ export default Ember.Controller.extend({
   buildermodSearchService: Ember.inject.service(),
   departmentCityFilterService: Ember.inject.service(),
   vistkNetworkService: Ember.inject.service(),
-  queryParams: ['startDate', 'endDate', 'centerId'],
+  locationsSelectionsService: Ember.inject.service(),
+  queryParams: ['startDate', 'endDate', 'lastSelected'],
   categoriesFilterList: [],
   elementId: 'product_space',
   VCRValue: 1,
@@ -118,8 +119,6 @@ export default Ember.Controller.extend({
     var id = this.get("model.entity.id")
     var selected_products = {}
 
-    selected_products[id] = this.getPrimariesSecondaries2(parseInt(id))
-
     return selected_products
   }),
 
@@ -133,9 +132,7 @@ export default Ember.Controller.extend({
     this.set("selectedProducts", selected_products)
   },
 
-  selectedProducts: computed('model.[]', function () {
-    return this.get("initialSelectedProducts");
-  }),
+  selectedProducts: computed.alias('locationsSelectionsService.selectedProducts'),
   getProduct: function (id) {
     let indexedData = _.indexBy(this.get('networkData'), 'id');
     return indexedData[id]
@@ -157,8 +154,10 @@ export default Ember.Controller.extend({
   product_secondaries_total: null,
 
   center: computed("model", function () {
-    return this.get("model.entity.id");
+    return this.get("lastSelected")
   }),
+
+
 
   categoriesObject: computed('model', 'i18n.locale', function() {
 
@@ -249,7 +248,6 @@ export default Ember.Controller.extend({
       };
     });
 
-    //console.log(categories)
 
     Ember.run.later(this , function() {
       $('.category-button').on("mouseover", function(e) {
@@ -314,7 +312,7 @@ export default Ember.Controller.extend({
         //selected.push(String(item.id))
         self.set("center", item.id)
         self.setSelectedProductsbyId(item.id)
-        this.transitionToRoute('product.ringchart', item.id, {queryParams: { endDate: this.get("endDate"), startDate: this.get("startDate"), centerId: this.get("center") }});
+        this.transitionToRoute('location.ringchart', item.id, {queryParams: { endDate: this.get("endDate"), startDate: this.get("startDate"), lastSelected: this.get("center") }});
 
         Ember.run.later(this , function() {
           $(`.d3plus-id-${item.id}`).click(),
@@ -392,6 +390,7 @@ export default Ember.Controller.extend({
       return number;
     }
   },
+
   observerCenter: observer("center", function () {
     var center = this.get("center")
     this.setSelectedProductsbyId(center)
@@ -402,6 +401,8 @@ export default Ember.Controller.extend({
 
     var selectedProducts = this.get("selectedProducts")
     var self = this;
+
+    console.log(selectedProducts)
 
     var ids = []
 
@@ -698,8 +699,6 @@ export default Ember.Controller.extend({
       d3.selectAll("circle").filter(function(d){return d.node.color === color}).style("fill", color);
     })
 
-    //console.log(categoriesFilter)
-
     //this.set("categoriesFilterList", categoriesFilter);
 
     //this.set("treemapService.filter_update", new Date())
@@ -780,5 +779,3 @@ export default Ember.Controller.extend({
     }
   }
 });
-
-
