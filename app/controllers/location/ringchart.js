@@ -402,7 +402,6 @@ export default Ember.Controller.extend({
     var selectedProducts = this.get("selectedProducts")
     var self = this;
 
-    console.log(selectedProducts)
 
     var ids = []
 

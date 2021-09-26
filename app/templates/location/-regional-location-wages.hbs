@@ -238,7 +238,7 @@
     {{/link-to}}
   </div>
   <div class="d-inline">
-    {{#link-to 'location.complexsectors' model.id
+    {{#link-to 'location.complexsectors' model.id (query-params startDate=startDate endDate=startDate)
       class="btn btn-outline-secondary"
     }}
     SIGUIENTE

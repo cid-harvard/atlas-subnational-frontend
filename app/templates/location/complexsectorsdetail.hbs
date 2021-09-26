@@ -1,0 +1,149 @@
+{{component "stream-header" model=modelData type='location' extra_type="location_route" firstYear=firstYear lastYear=lastYear}}
+
+<div class="container-fluid pl-md-x10 pr-md-x10">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 mt-5 pt-5">
+      {{
+        component 'buildermod-search'
+        source=source
+        filterData=filterData
+        placeHolderText=placeHolderText
+        visualization=visualization
+        startDate=startDate
+        endDate=endDate
+        dateExtent=dateExtent
+        canYearToggle=true
+        isScatter=false
+        rcaFilter=false
+        isSingleYearData=isSingleYearData
+        source=source
+        search=search
+      }}
+    </div>
+    <div class="col-sm-0 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4 mt-5 pt-5">
+      <div>
+        {{#link-to 'location.complexsectorsprimaries' model.entity.id (query-params startDate=startDate endDate=endDate)
+          class="btn btn-outline-secondary btn-block"
+        }}
+          CONEXIONES PRIMARIAS
+        {{/link-to}}
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<div class="container-fluid pl-md-x10 pr-md-x10 mt-5 pt-5">
+
+  <div class="row mt-5 pt-5 d-none" id="spinner_complexmap">
+    <div class="d-flex justify-content-center py-5 pt-md-x10" style="width: 100%;">
+      <div class="spinner-border text-warning" role="status" style="width: 3rem; height: 3rem;">
+        <span class="sr-only"></span>
+      </div>
+    </div>
+  </div>
+
+  <div style="border: #888888 1px solid;" id="complexmap">
+
+    <div class="row mt-5">
+      <div class="col-sm-12 text-right mr-5 pr-5">
+
+        <a href="" data-toggle="modal" data-target="#modalHelp35">
+          <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px;">
+        </a>
+
+        <div class="modal fade" id="modalHelp35" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+                  <i class="fas fa-times fa-2x"></i>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <div class="row h-100 px-4">
+                  <img src="assets/img/infografias/35.png" class="img-fluid">
+                </div>
+
+              </div>
+              <div class="modal-footer">
+
+                <div class="col text-center mb-4">
+                  <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <p class="d-none">{{vistkNetworkService.updated}}</p>
+    <p class="d-none">{{buildermodSearchService.search}}</p>
+    <div class="row">
+      {{vistk-network
+        data=productsData
+        immutableData=productsData
+        elementId=elementId
+        dataType='industries'
+        metadata=model.metaData
+        varDependent='export_value'
+        graph=industrySpace
+        height=600
+        delay=3500
+        showMiddle=false
+        filterCategory=true
+        title="PRODUCTOS"
+        subtitle="POR SECTOR"
+        selected=model.entity.id
+        canFilterVcr=true
+        VCRValue=VCRValue
+        categoriesFilterList=categoriesFilterList
+        selectedProducts=selectedProducts
+        show35=true
+      }}
+    </div>
+
+  </div>
+
+
+</div>
+
+<div class="container-fluid pl-md-x10 pr-md-x10 mt-5 pt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="text-white">FUENTE: cálculos del CID con datos de la DIAN.</p>
+      <p class="text-white">(En el glosario se encuentran explicaciones más detalladas de los conceptos).</p>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid pl-md-x10 pr-md-x10 my-5 py-5" id="complexmaptable">
+  <div class="row">
+    <div class="col-md-12">
+      {{
+        datlas-table
+        data=filteredDataTable
+        source="industries"
+        entityType="industries"
+        elementId="industriesTable"
+      }}
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid px-md-x10 pb-5">
+  <div class="text-right">
+    {{#link-to 'location.complexsectors' modelData.id (query-params startDate=startDate endDate=startDate)
+      class="btn btn-outline-secondary"
+    }}
+    ANTERIOR
+    {{/link-to}}
+  </div>
+</div>

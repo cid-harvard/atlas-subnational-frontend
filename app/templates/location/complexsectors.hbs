@@ -3,15 +3,27 @@
 </div>
 
 <div class="container-fluid px-md-x10 pb-5 text-right">
+
   <div class="d-inline">
-    {{#link-to 'location.locationwages' model.id
+    {{#link-to 'location.complexsectorsdetail' model.entity.id (query-params startDate=startDate endDate=startDate)
+      class="btn btn-outline-secondary"
+    }}
+    CASO 35
+    {{/link-to}}
+  </div>
+
+</div>
+
+<div class="container-fluid px-md-x10 pb-5 text-right">
+  <div class="d-inline">
+    {{#link-to 'location.locationwages' model.entity.id
       class="btn btn-outline-secondary"
     }}
     ANTERIOR
     {{/link-to}}
   </div>
   <div class="d-inline">
-    {{#link-to 'location.ruralactivities' model.id
+    {{#link-to 'location.ruralactivities' model.entity.id
       class="btn btn-outline-secondary"
     }}
     SIGUIENTE

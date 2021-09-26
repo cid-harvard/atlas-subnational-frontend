@@ -125,25 +125,6 @@ export default Ember.Controller.extend({
   }),
   selectedProducts: computed.alias('locationsSelectionsService.selectedProducts'),
 
-  enableRingChart: "disabled",
-  lastSelected: null,
-
-  enableRingChartObserver: observer("vistkNetworkService.updated", function () {
-
-    var selectedProducts = Object.keys(this.get("selectedProducts"));
-
-    if (selectedProducts.length > 0){
-      var lastSelected = selectedProducts[selectedProducts.length - 1]
-      this.set("lastSelected", lastSelected)
-      this.set("enableRingChart", "")
-    }
-    else {
-      this.set("lastSelected", null)
-      this.set("enableRingChart", "disabled")
-    }
-
-  }),
-
   searchFilter: observer('buildermodSearchService.search', function() {
 
     var data = this.get("model.metaData.products");
@@ -212,46 +193,23 @@ export default Ember.Controller.extend({
   filteredDataTable: computed("model", 'vistkNetworkService.updated', 'departmentCityFilterService.data', 'endDate', function () {
 
     var selectedProducts = this.get("selectedProducts")
-
-    var ids = []
-
-    for(let id of Object.keys(selectedProducts)){
-      ids.push(id)
-
-      for(let id2 of Object.keys(selectedProducts[id])){
-        ids.push(id2)
-      }
-
-    }
-
     var productsData = this.get("productsData")
-    var result = productsData.filter(item => ids.includes(String(item.id)))
+    var result = productsData.filter(item => Object.keys(selectedProducts).includes(String(item.id)))
 
     return result
   }),
 
   productSpace: computed.alias('model.metaData.productSpace'),
+  industrySpace: computed.alias('model.metaData.industrySpace'),
+
   productsData: computed('model', 'endDate', 'departmentCityFilterService.data', 'VCRValue', 'categoriesFilterList', function () {
 
     var id = this.get("departmentCityFilterService.id");
     var startDate = this.get("startDate");
     var endDate = this.get("endDate");
 
-    if(id == 0){
-      $("#spinner_complexmap").addClass("d-none")
-      $("#complexmap").removeClass("d-none")
-      $("#complexmaptable").removeClass("d-none")
-      return this.get("model.products_col").filter(item => item.year >= startDate && item.year <= endDate);
-    }
+    return this.get("model.industries_col").filter(item => item.year >= startDate && item.year <= endDate);
 
-    var data = this.get("departmentCityFilterService.data");
-
-    var data_filtered = data.filter(item => item.year >= startDate && item.year <= endDate);
-    $("#spinner_complexmap").addClass("d-none")
-    $("#complexmap").removeClass("d-none")
-    $("#complexmaptable").removeClass("d-none")
-
-    return data_filtered
 
   }),
 
@@ -316,5 +274,3 @@ export default Ember.Controller.extend({
     return this.get("model.locationsData").filter(item => item.year === this.get("startDate"));
   }),
 });
-
-
