@@ -82,6 +82,7 @@ app.import('vendor/color_mappings/mex-industry_section_colors.json', { destDir: 
 //Import leaflet-omnivore
 app.import('vendor/leaflet-omnivore.min.js');
 
+
 // Font Awesome
 // The npm package readme mentions refactoring this as a Broccoli tree, so consider that a TODO
 app.import('bower_components/font-awesome/fonts/fontawesome-webfont.eot', { destDir: 'fonts' });

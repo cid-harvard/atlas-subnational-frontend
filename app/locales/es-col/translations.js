@@ -634,13 +634,13 @@ export default {
   "pageheader.rankings": "Rankings",
   "pageheader.search_link": "Buscar",
   "pageheader.search_placeholder": "Busque un lugar, sector, producto o actividad rural",
-  "pageheader.search_placeholder.header": "Realice una busqueda por",
-  "pageheader.search_placeholder.industry": "Busqueda por Nombre o c\u00f3digo CIIU",
+  "pageheader.search_placeholder.header": "Realice una búsqueda por",
+  "pageheader.search_placeholder.industry": "Búsqueda por Nombre o c\u00f3digo CIIU",
   "pageheader.search_placeholder.location": "Busque un lugar",
   "pageheader.search_placeholder.locations_route": "Busque un lugar",
   "pageheader.search_placeholder.product": "Búsque por nombre de producto o partida arancelaría",
   "pageheader.search_placeholder.products_route": "Búsque por nombre de producto o partida arancelaría",
-  "pageheader.search_placeholder.rural": "Busqueda por producto agricola, uso de suelo, actividad agropecuaria o especie pecuaria",
+  "pageheader.search_placeholder.rural": "Búsqueda por producto agricola, uso de suelo, actividad agropecuaria o especie pecuaria",
 
   "pageheader.search_placeholder.first.chained.partners": "Seleccione una región",
   "pageheader.search_placeholder.second.chained.partners": "Seleccione un país",
@@ -679,14 +679,14 @@ export default {
   "search.results_rural": "Actividades rurales",
   "search.sophistication_path_place": "Ruta de sofisticación y diversificación de lugar",
   "search.sophistication_path_product": "Ruta de sofisticación y diversificación de producto",
-  "search.message.p1": "En el siguiente campo usted podrá diligenciar su consulta, tambien usted podra realizar esta misma busqueda por codigo CIIU.",
+  "search.message.p1": "En el siguiente campo usted podrá diligenciar su consulta, tambien usted podra realizar esta misma búsqueda por código CIIU.",
   "search.message.p2": "Haga uso del interrogante para ampliar la información.",
   "search.modal.title": "Código CIIU",
-  "search.placeholder.select2": "Busqueda por Nombre o Código CIIU",
+  "search.placeholder.select2": "Búsqueda por Nombre o Código CIIU",
   "search.modal.close": "Cerrar",
 
   "search.modal.title.industry": "Código CIIU",
-  "search.modal.p1.industry": "Clasificación numérica que identifica las actividades económicas. Aunque pertenece a las naciones unidas, en Colombia, el DANE realiza la última clasificacion a 4 digitos.",
+  "search.modal.p1.industry": "Clasificación numérica que identifica las actividades económicas. Aunque pertenece a las naciones unidas, en Colombia, el DANE realiza la última clasificación a 4 digitos.",
   "search.modal.link.industry": "https://clasificaciones.dane.gov.co/ciiu4-0/ciiu4_dispone",
 
   "search.modal.title.rural": "Búsqueda",
@@ -716,7 +716,7 @@ export default {
 
   "search.industry.title": "Realice una búsqueda por",
   "search.industry.subtitle": "Sector o por código CIIU",
-  "search.industry.body": "En el siguiente campo usted podrá diligenciar el nombre del sector a consultar, también usted podrá realizar esta misma busqueda por código CIIU.<br><br>Haga uso del interrogante para ampliar la información.",
+  "search.industry.body": "En el siguiente campo usted podrá diligenciar el nombre del sector a consultar, también usted podrá realizar esta misma búsqueda por código CIIU.<br><br>Haga uso del interrogante para ampliar la información.",
 
   "search.rural.title": "Búsqueda por",
   "search.rural.subtitle": "Una actividad rural",
@@ -733,11 +733,11 @@ export default {
 
   "search.product.title": "Búsqueda por",
   "search.product.subtitle": "Nombre de producto o partida arancelaria",
-  "search.product.body": "En el siguiente campo usted podra realizar una búsqueda por nombre de producto o codigo de partida arancelaria.<br><br>Haga uso del interrogante para ampliar la información.",
+  "search.product.body": "En el siguiente campo usted podra realizar una búsqueda por nombre de producto o código de partida arancelaria.<br><br>Haga uso del interrogante para ampliar la información.",
 
   "search.products_route.title": "Búsqueda por",
   "search.products_route.subtitle": "Nombre de producto o partida arancelaria",
-  "search.products_route.body": "En el siguiente campo usted podra realizar una búsqueda por nombre de producto o codigo de partida arancelaria.<br><br>Haga uso del interrogante para ampliar la información.",
+  "search.products_route.body": "En el siguiente campo usted podra realizar una búsqueda por nombre de producto o código de partida arancelaria.<br><br>Haga uso del interrogante para ampliar la información.",
 
 
   "table.export_data": "Descargar Datos",
@@ -751,9 +751,9 @@ export default {
 
   "visualization.clear": "Borrar",
 
-  "visualization.source.departments": "Ingrese el nombre del departamento o código CIIU",
-  "visualization.source.cities": "Búsqueda por departamento, ciudad o código CIIU",
-  "visualization.source.municipalities": "Búsque por departamento, municipio o código CIIU",
+  "visualization.source.departments": "Ingrese el nombre del departamento o código DANE",
+  "visualization.source.cities": "Búsqueda por departamento, ciudad o código DANE",
+  "visualization.source.municipalities": "Búsque por departamento, municipio o código DANE",
   "visualization.source.products": "Búsque por nombre de producto o partida arancelaría",
   "visualization.source.industries": "Ingrese el nombre del sector o código CIUU",
   "visualization.source.partners": "Busque por nombre de país",
@@ -786,10 +786,15 @@ export default {
 
   "modal.visualization.title": "Ayuda del componente",
   "modal.visualization.p1": "En el selector de año haga uso de los botones ",
-  "modal.visualization.p2": "para navegar por los años, esto hara que el componente y su información varie dependiendo de la selección.",
+  "modal.visualization.p2": "para navegar por los años, esto hará que el componente y su información varíe dependiendo de la selección.",
   "modal.visualization.p3": "En el Buscador haga uso del siguiente campo",
-  "modal.visualization.p4.departments": "para diligenciar un termino de busqueda en este caso puede ser por departamento o codigo CIIU, esto hara que el componente y su información varie dependiendo del termino buscado.",
-  "modal.visualization.p4.cities": "para diligenciar un termino de busqueda en este caso puede ser por departamento, ciudad o codigo CIIU, esto hara que el componente y su información varie dependiendo del termino buscado.",
-  "modal.visualization.p4.partners": "para diligenciar un termino de busqueda en este caso puede ser por nombre del país y/o región, esto hara que el componente y su información varie dependiendo del termino buscado.",
-  "modal.visualization.p4.products": "para diligenciar un termino de busqueda en este caso puede ser por nombre de producto o partida arancelaria, esto hara que el componente y su información varie dependiendo del termino buscado.",
+  "modal.visualization.p4.departments": "para diligenciar un término de búsqueda en este caso puede ser por departamento o código DANE, esto hará que el componente y su información varíe dependiendo del término buscado.",
+  "modal.visualization.p4.cities": "para diligenciar un término de búsqueda en este caso puede ser por departamento, ciudad o código DANE, esto hará que el componente y su información varíe dependiendo del término buscado.",
+  "modal.visualization.p4.municipalities": "para diligenciar un término de búsqueda en este caso puede ser por departamento, ciudad o código DANE, esto hará que el componente y su información varíe dependiendo del término buscado.",
+  "modal.visualization.p4.partners": "para diligenciar un término de búsqueda en este caso puede ser por nombre del país y/o región, esto hará que el componente y su información varíe dependiendo del término buscado.",
+  "modal.visualization.p4.products": "para diligenciar un término de búsqueda en este caso puede ser por nombre de producto o partida arancelaria, esto hará que el componente y su información varíe dependiendo del término buscado.",
+
+  "departments": "Departamentos",
+  "cities": "Ciudades",
+
 };

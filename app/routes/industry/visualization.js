@@ -11,8 +11,8 @@ export default Ember.Route.extend({
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
   queryParams: {
-    startDate: { refreshModel: true },
-    endDate: { refreshModel: true },
+    startDate: { refreshModel: false },
+    endDate: { refreshModel: false },
     search: { refreshModel: false },
     toolTips: { refreshModel: false },
   },
@@ -171,7 +171,6 @@ export default Ember.Route.extend({
     controller.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
     controller.set('drawerQuestionsIsOpen', false); // Turn off other drawers
     controller.set('searchText', controller.get('search'));
-    window.scrollTo(0, 0);
   },
   resetController(controller, isExiting) {
     controller.set('variable', null);

@@ -141,7 +141,7 @@ export default Ember.Route.extend({
       });
 
       _.forEach(occupationsMetadata, (d) => {
-        let color = '#ccafaf';
+        let color = '#7E57C2';
 
         d.group = get(d,'code').split('-')[0];
         d.parent_name_en = get(d, 'name_en');
@@ -152,7 +152,7 @@ export default Ember.Route.extend({
       _.forEach(livestockMetadata, (d) => {
         d.name_short_en = d.name_en;
         d.name_short_es = d.name_es;
-        d.color = '#ccafaf';
+        d.color = '#7E57C2';
         d.model = 'livestock';
       });
 
@@ -184,7 +184,7 @@ export default Ember.Route.extend({
       _.forEach(nonagsMetadata, (d) => {
         d.name_short_en = d.name_en;
         d.name_short_es = d.name_es;
-        d.color = '#ccafaf';
+        d.color = '#7E57C2';
         d.model = 'nonag';
       });
 
@@ -217,7 +217,7 @@ export default Ember.Route.extend({
       _.forEach(farmsizesMetadata, (d) => {
         d.name_short_en = d.name_en;
         d.name_short_es = d.name_es;
-        d.color = '#ccafaf';
+        d.color = '#33691E';
       });
 
       _.forEach(industriesMetadata, (d) => {

@@ -147,6 +147,11 @@ export default Ember.Component.extend({
   }),
   nestedData: computed('updatedData', 'search', function () {
     var updatedData = this.get('updatedData');
+    var groupByParent = this.get('groupByParent')
+
+    if(!groupByParent){
+      return d3.nest().entries(updatedData);
+    }
 
     if(updatedData[0] !== undefined){
       if(updatedData[0].hasOwnProperty("group")){
@@ -849,63 +854,83 @@ export default Ember.Component.extend({
   actions: {
     savePng() {
 
-      var id = this.get('id')
-      var svgElement = $(`${id} svg`).get(0)
+      var id = `#${this.get("elementId")}_section`;
+      var title = this.get("title");
+      var domNode = $(`${id}`).get(0);
       var d = new Date();
-      var file_name = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds()
+      var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
 
-      svgElement.setAttribute("width", svgElement.getBoundingClientRect().width);
-      svgElement.setAttribute("height", svgElement.getBoundingClientRect().height);
-      svgElement.style.width = null;
-      svgElement.style.height= null;
+      if(title){
+        file_name = title;
+      }
 
-      html2canvas(svgElement, {
-          onrendered: function(canvas) {
-              var myImage = canvas.toDataURL("image/png");
-              saveAs(myImage, `${file_name}.png`);
-          }
-      });
+      var options = {
+        width: domNode.clientWidth * 4,
+        height: domNode.clientHeight * 4,
+        style: {
+          transform: 'scale(' + 4 + ')',
+          transformOrigin: 'top left',
+          background: '#292A48'
+        },
+        imagePlaceholder: ""
+      };
+     domtoimage.toBlob(document.getElementById(`${this.get("elementId")}_section`), options)
+        .then(function (blob) {
+          window.saveAs(blob, `${file_name}.png`);
+        });
 
     },
     savePdf() {
 
-      var id = this.get('id')
-      var svgElement = $(`${id} svg`).get(0)
+      var id = `#${this.get("elementId")}_section`;
+      var title = this.get("title");
+      var domNodes = $(`${id}`);
+
+      var PDF_Width = domNodes[0].clientWidth ;
+      var PDF_Height = domNodes[0].clientHeight;
+
+      var pdf = new jsPDF('l', 'pt', [PDF_Width, PDF_Height]);
+
+      var totalPDFPages = domNodes.length;
+      var countPages = totalPDFPages;
       var d = new Date();
-      var file_name = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds()
+      var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
 
-      svgElement.setAttribute("width", svgElement.getBoundingClientRect().width);
-      svgElement.setAttribute("height", svgElement.getBoundingClientRect().height);
-      svgElement.style.width = null;
-      svgElement.style.height= null;
+      if(title){
+        file_name = title;
+      }
 
-      var HTML_Width = svgElement.getBoundingClientRect().width;
-      var HTML_Height = svgElement.getBoundingClientRect().height;
-      var top_left_margin = 15;
-      var PDF_Width = HTML_Width + (top_left_margin * 2);
-      var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
-      var canvas_image_width = HTML_Width;
-      var canvas_image_height = HTML_Height;
-
-      var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
-
-      html2canvas(svgElement, {
-          onrendered: function(canvas) {
-              var myImage = canvas.toDataURL("image/jpeg", 1.0);
-              var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
-
-              pdf.addImage(myImage, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
-
-              for (var i = 1; i <= totalPDFPages; i++) {
-                  pdf.addPage(PDF_Width, PDF_Height);
-                  pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
-              }
-
-              pdf.save(`${file_name}.pdf`);
-
-              saveAs(pdf, `${file_name}.pdf`);
+      for (var domNode of domNodes) {
+        var options = {
+          width: domNode.clientWidth * 4,
+          height: domNode.clientHeight * 4,
+          style: {
+            transform: 'scale(' + 4 + ')',
+            transformOrigin: 'top left',
+            background: '#292A48'
           }
-      });
+        };
+
+        var HTML_Width = domNodes[0].clientWidth;
+        var HTML_Height = domNodes[0].clientHeight;
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+
+        domtoimage.toJpeg(domNode, options)
+          .then(function (dataUrl) {
+            var myImage = dataUrl;
+            pdf.addImage(myImage, 'JPG', 0, 0, canvas_image_width, canvas_image_height);
+            countPages--;
+            if (countPages === 0) {
+              pdf.save(file_name + '.pdf');
+              saveAs(pdf, file_name + '.pdf');
+            } else {
+              pdf.addPage(PDF_Width, PDF_Height);
+            }
+          })
+          .catch(function (error) {
+          });
+      }
 
     },
     check(index, attr) {

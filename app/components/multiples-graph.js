@@ -422,7 +422,11 @@ export default Ember.Component.extend({
       this.initCharts();
     },
     savePdf: function savePdf() {
-      alert('Iniciando la descarga, este proceso tardara un momento.');
+      alert('Iniciando la descarga, este proceso tardará un momento.');
+      var title = this.get("title");
+
+      console.log(title)
+
       var PDF_Width = 800;
       var PDF_Height = 600;
       var pdf = new jsPDF('l', 'pt', [PDF_Width, PDF_Height]);
@@ -431,6 +435,10 @@ export default Ember.Component.extend({
       var countPages = totalPDFPages;
       var d = new Date();
       var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
+
+      if(title){
+        file_name = title;
+      }
 
       for (var domNode of domNodes) {
         var options = {

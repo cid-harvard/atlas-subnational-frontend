@@ -33,5 +33,9 @@ export default Ember.Component.extend({
             this.set("mapService.range", [start, end, range]);
           }
         },
+      resetFilterByKey(){
+          this.set('activeLegend', null);
+          this.set("mapService.range", null);
+      }
     }
 });

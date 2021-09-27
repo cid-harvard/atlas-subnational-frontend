@@ -28,7 +28,7 @@
   occupationLastYear=occupationLastYear
 }}
 
-<div class="container-fluid px-md-x10 my-5 py-5">
+<div class="container-fluid px-md-x10 my-5 py-5" id="scrollData">
   <div class="row row-without-margin d-flex align-items-center">
 
     {{#if (is-equal hideVisualization false)}}
@@ -114,6 +114,8 @@
             filterCategory=canFilterCategory
             resetFilter=resetFilter
             canFilterVcr=canFilterVcr
+            title=(is-concat endDate ' - ' variableTitle ' - ' model.entity.name ' (' model.entity.code ')')
+            groupByParent=groupByParent
           }}
           <div id="screens" style="padding: 10px"></div>
         </div>
@@ -151,6 +153,8 @@
           startDate=startDate
           endDate=endDate
           elementId="sourceTable"
+          title_data=(is-concat endDate ' - ' variableTitle ' - ' model.entity.name ' (' model.entity.code ')')
+          source_data=visualizationExplanation
         }}
 
       </div>

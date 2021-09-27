@@ -1,17 +1,22 @@
 <div class="row mb-5">
     <div class="col-lg-12">
         <div class="text-right">
-            <button type="button" class="btn btn-outline-secondary" {{action 'savePng'}}><i class="fas fa-file-image mr-3"></i>Descargar grafico (PNG)</button>
-            <button type="button" class="btn btn-outline-secondary" {{action 'savePdf'}}><i class="fas fa-file-pdf mr-3"></i>Descargar grafico (PDF)</button>
+            <button type="button" class="btn btn-outline-secondary" {{action 'savePng'}}><i class="fas fa-file-image mr-3"></i>Descargar gráfico (PNG)</button>
+            <button type="button" class="btn btn-outline-secondary" {{action 'savePdf'}}><i class="fas fa-file-pdf mr-3"></i>Descargar gráfico (PDF)</button>
         </div>
     </div>
 </div>
 
-<section>
+<section id="{{elementId}}_section">
+
+  {{#if title }}
+    <h3 class="text-white">{{title}}</h3>
+  {{/if}}
   <div class="text-right mb-5">
-    <button type="button" class="btn btn-outline-warning d-none"><i class="fas fa-caret-square-left mr-3"></i>Regresar</button>
+    <button type="button" class="btn btn-outline-warning"><i class="fas fa-caret-square-left mr-3"></i>Regresar</button>
   </div>
 </section>
+
 {{#if filterCategory }}
 <div class="row d-flex justify-content-center">
 

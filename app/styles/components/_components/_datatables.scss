@@ -12,6 +12,10 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control, table.dataTable.dt
   cursor: pointer;
 }
 
+table.dataTable>tbody>tr.child:hover{
+  color: white;
+}
+
 .dataTables_filter, .dataTables_info{
   color: white;
 }

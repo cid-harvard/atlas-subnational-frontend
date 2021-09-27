@@ -720,7 +720,7 @@ export default Ember.Component.extend({
       this.updateCategoriesObject(index, attr);
     },
     savePng() {
-      alert('Iniciando la descarga, este proceso tardara un momento.');
+      alert('Iniciando la descarga, este proceso tardará un momento.');
       var domNode = $('#complexmap')[0];
       var d = new Date();
       var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
@@ -742,7 +742,7 @@ export default Ember.Component.extend({
         });
     },
     savePdf: function savePdf() {
-      alert('Iniciando la descarga, este proceso tardara un momento.');
+      alert('Iniciando la descarga, este proceso tardará un momento.');
       var PDF_Width = 1024;
       var PDF_Height = 800;
       var pdf = new jsPDF('l', 'pt', [PDF_Width, PDF_Height]);

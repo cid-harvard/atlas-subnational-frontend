@@ -27,6 +27,12 @@ export default Ember.Component.extend({
     var placeholder = this.get("placeHolder")
 
 
+    $eventSelect.find('option').remove().end();
+    $eventSelect.append($('<option>', {
+        text: ''
+    }));
+
+
 
     if(placeholder === null){
       placeholder = this.get('i18n').t(`pageheader.search_placeholder.${type}`).string
@@ -108,6 +114,11 @@ export default Ember.Component.extend({
     if(placeholder === null){
       placeholder = this.get('i18n').t(`pageheader.search_placeholder.${type}`).string
     }
+
+    $eventSelect.find('option').remove().end();
+    $eventSelect.append($('<option>', {
+        text: ''
+    }));
 
     $eventSelect.select2({
       placeholder: placeholder,

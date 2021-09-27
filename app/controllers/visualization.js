@@ -3,6 +3,7 @@ import numeral from 'numeral';
 const {computed, observer, get:get } = Ember;
 
 export default Ember.Controller.extend({
+
   i18n: Ember.inject.service(),
   mapService: Ember.inject.service(),
   buildermodSearchService: Ember.inject.service(),
@@ -25,6 +26,18 @@ export default Ember.Controller.extend({
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
   drawerQuestionsIsOpen: false,
+
+  groupByParent: computed("source", function () {
+    var source = this.get("source");
+
+    if(source == "cities"){
+      return false
+    }
+    else if(source == "municipalities"){
+      return false
+    }
+    return true
+  }),
 
   locationsData: computed('model', function(){
 
@@ -231,6 +244,9 @@ export default Ember.Controller.extend({
   filterData: computed('source', function(){
 
     if(this.get('source') == 'departments'){
+
+      console.log(this.get('locationsData'))
+
       return this.get('locationsData')
     }
     else if(this.get('source') == 'cities'){
@@ -646,8 +662,29 @@ export default Ember.Controller.extend({
         return _.filter(data, (d) => { return _.get(d,rca) > 1;});
       }
     }
+
+    _.forEach(data, (d) => {
+      d.color = this.getColorYear(d.year);
+    });
+
     return data;
   }),
+  getColorYear: function(year){
+    var colors = {
+      2007: "#6E5100",
+      2008: "#827717",
+      2009: "#33691E",
+      2010: "#006064",
+      2011: "#01579B",
+      2012: "#4A148C",
+      2013: "#673AB7",
+      2014: "#F57C00",
+      2015: "#1976D2",
+      2016: "#00838F",
+      2017: "#880E4F",
+    }
+    return colors[year];
+  },
   filteredDataTable: computed('immutableData.[]', 'search', 'startDate', 'endDate', 'rcaFilter', 'mapService.range', 'treemapService.filter_update', function() {
 
     if(this.get("lastDataTableUpdate") !== this.get("treemapService.filter_update")){
@@ -666,7 +703,7 @@ export default Ember.Controller.extend({
     this.set("range", this.get("mapService.range"));
 
     if(range !== null){
-      this.set('search', null);
+      //this.set('search', null);
       return _.filter(data, (d) => {
         let varDependent = _.get(d, self.get('varDependent'));
         return varDependent >= range[0] && varDependent <= range[1];
@@ -711,6 +748,12 @@ export default Ember.Controller.extend({
     }
     return false;
   }),
+  sourceTitle: computed('source', function () {
+    return this.get('i18n').t(`${this.get('source')}`).string
+  }),
+  variableTitle: computed('variable', function () {
+    return this.get('i18n').t(`${this.get('variable')}`).string
+  }),
   recircUrl: computed('model.entity_type', 'model.entity.code', function() {
     let entityType = this.get('model.entity_type');
 
@@ -721,6 +764,8 @@ export default Ember.Controller.extend({
   searchFilter: function(data, variable) {
 
     let search = _.deburr(this.get('search'));
+
+    console.log(search)
 
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
@@ -892,12 +937,29 @@ export default Ember.Controller.extend({
       return _.contains(timeRange, get(d, 'year'));
     });
   },
-  updateSearch: observer('source', 'variable', function () {
-    this.set('buildermodSearchService.search', null)
+  updateSearch: observer('visualization', function () {
+    //
+    Ember.run.schedule("afterRender",this,function() {
+      document.getElementById("scrollData").scrollIntoView();
+    });
   }),
 
-  scrollTopWhenUpdate: observer('variable', function() {
-    window.scrollTo(0,0);
+  old_source: null,
+
+  scrollTopWhenUpdate: observer('source', function() {
+
+    var source = this.get('source');
+    var old_source = this.get('old_source');
+
+    if(source === old_source){
+
+    }
+    else{
+      this.set('buildermodSearchService.search', null)
+      this.set("old_source", source)
+    }
+
+
   }),
   actions: {
     resetSearch: function() {

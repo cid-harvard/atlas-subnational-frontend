@@ -16,6 +16,7 @@
 
               {{#each year in rangeYears }}
                 <option>{{year}}</option>
+                <option>{{year}}</option>
               {{/each}}
 
             </select>
@@ -54,6 +55,7 @@
         endDate=endDate
         elementId="productssourceTable"
         order=filteredDataLocationsTop5ExportOrder
+        title_data=(is-concat 'Departamentos en Colombia que más exportan el producto ' '(' endDate ')' ' - ' modelData.name ' (' modelData.code ')')
       }}
     </div>
     <div class="container-fluid my-5">
@@ -82,6 +84,7 @@
         endDate=endDate
         elementId="productssourceTable2"
         order=filteredDataCitiesTop5ExportOrder
+        title_data=(is-concat 'Ciudades en Colombia que más exportan el producto ' '(' endDate ')' ' - ' modelData.name ' (' modelData.code ')')
       }}
     </div>
 
@@ -112,6 +115,7 @@
         endDate=endDate
         elementId="productssourceTable21"
         order=filteredDataPartnersTop5ExportOrder
+        title_data=(is-concat 'Países a donde más se exporta el producto ' '(' endDate ')' ' - ' modelData.name ' (' modelData.code ')')
       }}
     </div>
     <div class="container-fluid my-5">
@@ -144,6 +148,7 @@
         endDate=endDate
         elementId="productssourceTable3"
         order=filteredDataLocationsTop5ImportOrder
+        title_data=(is-concat 'Departamentos en Colombia que más importan el producto ' '(' endDate ')' ' - ' modelData.name ' (' modelData.code ')')
       }}
     </div>
 
@@ -173,6 +178,7 @@
         endDate=endDate
         elementId="productssourceTable4"
         order=filteredDataCitiesTop5ImportOrder
+        title_data=(is-concat 'Ciudades en Colombia que más importan el producto ' '(' endDate ')' ' - ' modelData.name ' (' modelData.code ')')
       }}
     </div>
 
@@ -202,6 +208,7 @@
         endDate=endDate
         elementId="productssourceTable212"
         order=filteredDataPartnersTop5ImportOrder
+        title_data=(is-concat 'Países de donde más se importa el producto ' '(' endDate ')' ' - ' modelData.name ' (' modelData.code ')')
       }}
     </div>
 
