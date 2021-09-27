@@ -13,7 +13,7 @@ export default Ember.Component.extend({
   }),
 
   centerId: computed("center", function () {
-    return this.get("center");
+    return this.get("center").toString();
   }),
 
   nodes: computed('dataType', function() {

@@ -856,12 +856,17 @@ export default Ember.Component.extend({
 
       var id = `#${this.get("elementId")}_section`;
       var title = this.get("title");
+      var title_filter = this.get("title_filter");
       var domNode = $(`${id}`).get(0);
       var d = new Date();
       var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
 
       if(title){
         file_name = title;
+      }
+
+      if(title_filter){
+        file_name = title_filter;
       }
 
       var options = {
@@ -884,6 +889,7 @@ export default Ember.Component.extend({
 
       var id = `#${this.get("elementId")}_section`;
       var title = this.get("title");
+      var title_filter = this.get("title_filter");
       var domNodes = $(`${id}`);
 
       var PDF_Width = domNodes[0].clientWidth ;
@@ -898,6 +904,10 @@ export default Ember.Component.extend({
 
       if(title){
         file_name = title;
+      }
+
+      if(title_filter){
+        file_name = title_filter;
       }
 
       for (var domNode of domNodes) {

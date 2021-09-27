@@ -29,6 +29,7 @@ export default Router.map(function() {
     this.route('complexmapprimaries', { path: ':product_id/complexmap/primaries/'});
     this.route('complexmapsecondaries', { path: ':product_id/complexmap/secondaries/'});
     this.route('ringchart', { path: ':product_id/ringchart/'});
+    this.route('exports', { path: ':product_id/exports/'});
 
     this.route('visualization', { path: ':product_id/source/:source_type/visualization/:visualization_type/:variable'});
   });
@@ -54,6 +55,7 @@ export default Router.map(function() {
     //this.route('complexsectorssecondaries', {path: ':location_id/route/complex_sectors/secondaries/'});
 
     this.route('ruralactivities', {path: ':location_id/route/rural_activities/'});
+    this.route('thirdparty', {path: ':location_id/route/thirdparty/'});
 
 
     //this.route('productmapdecentralized', {path: ':location_id/route/product_map/decentralized/'});

@@ -122,6 +122,7 @@
             elementId='employment-vistk-treemap'
             class="position-relative"
             color='pink'
+            groupByParent=true
             title=(is-concat 'EMPLEO ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
           }}
         </div>
@@ -145,6 +146,7 @@
           elementId='occupation-vistk-treemap'
           class="position-relative"
           color='pink'
+          groupByParent=true
           title=(is-concat 'OCUPACIONES MÁS DEMANDADAS ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
         }}
       </div>

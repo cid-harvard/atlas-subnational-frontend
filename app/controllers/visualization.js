@@ -245,8 +245,6 @@ export default Ember.Controller.extend({
 
     if(this.get('source') == 'departments'){
 
-      console.log(this.get('locationsData'))
-
       return this.get('locationsData')
     }
     else if(this.get('source') == 'cities'){
@@ -764,8 +762,6 @@ export default Ember.Controller.extend({
   searchFilter: function(data, variable) {
 
     let search = _.deburr(this.get('search'));
-
-    console.log(search)
 
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
