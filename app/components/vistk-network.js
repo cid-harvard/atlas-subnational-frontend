@@ -131,7 +131,7 @@ export default Ember.Component.extend({
       VCRValue = 1
     }
 
-    var tooltips = ["complexity"];
+    var tooltips = ["employment", "complexity"];
     var self = this;
     var width = self.get("width");
     var height = self.get("height");

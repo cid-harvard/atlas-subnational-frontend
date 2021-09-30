@@ -10,6 +10,9 @@ export default Ember.Component.extend({
   classNames: ['geo__wrap'],
   accessToken: 'pk.eyJ1IjoiZ3dlemVyZWsiLCJhIjoicXJkMjV6WSJ9.Iw_1c5zREHqNSfdtkjlqbA',
   baseMap: computed('elementId', function() {
+
+    var self = this;
+
     if(!this.get('elementId')) { return ; }
     let map = new L.mapbox.map(this.get('elementId'), 'gwezerek.22ab4aa8,gwezerek.da867b0d', {
       accessToken: this.accessToken,
@@ -23,6 +26,7 @@ export default Ember.Component.extend({
     var simpleMapScreenshoter = L.simpleMapScreenshoter({
       hidden: true, // hide screen btn on map
     }).addTo(map);
+
     document.getElementById("savepng").addEventListener('click', function () {
       simpleMapScreenshoter.takeScreen('image').then(image => {
         var svgElement = $(`.leaflet-container`).get(0);
@@ -33,7 +37,15 @@ export default Ember.Component.extend({
         var screens = document.getElementById('screens')
         screens.prepend(img);
         var d = new Date();
+
+        var title = self.get("title");
+
         var file_name = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds()
+
+        if(title){
+          file_name = title;
+        }
+
           html2canvas($(`.visualizationComponent_div`).get(0), {
             allowTaint: true,
             onrendered: function(canvas) {
@@ -69,7 +81,15 @@ export default Ember.Component.extend({
 
         var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
         var d = new Date();
+
+        var title = self.get("title");
+
         var file_name = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds()
+
+        if(title){
+          file_name = title;
+        }
+
         html2canvas(containerElement, {
           allowTaint: true,
           onrendered: function(canvas) {

@@ -1,0 +1,110 @@
+{{component "stream-header" model=model.entity type='location' extra_type="location_route" firstYear=firstYear lastYear=lastYear}}
+
+
+<div class="container-fluid pl-md-x10 pr-md-x10">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 mt-5 pt-5">
+      {{
+        component 'buildermod-search'
+        source=source
+        filterData=filterData
+        placeHolderText=placeHolderText
+        visualization=visualization
+        startDate=startDate
+        endDate=endDate
+        dateExtent=dateExtent
+        canYearToggle=true
+        isScatter=false
+        rcaFilter=false
+        isSingleYearData=isSingleYearData
+        source=source
+        search=search
+      }}
+    </div>
+    <div class="col-sm-0 col-lg-4"></div>
+  </div>
+
+</div>
+
+
+<div class="container-fluid pl-md-x10 pr-md-x10">
+  <div class="row">
+    <div class="col-sm-12 mt-5 pt-5">
+      <p class="d-none">{{vistkScatterplotService.updated}}</p>
+      <p class="d-none">{{vistkScatterplotService.selected}}</p>
+      <p class="d-none">{{buildermodSearchService.search}}</p>
+      {{vistk-scatterplot
+        classNames='buildermod__viz'
+        immutableData=immutableData
+        modelData=modelData
+        data=filteredData
+        dataType=source
+        varDependent=varDependent
+        scale=scale
+        startDate=startDate
+        dateExtent=dateExtent
+        endDate=endDate
+        metadata=metadata
+        isFiltered=isFiltered
+        entityType=entityType
+        entityId=entityId
+        variable=variable
+        search=search
+        graph=graph
+        elementId=source
+        toolTips=toolTips
+        range=range
+        canUpdateBuildermodSearchService=canUpdateBuildermodSearchService
+        filterCategory=true
+        resetFilter=resetFilter
+        canFilterVcr=false
+        title="PRODUCTOS"
+        subtitle="POR SECTOR"
+        groupByParent=groupByParent
+        categoriesFilterList=categoriesFilterList
+      }}
+
+
+    </div>
+    <div class="col-sm-0 col-lg-4"></div>
+  </div>
+
+</div>
+
+
+<div class="container-fluid pl-md-x10 pr-md-x10">
+  <div class="row">
+    <div class="col-sm-12 mt-5">
+
+      {{
+        datlas-table
+        data=filteredDataTable
+        source=source
+        entityType=entityType
+        search=search
+        startDate=startDate
+        endDate=endDate
+        elementId="sourceTable"
+        title_data=(is-concat endDate ' - ' variableTitle ' - ' model.entity.name ' (' model.entity.code ')')
+      }}
+
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid px-md-x10 pb-5 text-right mt-5 pt-5">
+  <div class="d-inline">
+    {{#link-to 'location.productmap' model.entity.id (query-params startDate=startDate endDate=endDate)
+      class="btn btn-outline-secondary"
+    }}
+    ANTERIOR
+    {{/link-to}}
+  </div>
+  <!--<div class="d-inline">
+    {{#link-to 'product.exports' model.entity.id (query-params startDate=startDate endDate=endDate)
+      class="btn btn-outline-secondary"
+    }}
+    SIGUIENTE
+    {{/link-to}}
+  </div>-->
+</div>

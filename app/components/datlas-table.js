@@ -477,6 +477,8 @@ export default Ember.Component.extend(TableMap, {
             format: {
               body: function ( data, row, column, node ) {
 
+                data = String(data)
+
                 let result = "";
                 if (decimalRegex.test(data)){
                   result = data.replace(/[,]/g, '.');

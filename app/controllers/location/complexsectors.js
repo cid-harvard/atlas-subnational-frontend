@@ -1,276 +1,202 @@
 import Ember from 'ember';
-const {computed, get, observer, RSVP} = Ember;
-import ENV from '../../config/environment';
-
-const {apiURL} = ENV;
+import numeral from 'numeral';
+const {computed, get:get} = Ember;
 
 export default Ember.Controller.extend({
+  i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
-  buildermodSearchService: Ember.inject.service(),
-  departmentCityFilterService: Ember.inject.service(),
   vistkNetworkService: Ember.inject.service(),
-  locationsSelectionsService: Ember.inject.service(),
-  queryParams: ['startDate', 'endDate'],
+  vistkScatterplotService: Ember.inject.service(),
+  queryParams: ['year', 'startDate', 'endDate'],
 
+  startDate: null,
+  endDate: null,
   categoriesFilterList: [],
-  elementId: 'product_space',
-  VCRValue: 1,
-  entityType: "product",
-  source: "products",
-  visualization: "products",
+  selectedProducts: [],
+
+
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
+  censusYear: computed.alias('featureToggle.census_year'),
+  agproductFirstYear: computed.alias('featureToggle.year_ranges.agproduct.first_year'),
+  agproductLastYear: computed.alias('featureToggle.year_ranges.agproduct.last_year'),
+  agcensusFirstYear: computed.alias('featureToggle.year_ranges.agcensus.first_year'),
+  agcensusLastYear: computed.alias('featureToggle.year_ranges.agcensus.last_year'),
+  occupationLastYear: computed.alias('featureToggle.year_ranges.occupation.last_year'),
 
-  isSingleYearData: computed('dateExtent', function(){
-    let dateExtent = this.get('dateExtent');
-    if (dateExtent){
-      if (dateExtent[1] - dateExtent[0] > 0){
-        return false;
-      } else {
-        return true;
-      }
-    } else {
-      return false;
+  entityType: "location",
+  variable: computed.alias('model.variable'),
+
+  visualization: "similarity",
+  metadata: computed.alias('model.metaData'),
+
+  validTimeseries: computed.alias('model.timeseries'),
+  dotplotData: computed.oneWay('model.dotplotData'),
+  occupationData: computed.oneWay('model.occupations'),
+
+  elementId: 'product_space',
+  entityId: computed.alias('model.entity.id'),
+  modelData: computed('model.data.[]', function() {
+    console.log(this.get("model"))
+    return this.get('model.products_col');
+  }),
+  varDependent: computed('variable', 'source', function() {
+    return 'export_value';
+  }),
+  maxValue: computed('productsData.[]', 'varDependent', function () {
+    let varDependent = this.get('varDependent');
+    return d3.max(this.get('productsData'), function(d) { return Ember.get(d, varDependent); });
+  }),
+  scale: computed('maxValue', 'varDependent', function(){
+    let varDependent = this.get('varDependent');
+    if(_.isUndefined(varDependent)){
+      return d3.scale.quantize()
+        .range(d3.range(5).map(function(i) { return 'q' + i + '-5'; }));
     }
+    return d3.scale.quantize()
+      .domain([0, this.get('maxValue')])
+      .range(d3.range(5).map(function(i) { return 'q' + i + '-5'; }));
   }),
 
-  getPrimariesSecondaries2: function (id) {
-
-    var edges = this.get('productSpace').edges;
-    var result_object = {}
-
-     var primaries = edges.filter(function(e) {
-      if(typeof e.source !== 'undefined' && typeof e.target !== 'undefined') {
-        if(e.source.id === undefined){
-          return e.source == id || e.target == id;
-        }
-        else{
-          return e.source.id == id || e.target.id == id;
-        }
-      } else {
-        return false;
-      }
-    })
-    .map(item => {
-
-      if(item.source.id === undefined){
-        if(item.source == id){
-          return item.target
-        }
-        else {
-          return item.source
-        }
-      }
-      else{
-        if(item.source.id == id){
-          return item.target.id
-        }
-        else {
-          return item.source.id
-        }
-      }
-
-
-    })
-
-    for(let id2 of primaries){
-      var secondaries_acumm = edges.filter(function(e) {
-        if(typeof e.source !== 'undefined' && typeof e.target !== 'undefined') {
-
-          if(e.source.id === undefined){
-            return e.source == id2 || e.target == id2;
-          }
-          else{
-            return e.source.id == id2 || e.target.id == id2;
-          }
-        } else {
-          return false;
-        }
-      })
-      .map(item => {
-
-        if(item.source.id === undefined){
-          if(item.source == id2){
-            return item.target
-          }
-          else {
-            return item.source
-          }
-        }
-        else{
-          if(item.source.id == id2){
-            return item.target.id
-          }
-          else {
-            return item.source.id
-          }
-        }
-
-
-      })
-      .filter(item => item != id)
-
-      result_object[`${id2}`] = secondaries_acumm
-
+  dateExtent: computed('model.products_col.[]', function() {
+    if(this.get('model.products_col').length) {
+      return d3.extent(this.get('model.products_col'), function(d) { return d.year; });
     }
-
-    return result_object
-
-  },
-  initialSelectedProducts: computed('model.[]', function () {
-    var id = this.get("model.entity.id")
-    var selected_products = {}
-
-    return selected_products
+    return  [this.get('firstYear'), this.get('lastYear')];
   }),
-  selectedProducts: computed.alias('locationsSelectionsService.selectedProducts'),
-
-  searchFilter: observer('buildermodSearchService.search', function() {
-
-    var data = this.get("model.metaData.products");
-    var selected = this.get("selectedProducts");
-    let search = _.deburr(this.get('buildermodSearchService.search'));
-    var self = this;
-    var elementId = this.get("elementId");
-    var initialSelectedProducts = this.get("initialSelectedProducts")
-
-    if(search === ""){
-
-      var id_principal = this.get("model.entity.id");
 
 
-      d3.selectAll(".tooltip_network").classed("d-none", true);
+  productsData: computed('model', 'endDate', 'VCRValue', 'categoriesFilterList', function () {
 
-      this.set("selectedProducts", {});
-      this.set('vistkNetworkService.updated', new Date());
-    }
-    else {
-      var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
-      .replace(/\s+/g, ''), "gi");
+    var startDate = this.get("startDate");
+    var endDate = this.get("endDate");
+    var data = this.get("model.products_col")
 
+    console.log(this.get("model"))
 
-      var result = _.filter(data, (d) => {
-        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
-        let longName = get(d,`name_${this.get('i18n').display}`);
-        let shortName = get(d,`name_short_${this.get('i18n').display}`);
-        let code = get(d, 'code');
-
-        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
-
-        if(result_city !== null){
-          return result_city;
-        }
-        return _.deburr(`${parentName} ${code}`).match(regexp);
-      });
-
-
-
-      result.map(item => {
-        //selected.push(String(item.id))
-        selected[String(item.id)] = this.getPrimariesSecondaries2(parseInt(item.id))
-        self.set('vistkNetworkService.updated', new Date());
-        d3.selectAll(`.tooltip_${item.id}_${elementId}`).classed('d-none', false);
-      });
-    }
+    var data_filtered = data.filter(item => item.year >= startDate && item.year <= endDate);
+    return data_filtered
 
   }),
 
-  rangeYears: computed('firstYear', 'lastYear', function(){
-    var min = this.get("firstYear");
-    var max = this.get("lastYear");
-    return [...Array(max - min + 1).keys()].map(i => i + min);
-  }),
 
-  location: computed("departmentCityFilterService.name", function (){
-    this.get("departmentCityFilterService.data")
-    this.get('buildermodSearchService.search')
-    return this.get("departmentCityFilterService.name");
-  }),
-  locationId: computed("departmentCityFilterService.id", function (){
-    return this.get("departmentCityFilterService.id");
-  }),
-
-  filteredDataTable: computed("model", 'vistkNetworkService.updated', 'departmentCityFilterService.data', 'endDate', function () {
+  filteredDataTable: computed("model", 'vistkNetworkService.updated', 'endDate', function () {
 
     var selectedProducts = this.get("selectedProducts")
+
     var productsData = this.get("productsData")
     var result = productsData.filter(item => Object.keys(selectedProducts).includes(String(item.id)))
 
     return result
   }),
 
+
+  filteredDataTable2: computed("model", 'vistkScatterplotService.updated', 'endDate', function () {
+
+    var selectedProducts = this.get("vistkScatterplotService.selected")
+
+    console.log(selectedProducts)
+
+    var productsData = this.get("productsData")
+    var result = productsData.filter(item => selectedProducts.includes(item.id))
+
+    return result
+  }),
+
+
+  inmutableProductsData: computed.oneWay('model.productsData'),
+  industriesData: computed.oneWay('model.industriesData'),
+
+  otherPossibleGraphs: computed('model.visualization', 'model.source',  function() {
+    return [
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: true, name: 'Mapa de productos' },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: true, name: 'Productos con mayor potencial' },
+        ];
+  }),
+
+  rangeYears: computed('firstYear', 'lastYear', function(){
+
+    this.set('startDate', this.get("lastYear"))
+    this.set('endDate', this.get("lastYear"))
+
+    var min = this.get("firstYear")
+    var max = this.get("lastYear")
+    return [...Array(max - min + 1).keys()].map(i => i + min);
+  }),
+
+  filteredProductsData: computed('model', 'startDate', 'endDate', function (){
+    var products = this.get("model.allProducts")
+
+    return products.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
+  }),
+
+  filteredPartnersData: computed('model', 'startDate', 'endDate', function (){
+
+    var partners = this.get("model.allPartners")
+    return partners.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
+  }),
+
+  hasTimeseries: computed.notEmpty('model.timeseries'),
+  hasOccupationData: computed.notEmpty('model.occupations'),
+  hasProductsData: computed.notEmpty('model.productsData'),
+  hasIndustriesData: computed.notEmpty('model.industriesData'),
+
+  hasAgproductsData: computed.notEmpty('model.agproductsData'),
+  hasLanduseData: computed.notEmpty('model.landusesData'),
+
+  isCountry: computed.equal('model.level', 'country'),
+  isDepartment: computed.equal('model.level','department'),
+  isMsa: computed.equal('model.level','msa'),
+  isMunicipality: computed.equal('model.level','municipality'),
+  showExports: false,
+
   productSpace: computed.alias('model.metaData.productSpace'),
   industrySpace: computed.alias('model.metaData.industrySpace'),
 
-  productsData: computed('model', 'endDate', 'departmentCityFilterService.data', 'VCRValue', 'categoriesFilterList', function () {
-
-    var id = this.get("departmentCityFilterService.id");
-    var startDate = this.get("startDate");
-    var endDate = this.get("endDate");
-
-    return this.get("model.industries_col").filter(item => item.year >= startDate && item.year <= endDate);
-
-
+  locationId: computed('model.id','model.level', function() {
+    return this.get('model.id');
   }),
-
-  dateExtent: computed('model', function() {
-    //this.set('startDate', this.get('lastYear'));
-    //this.set('endDate', this.get('lastYear'));
-    return  [this.get('firstYear'), this.get('lastYear')];
+  imageCode: computed('model.level', 'model.code', function() {
+    if(this.get('isDepartment')  || this.get('isCountry')) {
+      return this.get('model.code');
+    } else {
+      return (this.get('model.code')).substring(0,2);
+    }
   }),
-
-  productsDataValues: computed('model', function(){
-
-    var locations = Object.entries(this.get('model.metaData.products'))
-
-    return locations.filter(item => item[1].level === "4digit").map((item) => {
-
-      var name = get(item[1], `name_short_${this.get('i18n').display}`)
-
-      return {id:item[1].id, text: `${name} (${item[1].code})`}
-    })
+  productsSortedByExports: computed('productsData', function() {
+    return _.slice(_.sortBy(this.get('productsData'), function(d) { return -d.export_value;}), 0, 50);
   }),
-
-  placeHolderText: computed('i18n.locale', 'source', function(){
-    return this.get('i18n').t(`visualization.source.${this.get('source')}`).string
+  exportTotal: computed('productsData', function() {
+    var total = _.reduce(this.get('productsData'), function(memo, data) {
+      return memo + data.export_value;
+    }, 0);
+    return '$' + numeral(total).format('0.0a') + ' USD';
   }),
-
-  filteredDataAsync: observer("departmentCityFilterService.id", function () {
-
-    var id = this.get("departmentCityFilterService.id");
-    var productsMetadata = this.get("model.metaData.products")
-    var self = this
-
-    var products = $.getJSON(`${apiURL}/data/location/${id}/products?level=4digit`)
-
-    var promises = [products]
-
-    var result = RSVP.allSettled(promises).then((array) => {
-      let productsData = array[0].value.data;
-
-      let productsDataResponse = _.reduce(productsData, (memo, d) => {
-        let product = productsMetadata[d.product_id];
-        product.complexity = _.result(_.find(product.pci_data, { year: d.year }), 'pci');
-        memo.push(_.merge(d, product));
-        return memo;
-      }, []);
-
-      self.set("departmentCityFilterService.data", productsDataResponse)
-
-      return productsDataResponse
-    });
+  lastIndustryData: computed.filter('industriesData', function(datum) {
+    return parseInt(get(datum, 'year')) === this.get('lastYear');
   }),
-
-  filterData: computed('source', function(){
-    return this.get('productsDataValues');
+  graphbuilderLink: computed('model.id', function() {
+    return `location-${this.get('model.id')}`;
   }),
-
-  dataNull: [],
-
-
-  occupationsData: computed.alias('model.occupationsData'),
-  modelData: computed.alias('model.entity'),
-  exportDataLocations: computed('model.data', 'startDate', function (){
-    return this.get("model.locationsData").filter(item => item.year === this.get("startDate"));
+  description: computed('model.name', 'i18n.locale', function() {
+    return this.get(`model.description_${this.get('i18n.display')}`);
   }),
+  actions: {
+    toggleVisualization: function(visualization) {
+      this.set("visualization", visualization)
+      this.set("vistkScatterplotService.selected", [])
+      this.set("vistkScatterplotService.updated", new Date())
+    },
+    showExports(value) {
+      this.set('showExports', value);
+    },
+    setStartYear(){
+
+      var year = parseInt($("#selectYear").val())
+
+      this.set('startDate', year)
+      this.set('endDate', year)
+    },
+  }
 });
+
