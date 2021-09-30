@@ -6,6 +6,7 @@ const {apiURL} = ENV;
 
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
+  vistkScatterplotService: Ember.inject.service(),
   tagName: 'div',
   height: 500,
   varIndependent: 'code',
@@ -26,10 +27,20 @@ export default Ember.Component.extend({
         return get(datum, 'industry_eci');
       }
   }),
-  scatter: computed('data.@each', 'dataType','eciValue','i18n.locale', function() {
+  scatter: computed('data.[]', 'dataType','eciValue','i18n.locale', function() {
+
+    var categoriesFilter = this.get("categoriesFilterList");
+
     let eci = this.get('eciValue');
+    var self = this;
+    let selectedProducts = this.get('vistkScatterplotService.selected');
     let vistkLanguage = this.get('i18n.display') === 'es' ? 'es_ES': 'en_EN';
     let format = function(value) { return numeral(value).format('0.00'); };
+
+    if(categoriesFilter == undefined){
+      categoriesFilter = []
+    }
+
     return vistk.viz()
     .params({
       type: 'scatterplot',
@@ -54,22 +65,76 @@ export default Ember.Component.extend({
       x_text_custom: this.get('i18n').t('graph_builder.table.distance').string,
       y_text_custom: this.get('i18n').t('graph_builder.table.complexity').string,
       items: [{
-        marks: [{
+        marks: [
+        {
           type: 'circle',
-          fill: (d) => { return d.color ? d.color : '#ccc1b9'; }
-        }, {
+          fill: (d) => {
+
+            var color = '#ccc1b9';
+
+            if(categoriesFilter.length > 0){
+              if(categoriesFilter.includes(d.parent_name_es)){
+                return d.color ? d.color : '#ccc1b9';
+              }
+              else{
+                return color
+              }
+            }
+            else{
+              return d.color ? d.color : '#ccc1b9';
+            }
+
+          },
+          evt: [
+            {
+              type: 'selection',
+              func: function(d, i, vars) {
+                if(selectedProducts !== undefined){
+
+                  if(d.__selected){
+                    if(!selectedProducts.includes(d.id)){
+                      selectedProducts.push(d.id)
+                      d3.selectAll(`.tooltip_${d.id}`).classed("d-none", false);
+                      self.set('vistkScatterplotService.updated', new Date());
+                    }
+                  }else{
+                    if(selectedProducts.includes(d.id)){
+
+                      const index = selectedProducts.indexOf(d.id);
+                      if (index > -1) {
+                        selectedProducts.splice(index, 1);
+                        d3.selectAll(`.tooltip_${d.id}`).classed("d-none", true);
+                        self.set('vistkScatterplotService.updated', new Date());
+                      }
+
+                    }
+                  }
+
+
+
+                }
+
+              }
+            },
+          ]
+        },
+        {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['line_horizontal', 'none']),
           offset_right: function(d, i, vars) {
               return vars.x_scale[0]['func'].range()[1] - vars.x_scale[0]['func'](d[vars.var_x]) + vars.r_scale(d[vars.var_r]);
           }
-        }, {
+        },
+
+        {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['line_vertical', 'none']),
           offset_top: function(d, i, vars) {
               return vars.r_scale(d[vars.var_r]);
           }
-        }, {
+        },
+
+        {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['rect', 'none']),
           translate: function(d, i, vars) {
@@ -80,7 +145,9 @@ export default Ember.Component.extend({
           stroke: 'black',
           stroke_width: '1.5px',
           fill: function() { return 'white'; }
-        }, {
+        },
+
+        {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['text', 'none']),
           translate: function(d, i, vars) {
@@ -90,7 +157,9 @@ export default Ember.Component.extend({
           text: function(d, i, vars) {
             return format(d[vars.var_y]);
           }
-        }, {
+        },
+
+        {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['rect', 'none']),
           translate: function(d, i, vars) {
@@ -101,7 +170,9 @@ export default Ember.Component.extend({
           stroke: 'black',
           stroke_width: '1.5px',
           fill: function() { return 'white'; }
-        }, {
+        },
+
+        {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([true, false]).range(['text', 'none']),
           translate: function(d, i, vars) {
@@ -111,7 +182,9 @@ export default Ember.Component.extend({
           text: function(d, i, vars) {
             return format(d[vars.var_x]);
           }
-        }, {
+        },
+
+        {
           var_mark: '__highlighted',
           type: d3.scale.ordinal().domain([false, true]).range(['none', 'div']),
           class: function() {
@@ -149,7 +222,59 @@ export default Ember.Component.extend({
           translate: [0, 0],
           width: 200,
           height: 'auto'
-        }, {
+        },
+
+        {
+          type: 'div',
+          class: function(d) {
+
+            $( `#close_tooltip_${d.id}` ).click(function() {
+
+              const index = selectedProducts.indexOf(d.id);
+              if (index > -1) {
+                selectedProducts.splice(index, 1);
+                d3.selectAll(`.tooltip_${d.id}`).classed("d-none", true);
+                self.set('vistkScatterplotService.updated', new Date());
+              }
+            });
+
+            return `d-none tooltip_network tooltip_${d.id}`;
+          },
+          x: function(d, i, vars) {
+            return  vars.x_scale[0]['func'](d[vars.var_x]) + vars.margin.left;
+          },
+          y: function(d, i, vars) {
+            return vars.y_scale[0]['func'](d[vars.var_y]);
+          },
+          text: (d)  => {
+            var data = [{
+              'key': this.get('rca'),
+              'value': get(d,this.get('rca'))
+            },{
+              'key': 'cog',
+              'value':get(d,'cog')
+            },{
+              'key': this.get('amount'),
+              'value':get(d,this.get('amount'))
+            }
+            ];
+            var textItem = get(d, `name_short_${this.get('i18n').display}`) || d.code;
+            var tooltip_text = `<a href="javascript:void(0);" id='close_tooltip_${d.id}' style="color: black; position: absolute; top:0; right:0; padding: 10px; font-size: 2rem;">x</a><span style="color:${get(d, 'color')}">${textItem} - ${get(d, 'code')}</span>`;
+
+            data.forEach((datum) => {
+              if(datum.key) {
+                tooltip_text += '<br>' + this.get('i18n').t(`graph_builder.table.${get(datum,'key')}`) + ': ' + format(get(datum,'value'));
+              }
+            });
+
+            return tooltip_text;
+          },
+          translate: [0, 0],
+          width: 200,
+          height: 'auto'
+        },
+
+        {
           type: 'line_horizontal',
           filter: function(d, i) {
            return typeof eci !== 'undefined' && i === 0;
@@ -157,7 +282,9 @@ export default Ember.Component.extend({
           offset_y: function(d, i, vars) {
             return -(vars.y_scale[0]['func'](d[vars.var_y]) - vars.y_scale[0]['func'](eci));
           }
-        }, {
+        },
+
+        {
           type: 'text',
           filter: function(d, i) {
            return typeof eci !== 'undefined' && i === 0;
@@ -306,11 +433,17 @@ export default Ember.Component.extend({
     });
     return categories;
   }),
+
   didInsertElement: function() {
-    // TODO: Why is this code here >:| Getting location level specific data
+    Ember.run.scheduleOnce('afterRender', this , function() {
+      // TODO: Why is this code here >:| Getting location level specific data
     // definitely is not a scatterplot component concern
     this.set("inmutableDataInternal", this.get("data"));
+
+    console.log( $(".js-range-slider"))
+
     let id = this.get('entityId');
+
     let locationLevel = this.get(`metadata.locations.${id}.level`);
     // There are no country level data API (/location/0/?level=country) yet, so
     // in that case just use some defaults and don't care about ECI value.
@@ -319,6 +452,7 @@ export default Ember.Component.extend({
       this.set('x_domain', vistk.utils.extent(this.get('modelData'), 'distance'));
       this.set('y_domain', vistk.utils.extent(this.get('modelData'), 'complexity'));
       this.set('r_domain', vistk.utils.extent(this.get('modelData'), this.get('varSize')));
+      this.get('updatedDate');
       d3.select(this.get('id')).call(this.get('scatter'));
       return;
     }
@@ -341,7 +475,10 @@ export default Ember.Component.extend({
       this.set('y_domain', vistk.utils.extent(this.get('modelData'), 'complexity'));
       this.set('r_domain', vistk.utils.extent(this.get('modelData'), this.get('varSize')));
 
+      this.get('updatedDate');
       d3.select(this.get('id')).call(this.get('scatter'));
+
+
     });
 
     Ember.run.later(this , function() {
@@ -353,9 +490,11 @@ export default Ember.Component.extend({
       $('.category-button').on("mouseleave", function(e) {
           $(this).find("div.tooltip").addClass("d-none");
       })
-    }, 100);
 
+    }, 100);
+    });
   },
+
   willDestroyElement: function() {
     this.set('scatter',  null);
     this.removeObserver('i18n.locale', this, this.update);
@@ -363,19 +502,22 @@ export default Ember.Component.extend({
   },
   update_categories_filter: observer('categoriesFilter', function () {
     var categoriesFilter = this.get("categoriesFilter");
-    var updated = this.get("inmutableDataInternal").filter(item => categoriesFilter.includes(item.parent_name_es) )
-    this.set("data", updated)
+    this.set("vistkScatterplotService.categoriesFilter", categoriesFilter)
+    //var updated = this.get("inmutableDataInternal").filter(item => categoriesFilter.includes(item.parent_name_es) )
+    //this.set("data", updated)
   }),
   update_vcr_filter: observer('VCRValue', function () {
     var VCRValue = this.get("VCRValue");
     var updated = this.get("inmutableDataInternal").filter(item => item.rca >= VCRValue )
     this.set("data", updated)
   }),
-  update: observer('data.@each', 'varRca', 'i18n.locale', 'dataType', function() {
+  update: observer('data.[]', 'varRca', 'i18n.locale', 'dataType', function() {
+
     if(!this.element){ return ; } //do not redraw if not there
     d3.select(this.get('id')).select('svg').remove();
     Ember.run.later(this , function() {
       if(this.get('scatter')) {
+        this.get('updatedDate');
         d3.select(this.get('id')).call(this.get('scatter'));
       }
     });
@@ -483,7 +625,8 @@ export default Ember.Component.extend({
 
     }
 
-    this.set("categoriesFilter", categoriesFilter);
+    this.set("categoriesFilterList", categoriesFilter);
+    //this.set("vistkScatterplotService.updated", new Date());
 
     //this.set("treemapService.filter_update", new Date())
     //this.set("treemapService.filter_updated_data", updatedData)
@@ -492,6 +635,8 @@ export default Ember.Component.extend({
   },
   actions: {
     check(index, attr) {
+      //this.set('vistkScatterplotService.selected', []);
+      this.set('vistkScatterplotService.updated', new Date());
       this.updateCategoriesObject(index, attr);
     },
     range_update(){

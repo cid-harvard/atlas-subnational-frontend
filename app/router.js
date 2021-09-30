@@ -49,6 +49,7 @@ export default Router.map(function() {
     this.route('locationwages', {path: ':location_id/route/wages/'});
 
     this.route('complexsectors', {path: ':location_id/route/complex_sectors/'});
+    this.route('potential', {path: ':location_id/route/potential/'});
 
     this.route('complexsectorsdetail', {path: ':location_id/route/complex_sectors/detail/'});
     this.route('complexsectorsprimaries', {path: ':location_id/route/complex_sectors/primaries/'});

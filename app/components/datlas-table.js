@@ -139,27 +139,28 @@ export default Ember.Component.extend(TableMap, {
       'num_livestock',
     ];
 
+    let result = "";
     if(_.include(wageVarsInThousands, key)){
       return numeral(number).divide(1000).format('0,0');
     } else if(_.include(decimalVars, key)){
-      var result = numeral(number).format('0.00a')
-      return result;
+      result = numeral(number).format('0.00a');
     } else if(key === 'employment'){
-      return numeral(Math.ceil(number)).format('0,0');
+      result = numeral(Math.ceil(number)).format('0,0');
     } else if(key === 'num_establishments' || key === 'export_num_plants'){
       if(parseInt(number) < 6) {
-        return i18n.t('graph_builder.table.less_than_5');
+        result = i18n.t('graph_builder.table.less_than_5');
       }
-      return numeral(number).format('0,0');
+      result = Number(numeral(number).format('0,0'));
     } else if(_.include(percentVars, key)){
-      return numeral(number).format('0.00%');
+      result = numeral(number).format('0.00%');
     } else if(_.include(largeNumbers, key)) {
-      return numeral(number).format('0,0');
+      result = numeral(number).format('0,0');
     } else if(_.include(moneyVars, key)) {
-      return numeral(number).format('$0.00a');
+      result = numeral(number).format('$0.00a');
     } else {
-      return number;
+      result = number;
     }
+    return result;
   },
   updatedData: computed('data.[]', 'tableMap', 'i18n.locale', 'source', 'search', 'startDate', function() {
     var data = this.get("data");
@@ -457,9 +458,8 @@ export default Ember.Component.extend(TableMap, {
       order = [[ 0, "desc" ]];
     }
 
-    const decimalRegex = /^\d*(\.\d{1,2})$/g;
-    const numericRegex = /(\.*){2,}/g;
-    const htmlRegex = /<[^>]*>/g;
+    const decimalRegex = /^[-]?\d*([.,]\d{1,2})$/;
+    const numericRegex = /(\..*){1,}/;
 
     var table = $(id_element).DataTable({
       dom: 'Bfrtip',
@@ -479,15 +479,13 @@ export default Ember.Component.extend(TableMap, {
 
                 let result = "";
                 if (decimalRegex.test(data)){
-                  result = data;
+                  result = data.replace(/[,]/g, '.');
                 }else if (numericRegex.test(data)) {
-                  result = `${data}`.replace(/[\.]/g, '');
+                  result = data.replace(/[.]/g, '');
                 } else {
                   result = data;
                 }
-
                 result = `${result}`.replace(/<[^>]*>/g, "");
-
                 return result;
               }
             }

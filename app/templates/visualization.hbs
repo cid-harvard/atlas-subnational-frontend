@@ -88,7 +88,7 @@
       </div>
 
       <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
-        <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
+        <div class="visualizationComponent {{if isGeo 'col-md-8'}}" style="{{if isGeo 'border: 1px #555 solid;'}}">
           {{component visualizationComponent
             classNames='buildermod__viz'
             immutableData=immutableData

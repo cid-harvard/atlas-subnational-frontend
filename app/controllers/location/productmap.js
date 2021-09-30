@@ -5,10 +5,15 @@ const {computed, get:get} = Ember;
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
+  vistkNetworkService: Ember.inject.service(),
+  vistkScatterplotService: Ember.inject.service(),
   queryParams: ['year', 'startDate', 'endDate'],
 
   startDate: null,
   endDate: null,
+  categoriesFilterList: [],
+  selectedProducts: [],
+
 
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
@@ -20,14 +25,94 @@ export default Ember.Controller.extend({
   occupationLastYear: computed.alias('featureToggle.year_ranges.occupation.last_year'),
 
   entityType: "location",
+  variable: computed.alias('model.variable'),
+
+  visualization: "similarity",
+  metadata: computed.alias('model.metaData'),
 
   validTimeseries: computed.alias('model.timeseries'),
   dotplotData: computed.oneWay('model.dotplotData'),
   occupationData: computed.oneWay('model.occupations'),
 
+  elementId: 'product_space',
+  entityId: computed.alias('model.entity.id'),
+  modelData: computed('model.data.[]', function() {
+    console.log(this.get("model"))
+    return this.get('model.products_col');
+  }),
+  varDependent: computed('variable', 'source', function() {
+    return 'export_value';
+  }),
+  maxValue: computed('productsData.[]', 'varDependent', function () {
+    let varDependent = this.get('varDependent');
+    return d3.max(this.get('productsData'), function(d) { return Ember.get(d, varDependent); });
+  }),
+  scale: computed('maxValue', 'varDependent', function(){
+    let varDependent = this.get('varDependent');
+    if(_.isUndefined(varDependent)){
+      return d3.scale.quantize()
+        .range(d3.range(5).map(function(i) { return 'q' + i + '-5'; }));
+    }
+    return d3.scale.quantize()
+      .domain([0, this.get('maxValue')])
+      .range(d3.range(5).map(function(i) { return 'q' + i + '-5'; }));
+  }),
+
+  dateExtent: computed('model.products_col.[]', function() {
+    if(this.get('model.products_col').length) {
+      return d3.extent(this.get('model.products_col'), function(d) { return d.year; });
+    }
+    return  [this.get('firstYear'), this.get('lastYear')];
+  }),
+
+
+  productsData: computed('model', 'endDate', 'VCRValue', 'categoriesFilterList', function () {
+
+    var startDate = this.get("startDate");
+    var endDate = this.get("endDate");
+    var data = this.get("model.products_col")
+
+    console.log(this.get("model"))
+
+    var data_filtered = data.filter(item => item.year >= startDate && item.year <= endDate);
+    return data_filtered
+
+  }),
+
+
+  filteredDataTable: computed("model", 'vistkNetworkService.updated', 'endDate', function () {
+
+    var selectedProducts = this.get("selectedProducts")
+
+    var productsData = this.get("productsData")
+    var result = productsData.filter(item => Object.keys(selectedProducts).includes(String(item.id)))
+
+    return result
+  }),
+
+
+  filteredDataTable2: computed("model", 'vistkScatterplotService.updated', 'endDate', function () {
+
+    var selectedProducts = this.get("vistkScatterplotService.selected")
+
+    console.log(selectedProducts)
+
+    var productsData = this.get("productsData")
+    var result = productsData.filter(item => selectedProducts.includes(item.id))
+
+    return result
+  }),
+
 
   inmutableProductsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
+
+  otherPossibleGraphs: computed('model.visualization', 'model.source',  function() {
+    return [
+          { type: 'similarity', description: 'graph_builder.change_graph.similarity_description', available: true, name: 'Mapa de productos' },
+          { type: 'scatter', description: 'graph_builder.change_graph.scatter_description', available: true, name: 'Productos con mayor potencial' },
+        ];
+  }),
 
   rangeYears: computed('firstYear', 'lastYear', function(){
 
@@ -97,6 +182,11 @@ export default Ember.Controller.extend({
     return this.get(`model.description_${this.get('i18n.display')}`);
   }),
   actions: {
+    toggleVisualization: function(visualization) {
+      this.set("visualization", visualization)
+      this.set("vistkScatterplotService.selected", [])
+      this.set("vistkScatterplotService.updated", new Date())
+    },
     showExports(value) {
       this.set('showExports', value);
     },
@@ -106,7 +196,7 @@ export default Ember.Controller.extend({
 
       this.set('startDate', year)
       this.set('endDate', year)
-    }
+    },
   }
 });
 

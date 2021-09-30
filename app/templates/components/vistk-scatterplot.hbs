@@ -37,8 +37,8 @@
 {{/if}}
 
 {{#if canFilterVcr }}
-  <div class="row d-flex justify-content-center">
+  <div class="row d-flex justify-content-center mb-5 pb-5">
     <label for="customRange1" class="form-label mr-5 title_yellow">VCR: {{VCRValue}}</label>
-    <input type="range" class="form-range" id="customRange1" min="0" max="10" step="1" value="{{VCRValue}}" {{action "range_update" on="change"}}>
+    <input type="range" class="form-range" id="customRange1" min="0" max="10" step="0.5" value="{{VCRValue}}" {{action "range_update" on="change"}}>
   </div>
 {{/if}}

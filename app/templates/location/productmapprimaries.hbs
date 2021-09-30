@@ -47,7 +47,7 @@
         <div class="col-sm-12 col-md-6 px-5">
           <div>
             {{#link-to 'location.ringchart' model.entity.id (query-params startDate=startDate endDate=endDate lastSelected=lastSelected)
-              class=(is-concat 'btn btn-outline-secondary btn-block disabled ' enableRingChart)
+              class=(is-concat 'btn btn-outline-secondary btn-block ' enableRingChart)
             }}
               RING CHART
             {{/link-to}}
