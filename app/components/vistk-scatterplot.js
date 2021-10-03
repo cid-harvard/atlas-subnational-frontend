@@ -440,8 +440,6 @@ export default Ember.Component.extend({
     // definitely is not a scatterplot component concern
     this.set("inmutableDataInternal", this.get("data"));
 
-    console.log( $(".js-range-slider"))
-
     let id = this.get('entityId');
 
     let locationLevel = this.get(`metadata.locations.${id}.level`);

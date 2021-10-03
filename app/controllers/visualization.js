@@ -12,6 +12,13 @@ export default Ember.Controller.extend({
   lastDataTableUpdate: null,
   lastDataUpdate: null,
   resetFilter: null,
+  showCensus: computed("model", function () {
+    var entity_type = this.get("model.entity_type")
+    if(["landUse","nonag", "livestock"].includes(entity_type)){
+      return true
+    }
+    return false
+  }),
 
   queryParams: ['search', 'startDate', 'endDate', 'toolTips'],
   search: null,

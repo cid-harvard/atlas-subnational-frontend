@@ -59,7 +59,42 @@
     {{#unless hideVisualization }}
 
       <div class="col-sm-12 col-md-8">
-        <h1 class="title_yellow" style="font-size: 6rem;">{{builderModHeader}}</h1>
+
+        <h1 class="title_yellow d-inline" style="font-size: 6rem;">{{builderModHeader}}</h1>
+        {{#if showCensus }}
+
+        <a href="" data-toggle="modal" data-target="#modalHelpCensus" class="d-inline ml-3">
+          <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px; margin-top: -30px;">
+        </a>
+
+        <div class="modal fade" id="modalHelpCensus" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+                  <i class="fas fa-times fa-2x"></i>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <div class="row h-100 px-4">
+                  <img src="assets/img/infografias/census.png" class="img-fluid">
+                </div>
+
+              </div>
+              <div class="modal-footer">
+
+                <div class="col text-center mb-4">
+                  <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{/if}}
+
         <h1 class="pt-2" style="font-size: 6rem;">{{headerValue}}</h1>
         <h1 class="pt-2 mb-5" style="font-size: 6rem;">{{years}}</h1>
       </div>
@@ -87,7 +122,7 @@
         }}
       </div>
 
-      <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
+      <div class="col-sm-12 mt-5 pt-5 mb-5 pb-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
         <div class="visualizationComponent {{if isGeo 'col-md-8'}}" style="{{if isGeo 'border: 1px #555 solid;'}}">
           {{component visualizationComponent
             classNames='buildermod__viz'

@@ -298,6 +298,10 @@ export default Ember.Route.extend({
   },
   setupController(controller, model) {
     this._super(controller, model);
+    controller.setProperties({
+      categoriesFilterList: [],
+      categoriesFilterListlastIndustryData: []
+    });
     this.controllerFor('application').set('entity', model.get('constructor.modelName'));
     this.controllerFor('application').set('entity_id', model.get('id'));
     window.scrollTo(0, 0);

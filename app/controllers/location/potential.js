@@ -145,8 +145,6 @@ export default Ember.Controller.extend({
     var updated = this.get("vistkScatterplotService.updated");
     var selected = this.get("vistkScatterplotService.selected");
 
-    console.log(selected)
-
     var result = data.filter(item => {
       if(selected.includes(item.id)){
         return true;
@@ -158,7 +156,6 @@ export default Ember.Controller.extend({
   }),
 
   modelData: computed('model.data.[]', function() {
-    console.log(this.get("model"))
     return this.get('model.industries_col');
   }),
 

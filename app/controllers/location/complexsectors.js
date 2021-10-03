@@ -37,7 +37,6 @@ export default Ember.Controller.extend({
   elementId: 'product_space',
   entityId: computed.alias('model.entity.id'),
   modelData: computed('model.data.[]', function() {
-    console.log(this.get("model"))
     return this.get('model.products_col');
   }),
   varDependent: computed('variable', 'source', function() {
@@ -72,8 +71,6 @@ export default Ember.Controller.extend({
     var endDate = this.get("endDate");
     var data = this.get("model.products_col")
 
-    console.log(this.get("model"))
-
     var data_filtered = data.filter(item => item.year >= startDate && item.year <= endDate);
     return data_filtered
 
@@ -94,8 +91,6 @@ export default Ember.Controller.extend({
   filteredDataTable2: computed("model", 'vistkScatterplotService.updated', 'endDate', function () {
 
     var selectedProducts = this.get("vistkScatterplotService.selected")
-
-    console.log(selectedProducts)
 
     var productsData = this.get("productsData")
     var result = productsData.filter(item => selectedProducts.includes(item.id))

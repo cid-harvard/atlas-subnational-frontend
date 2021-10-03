@@ -1,11 +1,3 @@
-<div class="row mb-5">
-    <div class="col-lg-12">
-        <div class="text-right">
-            <button type="button" class="btn btn-outline-secondary" {{action 'savePng'}}><i class="fas fa-file-image mr-3"></i>Descargar gráfico (PNG)</button>
-            <button type="button" class="btn btn-outline-secondary" {{action 'savePdf'}}><i class="fas fa-file-pdf mr-3"></i>Descargar gráfico (PDF)</button>
-        </div>
-    </div>
-</div>
 
 <section id="{{elementId}}_section">
 
@@ -52,6 +44,16 @@
 
     {{/each}}
 </div>
+
+<div class="row mb-5 mt-5 pt-5">
+    <div class="col-lg-12">
+        <div class="text-center">
+            <button type="button" class="btn btn-outline-secondary" {{action 'savePng'}}><i class="fas fa-file-image mr-3"></i>Descargar gráfico (PNG)</button>
+            <button type="button" class="btn btn-outline-secondary" {{action 'savePdf'}}><i class="fas fa-file-pdf mr-3"></i>Descargar gráfico (PDF)</button>
+        </div>
+    </div>
+</div>
+
 <div style="min-height: 50px;"></div>
 {{/if}}
 

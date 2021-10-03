@@ -111,7 +111,7 @@
       </ul>
     </div>
 
-    <div class="mt-5 tab-content" id="pills-tabContent">
+    <div class="mt-5 pt-5 tab-content" id="pills-tabContent">
 
       <div class="tab-pane fade active show" id="pills-exports" role="tabpanel" aria-labelledby="pills-exports">
         <div class="container-fluid">
@@ -123,8 +123,9 @@
             elementId='zoomable-export-value-treemap'
             class="position-relative"
             filterCategory=true
-            toolTips="rca,complexity"
+            toolTips="export_rca,complexity"
             groupByParent=true
+            title_filter=(is-concat 'Exportaciones, USD ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
           }}
         </div>
       </div>
@@ -141,6 +142,7 @@
             filterCategory=true
             toolTips="rca,complexity"
             groupByParent=true
+            title_filter=(is-concat 'Importaciones, USD ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
           }}
         </div>
       </div>
@@ -156,6 +158,7 @@
             class="position-relative"
             filterCategory=true
             groupByParent=true
+            title_filter=(is-concat 'Empleo Total ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
           }}
         </div>
       </div>
@@ -171,6 +174,7 @@
             class="position-relative"
             filterCategory=true
             groupByParent=true
+            title_filter=(is-concat 'Nómina Salarial ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
           }}
         </div>
       </div>
@@ -203,7 +207,8 @@
               filterCategory=true
               title="SECTORES DE"
               subtitle="LOS PRODUCTOS"
-              type="productSpace"
+              categoriesFilterList=categoriesFilterList
+              toolTips="complexity"
             }}
           </div>
 
@@ -213,20 +218,21 @@
 
       <div class="tab-pane fade show" id="pills-space" role="tabpanel" aria-labelledby="pills-space">
         <div class="container-fluid mt-5 pt-5">
-          {{vistk-network
+         {{vistk-network
             data=lastIndustryData
             immutableData=lastIndustryData
             elementId='industry-space'
             dataType='industries'
             metadata=model.metaData
-            varDependent='export_value'
+            varDependent='wages'
             graph=industrySpace
             height=600
             delay=2000
             filterCategory=true
             title="SECTORES"
             subtitle="LOS PRODUCTOS"
-            type="industrySpace"
+            categoriesFilterList=categoriesFilterListlastIndustryData
+            toolTips="complexity"
           }}
         </div>
       </div>

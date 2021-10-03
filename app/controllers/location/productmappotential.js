@@ -93,8 +93,6 @@ export default Ember.Controller.extend({
 
   searchFilter: observer('buildermodSearchService.search', function() {
 
-    console.log("searchFilter")
-
     var data = this.get("model.metaData.products");
     var selected = this.get("vistkScatterplotService.selected");
     let search = _.deburr(this.get('buildermodSearchService.search'));
@@ -147,8 +145,6 @@ export default Ember.Controller.extend({
     var updated = this.get("vistkScatterplotService.updated");
     var selected = this.get("vistkScatterplotService.selected");
 
-    console.log(selected)
-
     var result = data.filter(item => {
       if(selected.includes(item.id)){
         return true;
@@ -160,7 +156,6 @@ export default Ember.Controller.extend({
   }),
 
   modelData: computed('model.data.[]', function() {
-    console.log(this.get("model"))
     return this.get('model.products_col');
   }),
 

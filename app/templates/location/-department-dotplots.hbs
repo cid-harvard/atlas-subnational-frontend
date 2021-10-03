@@ -232,7 +232,7 @@
       </ul>
     </div>
 
-    <div class="mt-5 tab-content" id="pills-tabContent">
+    <div class="mt-5 pt-5 tab-content" id="pills-tabContent">
 
       <div class="tab-pane fade active show" id="pills-exports" role="tabpanel" aria-labelledby="pills-exports">
         <div class="container-fluid">
@@ -244,8 +244,9 @@
             elementId='zoomable-export-value-treemap'
             class="position-relative"
             filterCategory=true
-            toolTips="rca,complexity"
+            toolTips="export_rca,complexity"
             groupByParent=true
+            title_filter=(is-concat 'Exportaciones, USD ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
           }}
         </div>
       </div>
@@ -262,6 +263,7 @@
             filterCategory=true
             toolTips="rca,complexity"
             groupByParent=true
+            title_filter=(is-concat 'Importaciones, USD ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
           }}
         </div>
       </div>
@@ -277,6 +279,7 @@
             class="position-relative"
             filterCategory=true
             groupByParent=true
+            title_filter=(is-concat 'Empleo Total ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
           }}
         </div>
       </div>
@@ -292,6 +295,7 @@
             class="position-relative"
             filterCategory=true
             groupByParent=true
+            title_filter=(is-concat 'Nómina Salarial ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
           }}
         </div>
       </div>
@@ -307,7 +311,8 @@
               <p class="text_yellow">BAJO NIVEL DE COMPLEJIDAD</p>
             </div>
           </div>
-          <p>{{vistkNetworkService.updated}}</p>
+          <p class="d-none">{{vistkNetworkService.updated}}</p>
+          <p class="d-none">{{categoriesFilterList}}</p>
 
           <div class="row">
             {{vistk-network
@@ -324,7 +329,8 @@
               filterCategory=true
               title="SECTORES DE"
               subtitle="LOS PRODUCTOS"
-              categoriesFilterList=categoriesFilterListlastProductsData
+              categoriesFilterList=categoriesFilterList
+              toolTips="complexity"
             }}
           </div>
 
@@ -348,6 +354,7 @@
             title="SECTORES"
             subtitle="LOS PRODUCTOS"
             categoriesFilterList=categoriesFilterListlastIndustryData
+            toolTips="complexity"
           }}
         </div>
       </div>

@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import numeral from 'numeral';
-const {computed, get:get} = Ember;
+const {computed, get:get, observer} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
@@ -10,8 +10,9 @@ export default Ember.Controller.extend({
 
   startDate: null,
   endDate: null,
-  categoriesFilterListlastProductsData: [],
+  categoriesFilterList: [],
   categoriesFilterListlastIndustryData: [],
+
 
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
