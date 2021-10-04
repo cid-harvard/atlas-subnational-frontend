@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
     return sorted;
   }),
   filteredDataLocationsTop5ExportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 3, "desc" ]];
+    return [[ 5, "desc" ]];
   }),
 
   filteredDataLocationsTop5Import: computed('model', 'startDate', function (){
@@ -45,7 +45,7 @@ export default Ember.Controller.extend({
     return sorted;
   }),
   filteredDataLocationsTop5ImportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 3, "desc" ]];
+    return [[ 5, "desc" ]];
   }),
 
   exportDataCities: computed('model.data', 'startDate', function (){
@@ -60,7 +60,7 @@ export default Ember.Controller.extend({
     return sorted;
   }),
   filteredDataCitiesTop5ExportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 4, "desc" ]];
+    return [[ 6, "desc" ]];
   }),
 
   filteredDataCitiesTop5Import: computed('model.data', 'startDate', function (){
@@ -70,7 +70,7 @@ export default Ember.Controller.extend({
     return sorted;
   }),
   filteredDataCitiesTop5ImportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 4, "desc" ]];
+    return [[ 6, "desc" ]];
   }),
 
 
@@ -82,10 +82,13 @@ export default Ember.Controller.extend({
     var products = this.get("model.partnersData")
     var filtered = products.filter(item => item.year === this.get("startDate"))
     var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.export_value;}), 0, 5);
+
+    console.log(sorted)
+
     return sorted;
   }),
   filteredDataPartnersTop5ExportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 4, "desc" ]];
+    return [[ 6, "desc" ]];
   }),
 
   filteredDataPartnersTop5Import: computed('model.data', 'startDate', function (){
@@ -95,7 +98,7 @@ export default Ember.Controller.extend({
     return sorted;
   }),
   filteredDataPartnersTop5ImportOrder: computed('model', 'startDate', 'endDate', function (){
-    return [[ 4, "desc" ]];
+    return [[ 5, "desc" ]];
   }),
 
   actions: {

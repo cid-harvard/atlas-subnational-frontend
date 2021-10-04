@@ -200,6 +200,8 @@ export default Ember.Mixin.create({
     let columns = [
       { key: 'code' },
       { key: 'name', copy: 'location' },
+      { key: 'product_code' },
+      { key: 'product_name_short_es', copy: 'product' },
       { key: 'year' },
       { key: 'export_value' },
       { key: 'export_rca' },
@@ -213,6 +215,8 @@ export default Ember.Mixin.create({
     let columns = [
       { key: 'code' },
       { key: 'name', copy: 'location' },
+      { key: 'product_code' },
+      { key: 'product_name_short_es', copy: 'product' },
       { key: 'year' },
       { key: 'import_value' },
       { key: 'import_rca' },
@@ -235,6 +239,8 @@ export default Ember.Mixin.create({
       { key: 'code' },
       { key: 'name', copy: 'location' },
       { key: 'parent_name', copy: 'parent.location' },
+      { key: 'product_code' },
+      { key: 'product_name_short_es', copy: 'product' },
       { key: 'year' },
       { key: 'export_value' },
       { key: 'export_rca' },
@@ -252,6 +258,8 @@ export default Ember.Mixin.create({
       { key: 'code' },
       { key: 'name', copy: 'location' },
       { key: 'parent_name', copy: 'parent.location' },
+      { key: 'product_code' },
+      { key: 'product_name_short_es', copy: 'product' },
       { key: 'year' },
       { key: 'import_value' },
       { key: 'import_rca' },
@@ -401,6 +409,8 @@ export default Ember.Mixin.create({
       { key: 'code' },
       { key: 'name', copy: 'country' },
       { key: 'parent', copy: 'parent.country' },
+      { key: 'product_code' },
+      { key: 'product_name_short_es', copy: 'product' },
       { key: 'year' },
       { key: 'export_value' }
     ];
@@ -412,6 +422,8 @@ export default Ember.Mixin.create({
       { key: 'code' },
       { key: 'name', copy: 'country' },
       { key: 'parent', copy: 'parent.country' },
+      { key: 'product_code' },
+      { key: 'product_name_short_es', copy: 'product' },
       { key: 'year' },
       { key: 'import_value' }
     ];

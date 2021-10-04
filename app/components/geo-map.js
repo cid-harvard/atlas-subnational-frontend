@@ -38,12 +38,12 @@ export default Ember.Component.extend({
         screens.prepend(img);
         var d = new Date();
 
-        var title = self.get("title");
+        var filename = self.get("filename");
 
         var file_name = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds()
 
-        if(title){
-          file_name = title;
+        if(filename){
+          file_name = filename;
         }
 
           html2canvas($(`.visualizationComponent_div`).get(0), {
@@ -82,12 +82,12 @@ export default Ember.Component.extend({
         var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
         var d = new Date();
 
-        var title = self.get("title");
+        var filename = self.get("filename");
 
         var file_name = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds()
 
-        if(title){
-          file_name = title;
+        if(filename){
+          file_name = filename;
         }
 
         html2canvas(containerElement, {

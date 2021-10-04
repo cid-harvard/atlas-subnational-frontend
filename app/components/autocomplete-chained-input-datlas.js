@@ -122,7 +122,9 @@ export default Ember.Component.extend({
     });
 
     $eventSelect2.on("select2:select", function (e) {
-
+      let text= $(`#${id_select2} option:selected`).text();
+      self.set('search', text);
+      self.set("buildermodSearchService.search", text);
     });
   }),
   didInsertElement: function() {

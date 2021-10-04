@@ -424,6 +424,8 @@ export default {
   "graph_builder.settings.year.next": "Siguiente",
   "graph_builder.settings.year.previous": "Anterior",
   "graph_builder.table.agproduct": "Producto Agr\u00edcola",
+  "graph_builder.table.product": "Producto",
+  "graph_builder.table.product_code": "Código del producto",
   "graph_builder.table.area": "\u00c1rea (ha)",
   "graph_builder.table.average_livestock_load": "",
   "graph_builder.table.average_wages": "Salario mensual promedio, Col$ ",

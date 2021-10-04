@@ -20,7 +20,7 @@ export default Ember.Controller.extend({
     return false
   }),
 
-  queryParams: ['search', 'startDate', 'endDate', 'toolTips'],
+  queryParams: ['search', 'startDate', 'endDate', 'toolTips', 'showBack'],
   search: null,
   range: null,
 
@@ -38,10 +38,13 @@ export default Ember.Controller.extend({
     var source = this.get("source");
 
     if(source == "cities"){
-      return false
+      return false;
     }
     else if(source == "municipalities"){
-      return false
+      return false;
+    }
+    else if(source == "partners"){
+      return false;
     }
     return true
   }),
@@ -593,6 +596,7 @@ export default Ember.Controller.extend({
     return this.get('i18n').t(`general.${entityType}`);
   }),
   modelData: computed('model.data.[]', function() {
+    console.log(this.get("model"))
     if(this.get('source') === "departments" && this.get('visualization') === "treemap"){
       return this.get('model.cities');
     }
@@ -617,6 +621,9 @@ export default Ember.Controller.extend({
     else if(this.get('source') === "agproducts"){
       return true;
     }
+    else if(this.get('source') === "partners"){
+      return true;
+    }
     return false;
   }),
   canFilterVcr: computed('source', 'visualization', function(){
@@ -637,7 +644,18 @@ export default Ember.Controller.extend({
     }
     return this.filterToSelectedYears(this.get('model.data'), this.get('startDate'), this.get('endDate'));
   }),
+
+  addColorYears: computed("source", function () {
+    var source = this.get("source");
+    if(["partners"].includes(source)){
+      return false;
+    }
+    return true;
+  }),
+
   filteredData: computed('immutableData.[]', 'startDate', 'endDate', 'rcaFilter', 'buildermodSearchService.search', 'treemapService.filter_update', 'search', function() {
+
+    var addColorYears = this.get("addColorYears");
 
     if(this.get("lastDataUpdate") !== this.get("treemapService.filter_update")){
 
@@ -668,9 +686,12 @@ export default Ember.Controller.extend({
       }
     }
 
-    _.forEach(data, (d) => {
-      d.color = this.getColorYear(d.year);
-    });
+    if(addColorYears){
+      _.forEach(data, (d) => {
+        d.color = this.getColorYear(d.year);
+      });
+    }
+
 
     return data;
   }),

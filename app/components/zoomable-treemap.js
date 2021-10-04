@@ -855,14 +855,14 @@ export default Ember.Component.extend({
     savePng() {
 
       var id = `#${this.get("elementId")}_section`;
-      var title = this.get("title");
+      var filename = this.get("filename");
       var title_filter = this.get("title_filter");
       var domNode = $(`${id}`).get(0);
       var d = new Date();
       var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
 
-      if(title){
-        file_name = title;
+      if(filename){
+        file_name = filename;
       }
 
       if(title_filter){
@@ -888,7 +888,7 @@ export default Ember.Component.extend({
     savePdf() {
 
       var id = `#${this.get("elementId")}_section`;
-      var title = this.get("title");
+      var filename = this.get("filename");
       var title_filter = this.get("title_filter");
       var domNodes = $(`${id}`);
 
@@ -902,8 +902,8 @@ export default Ember.Component.extend({
       var d = new Date();
       var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
 
-      if(title){
-        file_name = title;
+      if(filename){
+        file_name = filename;
       }
 
       if(title_filter){

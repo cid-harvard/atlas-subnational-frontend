@@ -96,18 +96,6 @@
           </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-product_space-tab" data-toggle="pill" href="#pills-product_space" role="tab" aria-controls="pills-product_space" aria-selected="false">
-             {{t 'country.show.product_space' lastYear=lastYear}}
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-space-tab" data-toggle="pill" href="#pills-space" role="tab" aria-controls="pills-space" aria-selected="false">
-             {{t 'country.show.industry_space' lastYear=lastYear}}
-          </a>
-        </li>
-
       </ul>
     </div>
 
@@ -179,63 +167,6 @@
         </div>
       </div>
 
-      <div class="tab-pane fade show" id="pills-product_space" role="tabpanel" aria-labelledby="pills-product_space">
-        <div class="container-fluid mt-5 pt-5">
-
-          <div class="row">
-            <div class="col-sm-12 col-md-6 text-center">
-              <p class="text_yellow">ALTO NIVEL DE COMPLEJIDAD</p>
-            </div>
-            <div class="col-sm-12 col-md-6 text-center">
-              <p class="text_yellow">BAJO NIVEL DE COMPLEJIDAD</p>
-            </div>
-          </div>
-
-
-          <div class="row">
-            {{vistk-network
-              data=lastProductsData
-              immutableData=lastProductsData
-              elementId='product-space'
-              dataType='products'
-              metadata=model.metaData
-              varDependent='export_value'
-              graph=productSpace
-              height=600
-              delay=3500
-              showMiddle=true
-              filterCategory=true
-              title="SECTORES DE"
-              subtitle="LOS PRODUCTOS"
-              categoriesFilterList=categoriesFilterList
-              toolTips="complexity"
-            }}
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="tab-pane fade show" id="pills-space" role="tabpanel" aria-labelledby="pills-space">
-        <div class="container-fluid mt-5 pt-5">
-         {{vistk-network
-            data=lastIndustryData
-            immutableData=lastIndustryData
-            elementId='industry-space'
-            dataType='industries'
-            metadata=model.metaData
-            varDependent='wages'
-            graph=industrySpace
-            height=600
-            delay=2000
-            filterCategory=true
-            title="SECTORES"
-            subtitle="LOS PRODUCTOS"
-            categoriesFilterList=categoriesFilterListlastIndustryData
-            toolTips="complexity"
-          }}
-        </div>
-      </div>
 
     </div>
 

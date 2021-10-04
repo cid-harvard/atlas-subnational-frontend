@@ -13,7 +13,7 @@
 
         <div class="mt-4">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'product.visualization' model.id 'departments' 'geo' 'export_value' (query-params startDate=lastYear endDate=lastYear search='null' toolTips="rca")
+          {{#link-to 'product.visualization' model.id 'departments' 'geo' 'export_value' (query-params startDate=lastYear endDate=lastYear search='null' toolTips="rca" showBack="false")
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.product.departments.export_value'}}
@@ -22,7 +22,7 @@
 
         <div class="mt-3">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'product.visualization' model.id  'cities' 'multiples' 'export_value' (query-params startDate=firstYear endDate=lastYear search='null' toolTips="rca")
+          {{#link-to 'product.visualization' model.id  'cities' 'multiples' 'export_value' (query-params startDate=firstYear endDate=lastYear search='null' toolTips="rca" showBack="false")
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.product.cities.export_value'}}
@@ -31,7 +31,7 @@
 
         <div class="mt-3">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'product.visualization' model.id 'partners' 'treemap' 'export_value' (query-params startDate=lastYear endDate=lastYear search='null' toolTips="rca")
+          {{#link-to 'product.visualization' model.id 'partners' 'treemap' 'export_value' (query-params startDate=lastYear endDate=lastYear search='null' toolTips="rca" showBack="false")
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.product.partners.export_value'}}
@@ -45,7 +45,7 @@
 
         <div class="mt-4">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'product.visualization' model.id 'departments' 'geo' 'import_value' (query-params startDate=lastYear endDate=lastYear search='null' toolTips="rca")
+          {{#link-to 'product.visualization' model.id 'departments' 'geo' 'import_value' (query-params startDate=lastYear endDate=lastYear search='null' toolTips="rca" showBack="false")
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.product.departments.import_value'}}
@@ -54,7 +54,7 @@
 
         <div class="mt-3">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'product.visualization' model.id 'cities' 'multiples' 'import_value' (query-params startDate=firstYear endDate=lastYear search='null' toolTips="rca")
+          {{#link-to 'product.visualization' model.id 'cities' 'multiples' 'import_value' (query-params startDate=firstYear endDate=lastYear search='null' toolTips="rca" showBack="false")
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.product.cities.import_value'}}
@@ -63,7 +63,7 @@
 
         <div class="mt-3">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          {{#link-to 'product.visualization' model.id 'partners' 'treemap' 'import_value' (query-params startDate=lastYear endDate=lastYear search='null' toolTips="rca")
+          {{#link-to 'product.visualization' model.id 'partners' 'treemap' 'import_value' (query-params startDate=lastYear endDate=lastYear search='null' toolTips="rca" showBack="false")
             class="builder__questions__question"
           }}
             {{t 'graph_builder.page_title.product.partners.import_value'}}

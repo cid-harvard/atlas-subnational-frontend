@@ -124,6 +124,7 @@
 
       <div class="col-sm-12 mt-5 pt-5 mb-5 pb-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
         <div class="visualizationComponent {{if isGeo 'col-md-8'}}" style="{{if isGeo 'border: 1px #555 solid;'}}">
+
           {{component visualizationComponent
             classNames='buildermod__viz'
             immutableData=immutableData
@@ -149,7 +150,7 @@
             filterCategory=canFilterCategory
             resetFilter=resetFilter
             canFilterVcr=canFilterVcr
-            title=(is-concat endDate ' - ' variableTitle ' - ' model.entity.name ' (' model.entity.code ')')
+            filename=(is-concat endDate ' - ' variableTitle ' - ' model.entity.name ' (' model.entity.code ')')
             groupByParent=groupByParent
           }}
           <div id="screens" style="padding: 10px"></div>
@@ -219,27 +220,29 @@
   </div>
   {{#if (is-equal entityType "product")}}
 
+    {{#if (is-equal showBack "true")}}
 
-    {{#if (is-equal variable "export_value")}}
-      <div class="container-fluid my-5">
-        <div class="text-right">
-          {{#link-to 'product.abstract' model.entity.id class="btn btn-outline-secondary"}}
-          ANTERIOR
-          {{/link-to}}
+      {{#if (is-equal variable "export_value")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'product.abstract' model.entity.id class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
         </div>
-      </div>
-    {{/if}}
+      {{/if}}
 
-    {{#if (is-equal variable "import_value")}}
-      <div class="container-fluid my-5">
-        <div class="text-right">
-          {{#link-to 'product.abstract' model.entity.id class="btn btn-outline-secondary"}}
-          ANTERIOR
-          {{/link-to}}
+      {{#if (is-equal variable "import_value")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'product.abstract' model.entity.id class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
         </div>
-      </div>
-    {{/if}}
+      {{/if}}
 
+    {{/if}}
 
   {{/if}}
 

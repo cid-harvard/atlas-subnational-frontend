@@ -16,7 +16,6 @@
 
               {{#each year in rangeYears }}
                 <option>{{year}}</option>
-                <option>{{year}}</option>
               {{/each}}
 
             </select>
@@ -60,7 +59,7 @@
     </div>
     <div class="container-fluid my-5">
       <div class="text-right">
-        {{#link-to 'product.visualization' modelData.id 'departments' 'geo' 'export_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca")
+        {{#link-to 'product.visualization' modelData.id 'departments' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca" showBack="true")
           class="btn btn-outline-secondary"
         }}
           <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -90,7 +89,7 @@
 
     <div class="container-fluid my-5">
       <div class="text-right">
-        {{#link-to 'product.visualization' modelData.id 'cities' 'multiples' 'export_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca")
+        {{#link-to 'product.visualization' modelData.id 'cities' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca" showBack="true")
           class="btn btn-outline-secondary"
         }}
           <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -120,7 +119,7 @@
     </div>
     <div class="container-fluid my-5">
       <div class="text-right">
-        {{#link-to 'product.visualization' modelData.id 'partners' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca")
+        {{#link-to 'product.visualization' modelData.id 'partners' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca" showBack="true")
           class="btn btn-outline-secondary"
         }}
           <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -154,7 +153,7 @@
 
     <div class="container-fluid my-5">
       <div class="text-right">
-        {{#link-to 'product.visualization' modelData.id 'departments' 'geo' 'import_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca")
+        {{#link-to 'product.visualization' modelData.id 'departments' 'treemap' 'import_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca" showBack="true")
           class="btn btn-outline-secondary"
         }}
           <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -184,7 +183,7 @@
 
     <div class="container-fluid my-5">
       <div class="text-right">
-        {{#link-to 'product.visualization' modelData.id 'cities' 'multiples' 'import_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca")
+        {{#link-to 'product.visualization' modelData.id 'cities' 'treemap' 'import_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca" showBack="true")
           class="btn btn-outline-secondary"
         }}
           <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -214,7 +213,7 @@
 
     <div class="container-fluid my-5">
       <div class="text-right">
-        {{#link-to 'product.visualization' modelData.id 'partners' 'treemap' 'import_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca")
+        {{#link-to 'product.visualization' modelData.id 'partners' 'treemap' 'import_value' (query-params startDate=startDate endDate=startDate search='null' toolTips="rca" showBack="true")
           class="btn btn-outline-secondary"
         }}
           <i class="far fa-plus pr-2" aria-hidden="true"></i>

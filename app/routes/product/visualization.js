@@ -130,9 +130,11 @@ export default Ember.Route.extend({
       let country = partnersMetadata[d.country_id];
       let parent = partnersMetadata[country.parent_id];
       let partner = copy(d);
+
       partner.parent_name_en = parent.name_en;
       partner.parent_name_es = parent.name_es;
       partner.group = parent.id;
+      partner.color = parent.color;
       d.model = null;
       return _.merge(partner, parent, country);
     });

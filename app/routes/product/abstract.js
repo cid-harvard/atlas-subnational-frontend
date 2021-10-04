@@ -35,11 +35,17 @@ export default Ember.Route.extend({
     let {model, locations, cities, partners} = hash;
     let locationsMetadata  = this.modelFor('application').locations;
     let partnersMetadata = this.modelFor('application').partnerCountries;
+    let productsMetadata = this.modelFor('application').products;
 
     let locationsData = _.map(locations.data, (d) => {
       let location = locationsMetadata[d.department_id];
       let department = copy(d);
-      return _.merge(department, location, {model: 'location'});
+      return _.merge(department, location, {
+        model: 'location',
+        product_name_short_es: productsMetadata[d.product_id].name_short_es,
+        product_name_short_en: productsMetadata[d.product_id].name_short_en,
+        product_code: productsMetadata[d.product_id].code
+      });
     });
 
     let citiesData = _.map(cities.data, (d) => {
@@ -51,6 +57,9 @@ export default Ember.Route.extend({
           model: 'location',
           parent_name_en: locationsMetadata[location.parent_id].name_short_en,
           parent_name_es: locationsMetadata[location.parent_id].name_short_es,
+          product_name_short_es: productsMetadata[d.product_id].name_short_es,
+          product_name_short_en: productsMetadata[d.product_id].name_short_en,
+          product_code: productsMetadata[d.product_id].code
         }
       );
       return result;
@@ -64,7 +73,12 @@ export default Ember.Route.extend({
       partner.parent_name_es = parent.name_es;
       partner.group = parent.id;
       d.model = null;
-      return _.merge(partner, parent, country);
+      return _.merge(partner, parent, country, {
+          model: 'location',
+          product_name_short_es: productsMetadata[d.product_id].name_short_es,
+          product_name_short_en: productsMetadata[d.product_id].name_short_en,
+          product_code: productsMetadata[d.product_id].code
+        });
     });
 
     return Ember.Object.create({

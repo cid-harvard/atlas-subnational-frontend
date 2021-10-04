@@ -98,7 +98,8 @@ export default Ember.Component.extend({
   actions: {
     savePdf: function savePdf() {
       alert('La descarga tardara un momento. Por favor espere...');
-      var title = this.get("title");
+      var filename = this.get("filename");
+
       var PDF_Width = 800;
       var PDF_Height = 600;
       var pdf = new jsPDF('l', 'pt', [PDF_Width, PDF_Height]);
@@ -108,8 +109,8 @@ export default Ember.Component.extend({
       var d = new Date();
       var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
 
-      if(title){
-        file_name = title;
+      if(filename){
+        file_name = filename;
       }
 
       for (var domNode of domNodes) {

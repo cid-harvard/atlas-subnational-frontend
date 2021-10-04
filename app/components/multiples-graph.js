@@ -423,7 +423,9 @@ export default Ember.Component.extend({
     },
     savePdf: function savePdf() {
       alert('Iniciando la descarga, este proceso tardará un momento.');
-      var title = this.get("title");
+      var filename = this.get("filename");
+
+      console.log(filename)
 
       var PDF_Width = 800;
       var PDF_Height = 600;
@@ -434,8 +436,8 @@ export default Ember.Component.extend({
       var d = new Date();
       var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
 
-      if(title){
-        file_name = title;
+      if(filename){
+        file_name = filename;
       }
 
       for (var domNode of domNodes) {
