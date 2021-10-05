@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
 
   linkDatlas: computed('startDate', function () {
     var startDate = this.get("startDate");
-    return `https://atlas.cid.harvard.edu/explore?country=49&year=${startDate}`
+    return `https://atlas.cid.harvard.edu/explore/network?country=49&year=${startDate}&productClass=HS`
   }),
 
 

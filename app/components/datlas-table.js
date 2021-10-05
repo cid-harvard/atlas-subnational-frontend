@@ -265,7 +265,7 @@ export default Ember.Component.extend(TableMap, {
               "fillHorizontal": "Rellenar celdas horizontalmente",
               "fillVertical": "Rellenar celdas verticalmentemente"
           },
-          "decimal": ".",
+          "decimal": ",",
           "searchBuilder": {
               "add": "Añadir condición",
               "button": {
@@ -353,7 +353,7 @@ export default Ember.Component.extend(TableMap, {
                   "_": "%d filas seleccionadas"
               }
           },
-          "thousands": ",",
+          "thousands": ".",
           "datetime": {
               "previous": "Anterior",
               "next": "Proximo",

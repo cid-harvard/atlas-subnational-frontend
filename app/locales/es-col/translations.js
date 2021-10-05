@@ -516,7 +516,7 @@ export default {
   "header.product_space": "Mapa de los productos",
   "header.production_tons": "Producci\u00f3n",
   "header.region": "Por departamento",
-  "header.rural": "Preguntas: Actividades Rurales",
+  "header.rural": "Actividades Rurales",
   "header.subregion": "Por ciudad",
   "header.subsubregion": "Por municipio",
   "header.wage": "N\u00f3mina total",
@@ -795,6 +795,9 @@ export default {
   "modal.visualization.p4.municipalities": "para diligenciar un término de búsqueda en este caso puede ser por departamento, ciudad o código DANE, esto hará que el componente y su información varíe dependiendo del término buscado.",
   "modal.visualization.p4.partners": "para diligenciar un término de búsqueda en este caso puede ser por nombre del país y/o región, esto hará que el componente y su información varíe dependiendo del término buscado.",
   "modal.visualization.p4.products": "para diligenciar un término de búsqueda en este caso puede ser por nombre de producto o partida arancelaria, esto hará que el componente y su información varíe dependiendo del término buscado.",
+  "modal.visualization.p4.agproducts": "para diligenciar un término de búsqueda en este caso puede ser por nombre de producto agropecuario, esto hará que el componente y su información varíe dependiendo del término buscado.",
+  "modal.visualization.p4.landUses": "para diligenciar un término de búsqueda en este caso puede ser por nombre del uso de suelo, esto hará que el componente y su información varíe dependiendo del término buscado.",
+  "modal.visualization.p4.farmtypes": "para diligenciar un término de búsqueda en este caso puede ser por tipo de producción rural, esto hará que el componente y su información varíe dependiendo del término buscado.",
 
   "departments": "Departamentos",
   "cities": "Ciudades",

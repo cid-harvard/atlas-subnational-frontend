@@ -647,7 +647,7 @@ export default Ember.Controller.extend({
 
   addColorYears: computed("source", function () {
     var source = this.get("source");
-    if(["partners"].includes(source)){
+    if(["partners", "industries", "products", "agproducts", "farmtypes"].includes(source)){
       return false;
     }
     return true;

@@ -19,6 +19,12 @@ export default Ember.Route.extend({
   agcensusFirstYear: computed.alias('featureToggle.year_ranges.agcensus.first_year'),
   agcensusLastYear: computed.alias('featureToggle.year_ranges.agcensus.last_year'),
 
+  queryParams: {
+    startDate: { refreshModel: false },
+    endDate: { refreshModel: false },
+    ruralOption: { refreshModel: false }
+  },
+
   model: function(params) {
     return this.store.find('location', params.location_id);
   },
@@ -345,6 +351,9 @@ export default Ember.Route.extend({
     });
   },
   setupController(controller, model) {
+    controller.setProperties({
+      updatedDate: new Date(),
+    });
     this._super(controller, model);
     this.controllerFor('application').set('entity', model.get('constructor.modelName'));
     this.controllerFor('application').set('entity_id', model.get('id'));

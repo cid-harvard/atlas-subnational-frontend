@@ -212,6 +212,8 @@
           startDate=startDate
           endDate=endDate
           elementId="sourceTable"
+          title_data=(is-concat endDate ' - ' variableTitle ' - ' model.entity.name ' (' model.entity.code ')')
+          source_data=visualizationExplanation
         }}
 
       </div>
@@ -247,99 +249,149 @@
   {{/if}}
 
   {{#if (is-equal entityType "location")}}
-
-    {{#if (is-equal variable "export_value")}}
-      <div class="container-fluid my-5">
-        <div class="text-right">
-          {{#link-to 'location.route' model.entity.id class="btn btn-outline-secondary"}}
-          ANTERIOR
-          {{/link-to}}
+    {{#if (is-equal showBack "true")}}
+      {{#if (is-equal variable "export_value")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.route' model.entity.id class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
         </div>
-      </div>
-    {{/if}}
+      {{/if}}
 
-    {{#if (is-equal variable "import_value")}}
-      <div class="container-fluid my-5">
-        <div class="text-right">
-          {{#link-to 'location.locationimports' model.entity.id class="btn btn-outline-secondary"}}
-          ANTERIOR
-          {{/link-to}}
+      {{#if (is-equal variable "import_value")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.locationimports' model.entity.id class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
         </div>
-      </div>
-    {{/if}}
+      {{/if}}
 
-    {{#if (is-equal variable "employment")}}
-      <div class="container-fluid my-5">
-        <div class="text-right">
-          {{#link-to 'location.locationwages' model.entity.id class="btn btn-outline-secondary"}}
-          ANTERIOR
-          {{/link-to}}
+      {{#if (is-equal variable "employment")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.locationwages' model.entity.id class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
         </div>
-      </div>
-    {{/if}}
+      {{/if}}
 
-    {{#if (is-equal variable "wages")}}
-      <div class="container-fluid my-5">
-        <div class="text-right">
-          {{#link-to 'location.locationwages' model.entity.id class="btn btn-outline-secondary"}}
-          ANTERIOR
-          {{/link-to}}
+      {{#if (is-equal variable "wages")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.locationwages' model.entity.id class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
         </div>
-      </div>
-    {{/if}}
+      {{/if}}
 
-    {{#if (is-equal source "landUses")}}
-      <div class="container-fluid my-5">
-        <div class="text-right">
-          {{#link-to 'location.ruralactivities' model.entity.id class="btn btn-outline-secondary"}}
-          ANTERIOR
-          {{/link-to}}
+      {{#if (is-equal source "landUses")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="1") class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
         </div>
-      </div>
-    {{/if}}
+      {{/if}}
 
 
-    {{#if (is-equal source "farmtypes")}}
-      <div class="container-fluid my-5">
-        <div class="text-right">
-          {{#link-to 'location.ruralactivities' model.entity.id class="btn btn-outline-secondary"}}
-          ANTERIOR
-          {{/link-to}}
+      {{#if (is-equal source "farmtypes")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="2") class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
         </div>
-      </div>
-    {{/if}}
+      {{/if}}
 
-    {{#if (is-equal source "agproducts")}}
-      <div class="container-fluid my-5">
-        <div class="text-right">
-          {{#link-to 'location.ruralactivities' model.entity.id class="btn btn-outline-secondary"}}
-          ANTERIOR
-          {{/link-to}}
+      {{#if (is-equal source "agproducts")}}
+
+
+        {{#if (is-equal variable "land_sown")}}
+          <div class="container-fluid my-5">
+            <div class="text-right">
+              {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="3") class="btn btn-outline-secondary"}}
+              ANTERIOR
+              {{/link-to}}
+            </div>
+          </div>
+        {{/if}}
+
+        {{#if (is-equal variable "land_harvested")}}
+          <div class="container-fluid my-5">
+            <div class="text-right">
+              {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="4") class="btn btn-outline-secondary"}}
+              ANTERIOR
+              {{/link-to}}
+            </div>
+          </div>
+        {{/if}}
+
+        {{#if (is-equal variable "production_tons")}}
+          <div class="container-fluid my-5">
+            <div class="text-right">
+              {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="5") class="btn btn-outline-secondary"}}
+              ANTERIOR
+              {{/link-to}}
+            </div>
+          </div>
+        {{/if}}
+
+        {{#if (is-equal variable "yield_ratio")}}
+          <div class="container-fluid my-5">
+            <div class="text-right">
+              {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="6") class="btn btn-outline-secondary"}}
+              ANTERIOR
+              {{/link-to}}
+            </div>
+          </div>
+        {{/if}}
+
+
+      {{/if}}
+
+      {{#if (is-equal source "nonags")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="7") class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
         </div>
-      </div>
+      {{/if}}
+
+      {{#if (is-equal source "livestock")}}
+
+         {{#if (is-equal variable "num_livestock")}}
+          <div class="container-fluid my-5">
+            <div class="text-right">
+              {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="8") class="btn btn-outline-secondary"}}
+              ANTERIOR
+              {{/link-to}}
+            </div>
+          </div>
+        {{/if}}
+
+        {{#if (is-equal variable "num_farms")}}
+          <div class="container-fluid my-5">
+            <div class="text-right">
+              {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="9") class="btn btn-outline-secondary"}}
+              ANTERIOR
+              {{/link-to}}
+            </div>
+          </div>
+        {{/if}}
+
+      {{/if}}
+
     {{/if}}
-
-    {{#if (is-equal source "nonags")}}
-      <div class="container-fluid my-5">
-        <div class="text-right">
-          {{#link-to 'location.ruralactivities' model.entity.id class="btn btn-outline-secondary"}}
-          ANTERIOR
-          {{/link-to}}
-        </div>
-      </div>
-    {{/if}}
-
-    {{#if (is-equal source "livestock")}}
-      <div class="container-fluid my-5">
-        <div class="text-right">
-          {{#link-to 'location.ruralactivities' model.entity.id class="btn btn-outline-secondary"}}
-          ANTERIOR
-          {{/link-to}}
-        </div>
-      </div>
-    {{/if}}
-
-
   {{/if}}
 
 </div>

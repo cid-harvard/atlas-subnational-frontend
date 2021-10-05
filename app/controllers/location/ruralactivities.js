@@ -1,14 +1,12 @@
 import Ember from 'ember';
 import numeral from 'numeral';
-const {computed, get:get} = Ember;
+const {computed, get:get, observer} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
-  queryParams: ['year'],
+  queryParams: ['startDate', 'endDate', 'ruralOption'],
 
-  startDate: null,
-  startDateTable: null,
   classNone: "",
   tableClassNone: "",
   endDate: null,
@@ -16,10 +14,19 @@ export default Ember.Controller.extend({
   showMultiples: false,
   showTable: false,
   canFilterCategory: false,
-  source: "landUses",
-  variable: "area",
-  vizualization: "treemap",
-  Title: "Área total",
+  source: null,
+  variable: null,
+  vizualization: null,
+  Title: null,
+  updatedDate: null,
+
+  observerRuralOption: observer('updatedDate', function(){
+    var rural_option = this.get('ruralOption');
+    this.send("selectSourceId", String(rural_option));
+    Ember.run.schedule("afterRender",this,function() {
+      $("#selectType").val(String(rural_option));
+    });
+  }),
 
   firstYear: computed('featureToggle.census_year', function () {
     return this.get("featureToggle.year_ranges.agcensus.first_year");
@@ -51,7 +58,7 @@ export default Ember.Controller.extend({
   productsData: computed.oneWay('model.productsData'),
   inmutableProductsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
-  filteredData: computed('model.[]', 'startDate', 'source', function(){
+  filteredData: computed('model.[]', 'endDate', 'source', function(){
 
     var source = this.get("source")
     var data = []
@@ -67,103 +74,112 @@ export default Ember.Controller.extend({
     } else if(source === "livestock"){
       data = this.get("model.livestockData");
     }
-    return data.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"));
+    return data.filter(item => item.year >= parseInt(this.get("startDate")) && item.year <= parseInt(this.get("endDate")));
   }),
-  filteredDataLandUsesTop5: computed('model.[]', 'startDateTable', function(){
+  filteredDataLandUsesTop5: computed('model.[]', 'endDate', function(){
+    var endDate = parseInt(this.get("endDate"))
     var data = this.get("model.landusesData");
-    var dataFiltered = data.filter(item => item.year === this.get("startDateTable"));
+    var dataFiltered = data.filter(item => item.year === endDate);
     var sorted = _.slice(_.sortBy(dataFiltered, function(d) { return -d.area;}), 0, 5);
     return sorted
   }),
-  filteredDataLandUsesTop5Order: computed('model', 'startDateTable', function (){
+  filteredDataLandUsesTop5Order: computed('model', 'endDate', function (){
     return [[ 3, "desc" ]];
   }),
 
 
-  filteredDataFarmTypesTop5: computed('model.[]', 'startDateTable', function(){
+  filteredDataFarmTypesTop5: computed('model.[]', 'endDate', function(){
+    var endDate = parseInt(this.get("endDate"))
     var data = this.get("model.farmtypesData");
-    var dataFiltered = data.filter(item => item.year === this.get("startDateTable"));
+    var dataFiltered = data.filter(item => item.year === endDate);
     var sorted = _.slice(_.sortBy(dataFiltered, function(d) { return -d.num_farms;}), 0, 5);
     return sorted
   }),
-  filteredDataFarmTypesTop5Order: computed('model', 'startDateTable', function (){
+  filteredDataFarmTypesTop5Order: computed('model', 'endDate', function (){
     return [[ 1, "desc" ]];
   }),
 
 
-  filteredDataLandSownTop5: computed('model.[]', 'startDateTable', function(){
+  filteredDataLandSownTop5: computed('model.[]', 'endDate', function(){
+    var endDate = parseInt(this.get("endDate"))
     var data = this.get("model.agproductsData");
-    var dataFiltered = data.filter(item => item.year === this.get("startDateTable"));
+    var dataFiltered = data.filter(item => item.year === endDate);
     var sorted = _.slice(_.sortBy(dataFiltered, function(d) { return -d.land_sown;}), 0, 5);
     return sorted
   }),
-  filteredDataLandSownTop5Order: computed('model', 'startDateTable', function (){
+  filteredDataLandSownTop5Order: computed('model', 'endDate', function (){
     return [[ 2, "desc" ]];
   }),
 
 
-  filteredDataLandHarvestedTop5: computed('model.[]', 'startDateTable', function(){
+  filteredDataLandHarvestedTop5: computed('model.[]', 'endDate', function(){
+    var endDate = parseInt(this.get("endDate"))
     var data = this.get("model.agproductsData");
-    var dataFiltered = data.filter(item => item.year === this.get("startDateTable"));
+    var dataFiltered = data.filter(item => item.year === endDate);
     var sorted = _.slice(_.sortBy(dataFiltered, function(d) { return -d.land_harvested;}), 0, 5);
     return sorted
   }),
-  filteredDataLandHarvestedTop5Order: computed('model', 'startDateTable', function (){
+  filteredDataLandHarvestedTop5Order: computed('model', 'endDate', function (){
     return [[ 3, "desc" ]];
   }),
 
-  filteredDataProductionTonsTop5: computed('model.[]', 'startDateTable', function(){
+  filteredDataProductionTonsTop5: computed('model.[]', 'endDate', function(){
+    var endDate = parseInt(this.get("endDate"))
     var data = this.get("model.agproductsData");
-    var dataFiltered = data.filter(item => item.year === this.get("startDateTable"));
+    var dataFiltered = data.filter(item => item.year === endDate);
     var sorted = _.slice(_.sortBy(dataFiltered, function(d) { return -d.production_tons;}), 0, 5);
     return sorted
   }),
-  filteredDataProductionTonsTop5Order: computed('model', 'startDateTable', function (){
+  filteredDataProductionTonsTop5Order: computed('model', 'endDate', function (){
     return [[ 4, "desc" ]];
   }),
 
 
-  filteredDataYieldRatioTop5: computed('model.[]', 'startDateTable', function(){
+  filteredDataYieldRatioTop5: computed('model.[]', 'endDate', function(){
+    var endDate = parseInt(this.get("endDate"))
     var data = this.get("model.agproductsData");
-    var dataFiltered = data.filter(item => item.year === this.get("startDateTable"));
+    var dataFiltered = data.filter(item => item.year === endDate);
     var sorted = _.slice(_.sortBy(dataFiltered, function(d) { return -d.yield_ratio;}), 0, 5);
     return sorted
   }),
-  filteredDataYieldRatioTop5Order: computed('model', 'startDateTable', function (){
+  filteredDataYieldRatioTop5Order: computed('model', 'endDate', function (){
     return [[ 5, "desc" ]];
   }),
 
 
-  filteredDataNonagsNumFarmsTop5: computed('model.[]', 'startDateTable', function(){
+  filteredDataNonagsNumFarmsTop5: computed('model.[]', 'endDate', function(){
+    var endDate = parseInt(this.get("endDate"))
     var data = this.get("model.nonagsData");
-    var dataFiltered = data.filter(item => item.year === this.get("startDateTable"));
+    var dataFiltered = data.filter(item => item.year === endDate);
     var sorted = _.slice(_.sortBy(dataFiltered, function(d) { return -d.num_farms;}), 0, 5);
     return sorted
   }),
-  filteredDataNonagsNumFarmsTop5Order: computed('model', 'startDateTable', function (){
+  filteredDataNonagsNumFarmsTop5Order: computed('model', 'endDate', function (){
     return [[ 1, "desc" ]];
   }),
 
 
-  filteredDataLiveStockNumTop5: computed('model.[]', 'startDateTable', function(){
+  filteredDataLiveStockNumTop5: computed('model.[]', 'endDate', function(){
+    var endDate = parseInt(this.get("endDate"))
     var data = this.get("model.livestockData");
-    var dataFiltered = data.filter(item => item.year === this.get("startDateTable"));
+    var dataFiltered = data.filter(item => item.year === endDate);
     var sorted = _.slice(_.sortBy(dataFiltered, function(d) { return -d.num_livestock;}), 0, 5);
     return sorted
   }),
-  filteredDataLiveStockNumTop5Order: computed('model', 'startDateTable', function (){
+  filteredDataLiveStockNumTop5Order: computed('model', 'endDate', function (){
     return [[ 2, "desc" ]];
   }),
 
 
-  filteredDataLiveStockNumFarmsTop5: computed('model.[]', 'startDateTable', function(){
+  filteredDataLiveStockNumFarmsTop5: computed('model.[]', 'endDate', function(){
+    var endDate = parseInt(this.get("endDate"))
     var data = this.get("model.livestockData");
-    var dataFiltered = data.filter(item => item.year === this.get("startDateTable"));
+    var dataFiltered = data.filter(item => item.year === endDate);
     var sorted = _.slice(_.sortBy(dataFiltered, function(d) { return -d.num_farms;}), 0, 5);
 
     return sorted
   }),
-  filteredDataLiveStockNumFarmsTop5Order: computed('model', 'startDateTable', function (){
+  filteredDataLiveStockNumFarmsTop5Order: computed('model', 'endDate', function (){
     return [[ 1, "desc" ]];
   }),
 
@@ -216,7 +232,7 @@ export default Ember.Controller.extend({
   }),
   rangeYearsTable: computed('firstYearTable', 'lastYearTable', function(){
 
-    this.set('startDateTable', this.get("lastYearTable"))
+    //this.set('startDateTable', this.get("lastYearTable"))
 
     var min = this.get("firstYearTable")
     var max = this.get("lastYearTable")
@@ -319,8 +335,8 @@ export default Ember.Controller.extend({
 
       var year = parseInt($("#selectYearTable").val())
 
-      this.set('startDateTable', year)
-      this.set('endDateTable', year)
+      this.set('startDate', year)
+      this.set('endDate', year)
     },
     selectSource(){
       var value = $("#selectType").val();
@@ -338,6 +354,8 @@ export default Ember.Controller.extend({
         this.set("showTable", false);
         this.set("classNone", "");
         this.set("tableClassNone", "");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
         //$("#pills-graphic-tab").trigger("click");
       } else if(value === "2"){
         this.set("source", "farmtypes");
@@ -352,6 +370,8 @@ export default Ember.Controller.extend({
         this.set("showTable", false);
         this.set("classNone", "");
         this.set("tableClassNone", "");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
         //$("#pills-graphic-tab").trigger("click");
       } else if(value === "3"){
         this.set("source", "agproducts");
@@ -366,6 +386,8 @@ export default Ember.Controller.extend({
         this.set("showTable", false);
         this.set("classNone", "");
         this.set("tableClassNone", "");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
         //$("#pills-graphic-tab").trigger("click");
       } else if(value === "4"){
         this.set("source", "agproducts");
@@ -380,6 +402,8 @@ export default Ember.Controller.extend({
         this.set("showTable", false);
         this.set("classNone", "");
         this.set("tableClassNone", "");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
         //$("#pills-graphic-tab").trigger("click");
       } else if(value === "5"){
         this.set("source", "agproducts");
@@ -394,6 +418,8 @@ export default Ember.Controller.extend({
         this.set("showTable", false);
         this.set("classNone", "");
         this.set("tableClassNone", "");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
         //$("#pills-graphic-tab").trigger("click");
       } else if(value === "6"){
         this.set("source", "agproducts");
@@ -408,6 +434,8 @@ export default Ember.Controller.extend({
         this.set("showTable", false);
         this.set("classNone", "d-none");
         this.set("tableClassNone", "");
+        this.set('startDate', this.get("firstYear"))
+        this.set('endDate', this.get("lastYear"))
         //$("#pills-graphic-tab").trigger("click");
       } else if(value === "7"){
         this.set("source", "nonags");
@@ -422,6 +450,8 @@ export default Ember.Controller.extend({
         this.set("showTable", true);
         this.set("classNone", "d-none");
         this.set("tableClassNone", "d-none");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
         //$("#pills-table-tab").trigger("click");
       } else if(value === "8"){
         this.set("source", "livestock");
@@ -436,6 +466,8 @@ export default Ember.Controller.extend({
         this.set("showTable", true);
         this.set("classNone", "d-none");
         this.set("tableClassNone", "d-none");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
         //$("#pills-table-tab").trigger("click");
       } else if(value === "9"){
         this.set("source", "livestock");
@@ -450,10 +482,165 @@ export default Ember.Controller.extend({
         this.set("showTable", true);
         this.set("classNone", "d-none");
         this.set("tableClassNone", "d-none");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
         //$("#pills-table-tab").trigger("click");
       }
 
-      $("#selectYear").val(this.get("startDate"));
+      this.set("ruralOption", parseInt(value))
+
+      $("#selectYear").val(this.get("endDate"));
+
+    },
+    selectSourceId(value){
+
+      value = String(value);
+
+      if(value === "1"){
+        this.set("source", "landUses");
+        this.set("variable", "area");
+        this.set("firstYear", this.get("featureToggle.year_ranges.agcensus.first_year"));
+        this.set("lastYear", this.get("featureToggle.year_ranges.agcensus.first_year"));
+        this.set("Title", "Área total:");
+        this.set("vizualization", "treemap");
+        this.set("canFilterCategory", false);
+        this.set("showGrap", true);
+        this.set("showMultiples", false);
+        this.set("showTable", false);
+        this.set("classNone", "");
+        this.set("tableClassNone", "");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
+        //$("#pills-graphic-tab").trigger("click");
+      } else if(value === "2"){
+        this.set("source", "farmtypes");
+        this.set("variable", "num_farms");
+        this.set("firstYear", this.get("featureToggle.year_ranges.agcensus.first_year"));
+        this.set("lastYear", this.get("featureToggle.year_ranges.agcensus.first_year"));
+        this.set("Title", "UPAS y UPNAS:");
+        this.set("vizualization", "treemap");
+        this.set("canFilterCategory", true);
+        this.set("showGrap", true);
+        this.set("showMultiples", false);
+        this.set("showTable", false);
+        this.set("classNone", "");
+        this.set("tableClassNone", "");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
+        //$("#pills-graphic-tab").trigger("click");
+      } else if(value === "3"){
+        this.set("source", "agproducts");
+        this.set("variable", "land_sown");
+        this.set("firstYear", this.get("featureToggle.year_ranges.agproduct.first_year"));
+        this.set("lastYear", this.get("featureToggle.year_ranges.agproduct.last_year"));
+        this.set("Title", "Área sembrada (hectáreas):");
+        this.set("vizualization", "treemap");
+        this.set("canFilterCategory", true);
+        this.set("showGrap", true);
+        this.set("showMultiples", false);
+        this.set("showTable", false);
+        this.set("classNone", "");
+        this.set("tableClassNone", "");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
+        //$("#pills-graphic-tab").trigger("click");
+      } else if(value === "4"){
+        this.set("source", "agproducts");
+        this.set("variable", "land_harvested");
+        this.set("firstYear", this.get("featureToggle.year_ranges.agproduct.first_year"));
+        this.set("lastYear", this.get("featureToggle.year_ranges.agproduct.last_year"));
+        this.set("Title", "Área cosechada (hectáreas):");
+        this.set("vizualization", "treemap");
+        this.set("canFilterCategory", true)
+        this.set("showGrap", true);
+        this.set("showMultiples", false);
+        this.set("showTable", false);
+        this.set("classNone", "");
+        this.set("tableClassNone", "");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
+        //$("#pills-graphic-tab").trigger("click");
+      } else if(value === "5"){
+        this.set("source", "agproducts");
+        this.set("variable", "production_tons");
+        this.set("firstYear", this.get("featureToggle.year_ranges.agproduct.first_year"));
+        this.set("lastYear", this.get("featureToggle.year_ranges.agproduct.last_year"));
+        this.set("Title", "Producción (toneladas):");
+        this.set("vizualization", "treemap");
+        this.set("canFilterCategory", true);
+        this.set("showGrap", true);
+        this.set("showMultiples", false);
+        this.set("showTable", false);
+        this.set("classNone", "");
+        this.set("tableClassNone", "");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
+        //$("#pills-graphic-tab").trigger("click");
+      } else if(value === "6"){
+        this.set("source", "agproducts");
+        this.set("variable", "yield_ratio");
+        this.set("firstYear", this.get("featureToggle.year_ranges.agproduct.first_year"));
+        this.set("lastYear", this.get("featureToggle.year_ranges.agproduct.last_year"));
+        this.set("Title", "Rendimiento");
+        this.set("vizualization", "multiples");
+        this.set("canFilterCategory", false);
+        this.set("showGrap", false);
+        this.set("showMultiples", true);
+        this.set("showTable", false);
+        this.set("classNone", "d-none");
+        this.set("tableClassNone", "");
+        this.set('startDate', this.get("firstYear"))
+        this.set('endDate', this.get("lastYear"))
+        //$("#pills-graphic-tab").trigger("click");
+      } else if(value === "7"){
+        this.set("source", "nonags");
+        this.set("variable", "num_farms");
+        this.set("firstYear", this.get("featureToggle.year_ranges.agcensus.first_year"));
+        this.set("lastYear", this.get("featureToggle.year_ranges.agcensus.first_year"));
+        this.set("Title", "Numero unidades de producción:");
+        this.set("vizualization", "treemap");
+        this.set("canFilterCategory", false);
+        this.set("showGrap", false);
+        this.set("showMultiples", false);
+        this.set("showTable", true);
+        this.set("classNone", "d-none");
+        this.set("tableClassNone", "d-none");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
+        //$("#pills-table-tab").trigger("click");
+      } else if(value === "8"){
+        this.set("source", "livestock");
+        this.set("variable", "num_livestock");
+        this.set("firstYear", this.get("featureToggle.year_ranges.agcensus.first_year"));
+        this.set("lastYear", this.get("featureToggle.year_ranges.agcensus.first_year"));
+        this.set("Title", "Número de animales:");
+        this.set("vizualization", "treemap");
+        this.set("canFilterCategory", false);
+        this.set("showGrap", false);
+        this.set("showMultiples", false);
+        this.set("showTable", true);
+        this.set("classNone", "d-none");
+        this.set("tableClassNone", "d-none");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
+        //$("#pills-table-tab").trigger("click");
+      } else if(value === "9"){
+        this.set("source", "livestock");
+        this.set("variable", "num_farms");
+        this.set("firstYear", this.get("featureToggle.year_ranges.agcensus.first_year"));
+        this.set("lastYear", this.get("featureToggle.year_ranges.agcensus.first_year"));
+        this.set("Title", "Numero unidades de producción:");
+        this.set("vizualization", "treemap");
+        this.set("canFilterCategory", false);
+        this.set("showGrap", false);
+        this.set("showMultiples", false);
+        this.set("showTable", true);
+        this.set("classNone", "d-none");
+        this.set("tableClassNone", "d-none");
+        this.set('startDate', this.get("lastYear"))
+        this.set('endDate', this.get("lastYear"))
+        //$("#pills-table-tab").trigger("click");
+      }
 
     }
   }

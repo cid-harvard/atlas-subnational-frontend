@@ -1,12 +1,13 @@
 <div class="container-fluid px-md-x10 mt-5">
   <div class="row">
 
+    <p>{{ruralOptionValue}}</p>
 
     <div class="col-sm-12">
       <ul class="nav nav-pills center-pills" id="pills-tab-tables-graphics" role="tablist" style="justify-content: end;">
         <li class="nav-item">
-          <a class="nav-link active btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-graphic-tab" data-toggle="pill" href="#pills-graphics" role="tab" aria-controls="pills-graphics" aria-selected="true">
-            VER DETALLE
+          <a class="nav-link active btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-graphic-tab" data-toggle="pill" href="#pills-graphics" role="tab" aria-controls="pills-graphics" aria-selected="true" {{action "selectSourceId" ruralOption on="click"}}>
+            VER COMO GRÁFICA
           </a>
         </li>
 
@@ -24,47 +25,32 @@
 
         <div class="tab-pane fade active show" id="pills-graphics" role="tabpanel" aria-labelledby="pills-graphics">
 
-          <div class="col-sm-12 {{classNone}}">
-            <p class="text-white">Filtrar por Año</p>
-          </div>
-
           <div class="col-sm-12">
 
             <div class="row">
               <div class="col-sm-12 col-md-4 my-auto">
-                <div class="{{classNone}}">
+                <p class="text-white">Filtrar por Año</p>
+                <div class="">
                   <select class="form-control form-filter" id="selectYear">
 
                     {{#each year in rangeYears }}
-                      <option>{{year}}</option>
+                      {{#if (is-equal year endDate)}}
+                        <option selected>{{year}}</option>
+                      {{else}}
+                        <option>{{year}}</option>
+                       {{/if}}
                     {{/each}}
 
                   </select>
                 </div>
               </div>
 
-              <div class="col-sm-12 col-md-4 {{classNone}}">
-                <button class="btn btn-outline-secondary" {{action "setStartYear"}}>FILTRAR</button>
+              <div class="col-sm-12 col-md-4">
+                <button class="btn btn-outline-secondary {{classNone}}" {{action "setStartYear"}} style="position: absolute; bottom: 0px;">FILTRAR</button>
               </div>
 
-
-            </div>
-
-          </div>
-
-          <div class="col-sm-12">
-            <h1 class="text-white mt-5 pt-5">Actividades rurales</h1>
-          </div>
-
-          <div class="col-sm-12 mt-5 pt-5">
-            <h1 class="text-white d-inline">Selector</h1>
-            <p class="text-white d-inline ml-5 pl-5">Utilice el selector para cambiar la Información</p>
-          </div>
-
-          <div class="col-sm-12 mt-5">
-
-            <div class="row">
               <div class="col-sm-12 col-md-4 my-auto">
+                <p class="text-white">Actividades rurales</p>
                 <div class="">
                   <select class="form-control form-filter" id="selectType" {{action "selectSource" on="change"}}>
                     <option value="1">Uso del suelo</option>
@@ -75,10 +61,11 @@
                     <option value="6">Rendimiento de los cultivos</option>
                     <option value="7">Actividades no agropecuarias</option>
                     <option value="8">Especies pecuarias</option>
-                    <option value="9">UPAS actividad pecuara por especie</option>
+                    <option value="9">UPAS actividad pecuaria por especie</option>
                   </select>
                 </div>
               </div>
+
 
             </div>
 
@@ -87,7 +74,7 @@
           <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
             <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
               {{#if showGrap}}
-                <h1 class="text-white">{{Title}} {{headerValue}} ({{startDate}})</h1>
+                <!--<h1 class="text-white">{{Title}} {{headerValue}} ({{startDate}})</h1>-->
                 {{
                   zoomable-treemap
                   data=filteredData
@@ -98,6 +85,7 @@
                   color='pink'
                   filterCategory=canFilterCategory
                   groupByParent=true
+                  filename=(is-concat Title ' ' headerValue ' (' startDate ')' ' - ' model.name)
                 }}
               {{/if}}
               {{#if showMultiples}}
@@ -112,6 +100,7 @@
                   endDate=endDate
                   varDependent=variable
                   elementId='zoomable-export-value-multple'
+                  title_data=(is-concat Title ' ' headerValue ' (' dateValue ')' ' - ' model.name)
                 }}
               {{/if}}
               {{#if showTable}}
@@ -125,6 +114,7 @@
                   startDate=startDate
                   endDate=endDate
                   elementId="productssourceTable"
+                  title_data=(is-concat Title ' ' headerValue ' (' dateValue ')' ' - ' model.name)
                 }}
               {{/if}}
             </div>
@@ -133,7 +123,7 @@
           <div class="container-fluid my-5 pr-5">
             <div class="text-right">
 
-              {{#link-to 'location.visualization' model.id source vizualization variable (query-params startDate=startDate endDate=endDate search='null')
+              {{#link-to 'location.visualization' model.id source vizualization variable (query-params startDate=startDate endDate=endDate search='null' showBack="true")
                 class="btn btn-outline-secondary"
               }}
                 <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -158,7 +148,11 @@
                   <select class="form-control form-filter" id="selectYearTable">
 
                     {{#each year in rangeYearsTable }}
-                      <option>{{year}}</option>
+                      {{#if (is-equal year endDate)}}
+                        <option selected>{{year}}</option>
+                      {{else}}
+                        <option>{{year}}</option>
+                       {{/if}}
                     {{/each}}
 
                   </select>
@@ -189,17 +183,18 @@
                 data=filteredDataLandUsesTop5
                 source="landUse"
                 entityType='landUse'
-                startDate=startDateTable
-                endDate=startDateTable
+                startDate=startDate
+                endDate=startDate
                 elementId="productssourceTables"
                 order=filteredDataLandUsesTop5Order
+                title_data=(is-concat 'Uso del suelo en ' model.name ' (' startDate ')')
               }}
             </div>
 
             <div class="my-5 pr-5">
               <div class="text-right">
 
-                {{#link-to 'location.visualization' model.id "landUses" "treemap" "area" (query-params startDate=startDateTable endDate=startDateTable search='null')
+                {{#link-to 'location.visualization' model.id "landUses" "treemap" "area" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
                   class="btn btn-outline-secondary"
                 }}
                   <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -223,17 +218,18 @@
                 data=filteredDataFarmTypesTop5
                 source="farmtypes"
                 entityType='farmtypes'
-                startDate=startDateTable
-                endDate=startDateTable
+                startDate=startDate
+                endDate=startDate
                 elementId="productssourceTables2"
                 order=filteredDataFarmTypesTop5Order
+                title_data=(is-concat 'Unidades de producción agropecuaria y no agropecuaria en ' model.name ' (' startDate ')')
               }}
             </div>
 
             <div class="my-5 pr-5">
               <div class="text-right">
 
-                {{#link-to 'location.visualization' model.id "farmtypes" "treemap" "num_farms" (query-params startDate=startDateTable endDate=startDateTable search='null')
+                {{#link-to 'location.visualization' model.id "farmtypes" "treemap" "num_farms" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
                   class="btn btn-outline-secondary"
                 }}
                   <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -257,17 +253,18 @@
                 data=filteredDataLandSownTop5
                 source="agproducts"
                 entityType='agproducts'
-                startDate=startDateTable
-                endDate=startDateTable
+                startDate=startDate
+                endDate=startDate
                 elementId="productssourceTables3"
                 order=filteredDataLandSownTop5Order
+                title_data=(is-concat 'Hectáreas sembradas por cultivo en ' model.name ' (' startDate ')')
               }}
             </div>
 
             <div class="my-5 pr-5">
               <div class="text-right">
 
-                {{#link-to 'location.visualization' model.id "agproducts" "treemap" "land_sown" (query-params startDate=startDateTable endDate=startDateTable search='null')
+                {{#link-to 'location.visualization' model.id "agproducts" "treemap" "land_sown" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
                   class="btn btn-outline-secondary"
                 }}
                   <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -291,17 +288,18 @@
                 data=filteredDataLandHarvestedTop5
                 source="agproducts"
                 entityType='agproducts'
-                startDate=startDateTable
-                endDate=startDateTable
+                startDate=startDate
+                endDate=startDate
                 elementId="productssourceTables4"
                 order=filteredDataLandHarvestedTop5Order
+                title_data=(is-concat 'Hectáreas cosechadas por cultivo en ' model.name ' (' startDate ')')
               }}
             </div>
 
             <div class="my-5 pr-5">
               <div class="text-right">
 
-                {{#link-to 'location.visualization' model.id "agproducts" "treemap" "land_harvested" (query-params startDate=startDateTable endDate=startDateTable search='null')
+                {{#link-to 'location.visualization' model.id "agproducts" "treemap" "land_harvested" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
                   class="btn btn-outline-secondary"
                 }}
                   <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -325,17 +323,18 @@
                 data=filteredDataProductionTonsTop5
                 source="agproducts"
                 entityType='agproducts'
-                startDate=startDateTable
-                endDate=startDateTable
+                startDate=startDate
+                endDate=startDate
                 elementId="productssourceTables5"
                 order=filteredDataProductionTonsTop5Order
+                title_data=(is-concat 'Toneladas producidas por cultivo ' model.name ' (' startDate ')')
               }}
             </div>
 
             <div class="my-5 pr-5">
               <div class="text-right">
 
-                {{#link-to 'location.visualization' model.id "agproducts" "treemap" "production_tons" (query-params startDate=startDateTable endDate=startDateTable search='null')
+                {{#link-to 'location.visualization' model.id "agproducts" "treemap" "production_tons" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
                   class="btn btn-outline-secondary"
                 }}
                   <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -359,17 +358,18 @@
                 data=filteredDataYieldRatioTop5
                 source="agproducts"
                 entityType='agproducts'
-                startDate=startDateTable
-                endDate=startDateTable
+                startDate=startDate
+                endDate=startDate
                 elementId="productssourceTables6"
                 order=filteredDataYieldRatioTop5Order
+                title_data=(is-concat 'Rendimiento de los cultivos en ' model.name ' (' startDate ')')
               }}
             </div>
 
             <div class="my-5 pr-5">
               <div class="text-right">
 
-                {{#link-to 'location.visualization' model.id "agproducts" "multiples" "yield_ratio" (query-params startDate=startDateTable endDate=startDateTable search='null')
+                {{#link-to 'location.visualization' model.id "agproducts" "multiples" "yield_ratio" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
                   class="btn btn-outline-secondary"
                 }}
                   <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -393,17 +393,18 @@
                 data=filteredDataNonagsNumFarmsTop5
                 source="nonags"
                 entityType='nonags'
-                startDate=startDateTable
-                endDate=startDateTable
+                startDate=startDate
+                endDate=startDate
                 elementId="productssourceTables7"
                 order=filteredDataNonagsNumFarmsTop5Order
+                title_data=(is-concat 'Actividades no agropecuarias en ' model.name ' (' startDate ')')
               }}
             </div>
 
             <div class="my-5 pr-5">
               <div class="text-right">
 
-                {{#link-to 'location.visualization' model.id "nonags" "treemap" "num_farms" (query-params startDate=startDateTable endDate=startDateTable search='null')
+                {{#link-to 'location.visualization' model.id "nonags" "treemap" "num_farms" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
                   class="btn btn-outline-secondary"
                 }}
                   <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -426,17 +427,18 @@
                 data=filteredDataLiveStockNumTop5
                 source="livestockData"
                 entityType='livestockData'
-                startDate=startDateTable
-                endDate=startDateTable
+                startDate=startDate
+                endDate=startDate
                 elementId="productssourceTables8"
                 order=filteredDataLiveStockNumTop5Order
+                title_data=(is-concat 'Especies pecuarias en ' model.name ' (' startDate ')')
               }}
             </div>
 
             <div class="my-5 pr-5">
               <div class="text-right">
 
-                {{#link-to 'location.visualization' model.id "livestock" "treemap" "num_livestock" (query-params startDate=startDateTable endDate=startDateTable search='null')
+                {{#link-to 'location.visualization' model.id "livestock" "treemap" "num_livestock" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
                   class="btn btn-outline-secondary"
                 }}
                   <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -460,17 +462,18 @@
                 data=filteredDataLiveStockNumFarmsTop5
                 source="livestockData"
                 entityType='livestockData'
-                startDate=startDateTable
-                endDate=startDateTable
+                startDate=startDate
+                endDate=startDate
                 elementId="productssourceTables9"
                 order=filteredDataLiveStockNumFarmsTop5Order
+                title_data=(is-concat 'UPAS actividad pecuaria por especie en ' model.name ' (' startDate ')')
               }}
             </div>
 
             <div class="my-5 pr-5">
               <div class="text-right">
 
-                {{#link-to 'location.visualization' model.id "livestock" "treemap" "num_farms" (query-params startDate=startDateTable endDate=startDateTable search='null')
+                {{#link-to 'location.visualization' model.id "livestock" "treemap" "num_farms" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
                   class="btn btn-outline-secondary"
                 }}
                   <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -487,9 +490,6 @@
 
       </div>
     </div>
-
-
-
 
   </div>
 
