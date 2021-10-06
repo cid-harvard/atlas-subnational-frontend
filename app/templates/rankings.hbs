@@ -1,39 +1,44 @@
-<header class="stream__header">
-  <h2 class="stream__head">{{ pageTitle }}</h2>
-</header>
-
-<section class="stream__section">
-	<p class="section__p">
-		{{ t 'rankings.intro.p' }}
-	</p>
-</section>
-
-<section class="stream__section">
-	<h3 class="section__head">{{ t 'rankings.section.departments' }}</h3>
-  {{component 'table-download'
-    name=sectionDepartments
-    data=model.departments
-    source='departmentRankings'
-    pageTitle=pageTitle
-  }}
-	{{component 'graphbuilder-table'
-	  data=model.departments
-	  source='departmentRankings'
-	}}
-</section>
-
-{{#if featureToggle.showCities }}
+<div class="container-fluid px-md-x10 my-md-5 py-md-5 my-sm-1 py-sm-1">
+  <div class="row row-without-margin d-flex align-items-center">
+    <header class="stream__header">
+        <h2 class="title_yellow d-inline" style="font-size: 6rem;">{{ pageTitle }}</h2>
+    </header>
+  </div>
   <section class="stream__section">
-    <h3 class="section__head">{{ t 'rankings.section.cities' }}</h3>
+    <p class="text-white">
+      {{ t 'rankings.intro.p' }}
+    </p>
+  </section>
+  <section class="stream__section">
+    <h3 class='title_yellow'>{{ t 'rankings.section.departments' }}</h3>
     {{component 'table-download'
-      name=sectionCities
-      data=model.msas
-      source='msaRankings'
-      pageTitle=pageTitle
+                name=sectionDepartments
+                data=model.departments
+                source='departmentRankings'
+                pageTitle=pageTitle
     }}
     {{component 'graphbuilder-table'
-      data=model.msas
-      source='msaRankings'
+                data=model.departments
+                source='departmentRankings'
     }}
   </section>
-{{/if}}
+
+  {{#if featureToggle.showCities }}
+    <section class="stream__section">
+      <h3 class='title_yellow'>{{ t 'rankings.section.cities' }}</h3>
+      {{component 'table-download'
+                  name=sectionCities
+                  data=model.msas
+                  source='msaRankings'
+                  pageTitle=pageTitle
+      }}
+      {{component 'graphbuilder-table'
+                  data=model.msas
+                  source='msaRankings'
+      }}
+    </section>
+  {{/if}}
+
+</div>
+
+
