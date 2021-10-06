@@ -127,6 +127,7 @@
         categoriesFilterList=categoriesFilterList
         selectedProducts=selectedProducts
         show10=true
+        filename=(is-concat endDate ' - ' 'Mapa de complejidad' ' - ' model.entity.name ' (' model.entity.code ')')
       }}
     </div>
 
@@ -153,17 +154,26 @@
         source="products"
         entityType="products"
         elementId="industriesTable"
+        title_data=(is-concat endDate ' - ' 'Mapa de complejidad' ' - ' model.entity.name ' (' model.entity.code ')')
+        source_data="FUENTE: cálculos del CID con datos de la DIAN."
       }}
     </div>
   </div>
 </div>
 
-<div class="container-fluid px-md-x10 pb-5">
-  <div class="text-right">
+<div class="container-fluid px-md-x10 pb-5 text-right">
+  <div class="d-inline">
     {{#link-to 'product.abstract' modelData.id
       class="btn btn-outline-secondary"
     }}
     ANTERIOR
+    {{/link-to}}
+  </div>
+  <div class="d-inline">
+    {{#link-to 'product.exports' modelData.id (query-params startDate=startDate endDate=endDate)
+      class="btn btn-outline-secondary"
+    }}
+    SIGUIENTE
     {{/link-to}}
   </div>
 </div>

@@ -204,7 +204,7 @@ export default Ember.Controller.extend({
     var all_locations = Object.values(this.get("model.metaData.locations"))
 
     var locations = all_locations.filter(item => item.level === "department").map( (item) => {
-      var chained = all_locations.filter(item2 => item.id === item2.parent_id).map(item => ({'id': item.id, 'text': `${item.name_es} (${item.code})`}))
+      var chained = all_locations.filter(item2 => item.id === item2.parent_id && item2.level === "msa").map(item => ({'id': item.id, 'text': `${item.name_es} (${item.code})`}))
       return {'id': item.id, 'text': `${item.name_es} (${item.code})`, 'chained': chained}
     })
     return locations
@@ -260,9 +260,28 @@ export default Ember.Controller.extend({
   }),
   productsDataValues: computed('model', function(){
 
-    var locations = Object.entries(this.get('model.metaData.products'))
+    var locations = Object.entries(this.get('model.metaData.products'));
+    var edgesSourcesProductSpace = this.get('model.metaData.productSpace.edges').map(item => {
+      if(item.source.id === undefined){
+        return item.source;
+      }
+      else{
+        return item.source.id;
+      }
+    });
 
-    return locations.filter(item => item[1].level === "4digit").map((item) => {
+    var edgesTargetsProductSpace = this.get('model.metaData.productSpace.edges').map(item => {
+      if(item.target.id === undefined){
+        return item.target;
+      }
+      else{
+        return item.target.id;
+      }
+    });
+
+    const valid_ids = [...edgesSourcesProductSpace, ...edgesTargetsProductSpace];
+
+    return locations.filter(item => item[1].level === "4digit" && valid_ids.includes(item[0])).map((item) => {
 
       var name = get(item[1], `name_short_${this.get('i18n').display}`)
 

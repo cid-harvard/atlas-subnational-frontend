@@ -344,7 +344,7 @@ export default Ember.Component.extend({
 
               var textItem = get(d, `name_short_${this.get('i18n').display}`) || d.code;
 
-              var tooltip_text = `<a href="javascript:void(0);" id='close_tooltip_${d.id}_${elementId}' style="color: black; position: absolute; top:0; right:0; padding: 10px; font-size: 2rem;">x</a><span style="color:${get(d, 'color')}">${textItem}</span>`;
+              var tooltip_text = `<a href="javascript:void(0);" id='close_tooltip_${d.id}_${elementId}' style="color: black; position: absolute; top:0; right:0; padding: 10px; font-size: 2rem; pointer-events: auto;">x</a><span style="color:${get(d, 'color')}">${textItem}</span>`;
 
               data.forEach((datum) => {
                 if(datum.key) {
@@ -787,9 +787,15 @@ export default Ember.Component.extend({
     },
     savePng() {
       alert('Iniciando la descarga, este proceso tardará un momento.');
+      var filename = this.get("filename");
       var domNode = $('#complexmap')[0];
       var d = new Date();
       var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
+
+      if(filename){
+        file_name = filename;
+      }
+
       var options = {
         width: domNode.clientWidth * 4,
         height: domNode.clientHeight * 4,
@@ -809,6 +815,7 @@ export default Ember.Component.extend({
     },
     savePdf: function savePdf() {
       alert('Iniciando la descarga, este proceso tardará un momento.');
+      var filename = this.get("filename");
       var PDF_Width = 1024;
       var PDF_Height = 800;
       var pdf = new jsPDF('l', 'pt', [PDF_Width, PDF_Height]);
@@ -817,6 +824,10 @@ export default Ember.Component.extend({
       var countPages = totalPDFPages;
       var d = new Date();
       var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
+
+      if(filename){
+        file_name = filename;
+      }
 
       for (var domNode of domNodes) {
         var options = {

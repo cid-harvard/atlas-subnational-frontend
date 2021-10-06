@@ -73,11 +73,10 @@ export default Ember.Component.extend({
   },
   observerCenter: observer("center", function () {
     //d3.select(this.get('id')).selectAll('svg').remove();
-    //console.log(this.get("center"))
 
-    //this.get("ring")
-      //.center(this.get("center"))
-      //.render();
+    this.get("ring")
+      .center(this.get("center").toString())
+      .render();
 
   })
 });
