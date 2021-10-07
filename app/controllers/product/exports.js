@@ -25,6 +25,11 @@ export default Ember.Controller.extend({
     this.set("selectedProducts", selected_products)
   },
 
+  linkDatlas: computed('startDate', function () {
+    var startDate = this.get("startDate");
+    return `https://atlas.cid.harvard.edu/explore?country=undefined&product=undefined&year=${startDate}&tradeDirection=import&productClass=HS&target=Product&partner=undefined&startYear=undefined`
+  }),
+
   selectedProducts: computed('model.[]', function () {
     return this.get("initialSelectedProducts");
   }),

@@ -50,25 +50,17 @@
   </div>
 </div>
 
-<div class="container-fluid px-md-x10 mt-5 mt-5 pt-5">
+<div class="container-fluid px-md-x10 mt-5 pt-5">
   <div class="row">
+
     <div class="col-sm-12">
-      {{
-          zoomable-treemap
-          data=filterData
-          varDependent='export_value'
-          elementId='occupation-vistk-treemap'
-          class="position-relative"
-          color='pink'
-          filterCategory=true
-          groupByParent=true
-          title_filter=(is-concat 'Exportaciones del producto ' '(' lastYear ')' ' - ' model.entity.name ' (' model.entity.code ')')
-        }}
+      <iframe height="1000" style="width: inherit; background: white;" src={{linkDatlas}}></iframe>
     </div>
+
   </div>
 </div>
 
-<div class="container-fluid px-md-x10 pb-5 text-right">
+<div class="container-fluid px-md-x10 pb-5 text-right mt-5 pt-5">
   <div class="d-inline">
     {{#link-to 'product.ringchart' model.entity.id (query-params startDate=startDate endDate=endDate)
       class="btn btn-outline-secondary"
