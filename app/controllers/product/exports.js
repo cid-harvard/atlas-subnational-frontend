@@ -206,7 +206,7 @@ export default Ember.Controller.extend({
         //selected.push(String(item.id))
         self.set("center", item.id)
         self.setSelectedProductsbyId(item.id)
-        this.transitionToRoute('product.ringchart', item.id, {queryParams: { endDate: this.get("endDate"), startDate: this.get("startDate"), centerId: this.get("center") }});
+        //this.transitionToRoute('product.ringchart', item.id, {queryParams: { endDate: this.get("endDate"), startDate: this.get("startDate"), centerId: this.get("center") }});
 
         Ember.run.later(this , function() {
           $(`.d3plus-id-${item.id}`).click(),

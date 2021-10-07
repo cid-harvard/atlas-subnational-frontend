@@ -314,12 +314,7 @@ export default Ember.Controller.extend({
         //selected.push(String(item.id))
         self.set("center", item.id)
         self.setSelectedProductsbyId(item.id)
-        this.transitionToRoute('product.ringchart', item.id, {queryParams: { endDate: this.get("endDate"), startDate: this.get("startDate"), centerId: this.get("center") }});
-
-        Ember.run.later(this , function() {
-          $(`.d3plus-id-${item.id}`).click(),
-          2000
-        });
+        //this.transitionToRoute('product.ringchart', item.id, {queryParams: { endDate: this.get("endDate"), startDate: this.get("startDate"), centerId: this.get("center") }});
 
         //self.set('vistkNetworkService.updated', new Date());
         //d3.selectAll(`.tooltip_${item.id}_${elementId}`).classed('d-none', false);
@@ -394,7 +389,7 @@ export default Ember.Controller.extend({
   },
   observerCenter: observer("center", function () {
     var center = this.get("center")
-    this.setSelectedProductsbyId(center)
+    //this.setSelectedProductsbyId(center)
     this.set('vistkNetworkService.updated', new Date());
   }),
 
@@ -540,9 +535,28 @@ export default Ember.Controller.extend({
 
   productsDataValues: computed('model', function(){
 
-    var locations = Object.entries(this.get('model.metaData.products'))
+    var locations = Object.entries(this.get('model.metaData.products'));
+    var edgesSourcesProductSpace = this.get('model.metaData.productSpace.edges').map(item => {
+      if(item.source.id === undefined){
+        return item.source;
+      }
+      else{
+        return item.source.id;
+      }
+    });
 
-    return locations.filter(item => item[1].level === "4digit").map((item) => {
+    var edgesTargetsProductSpace = this.get('model.metaData.productSpace.edges').map(item => {
+      if(item.target.id === undefined){
+        return item.target;
+      }
+      else{
+        return item.target.id;
+      }
+    });
+
+    const valid_ids = [...edgesSourcesProductSpace, ...edgesTargetsProductSpace];
+
+    return locations.filter(item => item[1].level === "4digit" && valid_ids.includes(item[0])).map((item) => {
 
       var name = get(item[1], `name_short_${this.get('i18n').display}`)
 
@@ -713,9 +727,15 @@ export default Ember.Controller.extend({
     },
     savePng() {
       alert('Iniciando la descarga, este proceso tardará un momento.');
-      var domNode = $('#ringchartmap')[0];
+      var domNode = $('#complexmap')[0];
       var d = new Date();
-      var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
+      var filename = this.get("filename");
+      var file_name = `${this.get("endDate")} - RingChart - ${this.get("model.entity.name")} (${this.get("model.entity.code")}')`;
+
+      if(filename){
+        file_name = filename;
+      }
+
       var options = {
         width: domNode.clientWidth * 4,
         height: domNode.clientHeight * 4,

@@ -65,7 +65,7 @@
     </div>
   </div>
 
-  <div id="complexmap">
+  <div id="complexmap" style="padding-bottom: 60px;">
     <div class="row" id="ringchartmap">
       <div class="col-sm-12 col-md-8 mt-5 pt-5" style="min-height: 600px;">
         <p class="d-none">{{buildermodSearchService.search}}</p>
@@ -87,7 +87,7 @@
       <div class="col-sm-12 col-md-4 mt-5 pt-5" style="padding: 10px; border: #cccccc 1px solid;">
         <div style="padding: 10px;">
           <p class="text_yellow">Producto: <span class="text-white ml-3">{{product_selected.name_short_es}} ({{product_selected.code}})</span></p>
-          <p class="text-white">Exportaciones: {{product_selected.export_value}}</p>
+          <p class="text-white">Exportaciones: USD ${{product_selected.export_value}}</p>
           <p class="text-white">VCR: {{product_selected.export_rca}}</p>
           <p class="text-white">Complejidad: {{product_selected.complexity}}</p>
 
@@ -180,6 +180,8 @@
         source="products"
         entityType="products"
         elementId="industriesTable"
+        title_data=(is-concat endDate ' - ' 'RingChart' ' - ' model.entity.name ' (' model.entity.code ')')
+        source_data="FUENTE: cálculos del CID con datos de la DIAN."
       }}
     </div>
   </div>
