@@ -425,7 +425,7 @@ export default Ember.Component.extend({
       alert('Iniciando la descarga, este proceso tardará un momento.');
       var filename = this.get("filename");
 
-      console.log(filename)
+      //console.log(filename)
 
       var PDF_Width = 800;
       var PDF_Height = 600;

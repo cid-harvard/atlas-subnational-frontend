@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   buildermodSearchService: Ember.inject.service(),
   departmentCityFilterService: Ember.inject.service(),
   vistkNetworkService: Ember.inject.service(),
-  queryParams: ['startDate', 'endDate', 'centerId'],
+  queryParams: ['startDate', 'endDate'],
   categoriesFilterList: [],
   elementId: 'product_space',
   VCRValue: 1,
@@ -113,6 +113,12 @@ export default Ember.Controller.extend({
 
     return result_object
 
+  },
+  init: function(){
+    Ember.run.schedule("afterRender", this, function() {
+       var id = this.get("model.entity.id");
+       this.set("center", id);
+    })
   },
   initialSelectedProducts: computed('model.[]', function () {
     var id = this.get("model.entity.id")
@@ -274,6 +280,7 @@ export default Ember.Controller.extend({
     var data = this.get("model.metaData.products");
     var selected = this.get("selectedProducts");
     let search = _.deburr(this.get('buildermodSearchService.search'));
+
     var self = this;
     var elementId = this.get("elementId");
     var initialSelectedProducts = this.get("initialSelectedProducts")

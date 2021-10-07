@@ -17,7 +17,6 @@ export default Ember.Route.extend({
   queryParams: {
     startDate: { refreshModel: false },
     endDate: { refreshModel: false },
-    centerId: { refreshModel: true },
   },
 
   model(params) {

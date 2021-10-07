@@ -596,7 +596,7 @@ export default Ember.Controller.extend({
     return this.get('i18n').t(`general.${entityType}`);
   }),
   modelData: computed('model.data.[]', function() {
-    console.log(this.get("model"))
+    //console.log(this.get("model"))
     if(this.get('source') === "departments" && this.get('visualization') === "treemap"){
       return this.get('model.cities');
     }

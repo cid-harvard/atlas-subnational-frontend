@@ -17,7 +17,6 @@ export default Ember.Route.extend({
   queryParams: {
     startDate: { refreshModel: false },
     endDate: { refreshModel: false },
-    centerId: { refreshModel: true },
   },
 
   model(params) {
@@ -57,12 +56,14 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     //this.set('buildermodSearchService.search', null);
     this._super(controller, model);
+    controller.set('center', this.get('product_id'));
     window.scrollTo(0, 0);
   },
   resetController(controller, isExiting) {
 
     if (isExiting) {
       controller.setProperties({
+        center: this.get('product_id'),
       });
     }
   },

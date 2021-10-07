@@ -83,7 +83,7 @@ export default Ember.Controller.extend({
     var filtered = products.filter(item => item.year === this.get("startDate"))
     var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.export_value;}), 0, 5);
 
-    console.log(sorted)
+    //console.log(sorted)
 
     return sorted;
   }),

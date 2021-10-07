@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   buildermodSearchService: Ember.inject.service(),
   departmentCityFilterService: Ember.inject.service(),
   vistkNetworkService: Ember.inject.service(),
-  queryParams: ['startDate', 'endDate', 'centerId'],
+  queryParams: ['startDate', 'endDate'],
   categoriesFilterList: [],
   elementId: 'product_space',
   VCRValue: 1,
