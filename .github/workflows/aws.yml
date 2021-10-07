@@ -34,7 +34,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    environment: deploy2
+    environment: deploy
 
     steps:
     - name: Checkout
