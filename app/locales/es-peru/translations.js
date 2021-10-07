@@ -208,7 +208,7 @@ export default {
   "graph_builder.explanation.product.partners.import_value": "Muestra el origen de las importaciones de este producto, por pa\u00eds y regi\u00f3n del mundo. Fuente: DIAN.",
   "graph_builder.explanation.show": "Muestre m\u00e1s",
   "graph_builder.multiples.show_all": "Mostrar todo",
-  "graph_builder.types": "Graficas disponibles",
+  "graph_builder.types": "Gráficas disponibles",
   "graph_builder.page_title.industry.cities.employment": "\u00bfQu\u00e9 ciudades en Mexico ocupan m\u00e1s gente en este sector?",
   "graph_builder.page_title.industry.cities.wages": "\u00bfQu\u00e9 ciudades en Peru tienen las mayores n\u00f3minas salariales en este sector?",
   "graph_builder.page_title.industry.departments.employment": "",

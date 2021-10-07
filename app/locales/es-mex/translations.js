@@ -212,7 +212,7 @@ export default {
   "graph_builder.explanation.product.partners.import_value": "Muestra el origen de las importaciones de este producto, por pa\u00edses de origen agrupados por regi\u00f3n del mundo. Fuente: SAT, IMSS y c\u00e1lculos propios del CID.",
   "graph_builder.explanation.show": "Muestre m\u00e1s",
   "graph_builder.multiples.show_all": "Mostrar todo",
-  "graph_builder.types": "Graficas disponibles",
+  "graph_builder.types": "Gráficas disponibles",
   "graph_builder.page_title.industry.cities.employment": "\u00bfQu\u00e9 ciudades de Mexico representan una porci\u00f3n mayor del empleo este sector?",
   "graph_builder.page_title.industry.cities.wages": "\u00bfQu\u00e9 ciudades en Mexico representan una porci\u00f3n mayor de los salarios pagados en este sector?",
   "graph_builder.page_title.industry.departments.employment": "\u00bfQu\u00e9 lugares en M\u00e9xico ocupan m\u00e1s gente en esta industria?",

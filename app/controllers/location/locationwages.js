@@ -5,7 +5,7 @@ const {computed, get:get} = Ember;
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
-  queryParams: ['year'],
+  queryParams: ['year', 'startDate', 'endDate'],
 
   startDate: null,
   endDate: null,

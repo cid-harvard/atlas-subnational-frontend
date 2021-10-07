@@ -5,7 +5,7 @@ const {computed, get:get} = Ember;
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
-  queryParams: ['year'],
+  queryParams: ['year', 'startDate', 'endDate'],
 
   startDate: null,
   endDate: null,
@@ -39,13 +39,13 @@ export default Ember.Controller.extend({
   }),
 
   filteredProductsData: computed('model', 'startDate', 'endDate', function (){
-    var products = this.get("model.allProducts")
+    var products = this.get("model.productsData")
 
     return products.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
   }),
 
   filteredProductsDataTop5Import: computed('model', 'startDate', 'endDate', function (){
-    var products = this.get("model.allProducts")
+    var products = this.get("model.productsData")
     var filtered = products.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
     var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.import_value;}), 0, 5);
     return sorted;

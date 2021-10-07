@@ -91,7 +91,7 @@
                       filterCategory=true
                       groupByParent=true
                       toolTips="rca"
-                      title_filter=(is-concat 'Exportaciones por producto ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
+                      title_filter=(is-concat 'Exportaciones por producto ' '(' endDate ')' ' - ' model.name ' (' model.code ')')
                     }}
 
                   </div>
@@ -123,7 +123,7 @@
                           color='pink'
                           filterCategory=true
                           groupByParent=true
-                          title_filter=(is-concat 'Exportaciones por pais de destino ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
+                          title_filter=(is-concat 'Exportaciones por pais de destino ' '(' endDate ')' ' - ' model.name ' (' model.code ')')
                         }}
                       </div>
 
@@ -234,12 +234,25 @@
   </div>
 </div>
 
-<div class="container-fluid px-md-x10 pb-5">
-  <div class="text-right">
-    {{#link-to 'location.productmap' model.id (query-params startDate=startDate endDate=startDate)
-      class="btn btn-outline-secondary"
-    }}
-    SIGUIENTE
-    {{/link-to}}
+
+{{#if (is-equal model.level "municipality")}}
+  <div class="container-fluid px-md-x10 pb-5">
+    <div class="text-right">
+      {{#link-to 'location.locationimports' model.id (query-params startDate=startDate endDate=startDate)
+        class="btn btn-outline-secondary"
+      }}
+      SIGUIENTE
+      {{/link-to}}
+    </div>
   </div>
-</div>
+{{else}}
+  <div class="container-fluid px-md-x10 pb-5">
+    <div class="text-right">
+      {{#link-to 'location.productmap' model.id (query-params startDate=startDate endDate=startDate)
+        class="btn btn-outline-secondary"
+      }}
+      SIGUIENTE
+      {{/link-to}}
+    </div>
+  </div>
+{{/if}}
