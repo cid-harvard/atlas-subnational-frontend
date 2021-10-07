@@ -13,7 +13,11 @@
             <select class="form-control form-filter" id="selectYear">
 
               {{#each year in rangeYears }}
-                <option>{{year}}</option>
+                {{#if (is-equal year endDate)}}
+                  <option selected>{{year}}</option>
+                {{else}}
+                  <option>{{year}}</option>
+                 {{/if}}
               {{/each}}
 
             </select>
@@ -53,7 +57,7 @@
 
         <div class="tab-pane fade active show" id="pills-graphics" role="tabpanel" aria-labelledby="pills-graphics">
           <div class="container-fluid px-md-x10 mt-5">
-            <div class="col-md-12 text-center">
+            <div class="col-md-12">
 
               <ul class="nav nav-pills center-pills" id="pills-tab" role="tablist">
 
@@ -74,31 +78,27 @@
               <div class="mt-5 tab-content" id="pills-tabContent">
 
                 <div class="tab-pane fade active show" id="pills-exports" role="tabpanel" aria-labelledby="pills-exports">
-                  <div class="container-fluid">
+                  <div class="container-fluid mt-5 pt-5">
 
-                    <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
-                      <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
-                        {{
-                          zoomable-treemap
-                          data=filteredProductsData
-                          immutableData=filteredProductsData
-                          varDependent='export_value'
-                          elementId='zoomable-export-value-treemap'
-                          class="position-relative"
-                          color='pink'
-                          filterCategory=true
-                          groupByParent=true
-                          toolTips="rca"
-                        }}
-                      </div>
-
-                    </div>
+                    {{
+                      zoomable-treemap
+                      data=filteredProductsData
+                      immutableData=filteredProductsData
+                      varDependent='export_value'
+                      elementId='zoomable-export-value-treemap'
+                      class="position-relative"
+                      color='pink'
+                      filterCategory=true
+                      groupByParent=true
+                      toolTips="rca"
+                      title_filter=(is-concat 'Exportaciones por producto ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
+                    }}
 
                   </div>
 
                   <div class="container-fluid my-5">
                     <div class="text-right">
-                      {{#link-to 'location.visualization' model.id 'products' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null')
+                      {{#link-to 'location.visualization' model.id 'products' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null' showBack="true")
                         class="btn btn-outline-secondary"
                       }}
                         <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -123,6 +123,7 @@
                           color='pink'
                           filterCategory=true
                           groupByParent=true
+                          title_filter=(is-concat 'Exportaciones por pais de destino ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
                         }}
                       </div>
 
@@ -132,7 +133,7 @@
 
                   <div class="container-fluid my-5">
                     <div class="text-right">
-                      {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null')
+                      {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null' showBack="true")
                         class="btn btn-outline-secondary"
                       }}
                         <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -169,12 +170,13 @@
                   endDate=endDate
                   elementId="productssourceTable"
                   order=filteredProductsDataTop5ExportOrder
+                  title_data=(is-concat 'Productos que más exporta ' model.name '(' endDate ')')
                 }}
               </div>
 
               <div class="container-fluid my-5 pr-5">
                 <div class="text-right">
-                  {{#link-to 'location.visualization' model.id 'products' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null')
+                  {{#link-to 'location.visualization' model.id 'products' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null' showBack="true")
                     class="btn btn-outline-secondary"
                   }}
                     <i class="far fa-plus pr-2" aria-hidden="true"></i>
@@ -202,12 +204,13 @@
                   endDate=endDate
                   elementId="partnerssourceTable"
                   order=filteredPartnersDataTop5ExportOrder
+                  title_data=(is-concat 'Paises a donde más exporta ' model.name '(' endDate ')')
                 }}
               </div>
 
               <div class="container-fluid my-5">
                 <div class="text-right">
-                  {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null')
+                  {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null' showBack="true")
                     class="btn btn-outline-secondary"
                   }}
                     <i class="far fa-plus pr-2" aria-hidden="true"></i>
