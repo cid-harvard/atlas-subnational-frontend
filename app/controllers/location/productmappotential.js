@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   vistkScatterplotService: Ember.inject.service(),
   buildermodSearchService: Ember.inject.service(),
+  rcaFilterService: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
   queryParams: ['startDate', 'endDate'],
 
@@ -13,6 +14,8 @@ export default Ember.Controller.extend({
   rcaFilter: 'less',
   filterCategory: true,
   categoriesFilterList: [],
+
+  VCRValueScatter: 1,
 
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
@@ -60,6 +63,17 @@ export default Ember.Controller.extend({
       return _.contains(timeRange, get(d, 'year'));
     });
   },
+
+  productsData: computed('model', 'endDate', 'rcaFilterService.updated', function () {
+
+    var startDate = this.get("startDate");
+    var endDate = this.get("endDate");
+    var data = this.get("model.products_col")
+
+    var data_filtered = data.filter(item => item.year >= startDate && item.year <= endDate && item.export_rca >= 1);
+    return data_filtered
+
+  }),
 
   immutableData: computed('model.products_col.[]','endDate', 'startDate' , function() {
     return this.filterToSelectedYears(this.get('model.products_col'), this.get('startDate'), this.get('endDate'));
@@ -130,6 +144,10 @@ export default Ember.Controller.extend({
           selected.push(item.id);
           self.set("vistkScatterplotService.updated", new Date());
           d3.selectAll(`.tooltip_${item.id}`).classed('d-none', false);
+          d3.selectAll(`.line_horizontal_${item.id}`).classed('d-none', false);
+          d3.selectAll(`.line_vertical_${item.id}`).classed('d-none', false);
+          d3.selectAll(`.rect_${item.id}`).classed('d-none', false);
+          d3.selectAll(`.text_${item.id}`).classed('d-none', false);
         }
         //selected[String(item.id)] = this.getPrimariesSecondaries2(parseInt(item.id))
         //self.set('vistkNetworkService.updated', new Date());

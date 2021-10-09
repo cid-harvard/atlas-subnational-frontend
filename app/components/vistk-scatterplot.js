@@ -26,7 +26,7 @@ export default Ember.Component.extend({
         return get(datum, 'industry_eci');
       }
   }),
-  scatter: computed('data.[]', 'dataType','eciValue','i18n.locale', 'categoriesFilterList', function() {
+  scatter: computed('data.[]', 'dataType','eciValue','i18n.locale', 'toolTipsData', 'categoriesFilterList', function() {
 
     var VCRValue = this.get("VCRValue");
 
@@ -49,6 +49,8 @@ export default Ember.Component.extend({
       });
 
     }
+
+    var tooltips = this.get("toolTipsData");
 
     return vistk.viz()
     .params({
@@ -220,6 +222,11 @@ export default Ember.Component.extend({
               'value':get(d,this.get('amount'))
             }
             ];
+
+            for(let tooltip of tooltips){
+              data.push({'key': tooltip, 'value': get(d,tooltip)});
+            }
+
             var textItem = get(d, `name_short_${this.get('i18n').display}`) || d.code;
             var tooltip_text = `<span style="color:${get(d, 'color')}">${textItem} - ${get(d, 'code')}</span>`;
 
@@ -273,6 +280,11 @@ export default Ember.Component.extend({
               'value':get(d,this.get('amount'))
             }
             ];
+
+            for(let tooltip of tooltips){
+              data.push({'key': tooltip, 'value': get(d,tooltip)});
+            }
+
             var textItem = get(d, `name_short_${this.get('i18n').display}`) || d.code;
             var tooltip_text = `<a href="javascript:void(0);" id='close_tooltip_${d.id}' style="color: black; position: absolute; top:0; right:0; padding: 10px; font-size: 2rem; pointer-events: auto;">x</a><span style="color:${get(d, 'color')}">${textItem} - ${get(d, 'code')}</span>`;
 
@@ -397,6 +409,69 @@ export default Ember.Component.extend({
     }
 
   }),
+  formatNumber: (number, key, i18n) => {
+    var decimalVars = [
+      'export_rca',
+      'eci',
+      'industry_eci',
+      'rca',
+      'complexity',
+      'distance',
+      'cog',
+      'coi',
+      'industry_coi',
+      'population',
+      'yield_ratio',
+      'yield_index',
+      'average_livestock_load',
+    ];
+    var percentVars = [
+      'share',
+      'employment_growth'
+    ];
+    var wageVarsInThousands = [
+      'wages',
+      'avg_wages',
+      'avg_wage',
+    ];
+    var moneyVars = [
+      'gdp_pc_real',
+      'gdp_real',
+    ];
+    var largeNumbers = [
+      'export_value',
+      'import_value',
+      'monthly_wages',
+      'average_wages',
+      'area',
+      'production_tons',
+      'land_sown',
+      'land_harvested',
+      'num_farms',
+      'num_livestock',
+    ];
+
+    if(_.include(wageVarsInThousands, key)){
+      return numeral(number).divide(1000).format('0,0');
+    } else if(_.include(decimalVars, key)){
+      return numeral(number).format('0.00a');
+    } else if(key === 'employment'){
+      return numeral(Math.ceil(number)).format('0,0');
+    } else if(key === 'num_establishments' || key === 'export_num_plants'){
+      if(parseInt(number) < 6) {
+        return i18n.t('graph_builder.table.less_than_5');
+      }
+      return numeral(number).format('0,0');
+    } else if(_.include(percentVars, key)){
+      return numeral(number).format('0.00%');
+    } else if(_.include(largeNumbers, key)) {
+      return numeral(number).format('0,0');
+    } else if(_.include(moneyVars, key)) {
+      return numeral(number).format('$0.00a');
+    } else {
+      return number;
+    }
+  },
   inmutableNestedData: computed('inmutableDataInternal.[]', 'varDependent', 'i18n.locale', 'toolTips', function () {
     var data = this.get('data');
 
@@ -587,6 +662,8 @@ export default Ember.Component.extend({
     }
   }),
   update: observer('data.[]', 'varRca', 'i18n.locale', 'dataType', 'categoriesFilterList', function() {
+
+    console.log(this.get("VCRValue"))
 
     if(!this.element){ return ; } //do not redraw if not there
     d3.select(this.get('id')).select('svg').remove();
