@@ -138,22 +138,12 @@ export default Ember.Controller.extend({
     return indexedData[id]
   },
 
-  product_selected: computed('model', 'center', function () {
-    var id = this.get("center")
-    var product = this.getProduct(id)
-    var product_copy = {}
-
-    Object.assign(product_copy, product)
-
-    return product_copy
-  }),
-
   product_primaries: [],
   product_primaries_total: null,
   product_secondaries: [],
   product_secondaries_total: null,
 
-  center: computed("model", function () {
+  center: computed("lastSelected", function () {
     return this.get("lastSelected")
   }),
 
@@ -310,14 +300,8 @@ export default Ember.Controller.extend({
 
       result.map(item => {
         //selected.push(String(item.id))
-        self.set("center", item.id)
-        self.setSelectedProductsbyId(item.id)
-        this.transitionToRoute('location.ringchart', item.id, {queryParams: { endDate: this.get("endDate"), startDate: this.get("startDate"), lastSelected: this.get("center") }});
-
-        Ember.run.later(this , function() {
-          $(`.d3plus-id-${item.id}`).click(),
-          2000
-        });
+        self.set("lastSelected", item.id)
+        //self.setSelectedProductsbyId(item.id)
 
         //self.set('vistkNetworkService.updated', new Date());
         //d3.selectAll(`.tooltip_${item.id}_${elementId}`).classed('d-none', false);
@@ -397,9 +381,14 @@ export default Ember.Controller.extend({
     this.set('vistkNetworkService.updated', new Date());
   }),
 
-  filteredDataTable: computed("model", 'vistkNetworkService.updated', 'departmentCityFilterService.data', 'endDate', function () {
+  filteredDataTable: computed("model", 'vistkNetworkService.updated', 'endDate', function () {
 
-    var selectedProducts = this.get("selectedProducts")
+    var id = String(this.get("lastSelected"))
+
+    var selectedProducts = {}
+
+    selectedProducts[String(id)] = this.getPrimariesSecondaries2(parseInt(id))
+
     var self = this;
 
 
@@ -540,9 +529,28 @@ export default Ember.Controller.extend({
 
   productsDataValues: computed('model', function(){
 
-    var locations = Object.entries(this.get('model.metaData.products'))
+    var locations = Object.entries(this.get('model.metaData.products'));
+    var edgesSourcesProductSpace = this.get('model.metaData.productSpace.edges').map(item => {
+      if(item.source.id === undefined){
+        return item.source;
+      }
+      else{
+        return item.source.id;
+      }
+    });
 
-    return locations.filter(item => item[1].level === "4digit").map((item) => {
+    var edgesTargetsProductSpace = this.get('model.metaData.productSpace.edges').map(item => {
+      if(item.target.id === undefined){
+        return item.target;
+      }
+      else{
+        return item.target.id;
+      }
+    });
+
+    const valid_ids = [...edgesSourcesProductSpace, ...edgesTargetsProductSpace];
+
+    return locations.filter(item => item[1].level === "4digit" && valid_ids.includes(item[0])).map((item) => {
 
       var name = get(item[1], `name_short_${this.get('i18n').display}`)
 

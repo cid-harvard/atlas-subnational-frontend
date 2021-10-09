@@ -7,7 +7,7 @@ const {apiURL} = ENV;
 export default Ember.Controller.extend({
   featureToggle: Ember.inject.service(),
   buildermodSearchService: Ember.inject.service(),
-  departmentCityFilterService: Ember.inject.service(),
+  locationProductsService: Ember.inject.service(),
   vistkNetworkService: Ember.inject.service(),
   locationsSelectionsService: Ember.inject.service(),
   queryParams: ['startDate', 'endDate'],
@@ -114,13 +114,7 @@ export default Ember.Controller.extend({
     return result_object
 
   },
-  initialSelectedProducts: computed('model.[]', function () {
-    var id = this.get("model.entity.id")
-    var selected_products = {}
-
-    return selected_products
-  }),
-  selectedProducts: computed.alias('locationsSelectionsService.selectedProducts'),
+  selectedProducts: computed.alias("locationProductsService.selected"),
 
   enableRingChart: "disabled",
   lastSelected: null,
@@ -128,7 +122,6 @@ export default Ember.Controller.extend({
   enableRingChartObserver: observer("vistkNetworkService.updated", function () {
 
     var selectedProducts = Object.keys(this.get("selectedProducts"));
-    //console.log(selectedProducts)
 
     if (selectedProducts.length > 0){
       var lastSelected = selectedProducts[selectedProducts.length - 1]
@@ -149,7 +142,7 @@ export default Ember.Controller.extend({
     let search = _.deburr(this.get('buildermodSearchService.search'));
     var self = this;
     var elementId = this.get("elementId");
-    var initialSelectedProducts = this.get("initialSelectedProducts")
+
 
     if(search == ""){
 
@@ -159,7 +152,10 @@ export default Ember.Controller.extend({
       d3.selectAll(".tooltip_network").classed("d-none", true);
       //d3.selectAll(`.tooltip_${id_principal}_${elementId}`).classed("d-none", false);
 
-      this.set("selectedProducts", initialSelectedProducts);
+      for(let id of Object.keys(selected)){
+        delete selected[id];
+      }
+
       this.set('vistkNetworkService.updated', new Date());
 
     }
@@ -225,20 +221,6 @@ export default Ember.Controller.extend({
     this.get('buildermodSearchService.search')
     return this.get("departmentCityFilterService.name");
   }),
-
-  departmentsDataSelect: computed("model", function () {
-
-    this.set("selectedProducts", this.get("initialSelectedProducts"))
-
-    var all_locations = Object.values(this.get("model.metaData.locations"))
-
-    var locations = all_locations.filter(item => item.level === "department").map( (item) => {
-      var chained = all_locations.filter(item2 => item.id === item2.parent_id).map(item => ({'id': item.id, 'text': `${item.name_es} (${item.code})`}))
-      return {'id': item.id, 'text': `${item.name_es} (${item.code})`, 'chained': chained}
-    })
-    return locations
-  }),
-
   filteredDataTable: computed("model", 'vistkNetworkService.updated', 'departmentCityFilterService.data', 'endDate', function () {
 
     var selectedProducts = this.get("selectedProducts")
@@ -266,27 +248,12 @@ export default Ember.Controller.extend({
   }),
 
   productSpace: computed.alias('model.metaData.productSpace'),
-  productsData: computed('model', 'endDate', 'departmentCityFilterService.data', 'VCRValue', 'categoriesFilterList', function () {
+  productsData: computed('model', 'endDate', 'VCRValue', 'categoriesFilterList', function () {
 
-    var id = this.get("departmentCityFilterService.id");
     var startDate = this.get("startDate");
     var endDate = this.get("endDate");
 
-    if(id == 0){
-      $("#spinner_complexmap").addClass("d-none")
-      $("#complexmap").removeClass("d-none")
-      $("#complexmaptable").removeClass("d-none")
-      return this.get("model.products_col").filter(item => item.year >= startDate && item.year <= endDate);
-    }
-
-    var data = this.get("departmentCityFilterService.data");
-
-    var data_filtered = data.filter(item => item.year >= startDate && item.year <= endDate);
-    $("#spinner_complexmap").addClass("d-none")
-    $("#complexmap").removeClass("d-none")
-    $("#complexmaptable").removeClass("d-none")
-
-    return data_filtered
+    return this.get("model.products_col").filter(item => item.year >= startDate && item.year <= endDate);
 
   }),
 
@@ -298,9 +265,28 @@ export default Ember.Controller.extend({
 
   productsDataValues: computed('model', function(){
 
-    var locations = Object.entries(this.get('model.metaData.products'))
+    var locations = Object.entries(this.get('model.metaData.products'));
+    var edgesSourcesProductSpace = this.get('model.metaData.productSpace.edges').map(item => {
+      if(item.source.id === undefined){
+        return item.source;
+      }
+      else{
+        return item.source.id;
+      }
+    });
 
-    return locations.filter(item => item[1].level === "4digit").map((item) => {
+    var edgesTargetsProductSpace = this.get('model.metaData.productSpace.edges').map(item => {
+      if(item.target.id === undefined){
+        return item.target;
+      }
+      else{
+        return item.target.id;
+      }
+    });
+
+    const valid_ids = [...edgesSourcesProductSpace, ...edgesTargetsProductSpace];
+
+    return locations.filter(item => item[1].level === "4digit" && valid_ids.includes(item[0])).map((item) => {
 
       var name = get(item[1], `name_short_${this.get('i18n').display}`)
 

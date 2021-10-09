@@ -1,19 +1,22 @@
 import Ember from 'ember';
 import numeral from 'numeral';
-const {computed, get:get} = Ember;
+const {computed, get:get, observer} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
   vistkNetworkService: Ember.inject.service(),
   vistkScatterplotService: Ember.inject.service(),
+  rcaFilterService: Ember.inject.service(),
   queryParams: ['year', 'startDate', 'endDate'],
 
   startDate: null,
   endDate: null,
   categoriesFilterList: [],
+  categoriesFilterListScatter: [],
   selectedProducts: [],
-
+  VCRValue: 1,
+  VCRValueScatter: 1,
 
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
@@ -65,13 +68,13 @@ export default Ember.Controller.extend({
   }),
 
 
-  productsData: computed('model', 'endDate', 'VCRValue', 'categoriesFilterList', function () {
+  productsData: computed('model', 'endDate', 'VCRValue', 'rcaFilterService.updated', function () {
 
     var startDate = this.get("startDate");
     var endDate = this.get("endDate");
     var data = this.get("model.products_col")
 
-    var data_filtered = data.filter(item => item.year >= startDate && item.year <= endDate);
+    var data_filtered = data.filter(item => item.year >= startDate && item.year <= endDate && item.export_rca >= 1);
     return data_filtered
 
   }),
@@ -87,15 +90,39 @@ export default Ember.Controller.extend({
     return result
   }),
 
+  filteredProductsDataTop5Rca: computed('model', 'endDate', function (){
 
-  filteredDataTable2: computed("model", 'vistkScatterplotService.updated', 'endDate', function () {
 
-    var selectedProducts = this.get("vistkScatterplotService.selected")
+    var edgesSourcesProductSpace = this.get('model.metaData.productSpace.edges').map(item => {
+      if(item.source.id === undefined){
+        return item.source;
+      }
+      else{
+        return item.source.id;
+      }
+    });
 
-    var productsData = this.get("productsData")
-    var result = productsData.filter(item => selectedProducts.includes(item.id))
+    var edgesTargetsProductSpace = this.get('model.metaData.productSpace.edges').map(item => {
+      if(item.target.id === undefined){
+        return item.target;
+      }
+      else{
+        return item.target.id;
+      }
+    });
 
-    return result
+    const valid_ids = [...edgesSourcesProductSpace, ...edgesTargetsProductSpace];
+
+
+
+
+    var products = this.get("model.products_col");
+    var filtered = products.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate") && valid_ids.includes(String(item.id)))
+    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.export_rca;}), 0, 5);
+    return sorted;
+  }),
+  filteredProductsDataTop5RcaOrder: computed('model', 'startDate', 'endDate', function (){
+    return [[ 6, "desc" ]];
   }),
 
 
@@ -179,6 +206,10 @@ export default Ember.Controller.extend({
   actions: {
     toggleVisualization: function(visualization) {
       this.set("visualization", visualization)
+      this.set("VCRValue", 1)
+      this.set("VCRValueScatter", 1)
+      this.set("categoriesFilterListScatter", [])
+      this.set("categoriesFilterList", [])
       this.set("vistkScatterplotService.selected", [])
       this.set("vistkScatterplotService.updated", new Date())
     },

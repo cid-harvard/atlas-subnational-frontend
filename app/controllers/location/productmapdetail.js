@@ -7,8 +7,8 @@ const {apiURL} = ENV;
 export default Ember.Controller.extend({
   featureToggle: Ember.inject.service(),
   buildermodSearchService: Ember.inject.service(),
-  departmentCityFilterService: Ember.inject.service(),
   vistkNetworkService: Ember.inject.service(),
+  locationProductsService: Ember.inject.service(),
   locationsSelectionsService: Ember.inject.service(),
   queryParams: ['startDate', 'endDate'],
 
@@ -117,13 +117,23 @@ export default Ember.Controller.extend({
     return result_object
 
   },
-  initialSelectedProducts: computed('model.[]', function () {
-    var id = this.get("model.entity.id")
-    var selected_products = {}
 
-    return selected_products
+  selectedProducts: computed.alias("locationProductsService.selected"),
+
+  enableRingChart: "disabled",
+
+  enableRingChartObserver: observer("vistkNetworkService.updated", function () {
+
+    var selectedProducts = Object.keys(this.get("selectedProducts"));
+
+    if (selectedProducts.length > 0){
+      this.set("enableRingChart", "");
+    }
+    else {
+      this.set("enableRingChart", "disabled");
+    }
+
   }),
-  selectedProducts: computed.alias('locationsSelectionsService.selectedProducts'),
 
   searchFilter: observer('buildermodSearchService.search', function() {
 
@@ -132,16 +142,19 @@ export default Ember.Controller.extend({
     let search = _.deburr(this.get('buildermodSearchService.search'));
     var self = this;
     var elementId = this.get("elementId");
-    var initialSelectedProducts = this.get("initialSelectedProducts")
 
     if(search === ""){
 
-      var id_principal = this.get("model.entity.id");
-
-
       d3.selectAll(".tooltip_network").classed("d-none", true);
+      d3.selectAll(".selected__adjacent").classed("selected__adjacent", false);
+      d3.selectAll(".selected__secondary").classed("selected__secondary", false);
 
-      this.set("selectedProducts", {});
+      //this.set("selectedProducts", {});
+
+      for(let id of Object.keys(selected)){
+        delete selected[id]
+      }
+
       this.set('vistkNetworkService.updated', new Date());
     }
     else {
@@ -181,16 +194,7 @@ export default Ember.Controller.extend({
     return [...Array(max - min + 1).keys()].map(i => i + min);
   }),
 
-  location: computed("departmentCityFilterService.name", function (){
-    this.get("departmentCityFilterService.data")
-    this.get('buildermodSearchService.search')
-    return this.get("departmentCityFilterService.name");
-  }),
-  locationId: computed("departmentCityFilterService.id", function (){
-    return this.get("departmentCityFilterService.id");
-  }),
-
-  filteredDataTable: computed("model", 'vistkNetworkService.updated', 'departmentCityFilterService.data', 'endDate', function () {
+  filteredDataTable: computed("model", 'vistkNetworkService.updated', 'endDate', function () {
 
     var selectedProducts = this.get("selectedProducts")
     var productsData = this.get("productsData")
@@ -200,27 +204,12 @@ export default Ember.Controller.extend({
   }),
 
   productSpace: computed.alias('model.metaData.productSpace'),
-  productsData: computed('model', 'endDate', 'departmentCityFilterService.data', 'VCRValue', 'categoriesFilterList', function () {
+  productsData: computed('model', 'endDate', 'VCRValue', 'categoriesFilterList', function () {
 
-    var id = this.get("departmentCityFilterService.id");
     var startDate = this.get("startDate");
     var endDate = this.get("endDate");
 
-    if(id == 0){
-      $("#spinner_complexmap").addClass("d-none")
-      $("#complexmap").removeClass("d-none")
-      $("#complexmaptable").removeClass("d-none")
-      return this.get("model.products_col").filter(item => item.year >= startDate && item.year <= endDate);
-    }
-
-    var data = this.get("departmentCityFilterService.data");
-
-    var data_filtered = data.filter(item => item.year >= startDate && item.year <= endDate);
-    $("#spinner_complexmap").addClass("d-none")
-    $("#complexmap").removeClass("d-none")
-    $("#complexmaptable").removeClass("d-none")
-
-    return data_filtered
+    return this.get("model.products_col").filter(item => item.year >= startDate && item.year <= endDate);
 
   }),
 
@@ -232,9 +221,28 @@ export default Ember.Controller.extend({
 
   productsDataValues: computed('model', function(){
 
-    var locations = Object.entries(this.get('model.metaData.products'))
+    var locations = Object.entries(this.get('model.metaData.products'));
+    var edgesSourcesProductSpace = this.get('model.metaData.productSpace.edges').map(item => {
+      if(item.source.id === undefined){
+        return item.source;
+      }
+      else{
+        return item.source.id;
+      }
+    });
 
-    return locations.filter(item => item[1].level === "4digit").map((item) => {
+    var edgesTargetsProductSpace = this.get('model.metaData.productSpace.edges').map(item => {
+      if(item.target.id === undefined){
+        return item.target;
+      }
+      else{
+        return item.target.id;
+      }
+    });
+
+    const valid_ids = [...edgesSourcesProductSpace, ...edgesTargetsProductSpace];
+
+    return locations.filter(item => item[1].level === "4digit" && valid_ids.includes(item[0])).map((item) => {
 
       var name = get(item[1], `name_short_${this.get('i18n').display}`)
 
@@ -244,32 +252,6 @@ export default Ember.Controller.extend({
 
   placeHolderText: computed('i18n.locale', 'source', function(){
     return this.get('i18n').t(`visualization.source.${this.get('source')}`).string
-  }),
-
-  filteredDataAsync: observer("departmentCityFilterService.id", function () {
-
-    var id = this.get("departmentCityFilterService.id");
-    var productsMetadata = this.get("model.metaData.products")
-    var self = this
-
-    var products = $.getJSON(`${apiURL}/data/location/${id}/products?level=4digit`)
-
-    var promises = [products]
-
-    var result = RSVP.allSettled(promises).then((array) => {
-      let productsData = array[0].value.data;
-
-      let productsDataResponse = _.reduce(productsData, (memo, d) => {
-        let product = productsMetadata[d.product_id];
-        product.complexity = _.result(_.find(product.pci_data, { year: d.year }), 'pci');
-        memo.push(_.merge(d, product));
-        return memo;
-      }, []);
-
-      self.set("departmentCityFilterService.data", productsDataResponse)
-
-      return productsDataResponse
-    });
   }),
 
   filterData: computed('source', function(){

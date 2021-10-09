@@ -42,6 +42,8 @@ export default Router.map(function() {
 
 
     this.route('productmap', {path: ':location_id/route/product_map/'});
+
+
     this.route('productmappotential', {path: ':location_id/route/product_map/potential/'});
 
 

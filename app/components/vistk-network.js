@@ -115,7 +115,7 @@ export default Ember.Component.extend({
   },
   network: computed('data.[]', 'varDependent', 'dataType', 'vis', 'i18n.locale', 'toolTipsData', 'categoriesFilterList', function() {
 
-
+    this.set('vistkNetworkService.updated', new Date());
     let vistkLanguage = this.get('i18n.display') === 'es' ? 'es_ES': 'en_EN';
     var selectedProducts = this.get("selectedProducts");
 

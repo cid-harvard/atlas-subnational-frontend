@@ -11,7 +11,6 @@ export default Ember.Component.extend({
   height: 500,
   varIndependent: 'code',
   categoriesFilter: null,
-  VCRValue: 1,
   inmutableDataInternal: null,
   attributeBindings: ['width','height'],
   classNames: ['buildermod__viz','scatterplot'],
@@ -27,10 +26,12 @@ export default Ember.Component.extend({
         return get(datum, 'industry_eci');
       }
   }),
-  scatter: computed('data.[]', 'dataType','eciValue','i18n.locale', function() {
+  scatter: computed('data.[]', 'dataType','eciValue','i18n.locale', 'categoriesFilterList', function() {
+
+    var VCRValue = this.get("VCRValue");
 
     var categoriesFilter = this.get("categoriesFilterList");
-
+    var data = this.get('data');
     let eci = this.get('eciValue');
     var self = this;
     let selectedProducts = this.get('vistkScatterplotService.selected');
@@ -38,7 +39,15 @@ export default Ember.Component.extend({
     let format = function(value) { return numeral(value).format('0.00'); };
 
     if(categoriesFilter == undefined){
-      categoriesFilter = []
+      categoriesFilter = [];
+    }
+
+    if(categoriesFilter.length > 0){
+
+      data = data.filter(item => {
+        return categoriesFilter.includes(item.parent_name_es);
+      });
+
     }
 
     return vistk.viz()
@@ -48,7 +57,7 @@ export default Ember.Component.extend({
       height: this.get('height'),
       width: this.get('width'),
       container: this.get('id'),
-      data: this.get('data'),
+      data: data,
       var_id: this.get('varIndependent'),
       var_x: 'distance',
       var_y: 'complexity',
@@ -70,31 +79,30 @@ export default Ember.Component.extend({
           type: 'circle',
           fill: (d) => {
 
-            var color = '#ccc1b9';
+            if(d[this.get('varRCA')] >= VCRValue){
+              return d.color;
 
-            if(categoriesFilter.length > 0){
-              if(categoriesFilter.includes(d.parent_name_es)){
-                return d.color ? d.color : '#ccc1b9';
-              }
-              else{
-                return color
-              }
             }
-            else{
-              return d.color ? d.color : '#ccc1b9';
-            }
+
+            return "#ccc";
 
           },
           evt: [
             {
               type: 'selection',
               func: function(d, i, vars) {
+
+
                 if(selectedProducts !== undefined){
 
                   if(d.__selected){
                     if(!selectedProducts.includes(d.id)){
                       selectedProducts.push(d.id)
                       d3.selectAll(`.tooltip_${d.id}`).classed("d-none", false);
+                      d3.selectAll(`.line_horizontal_${d.id}`).classed("d-none", false);
+                      d3.selectAll(`.line_vertical_${d.id}`).classed("d-none", false);
+                      d3.selectAll(`.rect_${d.id}`).classed("d-none", false);
+                      d3.selectAll(`.text_${d.id}`).classed("d-none", false);
                       self.set('vistkScatterplotService.updated', new Date());
                     }
                   }else{
@@ -104,6 +112,10 @@ export default Ember.Component.extend({
                       if (index > -1) {
                         selectedProducts.splice(index, 1);
                         d3.selectAll(`.tooltip_${d.id}`).classed("d-none", true);
+                        d3.selectAll(`.line_horizontal_${d.id}`).classed("d-none", true);
+                        d3.selectAll(`.line_vertical_${d.id}`).classed("d-none", true);
+                        d3.selectAll(`.rect_${d.id}`).classed("d-none", true);
+                        d3.selectAll(`.text_${d.id}`).classed("d-none", true);
                         self.set('vistkScatterplotService.updated', new Date());
                       }
 
@@ -229,11 +241,14 @@ export default Ember.Component.extend({
           class: function(d) {
 
             $( `#close_tooltip_${d.id}` ).click(function() {
-
               const index = selectedProducts.indexOf(d.id);
               if (index > -1) {
                 selectedProducts.splice(index, 1);
                 d3.selectAll(`.tooltip_${d.id}`).classed("d-none", true);
+                d3.selectAll(`.line_horizontal_${d.id}`).classed("d-none", true);
+                d3.selectAll(`.line_vertical_${d.id}`).classed("d-none", true);
+                d3.selectAll(`.rect_${d.id}`).classed("d-none", true);
+                d3.selectAll(`.text_${d.id}`).classed("d-none", true);
                 self.set('vistkScatterplotService.updated', new Date());
               }
             });
@@ -259,7 +274,7 @@ export default Ember.Component.extend({
             }
             ];
             var textItem = get(d, `name_short_${this.get('i18n').display}`) || d.code;
-            var tooltip_text = `<a href="javascript:void(0);" id='close_tooltip_${d.id}' style="color: black; position: absolute; top:0; right:0; padding: 10px; font-size: 2rem;">x</a><span style="color:${get(d, 'color')}">${textItem} - ${get(d, 'code')}</span>`;
+            var tooltip_text = `<a href="javascript:void(0);" id='close_tooltip_${d.id}' style="color: black; position: absolute; top:0; right:0; padding: 10px; font-size: 2rem; pointer-events: auto;">x</a><span style="color:${get(d, 'color')}">${textItem} - ${get(d, 'code')}</span>`;
 
             data.forEach((datum) => {
               if(datum.key) {
@@ -272,6 +287,60 @@ export default Ember.Component.extend({
           translate: [0, 0],
           width: 200,
           height: 'auto'
+        },
+        {
+          type: "line_horizontal_d_none",
+          offset_right: function(d, i, vars) {
+              return vars.x_scale[0]['func'].range()[1] - vars.x_scale[0]['func'](d[vars.var_x]) + vars.r_scale(d[vars.var_r]);
+          }
+        },
+        {
+          type: 'line_vertical_d_none',
+          offset_top: function(d, i, vars) {
+              return vars.r_scale(d[vars.var_r]);
+          }
+        },
+        {
+          type: "rect_d_none",
+          translate: function(d, i, vars) {
+            return [-vars.x_scale[0]['func'](d[vars.var_x]) - 20, -10];
+          },
+          height: 25,
+          width: 50,
+          stroke: 'black',
+          stroke_width: '1.5px',
+          fill: function() { return 'white'; }
+        },
+        {
+          type: "rect_d_none",
+          translate: function(d, i, vars) {
+            return [-25, -vars.y_scale[0]['func'](d[vars.var_y]) + vars.height - vars.margin.bottom - vars.margin.top];
+          },
+          height: 25,
+          width: 50,
+          stroke: 'black',
+          stroke_width: '1.5px',
+          fill: function() { return 'white'; }
+        },
+        {
+          type: 'text_d_none',
+          translate: function(d, i, vars) {
+            return [-vars.x_scale[0]['func'](d[vars.var_x]) + 25, 0];
+          },
+          text_anchor: 'end',
+          text: function(d, i, vars) {
+            return format(d[vars.var_y]);
+          }
+        },
+        {
+          type: 'text_d_none',
+          translate: function(d, i, vars) {
+            return [0, -vars.y_scale[0]['func'](d[vars.var_y]) + vars.height - vars.margin.bottom - vars.margin.top + 10];
+          },
+          text_anchor: 'middle',
+          text: function(d, i, vars) {
+            return format(d[vars.var_x]);
+          }
         },
 
         {
@@ -504,21 +573,27 @@ export default Ember.Component.extend({
     //var updated = this.get("inmutableDataInternal").filter(item => categoriesFilter.includes(item.parent_name_es) )
     //this.set("data", updated)
   }),
-  update_vcr_filter: observer('VCRValue', function () {
-    var VCRValue = this.get("VCRValue");
-    var updated = this.get("inmutableDataInternal").filter(item => item.rca >= VCRValue )
-    this.set("data", updated)
+  //update_vcr_filter: observer('VCRValue', function () {
+    //var VCRValue = this.get("VCRValue");
+    //var updated = this.get("inmutableDataInternal").filter(item => item.rca >= VCRValue )
+    //this.set("data", updated)
+  //}),
+  varRCA: computed('dataType', function() {
+    let type = this.get('dataType');
+    if(type === 'industries') {
+      return 'rca';
+    } else if (type === 'products') {
+      return 'export_rca';
+    }
   }),
-  update: observer('data.[]', 'varRca', 'i18n.locale', 'dataType', function() {
+  update: observer('data.[]', 'varRca', 'i18n.locale', 'dataType', 'categoriesFilterList', function() {
 
     if(!this.element){ return ; } //do not redraw if not there
     d3.select(this.get('id')).select('svg').remove();
-    Ember.run.later(this , function() {
-      if(this.get('scatter')) {
-        this.get('updatedDate');
-        d3.select(this.get('id')).call(this.get('scatter'));
-      }
-    });
+
+    if(!this.get('width')){ this.set('width', this.$().parent().width()); }
+      d3.select(this.get('id')).call(this.get('scatter'));
+
   }),
   updateCategoriesObject: function (index, attr) {
 
@@ -639,6 +714,84 @@ export default Ember.Component.extend({
     },
     range_update(){
       this.set("VCRValue", $("#customRange1").val());
+    },
+    savePng() {
+      alert('Iniciando la descarga, este proceso tardará un momento.');
+      var filename = this.get("filename");
+      var domNode = $('#scatterplot')[0];
+      var d = new Date();
+      var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
+
+      if(filename){
+        file_name = filename;
+      }
+
+      var options = {
+        width: domNode.clientWidth * 4,
+        height: domNode.clientHeight * 4,
+        style: {
+          transform: 'scale(' + 4 + ')',
+          transformOrigin: 'top left',
+          padding: 0,
+          paddingTop: '30px',
+          background: '#292A48'
+        },
+        imagePlaceholder: ""
+      };
+      domtoimage.toBlob(document.getElementById('scatterplot'), options)
+        .then(function (blob) {
+          window.saveAs(blob, `${file_name}.png`);
+        });
+    },
+    savePdf: function savePdf() {
+      alert('Iniciando la descarga, este proceso tardará un momento.');
+      var filename = this.get("filename");
+      var PDF_Width = 1024;
+      var PDF_Height = 800;
+      var pdf = new jsPDF('l', 'pt', [PDF_Width, PDF_Height]);
+      var domNodes = $('#scatterplot');
+      var totalPDFPages = 1;
+      var countPages = totalPDFPages;
+      var d = new Date();
+      var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
+
+      if(filename){
+        file_name = filename;
+      }
+
+      var domNode = domNodes[0]
+
+      var options = {
+          width: domNode.clientWidth * 4,
+          height: domNode.clientHeight * 4,
+          style: {
+            transform: 'scale(' + 4 + ')',
+            transformOrigin: 'top left',
+            padding: 0,
+            paddingTop: '30px',
+            background: '#292A48'
+          }
+        };
+
+        var HTML_Width = 1024;
+        var HTML_Height = 800;
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+
+        domtoimage.toJpeg(domNode, options)
+          .then(function (dataUrl) {
+            var myImage = dataUrl;
+            pdf.addImage(myImage, 'JPG', 0, 0, canvas_image_width, canvas_image_height);
+            countPages--;
+            if (countPages === 0) {
+              pdf.save(file_name + '.pdf');
+              saveAs(pdf, file_name + '.pdf');
+            } else {
+              pdf.addPage(PDF_Width, PDF_Height);
+            }
+          })
+          .catch(function (error) {
+          });
     }
   }
 });

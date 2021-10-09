@@ -8,6 +8,7 @@ const {RSVP, computed, copy, get, $, set, getWithDefault} = Ember;
 export default Ember.Route.extend({
 
   i18n: Ember.inject.service(),
+  locationProductsService: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
   buildermodSearchService: Ember.inject.service(),
   firstYear: computed.alias('featureToggle.first_year'),
@@ -53,8 +54,7 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     //this.set('buildermodSearchService.search', null);
     this._super(controller, model);
-    startDate: this.get('firstYear')
-    endDate: this.get('lastYear')
+    //this.set("locationProductsService.selected", {})
     window.scrollTo(0, 0);
   },
   resetController(controller, isExiting) {
