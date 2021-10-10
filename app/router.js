@@ -64,15 +64,10 @@ export default Router.map(function() {
 
     this.route('complexsectors', {path: ':location_id/route/complex_sectors/'});
 
-
-
-
-
-    this.route('potential', {path: ':location_id/route/potential/'});
-
     this.route('complexsectorsdetail', {path: ':location_id/route/complex_sectors/detail/'});
     this.route('complexsectorsprimaries', {path: ':location_id/route/complex_sectors/primaries/'});
-    //this.route('complexsectorssecondaries', {path: ':location_id/route/complex_sectors/secondaries/'});
+    this.route('complexsectorssecondaries', {path: ':location_id/route/complex_sectors/secondaries/'});
+    this.route('potential', {path: ':location_id/route/potential/'});
 
     this.route('ruralactivities', {path: ':location_id/route/rural_activities/'});
     this.route('thirdparty', {path: ':location_id/route/thirdparty/'});

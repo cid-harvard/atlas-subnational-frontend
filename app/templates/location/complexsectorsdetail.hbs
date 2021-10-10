@@ -24,7 +24,7 @@
     <div class="col-sm-12 col-md-6 col-lg-4 mt-5 pt-5">
       <div>
         {{#link-to 'location.complexsectorsprimaries' model.entity.id (query-params startDate=startDate endDate=endDate)
-          class="btn btn-outline-secondary btn-block"
+          class=(is-concat 'btn btn-outline-secondary btn-block ' enableRingChart)
         }}
           CONEXIONES PRIMARIAS
         {{/link-to}}
@@ -47,6 +47,10 @@
   </div>
 
   <div style="border: #888888 1px solid;" id="complexmap">
+
+    <div class="col-sm-12 text-left ml-5 pl-5">
+      <p class="text-white mt-5 pt-5">{{ is-concat 'MAPA DE SECTORES ' endDate ' - ' model.entity.name ' (' model.entity.code ')' }}</p>
+    </div>
 
     <div class="row mt-5">
       <div class="col-sm-12 text-right mr-5 pr-5">
@@ -107,6 +111,8 @@
         categoriesFilterList=categoriesFilterList
         selectedProducts=selectedProducts
         show35=true
+        toolTips="complexity"
+        filename=(is-concat 'MAPA DE SECTORES ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
       }}
     </div>
 
@@ -133,6 +139,7 @@
         source="industries"
         entityType="industries"
         elementId="industriesTable"
+        title_data=(is-concat 'MAPA DE SECTORES ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
       }}
     </div>
   </div>

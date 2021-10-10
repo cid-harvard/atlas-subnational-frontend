@@ -26,46 +26,96 @@
 
 </div>
 
-<div class="container-fluid pl-md-x10 pr-md-x10">
-  <div class="row">
-    <div class="col-sm-12 mt-5 pt-5">
-      <p class="d-none">{{vistkScatterplotService.updated}}</p>
-      <p class="d-none">{{vistkScatterplotService.selected}}</p>
-      <p class="d-none">{{buildermodSearchService.search}}</p>
-      {{vistk-scatterplot
-        classNames='buildermod__viz'
-        immutableData=immutableData
-        modelData=modelData
-        data=filteredData
-        dataType=source
-        varDependent=varDependent
-        scale=scale
-        startDate=startDate
-        dateExtent=dateExtent
-        endDate=endDate
-        metadata=metadata
-        isFiltered=isFiltered
-        entityType=entityType
-        entityId=entityId
-        variable=variable
-        search=search
-        graph=graph
-        elementId=source
-        toolTips=toolTips
-        range=range
-        canUpdateBuildermodSearchService=canUpdateBuildermodSearchService
-        filterCategory=true
-        resetFilter=resetFilter
-        canFilterVcr=false
-        title="PRODUCTOS"
-        subtitle="POR SECTOR"
-        groupByParent=groupByParent
-        categoriesFilterList=categoriesFilterList
-      }}
+<div class="container-fluid pl-md-x10 pr-md-x10 mt-5 pt-5">
 
+  <div style="border: #888888 1px solid;" id="scatterplot">
 
+    <div class="col-sm-12 text-left ml-5 pl-5">
+      <p class="text-white mt-5 pt-5">{{ is-concat 'SECTORES CON MAYOR POTENCIAL ' endDate ' - ' model.entity.name ' (' model.entity.code ')' }}</p>
     </div>
+
+    <div class="row mt-5">
+      <div class="col-sm-12 text-right mr-5 pr-5">
+
+        <a href="" data-toggle="modal" data-target="#modalHelp3">
+          <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px;">
+        </a>
+
+        <div class="modal fade" id="modalHelp3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+                  <i class="fas fa-times fa-2x"></i>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <div class="row h-100 px-4">
+                  <img src="assets/img/infografias/27.jpg" class="img-fluid">
+                </div>
+
+              </div>
+              <div class="modal-footer">
+
+                <div class="col text-center mb-4">
+                  <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-sm-12 mt-5 pt-5">
+        <p class="d-none">{{vistkScatterplotService.updated}}</p>
+        <p class="d-none">{{vistkScatterplotService.selected}}</p>
+        <p class="d-none">{{buildermodSearchService.search}}</p>
+        <p class="d-none">{{buildermodSearchService.search}}</p>
+        <p class="d-none">{{rcaFilterService.updated}}</p>
+        <p class="d-none">{{VCRValueScatter}}</p>
+        {{vistk-scatterplot
+          classNames='buildermod__viz'
+          immutableData=productsData
+          modelData=modelData
+          data=productsData
+          dataType=source
+          varDependent=varDependent
+          scale=scale
+          startDate=startDate
+          dateExtent=dateExtent
+          endDate=endDate
+          metadata=metadata
+          isFiltered=isFiltered
+          entityType=entityType
+          entityId=entityId
+          variable=variable
+          search=search
+          graph=graph
+          elementId=source
+          toolTips=toolTips
+          range=range
+          canUpdateBuildermodSearchService=canUpdateBuildermodSearchService
+          filterCategory=true
+          resetFilter=resetFilter
+          canFilterVcr=true
+          VCRValue=VCRValueScatter
+          title="PRODUCTOS"
+          subtitle="POR SECTOR"
+          groupByParent=groupByParent
+          categoriesFilterList=categoriesFilterList
+          filename=(is-concat 'SECTORES CON MAYOR POTENCIAL ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+          toolTips="complexity"
+        }}
+
+
+      </div>
+
     <div class="col-sm-0 col-lg-4"></div>
+
   </div>
 
 </div>
@@ -83,7 +133,7 @@
         startDate=startDate
         endDate=endDate
         elementId="sourceTable"
-        title_data=(is-concat endDate ' - ' variableTitle ' - ' model.entity.name ' (' model.entity.code ')')
+        title_data=(is-concat 'SECTORES CON MAYOR POTENCIAL' endDate ' - ' model.entity.name ' (' model.entity.code ')')
       }}
 
     </div>

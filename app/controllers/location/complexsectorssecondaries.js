@@ -7,6 +7,7 @@ const {apiURL} = ENV;
 export default Ember.Controller.extend({
   featureToggle: Ember.inject.service(),
   buildermodSearchService: Ember.inject.service(),
+  departmentCityFilterService: Ember.inject.service(),
   locationSectorsService: Ember.inject.service(),
   vistkNetworkService: Ember.inject.service(),
   locationsSelectionsService: Ember.inject.service(),
@@ -148,7 +149,7 @@ export default Ember.Controller.extend({
       d3.selectAll(".tooltip_network").classed("d-none", true);
 
       for(let id of Object.keys(selected)){
-        delete selected[id]
+        delete selected[id];
       }
 
       this.set('vistkNetworkService.updated', new Date());
@@ -188,11 +189,38 @@ export default Ember.Controller.extend({
     return [...Array(max - min + 1).keys()].map(i => i + min);
   }),
 
-  filteredDataTable: computed("model", 'vistkNetworkService.updated', 'endDate', function () {
+  location: computed("departmentCityFilterService.name", function (){
+    this.get("departmentCityFilterService.data")
+    this.get('buildermodSearchService.search')
+    return this.get("departmentCityFilterService.name");
+  }),
+  locationId: computed("departmentCityFilterService.id", function (){
+    return this.get("departmentCityFilterService.id");
+  }),
+
+  filteredDataTable: computed("model", 'vistkNetworkService.updated', 'departmentCityFilterService.data', 'endDate', function () {
 
     var selectedProducts = this.get("selectedProducts")
+
+    var ids = []
+
+    for(let id of Object.keys(selectedProducts)){
+      ids.push(id)
+
+      for(let id2 of Object.keys(selectedProducts[id])){
+        ids.push(id2)
+
+        for(let id3 of selectedProducts[id][id2]){
+          ids.push(id3)
+        }
+
+      }
+
+    }
+
+
     var productsData = this.get("productsData")
-    var result = productsData.filter(item => Object.keys(selectedProducts).includes(String(item.id)))
+    var result = productsData.filter(item => ids.includes(String(item.id)))
 
     return result
   }),
@@ -230,6 +258,32 @@ export default Ember.Controller.extend({
 
   placeHolderText: computed('i18n.locale', 'source', function(){
     return this.get('i18n').t(`visualization.source.${this.get('source')}`).string
+  }),
+
+  filteredDataAsync: observer("departmentCityFilterService.id", function () {
+
+    var id = this.get("departmentCityFilterService.id");
+    var productsMetadata = this.get("model.metaData.products")
+    var self = this
+
+    var products = $.getJSON(`${apiURL}/data/location/${id}/products?level=4digit`)
+
+    var promises = [products]
+
+    var result = RSVP.allSettled(promises).then((array) => {
+      let productsData = array[0].value.data;
+
+      let productsDataResponse = _.reduce(productsData, (memo, d) => {
+        let product = productsMetadata[d.product_id];
+        product.complexity = _.result(_.find(product.pci_data, { year: d.year }), 'pci');
+        memo.push(_.merge(d, product));
+        return memo;
+      }, []);
+
+      self.set("departmentCityFilterService.data", productsDataResponse)
+
+      return productsDataResponse
+    });
   }),
 
   filterData: computed('source', function(){

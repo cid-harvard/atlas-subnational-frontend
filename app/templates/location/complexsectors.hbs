@@ -48,6 +48,10 @@
 
   <div style="border: #888888 1px solid;" id="complexmap">
 
+    <div class="col-sm-12 text-left ml-5 pl-5">
+      <p class="text-white mt-5 pt-5">{{ is-concat 'MAPA DE SECTORES ' endDate ' - ' model.entity.name ' (' model.entity.code ')' }}</p>
+    </div>
+
     <div class="row mt-5">
       <div class="col-sm-12 text-right mr-5 pr-5">
 
@@ -84,36 +88,31 @@
       </div>
     </div>
 
-    <div class="row mt-5 pt-5">
-      <div class="col-sm-12 col-md-6 text-center">
-        <p class="text_yellow">ALTO NIVEL DE COMPLEJIDAD</p>
-      </div>
-      <div class="col-sm-12 col-md-6 text-center">
-        <p class="text_yellow">BAJO NIVEL DE COMPLEJIDAD</p>
-      </div>
-    </div>
+
     <p class="d-none">{{vistkNetworkService.updated}}</p>
     <div class="row">
       {{vistk-network
-        data=productsData
-        immutableData=productsData
+        data=industriesData
+        immutableData=industriesData
         elementId=elementId
-        dataType='products'
+        dataType='industries'
         metadata=model.metaData
         varDependent='employment'
-        graph=productSpace
+        graph=industrySpace
         height=600
         delay=3500
-        showMiddle=true
+        showMiddle=false
         filterCategory=true
-        title="SECTORES DE"
-        subtitle="LOS PRODUCTOS"
+        title="PRODUCTOS"
+        subtitle="POR SECTOR"
         selected=model.entity.id
         canFilterVcr=true
         VCRValue=VCRValue
         categoriesFilterList=categoriesFilterList
         selectedProducts=selectedProducts
-        show10=true
+        show35=true
+        toolTips="complexity"
+        filename=(is-concat 'MAPA DE SECTORES ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
       }}
     </div>
 
@@ -140,12 +139,17 @@
 <div class="container-fluid pl-md-x10 pr-md-x10 my-5 py-5" id="complexmaptable">
   <div class="row">
     <div class="col-md-12">
+      <h1 class="text_yellow">INFORMACIÓN DE SECTORES</h1>
+    </div>
+    <div class="col-md-12">
       {{
         datlas-table
-        data=filteredDataTable
+        data=filteredIndustriesDataTop5Rca
         source="industries"
         entityType="industries"
         elementId="industriesTable"
+        order=filteredIndustriesDataTop5RcaOrder
+        title_data=(is-concat 'INFORMACIÓN DE SECTORES ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
       }}
     </div>
   </div>
@@ -159,7 +163,11 @@
 <div class="container-fluid pl-md-x10 pr-md-x10">
 
 
-  <div style="border: #888888 1px solid;" id="complexmap">
+  <div style="border: #888888 1px solid;" id="scatterplot">
+
+    <div class="col-sm-12 text-left ml-5 pl-5">
+      <p class="text-white mt-5 pt-5">{{ is-concat 'SECTORES RELATIVAMENTE COMPLEJOS ' endDate ' - ' model.entity.name ' (' model.entity.code ')' }}</p>
+    </div>
 
     <div class="row mt-5">
       <div class="col-sm-12 text-right mr-5 pr-5">
@@ -203,12 +211,15 @@
     <p class="d-none">{{vistkScatterplotService.updated}}</p>
     <p class="d-none">{{vistkScatterplotService.selected}}</p>
     <p class="d-none">{{buildermodSearchService.search}}</p>
-    <div class="row">
+    <p class="d-none">{{buildermodSearchService.search}}</p>
+    <p class="d-none">{{rcaFilterService.updated}}</p>
+    <p class="d-none">{{VCRValueScatter}}</p>
+    <div style="padding: 10px">
       {{vistk-scatterplot
         classNames='buildermod__viz'
-        immutableData=productsData
+        immutableData=industriesData
         modelData=modelData
-        data=productsData
+        data=industriesData
         dataType='industries'
         varDependent=varDependent
         scale=scale
@@ -230,10 +241,11 @@
         title="SECTORES DE"
         subtitle="LOS PRODUCTOS"
         selected=model.entity.id
-        canFilterVcr=false
-        VCRValue=VCRValue
-        categoriesFilterList=categoriesFilterList
-        show10=true
+        canFilterVcr=true
+        VCRValue=VCRValueScatter
+        categoriesFilterList=categoriesFilterListScatter
+        showProductVcr=true
+        filename=(is-concat 'SECTORES RELATIVAMENTE COMPLEJOS ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
       }}
     </div>
 
@@ -260,12 +272,17 @@
 <div class="container-fluid pl-md-x10 pr-md-x10 my-5 py-5" id="complexmaptable">
   <div class="row">
     <div class="col-md-12">
+      <h1 class="text_yellow">INFORMACIÓN DE SECTORES</h1>
+    </div>
+    <div class="col-md-12">
       {{
         datlas-table
-        data=filteredDataTable2
-        source="products"
-        entityType="products"
-        elementId="industriesTable2"
+        data=filteredIndustriesDataTop5Rca
+        source="industries"
+        entityType="industries"
+        elementId="industriesTable"
+        order=filteredIndustriesDataTop5RcaOrder
+        title_data=(is-concat 'SECTORES RELATIVAMENTE COMPLEJOS ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
       }}
     </div>
   </div>

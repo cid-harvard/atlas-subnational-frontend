@@ -8,16 +8,17 @@ export default Ember.Controller.extend({
   featureToggle: Ember.inject.service(),
   buildermodSearchService: Ember.inject.service(),
   departmentCityFilterService: Ember.inject.service(),
+  locationSectorsService: Ember.inject.service(),
   vistkNetworkService: Ember.inject.service(),
   locationsSelectionsService: Ember.inject.service(),
   queryParams: ['startDate', 'endDate'],
 
   categoriesFilterList: [],
-  elementId: 'product_space',
+  elementId: 'industrie_space',
   VCRValue: 1,
-  entityType: "product",
+  entityType: "industry",
   source: "industries",
-  visualization: "products",
+  visualization: "industry",
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
 
@@ -117,13 +118,23 @@ export default Ember.Controller.extend({
     return result_object
 
   },
-  initialSelectedProducts: computed('model.[]', function () {
-    var id = this.get("model.entity.id")
-    var selected_products = {}
 
-    return selected_products
+  selectedProducts: computed.alias("locationSectorsService.selected"),
+
+  enableRingChart: "disabled",
+
+  enableRingChartObserver: observer("vistkNetworkService.updated", function () {
+
+    var selectedProducts = Object.keys(this.get("selectedProducts"));
+
+    if (selectedProducts.length > 0){
+      this.set("enableRingChart", "");
+    }
+    else {
+      this.set("enableRingChart", "disabled");
+    }
+
   }),
-  selectedProducts: computed.alias('locationsSelectionsService.selectedProducts'),
 
   searchFilter: observer('buildermodSearchService.search', function() {
 
@@ -132,7 +143,6 @@ export default Ember.Controller.extend({
     let search = _.deburr(this.get('buildermodSearchService.search'));
     var self = this;
     var elementId = this.get("elementId");
-    var initialSelectedProducts = this.get("initialSelectedProducts")
 
     if(search === ""){
 
@@ -140,8 +150,13 @@ export default Ember.Controller.extend({
 
 
       d3.selectAll(".tooltip_network").classed("d-none", true);
+      d3.selectAll(".selected__adjacent").classed("selected__adjacent", false);
+      d3.selectAll(".selected__secondary").classed("selected__secondary", false);
 
-      this.set("selectedProducts", {});
+      for(let id of Object.keys(selected)){
+        delete selected[id];
+      }
+
       this.set('vistkNetworkService.updated', new Date());
     }
     else {

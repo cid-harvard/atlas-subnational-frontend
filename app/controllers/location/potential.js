@@ -6,13 +6,17 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   vistkScatterplotService: Ember.inject.service(),
   buildermodSearchService: Ember.inject.service(),
+  rcaFilterService: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
   queryParams: ['startDate', 'endDate'],
 
-  search: null,
-  rcaFilter: 'less',
-  filterCategory: true,
+  startDate: null,
+  endDate: null,
   categoriesFilterList: [],
+  categoriesFilterListScatter: [],
+  selectedProducts: [],
+  VCRValue: 1,
+  VCRValueScatter: 1,
 
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
@@ -34,22 +38,6 @@ export default Ember.Controller.extend({
     return [...Array(max - min + 1).keys()].map(i => i + min);
   }),
 
-  industriesDataValues: computed('model', function(){
-
-    var locations = Object.entries(this.get('model.metaData.industries'))
-
-    return locations.filter(item => item[1].level === "class").map((item) => {
-
-      var name = get(item[1], `name_short_${this.get('i18n').display}`)
-
-      return {id:item[1].id, text: `${name} (${item[1].code})`}
-    })
-  }),
-
-  filterData: computed('source', function(){
-    return this.get('industriesDataValues');
-  }),
-
   placeHolderText: computed('i18n.locale', 'source', function(){
     return this.get('i18n').t(`visualization.source.${this.get('source')}`).string
   }),
@@ -60,6 +48,17 @@ export default Ember.Controller.extend({
       return _.contains(timeRange, get(d, 'year'));
     });
   },
+
+  productsData: computed('model', 'endDate', 'rcaFilterService.updated', function () {
+
+    var startDate = this.get("startDate");
+    var endDate = this.get("endDate");
+    var data = this.get("model.industries_col")
+
+    var data_filtered = data.filter(item => item.year >= startDate && item.year <= endDate);
+    return data_filtered
+
+  }),
 
   immutableData: computed('model.industries_col.[]','endDate', 'startDate' , function() {
     return this.filterToSelectedYears(this.get('model.industries_col'), this.get('startDate'), this.get('endDate'));
@@ -139,7 +138,7 @@ export default Ember.Controller.extend({
 
   }),
 
-   filteredDataTable: computed('immutableData' , 'vistkScatterplotService.updated',function() {
+  filteredDataTable: computed('immutableData' , 'vistkScatterplotService.updated',function() {
 
     let data = this.get('immutableData');
     var updated = this.get("vistkScatterplotService.updated");
@@ -163,9 +162,9 @@ export default Ember.Controller.extend({
     return 'export_value';
   }),
 
-  maxValue: computed('filteredData.[]', 'varDependent', function () {
+  maxValue: computed('industriesData.[]', 'varDependent', function () {
     let varDependent = this.get('varDependent');
-    return d3.max(this.get('filteredData'), function(d) { return Ember.get(d, varDependent); });
+    return d3.max(this.get('industriesData'), function(d) { return Ember.get(d, varDependent); });
   }),
 
   scale: computed('maxValue', 'varDependent', function(){
@@ -186,6 +185,17 @@ export default Ember.Controller.extend({
     return  [this.get('firstYear'), this.get('lastYear')];
   }),
 
+  industriesData: computed('model', 'endDate', 'VCRValue', 'rcaFilterService.updated', function () {
+
+    var startDate = this.get("startDate");
+    var endDate = this.get("endDate");
+    var data = this.get("model.industries_col");
+
+    var data_filtered = data.filter(item => item.year >= startDate && item.year <= endDate);
+    return data_filtered;
+
+  }),
+
   isFiltered: computed('search', function() {
     return Boolean(this.get('search'));
   }),
@@ -198,8 +208,6 @@ export default Ember.Controller.extend({
       return this.get('model.metaData.productSpace');
     }
   }),
-
-
 
 
 });

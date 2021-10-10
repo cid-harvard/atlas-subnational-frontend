@@ -21,16 +21,7 @@
       }}
     </div>
     <div class="col-sm-0 col-lg-4"></div>
-    <div class="col-sm-12 col-md-6 col-lg-4 mt-5 pt-5">
-      <div>
-        {{#link-to 'location.complexsectorssecondaries' model.entity.id (query-params startDate=startDate endDate=endDate)
-          class=(is-concat 'btn btn-outline-secondary btn-block ' enableRingChart)
-        }}
-          CONEXIONES SECUNDARIAS
-        {{/link-to}}
-      </div>
 
-    </div>
   </div>
 
 </div>
@@ -49,7 +40,7 @@
   <div style="border: #888888 1px solid;" id="complexmap">
 
     <div class="col-sm-12 text-left ml-5 pl-5">
-      <p class="text-white mt-5 pt-5">{{ is-concat 'MAPA DE SECTORES - CONEXIONES PRIMARAS ' endDate ' - ' model.entity.name ' (' model.entity.code ')' }}</p>
+      <p class="text-white mt-5 pt-5">{{ is-concat 'MAPA DE SECTORES - CONEXIONES SECUNDARIAS ' endDate ' - ' model.entity.name ' (' model.entity.code ')' }}</p>
     </div>
 
     <div class="row mt-5">
@@ -111,9 +102,10 @@
         categoriesFilterList=categoriesFilterList
         selectedProducts=selectedProducts
         showPrimaries=true
+        showSecondaries=true
         show35=true
         toolTips="complexity"
-        filename=(is-concat 'MAPA DE SECTORES - CONEXIONES PRIMARAS ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+        filename=(is-concat 'MAPA DE SECTORES - CONEXIONES SECUNDARIAS ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
       }}
     </div>
 
@@ -140,7 +132,7 @@
         source="industries"
         entityType="industries"
         elementId="industriesTable"
-        title_data=(is-concat 'MAPA DE SECTORES - CONEXIONES PRIMARAS ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+        title_data=(is-concat 'MAPA DE SECTORES - CONEXIONES SECUNDARIAS ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
       }}
     </div>
   </div>
@@ -148,7 +140,7 @@
 
 <div class="container-fluid px-md-x10 pb-5">
   <div class="text-right">
-    {{#link-to 'location.complexsectorsdetail' modelData.id (query-params startDate=startDate endDate=startDate)
+    {{#link-to 'location.complexsectorsprimaries' modelData.id (query-params startDate=startDate endDate=startDate)
       class="btn btn-outline-secondary"
     }}
     ANTERIOR

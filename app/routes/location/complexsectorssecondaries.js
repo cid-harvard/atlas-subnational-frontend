@@ -55,6 +55,8 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     //this.set('buildermodSearchService.search', null);
     this._super(controller, model);
+    startDate: this.get('firstYear')
+    endDate: this.get('lastYear')
     window.scrollTo(0, 0);
   },
   resetController(controller, isExiting) {
