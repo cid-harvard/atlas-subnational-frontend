@@ -18,6 +18,22 @@ export default Ember.Controller.extend({
   VCRValue: 1,
   VCRValueScatter: 1,
 
+  industriesDataValues: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.industries'))
+
+    return locations.filter(item => item[1].level === "class").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name} (${item[1].code})`}
+    })
+  }),
+
+  filterData: computed('source', function(){
+    return this.get('industriesDataValues');
+  }),
+
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
   censusYear: computed.alias('featureToggle.census_year'),
@@ -129,6 +145,10 @@ export default Ember.Controller.extend({
           selected.push(item.id);
           self.set("vistkScatterplotService.updated", new Date());
           d3.selectAll(`.tooltip_${item.id}`).classed('d-none', false);
+          d3.selectAll(`.line_horizontal_${item.id}`).classed('d-none', false);
+          d3.selectAll(`.line_vertical_${item.id}`).classed('d-none', false);
+          d3.selectAll(`.rect_${item.id}`).classed('d-none', false);
+          d3.selectAll(`.text_${item.id}`).classed('d-none', false);
         }
         //selected[String(item.id)] = this.getPrimariesSecondaries2(parseInt(item.id))
         //self.set('vistkNetworkService.updated', new Date());

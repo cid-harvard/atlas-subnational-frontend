@@ -14,19 +14,23 @@
   isVisualization=true
   pageTitle=pageTitle
 }}
-{{navigation-questions
-  entityType=entityType
-  model=model.entity
-  isDepartment=isDepartment
-  isMunicipality=isMunicipality
-  firstYear=firstYearForMenu
-  lastYear=lastYearForMenu
-  agproductFirstYear=agproductFirstYear
-  agproductLastYear=agproductLastYear
-  agcensusFirstYear=agcensusFirstYear
-  agcensusLastYear=agcensusLastYear
-  occupationLastYear=occupationLastYear
+
+{{#if (is-equal showBack "true")}}
+{{else}}
+  {{navigation-questions
+    entityType=entityType
+    model=model.entity
+    isDepartment=isDepartment
+    isMunicipality=isMunicipality
+    firstYear=firstYearForMenu
+    lastYear=lastYearForMenu
+    agproductFirstYear=agproductFirstYear
+    agproductLastYear=agproductLastYear
+    agcensusFirstYear=agcensusFirstYear
+    agcensusLastYear=agcensusLastYear
+    occupationLastYear=occupationLastYear
 }}
+{{/if}}
 
 <div class="container-fluid px-md-x10 my-5 py-5" id="scrollData">
   <div class="row row-without-margin d-flex align-items-center">
