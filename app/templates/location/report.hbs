@@ -1,0 +1,141 @@
+{{component "stream-header" model=model.entity type='location' extra_type="location_route" firstYear=firstYear lastYear=lastYear}}
+
+
+<div class="container-fluid px-md-x10 mt-5 pt-5">
+  <div class="row">
+
+    <div class="col-sm-12">
+      <p class="text-white">Filtrar por Año</p>
+    </div>
+
+    <div class="col-sm-12">
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 my-auto">
+          <div class="">
+            <select class="form-control form-filter" id="selectYear" {{action "setStartYear" on="change"}}>
+
+              {{#each year in rangeYears }}
+                {{#if (is-equal year endDate)}}
+                  <option selected>{{year}}</option>
+                {{else}}
+                  <option>{{year}}</option>
+                 {{/if}}
+              {{/each}}
+
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<div class="new__buildermod__questions mt-5">
+  <div class="container-fluid px-md-x10">
+    <div class="row row-without-margin">
+      <div class="col-sm-12 pl-md-0">
+        <p class="question__title my-5">Por favor seleccione las secciones que quiere sean exportadas en el archivo de resumen.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid px-md-x10 mt-5 pt-5">
+  <div class="row">
+
+    <div class="col-sm-12" id="check1div" style="padding: 50px;">
+      <div>
+
+        <input class="d-inline" type="checkbox" checked id="check1" {{action "check1" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Información general de Exportaciones (Top 5) de ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+      <div class="{{check1class}}">
+        {{
+          datlas-table
+          data=filteredProductsDataTop5Export
+          source='productsExports'
+          entityType=''
+          search=search
+          startDate=startDate
+          endDate=endDate
+          elementId="productssourceTable"
+          order=filteredProductsDataTop5ExportOrder
+          title_data=(is-concat 'Productos que más exporta ' model.name '(' endDate ')')
+        }}
+      </div>
+
+    </div>
+
+    <div class="col-sm-12" id="check2div" style="padding: 50px;">
+      <div>
+
+        <input class="d-inline" type="checkbox" checked id="check2" {{action "check2" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Mapa de productos de ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+
+      <div class="{{check2class}}">
+        <div class="row mt-5 pt-5">
+          <div class="col-sm-12 col-md-6 text-center">
+            <p class="text_yellow">ALTO NIVEL DE COMPLEJIDAD</p>
+          </div>
+          <div class="col-sm-12 col-md-6 text-center">
+            <p class="text_yellow">BAJO NIVEL DE COMPLEJIDAD</p>
+          </div>
+        </div>
+        <p class="d-none">{{vistkNetworkService.updated}}</p>
+        <div>
+          {{vistk-network
+            data=productsData
+            immutableData=productsData
+            elementId="ProductMapId"
+            dataType='products'
+            metadata=model.metaData
+            varDependent='export_value'
+            graph=model.metaData.productSpace
+            height=600
+            delay=3500
+            showMiddle=true
+            filterCategory=true
+            title="SECTORES DE"
+            subtitle="LOS PRODUCTOS"
+            selected=model.entity.id
+            canFilterVcr=false
+            hideExport=true
+            VCRValue=VCRValue
+            categoriesFilterList=categoriesFilterList
+            selectedProducts=selectedProducts
+            filename=(is-concat 'MAPA DE PRODUCTOS ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+          }}
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid px-md-x10 pb-5 mt-5 pt-5 text-center">
+  <div class="d-inline">
+    <button class="btn btn-outline-secondary {{classFile}}" {{action "report"}}>GENERAR ARCHIVO RESUMEN</button>
+  </div>
+</div>
+
+<div class="container-fluid px-md-x10 pb-5 mt-5 pt-5 text-right">
+  <div class="d-inline">
+    {{#link-to 'location.thirdparty' model.entity.id (query-params startDate=startDate endDate=startDate)
+      class="btn btn-outline-secondary"
+    }}
+    ANTERIOR
+    {{/link-to}}
+  </div>
+</div>

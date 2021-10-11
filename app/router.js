@@ -71,6 +71,7 @@ export default Router.map(function() {
 
     this.route('ruralactivities', {path: ':location_id/route/rural_activities/'});
     this.route('thirdparty', {path: ':location_id/route/thirdparty/'});
+    this.route('report', {path: ':location_id/route/report/'});
 
 
     //this.route('productmapdecentralized', {path: ':location_id/route/product_map/decentralized/'});
