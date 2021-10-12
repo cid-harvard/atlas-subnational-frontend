@@ -52,7 +52,7 @@
     <div class="col-sm-12" id="check1div" style="padding: 50px;">
       <div>
 
-        <input class="d-inline" type="checkbox" checked id="check1" {{action "check1" on="change"}} style="height: 2rem; width: 2rem;">
+        <input class="d-inline" type="checkbox" id="check1" {{action "check1" on="change"}} style="height: 2rem; width: 2rem;">
         <h1 class="d-inline text-white ml-5">{{is-concat 'Información general de Exportaciones (Top 5) de ' model.entity.name ' (' endDate ')'}}</h1>
 
       </div>
@@ -73,6 +73,79 @@
 
     </div>
 
+    <div class="col-sm-12" id="check2div" style="padding: 50px;">
+      <div>
+
+        <input class="d-inline" type="checkbox" id="check2" {{action "check2" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Paises a donde más exporta ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+      <div class="{{check2class}}">
+        {{
+          datlas-table
+          data=filteredPartnersDataTop5Export
+          source='partnersExports'
+          entityType=''
+          search=search
+          startDate=startDate
+          endDate=endDate
+          elementId="partnerssourceTable"
+          order=filteredPartnersDataTop5ExportOrder
+          title_data=(is-concat 'Paises a donde más exporta ' model.name '(' endDate ')')
+        }}
+      </div>
+
+    </div>
+
+    <div class="col-sm-12" id="check5div" style="padding: 50px;">
+      <div>
+
+        <input class="d-inline" type="checkbox" id="check5" {{action "check5" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Productos que mas importa ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+      <div class="{{check5class}}">
+        {{
+          datlas-table
+          data=filteredProductsDataTop5Import
+          source='productsImports'
+          entityType=''
+          search=search
+          startDate=startDate
+          endDate=endDate
+          elementId="productssourceTable2"
+          order=filteredProductsDataTop5ImportOrder
+          title_data=(is-concat 'Productos que más importa ' model.name '(' endDate ')')
+        }}
+      </div>
+
+    </div>
+
+    <div class="col-sm-12" id="check6div" style="padding: 50px;">
+      <div>
+
+        <input class="d-inline" type="checkbox" id="check6" {{action "check6" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Paises de donde más importa ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+      <div class="{{check6class}}">
+       {{
+          datlas-table
+          data=filteredPartnersDataTop5Import
+          source='partnersExports'
+          entityType=''
+          search=search
+          startDate=startDate
+          endDate=endDate
+          elementId="partnerssourceTable2"
+          order=filteredPartnersDataTop5ImportOrder
+          title_data=(is-concat 'Paises de donde más importa ' model.name '(' endDate ')')
+        }}
+      </div>
+
+    </div>
+
+    <!--
     <div class="col-sm-12" id="check2div" style="padding: 50px;">
       <div>
 
@@ -120,7 +193,7 @@
 
 
     </div>
-
+    -->
   </div>
 </div>
 

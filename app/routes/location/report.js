@@ -24,6 +24,7 @@ export default Ember.Route.extend({
       model: this.store.find('location', params.location_id),
       industries_col: $.getJSON(`${apiURL}/data/location/${params.location_id}/industries?level=class`),
       products_col: $.getJSON(`${apiURL}/data/location/${params.location_id}/products?level=4digit`),
+      partners: $.getJSON(`${apiURL}/data/location/${params.location_id}/partners?level=country`),
     }
 
     return RSVP.hash(hash).then((hash) => {
@@ -33,9 +34,10 @@ export default Ember.Route.extend({
     //return this.store.find('product', params.product_id);
   },
   departmentsDataMunging(hash) {
-    let {model, industries_col, products_col} = hash;
+    let {model, industries_col, products_col, partners} = hash;
     let industriesMetadata = this.modelFor('application').industries;
     let productsMetadata = this.modelFor('application').products;
+    let partnersMetadata = this.modelFor('application').partnerCountries;
 
     let industries = _.map(industries_col.data, (d) => {
       let industry = industriesMetadata[d.industry_id];
@@ -52,10 +54,21 @@ export default Ember.Route.extend({
       return memo;
     }, []);
 
+    let allPartners = _.map(partners.data, (d) => {
+      let country = partnersMetadata[d.country_id];
+      let parent = partnersMetadata[country.parent_id];
+      d.parent_name_en = parent.name_en;
+      d.parent_name_es = parent.name_es;
+      d.group = parent.id;
+
+      return _.merge(copy(d), country);
+    });
+
     return Ember.Object.create({
       entity: model,
       industries_col: industries,
       products_col: products,
+      allPartners: allPartners,
       metaData: this.modelFor('application')
     });
   },

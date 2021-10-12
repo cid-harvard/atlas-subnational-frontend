@@ -21,10 +21,6 @@ export default Ember.Controller.extend({
     return [...Array(max - min + 1).keys()].map(i => i + min);
   }),
 
-  check1class: "",
-  check2class: "",
-
-
   filteredProductsDataTop5Export: computed('model', 'startDate', 'endDate', function (){
     var products = this.get("model.products_col")
     var filtered = products.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
@@ -47,8 +43,51 @@ export default Ember.Controller.extend({
 
   }),
 
+  filteredPartnersDataTop5Export: computed('model', 'startDate', 'endDate', function (){
+
+    var partners = this.get("model.allPartners")
+    console.log(partners)
+    var filtered = partners.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
+    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.export_value;}), 0, 5);
+    return sorted;
+  }),
+
+  filteredPartnersDataTop5ExportOrder: computed('model', 'startDate', 'endDate', function (){
+    return [[ 3, "desc" ]];
+  }),
+
+  filteredProductsDataTop5Import: computed('model', 'startDate', 'endDate', function (){
+    var products = this.get("model.products_col")
+    var filtered = products.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
+    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.import_value;}), 0, 5);
+    return sorted;
+  }),
+
+  filteredProductsDataTop5ImportOrder: computed('model', 'startDate', 'endDate', function (){
+    return [[ 3, "desc" ]];
+  }),
+
+  filteredPartnersDataTop5Import: computed('model', 'startDate', 'endDate', function (){
+
+    var partners = this.get("model.allPartners")
+    var filtered = partners.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
+    var sorted = _.slice(_.sortBy(filtered, function(d) { return -d.import_value;}), 0, 5);
+    return sorted;
+  }),
+
+  filteredPartnersDataTop5ImportOrder: computed('model', 'startDate', 'endDate', function (){
+    return [[ 4, "desc" ]];
+  }),
+
+
+
+  check1class: "d-none",
+  check2class: "d-none",
+  check5class: "d-none",
+  check6class: "d-none",
+
   selectedDivs: function () {
-    var lista = ["1", "2"];
+    var lista = ["1", "2", "5", "6"];
     var self = this;
     return lista.filter(item => {
       if( self.get(`check${item}class`) !== "d-none" ){
@@ -97,6 +136,24 @@ export default Ember.Controller.extend({
       }
       else{
         this.set("check2class", "d-none");
+      }
+    },
+    check5(){
+      this.set("lastUpdated", new Date());
+      if($("#check5").is(':checked')){
+        this.set("check5class", "");
+      }
+      else{
+        this.set("check5class", "d-none");
+      }
+    },
+    check6(){
+      this.set("lastUpdated", new Date());
+      if($("#check6").is(':checked')){
+        this.set("check6class", "");
+      }
+      else{
+        this.set("check6class", "d-none");
       }
     },
     report(){
