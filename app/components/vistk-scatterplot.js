@@ -587,6 +587,9 @@ export default Ember.Component.extend({
     let id = this.get('entityId');
 
     let locationLevel = this.get(`metadata.locations.${id}.level`);
+
+    console.log(this.get('metadata'))
+
     // There are no country level data API (/location/0/?level=country) yet, so
     // in that case just use some defaults and don't care about ECI value.
     if (locationLevel === "country"){

@@ -171,6 +171,7 @@ export default Ember.Route.extend({
     controller.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
     controller.set('drawerQuestionsIsOpen', false); // Turn off other drawers
     controller.set('searchText', controller.get('search'));
+    controller.set('VCRValue', 1);
   },
   resetController(controller, isExiting) {
     controller.set('variable', null);
@@ -178,7 +179,8 @@ export default Ember.Route.extend({
     if (isExiting) {
       controller.setProperties({
         startDate: this.get('firstYear'),
-        endDate: this.get('lastYear')
+        endDate: this.get('lastYear'),
+        VCRValue: 1
       });
     }
   }

@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
   buildermodSearchService: Ember.inject.service(),
   treemapService: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
+  rcaFilterService: Ember.inject.service(),
   lastDataTableUpdate: null,
   lastDataUpdate: null,
   resetFilter: null,
@@ -19,6 +20,9 @@ export default Ember.Controller.extend({
     }
     return false
   }),
+
+  VCRValue: 1,
+  selectedProducts: [],
 
   queryParams: ['search', 'startDate', 'endDate', 'toolTips', 'showBack'],
   search: null,
@@ -628,7 +632,7 @@ export default Ember.Controller.extend({
   }),
   canFilterVcr: computed('source', 'visualization', function(){
     if(this.get('source') === "industries" && this.get('visualization') === "similarity"){
-      return true;
+      return false;
     }
     else if(this.get('source') === "industries" && this.get('visualization') === "scatter"){
       return true;
@@ -653,7 +657,9 @@ export default Ember.Controller.extend({
     return true;
   }),
 
-  filteredData: computed('immutableData.[]', 'startDate', 'endDate', 'rcaFilter', 'buildermodSearchService.search', 'treemapService.filter_update', 'search', function() {
+  filteredData: computed('immutableData.[]', 'startDate', 'endDate', 'rcaFilter', 'VCRValue', 'rcaFilterService.updated', 'buildermodSearchService.search', 'treemapService.filter_update', 'search', function() {
+
+    console.log(this.get("VCRValue"))
 
     var addColorYears = this.get("addColorYears");
 
@@ -679,7 +685,7 @@ export default Ember.Controller.extend({
       let rca = this.get('rca');
       let rcaFilter = this.get('rcaFilter');
       if(rcaFilter === 'less') {
-        return _.filter(data, (d) => { return _.get(d,rca) <= 1;});
+        return _.filter(data, (d) => { return _.get(d,rca) > 0;});
       }
       if (rcaFilter === 'greater') {
         return _.filter(data, (d) => { return _.get(d,rca) > 1;});

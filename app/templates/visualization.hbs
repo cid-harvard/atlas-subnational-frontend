@@ -128,7 +128,7 @@
 
       <div class="col-sm-12 mt-5 pt-5 mb-5 pb-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
         <div class="visualizationComponent {{if isGeo 'col-md-8'}}" style="{{if isGeo 'border: 1px #555 solid;'}}">
-
+          <p class="d-none">{{rcaFilterService.updated}}</p>
           {{component visualizationComponent
             classNames='buildermod__viz'
             immutableData=immutableData
@@ -156,6 +156,8 @@
             canFilterVcr=canFilterVcr
             filename=(is-concat endDate ' - ' variableTitle ' - ' model.entity.name ' (' model.entity.code ')')
             groupByParent=groupByParent
+            VCRValue=VCRValue
+            selectedProducts=selectedProducts
           }}
           <div id="screens" style="padding: 10px"></div>
         </div>
