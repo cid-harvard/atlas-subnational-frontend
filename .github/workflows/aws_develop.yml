@@ -24,9 +24,9 @@
 #    and best practices on handling the access key credentials.
 on:
   push:
-    branches: [ master ]
+    branches: [ develop ]
   pull_request:
-      branches: [ master ]
+      branches: [ develop ]
 
 name: Deploy to Amazon ECS
 
@@ -34,7 +34,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    environment: deploy_prod
+    environment: deploy
 
     steps:
     - name: Checkout
@@ -64,11 +64,9 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ./docker/Dockerfile .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-
     - name: Download task definition
       run: |
         aws ecs describe-task-definition --task-definition ${{ secrets.ECS_TASK_DEFINITION }} --query taskDefinition > task-definition.json
-
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
