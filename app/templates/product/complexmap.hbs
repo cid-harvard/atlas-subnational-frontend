@@ -64,35 +64,11 @@
     <div class="row mt-5">
       <div class="col-sm-12 text-right mr-5 pr-5">
 
-        <a href="" data-toggle="modal" data-target="#modalHelp3">
-          <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px;">
-        </a>
-
-        <div class="modal fade" id="modalHelp3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
-                  <i class="fas fa-times fa-2x"></i>
-                </button>
-              </div>
-              <div class="modal-body">
-
-                <div class="row h-100 px-4">
-                  <img src="assets/img/infografias/10.jpg" class="img-fluid">
-                </div>
-
-              </div>
-              <div class="modal-footer">
-
-                <div class="col text-center mb-4">
-                  <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
+        {{
+          modal-button
+          target="modalHelp3"
+          img_url="assets/img/infografias/Inf_CU_10.jpg"
+        }}
 
       </div>
     </div>
@@ -126,7 +102,7 @@
         VCRValue=VCRValue
         categoriesFilterList=categoriesFilterList
         selectedProducts=selectedProducts
-        show10=true
+        showProductVcr=true
         filename=(is-concat endDate ' - ' 'Mapa de complejidad' ' - ' model.entity.name ' (' model.entity.code ')')
       }}
     </div>

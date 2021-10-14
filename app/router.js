@@ -25,11 +25,13 @@ export default Router.map(function() {
   this.resource('product', { path: 'product'}, function() {
     this.route('show', { path: ':product_id'});
     this.route('abstract', { path: ':product_id/abstract/'});
+
     this.route('complexmap', { path: ':product_id/complexmap/'});
     this.route('complexmapprimaries', { path: ':product_id/complexmap/primaries/'});
     this.route('complexmapsecondaries', { path: ':product_id/complexmap/secondaries/'});
     this.route('ringchart', { path: ':product_id/ringchart/'});
     this.route('exports', { path: ':product_id/exports/'});
+    this.route('report', {path: ':product_id/report/'});
 
     this.route('visualization', { path: ':product_id/source/:source_type/visualization/:visualization_type/:variable'});
   });
