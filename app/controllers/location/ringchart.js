@@ -300,6 +300,7 @@ export default Ember.Controller.extend({
 
       result.map(item => {
         //selected.push(String(item.id))
+        self.set("center", item.id)
         self.set("lastSelected", item.id)
         //self.setSelectedProductsbyId(item.id)
 
@@ -438,24 +439,9 @@ export default Ember.Controller.extend({
       }
 
 
-      if(primaries.length > 5){
-        this.set("product_primaries_count", primaries.length - 5)
-      }
-      else{
-        this.set("product_primaries_count", 0)
-      }
+      this.set("product_primaries", primaries)
 
-      this.set("product_primaries", primaries.splice(0,5))
-
-
-      if(secondaries.length > 5){
-        this.set("product_secondaries_count", secondaries.length - 5)
-      }
-      else{
-        this.set("product_secondaries_count", 0)
-      }
-
-      this.set("product_secondaries", secondaries.splice(0,5))
+      this.set("product_secondaries", secondaries)
 
     }
 
@@ -717,11 +703,10 @@ export default Ember.Controller.extend({
     check(index, attr) {
       this.updateCategoriesObject(index, attr);
     },
-    savePng() {
-      alert('Iniciando la descarga, este proceso tardará un momento.');
+    savePng(filename) {
       var domNode = $('#ringchartmap')[0];
       var d = new Date();
-      var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
+      var file_name = filename;
       var options = {
         width: domNode.clientWidth * 4,
         height: domNode.clientHeight * 4,
@@ -744,14 +729,12 @@ export default Ember.Controller.extend({
       var PDF_Width = 1024;
       var PDF_Height = 900;
       var pdf = new jsPDF('l', 'pt', [PDF_Width, PDF_Height]);
-      var domNodes = $('#ringchartmap');
-      var totalPDFPages = domNodes.length;
-      var countPages = totalPDFPages;
+      var domNode = $('#ringchartmap')[0];
+      var countPages = 1;
       var d = new Date();
       var file_name = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
 
-      for (var domNode of domNodes) {
-        var options = {
+      var options = {
           width: domNode.clientWidth * 4,
           height: domNode.clientHeight * 4,
           style: {
@@ -763,26 +746,20 @@ export default Ember.Controller.extend({
           }
         };
 
-        var HTML_Width = 1024;
-        var HTML_Height = 900;
-        var canvas_image_width = HTML_Width;
-        var canvas_image_height = HTML_Height;
+      var HTML_Width = 1024;
+      var HTML_Height = 900;
+      var canvas_image_width = HTML_Width;
+      var canvas_image_height = HTML_Height;
 
-        domtoimage.toJpeg(domNode, options)
-          .then(function (dataUrl) {
-            var myImage = dataUrl;
-            pdf.addImage(myImage, 'JPG', 0, 0, canvas_image_width, canvas_image_height);
-            countPages--;
-            if (countPages === 0) {
-              pdf.save(file_name + '.pdf');
-              saveAs(pdf, file_name + '.pdf');
-            } else {
-              pdf.addPage(PDF_Width, PDF_Height);
-            }
-          })
-          .catch(function (error) {
-          });
-      }
+      domtoimage.toJpeg(domNode, options)
+        .then(function (dataUrl) {
+          var myImage = dataUrl;
+          pdf.addImage(myImage, 'JPG', 0, 0, canvas_image_width, canvas_image_height);
+          pdf.save(file_name + '.pdf');
+          saveAs(pdf, file_name + '.pdf');
+        })
+        .catch(function (error) {
+        });
     }
   }
 });

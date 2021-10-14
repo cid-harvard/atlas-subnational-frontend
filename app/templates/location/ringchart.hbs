@@ -49,6 +49,11 @@
 
   <div id="complexmap">
     <div class="row" id="ringchartmap">
+
+      <div class="col-sm-12 text-left ml-5 pl-5">
+        <p class="text-white mt-5 pt-5">{{ is-concat model.entity.name ' (' model.entity.code ') - ' product_selected.name_short_es '(' product_selected.code ') - AÑO: ' endDate }}</p>
+      </div>
+
       <div class="col-sm-12 col-md-8 mt-5 pt-5" style="min-height: 600px;">
         <p class="d-none">{{buildermodSearchService.search}}</p>
         {{#if refreshRing}}
@@ -74,28 +79,34 @@
           <p class="text-white">Complejidad: {{product_selected.complexity}}</p>
 
           <p class="text_yellow mt-5">Conexiones primarias</p>
-          <ul class="text-white" style="list-style: inside;">
-            {{#each product in product_primaries}}
-              <li>{{product.name_short_es}} ({{product.code}})</li>
-            {{/each}}
 
-            {{#if product_primaries_count}}
-              <li>+ {{product_primaries_count}} productos</li>
-            {{/if}}
+          <div class="overflow-auto" style="max-height: 300px;">
+            <ul class="text-white" style="list-style: inside;">
+              {{#each product in product_primaries}}
+                <li>{{product.name_short_es}} ({{product.code}})</li>
+              {{/each}}
 
-          </ul>
+              {{#if product_primaries_count}}
+                <li>+ {{product_primaries_count}} productos</li>
+              {{/if}}
+
+            </ul>
+          </div>
+
 
           <p class="text_yellow mt-5">Conexiones secundarias</p>
-          <ul class="text-white" style="list-style: inside;">
-            {{#each product in product_secondaries}}
-              <li>{{product.name_short_es}} ({{product.code}})</li>
-            {{/each}}
+          <div class="overflow-auto" style="max-height: 300px;">
+            <ul class="text-white" style="list-style: inside;">
+              {{#each product in product_secondaries}}
+                <li>{{product.name_short_es}} ({{product.code}})</li>
+              {{/each}}
 
-            {{#if product_secondaries_count}}
-              <li>+ {{product_secondaries_count}} productos</li>
-            {{/if}}
+              {{#if product_secondaries_count}}
+                <li>+ {{product_secondaries_count}} productos</li>
+              {{/if}}
 
-          </ul>
+            </ul>
+          </div>
 
         </div>
       </div>
@@ -139,7 +150,7 @@
   <div class="row mb-5">
     <div class="col-lg-12">
         <div class="text-center">
-            <button type="button" class="btn btn-outline-secondary" {{action 'savePng'}}><i class="fas fa-file-image mr-3"></i>Descargar gráfico (PNG)</button>
+            <button type="button" class="btn btn-outline-secondary" {{action 'savePng' (is-concat model.entity.name ' (' model.entity.code ') - ' product_selected.name_short_es '(' product_selected.code ') - AÑO ' endDate)}}><i class="fas fa-file-image mr-3"></i>Descargar gráfico (PNG)</button>
         </div>
     </div>
   </div>
@@ -162,6 +173,8 @@
         source="products"
         entityType="products"
         elementId="industriesTable"
+        title_data=(is-concat model.entity.name ' (' model.entity.code ') - ' product_selected.name_short_es '(' product_selected.code ') - AÑO ' endDate)
+        source_data="FUENTE: cálculos del CID con datos de la DIAN."
       }}
     </div>
   </div>

@@ -55,35 +55,12 @@
     <div class="row mt-5">
       <div class="col-sm-12 text-right mr-5 pr-5">
 
-        <a href="" data-toggle="modal" data-target="#modalHelp23">
-          <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px;">
-        </a>
+        {{
+          modal-button
+          target="modalHelp3"
+          img_url="assets/img/infografias/Inf_CU_23.jpg"
+        }}
 
-        <div class="modal fade" id="modalHelp23" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
-                  <i class="fas fa-times fa-2x"></i>
-                </button>
-              </div>
-              <div class="modal-body">
-
-                <div class="row h-100 px-4">
-                  <img src="assets/img/infografias/23.png" class="img-fluid">
-                </div>
-
-              </div>
-              <div class="modal-footer">
-
-                <div class="col text-center mb-4">
-                  <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
 
       </div>
     </div>
@@ -118,7 +95,7 @@
         VCRValue=VCRValue
         categoriesFilterList=categoriesFilterList
         selectedProducts=selectedProducts
-        show23=true
+        showProductVcr=true
         toolTips="complexity"
         filename=(is-concat 'MAPA DE PRODUCTOS ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
       }}
@@ -148,6 +125,7 @@
         entityType="products"
         elementId="industriesTable"
         title_data=(is-concat 'MAPA DE PRODUCTOS ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+        source_data="FUENTE: cálculos del CID con datos de la DIAN."
       }}
     </div>
   </div>

@@ -42,19 +42,18 @@ export default Router.map(function() {
 
 
     this.route('productmap', {path: ':location_id/route/product_map/'});
-
-
+    this.route('productmapdetail', {path: ':location_id/route/product_map/detail/'});
+    this.route('productmapprimaries', {path: ':location_id/route/product_map/primaries/'});
+    this.route('productmapsecondaries', {path: ':location_id/route/product_map/secondaries/'});
+    this.route('ringchart', {path: ':location_id/route/ringchart/'});
     this.route('productmappotential', {path: ':location_id/route/product_map/potential/'});
 
 
 
 
 
-    this.route('productmapdetail', {path: ':location_id/route/product_map/detail/'});
-    this.route('productmapprimaries', {path: ':location_id/route/product_map/primaries/'});
-    this.route('productmapsecondaries', {path: ':location_id/route/product_map/secondaries/'});
 
-    this.route('ringchart', {path: ':location_id/route/ringchart/'});
+
 
     this.route('locationimports', {path: ':location_id/route/imports/'});
     this.route('locationwages', {path: ':location_id/route/wages/'});
@@ -63,9 +62,9 @@ export default Router.map(function() {
 
 
     this.route('complexsectors', {path: ':location_id/route/complex_sectors/'});
-
     this.route('complexsectorsdetail', {path: ':location_id/route/complex_sectors/detail/'});
     this.route('complexsectorsprimaries', {path: ':location_id/route/complex_sectors/primaries/'});
+
     this.route('complexsectorssecondaries', {path: ':location_id/route/complex_sectors/secondaries/'});
     this.route('potential', {path: ':location_id/route/potential/'});
 

@@ -74,6 +74,17 @@ export default Ember.Controller.extend({
     var endDate = this.get("endDate");
     var data = this.get("model.products_col")
 
+    var data_filtered = data.filter(item => item.year >= startDate && item.year <= endDate);
+    return data_filtered
+
+  }),
+
+  productsDataScatter: computed('model', 'endDate', 'VCRValue', 'rcaFilterService.updated', function () {
+
+    var startDate = this.get("startDate");
+    var endDate = this.get("endDate");
+    var data = this.get("model.products_col")
+
     var data_filtered = data.filter(item => item.year >= startDate && item.year <= endDate && item.export_rca >= 1);
     return data_filtered
 
