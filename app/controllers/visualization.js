@@ -632,7 +632,7 @@ export default Ember.Controller.extend({
   }),
   canFilterVcr: computed('source', 'visualization', function(){
     if(this.get('source') === "industries" && this.get('visualization') === "similarity"){
-      return false;
+      return true;
     }
     else if(this.get('source') === "industries" && this.get('visualization') === "scatter"){
       return true;
@@ -659,8 +659,6 @@ export default Ember.Controller.extend({
 
   filteredData: computed('immutableData.[]', 'startDate', 'endDate', 'rcaFilter', 'VCRValue', 'rcaFilterService.updated', 'buildermodSearchService.search', 'treemapService.filter_update', 'search', function() {
 
-    console.log(this.get("VCRValue"))
-
     var addColorYears = this.get("addColorYears");
 
     if(this.get("lastDataUpdate") !== this.get("treemapService.filter_update")){
@@ -681,14 +679,16 @@ export default Ember.Controller.extend({
 
     if(this.get('search')){ data = this.searchFilter(data, 'filteredData'); }
 
-    if(this.get('visualization') === 'scatter'){
+    if(["scatter", "similarity"].includes(this.get('visualization'))){
       let rca = this.get('rca');
+      let VCRValue = this.get("VCRValue");
       let rcaFilter = this.get('rcaFilter');
+
       if(rcaFilter === 'less') {
-        return _.filter(data, (d) => { return _.get(d,rca) > 0;});
+        return _.filter(data, (d) => { return _.get(d,rca) >= VCRValue;});
       }
       if (rcaFilter === 'greater') {
-        return _.filter(data, (d) => { return _.get(d,rca) > 1;});
+        return _.filter(data, (d) => { return _.get(d,rca) <= VCRValue;});
       }
     }
 
@@ -717,7 +717,7 @@ export default Ember.Controller.extend({
     }
     return colors[year];
   },
-  filteredDataTable: computed('immutableData.[]', 'search', 'startDate', 'endDate', 'rcaFilter', 'mapService.range', 'treemapService.filter_update', function() {
+  filteredDataTable: computed('immutableData.[]', 'search', 'startDate', 'endDate', 'VCRValue', 'rcaFilter', 'mapService.range', 'treemapService.filter_update', function() {
 
     if(this.get("lastDataTableUpdate") !== this.get("treemapService.filter_update")){
 
@@ -744,14 +744,15 @@ export default Ember.Controller.extend({
 
     if(this.get('search')){ data = this.searchFilter(data, 'filteredDataTable'); }
 
-    if(this.get('visualization') === 'scatter'){
+    if(["scatter", "similarity"].includes(this.get('visualization'))){
       let rca = this.get('rca');
+      let VCRValue = parseInt(this.get("VCRValue"));
       let rcaFilter = this.get('rcaFilter');
       if(rcaFilter === 'less') {
-        return _.filter(data, (d) => { return _.get(d,rca) <= 1;});
+        return _.filter(data, (d) => { return _.get(d,rca) >= VCRValue;});
       }
       if (rcaFilter === 'greater') {
-        return _.filter(data, (d) => { return _.get(d,rca) > 1;});
+        return _.filter(data, (d) => { return _.get(d,rca) <= VCRValue;});
       }
     }
     return data;
@@ -796,6 +797,7 @@ export default Ember.Controller.extend({
   searchFilter: function(data, variable) {
 
     let search = _.deburr(this.get('search'));
+    var elementId = this.get("elementId");
 
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
@@ -875,7 +877,7 @@ export default Ember.Controller.extend({
       });
     }
     else if(this.get('source') == 'products'){
-      return _.filter(data, (d) => {
+      var result = _.filter(data, (d) => {
         let parentName = get(d,`parent_name_${this.get('i18n').display}`);
         let longName = get(d,`name_${this.get('i18n').display}`);
         let shortName = get(d,`name_short_${this.get('i18n').display}`);
@@ -888,6 +890,7 @@ export default Ember.Controller.extend({
         }
         return _.deburr(`${parentName} ${code}`).match(regexp);
       });
+      return result;
     }
     else if(this.get('source') == 'landUses'){
       return _.filter(data, (d) => {

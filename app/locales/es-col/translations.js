@@ -155,7 +155,7 @@ export default {
   "graph_builder.builder_mod_header.location.farmtypes.num_farms": "UPAs y UPNAs",
   "graph_builder.builder_mod_header.location.industries.employment": "Empleo total",
   "graph_builder.builder_mod_header.location.industries.scatter": "Complejidad, distancia y valor estrat\u00e9gico de sectores potenciales ",
-  "graph_builder.builder_mod_header.location.industries.similarity": "Sectores con ventaja comparativa revelada  >1 (con color) y  <1 (gris)",
+  "graph_builder.builder_mod_header.location.industries.similarity": "Sectores con ventaja comparativa revelada en el rango seleccionado",
   "graph_builder.builder_mod_header.location.industries.wages": "Salarios totales",
   "graph_builder.builder_mod_header.location.landUses.area": "\u00c1rea total",
   "graph_builder.builder_mod_header.location.livestock.num_farms": "N\u00famero de UPAs ganaderas",
@@ -166,7 +166,7 @@ export default {
   "graph_builder.builder_mod_header.location.products.export_value": "Exportaciones totales",
   "graph_builder.builder_mod_header.location.products.import_value": "Importaciones totales",
   "graph_builder.builder_mod_header.location.products.scatter": "Complejidad, distancia y valor estrat\u00e9gico de exportaciones potenciales",
-  "graph_builder.builder_mod_header.location.products.similarity": "Exportaciones con ventaja comparativa revelada >1 (con color) y <1 (gris)",
+  "graph_builder.builder_mod_header.location.products.similarity": "Exportaciones con ventaja comparativa revelada en el rango seleccionado",
   "graph_builder.builder_mod_header.nonag.departments.num_farms": "N\u00famero de Unidades de Producción",
   "graph_builder.builder_mod_header.nonag.municipalities.num_farms": "N\u00famero de Unidades de Producción",
   "graph_builder.builder_mod_header.product.cities.export_value": "Exportaciones totales",
@@ -391,6 +391,7 @@ export default {
   "graph_builder.page_title.product.departments.export_value": "\u00bfQu\u00e9 departamentos en Colombia exportan este producto?",
   "graph_builder.page_title.product.departments.import_value": "\u00bfQu\u00e9 departamentos en Colombia importan este producto?",
   "graph_builder.page_title.product.partners.export_value": "\u00bfA d\u00f3nde exporta Colombia este producto?",
+  "graph_builder.page_title.product.partners.ringchart": "¿Como es el RingChart de este producto?",
   "graph_builder.page_title.product.partners.export_value.destination": "\u00bfA qu\u00e9 pa\u00edses env\u00eda {{location}} sus exportaciones de {{product}}?",
   "graph_builder.page_title.product.partners.import_value": "\u00bfDe d\u00f3nde importa Colombia este producto?",
   "graph_builder.page_title.product.partners.import_value.origin": "\u00bfDe qu\u00e9 pa\u00edses recibe {{location}} sus importaciones de {{product}}?",
@@ -750,6 +751,7 @@ export default {
   "visualization.treemap": "Muestra la descomposici\u00f3n en varios niveles",
   "visualization.multiples": "Muestra la evolución en varios períodos",
   "visualization.similarity": "Presenta las ventajas comparativas reveladas",
+  "visualization.scatter": "Presenta la complejidad y distancia",
 
   "visualization.clear": "Borrar",
 

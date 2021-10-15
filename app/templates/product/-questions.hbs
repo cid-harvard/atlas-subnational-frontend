@@ -38,6 +38,15 @@
           {{/link-to}}
         </div>
 
+        <div class="mt-3">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          {{#link-to 'product.ringchart' model.id (query-params startDate=lastYear endDate=lastYear showBack="false")
+            class="builder__questions__question"
+          }}
+            {{t 'graph_builder.page_title.product.partners.ringchart'}}
+          {{/link-to}}
+        </div>
+
       </div>
 
       <div class="col-sm-12 col-md-6 pt-5 pt-md-0">
