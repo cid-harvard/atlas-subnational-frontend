@@ -657,6 +657,8 @@ export default Ember.Controller.extend({
     return true;
   }),
 
+  highlight: null,
+
   filteredData: computed('immutableData.[]', 'startDate', 'endDate', 'rcaFilter', 'VCRValue', 'rcaFilterService.updated', 'buildermodSearchService.search', 'treemapService.filter_update', 'search', function() {
 
     var addColorYears = this.get("addColorYears");
@@ -677,7 +679,20 @@ export default Ember.Controller.extend({
 
     //console.log(this.get('buildermodSearchService.search'));
 
-    if(this.get('search')){ data = this.searchFilter(data, 'filteredData'); }
+    if(this.get("visualization") !== "treemap"){
+      if(this.get('search')){
+        data = this.searchFilter(data, 'filteredData');
+      }
+    }
+    else{
+      if(this.get('search')){
+        this.set('highlight', this.searchFilter(data, 'filteredData'));
+      }
+      else{
+        this.set('highlight', data);
+      }
+    }
+
 
     if(["scatter", "similarity"].includes(this.get('visualization'))){
       let rca = this.get('rca');
