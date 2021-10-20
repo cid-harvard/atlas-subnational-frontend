@@ -28,9 +28,20 @@ export default Ember.Component.extend({
     }
 
   }),
+  getColorByHighlight: function (highlight, item) {
+    if(highlight){
+      var indexed_highlight = _.indexBy(highlight, 'id');
+      if(Object.keys(indexed_highlight).includes(String(item.id))){
+        return _.get(item, "color");
+      }
+      return "#555";
+    }
+    return _.get(item, "color");
+  },
   updatedData: computed('data.[]', 'varDependent', 'varText', 'i18n.locale', 'search', 'toolTips', 'categoriesFilter', function() {
 
     var key = this.get('varText');
+    var highlight = this.get('highlight');
     var categoriesFilter = this.get('categoriesFilter');
     var data = this.get('data');
     var dependent = this.get('varDependent');
@@ -45,7 +56,7 @@ export default Ember.Component.extend({
       if(_.get(item, `parent_name_${this.get('i18n').display}`) === _.get(item, `name_${this.get('i18n').display}`) && _.get(item, `same_parent`) === undefined){
         return {
           key:_.get(item, key),
-          color: _.get(item, "color"),
+          color: self.getColorByHighlight(highlight, item),
           icon: _.get(item, "icon"),
           value: _.get(item, dependent),
           item: item,
@@ -60,7 +71,7 @@ export default Ember.Component.extend({
       else{
         return {
           key: _.get(item, key),
-          color: _.get(item, "color"),
+          color: self.getColorByHighlight(highlight, item),
           icon: _.get(item, "icon"),
           value: _.get(item, dependent),
           item: item,

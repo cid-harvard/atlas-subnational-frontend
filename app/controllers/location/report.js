@@ -422,6 +422,7 @@ export default Ember.Controller.extend({
       }
     },
     report(){
+      alert('Iniciando la descarga, este proceso tardará un momento.');
       var data = this.selectedDivs().map(item => {
         return `.check${item}div`
       })
