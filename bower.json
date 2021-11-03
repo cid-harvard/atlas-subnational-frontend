@@ -22,13 +22,13 @@
     "antiscroll": "*",
     "jquery-mousewheel": "~3.1.4",
     "jquery-ui": "~1.11.4",
-    "vis-toolkit": "https://github.com/Dandresfsoto/vis-toolkit.git#master"
+    "vis-toolkit": "https://github.com/jgp0000/vis-toolkit.git#master"
   },
   "devDependencies": {
     "d3": "~3.5.5",
     "FileSaver.js": "https://github.com/eligrey/FileSaver.js.git#v2.0.4",
     "papaparse": "~4.1.2",
-    "vis-toolkit": "https://github.com/Dandresfsoto/vis-toolkit.git#master"
+    "vis-toolkit": "https://github.com/jgp0000/vis-toolkit.git#master"
   },
   "resolutions": {
     "d3": "~3.5.5",
