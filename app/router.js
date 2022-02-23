@@ -10,6 +10,7 @@ export default Router.map(function() {
   this.route('search');
   this.route('downloads');
   this.route('colombia');
+  this.route('agro');
 
   // About
   this.resource('about', function() {

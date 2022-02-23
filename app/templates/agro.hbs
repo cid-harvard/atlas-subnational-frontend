@@ -1,0 +1,41 @@
+<div class="container-fluid px-md-x10 mt-5" style="">
+  <div class="row row-without-margin">
+
+    <div class="col-md-12">
+      <h1 class="text_yellow pt-5">Aprenda sobre oportunidades de productos Agro</h1>
+    </div>
+
+    <div class="col-md-12 mt-5">
+
+    </div>
+
+    <div class="col-md-12">
+      <iframe height="1000" style="width: inherit; background: white;" src="{{agroUrl}}"></iframe>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="container-fluid px-md-x10 pb-5 text-right mt-5 pt-5">
+
+  {{#if (is-equal source 'index')}}
+    <div class="d-inline">
+      {{#link-to 'index'
+        class="btn btn-outline-secondary"
+      }}
+      ANTERIOR
+      {{/link-to}}
+    </div>
+  {{else}}
+    <div class="d-inline">
+      {{#link-to 'search' (query-params filter='rural')
+        class="btn btn-outline-secondary"
+      }}
+      ANTERIOR
+      {{/link-to}}
+    </div>
+  {{/if}}
+
+
+</div>
