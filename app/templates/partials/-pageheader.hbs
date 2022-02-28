@@ -12,9 +12,10 @@
           <img src="assets/img/branding/bancoldex-white.svg" alt="Bancoldex" class="mr-3" height="50">
           <div class="d-flex mt-4 mt-md-0" style="min-height: 50px !important;">
             <div class="d-flex bordered-div align-items-center px-4">
-                <i class="fab fa-facebook-square fa-lg text-white pr-3"></i>
-                <i class="fab fa-twitter-square fa-lg  text-white pr-3"></i>
-                <i class="fab fa-linkedin fa-lg text-white"></i>
+                <a href="https://www.facebook.com/bancoldex" target="_blank"><i class="fab fa-facebook-square fa-lg text-white pr-3"></i></a>
+                <a href="https://twitter.com/bancoldex" target="_blank"><i class="fab fa-twitter-square fa-lg text-white pr-3"></i></a>
+                <a href="https://www.linkedin.com/company/grupo-bancoldex/mycompany/" target="_blank"><i class="fab fa-linkedin fa-lg text-white pr-3"></i></a>
+                <a href="https://www.instagram.com/bancoldex/" target="_blank"><i class="fab fa-instagram fa-lg text-white"></i></a>
             </div>
           </div>
         </div>
@@ -108,7 +109,10 @@
               <h1 class="stream__head index__head mb-2" style="font-size: 6rem;">{{ t 'index.header_h1_add' }}</h1>
               <h1 class="stream__subhead" style="font-size: 6rem;">{{ t 'index.header_subhead_add' }}</h1>
               <!-- el botón no se nota a menos que el cursos apunte a él, considerar cambio-->
-              <button type="button" class="btn btn-outline-warning text-uppercase" style="font-size: 2rem;">{{ t 'index.button_more_information' }}</button>
+              {{#link-to 'location.visualization' 3 'industries' 'treemap' 'employment' (query-params endDate=2017 startDate=2017 search=null showBack="false")
+                class="btn btn-outline-warning text-uppercase index_button"}}
+                {{ t 'index.button_more_information' }}
+              {{/link-to}}
             </div>
           </header>
         </div>
