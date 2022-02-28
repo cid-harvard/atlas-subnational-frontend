@@ -7,13 +7,15 @@
     <div class="col-sm-12 col-md-6 my-auto">
       <h1 class="text-uppercase seach__placeholder__title">{{ t titleText }}</h1>
       <h1 class="text-uppercase seach__placeholder__title">{{t subTitleText}}</h1>
-      <h2 class="text_yellow text-left mt-3">Aprenda sobre oportunidades de productos agro</h2>
-      {{#link-to 'agro'
-        (query-params source='search')
-        class="btn btn-light mt-4"
-      }}
-        &nbsp;&nbsp;&nbsp;Ver oportunidades Agro&nbsp;&nbsp;&nbsp;
-      {{/link-to}}
+      {{#if (is-equal filter "rural")}}
+        <h2 class="text_yellow text-left mt-3">Aprenda sobre oportunidades de productos agro</h2>
+        {{#link-to 'agro'
+          (query-params source='search')
+          class="btn btn-light mt-4"
+        }}
+          &nbsp;&nbsp;&nbsp;Ver oportunidades Agro&nbsp;&nbsp;&nbsp;
+        {{/link-to}}
+      {{/if}}
     </div>
 
     <div class="col-sm-12 col-md-6 my-auto">
