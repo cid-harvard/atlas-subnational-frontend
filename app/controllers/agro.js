@@ -13,15 +13,15 @@ export default Ember.Controller.extend({
       var guia = parseInt($("#selectFile").children(":selected").attr("id"));
 
       if(guia === 1){
-        window.open('https://drive.google.com/uc?export=view&id=1Oq_nK43hZj-Mjdx9GkH-2wkBR5giAN2W', '_blank');
+        window.open('https://datlas-colombia-downloads-test.s3.amazonaws.com/Agro/GUIA+AGUACATE+VF.pdf', '_blank');
       }
 
       if(guia === 2){
-        window.open('https://drive.google.com/uc?export=view&id=1OqwlB08qJA9QLuFLgr16iYUX4panrUrH', '_blank');
+        window.open('https://datlas-colombia-downloads-test.s3.amazonaws.com/Agro/GUIA+CACAO+VF.pdf', '_blank');
       }
 
       if(guia === 3){
-        window.open('https://drive.google.com/uc?export=view&id=1Oqu8sahUfehA8Jbeah44-ZMSR0wH1c8I', '_blank');
+        window.open('https://datlas-colombia-downloads-test.s3.amazonaws.com/Agro/GUIA+PI%C3%91A+VF.pdf', '_blank');
       }
 
     }
