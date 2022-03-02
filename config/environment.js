@@ -7,6 +7,7 @@ module.exports = function(environment) {
     baseURL: process.env.ROOT_URL || '/',
     locationType: 'auto',
     defaultLocale: process.env.DEFAULT_LOCALE,
+    agroUrl: process.env.AGRO_URL,
     otherLocale: process.env.OTHER_LOCALE,
     downloadURL: process.env.DOWNLOAD_URL,
     mapURL: process.env.MAP_URL,

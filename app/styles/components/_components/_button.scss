@@ -83,6 +83,12 @@ button::-moz-focus-inner {
   font-size: 1.8rem;
 }
 
+.btn-light{
+  font-size: 1.8rem;
+  padding: 4px;
+  color: #6c757d;
+}
+
 .btn-outline-secondary:not(:disabled):not(.disabled).active, .btn-outline-secondary:not(:disabled):not(.disabled):active, .show>.btn-outline-secondary.dropdown-toggle{
   color: $colorBase;
   background-color: $colorSecondary;
