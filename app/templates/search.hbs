@@ -7,6 +7,15 @@
     <div class="col-sm-12 col-md-6 my-auto">
       <h1 class="text-uppercase seach__placeholder__title">{{ t titleText }}</h1>
       <h1 class="text-uppercase seach__placeholder__title">{{t subTitleText}}</h1>
+      {{#if (is-equal filter "rural")}}
+        <h2 class="text_yellow text-left mt-3">Aprenda sobre oportunidades de productos agro</h2>
+        {{#link-to 'agro'
+          (query-params source='search')
+          class="btn btn-light mt-4"
+        }}
+          &nbsp;&nbsp;&nbsp;Ver oportunidades Agro&nbsp;&nbsp;&nbsp;
+        {{/link-to}}
+      {{/if}}
     </div>
 
     <div class="col-sm-12 col-md-6 my-auto">
@@ -16,7 +25,7 @@
         <div class="col-sm-12 col-md-8 my-auto mt-sm-5">
           <p class="text-light">{{t bodyText }}</p>
         </div>
-        
+
         <div class="col-sm-12 col-md-4 my-auto text-center mt-sm-5">
 
           <a href="" data-toggle="modal" data-target="#modalHelp">
@@ -34,7 +43,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  
+
                   <div class="row h-100 px-4">
                     <div class="col-sm-12 col-md-6 my-auto text-left">
                       <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t modalTitle }}</h2>
@@ -52,14 +61,14 @@
                   <div class="col text-center mb-4">
                     <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
           </div>
 
 
-          
+
         </div>
 
         <div class="col-sm-12 mt-5">
@@ -188,15 +197,15 @@
           </div>
         {{/each}}
       </div>
-      
+
       <div class="row mt-5">
-        
+
         {{#each sortedReferenceBody as |item|}}
           <div class="col-sm-12 col-md-6 col-lg-3">
             {{#link-to (is-concat item.profileName ".show") item.id tagName="a"}}{{item.name}}{{/link-to}}
           </div>
         {{/each}}
-        
+
       </div>
 
 
