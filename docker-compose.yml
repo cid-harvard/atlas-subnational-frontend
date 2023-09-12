@@ -9,7 +9,7 @@ services:
     container_name: atlas_col_front_app
     restart: always
     ports:
-      - "80:80"
+      - "443:443"
     env_file: .env.colombia
     volumes:
       - ./docker/conf.d:/etc/nginx/conf.d
