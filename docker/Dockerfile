@@ -11,6 +11,7 @@ RUN npm install
 RUN bower install
 RUN ember build --environment=production
 
+
 # production stage
 FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /usr/src/ember/dist /usr/share/nginx/html
