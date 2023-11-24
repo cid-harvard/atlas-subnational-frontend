@@ -24,9 +24,9 @@
 #    and best practices on handling the access key credentials.
 on:
   push:
-    branches: [ fix/ports-deploy-jag ]
+    branches: [ develop ]
   pull_request:
-      branches: [ fix/ports-deploy-jag ]
+      branches: [ develop ]
 
 name: Deploy to Amazon ECS
 
