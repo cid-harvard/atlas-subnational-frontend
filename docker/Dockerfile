@@ -8,7 +8,7 @@ RUN npm install -g bower
 RUN npm install -g sass
 RUN npm rebuild node-sass
 RUN npm install
-RUN bower install
+RUN bower install --force
 RUN ember build --environment=production
 
 # production stage
