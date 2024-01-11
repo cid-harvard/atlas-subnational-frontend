@@ -6,6 +6,7 @@ const { get, set, computed } = Ember;
 
 export default Ember.Service.extend({
   locale: ENV.defaultLocale,
+  agroUrl: ENV.agroUrl,
   country: computed('locale', function() {
     return get(this, 'locale').split('-')[1];
   }),

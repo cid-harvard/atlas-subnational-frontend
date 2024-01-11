@@ -48,7 +48,8 @@ export default Ember.Route.extend({
     let id = get(this, 'livestock_id');
     return {
       model: this.store.find('livestock', id),
-      livestock: $.getJSON(`${apiURL}/data/livestock/${id}/locations/?level=department`)
+      livestock: $.getJSON(`${apiURL}/data/livestock/${id}/locations/?level=department`),
+      municipalities: $.getJSON(`${apiURL}/data/livestock/${id}/locations/?level=municipality`)
     };
   }),
   municipalities: computed('livestock_id', function() {
@@ -59,7 +60,7 @@ export default Ember.Route.extend({
     };
   }),
   departmentsDataMunging(hash) {
-    let {model,livestock} = hash;
+    let {model,livestock, municipalities} = hash;
     let locationsMetadata  = this.modelFor('application').locations;
 
     let data = _.map(livestock.data, (d) => {
@@ -74,9 +75,25 @@ export default Ember.Route.extend({
       );
     });
 
+    let datas = _.map(municipalities.data, (d) => {
+      return _.merge(
+        copy(d),
+        locationsMetadata[d.location_id],
+        {
+          model: 'livestock',
+          year: this.get("lastYear"),
+          municipality_id: d.location_id,
+          group: locationsMetadata[d.location_id].parent_id,
+          parent_name_en: locationsMetadata[locationsMetadata[d.location_id].parent_id].name_en,
+          parent_name_es: locationsMetadata[locationsMetadata[d.location_id].parent_id].name_es,
+        }
+      );
+    });
+
     return Ember.Object.create({
       entity: model,
       data: data,
+      cities:datas
     });
   },
   municipalitiesDataMunging(hash) {

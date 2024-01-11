@@ -1,0 +1,75 @@
+.dataTables_filter label{
+  display: inline-block;
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control, table.dataTable.dtr-inline.collapsed>tbody>tr>th.dtr-control{
+  padding-left: 50px;
+}
+
+.table-hover tbody tr:hover{
+  color: $colorBase;
+  background-color: $colorSecondary;
+  cursor: pointer;
+}
+
+table.dataTable>tbody>tr.child:hover{
+  color: white;
+}
+
+.dataTables_filter, .dataTables_info{
+  color: white;
+}
+
+.datlas thead{
+  background-color: $colorSecondary;
+  color: $colorBase;
+}
+
+
+.datlas th, .datlas td{
+  border: none;
+}
+
+.even{
+  background-color: $colorThree;
+}
+
+
+.table th, .table td{
+  padding: 2rem;
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before, table.dataTable.dtr-inline.collapsed>tbody>tr>th.dtr-control:before{
+  background-color: $colorSecondary;
+  left: 15px;
+}
+
+
+.page-item.active .page-link{
+  background-color: $colorBase;
+  border-color: $colorBase;
+}
+
+.page-link, .page-link:hover{
+  color: $colorBase;
+  background-color: $colorThree;
+  border-color: $colorBase;
+}
+
+.page-item.disabled .page-link{
+  color: $colorBase;
+  background-color: $colorThree;
+  border-color: $colorBase;
+}
+
+.form-control-sm{
+  font-size: 1.8rem;
+}
+
+.dt-bootstrap4{
+  text-align: right;
+}
+
+.dt-buttons{
+  margin-bottom: 3rem !important;
+}

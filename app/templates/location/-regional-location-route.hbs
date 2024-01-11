@@ -1,0 +1,258 @@
+<div class="container-fluid px-md-x10 mt-5">
+  <div class="row">
+
+    <div class="col-sm-12">
+      <p class="text-white">Filtrar por Año</p>
+    </div>
+
+    <div class="col-sm-12">
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 my-auto">
+          <div class="">
+            <select class="form-control form-filter" id="selectYear">
+
+              {{#each year in rangeYears }}
+                {{#if (is-equal year endDate)}}
+                  <option selected>{{year}}</option>
+                {{else}}
+                  <option>{{year}}</option>
+                 {{/if}}
+              {{/each}}
+
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mx-auto">
+          <button class="btn btn-outline-secondary" {{action "setStartYear"}}>FILTRAR</button>
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+          <ul class="nav nav-pills center-pills" id="pills-tab-tables-graphics" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-graphic-tab" data-toggle="pill" href="#pills-graphics" role="tab" aria-controls="pills-graphics" aria-selected="true">
+                VER COMO GRÁFICA
+              </a>
+            </li>
+
+            <li class="nav-item ml-5">
+              <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-table-tab" data-toggle="pill" href="#pills-tables" role="tab" aria-controls="pills-tables" aria-selected="true">
+                VER COMO TABLA
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-12">
+      <h1 class="text-white mt-5 pt-5">Exportaciones</h1>
+    </div>
+
+    <div class="col-sm-12">
+      <div class="mt-5 tab-content" id="pills-tabContent">
+
+        <div class="tab-pane fade active show" id="pills-graphics" role="tabpanel" aria-labelledby="pills-graphics">
+          <div class="container-fluid px-md-x10 mt-5">
+            <div class="col-md-12">
+
+              <ul class="nav nav-pills center-pills" id="pills-tab" role="tablist">
+
+                <li class="nav-item">
+                  <a class="nav-link active btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-exports-tab" data-toggle="pill" href="#pills-exports" role="tab" aria-controls="pills-exports" aria-selected="true">
+                    {{t 'location.show.exports_filtered' year=startDate }}
+                  </a>
+                </li>
+
+                <li class="nav-item ml-5">
+                  <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-exports-country-tab" data-toggle="pill" href="#pills-exports-country" role="tab" aria-controls="pills-exports-country" aria-selected="true">
+                    {{t 'location.show.exports_country_filtered' year=startDate }}
+                  </a>
+                </li>
+
+              </ul>
+
+              <div class="mt-5 tab-content" id="pills-tabContent">
+
+                <div class="tab-pane fade active show" id="pills-exports" role="tabpanel" aria-labelledby="pills-exports">
+                  <div class="container-fluid mt-5 pt-5">
+
+                    {{
+                      zoomable-treemap
+                      data=filteredProductsData
+                      immutableData=filteredProductsData
+                      varDependent='export_value'
+                      elementId='zoomable-export-value-treemap'
+                      class="position-relative"
+                      color='pink'
+                      filterCategory=true
+                      groupByParent=true
+                      toolTips="rca"
+                      title_filter=(is-concat 'Exportaciones por producto ' '(' endDate ')' ' - ' model.name ' (' model.code ')')
+                    }}
+
+                  </div>
+
+                  <div class="container-fluid my-5">
+                    <div class="text-right">
+                      {{#link-to 'location.visualization' model.id 'products' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null' showBack="true")
+                        class="btn btn-outline-secondary"
+                      }}
+                        <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                        VER MAS
+                      {{/link-to}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade show" id="pills-exports-country" role="tabpanel" aria-labelledby="pills-exports-country">
+                  <div class="container-fluid">
+
+                    <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
+                      <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
+                        {{
+                          zoomable-treemap
+                          data=filteredPartnersData
+                          immutableData=filteredPartnersData
+                          varDependent='export_value'
+                          elementId='zoomable-export-value-treemap-partner'
+                          class="position-relative"
+                          color='pink'
+                          filterCategory=true
+                          groupByParent=true
+                          title_filter=(is-concat 'Exportaciones por pais de destino ' '(' endDate ')' ' - ' model.name ' (' model.code ')')
+                        }}
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div class="container-fluid my-5">
+                    <div class="text-right">
+                      {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null' showBack="true")
+                        class="btn btn-outline-secondary"
+                      }}
+                        <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                        VER MAS
+                      {{/link-to}}
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade show" id="pills-tables" role="tabpanel" aria-labelledby="pills-tables">
+
+
+          <div class="container-fluid px-md-x10 mt-5">
+            <div class="row">
+              <div class="col-sm-12">
+                <h1 class="text_yellow">Productos que más exporta {{model.name}}</h1>
+              </div>
+
+              <div class="col-sm-12">
+                {{
+                  datlas-table
+                  data=filteredProductsDataTop5Export
+                  source='productsExports'
+                  entityType=''
+                  search=search
+                  startDate=startDate
+                  endDate=endDate
+                  elementId="productssourceTable"
+                  order=filteredProductsDataTop5ExportOrder
+                  title_data=(is-concat 'Productos que más exporta ' model.name '(' endDate ')')
+                }}
+              </div>
+
+              <div class="container-fluid my-5 pr-5">
+                <div class="text-right">
+                  {{#link-to 'location.visualization' model.id 'products' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null' showBack="true")
+                    class="btn btn-outline-secondary"
+                  }}
+                    <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                    VER MAS
+                  {{/link-to}}
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-12">
+                <h1 class="text_yellow">Paises a donde más exporta {{model.name}}</h1>
+              </div>
+
+              <div class="col-sm-12">
+                {{
+                  datlas-table
+                  data=filteredPartnersDataTop5Export
+                  source='partnersExports'
+                  entityType=''
+                  search=search
+                  startDate=startDate
+                  endDate=endDate
+                  elementId="partnerssourceTable"
+                  order=filteredPartnersDataTop5ExportOrder
+                  title_data=(is-concat 'Paises a donde más exporta ' model.name '(' endDate ')')
+                }}
+              </div>
+
+              <div class="container-fluid my-5">
+                <div class="text-right">
+                  {{#link-to 'location.visualization' model.id 'partners' 'treemap' 'export_value' (query-params startDate=startDate endDate=startDate search='null' showBack="true")
+                    class="btn btn-outline-secondary"
+                  }}
+                    <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                    VER MAS
+                  {{/link-to}}
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+{{#if (is-equal model.level "municipality")}}
+  <div class="container-fluid px-md-x10 pb-5">
+    <div class="text-right">
+      {{#link-to 'location.locationimports' model.id (query-params startDate=startDate endDate=startDate)
+        class="btn btn-outline-secondary"
+      }}
+      SIGUIENTE
+      {{/link-to}}
+    </div>
+  </div>
+{{else}}
+  <div class="container-fluid px-md-x10 pb-5">
+    <div class="text-right">
+      {{#link-to 'location.productmap' model.id (query-params startDate=startDate endDate=startDate)
+        class="btn btn-outline-secondary"
+      }}
+      SIGUIENTE
+      {{/link-to}}
+    </div>
+  </div>
+{{/if}}

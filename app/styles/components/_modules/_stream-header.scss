@@ -44,7 +44,7 @@
   line-height: 100%;
   -moz-osx-font-smoothing: grayscale;
   margin-bottom: $baseSpace;
-  color: $colorRed;
+  color: $colorWhite;
   margin-top: $baseSpace/2;
 }
 
@@ -67,14 +67,9 @@
 }
 
 .breadcrumb {
-  color: $colorGrayLight;
-  font-size: $fontSmall;
-  font-family: $sansSC;
-  text-transform: lowercase;
-  font-weight: 400;
-  cursor: pointer;
-  display: inline-block;
-  margin-right: $baseSpace / 3;
+
+  background-color: $colorBase;
+  padding: 0;
 
   &:active, &:focus, &:hover {
     color: $colorGrayDark;
@@ -95,6 +90,14 @@
       content: none;
     }
   }
+}
+
+.breadcrumb-item.active {
+  color: $colorYellow;
+}
+
+.breadcrumb-item a{
+  color: $colorSecondary;
 }
 
 .breadcrumb__link {
@@ -245,4 +248,55 @@
   margin-bottom: $baseSpace / 2;
   font-family: $sansAlt;
   color: $colorRed;
+}
+
+.stream-header__title{
+  color: $colorSecondary;
+  text-transform: uppercase;
+}
+
+.stream-header__subtitle{
+  color: $colorYellow;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px){
+  .pl-md-x10{
+    padding-left: ($spacer * 10) !important;
+  }
+
+  .pr-md-x10{
+    padding-right: ($spacer * 10) !important;
+  }
+
+  .pt-md-x10{
+    padding-top: ($spacer * 10) !important;
+  }
+
+  .px-md-x10{
+    padding: 0 ($spacer * 10);
+  }
+}
+
+@media (min-width: 768px){
+  .ml-md-x10{
+    margin-left: ($spacer * 10) !important;
+  }
+
+  .mr-md-x10{
+    margin-right: ($spacer * 10) !important;
+  }
+
+  .mt-md-x10{
+    margin-top: ($spacer * 10) !important;
+  }
+
+  .mx-md-x10{
+    margin: 0 ($spacer * 10);
+  }
+}
+
+.center-pills {
+  display: flex;
+  justify-content: center;
 }

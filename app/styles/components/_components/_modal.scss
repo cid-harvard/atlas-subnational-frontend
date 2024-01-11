@@ -1,0 +1,17 @@
+
+.modal-content{
+ background-color: $colorBase;
+}
+
+.modal-header, .modal-footer{
+    border: none;
+}
+
+.rect-principal{
+    fill: $colorBase;
+}
+
+.close_modal{
+    color: $colorSecondary;
+    text-shadow: none;
+}

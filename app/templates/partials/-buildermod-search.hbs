@@ -1,4 +1,138 @@
-<form class="search__wrap buildermod__highlight__wrap">
+
+
+<div class="bordered-div-yellow position-relative">
+
+  <svg width="100" height="100" class="position-absolute" style="top: -50px; left: -50px;">
+    <rect width="100" height="100" class="rect-principal"/>
+  </svg>
+  <a href="" data-toggle="modal" data-target="#modalHelp">
+    <img src="assets/img/general/ico_questions.svg" class="position-absolute" style="width: 100px; top: -50px; left: -50px;">
+  </a>
+
+  <div class="container-fluid p-5">
+    <div class="row">
+
+
+      <div class="col-sm-12">
+        {{component 'graphbuilder-settings'
+          classNames='buildermod__settings'
+          startDate=startDate
+          endDate=endDate
+          dateExtent=dateExtent
+          canYearToggle=canYearToggle
+          isScatter=isScatter
+          rcaFilter=rcaFilter
+        }}
+      </div>
+
+
+      <div class="col-sm-12 text-center">
+        <div class="mb-3">
+
+          <i class="fas fa-search text-white"></i>
+          <span class="text-white text-uppercase">{{ t (is-concat 'visualization.search.' source) }}</span>
+        </div>
+        {{autocomplete-input-datlas data_search=filterData type='search' idSelect='searchSelect' placeHolder=placeHolderText search=search reset="reset"}}
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalHelp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times fa-2x"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          {{#if (is-equal visualization "geo")}}
+            <div class="row h-100 px-4">
+              <div class="col-sm-12 col-md-12 my-auto text-left">
+                <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.geo.visualization.title'}}</h2>
+                <div class="mb-3 mt-3">
+                  <p class="text-white d-inline mr-3">1. {{ t 'modal.geo.visualization.p1'}} </p>
+                  <button class="btn btn-outline-secondary d-inline mr-3">{{t 'graph_builder.settings.year.previous'}}</button>
+                  <p class="text-white d-inline mr-3">{{startDate}}</p>
+                  <button class="btn btn-outline-secondary d-inline mr-3">{{t 'graph_builder.settings.year.next'}}</button>
+                  <p class="text-white d-inline mr-3">{{ t 'modal.geo.visualization.p2'}}</p>
+                </div>
+                <div class="mb-3 my-5">
+                  <p class="text-white mr-3 mb-3">2. {{ t 'modal.geo.visualization.p3'}}</p>
+                  {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if (is-equal visualization "treemap")}}
+            <div class="row h-100 px-4">
+              <div class="col-sm-12 col-md-12 my-auto text-left">
+                <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.geo.visualization.title'}}</h2>
+                <div class="mb-3 mt-3">
+                  <p class="text-white d-inline mr-3">1. {{ t 'modal.geo.visualization.p1'}} </p>
+                  <button class="btn btn-outline-secondary d-inline mr-3">{{t 'graph_builder.settings.year.previous'}}</button>
+                  <p class="text-white d-inline mr-3">{{startDate}}</p>
+                  <button class="btn btn-outline-secondary d-inline mr-3">{{t 'graph_builder.settings.year.next'}}</button>
+                  <p class="text-white d-inline mr-3">{{ t 'modal.geo.visualization.p2'}}</p>
+                </div>
+                <div class="mb-3 my-5">
+                  <p class="text-white mr-3 mb-3">2. {{ t 'modal.geo.visualization.p3'}}</p>
+                  {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if (is-equal visualization "multiples")}}
+            <div class="row h-100 px-4">
+              <div class="col-sm-12 col-md-12 my-auto text-left">
+                <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t 'modal.geo.visualization.title'}}</h2>
+                <div class="mb-3 my-5">
+                  <p class="text-white mr-3 mb-3">1. {{ t 'modal.geo.visualization.p3'}}</p>
+                  {{autocomplete-input-datlas data_search=filterDataNull type='search' idSelect='searchSelect2' placeHolder=placeHolderText search=search}}
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <img class="float-right" src="assets/img/general/illustracion_2.svg" height="150">
+              </div>
+            </div>
+          {{/if}}
+
+          <!--<div class="row h-100 px-4">
+            <div class="col-sm-12 col-md-6 my-auto text-left">
+              <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t modalTitle }}</h2>
+              <p class="text-white mb-3">{{ t modalContent }}</p>
+              <a target="_blank" href={{ t modalLink }}>{{ t modalLink }}</a>
+            </div>
+            <div class="col-sm-12 col-md-6 my-auto">
+              <img src="assets/img/general/illustracion_2.svg" class="img-fluid">
+            </div>
+          </div>-->
+
+        </div>
+        <div class="modal-footer">
+
+          <div class="col text-center mb-4">
+            <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+
+</div>
+
+
+<!--<form class="search__wrap buildermod__highlight__wrap">
   <div class="search__field__wrap">
     {{input
       class="search"
@@ -10,5 +144,5 @@
     <button class="search__reset fa fa-close" type="reset"{{action 'resetSearch'}}></button>
   </div>
   <input class="search__submit btn btn--standalone btn--buildermod" type="submit" value="{{t 'graph_builder.search.submit'}}" {{action 'search'}}>
-</form>
+</form>-->
 

@@ -1,0 +1,59 @@
+
+<section id="{{elementId}}_section">
+
+  {{#if filename }}
+    <h3 class="text-white">{{filename}}</h3>
+  {{/if}}
+  {{#if title_filter }}
+    <h3 class="text-white">{{title_filter}}</h3>
+  {{/if}}
+  <div class="text-right mb-5">
+    <button type="button" class="btn btn-outline-warning"><i class="fas fa-caret-square-left mr-3"></i>Regresar</button>
+  </div>
+</section>
+
+{{#if filterCategory }}
+<div class="row d-flex justify-content-center">
+
+    <div class="category-button position-relative mr-5">
+      <p class="text_yellow">{{title}}</p>
+      <p class="text_yellow">{{subtitle}}</p>
+    </div>
+
+    {{#each category in categoriesObject}}
+
+    <div class="category-button position-relative mr-5" data-title={{category.name}}>
+        <div class='tooltip tooltip-category text-center d-none'>
+            <h3 class="mb-5 text-principal">{{category.name}}</h3>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" checked={{category.hide}} {{action "check" _view.contentIndex "hide" on="change"}}>
+                <label class="form-check-label mr-5 text-principal"><strong>Ocultar</strong></label>
+
+                <input class="form-check-input" type="checkbox" checked={{category.isolate}} {{action "check" _view.contentIndex "isolate" on="change"}}>
+                <label class="form-check-label text-principal"><strong>Aislar</strong></label>
+            </div>
+
+        </div>
+        <a href="javascript:void(0);" class="btn" style={{ is-concat 'background: ' category.color '; padding: 12px; transform: rotate(45deg);' }}>
+            <i class={{ is-concat category.icon ' fa-2x'}} style="color: {{ is-concat category.icon_color }}; transform: rotate(-45deg);"></i>
+        </a>
+        <!--<i class={{category.icon}} style={{ is-concat 'color: ' category.color '; margin-top: 10px;'}}></i>-->
+    </div>
+
+
+    {{/each}}
+</div>
+{{/if}}
+
+<div class="row mb-5 mt-5 pt-5">
+    <div class="col-lg-12">
+        <div class="text-center">
+            <button type="button" class="btn btn-outline-secondary" {{action 'savePng'}}><i class="fas fa-file-image mr-3"></i>Descargar gráfico (PNG)</button>
+            <button type="button" class="btn btn-outline-secondary" {{action 'savePdf'}}><i class="fas fa-file-pdf mr-3"></i>Descargar gráfico (PDF)</button>
+        </div>
+    </div>
+</div>
+
+<div style="min-height: 50px;"></div>
+

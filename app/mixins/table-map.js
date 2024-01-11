@@ -79,6 +79,45 @@ export default Ember.Mixin.create({
     }
 
   }),
+  productsExportsMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'name' },
+      { key: 'parent' },
+      { key: 'year' },
+      { key: 'export_value' },
+      { key: 'export_rca' },
+      { key: 'export_num_plants' },
+    ];
+
+    return columns;
+
+  }),
+  productsImportsMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'name' },
+      { key: 'parent' },
+      { key: 'year' },
+      { key: 'import_value' },
+      { key: 'rca' },
+      { key: 'import_num_plants' },
+    ];
+
+    return columns;
+
+  }),
+  industriesTopMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'name', copy: 'industry' },
+      { key: 'parent' },
+      { key: 'year' },
+      { key: 'employment' },
+      { key: 'wages' },
+      { key: 'num_establishments' },
+     ]
+
+    return columns;
+
+  }),
   citiesMap: computed('featureToggle.showImports', 'featureToggle.showIndustries', function() {
     let columns = [
       { key: 'code' },
@@ -153,6 +192,82 @@ export default Ember.Mixin.create({
         { key: 'num_establishments' }
       );
     }
+
+    return columns;
+
+  }),
+  exportsDepartmentsMap: computed('featureToggle.showImports', 'featureToggle.showIndustries', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'product_code' },
+      { key: 'product_name_short_es', copy: 'product' },
+      { key: 'year' },
+      { key: 'export_value' },
+      { key: 'export_rca' },
+      { key: 'export_num_plants' },
+      { key: 'distance' }
+     ];
+    return columns;
+
+  }),
+  importsDepartmentsMap: computed('featureToggle.showImports', 'featureToggle.showIndustries', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'product_code' },
+      { key: 'product_name_short_es', copy: 'product' },
+      { key: 'year' },
+      { key: 'import_value' },
+      { key: 'import_rca' },
+      { key: 'import_num_plants' },
+      { key: 'distance' },
+
+      //
+      //{ key: 'rca' },
+
+      //{ key: 'cog' }
+     ];
+
+
+
+    return columns;
+
+  }),
+  exportsCitiesMap: computed('featureToggle.showImports', 'featureToggle.showIndustries', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'parent.location' },
+      { key: 'product_code' },
+      { key: 'product_name_short_es', copy: 'product' },
+      { key: 'year' },
+      { key: 'export_value' },
+      { key: 'export_rca' },
+      { key: 'export_num_plants' },
+      { key: 'distance' },
+     ];
+
+
+
+    return columns;
+
+  }),
+  importsCitiesMap: computed('featureToggle.showImports', 'featureToggle.showIndustries', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'location' },
+      { key: 'parent_name', copy: 'parent.location' },
+      { key: 'product_code' },
+      { key: 'product_name_short_es', copy: 'product' },
+      { key: 'year' },
+      { key: 'import_value' },
+      { key: 'import_rca' },
+      { key: 'import_num_plants' },
+      { key: 'distance' },
+     ];
+
+
 
     return columns;
 
@@ -269,6 +384,51 @@ export default Ember.Mixin.create({
     } else {
       return columns;
     }
+  }),
+  livestockDataMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'name', copy: 'livestock' },
+      { key: 'num_farms' },
+      { key: 'num_livestock' },
+    ];
+    return columns;
+  }),
+  partnersExportsMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'name', copy: 'country' },
+      { key: 'parent', copy: 'parent.country' },
+      { key: 'year' },
+      { key: 'export_value' },
+      { key: 'import_value' },
+    ];
+
+    return columns;
+  }),
+  exportPartnersMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'country' },
+      { key: 'parent', copy: 'parent.country' },
+      { key: 'product_code' },
+      { key: 'product_name_short_es', copy: 'product' },
+      { key: 'year' },
+      { key: 'export_value' }
+    ];
+
+    return columns;
+  }),
+  importPartnersMap: computed('featureToggle.showImports', function() {
+    let columns = [
+      { key: 'code' },
+      { key: 'name', copy: 'country' },
+      { key: 'parent', copy: 'parent.country' },
+      { key: 'product_code' },
+      { key: 'product_name_short_es', copy: 'product' },
+      { key: 'year' },
+      { key: 'import_value' }
+    ];
+
+    return columns;
   }),
   departmentRankingsMap: computed('featureToggle.showIndustries', function() {
     let columns = [

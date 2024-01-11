@@ -1,0 +1,27 @@
+<div class="row d-flex justify-content-center">
+    {{#each category in categoriesObject}}
+
+    <div class="category-button position-relative mr-5" data-title={{category.name}}>
+        <div class='tooltip tooltip-category text-center d-none'>
+            <p class="text-white">{{category.name}}</p>
+            <p>{{_view.contentIndex}}</p>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" {{action "check" _view.contentIndex "hide" }}>
+                <label class="form-check-label">Hide</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" {{action "check" _view.contentIndex "isolate" }}>
+                <label class="form-check-label">Isolate</label>
+            </div>
+
+        </div>
+        <a href="javascript:void(0);" class="btn" style={{ is-concat 'background: ' category.icon_color.color '; padding: 12px; transform: rotate(45deg);' }}>
+            <i class={{ is-concat category.icon_color.icon ' fa-2x'}} style="color: white; transform: rotate(-45deg);"></i>
+        </a>
+        <!--<i class={{category.icon_color.icon}} style={{ is-concat 'color: ' category.icon_color.color '; margin-top: 10px;'}}></i>-->
+    </div>
+    
+
+    {{/each}}
+</div>

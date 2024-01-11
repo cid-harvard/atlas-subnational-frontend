@@ -1,0 +1,269 @@
+<section class="mb-5 pb-5">
+
+</section>
+{{#if filterCategory }}
+<div class="row d-flex justify-content-center">
+
+    <div class="category-button position-relative mr-5">
+      <p class="text_yellow">{{title}}</p>
+      <p class="text_yellow">{{subtitle}}</p>
+    </div>
+
+    {{#each category in categoriesObject}}
+
+    <div class="category-button position-relative mr-5" data-title={{category.name}}>
+        <div class='tooltip tooltip-category text-center d-none selector_{{_view.contentIndex}}'>
+            <h3 class="mb-5 text-principal">{{category.name}}</h3>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" checked={{category.hide}} {{action "check" _view.contentIndex "hide" on="change"}}>
+                <label class="form-check-label mr-5 text-principal"><strong>Ocultar</strong></label>
+
+                <input class="form-check-input" type="checkbox" checked={{category.isolate}} {{action "check" _view.contentIndex "isolate" on="change"}}>
+                <label class="form-check-label text-principal"><strong>Aislar</strong></label>
+            </div>
+
+        </div>
+        <a href="javascript:void(0);" class="btn button_{{_view.contentIndex}}" style={{ is-concat 'background: ' category.color '; padding: 12px; transform: rotate(45deg);' }}>
+            <i class={{ is-concat category.icon ' fa-2x'}} style="color: {{ is-concat category.icon_color }}; transform: rotate(-45deg);"></i>
+        </a>
+        <!--<i class={{category.icon}} style={{ is-concat 'color: ' category.color '; margin-top: 10px;'}}></i>-->
+    </div>
+
+
+    {{/each}}
+</div>
+<div style="min-height: 100px;"></div>
+{{/if}}
+
+{{#if canFilterVcr }}
+  <div class="row d-flex justify-content-center mb-5 pb-5">
+    <div style="width: 300px;">
+      <input type="text" class="js-range-slider" name="my_range" value="" />
+    </div>
+    <div class="ml-5 align-self-center">
+      <h1>VCR</h1>
+    </div>
+
+    {{#if show10 }}
+    <div class="ml-5 align-self-center">
+      <a href="" data-toggle="modal" data-target="#modalHelp2">
+        <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px;">
+      </a>
+
+      <div class="modal fade" id="modalHelp2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+                <i class="fas fa-times fa-2x"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="row h-100 px-4">
+                <img src="assets/img/infografias/10.jpg" class="img-fluid">
+              </div>
+
+            </div>
+            <div class="modal-footer">
+
+              <div class="col text-center mb-4">
+                <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if show11 }}
+    <div class="ml-5 align-self-center">
+      <a href="" data-toggle="modal" data-target="#modalHelp11">
+        <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px;">
+      </a>
+
+      <div class="modal fade" id="modalHelp11" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+                <i class="fas fa-times fa-2x"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="row h-100 px-4">
+                <img src="assets/img/infografias/11.jpg" class="img-fluid">
+              </div>
+
+            </div>
+            <div class="modal-footer">
+
+              <div class="col text-center mb-4">
+                <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if show12 }}
+    <div class="ml-5 align-self-center">
+      <a href="" data-toggle="modal" data-target="#modalHelp12">
+        <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px;">
+      </a>
+
+      <div class="modal fade" id="modalHelp12" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+                <i class="fas fa-times fa-2x"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="row h-100 px-4">
+                <img src="assets/img/infografias/12.jpg" class="img-fluid">
+              </div>
+
+            </div>
+            <div class="modal-footer">
+
+              <div class="col text-center mb-4">
+                <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if show23 }}
+    <div class="ml-5 align-self-center">
+      <a href="" data-toggle="modal" data-target="#modalHelp23">
+        <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px;">
+      </a>
+
+      <div class="modal fade" id="modalHelp23" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+                <i class="fas fa-times fa-2x"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="row h-100 px-4">
+                <img src="assets/img/infografias/23.png" class="img-fluid">
+              </div>
+
+            </div>
+            <div class="modal-footer">
+
+              <div class="col text-center mb-4">
+                <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if show35 }}
+    <div class="ml-5 align-self-center">
+      <a href="" data-toggle="modal" data-target="#modalHelp23">
+        <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px;">
+      </a>
+
+      <div class="modal fade" id="modalHelp23" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+                <i class="fas fa-times fa-2x"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="row h-100 px-4">
+                <img src="assets/img/infografias/35.png" class="img-fluid">
+              </div>
+
+            </div>
+            <div class="modal-footer">
+
+              <div class="col text-center mb-4">
+                <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if showProductVcr }}
+    <div class="ml-5 align-self-center">
+      <a href="" data-toggle="modal" data-target="#modalHelp23">
+        <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px;">
+      </a>
+
+      <div class="modal fade" id="modalHelp23" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+                <i class="fas fa-times fa-2x"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="row h-100 px-4">
+                <img src="assets/img/infografias/infografia_vr.jpg" class="img-fluid">
+              </div>
+
+            </div>
+            <div class="modal-footer">
+
+              <div class="col text-center mb-4">
+                <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+
+  </div>
+{{/if}}
+
+
+{{#if hideExport }}
+{{else}}
+ <div class="container-fluid pl-md-x10 pr-md-x10 pb-5">
+    <div class="row mb-5">
+      <div class="col-lg-12">
+          <div class="text-center">
+              <button type="button" class="btn btn-outline-secondary" {{action 'savePng'}}><i class="fas fa-file-image mr-3"></i>Descargar gráfico (PNG)</button>
+              <button type="button" class="btn btn-outline-secondary" {{action 'savePdf'}}><i class="fas fa-file-pdf mr-3"></i>Descargar gráfico (PDF)</button>
+          </div>
+      </div>
+  </div>
+ </div>
+ {{/if}}

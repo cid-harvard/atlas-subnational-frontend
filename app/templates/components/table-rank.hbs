@@ -1,11 +1,11 @@
-<div class="table__cell--rank">
+<div>
   {{#link-to 'rankings'}}
     {{#if isEmpty}}
       <div class='value'>
         N/A
       </div>
     {{else}}
-      <div class={{if isTop 'value top' 'value'}}>
+      <div class={{if isTop 'table_cell_rank value top' 'table_cell_rank value'}}>
         #{{rank}}
       </div>
     {{/if}}

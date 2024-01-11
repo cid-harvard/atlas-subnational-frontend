@@ -3,6 +3,8 @@
 # compiled output
 /dist
 /tmp
+.idea/
+package-lock.json
 
 # dependencies
 /node_modules

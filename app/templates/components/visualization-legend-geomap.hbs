@@ -1,8 +1,27 @@
-<div class="buildermod__legend geo__legend">
-	{{#each key in legend}}
-		<div class="buildermod__legend__item">
-            <i class="fa fa-circle" class={{key.class}}></i> {{key.start}} - {{key.end}}
-	  	</div>
-	{{else}}
-	{{/each}}
+<div class="row">
+  <div class="col-lg-12 mb-5">
+    <h4 class="title_yellow">{{t varDependent}}</h4>
+  </div>
+  <div class="d-block ml-4">
+    {{#each key in staticLegend}}
+      {{#if (is-equal key.class activeLegend)}}
+        <div class="col-sm-12 text-white" {{action 'filterByKey' key.start_value key.end_value key.class key.range}} role="button" class="btn-outline-secondary active">
+          <i class="fa fa-circle" class={{key.class}}></i> {{key.start}} - {{key.end}}
+        </div>
+      {{else}}
+        <div class="col-sm-12 text-white" {{action 'filterByKey' key.start_value key.end_value key.class key.range}} role="button" class="btn-outline-secondary">
+          <i class="fa fa-circle" class={{key.class}}></i> {{key.start}} - {{key.end}}
+        </div>
+      {{/if}}
+
+    {{/each}}
+    <button type="button" class="btn btn-outline-secondary btn-sm mt-5" style="font-size: 1rem;" {{action 'resetFilterByKey'}}>BORRAR</button>
+  </div>
+
+	<div class="col-lg-12 mt-5 pt-5">
+        <div class="text-left mt-5">
+            <button type="button" id="savepng" class="btn btn-outline-secondary"><i class="fas fa-file-image mr-3"></i>Descargar gráfico (PNG)</button>
+            <button type="button" id="savepdf" class="btn btn-outline-secondary"><i class="fas fa-file-pdf mr-3"></i>Descargar gráfico (PDF)</button>
+        </div>
+    </div>
 </div>

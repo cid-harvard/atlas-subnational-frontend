@@ -1,64 +1,174 @@
-<section class="stream__section">
-  <header class="section__header">
-  <h3 class="section__head">{{t 'location.show.overview'}}</h3>
-  </header>
-  <table class="table--summaries">
-    <thead>
-      <tr class="table__row table__row--header">
-        <th class="table__header"></th>
-        <th class="table__header table__header--summaries--value">
-          {{t 'location.show.value'}}
-          <div class="table__cell--rank title">
-            <div class="value title">
-              {{t 'rankings.table-title'}}
-            </div>
-          </div>
-        </th>
-        <th class="table__header table__header--summaries--dotplot">
-          {{t 'location.show.all_departments'}}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="table__row table__row--body">
-        <td class="table__cell table__cell--summaries">
-          {{t 'location.show.ag_farmsize'}}
-        </td>
-        <td class="table__cell table__header--summaries--value">
-          {{model.agFarmsize}}
-          {{table-rank rank=model.agFarmsizeRank}}
-        </td>
-        <td class="table__cell table__cell--summaries">
-          {{vistk-dotplot
-            elementId='dotplot--agfarmsizes'
-            data=model.agFarmsizesData
-            varX='avg_farmsize'
-            varId='location_id'
-            type='decimal'
-            currentSelection=locationId
+
+<div class="container-fluid px-md-x10 pb-5">
+  <div class="row mt-5">
+    <div class="col-sm-12">
+      {{#if description }}
+        <p class="text-white">{{description}}</p>
+      {{/if}}
+    </div>
+
+  </div>
+  <div class="row">
+
+    <table class="table datlas-table">
+      <col style="width:30%">
+      <col style="width:20%">
+      <col style="width:50%">
+      <thead>
+        <tr class="table__row--header">
+          <th scope="col"></th>
+          <th scope="col" class="d-flex justify-content-between">
+            <div>{{t 'location.show.value'}}</div>
+            <div>{{t 'rankings.table-title'}}</div>
+          </th>
+          <th scope="col">{{t 'location.show.all_departments'}}</th>
+        </tr>
+      </thead>
+      <tbody class="text-white">
+
+        <tr class="table__row table__row--body">
+          <td scope="row">{{t 'location.show.ag_farmsize'}}</td>
+          <td class="d-flex justify-content-between">
+            {{model.agFarmsize}}
+            {{table-rank rank=model.agFarmsizeRank}}
+          </td>
+          <td class="table__cell table__cell--summaries" style="height:10rem;">
+            {{vistk-dotplot
+              elementId='dotplot--agfarmsizes'
+              data=model.agFarmsizesData
+              varX='avg_farmsize'
+              varId='location_id'
+              type='decimal'
+              currentSelection=locationId
+            }}
+          </td>
+        </tr>
+
+
+        <tr class="table__row table__row--body">
+          <td scope="row">{{t 'location.show.nonag_farmsize'}}</td>
+          <td class="d-flex justify-content-between">
+            {{model.nonagFarmsize}}
+            {{table-rank rank=model.nonagFarmsizeRank}}
+          </td>
+          <td class="table__cell table__cell--summaries" style="height:10rem;">
+            {{vistk-dotplot
+              elementId='dotplot--nonagfarmsizes'
+              data=model.nonagFarmsizesData
+              varX='avg_farmsize'
+              varId='location_id'
+              type='decimal'
+              currentSelection=locationId
+            }}
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<div class="container-fluid px-md-x10 mt-5">
+
+    <div class="col-md-12 text-center">
+      <ul class="nav nav-pills center-pills" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-exports-tab" data-toggle="pill" href="#pills-exports" role="tab" aria-controls="pills-exports" aria-selected="true">
+            {{t 'location.show.exports' year=lastYear }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-imports-tab" data-toggle="pill" href="#pills-imports" role="tab" aria-controls="pills-imports" aria-selected="false">
+            {{t 'location.show.imports' year=lastYear }}
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-employment-tab" data-toggle="pill" href="#pills-employment" role="tab" aria-controls="pills-employment" aria-selected="false">
+            {{t 'location.show.employment' lastYear=lastYear}}
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-total_wages-tab" data-toggle="pill" href="#pills-total_wages" role="tab" aria-controls="pills-total_wages" aria-selected="false">
+            {{t 'location.show.total_wages' lastYear=lastYear}}
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="mt-5 pt-5 tab-content" id="pills-tabContent">
+
+      <div class="tab-pane fade active show" id="pills-exports" role="tabpanel" aria-labelledby="pills-exports">
+        <div class="container-fluid">
+          {{
+            zoomable-treemap
+            data=lastProductsData
+            inmutableData=lastProductsData
+            varDependent='export_value'
+            elementId='zoomable-export-value-treemap'
+            class="position-relative"
+            filterCategory=true
+            toolTips="export_rca,complexity"
+            groupByParent=true
+            title_filter=(is-concat 'Exportaciones, USD ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
           }}
-        </td>
-      </tr>
-      <tr class="table__row table__row--body">
-        <td class="table__cell table__cell--summaries">
-          {{t 'location.show.nonag_farmsize'}}
-        </td>
-        <td class="table__cell table__header--summaries--value">
-          {{model.nonagFarmsize}}
-          {{table-rank rank=model.nonagFarmsizeRank}}
-        </td>
-        <td class="table__cell table__cell--summaries">
-          {{vistk-dotplot
-            elementId='dotplot--nonagfarmsizes'
-            data=model.nonagFarmsizesData
-            varX='avg_farmsize'
-            varId='location_id'
-            type='decimal'
-            currentSelection=locationId
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="pills-imports" role="tabpanel" aria-labelledby="pills-imports">
+        <div class="container-fluid">
+          {{
+            zoomable-treemap
+            data=lastProductsData
+            inmutableData=lastProductsData
+            varDependent='import_value'
+            elementId='zoomable-import-value-treemap'
+            class="position-relative"
+            filterCategory=true
+            toolTips="rca,complexity"
+            groupByParent=true
+            title_filter=(is-concat 'Importaciones, USD ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
           }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="pills-employment" role="tabpanel" aria-labelledby="pills-employment">
+        <div class="container-fluid">
+          {{
+            zoomable-treemap
+            data=lastIndustryData
+            inmutableData=lastIndustryData
+            varDependent='employment'
+            elementId='zoomable-employment-treemap'
+            class="position-relative"
+            filterCategory=true
+            groupByParent=true
+            title_filter=(is-concat 'Empleo Total ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
+          }}
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="pills-total_wages" role="tabpanel" aria-labelledby="pills-total_wages">
+        <div class="container-fluid">
+          {{
+            zoomable-treemap
+            data=lastIndustryData
+            inmutableData=lastIndustryData
+            varDependent='wages'
+            elementId='zoomable-wages-treemap'
+            class="position-relative"
+            filterCategory=true
+            groupByParent=true
+            title_filter=(is-concat 'Nómina Salarial ' '(' lastYear ')' ' - ' model.name ' (' model.code ')')
+          }}
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
 

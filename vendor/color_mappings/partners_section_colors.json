@@ -1,0 +1,38 @@
+{
+  "258": {
+    "color": "#33691e",
+    "icon": "fas fa-globe-americas"
+  },
+  "252": {
+    "color": "#00acc1",
+    "icon": "fas fa-globe-africa"
+  },
+  "251": {
+    "color": "#f57f17",
+    "icon": "fas fa-globe-europe"
+  },
+  "254": {
+    "color": "#4a148c",
+    "icon": "fas fa-globe-asia"
+  },
+  "256": {
+    "color": "#ba68c8",
+    "icon": "fas fa-globe-americas"
+  },
+  "253": {
+    "color": "#880e4f",
+    "icon": "fas fa-globe"
+  },
+  "257": {
+    "color": "#827717",
+    "icon": "fas fa-globe-americas"
+  },
+ "255": {
+    "color": "#006064",
+    "icon": "fas fa-globe-americas"
+  },
+  "259": {
+    "color": "#0d47a1",
+    "icon": "fas fa-globe-americas"
+  }
+}

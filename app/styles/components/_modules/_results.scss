@@ -11,7 +11,7 @@
 
 .results__head {
   font-size: $fontXLarge;
-  color: $colorRed;
+  color: $colorWhite;
   margin-bottom: $baseSpace*2;
   margin-top: $baseSpace;
   line-height: 100%;
@@ -20,7 +20,7 @@
 }
 
 .results__subhead {
-  color: $colorBlack;
+  color: $colorWhite;
   font-size: $fontLarge;
   @include offset-text;
   margin-top: $baseSpace;
@@ -55,7 +55,7 @@
 }
 
 .results__breadcrumb {
-  color: $colorBlack;
+  color: $colorWhite;
   font-size: $fontSmall;
   @include offset-text;
 
@@ -65,7 +65,7 @@
   &:after {
     content: '/';
     margin-left: $baseSpace / 3;
-    color: $colorGray;
+    color: $colorWhite;
   }
   &:last-of-type {
     margin-right: 0;
@@ -76,7 +76,7 @@
 }
 
 .results__name {
-  color: $colorBlack;
+  color: $colorWhite;
   font-weight: 700;
   @include offset-text;
 }
@@ -93,7 +93,7 @@
 .results__copy--postscript {
   margin: $baseSpace*2 0;
   text-align: left;
-  color: $colorGray;
+  color: $colorWhite;
   @include offset-text;
   padding: $baseSpace/2 0;
   border-top: 1px solid $colorGrayLight;
@@ -104,7 +104,7 @@
 .results__reference {
     margin-top: 10rem;
     padding-top: 4rem;
-    border-top: 1px solid $colorGrayLight;
+    border-top: 1px solid $colorWhite;
 }
 
 .results__reference__menu {

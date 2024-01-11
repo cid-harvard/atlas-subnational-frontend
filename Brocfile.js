@@ -42,7 +42,7 @@ var app = new EmberApp({
 });
 
 // FileSaver
-app.import('bower_components/FileSaver.js/FileSaver.min.js');
+app.import('bower_components/FileSaver.js/dist/FileSaver.min.js');
 
 // PapaParse
 app.import('bower_components/papaparse/papaparse.min.js');
@@ -72,12 +72,16 @@ app.import('vendor/networks/col-industry_space.json', { destDir: 'assets/network
 app.import('vendor/networks/mex-industry_space.json', { destDir: 'assets/networks' });
 
 app.import('vendor/color_mappings/product_section_colors.json', { destDir: 'assets/color_mappings' });
+app.import('vendor/color_mappings/partners_section_colors.json', { destDir: 'assets/color_mappings' });
+app.import('vendor/color_mappings/farmtypes_section_colors.json', { destDir: 'assets/color_mappings' });
+app.import('vendor/color_mappings/agproducts_section_colors.json', { destDir: 'assets/color_mappings' });
 
 app.import('vendor/color_mappings/col-industry_section_colors.json', { destDir: 'assets/color_mappings' });
 app.import('vendor/color_mappings/mex-industry_section_colors.json', { destDir: 'assets/color_mappings' });
 
 //Import leaflet-omnivore
 app.import('vendor/leaflet-omnivore.min.js');
+
 
 // Font Awesome
 // The npm package readme mentions refactoring this as a Broccoli tree, so consider that a TODO

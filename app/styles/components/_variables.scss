@@ -7,13 +7,18 @@
 /* ==========  Type Palette  ========== */
 
 $icon: 'FontAwesome';
-$sans: 'Source Sans Pro', sans-serif;  // 'Alegreya Sans', Arial, sans-serif;
+$sans: 'RF Rufo', sans-serif;  // 'Alegreya Sans', Arial, sans-serif;
 $sansAlt: $sans;
 $sansSC: 'Alegreya Sans SC', Arial, sans-serif;
 $serif: 'Alegreya', 'Times New Roman', Georgia, serif;  // 'Bitter', serif; // 'Source Serif Pro', Georgia, serif;
 $serifSC: 'Alegreya SC', Georgia, serif;
 
 /* ==========  Color Palettes  ========== */
+
+$colorBase: #292A48;
+$colorYellow: #FFCD00;
+$colorSecondary: #C2C4FF;
+$colorThree: #7C7EAC;
 
 $colorBlack: rgb( 25, 25, 20 );
 $colorGrayDark: rgb( 83, 83, 79 );
@@ -72,11 +77,25 @@ $colorRedQ3-5: rgb(222,45,38);
 $colorRedQ4-5: rgb(165,15,21);
 
 //Map Green Scale
-$colorGreenQ0-5: rgb(237,248,233);
-$colorGreenQ1-5: rgb(186,228,179);
-$colorGreenQ2-5: rgb(116,196,118);
-$colorGreenQ3-5: rgb(49,163,84);
-$colorGreenQ4-5: rgb(0,109,44);
+$colorGreenQ0-5: rgb(255,224,178);
+$colorGreenQ1-5: rgb(255,183,77);
+$colorGreenQ2-5: rgb(255,152,0);
+$colorGreenQ3-5: rgb(245,124,0);
+$colorGreenQ4-5: rgb(230,81,0);
+
+//Map alter Blue Scale
+$colorBlueQ0-5: #BBDEFB;
+$colorBlueQ1-5: #64B5F6;
+$colorBlueQ2-5: #2196F3;
+$colorBlueQ3-5: #1976D2;
+$colorBlueQ4-5: #0D47A1;
+
+//Map alter Pink Scale
+$colorPinkQ0-5: #F8BBD0;
+$colorPinkQ1-5: #F06292;
+$colorPinkQ2-5: #E91E63;
+$colorPinkQ3-5: #C2185B;
+$colorPinkQ4-5: #880E4F;
 
 $colorNavy200: rgb( 204, 204, 214 );
 $colorNavy400: rgb( 154, 153, 172 );
@@ -126,6 +145,7 @@ $fontIcon: 'icons' !default;
 
 // Defining font sizes
 $fontXTiny: 1rem !default;
+$fontMTiny: 1.1rem !default;
 $fontTiny: 1.3rem !default;
 $fontSmall: 1.6rem  !default;
 $fontBase: 2rem !default;
@@ -174,3 +194,6 @@ $zIndex-7:   700;
 $zIndex-8:   800;
 $zIndex-9:   900;
 $zIndex-10: 1001;
+
+
+$spacer: 1rem;

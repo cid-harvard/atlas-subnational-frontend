@@ -1,0 +1,270 @@
+{{component "stream-header" model=model.entity type='location' extra_type="location_route" firstYear=firstYear lastYear=lastYear}}
+
+
+
+<div class="container-fluid px-md-x10 my-5 py-5" id="scrollData">
+  <div class="row row-without-margin d-flex align-items-center">
+
+    <div class="col-sm-12 col-md-6">
+      <div class="col-sm-12">
+        <p class="text-white">Filtrar por Año</p>
+      </div>
+
+      <div class="col-sm-12">
+
+        <div class="row">
+          <div class="col-sm-12 my-auto">
+            <div class="">
+              <select class="form-control form-filter" id="selectYear" {{action "setStartYear" on="change"}}>
+
+                {{#each year in rangeYears }}
+                  {{#if (is-equal year endDate)}}
+                    <option selected>{{year}}</option>
+                  {{else}}
+                    <option>{{year}}</option>
+                   {{/if}}
+                {{/each}}
+
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6">
+      {{partial "partials/buildermod-drawer-change-graph-products"}}
+    </div>
+
+  </div>
+</div>
+
+
+
+{{#if (is-equal visualization "similarity") }}
+
+<div class="container-fluid pl-md-x10 pr-md-x10">
+
+
+  <div style="border: #888888 1px solid;" id="complexmap">
+
+    <div class="row mt-5">
+
+      <div class="col-sm-12 text-left ml-5 pl-5">
+        <p class="text-white">{{ is-concat 'MAPA DE PRODUCTOS ' endDate ' - ' model.entity.name ' (' model.entity.code ')' }}</p>
+      </div>
+
+      <div class="col-sm-12 text-right mr-5 pr-5">
+
+        {{
+          modal-button
+          target="modalHelp3"
+          img_url="assets/img/infografias/Inf_CU_10.svg"
+        }}
+
+      </div>
+    </div>
+
+    <div class="row mt-5 pt-5">
+      <div class="col-sm-12 col-md-6 text-center">
+        <p class="text_yellow">ALTO NIVEL DE COMPLEJIDAD</p>
+      </div>
+      <div class="col-sm-12 col-md-6 text-center">
+        <p class="text_yellow">BAJO NIVEL DE COMPLEJIDAD</p>
+      </div>
+    </div>
+    <p class="d-none">{{vistkNetworkService.updated}}</p>
+    <div style="padding: 10px;">
+      {{vistk-network
+        data=productsData
+        immutableData=productsData
+        elementId=elementId
+        dataType='products'
+        metadata=model.metaData
+        varDependent='export_value'
+        graph=productSpace
+        height=600
+        delay=3500
+        showMiddle=true
+        filterCategory=true
+        title="SECTORES DE"
+        subtitle="LOS PRODUCTOS"
+        selected=model.entity.id
+        canFilterVcr=true
+        VCRValue=VCRValue
+        categoriesFilterList=categoriesFilterList
+        selectedProducts=selectedProducts
+        showProductVcr=true
+        filename=(is-concat 'MAPA DE PRODUCTOS ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+      }}
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<div class="container-fluid px-md-x10 pb-5 text-right mt-5 pt-5">
+
+  <div class="d-inline">
+    {{#link-to 'location.productmapdetail' model.entity.id (query-params startDate=startDate endDate=startDate)
+      class="btn btn-outline-secondary"
+    }}
+    <i class="far fa-plus pr-2" aria-hidden="true"></i>
+    VER MAS
+    {{/link-to}}
+  </div>
+
+</div>
+
+
+<div class="container-fluid pl-md-x10 pr-md-x10 my-5 py-5" id="complexmaptable">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text_yellow">INFORMACIÓN DEL MAPA DE PRODUCTOS</h1>
+    </div>
+    <div class="col-md-12">
+      {{
+        datlas-table
+        data=filteredProductsDataTop5Rca
+        source="products"
+        entityType="products"
+        elementId="industriesTable"
+        order=filteredProductsDataTop5RcaOrder
+        title_data=(is-concat 'PRODUCTOS CON MAYOR VENTAJA COMPARATIVA REVELADA ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+      }}
+    </div>
+
+  </div>
+
+</div>
+
+{{/if}}
+
+
+{{#if (is-equal visualization "scatter") }}
+
+<div class="container-fluid pl-md-x10 pr-md-x10">
+
+  <div style="border: #888888 1px solid;" id="scatterplot">
+
+    <div class="col-sm-12 text-left ml-5 pl-5">
+      <p class="text-white mt-5 pt-5">{{ is-concat 'PRODUCTOS CON MAYOR POTENCIAL ' endDate ' - ' model.entity.name ' (' model.entity.code ')' }}</p>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-sm-12 text-right mr-5 pr-5">
+
+        {{
+          modal-button
+          target="modalHelp3"
+          img_url="assets/img/infografias/Inf_CU_27.svg"
+        }}
+
+      </div>
+    </div>
+
+    <div class="row mt-5 pt-5">
+
+    </div>
+    <p class="d-none">{{vistkScatterplotService.updated}}</p>
+    <p class="d-none">{{vistkScatterplotService.selected}}</p>
+    <p class="d-none">{{buildermodSearchService.search}}</p>
+    <p class="d-none">{{buildermodSearchService.search}}</p>
+    <p class="d-none">{{rcaFilterService.updated}}</p>
+    <p class="d-none">{{VCRValueScatter}}</p>
+
+    <div style="padding: 10px">
+      {{vistk-scatterplot
+        classNames='buildermod__viz'
+        immutableData=productsDataScatter
+        modelData=modelData
+        data=productsDataScatter
+        dataType='products'
+        varDependent=varDependent
+        scale=scale
+        startDate=startDate
+        dateExtent=dateExtent
+        endDate=endDate
+        metadata=metadata
+        isFiltered=false
+        entityType=entityType
+        entityId=entityId
+        variable=variable
+        graph=productSpace
+        elementId="scatterplot"
+        metadata=model.metaData
+        varDependent='export_value'
+        filterCategory=true
+        title="SECTORES DE"
+        subtitle="LOS PRODUCTOS"
+        selected=model.entity.id
+        canFilterVcr=true
+        VCRValue=VCRValueScatter
+        categoriesFilterList=categoriesFilterListScatter
+        showProductVcr=true
+        filename=(is-concat 'PRODUCTOS CON MAYOR POTENCIAL ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+      }}
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<div class="container-fluid px-md-x10 pb-5 text-right mt-5 pt-5">
+
+  <div class="d-inline">
+    {{#link-to 'location.productmappotential' model.entity.id (query-params startDate=startDate endDate=startDate)
+      class="btn btn-outline-secondary"
+    }}
+    <i class="far fa-plus pr-2" aria-hidden="true"></i>
+    VER MAS
+    {{/link-to}}
+  </div>
+
+</div>
+
+
+<div class="container-fluid pl-md-x10 pr-md-x10 my-5 py-5" id="complexmaptable">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text_yellow">INFORMACIÓN DE PRODUCTOS CON MAYOR POTENCIAL</h1>
+    </div>
+    <div class="col-md-12">
+      {{
+        datlas-table
+        data=filteredProductsDataTop5Rca
+        source="products"
+        entityType="products"
+        elementId="industriesTable2"
+        order=filteredProductsDataTop5RcaOrder
+        title_data=(is-concat 'PRODUCTOS CON MAYOR POTENCIAL ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+      }}
+    </div>
+  </div>
+</div>
+
+{{/if}}
+
+
+<div class="container-fluid px-md-x10 pb-5 text-right">
+  <div class="d-inline">
+    {{#link-to 'location.route' model.entity.id (query-params startDate=startDate endDate=startDate)
+      class="btn btn-outline-secondary"
+    }}
+    ANTERIOR
+    {{/link-to}}
+  </div>
+  <div class="d-inline">
+    {{#link-to 'location.locationimports' model.entity.id (query-params startDate=startDate endDate=startDate)
+      class="btn btn-outline-secondary"
+    }}
+    SIGUIENTE
+    {{/link-to}}
+  </div>
+</div>

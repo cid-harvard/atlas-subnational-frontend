@@ -53,12 +53,13 @@ button::-moz-focus-inner {
 }
 
 .btn--search {
-  background: $colorRed;
+  background: none;
   color: $colorWhite;
-  box-shadow: inset 0 -5px $colorRedDark;
+  border: solid 1px $colorWhite;
   width: 10rem;
   &:hover {
-    background: $colorRedDark;
+    color: $colorWhite;
+    opacity: 0.8;
   }
 }
 
@@ -74,4 +75,28 @@ button::-moz-focus-inner {
 
 .btn--text {
   text-align: right;
+}
+
+.btn-outline-secondary{
+  color: $colorSecondary;
+  border-color: $colorSecondary;
+  font-size: 1.8rem;
+}
+
+.btn-light{
+  font-size: 1.8rem;
+  padding: 4px;
+  color: #6c757d;
+}
+
+.btn-outline-secondary:not(:disabled):not(.disabled).active, .btn-outline-secondary:not(:disabled):not(.disabled):active, .show>.btn-outline-secondary.dropdown-toggle{
+  color: $colorBase;
+  background-color: $colorSecondary;
+  border-color: $colorSecondary;
+}
+
+.btn-outline-secondary:hover{
+  color: $colorBase;
+  background-color: $colorSecondary;
+  border-color: $colorSecondary;
 }

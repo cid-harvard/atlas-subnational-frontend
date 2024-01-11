@@ -11,104 +11,405 @@
   agcensusLastYear=agcensusLastYear
   occupationLastYear=occupationLastYear
   metaData=model.metaData
+  isVisualization=true
+  pageTitle=pageTitle
 }}
-{{navigation-questions
-  entityType=entityType
-  model=model.entity
-  isDepartment=isDepartment
-  isMunicipality=isMunicipality
-  firstYear=firstYearForMenu
-  lastYear=lastYearForMenu
-  agproductFirstYear=agproductFirstYear
-  agproductLastYear=agproductLastYear
-  agcensusFirstYear=agcensusFirstYear
-  agcensusLastYear=agcensusLastYear
-  occupationLastYear=occupationLastYear
+
+{{#if (is-equal showBack "true")}}
+{{else}}
+  {{navigation-questions
+    entityType=entityType
+    model=model.entity
+    isDepartment=isDepartment
+    isMunicipality=isMunicipality
+    firstYear=firstYearForMenu
+    lastYear=lastYearForMenu
+    agproductFirstYear=agproductFirstYear
+    agproductLastYear=agproductLastYear
+    agcensusFirstYear=agcensusFirstYear
+    agcensusLastYear=agcensusLastYear
+    occupationLastYear=occupationLastYear
 }}
-<header class="section__header builder__header">
-  <h3 class="section__head question__head">{{pageTitle}}</h3>
-</header>
-<section class="stream__section visualization__{{visualization}}">
-  <div {{bind-attr class=":section__buildermod drawerChangeGraphIsOpen:buildermod__changegraph--open" }}>
-    {{#unless hideVisualization }}
-  <div class="buildermod__tools">
-          {{partial "partials/buildermod-drawer-change-graph"}}
+{{/if}}
+
+<div class="container-fluid px-md-x10 my-5 py-5" id="scrollData">
+  <div class="row row-without-margin d-flex align-items-center">
+
+    {{#if (is-equal hideVisualization false)}}
+
+      <div class="col-sm-12 col-md-6">
+        <h3 class="title_yellow">{{pageTitle}}</h3>
       </div>
-    <header class="buildermod__header">
-      <h4 class="buildermod__head">{{builderModHeader}}: {{headerValue}} ({{years}})</h4>
-    </header>
-    <div {{bind-attr class=":buildermod__vizwrap isFixedHeight:buildermod__vizwrap--fixedheight isGeo:buildermod__vizwrap--geo"}}>
-      {{#unless isGeo }}
+
+      <div class="col-sm-12 col-md-6">
+        <h1 class="text-center my-5 text_yellow">{{ t 'graph_builder.types' }}</h1>
+        {{partial "partials/buildermod-drawer-change-graph"}}
+      </div>
+
+    {{else}}
+      <div class="col-sm-12">
+        <h3 class="title_yellow">{{pageTitle}}</h3>
+      </div>
+    {{/if}}
+
+
+  </div>
+</div>
+
+
+<div class="container-fluid px-md-x10 my-md-5 py-md-5 my-sm-1 py-sm-1">
+  <div class="row row-without-margin d-flex align-items-center">
+
+    {{#unless hideVisualization }}
+
+      <div class="col-sm-12 col-md-8">
+
+        <h1 class="title_yellow d-inline" style="font-size: 6rem;">{{builderModHeader}}</h1>
+        {{#if showCensus }}
+
+        <a href="" data-toggle="modal" data-target="#modalHelpCensus" class="d-inline ml-3">
+          <img src="assets/img/general/ico_questions.svg" class="img-fluid" style="height: 60px; margin-top: -30px;">
+        </a>
+
+        <div class="modal fade" id="modalHelpCensus" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+                  <i class="fas fa-times fa-2x"></i>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <div class="row h-100 px-4">
+                  <img src="assets/img/infografias/census.png" class="img-fluid">
+                </div>
+
+              </div>
+              <div class="modal-footer">
+
+                <div class="col text-center mb-4">
+                  <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{/if}}
+
+        <h1 class="pt-2" style="font-size: 6rem;">{{headerValue}}</h1>
+        <h1 class="pt-2 mb-5" style="font-size: 6rem;">{{years}}</h1>
+      </div>
+
+      <!--<div class="col-sm-12 col-md-4">
         {{partial "partials/buildermod-search"}}
-      {{/unless}}
+      </div>-->
 
-      {{component visualizationComponent
-        classNames='buildermod__viz'
-        immutableData=immutableData
-        modelData=modelData
-        data=filteredData
-        dataType=source
-        varDependent=varDependent
-        scale=scale
-        startDate=startDate
-        dateExtent=dateExtent
-        endDate=endDate
-        metadata=metadata
-        isFiltered=isFiltered
-        entityType=entityType
-        entityId=entityId
-        variable=variable
-        search=search
-        graph=graph
-      }}
-
-      {{#if needsLegend }}
-        {{#unless isGeo }}
-            {{component 'visualization-legend' legend=legend }}
-        {{else}}
-            {{component 'visualization-legend-geomap' legend=geoLegend }}
-        {{/unless}}
-      {{/if}}
-
-      <div class="buildermod__settings__wrap">
-        {{component 'graphbuilder-settings'
-          classNames='buildermod__settings'
+      <div class="col-sm-12 col-md-4">
+        {{
+          component 'buildermod-search'
+          source=source
+          filterData=filterData
+          partnersDataChained=partnersDataChained
+          placeHolderText=placeHolderText
+          visualization=visualization
           startDate=startDate
           endDate=endDate
           dateExtent=dateExtent
           canYearToggle=canYearToggle
           isScatter=isScatter
           rcaFilter=rcaFilter
+          isSingleYearData=isSingleYearData
+          source=source
+          variable=variable
         }}
       </div>
-    </div>
+
+      <div class="col-sm-12 mt-5 pt-5 mb-5 pb-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
+        <div class="visualizationComponent {{if isGeo 'col-md-8'}}" style="{{if isGeo 'border: 1px #555 solid;'}}">
+          <p class="d-none">{{rcaFilterService.updated}}</p>
+          {{component visualizationComponent
+            classNames='buildermod__viz'
+            immutableData=immutableData
+            modelData=modelData
+            data=filteredData
+            dataType=source
+            varDependent=varDependent
+            scale=scale
+            startDate=startDate
+            dateExtent=dateExtent
+            endDate=endDate
+            metadata=metadata
+            isFiltered=isFiltered
+            entityType=entityType
+            entityId=entityId
+            variable=variable
+            search=search
+            graph=graph
+            elementId=source
+            toolTips=toolTips
+            range=range
+            canUpdateBuildermodSearchService=canUpdateBuildermodSearchService
+            filterCategory=canFilterCategory
+            resetFilter=resetFilter
+            canFilterVcr=canFilterVcr
+            filename=(is-concat endDate ' - ' variableTitle ' - ' model.entity.name ' (' model.entity.code ')')
+            groupByParent=groupByParent
+            VCRValue=VCRValue
+            selectedProducts=selectedProducts
+            showPrimaries=true
+            showSecondaries=true
+            showProductVcr=true
+            highlight=highlight
+          }}
+          <div id="screens" style="padding: 10px"></div>
+        </div>
+
+        {{#if needsLegend }}
+          {{#unless isGeo }}
+
+          {{else}}
+              {{component 'visualization-legend-geomap'
+                          legend=geoLegend
+                          varDependent=varDependent
+                          startDate=startDate
+                          dateExtent=dateExtent
+                          endDate=endDate
+                          classNames='col-md-4 d-flex flex-column justify-content-around' }}
+          {{/unless}}
+        {{/if}}
+
+      </div>
+
+
+
+      <div class="col-sm-12 mt-5">
+        {{component 'visualization-explanation' text=visualizationExplanation}}
+      </div>
+
+      <div class="col-sm-12 mt-5">
+
+        {{
+          datlas-table
+          data=filteredDataTable
+          source=source
+          entityType=entityType
+          search=search
+          startDate=startDate
+          endDate=endDate
+          elementId="sourceTable"
+          title_data=(is-concat endDate ' - ' variableTitle ' - ' model.entity.name ' (' model.entity.code ')')
+          source_data=visualizationExplanation
+        }}
+
+      </div>
+
     {{/unless}}
-    {{component 'visualization-explanation'
-      text=visualizationExplanation
-    }}
-    <div class="ember__table__wrap">
-      {{component 'table-download'
-        name=builderModHeader
-        data=immutableData
-        source=source
-        entityType=entityType
-        pageTitle=pageTitle
-      }}
-      {{component 'graphbuilder-table'
-        data=filteredData
-        source=source
-        entityType=entityType
-        search=search
-      }}
-    </div>
-    <small class="table__footer">
-      {{ t 'graph_builder.table.read_more' }}
-      {{#link-to 'about.glossary' class='link--stream link--stream--inline--tiny table__footer__link--glossary'}}
-        {{t 'general.glossary'}}.
-      {{/link-to}}
-    </small>
+
+    {{#if (is-equal hideVisualization true)}}
+      <div class="col-sm-12 mt-5">
+        {{component 'visualization-explanation' text=visualizationExplanation}}
+      </div>
+      <div class="col-sm-12 mt-5">
+
+        {{
+          datlas-table
+          data=filteredDataTable
+          source=source
+          entityType=entityType
+          search=search
+          startDate=startDate
+          endDate=endDate
+          elementId="sourceTable"
+          title_data=(is-concat endDate ' - ' variableTitle ' - ' model.entity.name ' (' model.entity.code ')')
+          source_data=visualizationExplanation
+        }}
+
+      </div>
+    {{/if}}
+
   </div>
-</section>
+  {{#if (is-equal entityType "product")}}
+
+    {{#if (is-equal showBack "true")}}
+
+      {{#if (is-equal variable "export_value")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'product.abstract' model.entity.id class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
+        </div>
+      {{/if}}
+
+      {{#if (is-equal variable "import_value")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'product.abstract' model.entity.id class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
+        </div>
+      {{/if}}
+
+    {{/if}}
+
+  {{/if}}
+
+  {{#if (is-equal entityType "location")}}
+    {{#if (is-equal showBack "true")}}
+      {{#if (is-equal variable "export_value")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.route' model.entity.id class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
+        </div>
+      {{/if}}
+
+      {{#if (is-equal variable "import_value")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.locationimports' model.entity.id class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
+        </div>
+      {{/if}}
+
+      {{#if (is-equal variable "employment")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.locationwages' model.entity.id class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
+        </div>
+      {{/if}}
+
+      {{#if (is-equal variable "wages")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.locationwages' model.entity.id class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
+        </div>
+      {{/if}}
+
+      {{#if (is-equal source "landUses")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="1") class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
+        </div>
+      {{/if}}
+
+
+      {{#if (is-equal source "farmtypes")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="2") class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
+        </div>
+      {{/if}}
+
+      {{#if (is-equal source "agproducts")}}
+
+
+        {{#if (is-equal variable "land_sown")}}
+          <div class="container-fluid my-5">
+            <div class="text-right">
+              {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="3") class="btn btn-outline-secondary"}}
+              ANTERIOR
+              {{/link-to}}
+            </div>
+          </div>
+        {{/if}}
+
+        {{#if (is-equal variable "land_harvested")}}
+          <div class="container-fluid my-5">
+            <div class="text-right">
+              {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="4") class="btn btn-outline-secondary"}}
+              ANTERIOR
+              {{/link-to}}
+            </div>
+          </div>
+        {{/if}}
+
+        {{#if (is-equal variable "production_tons")}}
+          <div class="container-fluid my-5">
+            <div class="text-right">
+              {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="5") class="btn btn-outline-secondary"}}
+              ANTERIOR
+              {{/link-to}}
+            </div>
+          </div>
+        {{/if}}
+
+        {{#if (is-equal variable "yield_ratio")}}
+          <div class="container-fluid my-5">
+            <div class="text-right">
+              {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="6") class="btn btn-outline-secondary"}}
+              ANTERIOR
+              {{/link-to}}
+            </div>
+          </div>
+        {{/if}}
+
+
+      {{/if}}
+
+      {{#if (is-equal source "nonags")}}
+        <div class="container-fluid my-5">
+          <div class="text-right">
+            {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="7") class="btn btn-outline-secondary"}}
+            ANTERIOR
+            {{/link-to}}
+          </div>
+        </div>
+      {{/if}}
+
+      {{#if (is-equal source "livestock")}}
+
+         {{#if (is-equal variable "num_livestock")}}
+          <div class="container-fluid my-5">
+            <div class="text-right">
+              {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="8") class="btn btn-outline-secondary"}}
+              ANTERIOR
+              {{/link-to}}
+            </div>
+          </div>
+        {{/if}}
+
+        {{#if (is-equal variable "num_farms")}}
+          <div class="container-fluid my-5">
+            <div class="text-right">
+              {{#link-to 'location.ruralactivities' model.entity.id (query-params startDate=startDate endDate=endDate ruralOption="9") class="btn btn-outline-secondary"}}
+              ANTERIOR
+              {{/link-to}}
+            </div>
+          </div>
+        {{/if}}
+
+      {{/if}}
+
+    {{/if}}
+  {{/if}}
+
+</div>
+
+
+
+
 <section class="stream__section recirc builder__recirc">
   <div class="recirc__bground" style="background-image: url({{recircUrl}})"></div>
   <div class="recirc__wrap">

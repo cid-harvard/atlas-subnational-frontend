@@ -11,9 +11,10 @@ export default Ember.Route.extend({
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
   queryParams: {
-    startDate: { refreshModel: true },
-    endDate: { refreshModel: true },
-    search: { refreshModel: false }
+    startDate: { refreshModel: false },
+    endDate: { refreshModel: false },
+    search: { refreshModel: false },
+    toolTips: { refreshModel: false },
   },
   controllerName: 'visualization',
   renderTemplate() {
@@ -26,12 +27,13 @@ export default Ember.Route.extend({
     set(this, 'visualization_type', visualization_type);
     set(this, 'variable', variable);
 
+
     return RSVP.hash(this.get(source_type)).then((hash) => {
       if(source_type === 'departments') {
         return this.departmentDataMunging(hash);
       } else if (source_type === 'occupations') {
         return this.occupationsDataMunging(hash);
-      } else if (source_type == 'cities') {
+      } else if (source_type === 'cities') {
         return this.citiesDataMunging(hash);
       }
     });
@@ -49,7 +51,8 @@ export default Ember.Route.extend({
     let id = get(this, 'industry_id');
     return {
       model: this.store.find('industry', id),
-      departments: $.getJSON(`${apiURL}/data/industry/${id}/participants?level=department`)
+      departments: $.getJSON(`${apiURL}/data/industry/${id}/participants?level=department`),
+      cities: $.getJSON(`${apiURL}/data/industry/${id}/participants/?level=msa`)
     };
   }),
   occupations: computed('industry_id', function() {
@@ -66,8 +69,9 @@ export default Ember.Route.extend({
       cities: $.getJSON(`${apiURL}/data/industry/${id}/participants/?level=msa`)
     };
   }),
+
   departmentDataMunging(hash) {
-    let {model, departments} = hash;
+    let {model, departments, cities} = hash;
     let locationsMetadata = this.modelFor('application').locations;
 
     let data = _.map(departments.data, (d) => {
@@ -83,9 +87,26 @@ export default Ember.Route.extend({
       return copy(d);
     });
 
+    let datas = _.map(cities.data, (d) => {
+      let industry = locationsMetadata[d.msa_id];
+      d.avg_wage =  d.wages/d.employment;
+      d.name_short_en = industry.name_short_en;
+      d.name_short_es = industry.name_short_es;
+      d.color = industry.color;
+      d.code = industry.code;
+      d.group = industry.group;
+      d.model = 'location';
+      d.id = d.msa_id;
+      d.parent_name_en = locationsMetadata[industry.parent_id].name_short_en;
+      d.parent_name_es = locationsMetadata[industry.parent_id].name_short_es;
+      d.parent_code = locationsMetadata[locationsMetadata[d.msa_id].parent_id].code;
+      return copy(d);
+    });
+
     return Ember.Object.create({
       entity: model,
       data: data,
+      cities:datas
     });
   },
   occupationsDataMunging(hash) {
@@ -150,7 +171,7 @@ export default Ember.Route.extend({
     controller.set('drawerChangeGraphIsOpen', false); // Turn off other drawers
     controller.set('drawerQuestionsIsOpen', false); // Turn off other drawers
     controller.set('searchText', controller.get('search'));
-    window.scrollTo(0, 0);
+    controller.set('VCRValue', 1);
   },
   resetController(controller, isExiting) {
     controller.set('variable', null);
@@ -158,7 +179,8 @@ export default Ember.Route.extend({
     if (isExiting) {
       controller.setProperties({
         startDate: this.get('firstYear'),
-        endDate: this.get('lastYear')
+        endDate: this.get('lastYear'),
+        VCRValue: 1
       });
     }
   }

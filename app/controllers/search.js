@@ -6,14 +6,75 @@ export default Ember.Controller.extend({
   featureToggle: Ember.inject.service(),
   needs: 'application', // inject the application controller
   queryParams: ['query','filter'],
-  entity: ['product', 'industry', 'location', 'rural'],
+  entity: ['product', 'industry', 'location', 'rural', 'locations_route', 'products_route'],
   query: null,
   filter: null,
+  modelData: computed('model', 'filter', 'i18n.locale', function() {
+    let model = get(this, 'modelCategorized');
+    let filter = get(this, 'filter');
+    let locale = this.get('i18n').display
+    var self = this
+
+    //console.log(filter);
+
+    if(filter === "location"){
+      model = {"location": model.location.filter(item => item.id !== '0')};
+    }
+
+    if(filter === "locations_route"){
+      model = {"location": model.location.filter(item => item.id !== '0')};
+    }
+
+    if(filter === "products_route"){
+      model = {"product": model.product};
+    }
+
+
+    if(model.hasOwnProperty("agproduct")){
+
+      return Object.entries(model).map(function(models){
+        var key = models[0]
+
+        return models[1].map(function(models){
+
+          var to_concatenate = self.get('i18n').t(`search.rural.${key}`).string
+
+          return {id: models.id, text: models.get(`name_${locale}`) + ' - ' + to_concatenate, key: key }
+
+        })
+
+      }).reduce((accum, item) => accum.concat(item))
+
+    }
+    else{
+
+
+      return Object.entries(model).map(function(models){
+
+        return models[1].map(function(models){
+
+          return {id: models.id, text: models.get(`name_short_${locale}`) + " (" + models.get('code') + ")" }
+        })
+
+      })[0]
+
+    }
+
+  }),
   search: computed('query', function() {
     return this.get('query');
   }),
+  isRural: computed('filter', function(){
+    if(this.get('filter') == 'rural'){
+      return true
+    }
+    return false
+  }),
   modelCategorized: computed('filter', 'model', function(){
-    return _.groupBy(this.get('model'), (x)=>x.constructor.modelName);
+    var modelCategorized = _.groupBy(this.get('model'), (x)=>x.constructor.modelName);
+    //modelCategorized["locations_route"] = modelCategorized["location"];
+    //modelCategorized["products_route"] = modelCategorized["product"];
+    return modelCategorized;
   }),
   modelCategorizedKeys: computed('modelCategorized', function(){
     return _.keys(this.get('modelCategorized'));
@@ -83,16 +144,73 @@ export default Ember.Controller.extend({
       return get(d,'constructor.modelName') === 'industry';
     });
   }),
-  placeHolderText: computed('filter', function() {
+  subTitleText: computed('filter', function() {
     if(_.contains(this.get('entity'), this.get('filter'))){
-      return `pageheader.search_placeholder.${this.get('filter')}`;
+      return `search.${this.get('filter')}.subtitle`;
     }
-    return `pageheader.search_placeholder`;
+    return `search.subtitle`;
+  }),
+  titleText: computed('filter', function() {
+    if(_.contains(this.get('entity'), this.get('filter'))){
+      return `search.${this.get('filter')}.title`;
+    }
+    return `search.title`;
+  }),
+  bodyText: computed('filter', function() {
+    if(_.contains(this.get('entity'), this.get('filter'))){
+      return `search.${this.get('filter')}.body`;
+    }
+    return `search.body`;
+  }),
+  modalTitle: computed('filter', function() {
+    if(_.contains(this.get('entity'), this.get('filter'))){
+      return `search.modal.title.${this.get('filter')}`;
+    }
+    return `search.modal.title`;
+  }),
+  modalContent: computed('filter', function() {
+    if(_.contains(this.get('entity'), this.get('filter'))){
+      return `search.modal.p1.${this.get('filter')}`;
+    }
+    return `search.modal.p1`;
+  }),
+  modalLink: computed('filter', function() {
+    if(_.contains(this.get('entity'), this.get('filter'))){
+      return `search.modal.link.${this.get('filter')}`;
+    }
+    return `search.modal.link`;
   }),
   actions:{
     toggleReferenceKey(key) {
       this.set("referenceKey", key);
-    }
+    },
+    transitionLocation(id) {
+      this.transitionToRoute('location.show', id);
+    },
+    transitionProduct(id) {
+      this.transitionToRoute('product.show', id);
+    },
+    transitionLocationRoute(id) {
+      this.transitionToRoute('location.abstract', id);
+    },
+    transitionProductsRoute(id) {
+      this.transitionToRoute('product.abstract', id);
+    },
+    transitionIndustry(id) {
+      this.transitionToRoute('industry.show', id);
+    },
+    transitionAgproduct(id) {
+      this.transitionToRoute('agproduct.show', id);
+    },
+    transitionLivestock(id) {
+      this.transitionToRoute('livestock.show', id);
+    },
+    transitionNonag(id) {
+      this.transitionToRoute('nonag.show', id);
+    },
+    transitionLanduse(id) {
+      this.transitionToRoute('landUse.show', id);
+    },
   }
 });
 

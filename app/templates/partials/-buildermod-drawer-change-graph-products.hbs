@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-around">
+  {{#each graph in otherPossibleGraphs}}
+    {{#if graph.available}}
+      {{component 'graphbuilder-change-graph-products'
+        toggleVisualization='toggleVisualization'
+        type=graph.type
+        name=graph.name
+        description=graph.description
+        visualization=visualization
+      }}
+    {{/if}}
+  {{/each}}
+</div>

@@ -1,4 +1,12 @@
-<div  class='multiples'></div>
-<button id="multiples__btn--showall" {{action 'showAll'}} {{bind-attr class=":btn :btn--standalone :btn--buildermod :multiples__btn--showall hasMore:multiples__btn--showall--is--relevant"}}>
-  {{fa-icon icon="plus" classNames="tool__btn__icon"}} {{t 'graph_builder.multiples.show_all'}}
-</button>
+<div class="text-right">
+  <button type="button" class="btn btn-outline-secondary" {{action 'savePdf'}}><i class="fas fa-file-pdf mr-3"></i>Descargar gráfico (PDF)</button>
+</div>
+<div  class='row'>
+
+</div>
+<div class="row justify-content-center mb-5">
+  <button id="multiples__btn--showall" {{action 'showAll'}} {{bind-attr class=":btn :btn-outline-secondary :btn-lg :text-uppercase :d-none hasMore:d-block :mr-3"}}>
+    {{t 'graph_builder.multiples.show_all'}}
+  </button>
+</div>
+

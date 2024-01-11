@@ -7,6 +7,7 @@ module.exports = function(environment) {
     baseURL: process.env.ROOT_URL || '/',
     locationType: 'auto',
     defaultLocale: process.env.DEFAULT_LOCALE,
+    agroUrl: process.env.AGRO_URL,
     otherLocale: process.env.OTHER_LOCALE,
     downloadURL: process.env.DOWNLOAD_URL,
     mapURL: process.env.MAP_URL,
@@ -30,11 +31,12 @@ module.exports = function(environment) {
   ENV.apiURL = process.env.API_URL,
 
   ENV.contentSecurityPolicy = {
+    'default-src': "'self' *",
     'style-src': "'self' 'unsafe-inline' *",
     'connect-src': "'self' http://54.6.95.239 *",
     'img-src': "'self' http://placehold.it/40x40 * data:",
-    'font-src': "'self' https://fonts.gstatic.com/",
-    'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com"
+    'font-src': "'self' https://fonts.gstatic.com/ *",
+    'script-src': "'self' 'unsafe-eval' 'unsafe-inline'  www.google-analytics.com *"
   };
 
   if (environment === 'test') {
