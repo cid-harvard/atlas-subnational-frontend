@@ -1,0 +1,63 @@
+<div class="container-fluid px-md-x10 pb-5">
+
+  <div class="row mt-5">
+    <div class="col-sm-12">
+      {{#if description }}
+        <p class="text-white">{{description}}</p>
+      {{/if}}
+    </div>
+
+  </div>
+  <div class="row mt-5">
+
+    <table class="table datlas-table">
+      <col style="width:30%">
+      <col style="width:20%">
+      <col style="width:50%">
+      <thead>
+        <tr class="table__row--header">
+          <th scope="col"></th>
+          <th scope="col" class="d-flex justify-content-between">
+            <div>{{t 'location.show.value'}}</div>
+            <div>{{t 'rankings.table-title'}}</div>
+          </th>
+          <th scope="col">{{t 'location.show.all_regions'}}</th>
+        </tr>
+      </thead>
+      <tbody class="text-white">
+
+        <tr class="table__row table__row--body">
+          <td scope="row">{{t 'location.show.eci'}} ({{model.lastYear}})</td>
+          <td class="d-flex justify-content-between">
+            {{model.lastEci}}
+            {{table-rank rank=model.eciRank}}
+          </td>
+          <td class="table__cell table__cell--summaries" style="height:10rem;">
+            {{vistk-dotplot
+              elementId='dotplot--eci'
+              data=dotplotData
+              varX='eci'
+              varText='name'
+              varId='location_id'
+              type='eci'
+              currentSelection=locationId
+            }}
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+<div class="container-fluid px-md-x10 pb-5">
+  <div class="text-right">
+    {{#link-to 'location.route' model.id
+      class="btn btn-outline-secondary"
+    }}
+    SIGUIENTE
+    {{/link-to}}
+  </div>
+</div>

@@ -1,14 +1,12 @@
-<div class="change-visualization__container">
+<div class="d-flex justify-content-around">
   {{#each graph in otherPossibleGraphs}}
     {{#if graph.available}}
-    <div class="change-visualization__item">
       {{component 'graphbuilder-change-graph'
         toggleVisualization='toggleVisualization'
         type=graph.type
         description=graph.description
         visualization=visualization
       }}
-      </div>
     {{/if}}
   {{/each}}
 </div>

@@ -1,47 +1,56 @@
 {
   "504": {
-    "color": "#7ddaa1",
+    "color": "#33691e",
     "name_en": "Agriculture",
-    "name_es": "Agricultura"
+    "name_es": "Agricultura",
+    "icon": "fas fa-carrot"
   },
  "505": {
-    "color": "#dbd37d",
+    "color": "#00acc1",
     "name_en": "Mining and Oil",
-    "name_es": "Miner\u00eda y Petr\u00f3leo"
+    "name_es": "Miner\u00eda y Petr\u00f3leo",
+   "icon": "fas fa-oil-can"
   },
  "506": {
-    "color": "#dab47d",
+    "color": "#f57f17",
     "name_en": "Manufacturing",
-    "name_es": "Manufactura"
+    "name_es": "Manufactura",
+   "icon": "fas fa-industry"
   },
  "507": {
-    "color": "#db987c",
+    "color": "#4a148c",
     "name_en": "Utilities",
-    "name_es": "Electricidad, Gas y Agua"
+    "name_es": "Electricidad, Gas y Agua",
+   "icon": "fas fa-plug"
   },
  "508": {
-    "color": "#d97b7b",
+    "color": "#ba68c8",
     "name_en": "Construction",
-    "name_es": "Construcci\u00f3n"
+    "name_es": "Construcci\u00f3n",
+   "icon": "fas fa-building"
   },
  "509": {
-    "color": "#c57bd9",
+    "color": "#880e4f",
     "name_en": "Commerce",
-    "name_es": "Comercio"
+    "name_es": "Comercio",
+   "icon": "fas fa-dolly"
   },
   "510": {
-    "color": "#8d7bd8",
+    "color": "#827717",
     "name_en": "Transport & Communications",
-    "name_es": "Transporte y Comunicaciones"
+    "name_es": "Transporte y Comunicaciones",
+    "icon": "fas fa-bus"
   },
   "511": {
-    "color": "#7ba2d9",
+    "color": "#006064",
     "name_en": "Financial & Business Services",
-    "name_es": "Servicios Financieros y Empresariales"
+    "name_es": "Servicios Financieros y Empresariales",
+    "icon": "fas fa-hand-holding-usd"
   },
   "512": {
-    "color": "#7ddada",
+    "color": "#0d47a1",
     "name_en": "Social Services",
-    "name_es": "Servicios Sociales"
+    "name_es": "Servicios Sociales",
+    "icon": "fas fa-user-friends"
   }
 }

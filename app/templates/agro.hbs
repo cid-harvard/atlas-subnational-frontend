@@ -1,0 +1,75 @@
+<div class="container-fluid px-md-x10 mt-5" style="">
+  <div class="row row-without-margin">
+
+    <div class="col-md-12">
+      <h1 class="text_yellow pt-5">Aprenda sobre oportunidades de productos Agro</h1>
+    </div>
+
+    <div class="col-md-12">
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4">
+          <h2 class="pt-5">Documentación del aplicativo:</h2>
+          <a class="mt-5 btn btn-outline-secondary btn-lg text-uppercase" href="https://datlas-colombia-downloads-test.s3.amazonaws.com/Agro/GUIA+USUARIO+FINAL.pdf" target="_blank" role="button">Instructivo de uso aplicativo Agro</a>
+        </div>
+
+        <div class="col-sm-12 col-md-8">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <h2 class="pt-5">Oportunidades de crecimiento:</h2>
+            </div>
+
+            <div class="col-sm-12 mt-5">
+              <div class="row">
+                <div class="col-sm-12 col-md-4">
+                  <select class="form-control form-filter" id="selectFile" style="height: 100%;">
+
+                    <option id="1">Aguacate</option>
+                    <option id="2">Cacao</option>
+                    <option id="3">Piña</option>
+
+                  </select>
+                </div>
+
+                <div class="col-sm-12 col-md-4 my-auto">
+                  <button class="btn btn-outline-secondary" {{action "openGuia"}}>Abrir Guia</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-12">
+      <iframe height="1000" style="width: inherit; background: white;margin-top: 50px;" src="{{agroUrl}}"></iframe>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="container-fluid px-md-x10 pb-5 text-right mt-5 pt-5">
+
+  {{#if (is-equal source 'index')}}
+    <div class="d-inline">
+      {{#link-to 'index'
+        class="btn btn-outline-secondary"
+      }}
+      ANTERIOR
+      {{/link-to}}
+    </div>
+  {{else}}
+    <div class="d-inline">
+      {{#link-to 'search' (query-params filter='rural')
+        class="btn btn-outline-secondary"
+      }}
+      ANTERIOR
+      {{/link-to}}
+    </div>
+  {{/if}}
+
+
+</div>

@@ -1,11 +1,18 @@
 import Ember from 'ember';
 import numeral from 'numeral';
-const {computed, get:get} = Ember;
+const {computed, get:get, observer} = Ember;
 
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   featureToggle: Ember.inject.service(),
+  vistkNetworkService: Ember.inject.service(),
   queryParams: ['year'],
+
+  startDate: null,
+  endDate: null,
+  categoriesFilterList: [],
+  categoriesFilterListlastIndustryData: [],
+
 
   firstYear: computed.alias('featureToggle.first_year'),
   lastYear: computed.alias('featureToggle.last_year'),
@@ -22,7 +29,30 @@ export default Ember.Controller.extend({
   dotplotData: computed.oneWay('model.dotplotData'),
   occupationData: computed.oneWay('model.occupations'),
   productsData: computed.oneWay('model.productsData'),
+  inmutableProductsData: computed.oneWay('model.productsData'),
   industriesData: computed.oneWay('model.industriesData'),
+
+  rangeYears: computed('firstYear', 'lastYear', function(){
+
+    this.set('startDate', this.get("lastYear"))
+    this.set('endDate', this.get("lastYear"))
+
+    var min = this.get("firstYear")
+    var max = this.get("lastYear")
+    return [...Array(max - min + 1).keys()].map(i => i + min);
+  }),
+
+  filteredProductsData: computed('model', 'startDate', 'endDate', function (){
+    var products = this.get("model.allProducts")
+
+    return products.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
+  }),
+
+  filteredPartnersData: computed('model', 'startDate', 'endDate', function (){
+
+    var partners = this.get("model.allPartners")
+    return partners.filter(item => item.year >= this.get("startDate") && item.year <= this.get("endDate"))
+  }),
 
   hasTimeseries: computed.notEmpty('model.timeseries'),
   hasOccupationData: computed.notEmpty('model.occupations'),
@@ -36,6 +66,7 @@ export default Ember.Controller.extend({
   isDepartment: computed.equal('model.level','department'),
   isMsa: computed.equal('model.level','msa'),
   isMunicipality: computed.equal('model.level','municipality'),
+  showExports: false,
 
   productSpace: computed.alias('model.metaData.productSpace'),
   industrySpace: computed.alias('model.metaData.industrySpace'),
@@ -59,14 +90,29 @@ export default Ember.Controller.extend({
     }, 0);
     return '$' + numeral(total).format('0.0a') + ' USD';
   }),
-  lastIndustryData: computed.filter('industriesData', function(datum) {
-    return parseInt(get(datum, 'year')) === this.get('lastYear');
+  lastIndustryData: computed('industriesData', function() {
+    return this.get("industriesData");
+  }),
+  lastProductsData: computed('productsData', function() {
+    return this.get("productsData");
   }),
   graphbuilderLink: computed('model.id', function() {
     return `location-${this.get('model.id')}`;
   }),
   description: computed('model.name', 'i18n.locale', function() {
     return this.get(`model.description_${this.get('i18n.display')}`);
-  })
+  }),
+  actions: {
+    showExports(value) {
+      this.set('showExports', value);
+    },
+    setStartYear(){
+
+      var year = parseInt($("#selectYear").val())
+
+      this.set('startDate', year)
+      this.set('endDate', year)
+    }
+  }
 });
 

@@ -1,0 +1,50 @@
+{
+  "1": {
+    "color": "#33691e",
+    "icon": "fas fa-seedling"
+  },
+  "24": {
+    "color": "#00acc1",
+    "icon": "fas fa-leaf"
+  },
+  "41": {
+    "color": "#f57f17",
+    "icon": "fas fa-fan"
+  },
+  "65": {
+    "color": "#4a148c",
+    "icon": "fas fa-tree"
+  },
+  "69": {
+    "color": "#ba68c8",
+    "icon": "fas fa-lemon"
+  },
+  "196": {
+    "color": "#880e4f",
+    "icon": "fas fa-cloud-meatball"
+  },
+  "201": {
+    "color": "#827717",
+    "icon": "fab fa-pagelines"
+  },
+  "265": {
+    "color": "#03a9f4",
+    "icon": "fas fa-fan"
+  },
+  "292": {
+    "color": "#006064",
+    "icon": "fas fa-fan"
+  },
+  "303": {
+    "color": "#0d47a1",
+    "icon": "fas fa-leaf"
+  },
+  "317": {
+    "color": "#e91e63",
+    "icon": "fas fa-tree"
+  },
+  "357": {
+    "color": "#7e57c2",
+    "icon": "fas fa-seedling"
+  }
+}

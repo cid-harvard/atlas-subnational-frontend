@@ -1,47 +1,56 @@
 {
   "0": {
-    "color": "#dbd37d",
+    "color": "#33691e",
     "name_en": "Vegetables, Foodstuffs, Wood",
-    "name_es": "Vegetales, Alimentos y Madera"
+    "name_es": "Vegetales, Alimentos y Madera",
+    "icon": "fas fa-seedling"
   },
   "227": {
-    "color": "#db987c",
+    "color": "#00acc1",
     "name_en": "Minerals",
-    "name_es": "Minerales"
+    "name_es": "Minerales",
+    "icon": "fas fa-truck"
   },
   "298": {
-    "color": "#c57bd9",
+    "color": "#f57f17",
     "name_en": "Chemicals & Plastics",
-    "name_es": "Qu\u00edmicos y Pl\u00e1sticos"
+    "name_es": "Qu\u00edmicos y Pl\u00e1sticos",
+    "icon": "fas fa-prescription-bottle"
   },
   "638": {
-    "color": "#7ddaa1",
+    "color": "#4a148c",
     "name_en": "Textiles & Furniture",
-    "name_es": "Textiles y Muebles"
+    "name_es": "Textiles y Muebles",
+    "icon": "fas fa-tshirt"
   },
   "830": {
-    "color": "#dab47d",
+    "color": "#ba68c8",
     "name_en": "Stone & Glass",
-    "name_es": "Piedra & Vidrio"
+    "name_es": "Piedra & Vidrio",
+    "icon": "fas fa-glass-whiskey"
   },
   "902": {
-    "color": "#d97b7b",
+    "color": "#880e4f",
     "name_en": "Metals",
-    "name_es": "Metales"
+    "name_es": "Metales",
+    "icon": "fas fa-meteor"
   },
   "1071": {
-    "color": "#7ba2d9",
+    "color": "#827717",
     "name_en": "Machinery",
-    "name_es": "Maquinaria"
+    "name_es": "Maquinaria",
+    "icon": "fas fa-cogs"
   },
  "1160": {
-    "color": "#7ddada",
+    "color": "#006064",
     "name_en": "Electronics",
-    "name_es": "Electr\u00f3nicos"
+    "name_es": "Electr\u00f3nicos",
+    "icon": "fas fa-car-battery"
   },
   "1210": {
-    "color": "#8d7bd8",
+    "color": "#0d47a1",
     "name_en": "Transport Vehicles",
-    "name_es": "Veh\u00edculos de Transporte"
+    "name_es": "Veh\u00edculos de Transporte",
+    "icon": "fas fa-car"
   }
 }

@@ -1,26 +1,21 @@
-<table class="table--summaries">
+<table class="table datlas-table">
+  <col style="width:30%">
+  <col style="width:20%">
+  <col style="width:50%">
   <thead>
-    <tr class="table__row table__row--header">
-      <th class="table__header"></th>
-      <th class="table__header table__header--summaries--value">
-        {{t 'country.show.total'}}
-      </th>
-      <th class="table__header table__header--summaries--dotplot">
-        {{t 'country.show.dotplot-column'}}
-      </th>
+    <tr class="table__row--header">
+      <th scope="col"></th>
+      <th scope="col">{{t 'country.show.total'}}</th>
+      <th scope="col">{{t 'country.show.dotplot-column'}}</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="text-white">
     <tr class="table__row table__row--body">
-      <td class="table__cell table__cell--summaries">
-        {{t 'location.show.gdp_pc'}} ({{model.censusYear}})
-      </td>
-      <td class="table__cell table__cell--summaries">
-        {{t 'country.show.gdp_per_capita'}}
-      </td>
-      <td class="table__cell table__cell--summaries">
+      <td scope="row">{{t 'location.show.gdp_pc'}} ({{model.censusYear}})</td>
+      <td>{{t 'country.show.gdp_per_capita'}}</td>
+      <td class="table__cell table__cell--summaries" style="height:10rem;">
         {{vistk-dotplot
-          elementId='dotplot--gdp-pc'
+          elementId='dotplot-gdp-pc'
           data=dotplotData
           varX='gdp_pc_real'
           varText='name'
@@ -29,14 +24,11 @@
         }}
       </td>
     </tr>
+
     <tr class="table__row table__row--body">
-      <td class="table__cell table__cell--summaries">
-        {{t 'location.show.gdp'}} ({{model.censusYear}})
-      </td>
-      <td class="table__cell table__cell--summaries">
-        {{t 'country.show.gdp'}}
-      </td>
-      <td class="table__cell table__cell--summaries">
+      <td scope="row">{{t 'location.show.gdp'}} ({{model.censusYear}})</td>
+      <td>{{t 'country.show.gdp'}}</td>
+      <td class="table__cell table__cell--summaries" style="height:10rem;">
         {{vistk-dotplot
           elementId='dotplot--gdp'
           data=dotplotData
@@ -46,14 +38,11 @@
         }}
       </td>
     </tr>
+
     <tr class="table__row table__row--body">
-      <td class="table__cell table__cell--summaries">
-        {{t 'location.show.population'}} ({{model.censusYear}})
-      </td>
-      <td class="table__cell table__cell--summaries">
-        {{t 'country.show.population'}}
-      </td>
-      <td class="table__cell table__cell--summaries">
+      <td scope="row">{{t 'location.show.population'}} ({{model.censusYear}})</td>
+      <td>{{t 'country.show.population'}}</td>
+      <td class="table__cell table__cell--summaries" style="height:10rem;">
         {{vistk-dotplot
           elementId='dotplot--population'
           data=dotplotData
@@ -65,14 +54,11 @@
         }}
       </td>
     </tr>
+
     <tr class="table__row table__row--body">
-      <td class="table__cell table__cell--summaries">
-        {{t 'location.show.eci'}} ({{model.lastYear}})
-      </td>
-      <td class="table__cell table__cell--summaries">
-        {{t 'country.show.eci'}}
-      </td>
-      <td class="table__cell table__cell--summaries">
+      <td scope="row">{{t 'location.show.eci'}} ({{model.lastYear}})</td>
+      <td>{{t 'country.show.eci'}}</td>
+      <td class="table__cell table__cell--summaries" style="height:10rem;">
         {{vistk-dotplot
           elementId='dotplot--eci'
           data=dotplotData
@@ -84,14 +70,11 @@
         }}
       </td>
     </tr>
+
     <tr class="table__row table__row--body">
-      <td class="table__cell table__cell--summaries">
-        {{t 'location.show.ag_farmsize'}}
-      </td>
-      <td class="table__cell table__cell--summaries">
-        {{t 'country.show.ag_farmsize'}}
-      </td>
-      <td class="table__cell table__cell--summaries">
+      <td scope="row">{{t 'location.show.ag_farmsize'}}</td>
+      <td>{{t 'country.show.ag_farmsize'}}</td>
+      <td class="table__cell table__cell--summaries" style="height:10rem;">
         {{vistk-dotplot
           elementId='dotplot--agfarmsizes'
           data=model.agFarmsizesData
@@ -101,14 +84,11 @@
         }}
       </td>
     </tr>
+
     <tr class="table__row table__row--body">
-      <td class="table__cell table__cell--summaries">
-        {{t 'location.show.nonag_farmsize'}}
-      </td>
-      <td class="table__cell table__cell--summaries">
-        {{t 'country.show.nonag_farmsize'}}
-      </td>
-      <td class="table__cell table__cell--summaries">
+      <td scope="row">{{t 'location.show.nonag_farmsize'}}</td>
+      <td>{{t 'country.show.nonag_farmsize'}}</td>
+      <td class="table__cell table__cell--summaries" style="height:10rem;">
         {{vistk-dotplot
           elementId='dotplot--nonagfarmsizes'
           data=model.nonagFarmsizesData
@@ -118,6 +98,7 @@
         }}
       </td>
     </tr>
+
   </tbody>
 </table>
 

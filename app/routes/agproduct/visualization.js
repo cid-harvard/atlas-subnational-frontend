@@ -48,7 +48,8 @@ export default Ember.Route.extend({
     let id = get(this, 'agproduct_id');
     return {
       model: this.store.find('agproduct', id),
-      agproducts: $.getJSON(`${apiURL}/data/agproduct/${id}/locations/?level=department`)
+      agproducts: $.getJSON(`${apiURL}/data/agproduct/${id}/locations/?level=department`),
+      municipalities: $.getJSON(`${apiURL}/data/agproduct/${id}/locations/?level=municipality`)
     };
   }),
   municipalities: computed('agproduct_id', function() {
@@ -59,7 +60,7 @@ export default Ember.Route.extend({
     };
   }),
   departmentsDataMunging(hash) {
-    let {model,agproducts} = hash;
+    let {model, agproducts, municipalities} = hash;
     let locationsMetadata  = this.modelFor('application').locations;
 
     let data = _.map(agproducts.data, (d) => {
@@ -73,9 +74,24 @@ export default Ember.Route.extend({
       );
     });
 
+    let datas = _.map(municipalities.data, (d) => {
+      return _.merge(
+        copy(d),
+        locationsMetadata[d.location_id],
+        {
+          model: 'agproduct',
+          municipality_id: d.location_id,
+          group: locationsMetadata[d.location_id].parent_id,
+          parent_name_en: locationsMetadata[locationsMetadata[d.location_id].parent_id].name_en,
+          parent_name_es: locationsMetadata[locationsMetadata[d.location_id].parent_id].name_es,
+        }
+      );
+    });
+
     return Ember.Object.create({
       entity: model,
       data: data,
+      cities:datas
     });
   },
   municipalitiesDataMunging(hash) {

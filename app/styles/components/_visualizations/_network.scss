@@ -27,6 +27,12 @@
   stroke: red;
 }
 
+.connect__line.selected__secondary {
+  stroke-width: 3px;
+  stroke-opacity: 1;
+  stroke: $colorYellow;
+}
+
 .connect__line.highlighted__adjacent {
   stroke-width: 2px;
   stroke-opacity: 1;

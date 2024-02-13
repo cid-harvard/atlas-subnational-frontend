@@ -1,0 +1,45 @@
+{{component "stream-header"
+    model=model
+    type="location"
+    extra_type="location_route"
+    metaData=model.metaData
+    firstYear=firstYear
+    lastYear=lastYear
+    agproductFirstYear=agproductFirstYear
+    agproductLastYear=agproductLastYear
+    agcensusFirstYear=agcensusFirstYear
+    agcensusLastYear=agcensusLastYear
+}}
+
+{{#if isCountry }}
+  {{partial 'location/country-location-route'}}
+{{else}}
+  {{partial 'location/regional-location-rural'}}
+{{/if}}
+
+<div class="container-fluid px-md-x10 pb-5 text-right">
+  {{#if (is-equal model.level "municipality")}}
+    <div class="d-inline">
+      {{#link-to 'location.locationwages' model.id
+        class="btn btn-outline-secondary"
+      }}
+      ANTERIOR
+      {{/link-to}}
+    </div>
+  {{else}}
+    <div class="d-inline">
+      {{#link-to 'location.complexsectors' model.id
+        class="btn btn-outline-secondary"
+      }}
+      ANTERIOR
+      {{/link-to}}
+    </div>
+  {{/if}}
+  <div class="d-inline">
+    {{#link-to 'location.thirdparty' model.id
+      class="btn btn-outline-secondary"
+    }}
+    SIGUIENTE
+    {{/link-to}}
+  </div>
+</div>

@@ -1,5 +1,5 @@
 {{#unless isFiltered }}
-  <h3 class="section__head">{{setTitle}}</h3>
+
 {{/unless}}
 
 {{#if showTotal}}
@@ -14,6 +14,8 @@
       dateExtent=dateExtent
       endDate=endDate
       markerGroup='total'
+      title=title
+      filename=filename
     }}
   {{/unless}}
 {{/if}}
@@ -30,6 +32,8 @@
     dateExtent=dateExtent
     endDate=endDate
     markerGroup='parent'
+    title=title
+    filename=filename
   }}
 {{/if}}
 
@@ -44,5 +48,11 @@
   dateExtent=dateExtent
   endDate=endDate
   markerGroup='subsets'
+  title=title
+  filename=filename
 }}
-
+<!--<div class="col-lg-12 mt-5">
+  <div class="text-left">
+    <button type="button" class="btn btn-outline-secondary" {{action 'savePdf'}}><i class="fas fa-file-pdf mr-3"></i>Descargar gráfico (PDF)</button>
+  </div>
+</div>-->

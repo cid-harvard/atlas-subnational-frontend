@@ -1,0 +1,191 @@
+{{component "stream-header" model=modelData type='product' extra_type="product_route" firstYear=firstYear lastYear=lastYear}}
+
+<div class="container-fluid pl-md-x10 pr-md-x10">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 mt-5 pt-5">
+      {{
+        component 'buildermod-search'
+        source=source
+        filterData=filterData
+        placeHolderText=placeHolderText
+        visualization=visualization
+        startDate=startDate
+        endDate=endDate
+        dateExtent=dateExtent
+        canYearToggle=true
+        isScatter=false
+        rcaFilter=false
+        isSingleYearData=isSingleYearData
+        source=source
+        search=search
+      }}
+    </div>
+    <div class="col-sm-0 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4 mt-5 pt-5">
+      <div>
+        <p class="text-white text-center">CONEXIONES SECUNDARIAS</p>
+      </div>
+      <div class="mt-5">
+        {{#link-to 'location.productmapdetail' model.entity.id (query-params startDate=startDate endDate=endDate)
+          class="btn btn-outline-secondary btn-block"
+        }}
+          MAPA DE PRODUCTOS
+        {{/link-to}}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid pl-md-x10 pr-md-x10 mt-5 pt-5">
+
+  <div class="row mt-5 pt-5 d-none" id="spinner_complexmap">
+    <div class="d-flex justify-content-center py-5 pt-md-x10" style="width: 100%;">
+      <div class="spinner-border text-warning" role="status" style="width: 3rem; height: 3rem;">
+        <span class="sr-only"></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="complexmap">
+    <div class="row" id="ringchartmap">
+
+      <div class="col-sm-12 text-left ml-5 pl-5">
+        <p class="text-white mt-5 pt-5">{{ is-concat model.entity.name ' (' model.entity.code ') - ' product_selected.name_short_es '(' product_selected.code ') - AÑO: ' endDate }}</p>
+      </div>
+
+      <div class="col-sm-12 col-md-8 mt-5 pt-5" style="min-height: 600px;">
+        <p class="d-none">{{buildermodSearchService.search}}</p>
+        {{#if refreshRing}}
+          {{
+            ring-chart
+            data=filteredDataTable
+            graph=productSpace
+            dataType='products'
+            metadata=model.metaData
+            componentId="ringChart"
+            center=center
+            filterCategory=true
+          }}
+        {{/if}}
+        <div style="min-height: 100px;"></div>
+
+      </div>
+      <div class="col-sm-12 col-md-4 mt-5 pt-5" style="padding: 10px; border: #cccccc 1px solid;">
+        <div style="padding: 10px;">
+          <p class="text_yellow">Producto: <span class="text-white ml-3">{{product_selected.name_short_es}} ({{product_selected.code}})</span></p>
+          <p class="text-white">Exportaciones: {{product_selected.export_value}}</p>
+          <p class="text-white">VCR: {{product_selected.export_rca}}</p>
+          <p class="text-white">Complejidad: {{product_selected.complexity}}</p>
+
+          <p class="text_yellow mt-5">Conexiones primarias</p>
+
+          <div class="overflow-auto" style="max-height: 300px;">
+            <ul class="text-white" style="list-style: inside;">
+              {{#each product in product_primaries}}
+                <li>{{product.name_short_es}} ({{product.code}})</li>
+              {{/each}}
+
+              {{#if product_primaries_count}}
+                <li>+ {{product_primaries_count}} productos</li>
+              {{/if}}
+
+            </ul>
+          </div>
+
+
+          <p class="text_yellow mt-5">Conexiones secundarias</p>
+          <div class="overflow-auto" style="max-height: 300px;">
+            <ul class="text-white" style="list-style: inside;">
+              {{#each product in product_secondaries}}
+                <li>{{product.name_short_es}} ({{product.code}})</li>
+              {{/each}}
+
+              {{#if product_secondaries_count}}
+                <li>+ {{product_secondaries_count}} productos</li>
+              {{/if}}
+
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center mt-5 pt-5">
+
+       <div class="category-button position-relative mr-5">
+          <p class="text_yellow">SECTORES DE</p>
+          <p class="text_yellow">LOS PRODUCTOS</p>
+        </div>
+
+      {{#each category in categoriesObject}}
+
+      <div class="category-button position-relative mr-5" data-title={{category.name}}>
+          <div class='tooltip tooltip-category text-center d-none selector_{{_view.contentIndex}}'>
+              <h3 class="mb-5 text-principal">{{category.name}}</h3>
+
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" checked={{category.hide}} {{action "check" _view.contentIndex "hide" on="change"}}>
+                  <label class="form-check-label mr-5 text-principal"><strong>Ocultar</strong></label>
+
+                  <input class="form-check-input" type="checkbox" checked={{category.isolate}} {{action "check" _view.contentIndex "isolate" on="change"}}>
+                  <label class="form-check-label text-principal"><strong>Aislar</strong></label>
+              </div>
+
+          </div>
+          <a href="javascript:void(0);" class="btn button_{{_view.contentIndex}}" style={{ is-concat 'background: ' category.color '; padding: 12px; transform: rotate(45deg);' }}>
+              <i class={{ is-concat category.icon ' fa-2x'}} style="color: {{ is-concat category.icon_color }}; transform: rotate(-45deg);"></i>
+          </a>
+          <!--<i class={{category.icon}} style={{ is-concat 'color: ' category.color '; margin-top: 10px;'}}></i>-->
+      </div>
+
+      {{/each}}
+
+    </div>
+  </div>
+
+</div>
+
+ <div class="container-fluid pl-md-x10 pr-md-x10 pb-5 mt-5 pt-5">
+  <div class="row mb-5">
+    <div class="col-lg-12">
+        <div class="text-center">
+            <button type="button" class="btn btn-outline-secondary" {{action 'savePng' (is-concat model.entity.name ' (' model.entity.code ') - ' product_selected.name_short_es '(' product_selected.code ') - AÑO ' endDate)}}><i class="fas fa-file-image mr-3"></i>Descargar gráfico (PNG)</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid pl-md-x10 pr-md-x10 mt-5 pt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="text-white">FUENTE: cálculos del CID con datos de la DIAN.</p>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid pl-md-x10 pr-md-x10 my-5 py-5" id="complexmaptable">
+  <div class="row">
+    <div class="col-md-12">
+      {{
+        datlas-table
+        data=filteredDataTable
+        source="products"
+        entityType="products"
+        elementId="industriesTable"
+        title_data=(is-concat model.entity.name ' (' model.entity.code ') - ' product_selected.name_short_es '(' product_selected.code ') - AÑO ' endDate)
+        source_data="FUENTE: cálculos del CID con datos de la DIAN."
+      }}
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid px-md-x10 pb-5">
+  <div class="text-right">
+    {{#link-to 'location.productmapprimaries' model.entity.id (query-params startDate=startDate endDate=endDate)
+      class="btn btn-outline-secondary"
+    }}
+    ANTERIOR
+    {{/link-to}}
+  </div>
+</div>

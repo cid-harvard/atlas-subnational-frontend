@@ -1,0 +1,78 @@
+{{component "stream-header" model=modelData type='product' extra_type="product_route" firstYear=firstYear lastYear=lastYear}}
+
+<div class="container-fluid px-md-x10 mt-5 pt-5">
+  <div class="row">
+
+    <div class="col-sm-12">
+      <h1 class="text_yellow">{{is-concat '¿Quién importo ' model.entity.name ' en ' endDate '?'}}</h1>
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid px-md-x10 mt-5 pt-5">
+  <div class="row">
+
+    <div class="col-sm-12">
+      <p class="text-white">Filtrar por Año</p>
+    </div>
+
+    <div class="col-sm-12">
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 my-auto">
+          <div class="">
+            <select class="form-control form-filter" id="selectYear" {{action "setStartYear" on="change"}}>
+
+              {{#each year in rangeYears }}
+                {{#if (is-equal year endDate)}}
+                  <option selected>{{year}}</option>
+                {{else}}
+                  <option>{{year}}</option>
+                 {{/if}}
+              {{/each}}
+
+            </select>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12 col-md-4">
+          <button class="btn btn-outline-secondary" {{action "decreaseYear"}}>ANTERIOR</button>
+          <button class="btn btn-outline-secondary ml-3" {{action "increaseYear"}}>SIGUIENTE</button>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid px-md-x10 mt-5 pt-5">
+  <div class="row">
+
+    <div class="col-sm-12">
+      <iframe height="1000" style="width: inherit; background: white;" src={{linkDatlas}}></iframe>
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid px-md-x10 pb-5 text-right mt-5 pt-5">
+  <div class="d-inline">
+    {{#link-to 'product.ringchart' model.entity.id (query-params startDate=startDate endDate=endDate)
+      class="btn btn-outline-secondary"
+    }}
+    ANTERIOR
+    {{/link-to}}
+  </div>
+  <div class="d-inline">
+    {{#link-to 'product.report' model.entity.id (query-params startDate=startDate endDate=endDate)
+      class="btn btn-outline-secondary"
+    }}
+    SIGUIENTE
+    {{/link-to}}
+  </div>
+</div>

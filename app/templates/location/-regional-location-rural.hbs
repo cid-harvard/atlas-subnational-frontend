@@ -1,0 +1,496 @@
+<div class="container-fluid px-md-x10 mt-5">
+  <div class="row">
+
+    <p>{{ruralOptionValue}}</p>
+
+    <div class="col-sm-12">
+      <ul class="nav nav-pills center-pills" id="pills-tab-tables-graphics" role="tablist" style="justify-content: end;">
+        <li class="nav-item">
+          <a class="nav-link active btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-graphic-tab" data-toggle="pill" href="#pills-graphics" role="tab" aria-controls="pills-graphics" aria-selected="true" {{action "selectSourceId" ruralOption on="click"}}>
+            VER COMO GRÁFICA
+          </a>
+        </li>
+
+        <li class="nav-item ml-5">
+          <a class="nav-link btn btn-outline-secondary btn-lg btn-block text-uppercase" id="pills-table-tab" data-toggle="pill" href="#pills-tables" role="tab" aria-controls="pills-tables" aria-selected="true">
+            VER COMO TABLA
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="col-sm-12">
+      <div class="mt-5 tab-content" id="pills-tabContent">
+
+        <div class="tab-pane fade active show" id="pills-graphics" role="tabpanel" aria-labelledby="pills-graphics">
+
+          <div class="col-sm-12">
+
+            <div class="row">
+              <div class="col-sm-12 col-md-4 my-auto">
+                <p class="text-white">Filtrar por Año</p>
+                <div class="">
+                  <select class="form-control form-filter" id="selectYear">
+
+                    {{#each year in rangeYears }}
+                      {{#if (is-equal year endDate)}}
+                        <option selected>{{year}}</option>
+                      {{else}}
+                        <option>{{year}}</option>
+                       {{/if}}
+                    {{/each}}
+
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md-4">
+                <button class="btn btn-outline-secondary {{classNone}}" {{action "setStartYear"}} style="position: absolute; bottom: 0px;">FILTRAR</button>
+              </div>
+
+              <div class="col-sm-12 col-md-4 my-auto">
+                <p class="text-white">Actividades rurales</p>
+                <div class="">
+                  <select class="form-control form-filter" id="selectType" {{action "selectSource" on="change"}}>
+                    <option value="1">Uso del suelo</option>
+                    <option value="2">Unidades de producción agropecuaria y no agropecuaria</option>
+                    <option value="3">Hectáreas sembradas por cultivo</option>
+                    <option value="4">Hectáreas cosechadas por cultivo</option>
+                    <option value="5">Toneladas producidas por cultivo</option>
+                    <option value="6">Rendimiento de los cultivos</option>
+                    <option value="7">Actividades no agropecuarias</option>
+                    <option value="8">Especies pecuarias</option>
+                    <option value="9">UPAS actividad pecuaria por especie</option>
+                  </select>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+
+          <div class="col-sm-12 mt-5 pt-5 {{if isGeo 'row'}} visualizationComponent_div geo_background">
+            <div class="visualizationComponent {{if isGeo 'col-md-8'}}">
+              {{#if showGrap}}
+                <!--<h1 class="text-white">{{Title}} {{headerValue}} ({{startDate}})</h1>-->
+                {{
+                  zoomable-treemap
+                  data=filteredData
+                  immutableData=filteredData
+                  varDependent=variable
+                  elementId='zoomable-export-value-treemap'
+                  class="position-relative"
+                  color='pink'
+                  filterCategory=canFilterCategory
+                  groupByParent=true
+                  filename=(is-concat Title ' ' headerValue ' (' startDate ')' ' - ' model.name)
+                }}
+              {{/if}}
+              {{#if showMultiples}}
+                <h1 class="text-white">{{Title}} {{headerValue}} ({{dateValue}})</h1>
+                {{
+                  multiples-graph
+                  immutableData=filteredData
+                  data=filteredData
+                  modelData=filteredData
+                  dataType=source
+                  startDate=startDate
+                  endDate=endDate
+                  varDependent=variable
+                  elementId='zoomable-export-value-multple'
+                  title_data=(is-concat Title ' ' headerValue ' (' dateValue ')' ' - ' model.name)
+                }}
+              {{/if}}
+              {{#if showTable}}
+                <h1 class="text-white">{{Title}} {{headerValue}} ({{dateValue}})</h1>
+                {{
+                  datlas-table
+                  data=filteredData
+                  source=source
+                  entityType=''
+                  search=search
+                  startDate=startDate
+                  endDate=endDate
+                  elementId="productssourceTable"
+                  title_data=(is-concat Title ' ' headerValue ' (' dateValue ')' ' - ' model.name)
+                }}
+              {{/if}}
+            </div>
+
+          </div>
+          <div class="container-fluid my-5 pr-5">
+            <div class="text-right">
+
+              {{#link-to 'location.visualization' model.id source vizualization variable (query-params startDate=startDate endDate=endDate search='null' showBack="true")
+                class="btn btn-outline-secondary"
+              }}
+                <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                VER MAS
+              {{/link-to}}
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade show" id="pills-tables" role="tabpanel" aria-labelledby="pills-tables">
+
+          <div class="col-sm-12">
+            <p class="text-white">Filtrar por Año</p>
+          </div>
+
+          <div class="col-sm-12">
+
+            <div class="row">
+              <div class="col-sm-12 col-md-4 my-auto">
+                <div>
+                  <select class="form-control form-filter" id="selectYearTable">
+
+                    {{#each year in rangeYearsTable }}
+                      {{#if (is-equal year endDate)}}
+                        <option selected>{{year}}</option>
+                      {{else}}
+                        <option>{{year}}</option>
+                       {{/if}}
+                    {{/each}}
+
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md-4">
+                <button class="btn btn-outline-secondary" {{action "setStartYearTable"}}>FILTRAR</button>
+              </div>
+
+
+            </div>
+
+          </div>
+
+          <div class="col-sm-12">
+            <h1 class="text-white mt-5 pt-5">Actividades rurales</h1>
+          </div>
+
+          <div class="col-sm-12">
+            <h1 class="mt-5 pt-5 text_yellow">Uso del suelo en {{model.name}}</h1>
+          </div>
+
+          <div class="col-sm-12 mt-5 pt-5 visualizationComponent_div geo_background">
+            <div class="visualizationComponent">
+              {{
+                datlas-table
+                data=filteredDataLandUsesTop5
+                source="landUse"
+                entityType='landUse'
+                startDate=startDate
+                endDate=startDate
+                elementId="productssourceTables"
+                order=filteredDataLandUsesTop5Order
+                title_data=(is-concat 'Uso del suelo en ' model.name ' (' startDate ')')
+              }}
+            </div>
+
+            <div class="my-5 pr-5">
+              <div class="text-right">
+
+                {{#link-to 'location.visualization' model.id "landUses" "treemap" "area" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
+                  class="btn btn-outline-secondary"
+                }}
+                  <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                  VER MAS
+                {{/link-to}}
+
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="col-sm-12 mt-5 pt-5">
+            <h1 class="mt-5 pt-5 text_yellow">Unidades de producción agropecuaria y no agropecuaria en {{model.name}}</h1>
+          </div>
+
+          <div class="col-sm-12 mt-5 pt-5 visualizationComponent_div geo_background">
+            <div class="visualizationComponent">
+              {{
+                datlas-table
+                data=filteredDataFarmTypesTop5
+                source="farmtypes"
+                entityType='farmtypes'
+                startDate=startDate
+                endDate=startDate
+                elementId="productssourceTables2"
+                order=filteredDataFarmTypesTop5Order
+                title_data=(is-concat 'Unidades de producción agropecuaria y no agropecuaria en ' model.name ' (' startDate ')')
+              }}
+            </div>
+
+            <div class="my-5 pr-5">
+              <div class="text-right">
+
+                {{#link-to 'location.visualization' model.id "farmtypes" "treemap" "num_farms" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
+                  class="btn btn-outline-secondary"
+                }}
+                  <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                  VER MAS
+                {{/link-to}}
+
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="col-sm-12 mt-5 pt-5">
+            <h1 class="mt-5 pt-5 text_yellow">Hectáreas sembradas por cultivo en {{model.name}}</h1>
+          </div>
+
+          <div class="col-sm-12 mt-5 pt-5 visualizationComponent_div geo_background">
+            <div class="visualizationComponent">
+              {{
+                datlas-table
+                data=filteredDataLandSownTop5
+                source="agproducts"
+                entityType='agproducts'
+                startDate=startDate
+                endDate=startDate
+                elementId="productssourceTables3"
+                order=filteredDataLandSownTop5Order
+                title_data=(is-concat 'Hectáreas sembradas por cultivo en ' model.name ' (' startDate ')')
+              }}
+            </div>
+
+            <div class="my-5 pr-5">
+              <div class="text-right">
+
+                {{#link-to 'location.visualization' model.id "agproducts" "treemap" "land_sown" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
+                  class="btn btn-outline-secondary"
+                }}
+                  <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                  VER MAS
+                {{/link-to}}
+
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="col-sm-12 mt-5 pt-5">
+            <h1 class="mt-5 pt-5 text_yellow">Hectáreas cosechadas por cultivo en {{model.name}}</h1>
+          </div>
+
+          <div class="col-sm-12 mt-5 pt-5 visualizationComponent_div geo_background">
+            <div class="visualizationComponent">
+              {{
+                datlas-table
+                data=filteredDataLandHarvestedTop5
+                source="agproducts"
+                entityType='agproducts'
+                startDate=startDate
+                endDate=startDate
+                elementId="productssourceTables4"
+                order=filteredDataLandHarvestedTop5Order
+                title_data=(is-concat 'Hectáreas cosechadas por cultivo en ' model.name ' (' startDate ')')
+              }}
+            </div>
+
+            <div class="my-5 pr-5">
+              <div class="text-right">
+
+                {{#link-to 'location.visualization' model.id "agproducts" "treemap" "land_harvested" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
+                  class="btn btn-outline-secondary"
+                }}
+                  <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                  VER MAS
+                {{/link-to}}
+
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="col-sm-12 mt-5 pt-5">
+            <h1 class="mt-5 pt-5 text_yellow">Toneladas producidas por cultivo {{model.name}}</h1>
+          </div>
+
+          <div class="col-sm-12 mt-5 pt-5 visualizationComponent_div geo_background">
+            <div class="visualizationComponent">
+              {{
+                datlas-table
+                data=filteredDataProductionTonsTop5
+                source="agproducts"
+                entityType='agproducts'
+                startDate=startDate
+                endDate=startDate
+                elementId="productssourceTables5"
+                order=filteredDataProductionTonsTop5Order
+                title_data=(is-concat 'Toneladas producidas por cultivo ' model.name ' (' startDate ')')
+              }}
+            </div>
+
+            <div class="my-5 pr-5">
+              <div class="text-right">
+
+                {{#link-to 'location.visualization' model.id "agproducts" "treemap" "production_tons" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
+                  class="btn btn-outline-secondary"
+                }}
+                  <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                  VER MAS
+                {{/link-to}}
+
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="col-sm-12 mt-5 pt-5">
+            <h1 class="mt-5 pt-5 text_yellow">Rendimiento de los cultivos en {{model.name}}</h1>
+          </div>
+
+          <div class="col-sm-12 mt-5 pt-5 visualizationComponent_div geo_background">
+            <div class="visualizationComponent">
+              {{
+                datlas-table
+                data=filteredDataYieldRatioTop5
+                source="agproducts"
+                entityType='agproducts'
+                startDate=startDate
+                endDate=startDate
+                elementId="productssourceTables6"
+                order=filteredDataYieldRatioTop5Order
+                title_data=(is-concat 'Rendimiento de los cultivos en ' model.name ' (' startDate ')')
+              }}
+            </div>
+
+            <div class="my-5 pr-5">
+              <div class="text-right">
+
+                {{#link-to 'location.visualization' model.id "agproducts" "multiples" "yield_ratio" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
+                  class="btn btn-outline-secondary"
+                }}
+                  <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                  VER MAS
+                {{/link-to}}
+
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="col-sm-12 mt-5 pt-5">
+            <h1 class="mt-5 pt-5 text_yellow">Actividades no agropecuarias en {{model.name}}</h1>
+          </div>
+
+          <div class="col-sm-12 mt-5 pt-5 visualizationComponent_div geo_background">
+            <div class="visualizationComponent">
+              {{
+                datlas-table
+                data=filteredDataNonagsNumFarmsTop5
+                source="nonags"
+                entityType='nonags'
+                startDate=startDate
+                endDate=startDate
+                elementId="productssourceTables7"
+                order=filteredDataNonagsNumFarmsTop5Order
+                title_data=(is-concat 'Actividades no agropecuarias en ' model.name ' (' startDate ')')
+              }}
+            </div>
+
+            <div class="my-5 pr-5">
+              <div class="text-right">
+
+                {{#link-to 'location.visualization' model.id "nonags" "treemap" "num_farms" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
+                  class="btn btn-outline-secondary"
+                }}
+                  <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                  VER MAS
+                {{/link-to}}
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-sm-12 mt-5 pt-5">
+            <h1 class="mt-5 pt-5 text_yellow">Especies pecuarias en {{model.name}}</h1>
+          </div>
+
+          <div class="col-sm-12 mt-5 pt-5 visualizationComponent_div geo_background">
+            <div class="visualizationComponent">
+              {{
+                datlas-table
+                data=filteredDataLiveStockNumTop5
+                source="livestockData"
+                entityType='livestockData'
+                startDate=startDate
+                endDate=startDate
+                elementId="productssourceTables8"
+                order=filteredDataLiveStockNumTop5Order
+                title_data=(is-concat 'Especies pecuarias en ' model.name ' (' startDate ')')
+              }}
+            </div>
+
+            <div class="my-5 pr-5">
+              <div class="text-right">
+
+                {{#link-to 'location.visualization' model.id "livestock" "treemap" "num_livestock" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
+                  class="btn btn-outline-secondary"
+                }}
+                  <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                  VER MAS
+                {{/link-to}}
+
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="col-sm-12 mt-5 pt-5">
+            <h1 class="mt-5 pt-5 text_yellow">UPAS actividad pecuaria por especie en {{model.name}}</h1>
+          </div>
+
+          <div class="col-sm-12 mt-5 pt-5 visualizationComponent_div geo_background">
+            <div class="visualizationComponent">
+              {{
+                datlas-table
+                data=filteredDataLiveStockNumFarmsTop5
+                source="livestockData"
+                entityType='livestockData'
+                startDate=startDate
+                endDate=startDate
+                elementId="productssourceTables9"
+                order=filteredDataLiveStockNumFarmsTop5Order
+                title_data=(is-concat 'UPAS actividad pecuaria por especie en ' model.name ' (' startDate ')')
+              }}
+            </div>
+
+            <div class="my-5 pr-5">
+              <div class="text-right">
+
+                {{#link-to 'location.visualization' model.id "livestock" "treemap" "num_farms" (query-params startDate=startDate endDate=startDate search='null' showBack="true")
+                  class="btn btn-outline-secondary"
+                }}
+                  <i class="far fa-plus pr-2" aria-hidden="true"></i>
+                  VER MAS
+                {{/link-to}}
+
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

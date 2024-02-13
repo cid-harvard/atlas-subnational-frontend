@@ -1,137 +1,215 @@
-{{#if query }}
-  <h2 class="results__head">{{resultsLength}} {{t 'search.header'}}</h2>
-{{else}}
-  <h2 class="results__head">{{t placeHolderText}}</h2>
-{{/if}}
+<div class="container-fluid px-md-x10 py-5 my-5">
 
-<form class="search__wrap">
-  <div class="search__field__wrap">
-    {{input
-      class="search"
-      placeholder=( t placeHolderText )
-      value=search
-      enter='query'
-      required='required'
-      data-search-input=''
-    }}
-    <button class="search__reset fa fa-close" type="reset"></button>
+  {{#if filter}}
+
+  <div class="row h-100">
+
+    <div class="col-sm-12 col-md-6 my-auto">
+      <h1 class="text-uppercase seach__placeholder__title">{{ t titleText }}</h1>
+      <h1 class="text-uppercase seach__placeholder__title">{{t subTitleText}}</h1>
+      {{#if (is-equal filter "rural")}}
+        <h2 class="text_yellow text-left mt-3">Aprenda sobre oportunidades de productos agro</h2>
+        {{#link-to 'agro'
+          (query-params source='search')
+          class="btn btn-light mt-4"
+        }}
+          &nbsp;&nbsp;&nbsp;Ver oportunidades Agro&nbsp;&nbsp;&nbsp;
+        {{/link-to}}
+      {{/if}}
+    </div>
+
+    <div class="col-sm-12 col-md-6 my-auto">
+
+      <div class="row">
+
+        <div class="col-sm-12 col-md-8 my-auto mt-sm-5">
+          <p class="text-light">{{t bodyText }}</p>
+        </div>
+
+        <div class="col-sm-12 col-md-4 my-auto text-center mt-sm-5">
+
+          <a href="" data-toggle="modal" data-target="#modalHelp">
+            <img src="assets/img/general/ico_questions.svg" class="img-fluid">
+          </a>
+
+
+
+          <div class="modal fade" id="modalHelp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times fa-2x"></i>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                  <div class="row h-100 px-4">
+                    <div class="col-sm-12 col-md-6 my-auto text-left">
+                      <h2 class="modal-title title_yellow mb-4" id="exampleModalCenterTitle">{{ t modalTitle }}</h2>
+                      <p class="text-white mb-3">{{ t modalContent }}</p>
+                      <a target="_blank" href={{ t modalLink }}>{{ t modalLink }}</a>
+                    </div>
+                    <div class="col-sm-12 col-md-6 my-auto">
+                      <img src="assets/img/general/illustracion_2.svg" class="img-fluid">
+                    </div>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+
+                  <div class="col text-center mb-4">
+                    <button type="button" class="btn btn-outline-secondary text-uppercase" data-dismiss="modal">{{ t 'search.modal.close' }}</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <div class="col-sm-12 mt-5">
+          {{autocomplete-input-datlas data_search=modelData type=filter idSelect='search_select'}}
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
-  <input class="search__submit btn btn--standalone btn--search"
-    data-search
-    type="submit"
-    value="{{ t 'pageheader.search_link' }}"
-    {{action 'query' search}} >
-</form>
+  {{/if}}
 
-{{#if landuseResults.length}}
-  <h3 class="section__head results__subhead">{{t 'search.results_landuses'}}</h3>
-  <ul class="results__list">
-    {{#each result in landuseResults}}
-      {{search-result
-        result=result
-        tagName="li"
-        class="results__item"
-        levelOnly=true
-      }}
-    {{/each}}
-  </ul>
-{{/if}}
-{{#if locationResults.length}}
-  <h3 class="section__head results__subhead">{{t 'search.results_locations'}}</h3>
-  <ul class="results__list">
-    {{#each result in locationResults}}
-      {{search-result
-        result=result
-        tagName="li"
-        class="results__item"
-        metaData=metaData
-        isLocation="True"
-      }}
-    {{/each}}
-  </ul>
-{{/if}}
-{{#if productResults.length}}
-  <h3 class="section__head results__subhead">{{t 'search.results_products'}}</h3>
-  <ul class="results__list">
-    {{#each result in productResults}}
-      {{search-result
-        result=result
-        tagName="li"
-        class="results__item"
-      }}
-    {{/each}}
-  </ul>
-{{/if}}
-{{#if agproductResults.length}}
-  <h3 class="section__head results__subhead">{{t 'search.results_agproducts'}}</h3>
-  <ul class="results__list">
-    {{#each result in agproductResults}}
-      {{search-result
-        result=result
-        tagName="li"
-        class="results__item"
-        levelOnly=true
-      }}
-    {{/each}}
-  </ul>
-{{/if}}
-{{#if nonagResults.length}}
-  <h3 class="section__head results__subhead">{{t 'search.results_nonag'}}</h3>
-  <ul class="results__list">
-    {{#each result in nonagResults}}
-      {{search-result
-        result=result
-        tagName="li"
-        class="results__item"
-        levelOnly=true
-      }}
-    {{/each}}
-  </ul>
-{{/if}}
-{{#if livestockResults.length}}
-  <h3 class="section__head results__subhead">{{t 'search.results_livestock'}}</h3>
-  <ul class="results__list">
-    {{#each result in livestockResults}}
-      {{search-result
-        result=result
-        tagName="li"
-        class="results__item"
-        levelOnly=true
-      }}
-    {{/each}}
-  </ul>
-{{/if}}
-{{#if industryResults.length}}
-  <h3 class="section__head results__subhead">{{t 'search.results_industries'}}</h3>
-  <ul class="results__list">
-    {{#each result in industryResults}}
-      {{search-result
-        result=result
-        tagName="li"
-        class="results__item"
-      }}
-    {{/each}}
-  </ul>
-{{/if}}
+  {{#if query}}
 
-{{#if modelCategorized }}
-<div class="results__reference">
-  <div class="results__reference__menu">
-  {{#each modelCategorizedKeys as |key|}}
-      {{#if (is-equal key referenceKey)}}
-           <div class="results__reference__menuitem results__reference__menuitem__active" {{action 'toggleReferenceKey' key}}>{{t (is-concat 'header.' key)}}</div>
-       {{else}}
-           <div class="results__reference__menuitem" {{action 'toggleReferenceKey' key}}>{{t (is-concat 'header.' key)}}</div>
-       {{/if}}
-  {{/each}}
-  </div>
-  <ul class="results__reference__body">
-  {{#each sortedReferenceBody as |item|}}
-      {{#link-to (is-concat item.profileName ".show") item.id tagName="li"}}{{item.name}}{{/link-to}}
-  {{/each}}
-  </ul>
+    {{#if filter}}
+
+    {{else}}
+      {{#if landuseResults.length}}
+        <h3 class="section__head results__subhead">{{t 'search.results_landuses'}}</h3>
+        <ul class="results__list">
+          {{#each result in landuseResults}}
+            {{search-result
+              result=result
+              tagName="li"
+              class="results__item"
+              levelOnly=true
+            }}
+          {{/each}}
+        </ul>
+      {{/if}}
+      {{#if locationResults.length}}
+        <h3 class="section__head results__subhead">{{t 'search.results_locations'}}</h3>
+        <ul class="results__list">
+          {{#each result in locationResults}}
+            {{search-result
+              result=result
+              tagName="li"
+              class="results__item"
+              metaData=metaData
+              isLocation="True"
+            }}
+          {{/each}}
+        </ul>
+      {{/if}}
+      {{#if productResults.length}}
+        <h3 class="section__head results__subhead">{{t 'search.results_products'}}</h3>
+        <ul class="results__list">
+          {{#each result in productResults}}
+            {{search-result
+              result=result
+              tagName="li"
+              class="results__item"
+            }}
+          {{/each}}
+        </ul>
+      {{/if}}
+      {{#if agproductResults.length}}
+        <h3 class="section__head results__subhead">{{t 'search.results_agproducts'}}</h3>
+        <ul class="results__list">
+          {{#each result in agproductResults}}
+            {{search-result
+              result=result
+              tagName="li"
+              class="results__item"
+              levelOnly=true
+            }}
+          {{/each}}
+        </ul>
+      {{/if}}
+      {{#if nonagResults.length}}
+        <h3 class="section__head results__subhead">{{t 'search.results_nonag'}}</h3>
+        <ul class="results__list">
+          {{#each result in nonagResults}}
+            {{search-result
+              result=result
+              tagName="li"
+              class="results__item"
+              levelOnly=true
+            }}
+          {{/each}}
+        </ul>
+      {{/if}}
+      {{#if livestockResults.length}}
+        <h3 class="section__head results__subhead">{{t 'search.results_livestock'}}</h3>
+        <ul class="results__list">
+          {{#each result in livestockResults}}
+            {{search-result
+              result=result
+              tagName="li"
+              class="results__item"
+              levelOnly=true
+            }}
+          {{/each}}
+        </ul>
+      {{/if}}
+      {{#if industryResults.length}}
+        <h3 class="section__head results__subhead">{{t 'search.results_industries'}}</h3>
+        <ul class="results__list">
+          {{#each result in industryResults}}
+            {{search-result
+              result=result
+              tagName="li"
+              class="results__item"
+            }}
+          {{/each}}
+        </ul>
+      {{/if}}
+
+    {{/if}}
+
+  {{/if}}
+
+
+  {{#if isRural }}
+    <div class="mt-5 pt-5">
+
+      <div class="row">
+        {{#each modelCategorizedKeys as |key|}}
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            {{#if (is-equal key referenceKey)}}
+              <button class="btn btn-outline-secondary btn-lg btn-block active" {{action 'toggleReferenceKey' key}}>{{t (is-concat 'header.' key)}}</button>
+            {{else}}
+              <button class="btn btn-outline-secondary btn-lg btn-block" {{action 'toggleReferenceKey' key}}>{{t (is-concat 'header.' key)}}</button>
+            {{/if}}
+          </div>
+        {{/each}}
+      </div>
+
+      <div class="row mt-5">
+
+        {{#each sortedReferenceBody as |item|}}
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            {{#link-to (is-concat item.profileName ".show") item.id tagName="a"}}{{item.name}}{{/link-to}}
+          </div>
+        {{/each}}
+
+      </div>
+
+
+    </div>
+  {{/if}}
+
 </div>
-{{/if}}
-
-<p class='results__copy results__copy--postscript'>{{t 'search.didnt_find'}}</p>
-

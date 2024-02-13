@@ -3,18 +3,185 @@ import numeral from 'numeral';
 const {computed, observer, get:get } = Ember;
 
 export default Ember.Controller.extend({
-  i18n: Ember.inject.service(),
-  featureToggle: Ember.inject.service(),
 
-  queryParams: ['search', 'startDate', 'endDate'],
+  i18n: Ember.inject.service(),
+  mapService: Ember.inject.service(),
+  buildermodSearchService: Ember.inject.service(),
+  treemapService: Ember.inject.service(),
+  featureToggle: Ember.inject.service(),
+  rcaFilterService: Ember.inject.service(),
+  lastDataTableUpdate: null,
+  lastDataUpdate: null,
+  resetFilter: null,
+  showCensus: computed("model", function () {
+    var entity_type = this.get("model.entity_type")
+    if(["landUse","nonag", "livestock"].includes(entity_type)){
+      return true
+    }
+    return false
+  }),
+
+  VCRValue: 1,
+  selectedProducts: [],
+
+  queryParams: ['search', 'startDate', 'endDate', 'toolTips', 'showBack'],
   search: null,
+  range: null,
+
+  toolTips: null,
   rcaFilter: 'less',
   startDate: null,
   endDate: null,
   searchText: null,
+  filteredMapData: null,
   drawerSettingsIsOpen: false,
   drawerChangeGraphIsOpen: false,
   drawerQuestionsIsOpen: false,
+
+  groupByParent: computed("source", function () {
+    var source = this.get("source");
+
+    if(source == "cities"){
+      return false;
+    }
+    else if(source == "municipalities"){
+      return false;
+    }
+    else if(source == "partners"){
+      return false;
+    }
+    return true
+  }),
+
+  locationsData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.locations'))
+
+    return locations.filter(item => item[1].level === "department").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name} (${item[1].code})`}
+    })
+  }),
+
+  citiesData: computed('model', function(){
+
+    var cities = Object.entries(this.get('model.metaData.locations'))
+
+    return cities.filter(item => item[1].level === "msa" || item[1].level === "department").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name} (${item[1].code})`}
+    })
+  }),
+
+  municipalitiesData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.locations'))
+
+    return locations.filter(item => item[1].level === "municipality" || item[1].level === "department").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name} (${item[1].code})`}
+    })
+  }),
+
+  productsData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.products'))
+
+    return locations.filter(item => item[1].level === "4digit").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name} (${item[1].code})`}
+    })
+  }),
+
+  landUsesData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.landUses'))
+
+    return locations.filter(item => item[1].level === "level2").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name}`}
+    })
+  }),
+
+  farmtypesData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.farmtypes'))
+
+    return locations.filter(item => item[1].level === "level2").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name}`}
+    })
+  }),
+
+  agproductsData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.agproducts'))
+
+    return locations.filter(item => item[1].level === "level3").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name}`}
+    })
+  }),
+
+  partnersData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.partnerCountries'))
+
+    return locations.filter(item => item[1].level === "country").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name} (${item[1].code})`}
+    })
+  }),
+
+  partnersDataChained: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.partnerCountries'))
+
+
+
+    var partnerCountriesRegion = locations.filter(item => item[1].level === "region").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      var chained = locations.filter(item2 => item2[1].level === "country" && item2[1].parent_id === item[1].id).map((item2) => {
+        var name = get(item2[1], `name_short_${this.get('i18n').display}`)
+        return {id:item2[1].id, text: `${name} (${item2[1].code})`}
+      });
+
+      return {id:item[1].id, text: `${name}`, chained: chained}
+    })
+
+    return partnerCountriesRegion
+
+  }),
+
+  industriesData: computed('model', function(){
+
+    var locations = Object.entries(this.get('model.metaData.industries'))
+
+    return locations.filter(item => item[1].level === "class").map((item) => {
+
+      var name = get(item[1], `name_short_${this.get('i18n').display}`)
+
+      return {id:item[1].id, text: `${name} (${item[1].code})`}
+    })
+  }),
 
   firstYear: computed('model', 'entityType', 'source', 'featureToggle', function(){
     // Handle the situation where we're not looking at a location profile but
@@ -88,6 +255,56 @@ export default Ember.Controller.extend({
   isGeo: computed.equal('visualization','geo'),
   isScatter: computed.equal('visualization','scatter'),
 
+  filterData: computed('source', function(){
+
+    if(this.get('source') == 'departments'){
+
+      return this.get('locationsData')
+    }
+    else if(this.get('source') == 'cities'){
+      return this.get('citiesData')
+    }
+    else if(this.get('source') == 'municipalities'){
+      return this.get('municipalitiesData')
+    }
+    else if(this.get('source') == 'products'){
+      return this.get('productsData')
+    }
+    else if(this.get('source') == 'partners'){
+      return this.get('partnersData')
+    }
+    else if(this.get('source') == 'industries'){
+      return this.get('industriesData')
+    }
+    else if(this.get('source') == 'landUses'){
+      return this.get('landUsesData')
+    }
+    else if(this.get('source') == 'farmtypes'){
+      return this.get('farmtypesData')
+    }
+    else if(this.get('source') == 'agproducts'){
+      return this.get('agproductsData')
+    }
+    else{
+      return []
+    }
+  }),
+  filterDataRegion: computed('source', function(){
+
+    if(this.get('source') == 'partners'){
+
+      var partnersDataChained = this.get('partnersDataChained');
+
+      return this.get('partnersDataChained');
+    }
+    else{
+      return []
+    }
+  }),
+  placeHolderText: computed('i18n.locale', 'source', function(){
+    return this.get('i18n').t(`visualization.source.${this.get('source')}`).string
+  }),
+
   isFixedHeight: computed('model.visualization', function() {
     let vis = this.get('model.visualization');
      return _.contains(['geo', 'treemap', 'scatter', 'similarity'], vis) ? true : false;
@@ -121,6 +338,18 @@ export default Ember.Controller.extend({
       return d3.extent(this.get('model.data'), function(d) { return d.year; });
     }
     return  [this.get('firstYear'), this.get('lastYear')];
+  }),
+  isSingleYearData: computed('dateExtent', function(){
+    let dateExtent = this.get('dateExtent');
+    if (dateExtent){
+      if (dateExtent[1] - dateExtent[0] > 0){
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
   }),
   dateRange: computed('dateExtent', function() {
     return d3.range(this.get('dateExtent')[0], this.get('dateExtent')[1] + 1);
@@ -348,12 +577,21 @@ export default Ember.Controller.extend({
   }),
   geoLegend: computed('scale', function(){
     let scale =  this.get('scale');
+    var self = this;
     return scale.range().map(function(t){
       let extents = scale.invertExtent(t);
+      let alterShadeClass = '';
+      if (self.get('endDate') || self.get('startDate')){
+        const date = self.get('endDate') || self.get('startDate');
+        alterShadeClass = `s${date % 3}`;
+      }
       return {
         "start": numeral(extents[0]).format('0.0a'),
+        "start_value": extents[0],
         "end": numeral(extents[1]).format('0.0a'),
-        "class": new Ember.Handlebars.SafeString(`fa fa-circle ${scale(extents[0])}`)
+        "end_value": extents[1],
+        "class": new Ember.Handlebars.SafeString(`fa fa-circle ${scale(extents[0])} ${alterShadeClass}`),
+        "range": `${scale(extents[0])}`
       };
     });
   }),
@@ -362,31 +600,184 @@ export default Ember.Controller.extend({
     return this.get('i18n').t(`general.${entityType}`);
   }),
   modelData: computed('model.data.[]', function() {
+    //console.log(this.get("model"))
+    if(this.get('source') === "departments" && this.get('visualization') === "treemap"){
+      return this.get('model.cities');
+    }
     return this.get('model.data');
   }),
+  canUpdateBuildermodSearchService: computed('source', function(){
+    if(this.get('source') === "industries"){
+      return false;
+    }
+    return true;
+  }),
+  canFilterCategory: computed('source', function(){
+    if(this.get('source') === "industries"){
+      return true;
+    }
+    else if(this.get('source') === "products"){
+      return true;
+    }
+    else if(this.get('source') === "farmtypes"){
+      return true;
+    }
+    else if(this.get('source') === "agproducts"){
+      return true;
+    }
+    else if(this.get('source') === "partners"){
+      return true;
+    }
+    return false;
+  }),
+  canFilterVcr: computed('source', 'visualization', function(){
+    if(this.get('source') === "industries" && this.get('visualization') === "similarity"){
+      return true;
+    }
+    else if(this.get('source') === "industries" && this.get('visualization') === "scatter"){
+      return true;
+    }
+    else if(this.get('source') === "products"){
+      return true;
+    }
+    return false;
+  }),
   immutableData: computed('model.data.[]','endDate', 'startDate' , function() {
+    if(this.get('source') === "departments" && this.get('visualization') === "treemap"){
+      return this.filterToSelectedYears(this.get('model.cities'), this.get('startDate'), this.get('endDate'));
+    }
     return this.filterToSelectedYears(this.get('model.data'), this.get('startDate'), this.get('endDate'));
   }),
-  filteredData: computed('immutableData.[]', 'search', 'startDate', 'endDate', 'rcaFilter', function() {
-    let data = this.get('immutableData');
-    if(this.get('search')){ data = this.searchFilter(data); }
 
-    if(this.get('visualization') === 'scatter'){
+  addColorYears: computed("source", function () {
+    var source = this.get("source");
+    if(["partners", "industries", "products", "agproducts", "farmtypes"].includes(source)){
+      return false;
+    }
+    return true;
+  }),
+
+  highlight: null,
+
+  filteredData: computed('immutableData.[]', 'startDate', 'endDate', 'rcaFilter', 'VCRValue', 'rcaFilterService.updated', 'buildermodSearchService.search', 'treemapService.filter_update', 'search', function() {
+
+    var addColorYears = this.get("addColorYears");
+
+    if(this.get("lastDataUpdate") !== this.get("treemapService.filter_update")){
+
+      this.set("lastDataUpdate", this.get("treemapService.filter_update"));
+      var filter_updated_data = this.get("treemapService.filter_updated_data").map(item => item.item);
+
+      return filter_updated_data;
+    }
+
+    this.set("resetFilter", new Date());
+
+    let data = this.get('immutableData');
+
+    this.set('search', this.get('buildermodSearchService.search'));
+
+    //console.log(this.get('buildermodSearchService.search'));
+
+    if(this.get("visualization") !== "treemap"){
+      if(this.get('search')){
+        data = this.searchFilter(data, 'filteredData');
+      }
+    }
+    else{
+      if(this.get('search')){
+        this.set('highlight', this.searchFilter(data, 'filteredData'));
+      }
+      else{
+        this.set('highlight', data);
+      }
+    }
+
+
+    if(["scatter", "similarity"].includes(this.get('visualization'))){
       let rca = this.get('rca');
+      let VCRValue = this.get("VCRValue");
       let rcaFilter = this.get('rcaFilter');
+
       if(rcaFilter === 'less') {
-        return _.filter(data, (d) => { return _.get(d,rca) <= 1;});
+        return _.filter(data, (d) => { return _.get(d,rca) >= VCRValue;});
       }
       if (rcaFilter === 'greater') {
-        return _.filter(data, (d) => { return _.get(d,rca) > 1;});
+        return _.filter(data, (d) => { return _.get(d,rca) <= VCRValue;});
+      }
+    }
+
+    if(addColorYears){
+      _.forEach(data, (d) => {
+        d.color = this.getColorYear(d.year);
+      });
+    }
+
+
+    return data;
+  }),
+  getColorYear: function(year){
+    var colors = {
+      2007: "#6E5100",
+      2008: "#827717",
+      2009: "#33691E",
+      2010: "#006064",
+      2011: "#01579B",
+      2012: "#4A148C",
+      2013: "#673AB7",
+      2014: "#F57C00",
+      2015: "#1976D2",
+      2016: "#00838F",
+      2017: "#880E4F",
+    }
+    return colors[year];
+  },
+  filteredDataTable: computed('immutableData.[]', 'search', 'startDate', 'endDate', 'VCRValue', 'rcaFilter', 'mapService.range', 'treemapService.filter_update', function() {
+
+    if(this.get("lastDataTableUpdate") !== this.get("treemapService.filter_update")){
+
+      this.set("lastDataTableUpdate", this.get("treemapService.filter_update"));
+      var filter_updated_data = this.get("treemapService.filter_updated_data").map(item => item.item);
+
+      return filter_updated_data;
+    }
+
+    let data = this.filterToSelectedYears(this.get('model.data'), this.get('startDate'), this.get('endDate'));
+
+    var range = this.get('mapService.range');
+    var self = this;
+
+    this.set("range", this.get("mapService.range"));
+
+    if(range !== null){
+      //this.set('search', null);
+      return _.filter(data, (d) => {
+        let varDependent = _.get(d, self.get('varDependent'));
+        return varDependent >= range[0] && varDependent <= range[1];
+      });
+    }
+
+    if(this.get('search')){ data = this.searchFilter(data, 'filteredDataTable'); }
+
+    if(["scatter", "similarity"].includes(this.get('visualization'))){
+      let rca = this.get('rca');
+      let VCRValue = parseInt(this.get("VCRValue"));
+      let rcaFilter = this.get('rcaFilter');
+      if(rcaFilter === 'less') {
+        return _.filter(data, (d) => { return _.get(d,rca) >= VCRValue;});
+      }
+      if (rcaFilter === 'greater') {
+        return _.filter(data, (d) => { return _.get(d,rca) <= VCRValue;});
       }
     }
     return data;
   }),
   visualizationComponent: computed('visualization', function(){
+    this.set("range", null);
+    this.set("mapService.range", null);
     let visualization = this.get('visualization');
     if(visualization === 'treemap') {
-      return 'vistk-treemap';
+      return 'zoomable-treemap';
     } else if(visualization === 'multiples') {
       return 'small-multiples-set';
     } else if(visualization === 'scatter') {
@@ -405,6 +796,12 @@ export default Ember.Controller.extend({
     }
     return false;
   }),
+  sourceTitle: computed('source', function () {
+    return this.get('i18n').t(`${this.get('source')}`).string
+  }),
+  variableTitle: computed('variable', function () {
+    return this.get('i18n').t(`${this.get('variable')}`).string
+  }),
   recircUrl: computed('model.entity_type', 'model.entity.code', function() {
     let entityType = this.get('model.entity_type');
 
@@ -412,16 +809,169 @@ export default Ember.Controller.extend({
     if(entityType === 'product') { return 'assets/img/hero_images/product/product_1.jpg'; }
     if(entityType === 'industry') { return 'assets/img/hero_images/industry/industry_1.jpg'; }
   }),
-  searchFilter: function(data) {
+  searchFilter: function(data, variable) {
+
     let search = _.deburr(this.get('search'));
+    var elementId = this.get("elementId");
+
     var regexp = new RegExp(search.replace(/(\S+)/g, function(s) { return "\\b(" + s + ")(.*)"; })
       .replace(/\s+/g, ''), "gi");
-    return _.filter(data, (d) => {
-      let longName = get(d,`name_${this.get('i18n').display}`);
-      let shortName = get(d,`name_short_${this.get('i18n').display}`);
-      let code = get(d, 'code');
-      return _.deburr(`${shortName} ${longName} ${code}`).match(regexp);
-    });
+
+    if(this.get('source') == 'departments'){
+
+      if(variable === 'filteredData'){
+        return _.filter(data, (d) => {
+          let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+          let longName = get(d,`name_${this.get('i18n').display}`);
+          let shortName = get(d,`name_short_${this.get('i18n').display}`);
+          let code = get(d, 'code');
+
+          var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+          if(result_city !== null){
+            return result_city;
+          }
+          return _.deburr(`${parentName} ${code}`).match(regexp);
+        });
+      }
+      else{
+        return _.filter(data, (d) => {
+          let longName = get(d,`name_${this.get('i18n').display}`);
+          let shortName = get(d,`name_short_${this.get('i18n').display}`);
+          let code = get(d, 'code');
+
+          return _.deburr(`${shortName} ${longName} ${code}`).match(regexp);
+        });
+      }
+    }
+    else if(this.get('source') == 'cities'){
+
+      return _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+    }
+    else if(this.get('source') == 'municipalities'){
+      return _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+    }
+    else if(this.get('source') == 'industries'){
+
+      return _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+    }
+    else if(this.get('source') == 'products'){
+      var result = _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+      return result;
+    }
+    else if(this.get('source') == 'landUses'){
+      return _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+    }
+    else if(this.get('source') == 'farmtypes'){
+      return _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+    }
+    else if(this.get('source') == 'agproducts'){
+      return _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+    }
+    else if(this.get('source') == 'partners'){
+      var data_result = _.filter(data, (d) => {
+        let parentName = get(d,`parent_name_${this.get('i18n').display}`);
+        let longName = get(d,`name_${this.get('i18n').display}`);
+        let shortName = get(d,`name_short_${this.get('i18n').display}`);
+        let code = get(d, 'code');
+
+        var result_city = _.deburr(`${shortName} ${longName} ${code}`).match(regexp)
+
+        if(result_city !== null){
+          return result_city;
+        }
+        return _.deburr(`${parentName} ${code}`).match(regexp);
+      });
+      return data_result
+    }
+    else{
+      return []
+    }
+
   },
 
   isCountry: computed.equal('model.entity.level', 'country'),
@@ -435,8 +985,29 @@ export default Ember.Controller.extend({
       return _.contains(timeRange, get(d, 'year'));
     });
   },
-  scrollTopWhenUpdate: observer('variable', function() {
-    window.scrollTo(0,0);
+  updateSearch: observer('visualization', function () {
+    //
+    Ember.run.schedule("afterRender",this,function() {
+      document.getElementById("scrollData").scrollIntoView();
+    });
+  }),
+
+  old_source: null,
+
+  scrollTopWhenUpdate: observer('source', function() {
+
+    var source = this.get('source');
+    var old_source = this.get('old_source');
+
+    if(source === old_source){
+
+    }
+    else{
+      this.set('buildermodSearchService.search', null)
+      this.set("old_source", source)
+    }
+
+
   }),
   actions: {
     resetSearch: function() {

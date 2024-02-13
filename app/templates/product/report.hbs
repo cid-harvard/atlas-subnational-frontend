@@ -1,0 +1,879 @@
+{{component "stream-header" model=model.entity type='product' extra_type="product_route" firstYear=firstYear lastYear=lastYear}}
+
+
+<div class="container-fluid px-md-x10 mt-5 pt-5">
+  <div class="row">
+
+    <div class="col-sm-12">
+      <p class="text-white">Filtrar por Año</p>
+    </div>
+
+    <div class="col-sm-12">
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 my-auto">
+          <div class="">
+            <select class="form-control form-filter" id="selectYear" {{action "setStartYear" on="change"}}>
+
+              {{#each year in rangeYears }}
+                {{#if (is-equal year endDate)}}
+                  <option selected>{{year}}</option>
+                {{else}}
+                  <option>{{year}}</option>
+                 {{/if}}
+              {{/each}}
+
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<div class="new__buildermod__questions mt-5">
+  <div class="container-fluid px-md-x10">
+    <div class="row row-without-margin">
+      <div class="col-sm-12 pl-md-0">
+        <p class="question__title my-5">Por favor seleccione las secciones que quiere sean exportadas en el archivo de resumen.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid px-md-x10 mt-5 pt-5">
+  <div class="row">
+
+
+
+    <div class="col-sm-12" style="padding: 50px;">
+      <div>
+
+        <input class="d-inline" type="checkbox" id="check1" {{action "check1" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Información general de Exportaciones (Top 5) de ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+      {{#if show1}}
+      <div>
+        <div class="check1div">
+          <p class="text_yellow mt-5 pt-5">{{is-concat 'Departamentos en Colombia que más exportan ' model.entity.name ' (' endDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataLocationsTop5Export
+            source="exportsDepartments"
+            entityType=entityType
+            search=''
+            startDate=startDate
+            endDate=endDate
+            elementId="table1"
+            order=filteredDataLocationsTop5ExportOrder
+            title_data=(is-concat 'Departamentos en Colombia que más exportan ' model.entity.name ' (' endDate ')')
+          }}
+        </div>
+        <div class="check1div">
+          <p class="text_yellow mt-5 pt-5">{{is-concat 'Ciudades en Colombia que más exportan ' model.entity.name ' (' endDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataCitiesTop5Export
+            source="exportsCities"
+            entityType=entityType
+            search=''
+            startDate=startDate
+            endDate=endDate
+            elementId="table2"
+            order=filteredDataCitiesTop5ExportOrder
+            title_data=(is-concat 'Ciudades en Colombia que más exportan ' model.entity.name ' (' endDate ')')
+          }}
+        </div>
+        <div class="check1div">
+          <p class="text_yellow mt-5 pt-5">{{is-concat 'Países a donde más se exportan ' model.entity.name ' (' endDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataPartnersTop5Export
+            source="exportPartners"
+            entityType=entityType
+            search=''
+            startDate=startDate
+            endDate=endDate
+            elementId="table3"
+            order=filteredDataPartnersTop5ExportOrder
+            title_data=(is-concat 'Países a donde más se exportan ' model.entity.name ' (' endDate ')')
+          }}
+        </div>
+      </div>
+      {{/if}}
+
+    </div>
+
+    <div class="col-sm-12" style="padding: 50px;">
+      <div>
+
+        <input class="d-inline" type="checkbox" id="check2" {{action "check2" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Información general de Importaciones (Top 5) de ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+      {{#if show2}}
+      <div>
+        <div class="check2div">
+          <p class="text_yellow mt-5 pt-5">{{is-concat 'Departamentos en Colombia que más importan ' model.entity.name ' (' endDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataLocationsTop5Import
+            source="importsDepartments"
+            entityType=entityType
+            search=''
+            startDate=startDate
+            endDate=endDate
+            elementId="table4"
+            order=filteredDataLocationsTop5ImportOrder
+            title_data=(is-concat 'Departamentos en Colombia que más importan ' model.entity.name ' (' endDate ')')
+          }}
+        </div>
+        <div class="check2div">
+          <p class="text_yellow mt-5 pt-5">{{is-concat 'Ciudades en Colombia que más importan ' model.entity.name ' (' endDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataCitiesTop5Import
+            source="importsCities"
+            entityType=entityType
+            search=''
+            startDate=startDate
+            endDate=endDate
+            elementId="table5"
+            order=filteredDataCitiesTop5ImportOrder
+            title_data=(is-concat 'Ciudades en Colombia que más importan ' model.entity.name ' (' endDate ')')
+          }}
+        </div>
+        <div class="check2div">
+          <p class="text_yellow mt-5 pt-5">{{is-concat 'Países de donde más se importan ' model.entity.name ' (' endDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataPartnersTop5Import
+            source="importPartners"
+            entityType=entityType
+            search=''
+            startDate=startDate
+            endDate=endDate
+            elementId="table6"
+            order=filteredDataPartnersTop5ImportOrder
+            title_data=(is-concat 'Países de donde más se importan ' model.entity.name ' (' endDate ')')
+          }}
+        </div>
+      </div>
+      {{/if}}
+
+    </div>
+
+    <div class="col-sm-12" style="padding: 50px;">
+      <div>
+
+        <input class="d-inline" type="checkbox" id="check3" {{action "check3" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Mapa de productos de ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+      {{#if show3}}
+      <div>
+        <div class="check3div">
+
+          <div class="col-sm-12 text-center mt-5 pt-5">
+            <h1 class="text_yellow text-uppercase">{{location}}</h1>
+          </div>
+
+          <div class="row mt-5 pt-5">
+            <div class="col-sm-12 col-md-6 text-center">
+              <p class="text_yellow">ALTO NIVEL DE COMPLEJIDAD</p>
+            </div>
+            <div class="col-sm-12 col-md-6 text-center">
+              <p class="text_yellow">BAJO NIVEL DE COMPLEJIDAD</p>
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            {{vistk-network
+              data=productsData
+              immutableData=productsData
+              elementId="elementId"
+              dataType='products'
+              metadata=model.metaData
+              varDependent='export_value'
+              graph=model.metaData.productSpace
+              height=600
+              delay=3500
+              showMiddle=true
+              filterCategory=false
+              title="SECTORES DE"
+              subtitle="LOS PRODUCTOS"
+              selected=model.entity.id
+              canFilterVcr=false
+              VCRValue=VCRValue
+              categoriesFilterList=categoriesFilterList
+              selectedProducts=selectedProducts
+              showProductVcr=false
+              hideExport=true
+              filename=(is-concat endDate ' - ' 'Mapa de complejidad' ' - ' model.entity.name ' (' model.entity.code ')')
+            }}
+          </div>
+
+          <div class="col-sm-12 mt-5 pt-5">
+            {{
+              datlas-table
+              data=filteredDataTable
+              source="products"
+              entityType="products"
+              elementId="table7"
+              title_data=(is-concat endDate ' - ' 'Mapa de complejidad' ' - ' model.entity.name ' (' model.entity.code ')')
+              source_data="FUENTE: cálculos del CID con datos de la DIAN."
+            }}
+          </div>
+
+        </div>
+      </div>
+      {{/if}}
+
+    </div>
+
+    <div class="col-sm-12" style="padding: 50px;">
+      <div>
+
+        <input class="d-inline" type="checkbox" id="check4" {{action "check4" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Conexiones primarias de ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+      {{#if show4}}
+      <div>
+        <div class="check4div">
+
+          <div class="col-sm-12 text-center mt-5 pt-5">
+            <h1 class="text_yellow text-uppercase">{{location}}</h1>
+          </div>
+
+          <div class="row mt-5 pt-5">
+            <div class="col-sm-12 col-md-6 text-center">
+              <p class="text_yellow">ALTO NIVEL DE COMPLEJIDAD</p>
+            </div>
+            <div class="col-sm-12 col-md-6 text-center">
+              <p class="text_yellow">BAJO NIVEL DE COMPLEJIDAD</p>
+            </div>
+          </div>
+
+          <div class="row">
+            {{vistk-network
+              data=productsData
+              immutableData=productsData
+              elementId="elementId2"
+              dataType='products'
+              metadata=model.metaData
+              varDependent='export_value'
+              graph=model.metaData.productSpace
+              height=600
+              delay=3500
+              showMiddle=true
+              filterCategory=false
+              title="SECTORES DE"
+              subtitle="LOS PRODUCTOS"
+              selected=model.entity.id
+              canFilterVcr=false
+              VCRValue=VCRValue
+              categoriesFilterList=categoriesFilterList
+              selectedProducts=selectedProducts
+              showProductVcr=false
+              hideExport=true
+              showPrimaries=true
+              filename=(is-concat endDate ' - ' 'Mapa de complejidad - Conexiones primarias' ' - ' model.entity.name ' (' model.entity.code ')')
+            }}
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              {{
+                datlas-table
+                data=filteredDataTable2
+                source="products"
+                entityType="products"
+                elementId="table8"
+                title_data=(is-concat endDate ' - ' 'Mapa de complejidad - Conexiones primarias' ' - ' model.entity.name ' (' model.entity.code ')')
+                source_data="FUENTE: cálculos del CID con datos de la DIAN."
+              }}
+            </div>
+          </div>
+
+        </div>
+      </div>
+      {{/if}}
+
+    </div>
+
+    <div class="col-sm-12" style="padding: 50px;">
+      <div>
+
+        <input class="d-inline" type="checkbox" id="check5" {{action "check5" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Conexiones secundarias de ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+      {{#if show5}}
+      <div>
+        <div class="check5div">
+
+          <div class="col-sm-12 text-center mt-5 pt-5">
+            <h1 class="text_yellow text-uppercase">{{location}}</h1>
+          </div>
+
+          <div class="row mt-5 pt-5">
+            <div class="col-sm-12 col-md-6 text-center">
+              <p class="text_yellow">ALTO NIVEL DE COMPLEJIDAD</p>
+            </div>
+            <div class="col-sm-12 col-md-6 text-center">
+              <p class="text_yellow">BAJO NIVEL DE COMPLEJIDAD</p>
+            </div>
+          </div>
+
+          <div class="row">
+            {{vistk-network
+              data=productsData
+              immutableData=productsData
+              elementId="elementId3"
+              dataType='products'
+              metadata=model.metaData
+              varDependent='export_value'
+              graph=model.metaData.productSpace
+              height=600
+              delay=3500
+              showMiddle=true
+              filterCategory=false
+              title="SECTORES DE"
+              subtitle="LOS PRODUCTOS"
+              selected=model.entity.id
+              canFilterVcr=false
+              VCRValue=VCRValue
+              categoriesFilterList=categoriesFilterList
+              selectedProducts=selectedProducts
+              showProductVcr=false
+              hideExport=true
+              showPrimaries=true
+              showSecondaries=true
+              filename=(is-concat endDate ' - ' 'Mapa de complejidad - Conexiones secundarias' ' - ' model.entity.name ' (' model.entity.code ')')
+            }}
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              {{
+                datlas-table
+                data=filteredDataTable3
+                source="products"
+                entityType="products"
+                elementId="table9"
+                title_data=(is-concat endDate ' - ' 'Mapa de complejidad - Conexiones secundarias' ' - ' model.entity.name ' (' model.entity.code ')')
+                source_data="FUENTE: cálculos del CID con datos de la DIAN."
+              }}
+            </div>
+          </div>
+
+        </div>
+      </div>
+      {{/if}}
+
+    </div>
+
+    <!--
+    <div class="col-sm-12" style="padding: 50px;">
+
+      <div>
+
+        <input class="d-inline" type="checkbox" id="check2"  {{action "check2" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Mapa de productos y productos con mayor potencial ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+
+      {{#if show2}}
+      <div>
+        <div class="check2div">
+
+        <div class="row mt-5 pt-5">
+          <div class="col-sm-12">
+            <h1 class="text_yellow text-center mt-5 pt-5">MAPA DE PRODUCTOS</h1>
+          </div>
+        </div>
+
+        <div class="row mt-5 pt-5">
+          <div class="col-sm-12 col-md-6 text-center">
+            <p class="text_yellow">ALTO NIVEL DE COMPLEJIDAD</p>
+          </div>
+          <div class="col-sm-12 col-md-6 text-center">
+            <p class="text_yellow">BAJO NIVEL DE COMPLEJIDAD</p>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          {{vistk-network
+            data=productsData
+            immutableData=productsData
+            elementId="elementId"
+            dataType='products'
+            metadata=model.metaData
+            varDependent='export_value'
+            graph=model.metaData.productSpace
+            height=600
+            delay=3500
+            showMiddle=true
+            filterCategory=false
+            title="SECTORES DE"
+            subtitle="LOS PRODUCTOS"
+            selected=model.entity.id
+            canFilterVcr=false
+            VCRValue=VCRValue
+            categoriesFilterList=categoriesFilterList
+            selectedProducts=selectedProducts1
+            showProductVcr=true
+            hideExport=true
+            filename=(is-concat 'MAPA DE PRODUCTOS ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+          }}
+        </div>
+        <div class="col-md-12">
+          <h1 class="text_yellow">INFORMACIÓN DEL MAPA DE PRODUCTOS</h1>
+        </div>
+        <div class="col-md-12">
+          {{
+            datlas-table
+            data=filteredProductsDataTop5Rca
+            source="products"
+            entityType="products"
+            elementId="industriesTablediv2"
+            order=filteredProductsDataTop5RcaOrder
+            title_data=(is-concat 'PRODUCTOS CON MAYOR VENTAJA COMPARATIVA REVELADA ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+          }}
+        </div>
+
+      </div>
+        <div class="check2div">
+
+          <div class=col-md-12">
+            <h1 class="text_yellow text-center my-5 py-5">PRODUCTOS CON MAYOR POTENCIAL</h1>
+            {{vistk-scatterplot
+              classNames='buildermod__viz'
+              immutableData=productsData
+              modelData=model.products_col
+              data=productsData
+              dataType='products'
+              varDependent=varDependent
+              scale=scale
+              startDate=startDate
+              dateExtent=dateExtent
+              endDate=endDate
+              metadata=model.metaData
+              isFiltered=false
+              entityType=entityType
+              entityId=model.entity.id
+              variable=variable
+              graph=productSpace
+              elementId="scatterplotv2"
+              metadata=model.metaData
+              filterCategory=false
+              title="SECTORES DE"
+              subtitle="LOS PRODUCTOS"
+              selected=model.entity.id
+              canFilterVcr=false
+              VCRValue=1
+              categoriesFilterList=categoriesFilterListScatter
+              showProductVcr=true
+              hideExport=true
+              filename=(is-concat 'PRODUCTOS CON MAYOR POTENCIAL ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+            }}
+          </div>
+          <div class="col-md-12">
+            <h1 class="text_yellow">INFORMACIÓN DE PRODUCTOS CON MAYOR POTENCIAL</h1>
+          </div>
+          <div class="col-md-12">
+            {{
+              datlas-table
+              data=filteredProductsDataTop5Rca
+              source="products"
+              entityType="products"
+              elementId="industriesTablediv21"
+              order=filteredProductsDataTop5RcaOrder
+              title_data=(is-concat 'PRODUCTOS CON MAYOR VENTAJA COMPARATIVA REVELADA ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+            }}
+          </div>
+
+        </div>
+      </div>
+      {{/if}}
+
+    </div>
+
+    <div class="col-sm-12" style="padding: 50px;">
+      <div>
+
+        <input class="d-inline" type="checkbox" id="check3" {{action "check3" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Información general de Importaciones (Top 5) de ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+
+      {{#if show3}}
+      <div>
+        <div class="check3div">
+          <p class="text_yellow mt-5 pt-5">Productos que más importa {{is-concat model.entity.name ' (' endDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredProductsDataTop5Import
+            source='productsImports'
+            entityType=''
+            search=search
+            startDate=startDate
+            endDate=endDate
+            elementId="productssourceTable2"
+            order=filteredProductsDataTop5ImportOrder
+            title_data=(is-concat 'Productos que más importa ' model.name '(' endDate ')')
+          }}
+        </div>
+        <div class="check3div">
+          <p class="text_yellow mt-5 pt-5">Paises de donde más importa {{is-concat model.entity.name ' (' endDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredPartnersDataTop5Import
+            source='partnersExports'
+            entityType=''
+            search=search
+            startDate=startDate
+            endDate=endDate
+            elementId="partnerssourceTable2"
+            order=filteredPartnersDataTop5ImportOrder
+            title_data=(is-concat 'Paises de donde más importa ' model.name '(' endDate ')')
+          }}
+        </div>
+      </div>
+      {{/if}}
+
+
+    </div>
+
+    <div class="col-sm-12" style="padding: 50px;">
+      <div>
+
+        <input class="d-inline" type="checkbox" id="check4" {{action "check4" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Información de Empleo y Nómina Salarial (Top 5) en ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+
+      {{#if show4}}
+      <div>
+        <div class="check4div">
+          <p class="text_yellow mt-5 pt-5">Top 5 Sectores que más generan empleo {{is-concat model.entity.name ' (' endDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredIndustriesDataTop5Employment
+            source='industriesTop'
+            entityType=''
+            search=search
+            startDate=startDate
+            endDate=endDate
+            elementId="productssourceTable7"
+            order=filteredIndustriesDataTop5EmploymentOrder
+            title_data=(is-concat 'Top 5 Sectores que más generan empleo en ' model.name '(' endDate ')')
+          }}
+        </div>
+        <div class="check4div">
+          <p class="text_yellow mt-5 pt-5">Top 5 Sectores con mayores nominas salariales en {{is-concat model.entity.name ' (' endDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredIndustriesDataTop5Wages
+            source='industriesTop'
+            entityType=''
+            search=search
+            startDate=startDate
+            endDate=endDate
+            elementId="partnerssourceTable8"
+            order=filteredIndustriesDataTop5WagesOrder
+            title_data=(is-concat 'Top 5 Sectores con mayores nominas salariales en ' model.name '(' endDate ')')
+          }}
+        </div>
+      </div>
+      {{/if}}
+
+
+    </div>
+
+    <div class="col-sm-12" style="padding: 50px;">
+
+      <div>
+
+        <input class="d-inline" type="checkbox" id="check5"  {{action "check5" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Mapa de sectores y sectores con mayor potencial ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+
+      {{#if show5}}
+      <div>
+        <div class="check5div">
+
+        <div class="row">
+          <div class="col-sm-12">
+            <h1 class="text_yellow text-center mt-5 pt-5">MAPA DE SECTORES</h1>
+          </div>
+        </div>
+
+
+        <div class="col-md-12 mt-5 pt-5">
+          {{vistk-network
+            data=industriesData
+            immutableData=industriesData
+            elementId="mapaSectores"
+            dataType='industries'
+            metadata=model.metaData
+            varDependent='employment'
+            graph=model.metaData.industrySpace
+            height=600
+            delay=3500
+            showMiddle=false
+            filterCategory=false
+            title="PRODUCTOS"
+            subtitle="POR SECTOR"
+            selected=model.entity.id
+            canFilterVcr=false
+            VCRValue=VCRValue
+            categoriesFilterList=categoriesFilterList
+            selectedProducts=selectedProducts2
+            hideExport=true
+            toolTips="complexity"
+            filename=(is-concat 'MAPA DE SECTORES ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+          }}
+        </div>
+        <div class="col-md-12">
+          <h1 class="text_yellow">INFORMACIÓN DE SECTORES</h1>
+        </div>
+        <div class="col-md-12">
+          {{
+            datlas-table
+            data=filteredIndustriesDataTop5Rca
+            source="industries"
+            entityType="industries"
+            elementId="industriesTable"
+            order=filteredIndustriesDataTop5RcaOrder
+            title_data=(is-concat 'INFORMACIÓN DE SECTORES ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+          }}
+        </div>
+
+      </div>
+        <div class="check2div">
+
+          <div class=col-md-12">
+            <h1 class="text_yellow text-center my-5 py-5">PRODUCTOS CON MAYOR POTENCIAL</h1>
+            {{vistk-scatterplot
+              classNames='buildermod__viz'
+              immutableData=industriesData
+              modelData=model.industries_col
+              data=industriesData
+              dataType='industries'
+              varDependent="export_value"
+              scale=scale
+              startDate=startDate
+              dateExtent=dateExtent
+              endDate=endDate
+              metadata=model.metaData
+              isFiltered=false
+              entityType=entityType
+              entityId=model.entity.id
+              variable=variable
+              graph=model.metaData.industrySpace
+              elementId="scatterplotv3"
+              metadata=model.metaData
+              filterCategory=false
+              title="SECTORES DE"
+              subtitle="LOS PRODUCTOS"
+              selected=model.entity.id
+              canFilterVcr=false
+              VCRValue=1
+              categoriesFilterList=categoriesFilterListScatter
+              showProductVcr=true
+              hideExport=true
+              filename=(is-concat 'PRODUCTOS CON MAYOR POTENCIAL ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+            }}
+          </div>
+          <div class="col-md-12">
+            <h1 class="text_yellow">INFORMACIÓN DE PRODUCTOS CON MAYOR POTENCIAL</h1>
+          </div>
+          <div class="col-md-12">
+            {{
+              datlas-table
+              data=filteredIndustriesDataTop5Rca
+              source="industries"
+              entityType="industries"
+              elementId="industriesTablev56"
+              order=filteredIndustriesDataTop5RcaOrder
+              title_data=(is-concat 'SECTORES RELATIVAMENTE COMPLEJOS ' endDate ' - ' model.entity.name ' (' model.entity.code ')')
+            }}
+          </div>
+
+        </div>
+      </div>
+      {{/if}}
+
+    </div>
+
+    <div class="col-sm-12" style="padding: 50px;">
+      <div>
+
+        <input class="d-inline" type="checkbox" id="check6" {{action "check6" on="change"}} style="height: 2rem; width: 2rem;">
+        <h1 class="d-inline text-white ml-5">{{is-concat 'Información general Actividades Rurales en ' model.entity.name ' (' endDate ')'}}</h1>
+
+      </div>
+
+      {{#if show6}}
+      <div>
+        <div class="check6div">
+          <p class="text_yellow mt-5 pt-5">Uso del suelo en {{is-concat model.entity.name ' (' '2014' ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataLandUsesTop5
+            source="landUse"
+            entityType='landUse'
+            startDate=startDate
+            endDate=startDate
+            elementId="productssourceTables11"
+            order=filteredDataLandUsesTop5Order
+            title_data=(is-concat 'Uso del suelo en ' model.name ' (' '2014' ')')
+          }}
+        </div>
+        <div class="check6div">
+          <p class="text_yellow mt-5 pt-5">Unidades de producción agropecuaria y no agropecuaria en {{is-concat model.entity.name ' (' '2014' ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataFarmTypesTop5
+            source="farmtypes"
+            entityType='farmtypes'
+            startDate=startDate
+            endDate=startDate
+            elementId="productssourceTables12"
+            order=filteredDataFarmTypesTop5Order
+            title_data=(is-concat 'Unidades de producción agropecuaria y no agropecuaria en ' model.name ' (' '2014' ')')
+          }}
+        </div>
+        <div class="check6div">
+          <p class="text_yellow mt-5 pt-5">Hectáreas sembradas por cultivo en {{is-concat model.entity.name ' (' startDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataLandSownTop5
+            source="agproducts"
+            entityType='agproducts'
+            startDate=startDate
+            endDate=startDate
+            elementId="productssourceTables13"
+            order=filteredDataLandSownTop5Order
+            title_data=(is-concat 'Hectáreas sembradas por cultivo en ' model.name ' (' startDate ')')
+          }}
+        </div>
+        <div class="check6div">
+          <p class="text_yellow mt-5 pt-5">Hectáreas cosechadas por cultivo en {{is-concat model.entity.name ' (' startDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataLandHarvestedTop5
+            source="agproducts"
+            entityType='agproducts'
+            startDate=startDate
+            endDate=startDate
+            elementId="productssourceTables14"
+            order=filteredDataLandHarvestedTop5Order
+            title_data=(is-concat 'Hectáreas cosechadas por cultivo en ' model.name ' (' startDate ')')
+          }}
+        </div>
+        <div class="check6div">
+          <p class="text_yellow mt-5 pt-5">Toneladas producidas por cultivo en {{is-concat model.entity.name ' (' startDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataProductionTonsTop5
+            source="agproducts"
+            entityType='agproducts'
+            startDate=startDate
+            endDate=startDate
+            elementId="productssourceTables15"
+            order=filteredDataProductionTonsTop5Order
+            title_data=(is-concat 'Toneladas producidas por cultivo ' model.name ' (' startDate ')')
+          }}
+        </div>
+        <div class="check6div">
+          <p class="text_yellow mt-5 pt-5">Rendimiento de los cultivos en {{is-concat model.entity.name ' (' startDate ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataYieldRatioTop5
+            source="agproducts"
+            entityType='agproducts'
+            startDate=startDate
+            endDate=startDate
+            elementId="productssourceTables16"
+            order=filteredDataYieldRatioTop5Order
+            title_data=(is-concat 'Rendimiento de los cultivos en ' model.name ' (' startDate ')')
+          }}
+        </div>
+        <div class="check6div">
+          <p class="text_yellow mt-5 pt-5">Actividades no agropecuarias en {{is-concat model.entity.name ' (' '2014' ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataNonagsNumFarmsTop5
+            source="nonags"
+            entityType='nonags'
+            startDate=startDate
+            endDate=startDate
+            elementId="productssourceTables17"
+            order=filteredDataNonagsNumFarmsTop5Order
+            title_data=(is-concat 'Actividades no agropecuarias en ' model.name ' (' '2014' ')')
+          }}
+        </div>
+        <div class="check6div">
+          <p class="text_yellow mt-5 pt-5">Especies pecuarias en {{is-concat model.entity.name ' (' '2014' ')'}}</p>
+          {{
+            datlas-table
+            data=filteredDataLiveStockNumTop5
+            source="livestockData"
+            entityType='livestockData'
+            startDate=startDate
+            endDate=startDate
+            elementId="productssourceTables18"
+            order=filteredDataLiveStockNumTop5Order
+            title_data=(is-concat 'Especies pecuarias en ' model.name ' (' '2014' ')')
+          }}
+        </div>
+        <div class="check6div">
+          <p class="text_yellow mt-5 pt-5">UPAS actividad pecuaria por especie en {{is-concat model.entity.name ' (' '2014' ')'}}</p>
+           {{
+            datlas-table
+            data=filteredDataLiveStockNumFarmsTop5
+            source="livestockData"
+            entityType='livestockData'
+            startDate=startDate
+            endDate=startDate
+            elementId="productssourceTables19"
+            order=filteredDataLiveStockNumFarmsTop5Order
+            title_data=(is-concat 'UPAS actividad pecuaria por especie en ' model.name ' (' startDate ')')
+          }}
+        </div>
+      </div>
+      {{/if}}
+
+
+    </div>
+
+    -->
+
+  </div>
+</div>
+
+<div class="container-fluid px-md-x10 pb-5 mt-5 pt-5 text-center">
+  <div class="d-inline">
+    <button class="btn btn-outline-secondary {{classFile}}" {{action "report"}}>GENERAR ARCHIVO RESUMEN</button>
+  </div>
+</div>
+
+<div class="container-fluid px-md-x10 pb-5 mt-5 pt-5 text-right">
+  <div class="d-inline">
+    {{#link-to 'product.exports' model.entity.id (query-params startDate=startDate endDate=startDate)
+      class="btn btn-outline-secondary"
+    }}
+    ANTERIOR
+    {{/link-to}}
+  </div>
+</div>
